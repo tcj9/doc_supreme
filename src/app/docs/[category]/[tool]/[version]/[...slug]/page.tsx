@@ -56,7 +56,7 @@ export default async function SlugPage({ params }: PageProps) {
               { label: 'Docs', href: '/' },
               { label: category, href: '/' },
               { label: tool, href: `/docs/${category}/${tool}/${version}` },
-              { label: `v${version}`, href: `/docs/${category}/${tool}/${version}` },
+              { label: version.startsWith('v') ? version : `v${version}`, href: `/docs/${category}/${tool}/${version}` },
               { label: currentPage?.title || currentSlug },
             ]}
           />

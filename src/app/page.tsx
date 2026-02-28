@@ -86,7 +86,7 @@ export default function HomePage() {
                           key={v}
                           className="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full px-2 py-0.5"
                         >
-                          v{v}
+                          {v.startsWith('v') ? v : `v${v}`}
                         </span>
                       ))}
                     </div>

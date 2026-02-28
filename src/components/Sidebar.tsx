@@ -24,7 +24,7 @@ export default function Sidebar({ pages, category, tool, version }: SidebarProps
           </p>
           <h2 className="text-white font-semibold capitalize">{tool}</h2>
           <span className="text-xs text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 rounded px-1.5 py-0.5">
-            v{version}
+            {version.startsWith('v') ? version : `v${version}`}
           </span>
         </div>
 

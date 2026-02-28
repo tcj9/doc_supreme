@@ -40,7 +40,7 @@ export default async function VersionPage({ params }: PageProps) {
               { label: 'Docs', href: '/' },
               { label: category, href: '/' },
               { label: tool, href: `/docs/${category}/${tool}/${version}` },
-              { label: `v${version}` },
+              { label: version.startsWith('v') ? version : `v${version}` },
             ]}
           />
           <MarkdownRenderer content={doc.content} />
