@@ -5,12 +5,12 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import MarkdownRenderer from '@/components/MarkdownRenderer'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     category: string
     tool: string
     version: string
     slug: string[]
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -36,8 +36,8 @@ export async function generateStaticParams() {
   return params
 }
 
-export default function SlugPage({ params }: PageProps) {
-  const { category, tool, version, slug } = params
+export default async function SlugPage({ params }: PageProps) {
+  const { category, tool, version, slug } = await params
   const doc = getDocContent(category, tool, version, slug)
   const pages = getDocNavigation(category, tool, version)
 
