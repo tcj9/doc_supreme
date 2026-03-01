@@ -9,14 +9,6 @@ export default function Navbar() {
             Doc <span className="text-indigo-400">Supreme</span>
           </span>
         </Link>
-        <div className="flex items-center gap-6 text-sm text-slate-400">
-          <Link href="/docs/frameworks/react/19.2" className="hover:text-white transition-colors">
-            React
-          </Link>
-          <Link href="/docs/apis/youtube/v3" className="hover:text-white transition-colors">
-            YouTube API
-          </Link>
-        </div>
       </div>
     </nav>
   )
