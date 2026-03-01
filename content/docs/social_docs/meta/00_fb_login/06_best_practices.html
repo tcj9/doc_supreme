@@ -1,0 +1,299 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_3_Eq">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1>Facebook Login Best Practices</h1>
+                            <p>Facebook Login improves your app user experience by enabling customers to easily sign up
+                                for your app without creating a username/password, and it maximizes the number of people
+                                using your app.</p>
+                            <p>With more people using your app, you’ll see improved performance with our other business
+                                tools that are designed to provide you with insight into your audience. When more of
+                                your customers use Facebook Login, these tools are more powerful to help you understand
+                                and grow your business.
+                                We recommend using the following best practices to maximize the number of visitors who
+                                sign up with Facebook Login. A high quality onboarding experience can lead to conversion
+                                rates above 80%.</p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Video</h2>
+                            <div class="_1c_u" id="u_0_4_Eg">
+                                <div class="_53j5" id="u_0_5_Ct" style="height:337px;width:600px;" tabindex="0"><video
+                                        class="_ox1 _21y0" data-video-height="337" data-video-width="600" height="337"
+                                        id="u_0_6_5R" preload="metadata" style="" width="600"></video>
+                                    <div class="_4ubd _170l _27db _3htz" id="u_0_7_ik"></div>
+                                    <div class="_m54 _1jto _3htz" id="u_0_8_be"><img alt="" class="_1445 _2sy9 img"
+                                            id="u_0_9_/h"
+                                            src="https://static.xx.fbcdn.net/rsrc.php/v4/y4/r/-PAXP-deijE.gif"
+                                            style="background-image: url('https\3a //scontent-bos5-1.xx.fbcdn.net/v/t15.5256-10/56669783_2132144693521637_4754679983815786496_n.jpg?stp\3d dst-jpg_s600x600_tt6\26 _nc_cat\3d 104\26 ccb\3d 1-7\26 _nc_sid\3d bd79b0\26 _nc_ohc\3d 8cPztfvkIesQ7kNvwGHsPhc\26 _nc_oc\3d AdlUl0Wcc2oUFzN6yswgwpM7JQVSf6eN4sISp2vTMGVzKZ6z2fyF92jvVV2rhBosxFY\26 _nc_zt\3d 23\26 _nc_ht\3d scontent-bos5-1.xx\26 _nc_gid\3d ad8xr2dNU67Q65LGNPr_vA\26 oh\3d 00_AfsYb_HzkUUdkU30bswKLemof50pUOGHyxRe-QwgDqPsvg\26 oe\3d 698C9384');" />
+                                    </div>
+                                    <div class="_18xu _9omd _3htz">
+                                        <div class="_5l7x _360f _167h hidden_elem" id="u_0_2_0P"></div><input
+                                            aria-label="Play video" class="_530-" id="u_0_1_c+" type="button" />
+                                    </div>
+                                    <div class="_4ctp _1jto _3htz">
+                                        <div class="_4ctq">
+                                            <div class="_4ctr" id="u_0_a_Ao">Something Went Wrong</div>
+                                            <div id="u_0_b_xB">We're having trouble playing this video.</div>
+                                            <div class="_5hdy"><a class="_4cts"
+                                                    href="https://www.facebook.com/help/396404120401278/list"
+                                                    id="u_0_c_Sv">Learn more</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="_2i84">
+                                    <div id="u_0_d_6q"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="best-practices">Checklists</h2>
+                            <p><strong>User Experience Best Practices</strong></p>
+                            <ol>
+                                <li><a href="#accountcreation">Offer Facebook Login and account creation opportunities
+                                        immediately</a></li>
+                                <li><a href="#button">Use a large, rectangular button in a consistent style with the
+                                        rest of your app</a></li>
+                                <li><a href="#visible">Keep the option to Login with Facebook visible during alternate
+                                        account creation flows</a></li>
+                                <li><a href="#bonus">Offer customers a bonus for signing in</a></li>
+                                <li><a href="#minimizechoices">Minimize the choices offered</a></li>
+                                <li><a href="#duplicate">Help people avoid duplicate multi-channel accounts</a></li>
+                                <li><a href="#webviews">Avoid in-app web views</a></li>
+                                <li><a href="#logout">Provide a way to log out</a></li>
+                            </ol>
+                            <p><strong>Data Use Best Practices</strong></p>
+                            <ol>
+                                <li><a href="#onlyask">Only ask for the permissions you need.</a></li>
+                                <li><a href="#context">Ask for permissions in context and explain why.</a></li>
+                            </ol>
+                            <div class="_57yz _57z1 _3-8p">
+                                <div class="_57y-">
+                                    <p><a href="/docs/app-events/automatic-event-collection-detail">Understand Automatic
+                                            App Event Logging and change the setting as needed.</a></p>
+                                </div>
+                            </div>
+                            <ol>
+                                <li><a href="#checktokenvalidity">If you don't use the Facebook SDKs, regularly check
+                                        whether the access token is valid</a>.</li>
+                                <li><a href="#reauthflow">If data access for someone has expired, put them through the
+                                        reauthorization flow</a>.</li>
+                            </ol>
+                            <p><strong>Technical Practices</strong></p>
+                            <ol>
+                                <li><a href="#testing">Test and measure.</a></li>
+                                <li><a href="#policies">Follow the Facebook Developer Policies.</a></li>
+                                <li><a href="#datadeletion">Implement a Data Deletion Callback</a></li>
+                                <li><a href="#loginreview">Submit your app for App Review.</a></li>
+                            </ol>
+                            <p><strong>Additional Best Practices</strong></p>
+                            <ol>
+                                <li><a href="#promptrelogin">Prompt people to log back into your app or website</a></li>
+                                <li><a href="#checktoken">Check to make sure a user access token is still valid</a></li>
+                                <li><a href="#revokedpermissions">Check for revoked permissions</a></li>
+                                <li><a href="#datacontrol">Provide people with data control</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="user-experience">User Experience Best Practices</h2>
+                            <h4 id="accountcreation">1. Offer Login and Account Creation Opportunities Immediately</h4>
+                            <p>A majority of users who sign into apps with Facebook do so in the first five minutes of
+                                using the app, and more than 90% do so in the first day. Promote sign in as early as
+                                possible during your first-launch experience and offer incentives that share the
+                                business value you can provide from knowing who they are.
+                                Offering Facebook Login immediately on your welcome screen lets motivated visitors get
+                                started fast.</p>
+                            <p>If your analytics show that users arrive ready to complete a task immediately, use a
+                                banner to remind them to create an account, or offer account creation a way to speed up
+                                a check-out process.</p>
+                            <h4 id="button">2. Design: Use a Large, Rectangular Button</h4>
+                            <p>Use large, rectangular buttons for Facebook Login that are adjacent to other sign
+                                options. Facebook Login will do better if it is shown ahead of other options. You also
+                                want buttons to be consistent with the rest of your app design as buttons that are
+                                significantly visually different (for example, small, round buttons) won't perform as
+                                well.</p>
+                            <p>The Facebook Login button that comes with our <a
+                                    href="https://developers.facebook.com/docs#apis-and-sdks">SDKs</a> is easy to
+                                integrate and includes built-in education that ensures a consistent design and
+                                experience. However, if you do decide to build your own, for best results follow the <a
+                                    href="https://developers.facebook.com/devpolicy#login">Developer Policies for
+                                    Login</a> and the recommendations in <a
+                                    href="/docs/facebook-login/userexperience">User Experience Design</a>.</p>
+                            <img alt="" class="img"
+                                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=342511876627461&amp;version=1740403869"
+                                width="450" />
+                            <h4 id="visible">3. Keep the option to Login with Facebook Visible During Alternate Account
+                                Creation Flows</h4>
+                            <p>Customers might start down another account creation path and decide it is too much
+                                trouble if you require them to create a new password, upload a profile picture or
+                                manually enter other data they could provide through Facebook Login. Keep the option to
+                                use Facebook Login visible on these screens to convert visitors who might otherwise
+                                abandon account creation at this point.</p>
+                            <img alt="" class="img"
+                                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=511893132891784&amp;version=1740403869"
+                                width="450" />
+                            <h4 id="bonus">4. Offer customers a bonus for signing in</h4>
+                            <p>Offer customers a bonus for using Facebook Login and make it clear by the placement of
+                                your offer that it applies to Facebook Login, as well email and password sign up. You
+                                can also offer additional benefits for Facebook Login specifically.</p>
+                            <img alt="" class="img"
+                                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=1237779826383892&amp;version=1740403869"
+                                width="675" />
+                            <h4 id="minimizechoices">5. Minimize the choices offered</h4>
+                            <p>If an app has too many sign in options, the conversion towards Facebook Login can
+                                decrease. If your app supports multiple sign in options, use signals like language and
+                                country code to de-prioritize or hide options that are region specific.</p>
+                            <img alt="" class="img"
+                                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=493796628078269&amp;version=1740403869"
+                                width="675" />
+                            <h4 id="duplicate">6. Help people avoid duplicate multi-channel accounts</h4>
+                            <p>Sometimes users forget how they signed up for your service. If a user tries to use an
+                                email address to sign up or sign in and you've seen it before with Facebook Login,
+                                remind them and give them the chance to continue with their existing account.
+                                Ask for the same set of baseline permissions on all platforms, otherwise returning users
+                                may interpret being asked to grant a new permission as creating a new connection to
+                                Facebook, instead of easily logging back in with their existing one.</p>
+                            <img alt="" class="img"
+                                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=913040079068286&amp;version=1740403869"
+                                width="225" />
+                            <h4 id="webviews">7. Avoid in-app web views</h4>
+                            <p>On modern iOS and Android, in-app web views can't share cookies with the system browser.
+                                Because this makes it look to Facebook like a brand new browser, your visitors will see
+                                a “login to Facebook” screen with a cookie consent banner and requesting their username
+                                and password.</p>
+                            <p>On Android, log in users with the native Facebook app if it is present, or a Chrome
+                                Custom Tab if not. This ensures that people who've used Facebook on their device before
+                                are just one click away from approving your app.
+                                Our latest iOS SDKs always prefer <code>ASWebAuthenticationSession</code> /
+                                <code>SFAuthenticationSession</code> web views that can access system cookies.
+                            </p>
+                            <p>Generally, using the latest Facebook SDKs will give you the optimal behavior
+                                automatically. If you have a custom login flow or you use an integrator platform that
+                                provides Facebook Login as one of several sign in methods, make sure that your app has a
+                                Facebook Login experience that is full screen, and that you see the “use Facebook.com to
+                                Sign In” system prompt on iOS. If you see cookie consent banners or non-full screen
+                                experiences, contact your integrator and ask them to use the appropriate methods on each
+                                platform to give your visitors the best experience.</p>
+                            <img alt="" class="img"
+                                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=533805277361896&amp;version=1740403869"
+                                width="675" />
+                            <h4 id="logout">8. Provide a way to log out</h4>
+                            <p>Once people are logged in, you should also give them a way to log out, disconnect their
+                                account, or delete it all together. In addition to being a courtesy, this is also a
+                                requirement of our <a href="https://developers.facebook.com/devpolicy#login">Developer
+                                    Policies for Login</a>.</p>
+                            <p>The dating app Tinder, for example, gives you the option to log out or to delete your
+                                account entirely.</p>
+                            <img alt="" class="img"
+                                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=365695430779976&amp;version=1740403869"
+                                width="225" />
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Data Use Best Practices</h2>
+                            <h4 id="onlyask">1. Only ask for the permissions you need</h4>
+                            <p>Only ask for the <a href="/docs/facebook-login/permissions/overview">permissions</a> you
+                                need. The fewer permissions you ask for, the easier it is for people to feel comfortable
+                                granting them. We've seen that asking for fewer permissions typically results in greater
+                                conversion.</p>
+                            <p>You can always ask for additional permissions later after people have had a chance to try
+                                out your app.</p>
+                            <p>An additional benefit of asking for fewer permissions is that you might not need to
+                                submit your app for <a href="/docs/facebook-login/review">App Review</a>. You need to
+                                submit for App Review if you request any permissions other than the default fields and
+                                email.</p>
+                            <h4 id="context">2. Ask for permissions in context and explain why</h4>
+                            <p>You should trigger permission requests when people are trying to accomplish an action in
+                                your app which requires that specific permission.</p>
+                            <p>For example, the Facebook app only asks for Location Services when people explicitly tap
+                                on the location button when updating their status.</p>
+                            <p>In addition, people are most likely to accept permission requests when they clearly
+                                understand why your app needs that info to offer a better experience.</p>
+                            <h4 id="checktokenvalidity">3. If you don't use the Facebook SDKs, regularly check whether
+                                the access token is valid</h4>
+                            <p>Although access tokens have a scheduled expiration, tokens can be caused to expire early
+                                for security reasons. If you don't use the Facebook SDKs in your app, it is extremely
+                                important that you manually implement frequent checks of the token validity — at least
+                                daily — to ensure that your app is not relying on a token that has expired early for
+                                security reasons.</p>
+                            <h4 id="reauthflow">4. If data access for someone has expired, put them through the
+                                reauthorization flow</h4>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Technical Practices</h2>
+                            <h4 id="testing">1. Test and measure</h4>
+                            <p>It's incredibly important to test your Facebook Login flow under a variety of conditions,
+                                and we've built a <a href="/docs/facebook-login/testing-your-login-flow/">robust testing
+                                    plan</a> for you to follow. It's also a good idea to run qualitative usability tests
+                                to understand how people are reacting to what they see.</p>
+                            <p>Once you've tested your Facebook Login flow and are ready to launch, we suggest using an
+                                analytics program to understand if people are completing the process and their overall
+                                conversion rates. Best practice apps can see conversion rates of over 80%.</p>
+                            <h4 id="policies">2. Follow the Facebook Developer Policies</h4>
+                            <p>To avoid potential problems later on, do a quick check to make sure your Facebook Login
+                                integration adheres to the <a
+                                    href="https://developers.facebook.com/devpolicy#login">Developer Policies for
+                                    Login</a>.</p>
+                            <h4 id="datadeletion">3. Implement a Data Deletion Callback</h4>
+                            <p>To give people control of their data, implement a <a href="/docs/apps/delete-data">data
+                                    deletion callback</a> to respond to people's requests to delete data your app has
+                                from Facebook about them.</p>
+                            <h4 id="loginreview">4. Submit your app for App Review</h4>
+                            <p>You only need to submit your app for App Review if you're requesting permissions beyond
+                                the default fields and <code>email</code>. We recommend you submit your app for review
+                                as early as possible in your development lifecycle after you've integrated Facebook
+                                Login. You'll receive transparent feedback during the App Review process, including
+                                feedback on changes you can make to get a denied permission approved, if appropriate.
+                                For existing apps, going through Login Review will not affect your current app.</p>
+                            <p>You can learn more about App Review in <a href="/docs/apps/review/login">App Review for
+                                    Facebook Login</a>.</p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="additional">Additional Best Practices</h2>
+                            <p>We’re <a data-lynx-mode="hover"
+                                    href="http://l.facebook.com/l.php?u=http%3A%2F%2Fnewsroom.fb.com%2Fnews%2F2019%2F08%2Foff-facebook-activity%2F&amp;h=AT3UPRb9Xt1ojRjm-p7-LNYHgcJ4k3NptwigoTUBhbVDkFaktikeqXbbAm3Cp5x7byIztpiqNQlGPjMy41uE6ZEJ5pS8JlIixR50xLjW7qR8mJvrNcNMrXBDlK3Gyaq2iK23T389RJVPs66xtf3exA"
+                                    rel="nofollow" target="_blank">rolling out a feature</a> that gives people more
+                                transparency and control over the data other apps and websites share with us. As this
+                                feature rolls out, <a
+                                    href="https://developers.facebook.com/blog/post/2019/08/20/developer-best-practices-facebook-login/">it
+                                    may impact Facebook Login</a>.</p>
+                            <p>To help developers prepare for the launch of this feature, we’re providing our developer
+                                community with these additional best practices and guidance.</p>
+                            <h4 id="promptrelogin">1. Prompt people to log back into your app or website</h4>
+                            <p>When someone exercises control via the feature and wants to log back in to an app or
+                                website, that person should be prompted to do so when they open the app or website
+                                again. If they choose to log back in using Facebook Login, they will need to
+                                re-authorize any applicable permissions to the app or website.</p>
+                            <h4 id="checktoken">2. Check to make sure a user access token is still valid</h4>
+                            <p>In addition, when a person logged in with Facebook Login is actively using an app or
+                                website, developers should check that the user access token is still valid by making an
+                                API call or by checking permissions. Be sure to log the user out when their access token
+                                is invalidated.</p>
+                            <h4 id="revokedpermissions">3. Check for revoked permissions</h4>
+                            <p>People can revoke permissions granted to your app in Facebook's interface at any time
+                                after they have logged in. It is important to <a
+                                    href="/docs/facebook-login/permissions/requesting-and-revoking/#checking">check what
+                                    permissions are granted to apps and websites</a> by active users.</p>
+                            <h4 id="datacontrol">4. Provide people with data control</h4>
+                            <p>To give people control of their data, you should <a
+                                    href="/docs/apps/delete-data">implement a data deletion</a> callback to respond to
+                                people’s requests to delete data an app or website has from Facebook about them.</p>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

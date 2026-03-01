@@ -1,0 +1,403 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_fi">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Facebook Login for the Web with the JavaScript SDK</h1>
+              <p>This document walks you through the steps of implementing Facebook Login with the <a
+                  href="/docs/javascript">Facebook SDK for JavaScript</a> on your webpage.</p>
+              <h2>Before You Start</h2>
+              <p>You will need the following:</p>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">A <a href="https://developers.facebook.com/apps/" target="_blank">Facebook Developer
+                      Account <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=Nkdp_SmvdOwQHXuEioDf6w&amp;oh=00_Afu7dK4ELS2ZdZu_64RjrqgK5kpKZcKYN8uyhSu1EmQfxQ&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb">A <a href="https://developers.facebook.com/docs/apps#register"
+                      target="_blank">Facebook App ID <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=Nkdp_SmvdOwQHXuEioDf6w&amp;oh=00_Afu7dK4ELS2ZdZu_64RjrqgK5kpKZcKYN8uyhSu1EmQfxQ&amp;oe=69A0DBE2"
+                        width="10px" /></a> for a website</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Basic Automatic Login Example</h2>
+              <p>The following code sample shows you how to add the Facebook SDK for Javascript to your webpage,
+                initialize the SDK, and, if you are logged in to Facebook, will display your name and email. If you are
+                not logged into Facebook, the login dialog popup window will automatically be displayed.</p>
+              <p>
+                The
+                <a href="#" role="button" target="_blank">
+                  public_profile permission
+                  <img alt="" class="img"
+                    src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=Nkdp_SmvdOwQHXuEioDf6w&amp;oh=00_Afu7dK4ELS2ZdZu_64RjrqgK5kpKZcKYN8uyhSu1EmQfxQ&amp;oe=69A0DBE2"
+                    width="10px" /></a>, which allows you to get publicly available information such as name and profile
+                picture,
+                and the
+                <a href="https://developers.facebook.com/docs/permissions/reference/email" target="_blank">
+                  email permission
+                  <img alt="" class="img"
+                    src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=Nkdp_SmvdOwQHXuEioDf6w&amp;oh=00_Afu7dK4ELS2ZdZu_64RjrqgK5kpKZcKYN8uyhSu1EmQfxQ&amp;oe=69A0DBE2"
+                    width="10px" /></a>
+                do not require app review and are automatically granted to all apps using Facebook Login.
+
+              </p>
+              <pre class="_5s-8 prettyprint linenums lang-code" style="">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;h2&gt;Add Facebook Login to your webpage&lt;/h2&gt;
+
+      &lt;!-- Set the element id for the JSON response --&gt;
+    
+      &lt;p id="profile"&gt;&lt;/p&gt;
+
+      &lt;script&gt;
+  
+        &lt;!-- Add the Facebook SDK for Javascript --&gt;
+  
+        (function(d, s, id){
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) {return;}
+                              js = d.createElement(s); js.id = id;
+                              js.src = "https://connect.facebook.net/en_US/sdk.js";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk')
+        );
+
+
+        window.fbAsyncInit = function() {
+            &lt;!-- Initialize the SDK with your app and the Graph API version for your app --&gt;
+            FB.init({
+                      appId            : '{your-facebook-app-id}',
+                      xfbml            : true,
+                      version          : '{the-graph-api-version-for-your-app}'
+                    });
+            &lt;!-- If you are logged in, automatically get your name and email address, your public profile information --&gt;
+            FB.login(function(response) {
+                      if (response.authResponse) {
+                           console.log('Welcome!  Fetching your information.... ');
+                           FB.api('/me', {fields: 'name, email'}, function(response) {
+                               document.getElementById("profile").innerHTML = "Good to see you, " + response.name + ". i see your email address is " + response.email
+                           });
+                      } else { 
+                           &lt;!-- If you are not logged in, the login dialog will open for you to login asking for permission to get your public profile and email --&gt;
+                           console.log('User cancelled login or did not fully authorize.'); }
+            });
+        };
+
+      &lt;/script&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="redirecturl">1. Enable JavaScript SDK for Facebook Login</h2>
+              <p>In the <a href="https://developers.facebook.com/apps" target="_blank">App Dashboard</a>, choose your
+                app and scroll to <b>Add a Product</b> Click <b>Set Up</b> in the <b>Facebook Login</b> card. Select
+                <b>Settings</b> in the left side navigation panel and under <b>Client OAuth Settings</b>, enter your
+                redirect URL in the <b>Valid OAuth Redirect URIs</b> field for successful authorization.
+              </p>
+              <p>Indicate that you are using the JavaScript SDK for login by setting the <b>Login with JavaScript
+                  SDK</b> toggle to “yes”, and enter the domain of your page that hosts the SDK in <b>Allowed Domains
+                  for JavaScript SDK</b> list. This ensures that access tokens are only returned to callbacks in
+                authorized domains. Only https pages are supported for authentication actions with the Facebook
+                JavaScript SDK. </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="checklogin">2. Check Login Status of a Person</h2>
+              <p>The first step when your webpage loads is determining if a person is already logged into your webpage
+                with Facebook Login. A call to <a href="/docs/reference/javascript/FB.getLoginStatus"
+                  target="_blank"><code>FB.getLoginStatus</code></a> starts a call to Facebook to get the login status.
+                Facebook then calls your callback function with the results.</p>
+              <h4>Sample Call</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});</pre>
+              <h4>Sample JSON Response</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+    status: 'connected',
+    authResponse: {
+        accessToken: '{access-token}',
+        expiresIn:'{unix-timestamp}',
+        reauthorize_required_in:'{seconds-until-token-expires}',
+        signedRequest:'{signed-parameter}',
+        userID:'{user-id}'
+    }
+}</pre>
+              <p><code>status</code> specifies the login status of the person using the webpage. The <code>status</code>
+                can be one of the following:</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:150px"><code>Status</code> Type</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_BE">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>connected</code></p>
+                      </td>
+                      <td>
+                        <p>The person is logged into Facebook, and has logged into your webpage.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>not_authorized</code></p>
+                      </td>
+                      <td>
+                        <p>The person is logged into Facebook, but has not logged into your webpage.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>unknown</code></p>
+                      </td>
+                      <td>
+                        <p>The person is not logged into Facebook, so you don't know if they have logged into your
+                          webpage. Or <a href="#logout">FB.logout()</a> was called before, and therefore, it cannot
+                          connect to Facebook.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>If the status is <code>connected</code>, the following <code>authResponse</code> parameters are
+                included in the response:</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:250px"><code>authResponse</code> Parameters</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_0h">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>accessToken</code></p>
+                      </td>
+                      <td>
+                        <p>An access token for the person using the webpage.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>expiresIn</code></p>
+                      </td>
+                      <td>
+                        <p>A UNIX time stamp when the token expires. Once the token expires, the person will need to
+                          login again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>reauthorize_required_in</code></p>
+                      </td>
+                      <td>
+                        <p>The amount of time before the login expires, in seconds, and the person will need to login
+                          again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>signedRequest</code></p>
+                      </td>
+                      <td>
+                        <p>A signed parameter that contains information about the person using your webpage.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>userID</code></p>
+                      </td>
+                      <td>
+                        <p>The ID of the person using your webpage.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>The JavaScript SDK automatically detects login status, so you don't need to do anything to enable this
+                behavior.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="login">3. Log a Person In</h2>
+              <p>If a person opens your webpage but is not logged in or not logged in to Facebook, you can use <a
+                  href="/docs/facebook-login/overview/#logindialog">the Login dialog</a> to prompt them to log in to
+                both. If they are not logged into Facebook, they will first be prompted to log in, then prompted to log
+                in to your webpage.</p>
+              <p>There are two ways to log someone in:</p>
+              <ul>
+                <li>The <a href="#loginbutton">Facebook Login Button</a></li>
+                <li>The <a href="#logindialog">Login Dialog</a> from the JavaScript SDK</li>
+              </ul>
+              <h3 id="loginbutton">A. Log In with the Login Button</h3>
+              <p>Customize the <a href="/docs/facebook-login/web/login-button">Login Button</a> and add the code to your
+                project.</p>
+              <h3 id="logindialog">B. Log In with the Javascript SDK Login Dialog</h3>
+              <p>To use your own login button, invoke the Login Dialog with a call to <a
+                  href="/docs/reference/javascript/FB.login"><code>FB.login()</code></a>.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.login(function(response){
+  // handle the response 
+});</pre>
+              <h3>Ask for Additional Permissions</h3>
+              <p>When a person clicks your HTML button a pop-up window with the Login dialog is shown. This dialog
+                allows you to <a href="/docs/facebook-login/web/permissions">ask for permission</a> to access a person's
+                data. The <code>scope</code> parameter can be passed along with the <code>FB.login()</code> function
+                call. This optional parameter is a list of <a href="/docs/facebook-login/permissions">permissions</a>,
+                separated by commas, that a person must confirm to give your webpage access to their data. Facebook
+                Login requires dvanced public_profile permission, to be used by external users.</p>
+              <h4>Sample Call</h4>
+              <div style="padding:5px"></div>
+              <p>This example asks the person logging in if your webpage can have permission to access their public
+                profile and email.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.login(function(response) {
+  // handle the response
+}, {scope: 'public_profile,email'});</pre>
+              <h3 id="dialogresponse">Handle the Login Dialog Response</h3>
+              <p>The response, either to connect or to cancel, returns an <code>authResponse</code> object to the
+                callback specified when you called <code>FB.login()</code>. This response can be detected and handled
+                within the <code>FB.login()</code>.</p>
+              <h4>Sample Call</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.login(function(response) {
+  if (response.status === 'connected') {
+    // Logged into your webpage and Facebook.
+  } else {
+    // The person is not logged into your webpage or we are unable to tell. 
+  }
+});</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="logout">4. Log a Person Out</h2>
+              <p>Log a person out of your webpage by attaching the JavaScript SDK function <code>FB.logout()</code> to a
+                button or a link.</p>
+              <h4>Sample Call</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.logout(function(response) {
+   // Person is now logged out
+});</pre>
+              <p><strong>Note: This function call may also log the person out of Facebook.</strong></p>
+              <h4>Scenarios to Consider</h4>
+              <div style="padding:5px"></div>
+              <ol>
+                <li>A person logs into Facebook, then logs into your webpage. Upon logging out from your app, the person
+                  is still logged into Facebook.</li>
+                <li>A person logs into your webpage and into Facebook as part of your app's login flow. Upon logging out
+                  from your app, the user is also logged out of Facebook.</li>
+                <li>A person logs into another webpage and into Facebook as part of the other webpage's login flow, then
+                  logs into your webpage. Upon logging out from either webpage, the person is logged out of Facebook.
+                </li>
+              </ol>
+              <p>Additionally, logging out of your webpage does not revoking permissions the person granted your webpage
+                during login. <a href="/docs/facebook-login/permissions#revokelogin">Revoking permissions</a> must be
+                done separately. Build your webpage in such a way that a person who has logged out will not see the
+                Login dialog when they log back in.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="example">Full Code Example</h2>
+              <p>This code loads and initializes the JavaScript SDK in your HTML page. Replace <code>{app-id}</code>
+                with your <a href="https://developers.facebook.com/docs/apps" target="_blank"> app ID</a> and
+                <code>{api-version}</code> with the Graph API version to use. Unless you have a specific reason to use
+                an older version, specify the most recent version: <code>v24.0</code>.
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Facebook Login JavaScript Example&lt;/title&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script&gt;
+
+  function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+    console.log('statusChangeCallback');
+    console.log(response);                   // The current login status of the person.
+    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+      testAPI();  
+    } else {                                 // Not logged into your webpage or we are unable to tell.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this webpage.';
+    }
+  }
+
+
+  function checkLoginState() {               // Called when a person is finished with the Login Button.
+    FB.getLoginStatus(function(response) {   // See the onlogin handler
+      statusChangeCallback(response);
+    });
+  }
+
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{app-id}',
+      cookie     : true,                     // Enable cookies to allow the server to access the session.
+      xfbml      : true,                     // Parse social plugins on this webpage.
+      version    : '{api-version}'           // Use this Graph API version for this call.
+    });
+
+
+    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+      statusChangeCallback(response);        // Returns the login status.
+    });
+  };
+ 
+  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+
+&lt;/script&gt;
+
+
+&lt;!-- The JS SDK Login Button --&gt;
+
+&lt;fb:login-button scope="public_profile,email" onlogin="checkLoginState();"&gt;
+&lt;/fb:login-button&gt;
+
+&lt;div id="status"&gt;
+&lt;/div&gt;
+
+&lt;!-- Load the JS SDK asynchronously --&gt;
+&lt;script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h3 id="additional-resources">Additional Resources</h3>
+              <ul>
+                <li><a href="/docs/plugins/login-button">Login Button</a> Documentation</li>
+                <li><a href="/docs/reference/javascript/FB.login"><code>FB.login()</code> Reference</a></li>
+                <li><a href="/docs/reference/javascript/FB.getLoginStatus"><code>FB.getLoginStatus()</code>
+                    Reference</a> </li>
+                <li><a href="/docs/reference/javascript">JavaScript SDK Reference</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

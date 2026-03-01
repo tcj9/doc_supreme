@@ -1,0 +1,152 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_MD">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1>Business Integration Webhooks</h1>
+                            <p>Webhooks allow you to receive real-time HTTP notifications of changes to specific
+                                objects. For example, we could send you a notification whenever a user removes assets
+                                from an app install. This prevents you from having to query our APIs for changes to
+                                objects that may or may not have happened, and helps you avoid reaching your rate limit.
+                            </p>
+                            <p>Business integration Webhooks are available for the following Business Authorization
+                                platforms:</p>
+                            <ol>
+                                <li>Meta Business Extension</li>
+                                <li>Facebook Login for Business</li>
+                                <li>WhatsApp Embedded Sign On</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Fields</h2>
+                            <p>The following are the available business integration Webhook fields that can be
+                                subscribed to, under the “Application” topic:</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <th>Field</th>
+                                        <th>Trigger</th>
+                                        <th>Example</th>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_2_Kb">
+                                        <tr class="row_0">
+                                            <td>
+                                                <p>business_integration_install</p>
+                                            </td>
+                                            <td>
+                                                <p>When a business integration is installed.
+                                                    (Business Integration System User is created)</p>
+                                            </td>
+                                            <td>
+                                                <p>Client business installs your business application through Facebook
+                                                    Login for Business</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_1 _5m29">
+                                            <td>
+                                                <p>business_integration_uninstall</p>
+                                            </td>
+                                            <td>
+                                                <p>When a business integration is uninstalled. (Business Integration
+                                                    System User is deleted)</p>
+                                            </td>
+                                            <td>
+                                                <p>Client business uninstalls your business application through Meta
+                                                    Business Suite</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_2">
+                                            <td>
+                                                <p>business_integration_update</p>
+                                            </td>
+                                            <td>
+                                                <p>When a business asset is either added or removed from a business
+                                                    integration (Business Integration System User gains/loses access to
+                                                    a business asset)</p>
+                                            </td>
+                                            <td>
+                                                <p>Client business allows your System User to make posts on their
+                                                    Facebook Page</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Example Responses</h2>
+                            <h3><code>business_integration_install</code></h3>
+                            <pre class="_5s-8 prettyprint lang-json" style="">{
+  "entry": [
+        {
+            "id":"application_id",
+            "time":123123,
+            "changes": [
+            {
+                "field": "business_integration_install",
+                "value": {
+                    "business_manager_id": "bm_id"
+                    "tp_config_id": "config_id"
+                }
+            }
+        ]
+    }
+  ],
+  "object":"application"
+}</pre>
+                            <h3><code>business_integration_uninstall</code></h3>
+                            <pre class="_5s-8 prettyprint lang-json" style="">{
+  "entry": [
+        {
+            "id":"application_id",
+            "time":123123,
+            "changes": [
+            {
+                "field": "business_integration_uninstall",
+                "value": {
+                    "business_manager_id": "bm_id"
+                }
+            }
+        ]
+    }
+  ],
+  "object":"application"
+}</pre>
+                            <h3><code>business_integration_update</code></h3>
+                            <pre class="_5s-8 prettyprint lang-json" style="">{
+  "entry": [
+        {
+            "id":"application_id",
+            "time":123123,
+            "changes": [
+            {
+                "field": "business_integration_update",
+                "value": {
+                    "business_manager_id": "bm_id"
+                }
+            }
+        ]
+    }
+  ],
+  "object":"application"
+}</pre>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Next Steps</h2>
+                            <p>To configure Webhooks, refer to the Webhooks <a
+                                    href="https://developers.facebook.com/docs/graph-api/webhooks/getting-started">Getting
+                                    Started</a> page.</p>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

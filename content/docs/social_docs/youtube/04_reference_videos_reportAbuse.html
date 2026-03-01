@@ -1,0 +1,327 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Videos: reportAbuse<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+                  <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title"
+                        class="devsite-key-takeaways-panel-header" role="button" tabindex="0">
+                        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+                        <div class="devsite-key-takeaways-panel-title">
+                              <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI"
+                                    id="key-takeaways-panel-title">Page Summary</h2>
+                        </div>
+                        <span aria-hidden="true"
+                              class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+                        </img>
+                  </div>
+                  <div class="devsite-key-takeaways-panel-content">
+                        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+                              <button aria-label="Report Key Takeaways!"
+                                    class="button-flat button-primary devsite-key-takeaways-report-button"
+                                    data-title="Report Key Takeaways!">
+                                    <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+                              </button>
+                        </devsite-feedback>
+                        <ul class="devsite-key-takeaways-panel-list">
+                              <li>
+                                    <p>This API allows reporting a YouTube video for abusive content using a POST
+                                          request to
+                                          <code>https://www.googleapis.com/youtube/v3/videos/reportAbuse</code>.</p>
+                              </li>
+                              <li>
+                                    <p>Reporting a video requires setting both the <code>videoId</code> (the ID of the
+                                          video being reported) and the <code>reasonId</code> (the reason for reporting
+                                          the video) within the request body.</p>
+                              </li>
+                              <li>
+                                    <p>The request can optionally include <code>secondaryReasonId</code>,
+                                          <code>comments</code>, and <code>language</code> for more detailed information
+                                          about the report.</p>
+                              </li>
+                              <li>
+                                    <p>Utilizing this API call consumes 50 quota units and requires authorization with
+                                          specific scopes, such as <code>https://www.googleapis.com/auth/youtube</code>.
+                                    </p>
+                              </li>
+                              <li>
+                                    <p>The API will return an error if an unexpected or invalid value is entered for
+                                          <code>reasonId</code> or <code>secondaryReasonId</code> and if a video is not
+                                          found.</p>
+                              </li>
+                        </ul>
+                  </div>
+            </devsite-key-takeaways-panel>
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="reportAbuse" itemprop="name">
+                  <meta content="videos" itemprop="path">
+                  <section id="overview">
+                        <p>Reports a video for containing abusive content.</p>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of 50 units.</p>
+                  </section>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">POST https://www.googleapis.com/youtube/v3/videos/reportAbuse</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="auth_required">
+                              <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+                              <p>This request requires authorization with at least one of the following scopes (<a
+                                          href="/youtube/v3/guides/authentication">read more about authentication and
+                                          authorization</a>).</p>
+                              <table class="matchpre">
+                                    <thead>
+                                          <tr>
+                                                <th>Scope</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtubepartner</code>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The table below lists the parameters that this query supports. All of the parameters
+                                    listed are query parameters.</p>
+                              <table class="details responsive">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="onBehalfOfContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">onBehalfOfContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. <strong>Note:</strong> This parameter is
+                                                      intended exclusively for YouTube content partners.<br /><br />The
+                                                      <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter indicates that the request's authorization credentials
+                                                      identify a YouTube CMS user who is acting on behalf of the content
+                                                      owner specified in the parameter value. This parameter is intended
+                                                      for YouTube content partners that own and manage many different
+                                                      YouTube channels. It allows content owners to authenticate once
+                                                      and get access to all their video and channel data, without having
+                                                      to provide authentication credentials for each individual channel.
+                                                      The CMS account that the user authenticates with must be linked to
+                                                      the specified YouTube content owner.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>The request body has the following data structure:</p>
+                              <div></div><devsite-code>
+                                    <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Text only"
+                                          translate="no">{
+  "<a href="#videoId">videoId</a>": <var class="apiparam" translate="no">string</var>,
+  "<a href="#reasonId">reasonId</a>": <var class="apiparam" translate="no">string</var>,
+  "<a href="#secondaryReasonId">secondaryReasonId</a>": <var class="apiparam" translate="no">string</var>,
+  "<a href="#comments">comments</a>": <var class="apiparam" translate="no">string</var>,
+  "<a href="#language">language</a>": <var class="apiparam" translate="no">string</var>
+}</pre>
+                              </devsite-code>
+                              <h4 data-text="Required properties" id="required-properties" tabindex="-1">Required
+                                    properties</h4>
+                              <p>You must set values for the following properties:</p>
+                              <p>
+                              <ul>
+                                    <li><code dir="ltr" translate="no"><a href="#videoId">videoId</a></code></li>
+                                    <li><code dir="ltr" translate="no"><a href="#reasonId">reasonId</a></code></li>
+                              </ul>
+                              </p>
+                              <h4 data-text="Optional properties" id="optional-properties" tabindex="-1">Optional
+                                    properties</h4>
+                              <p>You can set values for the following properties:</p>
+                              <p>
+                              <ul>
+                                    <li><code dir="ltr"
+                                                translate="no"><a href="#secondaryReasonId">secondaryReasonId</a></code>
+                                    </li>
+                                    <li><code dir="ltr" translate="no"><a href="#comments">comments</a></code></li>
+                                    <li><code dir="ltr" translate="no"><a href="#language">language</a></code></li>
+                              </ul>
+                              </p>
+                        </section>
+                        <section id="properties">
+                              <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                              <p>The following table defines the properties that appear in this resource:</p>
+                              <table class="responsive properties" id="property-table">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Properties</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr id="videoId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">videoId</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Identifies the video that is being reported for containing abusive
+                                                      content. Set the value to that video's YouTube video ID.</td>
+                                          </tr>
+                                          <tr id="reasonId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">reasonId</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                      Specifies the reason that the video that is being reported for
+                                                      containing abusive content. Set the value to the appropriate <code
+                                                            dir="ltr" translate="no">videoAbuseReportReason</code>
+                                                      resource's <code dir="ltr"
+                                                            translate="no"><a href="/youtube/v3/docs/videoAbuseReportReasons#id">unique ID</a></code>.
+                                                </td>
+                                          </tr>
+                                          <tr id="secondaryReasonId">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">secondaryReasonId</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                      Specifies the secondary reason that the video that is being
+                                                      reported for containing abusive content. A secondary reason
+                                                      provides a more specific description of the objectionable content
+                                                      than the primary reason, which the <code dir="ltr"
+                                                            translate="no">reasonId</code> property identifies. Set the
+                                                      value to the appropriate secondary reason's <code dir="ltr"
+                                                            translate="no"><a href="/youtube/v3/docs/videoAbuseReportReasons#snippet.secondaryReasons[].id">unique ID</a></code>.
+                                                </td>
+                                          </tr>
+                                          <tr id="comments">
+                                                <td><code dir="ltr" itemprop="property" translate="no">comments</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Provides any additional information that the reporter wants to
+                                                      add.</td>
+                                          </tr>
+                                          <tr id="language">
+                                                <td><code dir="ltr" itemprop="property" translate="no">language</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                      Identifies a language spoken by the reporter.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <p>If successful, this method returns an HTTP <code dir="ltr" translate="no">204</code> response
+                              code (<code dir="ltr" translate="no">No Content</code>).</p>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The table below identifies error messages that the API could return in response to a call to
+                              this method. Please see the <a href="/youtube/v3/docs/errors">error message</a>
+                              documentation for more detail.</p>
+                        <table class="matchpre" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th>Error type</th>
+                                          <th>Error detail</th>
+                                          <th>Description</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="youtube.videos.reportAbuse-badRequest-invalidAbuseReason">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">invalidAbuseReason</code></td>
+                                          <td class="error-cause">The request contained an unexpected value for the
+                                                <code dir="ltr" translate="no">reasonId</code> property, or an invalid
+                                                combination of the <code dir="ltr" translate="no">reasonId</code> and
+                                                <code dir="ltr" translate="no">secondaryReasonId</code> properties.</td>
+                                    </tr>
+                                    <tr id="youtube.videos.reportAbuse-badRequest-rateLimitExceeded">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">rateLimitExceeded</code></td>
+                                          <td class="error-cause">The user has sent too many requests in a given
+                                                timeframe.</td>
+                                    </tr>
+                                    <tr id="youtube.videos.reportAbuse-forbidden-forbidden">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">forbidden</code></td>
+                                          <td class="error-cause"></td>
+                                    </tr>
+                                    <tr id="youtube.videos.reportAbuse-notFound-videoNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">videoNotFound</code></td>
+                                          <td class="error-cause">The video that you are trying to report abuse for
+                                                cannot be found.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  <section id="try-it">
+                        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                              request and response.</p>
+                        <div class="devsite-apix">
+                              <div class="apis-explorer"
+                                    data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+                                    data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                    data-method-id="youtube.videos.reportAbuse" data-show-code-button="true"></div>
+                        </div>
+                  </section>
+                  </meta>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

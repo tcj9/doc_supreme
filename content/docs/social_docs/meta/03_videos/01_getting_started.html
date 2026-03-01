@@ -1,0 +1,156 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_8I">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Get Started</h1>
+              <p>The Get Started with the Facebook Video API from Meta guide shows you how to obtain a permissions, a
+                Page access token, and a Page ID using the Graph API Explorer.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Before You Start</h2>
+              <p>You will need:</p>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/development/create-an-app"
+                      target="_blank">
+                      A Meta app
+                    </a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/pages-api/overview#tasks"
+                      target="_blank">
+                      A Facebook Page
+
+                    </a> that you are able to perform the <code>CREATE_CONTENT</code> task
+
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/guides/explorer"
+                      target="_blank">
+                      The Graph API Explorer tool
+
+                    </a> to run API requests
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">
+                    A Video handle ID for the video that you have uploaded to Meta servers using the
+                    <a href="https://developers.facebook.com/docs/graph-api/guides/upload" target="_blank">
+                      Resumble Upload API.
+
+                    </a>
+                    <div><span>
+                        <div class="_57yz _7_72 _3-8p">
+                          <div class="_57y-">
+                            <p>The <code>graph-video.facebook.com</code> host for video uploads has been deprecated. Use
+                              the <code>graph.facebook.com</code> host for API requests when uploading videos to Meta
+                              servers.</p>
+                          </div>
+                        </div>
+                      </span></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 1: Get an access token</h2>
+              <p>In this section you will beusing the Graph API Explorer to get an access token for your Page with the
+                necessary permissions</p>
+              <ol>
+                <li>Load the <a href="https://developers.facebook.com/tools/explorer/" target="_blank"><b>Graph API
+                      Explorer</b><img alt="" class="img"
+                      src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=U8kApPsJeYTlawUr1mHyTQ&amp;oh=00_Afv7mpWrLzIXOQ_qznwZsJLWy4lPKEUO3myseIL9tPOx3g&amp;oe=69A0DBE2"
+                      width="10px" /> in a new window.</a></li>
+                <li>Select your app from the <b>Meta App</b> dropdown menu.</li>
+                <li>In the <b>User or Page</b> drop-down menu, select <b>User Token</b>.</li>
+                <li>In the <b>Permissions</b> section, use the <b>Add a permission</b> search field to search for and
+                  select the following permissions:
+                  <ul class="uiList _4of _4kg">
+                    <li>
+                      <div class="fcb"><code>pages_manage_engagement</code></div>
+                    </li>
+                    <li>
+                      <div class="fcb"><code>pages_read_user_content</code></div>
+                    </li>
+                    <li>
+                      <div class="fcb"><code>pages_show_list</code></div>
+                    </li>
+                  </ul>
+                </li>
+                <li>Click <b>Generate Access Token</b>. </li>
+                <li>In the pop-up window that appears, select the Page where you want to publish your video and complete
+                  the pop-up window flow.</li>
+              </ol>
+              <p>You now have a User access token that you can use to make API requests. You can copy and paste this
+                token to test your app and click the <strong>i</strong> icon to view details about this token including
+                permissions and expiry.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 2: Get your Page ID and token</h2>
+              <ol>
+                <li>In the Graph API Explorer, update the query string field a request to the
+                  <code>GET /me/accounts</code> endpoint. <b><code>me</code></b> represents the ID for the User or Page
+                  that requested the access token, in this query the ID is your User ID.
+                </li>
+                <li>
+                  Click <b>Submit</b> in the upper right. A list of Page objects will be returned, including the name,
+                  Page ID, and Page access token, for Facebook pages on which you can perform a task.
+                </li>
+                <li>Copy the ID for your Page and Page access token.</li>
+                <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "data": [
+    {
+      "access_token": "EBACf...",  //Copy your Page Access Token
+      "category": "Media",
+      "category_list": [
+        {
+          "id": "163003840417682",
+          "name": "Media"
+        }
+      ],
+      "name": "Metricsaurus",
+      "id": "1755847768034402",  //Copy your Page ID
+      "tasks": [
+        "ANALYZE",
+        "ADVERTISE",
+        "MODERATE",
+        "CREATE_CONTENT",
+        "MANAGE"
+      ]
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "MTc1NTg0Nzc2ODAzNDQwMgZDZD",
+      "after": "MTc1NTg0Nzc2ODAzNDQwMgZDZD"
+    }
+  }
+}
+</pre>
+              </ol>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 3. Publish the video to your Page</h2>
+              <ol>
+                <li>In the explorer, replace <b><code>me</code></b> with your Page ID.</li>
+                <li>Replace the access token with your Page access token.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,372 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_wS">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Crosspost a Video</h2>
+              <p>This document explains how to use the Video API to publish a video on multiple Pages without uploading
+                the video to each <a href="/docs/graph-api/reference/page">Page</a>. For example, if you have a parent
+                Page with several child Pages, you can upload and publish a video to the parent Page then publish the <a
+                  href="/docs/graph-api/reference/video">Video</a> to all child Pages without having to upload the video
+                to each Page.</p>
+              <p>To crosspost a <a href="/docs/graph-api/reference/video">Video</a>, you must be able to perform to the
+                <a href="/docs/pages/overview#tasks"><code>CREATE</code> task</a> on the Pages and <a
+                  href="#step-1--enable-crossposting">enable the Video to be published to specific Pages</a>. You will
+                need the ID of the Video and the ID's of the Pages where you want to publish the Video as well as Page
+                access tokens from the Page where the Video was originally published and the Pages where you want to
+                publish.
+              </p>
+              <p>You can use the API to determine if a Video is already <a
+                  href="#get-video-crossposting-eligibility">eligible for crossposting</a> or <a
+                  href="#get-video-crossposting-status">a crossposted video</a>, how to <a
+                  href="#enable-crossposting-to-all-your-business-manager-pages">enable crossposting to all Pages
+                  managed by your Business Manager</a>, and to <a href="#get-video-crossposting-status">get a list of
+                  Pages you can crosspost to</a>.</p>
+              <p>Visit our <a
+                  href="https://developers.facebook.com/docs/video-api/guides/reels-publishing"><strong>Reels Publishing
+                    guide</strong></a> for informtion about crossposting a reel to a collaborator's Facebook Page.</p>
+              <h3>Limitations</h3>
+              <div style="padding:5px"></div>
+              <p>If a video has been crossposted to your Page but you do not have a <a
+                  href="/docs/pages/overview#tasks">Role on the Page</a> where the video was originally published, you
+                cannot change any Permissions of the Video.</p>
+              <h3>Step 1. Enable Crossposting</h3>
+              <p>To publish a Video to multiple Pages you must enable crossposting of the Video to these Pages.</p>
+              <p>You will need:</p>
+              <ul>
+                <li>The ID of the Video you want to crosspost</li>
+                <li>IDs of Pages where you want to publish the Video </li>
+                <li>A Page access token of the Page where the Video was originally published</li>
+                <li>The <a href="/docs/permission/reference/publish_video"><code>publish_video</code> Permission</a>
+                </li>
+                <li>The <a href="/docs/permission/reference/pages_manage_posts"><code>pages_manage_posts</code>
+                    Permission</a></li>
+                <li>The <a href="/docs/permission/reference/pages_read_engagement"><code>pages_read_engagement</code>
+                    Permission</a></li>
+              </ul>
+              <p>Send a <code>POST</code> request to the <a href="/docs/graph-api/reference/video">Video</a> endpoint:
+              </p>
+              <pre class="_5s-8 prettyprint lang-http" style="">POST /{api-version}/{video-id}
+  ?allow_crossposting_for_pages=[{page_id:{page-a-id},allow:true},{page_id:{page-b-id},allow:true}]
+  &amp;access_token={page-access-token}</pre>
+              <p>Include the following parameters:</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:250px">Parameter Name</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_7w">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>allow_crossposting_for_pages</code></p>
+                      </td>
+                      <td>
+                        <p>A JSON array of Page IDs where you want to publish the video. Set <code>allow</code> to
+                          <code>true</code> to enable publishing or <code>false</code> to disable publishing.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>access_token</code></p>
+                      </td>
+                      <td>
+                        <p>The Page access token of the Page where the video was originally published.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">curl -X POST \
+  "https://graph.facebook.com/v7.0/2918040388250909" \
+  -F "allow_crossposting_for_pages=[{page_id:104371193424796,allow:true},{page_id:115969103185286",allow:true}] \
+  -F "access_token=EAABkW..."</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "success": true
+}</pre>
+              <h3>Step 2. Crosspost the Video</h3>
+              <p>You will need:</p>
+              <ul>
+                <li>The ID of the Video you want to crosspost</li>
+                <li>The ID of the Page where you want to publish the Video </li>
+                <li>A Page access token of the Page where you want the Video published</li>
+                <li>The <a href="/docs/permission/reference/publish_video"><code>publish_video</code> Permission</a>
+                </li>
+                <li>The <a href="/docs/permission/reference/pages_manage_posts"><code>pages_manage_posts</code>
+                    Permission</a></li>
+                <li>The <a href="/docs/permission/reference/pages_read_engagement"><code>pages_read_engagement</code>
+                    Permission</a></li>
+              </ul>
+              <p>Send a <code>POST</code> request to the <a href="/docs/graph-api/reference/page/videos">Page Videos</a>
+                endpoint:</p>
+              <pre class="_5s-8 prettyprint lang-http" style="">POST /{api-version}/{page-id}/videos
+    ?crossposted_video_id={video-id}
+    &amp;access_token={page-access-token}</pre>
+              <p>Include the following parameters:</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th>Parameter Name</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_a9">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>crossposted_video_id</code></p>
+                      </td>
+                      <td>
+                        <p>The video ID of the Video you are crossposting.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>access_token</code></p>
+                      </td>
+                      <td>
+                        <p>The Page access token of the Page where you are publishing the video.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl"
+                style="">curl -X POST \
+  "https://graph.facebook.com/104371193424796/videos?crossposted_video_id=2918040388250909&amp;access_token=EAABk..."</pre>
+              <h4>Sample JSON Response</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "id":"577600939847873"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Video Crossposting Eligibility</h2>
+              <p>To determine if a Video is eligible to be crossposted, send a <code>GET</code> request to the Video
+                endpoint with the <code>is_crossposting_eligible</code> field.</p>
+              <p>You will need:</p>
+              <ul>
+                <li>The ID of the Video you want to crosspost</li>
+                <li>A Page access token of the Page where the Video was originally published</li>
+                <li>The <a href="/docs/permission/reference/pages_manage_posts"><code>pages_manage_posts</code>
+                    Permission</a></li>
+                <li>The <a href="/docs/permission/reference/pages_read_engagement"><code>pages_read_engagement</code>
+                    Permission</a></li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-http" style="">GET /{api-version}/{video-id}
+   ?fields=is_crossposting_eligible
+   &amp;access_token={page-access-token}</pre>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">curl -X GET \
+  "https://graph.facebook.com/v7.0/2918040388250909" \
+  -F "is_crossposting_eligible" \
+  -F "access_token=EAABkW..."</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "is_crossposting_eligible": true,
+  "id": "2918040388250909"
+}</pre>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th>Parameter Name</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_OZ">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>is_crossposting_eligible</code></p>
+                      </td>
+                      <td>
+                        <p>Displays if the Video is enabled to be crossposted.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>access_token</code></p>
+                      </td>
+                      <td>
+                        <p>The Page access token of the Page where the Video was originally published.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Video Crossposting Status</h2>
+              <p>To determine if the Video is a crossposted Video, send a <code>GET</code> request to the Video endpoint
+                with the <code>is_crosspost_video</code> field.</p>
+              <p>You will need:</p>
+              <ul>
+                <li>The ID of the Video you want to check</li>
+                <li>A Page access token of the Page where the video was originally published</li>
+                <li>The <a href="/docs/permission/reference/publish_video"><code>publish_video</code> Permission</a>
+                </li>
+                <li>The <a href="/docs/permission/reference/pages_manage_posts"><code>pages_manage_posts</code>
+                    Permission</a></li>
+                <li>The <a href="/docs/permission/reference/pages_read_engagement"><code>pages_read_engagement</code>
+                    Permission</a></li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-http" style="">GET /{api-version}/{video-id}
+  ?fields=is_crosspost_video
+  &amp;access_token={page-access-token}</pre>
+              <p>Include the following parameters</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th>Parameter Name</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_5_WF">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>is_crosspost_video</code></p>
+                      </td>
+                      <td>
+                        <p>Displays if the Video is the original or is a crossposted Video.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>access_token</code></p>
+                      </td>
+                      <td>
+                        <p>The Page access token of the Page where the Video was originally published.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">curl -X GET \
+ "https://graph.facebook.com/v7.0/577600939847873?fields=is_crosspost_video&amp;access_token=EAABk..."</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "is_crosspost_video": true,
+  "id": "577600939847873"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get a List of Pages Eligible for Crossposting</h2>
+              <p>You will need:</p>
+              <ul>
+                <li>The ID of the Page where the Video was originally published</li>
+                <li>A Page access token of the Page where the Video was originally published</li>
+                <li>The <a href="/docs/permission/reference/pages_manage_posts"><code>pages_manage_posts</code>
+                    Permission</a></li>
+                <li>The <a href="/docs/permission/reference/pages_read_engagement"><code>pages_read_engagement</code>
+                    Permission</a></li>
+              </ul>
+              <p>Send a <code>GET</code> request to the <a
+                  href="/docs/graph-api/reference/page/crosspost_whitelisted_pages/">Page CrosspostWhitelistedPages
+                  endpoint</a>.</p>
+              <pre class="_5s-8 prettyprint lang-http" style="">GET {page-id}/crosspost_whitelisted_pages
+  &amp;access_token={page-access-token}</pre>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-code"
+                style="">curl -X GET \ "https://graph.facebook.com/v7.0/2918040388250909/crosspost_whitelisted_pages&amp;access_token=EAABk..."</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "crosspost_whitelisted_pages": {
+    "data": [
+      {
+        "name": "Obsession, by Margaret",
+        "id": "115969103185286"
+      },
+      {
+        "name": "Cisco Dog",
+        "id": "422575694827569"
+      }
+    ],
+    "paging": {
+      "cursors": {
+        "before": "QVFIUn...",
+        "after": "QVFIUk4..."
+      }
+    }
+  },
+  "id": "1353269864728879"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Enable Crossposting to All Your Business Manager Pages</h2>
+              <p>To enable crossposting to all Pages managed by your Business Manager, send a <code>POST</code> request
+                to the <a href="/docs/graph-api/reference/video">Video</a> endpoint.</p>
+              <p>You will need:</p>
+              <ul>
+                <li>The ID of the Video you want to crosspost</li>
+                <li>A Page access token of the Page where the Video was originally published</li>
+                <li>The <a href="/docs/permission/reference/pages_manage_posts"><code>pages_manage_posts</code>
+                    Permission</a></li>
+                <li>The <a href="/docs/permission/reference/pages_read_engagement"><code>pages_read_engagement</code>
+                    Permission</a></li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-http" style="">POST /{api-version}/{video-id}
+  ?allow_bm_crossposting=true
+  &amp;access_token={page-access-token}</pre>
+              <p>Include the following parameters</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th>Parameter Name</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_6_jx">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>allow_bm_crossposting</code></p>
+                      </td>
+                      <td>
+                        <p>Set <code>allow</code> to true to enable publishing or false to disable publishing.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>access_token</code></p>
+                      </td>
+                      <td>
+                        <p>The Page access token of the Page where the video was originally published.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">curl -X POST \
+  "https://graph.facebook.com/v7.0/2918040388250909?allow_bm_crossposting=true&amp;access_token=EAABkW..."</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "success": true
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Insights</h2>
+              <p>Each crossposted Video has its own unique <code>video_id</code>. You can see <a
+                  href="/docs/video-api/guides/insights">video insights</a> from each Video and Page.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See Also</h2>
+              <p>For more information about crossposting, visit our <a
+                  href="https://www.facebook.com/help/publisher/1385580858214929" target="_blank">Help Center</a>.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

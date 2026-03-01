@@ -1,0 +1,125 @@
+<article class="devsite-article">
+        <h1 class="devsite-page-title" tabindex="-1">
+                Implementation: Pagination<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                                ack-key="AckCollectionsBookmarkTooltipDismiss"
+                                analytics-action-close="Callout Profile dismissed"
+                                analytics-action-show="Callout Profile displayed"
+                                analytics-category="Site-Wide Custom Events" analytics-label="Create Collection Callout"
+                                class="devsite-page-bookmark-tooltip nocontent" close-button-text="Got it"
+                                dismiss-button="true" dismiss-button-text="Dismiss" id="devsite-collections-dropdown">
+                                <devsite-bookmark></devsite-bookmark>
+                                <span slot="popout-heading">
+
+                                        Stay organized with collections
+                                </span>
+                                <span slot="popout-contents">
+
+                                        Save and categorize content based on your preferences.
+                                </span>
+                        </devsite-feature-tooltip></devsite-actions>
+        </h1>
+        <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+        <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+        </devsite-toc>
+        <div class="devsite-article-body clearfix">
+                <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+                        <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title"
+                                class="devsite-key-takeaways-panel-header" role="button" tabindex="0">
+                                <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+                                <div class="devsite-key-takeaways-panel-title">
+                                        <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI"
+                                                id="key-takeaways-panel-title">Page Summary</h2>
+                                </div>
+                                <span aria-hidden="true"
+                                        class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+                                </img>
+                        </div>
+                        <div class="devsite-key-takeaways-panel-content">
+                                <devsite-feedback bucket="8963846920012181156" disable-product-feedback=""
+                                        product-id="5123748">
+                                        <button aria-label="Report Key Takeaways!"
+                                                class="button-flat button-primary devsite-key-takeaways-report-button"
+                                                data-title="Report Key Takeaways!">
+                                                <span aria-label="Report Key Takeaways!"
+                                                        class="material-icons">outlined_flag</span>
+                                        </button>
+                                </devsite-feedback>
+                                <ul class="devsite-key-takeaways-panel-list">
+                                        <li>
+                                                <p>The YouTube Data API (v3) uses the <code>maxResults</code> parameter
+                                                        to determine the number of items returned in a query response.
+                                                </p>
+                                        </li>
+                                        <li>
+                                                <p>API <code>list</code> methods, such as <code>videos.list</code> and
+                                                        <code>playlists.list</code>, support the <code>maxResults</code>
+                                                        parameter for pagination.</p>
+                                        </li>
+                                        <li>
+                                                <p>If more results are available, the API response includes
+                                                        <code>nextPageToken</code> and/or <code>prevPageToken</code>
+                                                        properties.</p>
+                                        </li>
+                                        <li>
+                                                <p>These token values can be used to set the <code>pageToken</code>
+                                                        parameter to retrieve additional result pages.</p>
+                                        </li>
+                                        <li>
+                                                <p>The initial request fetches the first page of results, and subsequent
+                                                        requests use the <code>pageToken</code> from the previous
+                                                        response to get the next page of results.</p>
+                                        </li>
+                                </ul>
+                        </div>
+                </devsite-key-takeaways-panel>
+                <p>The following example shows how to retrieve additional sets of results for YouTube Data API (v3)
+                        queries.</p>
+                <p>The API uses the <code dir="ltr" translate="no">maxResults</code> parameter to indicate how many
+                        items should be included in an API response. Almost all of the API's <code dir="ltr"
+                                translate="no">list</code> methods (<code dir="ltr"
+                                translate="no"><a href="/youtube/v3/docs/videos/list">videos.list</a></code>, <code
+                                dir="ltr"
+                                translate="no"><a href="/youtube/v3/docs/playlists/list">playlists.list</a></code>,
+                        etc.) support that parameter.</p>
+                <p>If additional results are available for a query, then the API response will contain either a <code
+                                dir="ltr" translate="no">nextPageToken</code> property, a <code dir="ltr"
+                                translate="no">prevPageToken</code> property, or both. Those properties' values can then
+                        be used to set the <code dir="ltr" translate="no">pageToken</code> parameter to retrieve an
+                        additional page of results.</p>
+                <p>For example, the following query retrieves search results for the 10 most viewed videos matching the
+                        query "skateboarding dog":</p>
+                <div></div><devsite-code>
+                        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?part=snippet&amp;maxResults=10&amp;order=viewCount&amp;q=skateboarding+dog&amp;type=video">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?
+        part=snippet
+        &amp;maxResults=10
+        &amp;order=viewCount
+        &amp;q=skateboarding+dog
+        &amp;type=video</a></pre>
+                </devsite-code>
+                <p>The API response contains the first 10 matches for the query as well as a <code dir="ltr"
+                                translate="no">nextPageToken</code> property that can be used to retrieve the next 10
+                        results:</p>
+                <p>The query below retrieves the next 10 results for the query:</p>
+                <div></div><devsite-code>
+                        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?part=snippet&amp;maxResults=10&amp;order=viewCount&amp;pageToken=CAoQAA&amp;q=skateboarding+dog&amp;type=video">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?
+        part=snippet
+        &amp;maxResults=10
+        &amp;order=viewCount
+        &amp;pageToken=CAoQAA
+        &amp;q=skateboarding+dog
+        &amp;type=video</a></pre>
+                </devsite-code>
+                <p class="note"><b>Note:</b> You may need to update the value of the <code dir="ltr"
+                                translate="no">pageToken</code> parameter to complete this request in the APIs Explorer.
+                        Execute the query that retrieves the first 10 results to obtain the correct <code dir="ltr"
+                                translate="no">pageToken</code> parameter value.</p>
+        </div>
+        <devsite-recommendations display="in-page" hidden="" yield="">
+        </devsite-recommendations>
+        <devsite-thumb-rating position="footer">
+        </devsite-thumb-rating>
+        <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+        <div class="devsite-floating-action-buttons"></div>
+</article>

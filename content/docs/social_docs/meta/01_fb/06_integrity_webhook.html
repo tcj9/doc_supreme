@@ -1,0 +1,606 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_0Y">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Page Integrity API &amp; Webhook</h1>
+              <p>
+                As pages interact with users on various Meta apps, Meta may
+                <a data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fenforcement%2Fdetecting-violations%2F&amp;h=AT05TEMIZ3FoC8zhULW-EvXd6QIzdg5tLxp5z55aH41pL-o6fUi77axC6UJoTK4h6PFqF-Q5zSZa5uvmI8ryNdECporOFSqJJpLOZ7XFnnsOfSZSVUnYLqt5uW_vg_zUiz-jDAeJFWrsiHIo566opA"
+                  rel="nofollow" target="_blank">flag pages for violating</a>
+                the various
+                <a data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fpolicies%2Fcommunity-standards%2F&amp;h=AT0SLLvTjSSA58kdUcKzZYs6kB9l7TleYQRBGVb7KJpaEV2SmVo97iZqaarFHYE1VAQPthuVcfLud1eM4ubmGeHiG8xJ4gxN6yVs8yOUZvmyBUsUzEde-9-_ZzOMCKSM2oV7I2bs_N_ho-yGORdYmQ"
+                  rel="nofollow" target="_blank">community standards</a>
+                and other
+                <a data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fpolicies%2F&amp;h=AT36U-YqzTkb76OV-JAGiqUMO9S-EWCL8G-GKYOjvvU5wXed1nP_-F9qIxJFHFwPsz1LzRRPMVKQQClds1NIMF1dJCrU6e3dKkFcLtSFVRMrDArnxfAemZTz8zhI1J7BXnlMJg9zXZXgMcZ7tjtnXg"
+                  rel="nofollow" target="_blank">policies</a>.
+                When violations are detected, Meta may warn or restrict pages from performing various actions.
+                Restrictions may range from not being able to change the name of a page for a few days to more severe
+                ones, such as being unable to message users, use Meta platform APIs, or having the page completely
+                disabled and unpublished.
+              </p>
+              <p>
+                The APIs documented in this page provide apps with API access to the integrity status of a page, any
+                violation(s) for which a page has been flagged, restrictions that Meta has applied because of the
+                violation(s), along with recommended material to educate the page administrators on the violation,
+                restriction, what actions they can take to resolve the restriction, and how to prevent them in the
+                future.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>How It Works</h2>
+              <ol>
+                <li>
+                  The page interacts with users on Meta's apps (e.g., Facebook).
+                </li>
+                <li>
+                  Meta flags the page for one or more violations of Meta's
+                  <a data-lynx-mode="hover"
+                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fpolicies%2Fcommunity-standards%2F&amp;h=AT1wK6R8jJKI7OufRs1HLhADMZ-71Fdimeyq1s7MyDFRg9OyV6h39aT5hD28pRIQ9lZGG05JHUw0GL2Lw-PfzozpBGiOIqMrN2lSutTpo56BZy9DSWjTX9NZdoOMGHuEyDnAgmgm6pgSfMa7PsoOww"
+                    rel="nofollow" target="_blank">Community Standards</a> and may apply one or more restrictions
+                  depending on the violation.
+                  <ul class="uiList _4of _4kg">
+                    <li>
+                      <div class="fcb">
+                        a. webhook is triggered to the subscribed third-party app with the violation and/or restriction.
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  The third-party app can notify the page administrator of the violation and/or restriction.
+                </li>
+                <li>
+                  The page administrator logs in to the third-party app to see more information about the violation and
+                  recommended actions.
+                  <ul class="uiList _4of _4kg">
+                    <li>
+                      <div class="fcb">
+                        a. The third-party app retrieves the additional information from the Page Integrity API.
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  The page administrator is redirected to various Meta surfaces (Page Status, Business Support Home,
+                  Business Help Center, Developer Support) to learn more about the violation, file an appeal, file
+                  support tickets, etc.
+                </li>
+                <li>
+                  The app repeats steps 2.a (Integrity Webhook) and 4.a (Integrity API) to keep the page administrator
+                  updated on the latest integrity status.
+                </li>
+              </ol><img alt="" class="img"
+                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=1448856746850217&amp;version=1769816304" />
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Before You Start</h2>
+              <p>This guide assumes you have set up your webhooks server to receive notifications and subscribed to the
+                <b>business_integrity</b> field.
+              </p>
+              <p>You need the following:</p>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">The ID for the Page sending the message</div>
+                </li>
+                <li>
+                  <div class="fcb">A Page access token from your app user</div>
+                </li>
+                <li>
+                  <div class="fcb">Your app user has granted your app the <code>pages_manage_metadata</code> permission
+                  </div>
+                </li>
+              </ul>
+              <h3>Limitations</h3>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">The webhook provide information only for Pages you have access to with the required
+                    permissions</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Integrity Fields Available via the Page Integrity API and Webhook</h2>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><b>id</b> - the page ID for which the information is provided</div>
+                </li>
+                <li>
+                  <div class="fcb"><b>timestamp</b> - the time of the request and when the information was retrieved
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb"><b>status</b> - the current integrity status of the page. It can be:
+                    <ul class="uiList _4of _4kg">
+                      <li>
+                        <div class="fcb"><b>ok</b> - the page is OK, with no active violations or restrictions</div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>warning</b> - the page is not restricted but may be restricted soon due to
+                          potential violations</div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>restricted</b> - the page is currently restricted because of one or more
+                          violations</div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>suspended</b> - the page is suspended due to severe violations</div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb"><b>violations</b> - the list of active violations for the page
+                    <ul class="uiList _4of _4kg">
+                      <li>
+                        <div class="fcb"><b>type</b> - the type of violation corresponding to the <a
+                            data-lynx-mode="hover"
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fpolicies%2Fcommunity-standards%2F&amp;h=AT0P_6YAjFxeTdIfL2apGRa-avCq4hEoyzFlnlCDAOAZh4Rt7ritRg6kh-yoiQkvaXl_6Ysmz5qM9HL0OC_fSDMye5iKvgjHrBN4dz7kAU7Vd1R4OwXB6LPDujFffvi9UDIR4hYler9IeCo30PKx3A"
+                            rel="nofollow" target="_blank">community standards</a></div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>description</b> - user-friendly short description of the violation</div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>url</b> - the link where to learn more about the violation</div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb"><b>restrictions</b> - the list of active restrictions of the page
+                    <ul class="uiList _4of _4kg">
+                      <li>
+                        <div class="fcb"><b>feature</b> - the restricted feature. This can be one of:
+                          <ul class="uiList _4of _4kg">
+                            <li>
+                              <div class="fcb"><b>page_publish</b> - this feature means the page is unpublished from
+                                Meta's platform due to serious violations.</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>page_read_only</b> - an enforcement action that prevents the page from
+                                posting new content or making changes for a specified period of time.</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>page_messaging</b> - this feature limit blocks the Page from sending
+                                any messages to users via Messenger</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>page_messaging_api</b> - this feature blocks the Page from sending
+                                messages via the Messenger Platform API</div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>description</b> - user-friendly short description of the restriction</div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>status</b> - current status of the restriction. This can be one of:
+                          <ul class="uiList _4of _4kg">
+                            <li>
+                              <div class="fcb"><b>RESTRICTED</b> - the restriction is currently enforced</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>UNRESTRICTED</b> - the restriction is currently not enforced</div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>applied_time</b> - the time when the restriction was applied</div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>expiration_time</b> - the time when the restriction will expire</div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb"><b>recommended_actions</b> - the list of recommended actions for the page
+                    administrators
+                    <ul class="uiList _4of _4kg">
+                      <li>
+                        <div class="fcb"><b>action_type</b> - the type of action that the business can take. This can be
+                          one of:
+                          <ul class="uiList _4of _4kg">
+                            <li>
+                              <div class="fcb"><b>LEARN_MORE</b> - action with a link to an article where the admin can
+                                learn more about the violation, restriction, and what to do next.</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>FILE_APPEAL</b> - an action with a link to the Page Status or Business
+                                Support Home website where the administrator can file an appeal.</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>SUPPORT_TICKET</b> - an action with a link where the administrator or
+                                developer can file a support ticket.</div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>url</b> - the link where the admin should be redirected for the recommended
+                          action. This can be one of:
+                          <ul class="uiList _4of _4kg">
+                            <li>
+                              <div class="fcb">Link to Meta's Page Status</div>
+                            </li>
+                            <li>
+                              <div class="fcb">Link to Business Support Home</div>
+                            </li>
+                            <li>
+                              <div class="fcb">Link to Business Help Center</div>
+                            </li>
+                            <li>
+                              <div class="fcb">Link to Developer Support Page</div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>violation_type</b> - the violation that caused the restriction to be
+                          applied.</div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb"><b>actions_events</b>
+                    <ul class="uiList _4of _4kg">
+                      <li>
+                        <div class="fcb"><b>type</b> - the type of action. This can be one of:
+                          <ul class="uiList _4of _4kg">
+                            <li>
+                              <div class="fcb"><b>LEARN_MORE</b> - action with link to an article where the admin can
+                                learn more about the violation, restriction, and what to do next</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>FILE_APPEAL</b> - an action with a link to the Page Status or Business
+                                Support Home website where the administrator can file an appeal.</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>SUPPORT_TICKET</b> - an action with a link where the administrator or
+                                developer can file a support ticket.</div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>status</b> - the status of the action
+                          <ul class="uiList _4of _4kg">
+                            <li>
+                              <div class="fcb"><b>OPEN</b> - the action (e.g. support ticket or appeal) has been created
+                              </div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>PENDING</b> - the action is still pending (e.g. being reviewed). This
+                                will only be available for the GET API (not webhook).</div>
+                            </li>
+                            <li>
+                              <div class="fcb"><b>CLOSED</b> - the action has been resolved or closed</div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>created_time</b> - the time when the action was taken (e.g. ticket created,
+                          appeal filed)</div>
+                      </li>
+                      <li>
+                        <div class="fcb"><b>updated_time</b> - the last time the action was updated</div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Page Integrity API</h2>
+              <p>
+                The page integrity API is the main API for providing integrity information about a page. This includes
+                the overall status, the active violations, the active restrictions applied due to the violations,
+                recommended actions to be taken by the page administrators, and the latest status on the most recent
+                actions that were previously taken by the page.
+              </p>
+              <h3>Sample Request</h3>
+              <p>
+                To get the latest integrity information about a page, make a GET request to the
+                <code>/pages_status</code> API.
+              </p>
+              <pre class="_5s-8 prettyprint lang-json"
+                style="">curl -X GET "https://graph.facebook.com/v24.0/{PAGE_ID}/page_status?access_token={ACCESS_TOKEN}"</pre>
+              <p>
+                On success, your app receives the JSON response with all the integrity information about the page:
+              </p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "id": "{PAGE_ID}",
+  "timestamp": 1763665904,
+  "status": "restricted",
+  "violations": [
+    {
+      "type": "SPAM",
+      "description": "Page posted content that violates spam policies.",
+      "url": "https://www.facebook.com/policy/spam"
+    }
+  ],
+  "restrictions": [
+    {
+      "feature": "page_messaging_api",
+      "description": "This page is restricted from sending messages via Messenger Platform for 3 days",
+      "applied_time": 1763665904,
+      "expiration_time": 1763675775,
+      "violation_type": [
+        "SPAM"
+      ]
+    },
+    {
+      "feature": "page_publish",
+      "description": "We suspended your Page",
+      "applied_time": 1763665904,
+      "expiration_time": 1763675775,
+      "violation_type": [
+        "SPAM"
+      ]
+    }
+  ],
+  "recommended_actions": [
+    {
+      "action_type": "FILE_APPEAL",
+      "url": "https://www.facebook.com/help/contact/appeal",
+      "violation_type": [
+        "SPAM"
+      ]
+    }
+  ],
+  "actions_events": [
+    {
+      "type": "FILE_APPEAL",
+      "status": "OPEN",
+      "created_time": 1763666000,
+      "updated_time": 1763667000,
+      "violation_type": [
+        "SPAM"
+      ]
+    }
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Page Integrity Webhook</h2>
+              <p>
+                The page integrity webhook provides the same information as the Page Integrity API but it does so with
+                incremental events that can be used to notify the page administrator of any integrity updates (e.g. new
+                violations, restrictions, resolutions, action updates) in real-time.
+              </p>
+              <p>
+                To get real-time integrity updates, the app needs to set up webhooks and subscribe to the
+                <b>business_integrity</b> field. The page should have granted the necessary
+                <code>pages_manage_metadata</code> permission
+              </p>
+              <p>
+                When a violation or restriction occurs, your webhook will receive a payload similar to the following:
+              </p>
+              <h3>Example webhook: New Violation</h3>
+              <p>The following webhook shows an example of a page status being changed to restricted due to a
+                cybersecurity violation.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+ "object": "page",
+ "entry": [
+   {
+     "time": 1761804073668,
+     "id": "{PAGE_ID}",
+     "messaging": [
+       {
+         "timestamp": 1761803759,
+         "status": "restricted",
+         "violations": [
+           {
+             "type": "CYBERSECURITY",
+             "description": "The Page may try to gather sensitive information from others.",
+             "url": "https://www.transparency.meta.com/policies/community-standards/cybersecurity/"
+           }
+         ]
+       }
+     ]
+   }
+ ]
+}</pre>
+              <h3>Example webhook: New Violation and Restrictions</h3>
+              <p>The following response shows an example of a page being restricted from sending messages via the
+                Messaging APIs due to a SPAM violation.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "object": "page",
+  "entry": [
+    {
+      "time": 1760978707275,
+      "id": "{PAGE_ID}",
+      "messaging": [
+        {
+          "timestamp": 1760977876,
+          "status": "ok",
+          "violations": [
+            {
+              "type": "SPAM",
+              "description": "We don't allow people to take actions at high volume that might bother others.",
+              "url": "https://transparency.meta.com/policies/community-standards/spam/"
+            }
+          ]
+        }
+      ],
+      "restrictions": [
+        {
+          "feature": "page_messaging_api",
+          "status": "RESTRICTED",
+          "description": "This page is restricted from sending messages via Messenger Platform for 1 day",
+          "applied_time": 1760977876,
+          "expiration_time": 1761064276
+        },
+        {
+          "feature": "page_messaging",
+          "status": "RESTRICTED",
+          "description": "This page is restricted from sending messages via Messenger Platform for 1 day",
+          "applied_time": 1760977876,
+          "expiration_time": 1761064276
+        }
+      ]
+    }
+  ]
+}</pre>
+              <h3>Example webhook: New Restriction for Suspended Page</h3>
+              <p>The following webhook shows an example of a page being suspended / unpublished from Meta's apps.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "object": "page",
+  "entry": [
+    {
+      "time": 1761251584556,
+      "id": "{PAGE_ID}",
+      "messaging": [
+        {
+          "timestamp": 1761251502,
+          "status": "suspended",
+          "violations": [
+            {
+              "type": "NUDITY",
+              "description": "The Page may show nudity.",
+              "link": "https://www.meta.com/policies/community-standards/adult-nudity-sexual-activity/"
+            }
+          ],
+          "restrictions": [
+            {
+              "feature": "page_publish",
+              "status": "RESTRICTED",
+              "description": "We suspended your Page",
+              "applied_time": 1761251502
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+              <h3>Example webhook: Restriction is Lifted</h3>
+              <p>The following webhook shows an example of a page restriction being lifted and the page is now able to
+                send messages via the Messaging API.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "object": "page",
+  "entry": [
+    {
+      "time": 1760978542664,
+      "id": "{PAGE_ID}",
+      "messaging": [
+        {
+          "timestamp": 1760978516,
+          "status": "ok",
+          "restrictions": [
+            {
+              "feature": "page_messaging_api",
+              "status": "UNRESTRICTED",
+              "description": "this page is no longer restricted from sending messages",
+              "applied_time": 1760978516
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+              <h3>Example webhook: Administrator Requests an Appeal</h3>
+              <p>The following example shows the page getting a webhook notification after filing a new appeal with
+                Meta.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+ "object": "page",
+ "entry": [
+   {
+     "time": 1761672505662,
+     "id": "{PAGE_ID}",
+     "messaging": [
+       {
+         "timestamp": 1761672452,
+         "status": "restricted",
+         "action_events": [
+           {
+             "type": "FILE_APPEAL",
+             "status": "OPEN",
+             "created_time": 1761672452,
+             "updated_time": 1761672452
+           }
+         ]
+       }
+     ]
+   }
+ ]
+}</pre>
+              <h3>Example webhook: Appeal Is Resolved</h3>
+              <p>The following webhook shows an example of the appeal being resolved after Meta finished reviewing it.
+                This may or may not remove the restriction, but the webhook lets the administrator know that the appeal
+                is no longer in progress.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+ "object": "page",
+ "entry": [
+   {
+     "time": 1761672786564,
+     "id": "{PAGE_ID}",
+     "messaging": [
+       {
+         "timestamp": 1761672720,
+         "status": "restricted",
+         "action_events": [
+           {
+             "type": "FILE_APPEAL",
+             "status": "CLOSED",
+             "created_time": 1761672452,
+             "updated_time": 1761672720
+           }
+         ]
+       }
+     ]
+   }
+ ]
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See Also</h2>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><a data-lynx-mode="hover"
+                      href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fpolicies%2Fcommunity-standards%2F&amp;h=AT3HgHe-svXOyXHcZaw3MAPGeg7m6fdOgyd5ZiHYbGNfiixfPymH-W7TUtpUHwmdFKbwm2l2d5QTb4wtmu-WSKaNoPI2Yja_ckMI-gUOHu0hZTGwau6iJKjjOOZK4AYfIEVu0D27qI3k7pbibteZwg"
+                      rel="nofollow" target="_blank">Community Standards</a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a data-lynx-mode="hover"
+                      href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fenforcement%2Fdetecting-violations%2F&amp;h=AT1N6Z98xYOwEnBQIkDcHNHvASwEZOT6s6Th1gjkBeZlA3nBR3u8ucpZBD9bntDKODanQaOfT4fCzyZvZPnknnea2KBPjTZ6o-9VGGGLGLCnxMFEvlryiNicw57mJ0bt49vTMQ7SfDnG6k741lkVMw"
+                      rel="nofollow" target="_blank">Detecting Violations</a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/webhooks/">Webhooks
+                      Documentation</a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/pages/access-tokens">Page Access
+                      Tokens</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_r/">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Subscriptions Edge</h1>
+              <p>You can use the Graph API's <code>/app/subscriptions</code> edge to configure and manage your app's
+                Webhooks product. Refer to our <a href="/docs/graph-api/reference/app/subscriptions">/app/subscriptions
+                  documentation</a> to see which operations you can perform with this edge, and any permissions they
+                require. This document only covers a few common operations.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Creating Subscriptions</h2>
+              <p>To subscribe to an object and its fields, send a <code>POST</code> request to the <a
+                  href="/docs/graph-api/reference/app/subscriptions">/app/subscriptions edge</a> and include the
+                following parameters:</p>
+              <ul>
+                <li><code>object</code> — The type of object you want to set up field subscriptions for (e.g.,
+                  <code>user</code>).
+                </li>
+                <li><code>callback_url</code> — Your endpoint's URL.</li>
+                <li><code>verify_token</code> — A <code>string</code> that we will include whenever we send you a <a
+                    href="/docs/graph-api/webhooks/getting-started#verification-requests">verification request</a>.</li>
+                <li><code>fields</code> — The fields you want to subscribe to (e.g., <code>photos</code>).</li>
+              </ul>
+              <p>For example, if your app's ID were <code>188559381496048</code> and you want to be notified when your
+                app's user publish a new photo, you could do this:</p>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="">curl -F "object=user" \
+     -F "callback_url=https://your-clever-domain-name.com/webhooks" \
+     -F "fields=photos" \
+     -F "verify_token=your-verify-token" \
+     -F "access_token=your-app-access-token" \
+     "https://graph.facebook.com/188559381496048/subscriptions"</pre>
+              <h4>Sample Response</h4>
+              <p>If successful:</p>
+              <pre class="_5s-8 prettyprint lang-js" style="">{
+  "success": "true"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Getting Subscription Information</h2>
+              <p>To see the object and field subscriptions that you have set up for your app, send a <code>GET</code>
+                request the <code>/app/subscriptions</code> edge. For example, if your app's ID were
+                <code>188559381496048</code>, you could do this:
+              </p>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-html"
+                style="">GET graph.facebook.com/188559381496048/subscriptions</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="">{
+  "data": [
+    {
+      "object": "user",
+      "callback_url": "https://your-clever-domain-name.com/webhooks",
+      "active": true,
+      "fields": [
+        {
+          "name": "photos",
+          "version": "v2.10"
+        },
+        {
+          "name": "feed",
+          "version": "v2.10"
+        }
+      ]
+    }
+  ]
+}</pre>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

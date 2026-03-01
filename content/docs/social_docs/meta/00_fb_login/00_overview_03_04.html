@@ -1,0 +1,184 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_Nl">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1>Access Token Portability</h1>
+                            <p>This guide explains some common scenarios of portability so you can build your app with
+                                the configuration to fit your needs.</p>
+                            <h2 id="architecture">Token Usage with Different App Types</h2>
+                            <p>Access tokens are portable. Once you obtain a token, you can use it from any machine.
+                                When you combine web interfaces, mobile clients, and servers, you can get a mix of
+                                different possible configurations. However, these different configurations come with
+                                different advantages and disadvantages in terms of capabilities and security.</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <th>Configuration</th>
+                                        <th style="width:150px">Advantages</th>
+                                        <th style="width:125px">Disadvantages</th>
+                                        <th style="width:125px">Security Notes</th>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_2_Fk">
+                                        <tr class="row_0">
+                                            <td>
+                                                <p>Login and API requests happen in a web client (short term token).</p>
+                                            </td>
+                                            <td>
+                                                <p>Simple implementation.</p>
+                                            </td>
+                                            <td>
+                                                <p>No offline posting.</p>
+                                                <p>No long term access.</p>
+                                                <p>Authenticate often.</p>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="row_1 _5m29">
+                                            <td>
+                                                <p>Login and API requests happen in a native mobile or web client (long
+                                                    term token).</p>
+                                            </td>
+                                            <td>
+                                                <p>Authenticate less often.</p>
+                                            </td>
+                                            <td>
+                                                <p>No offline posting.</p>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="row_2">
+                                            <td>
+                                                <p>Login and API requests happen in a web client (long term token after
+                                                    code exchange).</p>
+                                            </td>
+                                            <td>
+                                                <p>Extra security in certain situations.</p>
+                                            </td>
+                                            <td>
+                                                <p>Difficult to implement.</p>
+                                                <p>No offline posting.</p>
+                                            </td>
+                                            <td>
+                                                <p>Only useful in <a href="#long-via-code">specific situations</a>.</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_3 _5m29">
+                                            <td>
+                                                <p>Login happens in a native mobile or web client. </p>
+                                                <p>API requests happen on a Server (with long term token).</p>
+                                            </td>
+                                            <td>
+                                                <p>Offline posting.</p>
+                                                <p>Add security features available with server based calls.</p>
+                                            </td>
+                                            <td>
+                                                <p>Client must call the server to proxy any calls.</p>
+                                            </td>
+                                            <td>
+                                                <p>Use <a
+                                                        href="https://developers.facebook.com/docs/facebook-login/security"
+                                                        target="_blank"><code>appsecret_proof</code></a> for any calls.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_4">
+                                            <td>
+                                                <p>Login happens in a native mobile or web client.</p>
+                                                <p>API requests happen on a server or in the client.</p>
+                                            </td>
+                                            <td>
+                                                <p>Offline posting</p>
+                                                <p>User-driven posting from client</p>
+                                            </td>
+                                            <td>
+                                                <p>Difficult to implement</p>
+                                            </td>
+                                            <td>
+                                                <p>Use <a
+                                                        href="https://developers.facebook.com/docs/facebook-login/security"
+                                                        target="_blank"><code>appsecret_proof</code></a> for any calls
+                                                    made from the server.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="authNative">Native or Web Client Login and API requests</h2>
+                            <p>This is the simplest configuration where authentication and API requests happen on the
+                                client. There are three possible configurations in this model:</p>
+                            <ol>
+                                <li>Native or web client authenticates and uses the returned short or long-term token to
+                                    make calls.</li>
+                                <li>Web client authenticates and exchanges the short-term token for a long-term token
+                                    via a server. This token is sent back to the web client where the web client uses it
+                                    to make API calls.</li>
+                                <li>Web client authenticates and exchanges the short-term token for a long-term token
+                                    via a server. The server sends a code to the client. The client exchanges the code
+                                    for a long-term token and uses it to make API calls. This configuration is rarely
+                                    used.</li>
+                            </ol>
+                            <h3>Native or Web Client Flow</h3>
+                            <img alt="" class="_5aqp _5aqr img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/851582_502001183213009_177879703_n.png?_nc_cat=104&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=ru_gNPbpaNMQ7kNvwEPfF1u&amp;_nc_oc=Adn6cVVe48o58w5eZz1Fx8SbY4pOD3Tf7oggSPQ6ar8C54O4zuKiVeCSI4k9cR3iVFc&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=bR8IyF4If0KUld9pckC-6g&amp;oh=00_AftFiQzL4zr9phKMI_1DbACZP2u0ola0-StpQB5QEwHl9A&amp;oe=698C947E" />
+                            <h3>Web Client Flow with Long Term Token</h3>
+                            <img alt="" class="_5aqp _5aqr img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/851585_667526966593398_797346584_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=tPaMn6fkkkMQ7kNvwFOCTdW&amp;_nc_oc=Admk0pFFTfSoKUb6YMoX8MXX4kwdZwLS06y2XhEbohqCIieCDFI2zjA45Y6f4gE5kL0&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=bR8IyF4If0KUld9pckC-6g&amp;oh=00_AfvOaMYWyH6pVWBup7XFOtXE6CZHjX1IVaeJLK53vX63sA&amp;oe=698C83BE" />
+                            <h3>Web Client Flow with Code Exchange</h3>
+                            <img alt="" class="_5aqp _5aqr img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/851561_151482361720966_1414831841_n.png?_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=jOv8srfyWvgQ7kNvwHPW8Be&amp;_nc_oc=AdnG79F8pJRURgzRQgRKblii2rJsfPW6iBhKl9wrhiQc6gAhWxvWp_HNiGzrgTJ7c8w&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=bR8IyF4If0KUld9pckC-6g&amp;oh=00_Afs65mum7a0n5ojTfR75kT4ngV7CiSHBfzZhnAbtiXyfvg&amp;oe=698C911E" />
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="authClientServer">Client Login and Server API Calls</h2>
+                            <p>In this common configuration, authentication happens on the client, but all API calls are
+                                made by the server on behalf of the client. The server can use the <a
+                                    href="https://developers.facebook.com/docs/facebook-login/security"
+                                    target="_blank"><code>appsecret_proof</code></a> parameter to further enhance
+                                security when making calls.</p><img alt="" class="_5aqp _5aqr img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/851586_1402594106623686_107548502_n.png?_nc_cat=111&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=Cenvt9j3clAQ7kNvwH69XsM&amp;_nc_oc=AdkpqcI-u2V3BYBcyEEPPEnfQoy6soLRtjPero8MpM0caGRb_65jgz4xmh3S-P_zIVE&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=bR8IyF4If0KUld9pckC-6g&amp;oh=00_AfvQT8ekidvRI6rTCCqPUZMvnkc7KquVS3Nc8qHomd6acw&amp;oe=698C6F0E" />
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="authHybrid">Client Login and Client or Server API Calls</h2>
+                            <p>This configuration is a combination of the above approaches.</p>
+                            <img alt="" class="_5aqp _5aqr img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/851576_1401207796761754_1304362567_n.png?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=Kkuya0DrOfoQ7kNvwERA4EU&amp;_nc_oc=Adl10YyDa9PJANqdRcDGvR5lZPM2MgQRsDrV-Sejf5vKrJx0ZVdW7D61b12KLvUcGhY&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=bR8IyF4If0KUld9pckC-6g&amp;oh=00_AfuXobM9p9Rx_PjDaONEizWWUBV-NhU7r2arTDplBGKXGg&amp;oe=698C924D" />
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="changingtokens">Set Access Tokens Using the SDK</h2>
+                            <p>There are different ways to specify which access token to use with an API call in our
+                                SDKs.</p>
+                            <ul class="uiList _4of _4kg">
+                                <li>
+                                    <div class="fcb">The Facebook Android SDK <a
+                                            href="/docs/reference/android/current/class/AccessToken/#setCurrentAccessToken"><code>setCurrentAccessToken</code>
+                                            method</a> has the <code>accessToken</code> parameter.</div>
+                                </li>
+                                <li>
+                                    <div class="fcb">The Facebook iOS SDK <a
+                                            href="/docs/reference/ios/current/class/FBSDKAccessToken"><code>setCurrentAccessToken</code>
+                                            method</a> has the <code>token</code> parameter.</div>
+                                </li>
+                                <li>
+                                    <div class="fcb">The Facebook Javascript SDK <a
+                                            href="/docs/reference/javascript/FB.api/"><code>FB.api()</code> method</a>
+                                        has the <code>access_token</code> parameter.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

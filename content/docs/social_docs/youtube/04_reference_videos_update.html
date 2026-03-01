@@ -1,0 +1,331 @@
+<article class="devsite-article">
+  <style>
+    .deprecated {
+      color: red
+    }
+  </style>
+  <h1 class="devsite-page-title" tabindex="-1">
+    Videos: update<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <div class="note">
+        The API now supports the ability to mark your <a href="/youtube/v3/docs/channels">channel</a> or
+        <a href="/youtube/v3/docs/videos">videos</a> as "made for kids." In addition, <code dir="ltr"
+          translate="no">channel</code>
+        and <code dir="ltr" translate="no">video</code> resources also now contain a property that identifies the "made
+        for kids"
+        status of that channel or video. The YouTube API Services Terms of Service and Developer Policies
+        were also updated on 10 January 2020. For more information, see the revision histories for
+        the <a href="/youtube/v3/revision_history">YouTube Data API Service</a> and the
+        <a href="/youtube/terms/revision-history">YouTube API Services Terms of Service</a>.
+      </div>
+      <section id="overview">
+        <p>Updates a video's metadata.</p>
+        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+            href="/youtube/v3/getting-started#quota">quota cost</a> of 50 units.</p>
+      </section>
+      <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common use cases
+      </h2>
+      <style>
+        iframe+section>h2 {
+          margin-top: 12px;
+        }
+      </style>
+      <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+          allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+          src="https://developers.google.com/frame/youtube/v3/docs/videos/update_23c33b018ed4a8269b18388e3254053285e776047a0a81911ba7026ce115f5c7.frame"></iframe></devsite-iframe>
+      <section id="request">
+        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+        <section id="request_url">
+          <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+          <div></div><devsite-code>
+            <pre dir="ltr" is-upgraded="" translate="no">PUT https://www.googleapis.com/youtube/v3/videos</pre>
+          </devsite-code>
+        </section>
+        <section id="auth_required">
+          <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+          <p>This request requires authorization with at least one of the following scopes (<a
+              href="/youtube/v3/guides/authentication">read more about authentication and authorization</a>).</p>
+          <table class="matchpre">
+            <thead>
+              <tr>
+                <th>Scope</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtubepartner</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="params">
+          <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+          <p>The following table lists the parameters that this query supports. All of the parameters listed are query
+            parameters.</p>
+          <table class="responsive details">
+            <thead>
+              <tr>
+                <th colspan="2">Parameters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="alt" id="required-parameters">
+                <td colspan="3"><b>Required parameters</b></td>
+              </tr>
+              <tr id="part">
+                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  The <code dir="ltr" translate="no"><strong>part</strong></code> parameter serves two purposes in this
+                  operation. It identifies the properties that the write operation will set as well as the properties
+                  that the API response will include.<br><br />Note that this method will override the existing values
+                  for all of the mutable properties that are contained in any parts that the parameter value specifies.
+                  For example, a video's privacy setting is contained in the <code dir="ltr"
+                    translate="no">status</code> part. As such, if your request is updating a private video, and the
+                  request's <code dir="ltr" translate="no">part</code> parameter value includes the <code dir="ltr"
+                    translate="no">status</code> part, the video's privacy setting will be updated to whatever value the
+                  request body specifies. If the request body does not specify a value, the existing privacy setting
+                  will be removed and the video will revert to the default privacy setting.<br /><br />In addition, not
+                  all parts contain properties that can be set when inserting or updating a video. For example, the
+                  <code dir="ltr" translate="no">statistics</code> object encapsulates statistics that YouTube
+                  calculates for a video and does not contain values that you can set or modify. If the parameter value
+                  specifies a <code dir="ltr" translate="no">part</code> that does not contain mutable values, that
+                  <code dir="ltr" translate="no">part</code> will still be included in the API response.<br /><br />The
+                  following list contains the <code dir="ltr" translate="no">part</code> names that you can include in
+                  the parameter value:<br />
+                  <ul>
+                    <li><code dir="ltr" translate="no">contentDetails</code></li>
+                    <li><code dir="ltr" translate="no">fileDetails</code></li>
+                    <li><code dir="ltr" translate="no">id</code></li>
+                    <li><code dir="ltr" translate="no">liveStreamingDetails</code></li>
+                    <li><code dir="ltr" translate="no">localizations</code></li>
+                    <li><code dir="ltr" translate="no">paidProductPlacementDetails</code></li>
+                    <li><code dir="ltr" translate="no">player</code></li>
+                    <li><code dir="ltr" translate="no">processingDetails</code></li>
+                    <li><code dir="ltr" translate="no">recordingDetails</code></li>
+                    <li><code dir="ltr" translate="no">snippet</code></li>
+                    <li><code dir="ltr" translate="no">statistics</code></li>
+                    <li><code dir="ltr" translate="no">status</code></li>
+                    <li><code dir="ltr" translate="no">suggestions</code></li>
+                    <li><code dir="ltr" translate="no">topicDetails</code></li>
+                  </ul>
+                  </br>
+                </td>
+              </tr>
+              <tr class="alt" id="optional-parameters">
+                <td colspan="3"><b>Optional parameters</b></td>
+              </tr>
+              <tr id="onBehalfOfContentOwner">
+                <td><code dir="ltr" itemprop="property" translate="no">onBehalfOfContentOwner</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  This parameter can only be used in a properly <a href="/youtube/v3/guides/authentication">authorized
+                    request</a>. <strong>Note:</strong> This parameter is intended exclusively for YouTube content
+                  partners.<br /><br />The <code dir="ltr" translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                  parameter indicates that the request's authorization credentials identify a YouTube CMS user who is
+                  acting on behalf of the content owner specified in the parameter value. This parameter is intended for
+                  YouTube content partners that own and manage many different YouTube channels. It allows content owners
+                  to authenticate once and get access to all their video and channel data, without having to provide
+                  authentication credentials for each individual channel. The actual CMS account that the user
+                  authenticates with must be linked to the specified YouTube content owner.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="request_body">
+          <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+          <p>Provide a <a href="/youtube/v3/docs/videos#resource">video resource</a> in the request body. For that
+            resource:</p>
+          <ul>
+            <li>
+              <p>You must specify a value for these properties:</p>
+              <ul>
+                <li><code dir="ltr" translate="no">id</code></li>
+                <li><code dir="ltr" translate="no">snippet.title</code> – This property is only required if the request
+                  updates the <code dir="ltr" translate="no">video</code> resource's <code dir="ltr"
+                    translate="no">snippet</code>.</li>
+                <li><code dir="ltr" translate="no">snippet.categoryId</code> – This property is only required if the
+                  request updates the <code dir="ltr" translate="no">video</code> resource's <code dir="ltr"
+                    translate="no">snippet</code>.</li>
+              </ul>
+            </li>
+            <li>
+              <p>You can set values for these properties:</p>
+              <ul>
+                <li><code dir="ltr" translate="no">snippet.categoryId</code></li>
+                <li><code dir="ltr" translate="no">snippet.defaultLanguage</code></li>
+                <li><code dir="ltr" translate="no">snippet.description</code></li>
+                <li><code dir="ltr" translate="no">snippet.tags[]</code></li>
+                <li><code dir="ltr" translate="no">snippet.title</code></li>
+                <li><code dir="ltr" translate="no">status.embeddable</code></li>
+                <li><code dir="ltr" translate="no">status.license</code></li>
+                <li><code dir="ltr" translate="no">status.privacyStatus</code></li>
+                <li><code dir="ltr" translate="no">status.publicStatsViewable</code></li>
+                <li><code dir="ltr" translate="no">status.publishAt</code> – If you set a value for this property, you
+                  must also set the <code dir="ltr" translate="no">status.privacyStatus</code> property to <code
+                    dir="ltr" translate="no">private</code>. This property can only be set if the video's privacy status
+                  is <code dir="ltr" translate="no">private</code> and the video has never been published.</li>
+                <li><code dir="ltr" translate="no">status.selfDeclaredMadeForKids</code></li>
+                <li><code dir="ltr" translate="no">status.containsSyntheticMedia</code></li>
+                <li><code dir="ltr" translate="no">recordingDetails.recordingDate</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key)</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key).title</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key).description</code></li>
+              </ul>
+              <p>If you are submitting an update request, and your request does not specify a value for a property that
+                already has a value, the property's existing value will be deleted.</p>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section id="response">
+        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+        <p>If successful, this method returns a <a href="/youtube/v3/docs/videos#resource">video resource</a> in the
+          response body.</p>
+      </section>
+      <section id="errors">
+        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+        <p>The following table identifies error messages that the API could return in response to a call to this method.
+          See the <a href="/youtube/v3/docs/errors">error message</a> documentation for more detail.</p>
+        <table class="matchpre" id="property-table">
+          <thead>
+            <tr>
+              <th>Error type</th>
+              <th>Error detail</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="youtube.videos.update-badRequest-defaultLanguageNotSet">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">defaultLanguageNotSet</code>
+              </td>
+              <td class="error-cause">The API request is trying to add localized video details without specifying the
+                default language of the video details.</td>
+            </tr>
+            <tr id="youtube.videos.update-badRequest-invalidCategoryId-resource.snippet.category_id">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidCategoryId</code></td>
+              <td class="error-cause">The <code dir="ltr" translate="no">snippet.categoryId</code> property specifies an
+                invalid category ID. Use the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/videoCategories/list">videoCategories.list</a></code> method
+                to retrieve supported categories.</td>
+            </tr>
+            <tr id="youtube.videos.update-badRequest-invalidDefaultBroadcastPrivacySetting">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">invalidDefaultBroadcastPrivacySetting</code></td>
+              <td class="error-cause">The request attempts to set an invalid privacy setting for the default broadcast.
+              </td>
+            </tr>
+            <tr id="youtube.videos.update-badRequest-invalidDescription-resource.snippet.description">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidDescription</code></td>
+              <td class="error-cause">The request metadata specifies an invalid video description.</td>
+            </tr>
+            <tr id="youtube.videos.update-badRequest-invalidPublishAt-resource.status.publish_at">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidPublishAt</code></td>
+              <td class="error-cause">The request metadata specifies an invalid scheduled publishing time.</td>
+            </tr>
+            <tr id="youtube.videos.update-badRequest-invalidRecordingDetails-resource.recording_details">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidRecordingDetails</code>
+              </td>
+              <td class="error-cause">The <code dir="ltr" translate="no">recordingDetails</code> object in the request
+                metadata specifies invalid recording details.</td>
+            </tr>
+            <tr id="youtube.videos.update-badRequest-invalidTags-resource.snippet.tags">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidTags</code></td>
+              <td class="error-cause">The request metadata specifies invalid video keywords.</td>
+            </tr>
+            <tr id="youtube.videos.update-badRequest-invalidTitle-resource.snippet.title">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidTitle</code></td>
+              <td class="error-cause">The request metadata specifies an invalid or empty video title.</td>
+            </tr>
+            <tr id="youtube.videos.update-badRequest-invalidVideoMetadata">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidVideoMetadata</code>
+              </td>
+              <td class="error-cause">The request metadata is invalid.</td>
+            </tr>
+            <tr id="youtube.videos.update-forbidden-forbidden">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">forbidden</code></td>
+              <td class="error-cause"></td>
+            </tr>
+            <tr id="youtube.videos.update-forbidden-forbiddenEmbedSetting">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">forbiddenEmbedSetting</code>
+              </td>
+              <td class="error-cause">The request attempts to set an invalid embed setting for the video. Note that some
+                channels may not have permission to offer embedded players for live streams. See the <a
+                  href="https://support.google.com/youtube/answer/2474026">YouTube Help Center</a> for more information.
+              </td>
+            </tr>
+            <tr id="youtube.videos.update-forbidden-forbiddenLicenseSetting">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">forbiddenLicenseSetting</code>
+              </td>
+              <td class="error-cause">The request attempts to set an invalid license for the video.</td>
+            </tr>
+            <tr id="youtube.videos.update-forbidden-forbiddenPrivacySetting">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">forbiddenPrivacySetting</code>
+              </td>
+              <td class="error-cause">The request attempts to set an invalid privacy setting for the video.</td>
+            </tr>
+            <tr id="youtube.videos.update-notFound-videoNotFound">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">videoNotFound</code></td>
+              <td class="error-cause">The video that you are trying to update cannot be found. Check the value of the
+                <code dir="ltr" translate="no">id</code> field in the request body to ensure that it is correct.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="try-it">
+        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API request and response.
+        </p>
+        <div class="devsite-apix">
+          <div class="apis-explorer" data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+            data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+            data-method-id="youtube.videos.update" data-show-code-button="true"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

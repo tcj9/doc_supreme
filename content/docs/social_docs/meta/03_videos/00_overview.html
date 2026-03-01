@@ -1,0 +1,115 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_O8">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1>Overview for the Video API from Meta</h1>
+                            <p>The Video API is a collection of Graph API endpoints that allow apps to publish existing
+                                videos on <a href="/docs/graph-api/reference/page">Pages</a> administered by app users.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Components</h2>
+                            <h3>Host URL</h3>
+                            <p>All requests are passed to the <code>graph.facebook.com</code> host URL.</p>
+                            <div><span>
+                                    <div class="_57yz _7_72 _3-8p">
+                                        <div class="_57y-">
+                                            <p>The <code>graph-video.facebook.com</code> host for video uploads has been
+                                                deprecated. Use the <code>graph.facebook.com</code> host for API
+                                                requests when uploading videos to Meta servers.</p>
+                                        </div>
+                                    </div>
+                                </span></div>
+                            <h3>Upload Protocols</h3>
+                            <p>Upload videos using the <a
+                                    href="/docs/video-api/guides/publishing#resumable-upload">Resumable Upload API</a>.
+                            </p>
+                            <h3>Resources</h3>
+                            <p>The API uses the following nodes.</p>
+                            <h4>Videos</h4>
+                            <p>The <a href="/docs/graph-api/reference/video">Video</a> node is the API's primary
+                                resource. When you upload an existing video the API generates a Video entity and
+                                publishes it on a <a href="/docs/graph-api/reference/page">Page</a>. Videos must be
+                                published on a target node.</p>
+                            <h4>Pages</h4>
+                            <p>Videos can be published on a Page as long as the app user can perform admin-equivalent <a
+                                    href="/docs/pages/overview#tasks">Tasks</a> on the Page, or have been granted an
+                                Admin Role on the Page via the Business Manager.</p>
+                            <h4>Crossposted Videos</h4>
+                            <p>Videos that have already been published can also be <a
+                                    href="/docs/video-api/guides/crossposting">published on other Pages</a> that the app
+                                user administers without having to be reuploaded. Insights on Crossposted Videos can be
+                                returned as aggregate values (e.g. the sum of all views across all Pages) or broken down
+                                by Page.</p>
+                            <h4>Slideshows</h4>
+                            <p>You can use the API to <a href="/docs/video-api/guides/slideshows">generate a slideshow
+                                    Video</a> from a collection of images hosted on a public server.</p>
+                            <h4>Polls</h4>
+                            <p>You can use the API to <a
+                                    href="https://developers.facebook.com/docs/graph-api/reference/video/polls">create
+                                    Polls on published videos</a> and get their results.</p>
+                            <h3>Ads</h3>
+                            <p>Published Videos can be used with the Marketing API's <a
+                                    href="/docs/marketing-api/advideo/">Ad Creative</a> endpoint to create Video Ads.
+                            </p>
+                            <h3>Insights</h3>
+                            <p>You can <a href="/docs/video-api/guides/insights">get insights</a> on any published
+                                Video. Insights for <a href="#crossposted-videos">Crossposted Videos</a> can be returned
+                                as aggregate values or broken down by Page.</p>
+                            <h3>Webhooks</h3>
+                            <p>You can receive real-time notifications of changes to a Video's publishing status and
+                                viewer interactions by setting up <a
+                                    href="/docs/graph-api/webhooks/getting-started/webhooks-for-pages">Page
+                                    Webhooks</a>. Set up a callback and then subscribe to the Page topic's
+                                <code>feed</code> and <code>videos</code> fields to receive notifications. Note that
+                                notification will not be sent for videos that are uploaded as <code>secret</code> or
+                                <code>no_story</code>.
+                            </p>
+                            <h3>Rights Management</h3>
+                            <p>For Videos published on a Page, you can use the <a
+                                    href="/docs/graph-api/rights-manager-api">Rights Manager API</a> to create and apply
+                                copyright rules in order to discover other published Videos that may be in violation,
+                                and report them.</p>
+                            <h3>Requirements</h3>
+                            <h4>Permissions</h4>
+                            <p>To publish on a Page, the app user must grant your app the <a
+                                    href="/docs/permissions/reference/pages_show_list"><code>pages_show_list</code></a>,
+                                <a
+                                    href="/docs/permissions/reference/pages_read_engagement"><code>pages_read_engagement</code></a>,
+                                and <a
+                                    href="/docs/permissions/reference/pages_manage_posts"><code>pages_manage_posts</code></a>
+                                permissions.
+                            </p>
+                            <h4>Admin Role</h4>
+                            <p>The app user must be able to perform the equivalent of <a
+                                    href="/docs/pages/overview-1#tasks"><code>ADMIN</code> tasks</a> on the targeted
+                                Page.</p>
+                            <h3>App Review</h3>
+                            <p>All permissions require <a href="/docs/apps/review">App Review</a>.</p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>How It Works</h2>
+                            <p>The general flow for publishing a video on a Page is to:</p>
+                            <ol>
+                                <li>Get an Access Token and appropriate permissions from your app user</li>
+                                <li>Get a list of Pages that the app user is able to perform admin-equivalent Tasks on
+                                </li>
+                                <li>Provide a way for the app user to select the Page where they want the video to
+                                    appear</li>
+                                <li>Provide a way for the app user to select a Video to be published.</li>
+                                <li>Upload the video using the Resumable Upload API</li>
+                                <li>Publish the video to the Page using the Video ID</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

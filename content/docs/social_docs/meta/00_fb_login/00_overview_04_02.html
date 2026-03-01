@@ -1,0 +1,138 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_Eb">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Handling Declined Permissions</h1>
+              <p>When people create accounts or log into your app using Facebook Login, they have the opportunity to
+                grant the <a href="/docs/facebook-login/permissions">permissions you request</a>. But people also have
+                an opportunity to decline all permissions except their public profile. People may choose to do this if
+                they feel uncomfortable sharing this information with your app, or they don't understand how that
+                information will be used to enhance their experience.</p>
+              <p>When people choose to decline permissions, its important your app respects their choice and still
+                provides a great experience for people.</p>
+              <p>In general, your app may react in one of three ways:</p>
+              <ol>
+                <li><a href="#continue-without">Continue on without the information</a></li>
+                <li><a href="#reprompt">Explain why you need the information and reprompt for it</a></li>
+                <li><a href="#collect-yourself">Collect the information yourself</a></li>
+              </ol>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="continue-without">Continue Without the Information</h2>
+              <p>In some cases, a certain requested permission may not be required for your app to function. In this
+                case, the simpliest thing to do is to respect permission decline and continue to lead them into the app.
+              </p>
+              <p>In the example below, <em>Flick Finder</em> might be able to provide enhanced movie recommendations if
+                it had access to the <code>user_likes</code> permission. But since the person declined that permission,
+                <em>Flick Finder</em> just presents more generic recommendations.
+              </p>
+              <img alt="" class="_5aqp _5aqr img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/11891355_118394905177257_267694697_n.gif?_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=kkqSdC-UujYQ7kNvwFL0Ogq&amp;_nc_oc=Adk5_orxf8KLNvkvygjjwijkRwO0yiwD9EX5N26ODqKvUZ8gNbLiVjhSKe_OXepjFHw&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=6O9_cQOaaAfWnL7leqT_dA&amp;oh=00_AftYhTzIB8B79_kLbfmEVIaT6IlhTozFw_YMMpzrqqTdtQ&amp;oe=698C87B9" />
+              <p>This is the simplest option, and provides a great respectful experience to people who choose to decline
+                certain permissions.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="reprompt">Explain Why and Reprompt</h2>
+              <p>People may decline a permission because they don't understand why your app needs that information. In
+                this case, your app could display a dialog explaining why you need the information and how it'll be used
+                to enhance the experience.</p>
+              <p>In the example below <em>Flick Finder</em> displays a dialog explaining that with an email address, the
+                app can send you updated when new movies become available. The “Add Email” button takes the person back
+                to the Facebook Login flow where they can grant the <code>email</code> permission.</p>
+              <img alt="" class="_5aqp _5aqr img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/11891347_612273268914253_1898773707_n.gif?_nc_cat=101&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=w6_qRrTaoWIQ7kNvwH7-XjC&amp;_nc_oc=Adlsyu9HjzLheNc_gj8oFgTlOrtd0VfvYAa5fWy7pjQPS9H6SdjtKphK1cP87qUVjFo&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=6O9_cQOaaAfWnL7leqT_dA&amp;oh=00_AfsLmUj9sgSdwde2-weVsoMD2ahPiwUspFVGd1BO15isVA&amp;oe=698C9D6A" />
+              <p>Note that in this example, the person still has the opportunity not to grant the <code>email</code>
+                permission.</p>
+              <p>This strategy can be used for permission which is critical or highly desirable for the functionality of
+                your app.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="collect-yourself">Collect the Information Yourself</h2>
+              <p>Some pieces of information may be simple enough to collect for yourself.</p>
+              <p>In this example, <em>Flick Finder</em> wants to collect a person's birthday so it can recommend
+                age-appropriate movies. If a person has declined to share their birthday when they logged in with
+                Facebook, <em>Flick Finder</em> can still create a place to collect the information inside the app,
+                separate from the Facebook Login flow. We recommend doing this after a person has had some time to
+                familiarize themselves with your app, so they have a better understanding of how the permission will
+                improve their experience.</p>
+              <img alt="" class="_5aqp _5aqr img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/11891354_852576298152788_453444951_n.gif?_nc_cat=111&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=ZijAKD6wPQUQ7kNvwFuhAY9&amp;_nc_oc=AdllOnI0VUpHY-GrKP9YKN1iJQhmrQER49EfWzwqQQlwdUet6AieB4K9iBkMNUTa0Vo&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=6O9_cQOaaAfWnL7leqT_dA&amp;oh=00_Aft_hZPCAKTt3YP_AoP1jocor5cNb0llFIxP18LKQPA_tA&amp;oe=698C970E" />
+              <p>Examples of information which might be collected this way includes <code>user_hometown</code>,
+                <code>user_location</code>, <code>user_birthday</code> or even <code>email</code>.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="detecting">Detecting Declined Permissions</h2>
+              <p>When people decline permissions as part of a Facebook Login flow, we make it easy for your app to
+                detect this and react using one of the strategies outlined above.</p>
+              <h3>Android SDK</h3>
+              <p>On Android, you can call the <a
+                  href="/docs/reference/android/current/class/AccessToken/#getDeclinedPermissions"><code>getDeclinedPermissions</code></a>
+                method on the <a href="/docs/reference/android/current/class/AccessToken"><code>AccessToken</code></a>
+                object in the <a href="/docs/android">Facebook SDK for Android</a>.</p>
+              <h3>iOS SDK</h3>
+              <p>On iOS, you can call the <a
+                  href="/docs/reference/ios/current/class/FBSDKAccessToken/#declinedPermissions"><code>[FBSDKAccessToken declinedPermissions]</code></a>
+                method in the <a href="/docs/ios">Facebook SDK for iOS</a>.</p>
+              <h3>JavaScript SDK</h3>
+              <p>To detect declined permissions, you can call the <code>permissions</code> edge on the <code>User</code>
+                object of the Graph API. You can collect any declined permissions by iterating through the response:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.api('/me/permissions', function(response) {
+  var declined = [];
+  for (i = 0; i &lt; response.data.length; i++) { 
+    if (response.data[i].status == 'declined') {
+      declined.push(response.data[i].permission)
+    }
+  }
+  alert(declined.toString())
+});</pre>
+              <h3>API</h3>
+              <p>To detect declined permissions, you can call the <code>permissions</code> edge on the <code>User</code>
+                object of the Graph API:</p>
+              <pre class="_5s-8 prettyprint lang-code"
+                style="">GET https://graph.facebook.com/me/permissions?access_token=USER_ACCESS_TOKEN</pre>
+              <p>which yeilds a response of the form:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{ "data": [
+    {
+      "permission": "user_birthday",
+      "status": "granted"
+    },
+    {
+      "permission": "public_profile",
+      "status": "granted"
+    },
+    {
+      "permission": "email",
+      "status": "declined"
+    }
+]}</pre>
+              <p>This tells your app that the person granted the <code>user_birthday</code> and
+                <code>public_profile</code> permissions, but chose to decline the <code>email</code> permission.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="summary">Summary</h2>
+              <p>Elegantly handling declined permissions is an important part of providing a great Facebook Login
+                experience to people.</p>
+              <p>Implementing one of the above strategies will ensure the people who download and install your app are
+                able to log in without encountering disruptive and frustrating experience which affect your app's
+                reputation and app store rating.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

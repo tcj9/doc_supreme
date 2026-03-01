@@ -1,0 +1,604 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_+c">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Facebook Stories API from Meta</h1>
+              <p>This document shows you how to use the Facebook Stories API to publish Stories on Facebook Pages.</p>
+              <p>To publish a story, your app will perform the following steps:</p>
+              <ol>
+                <li>Upload your app user's media to the Meta servers</li>
+                <li>Publish the media to your app user's Page as a Story</li>
+              </ol>
+              <h2>Before you start</h2>
+              <p>This guide assumes you have read the <a
+                  href="https://developers.facebook.com/docs/pages-api/overview">Pages API Overview</a> and implemented
+                the needed components, and successfully completed the <a
+                  href="https://developers.facebook.com/docs/pages-api/getting-started">Get Started guide</a>.</p>
+              <li>You will need to implement Facebook Login or Facebook Login for Business to ask your app users for
+                permissions needed to access their Facebook Pages and to receive Page access tokens.</li>
+              <ul>
+                <li>
+                  <p>Your app users will need to be able to perform the <code>CREATE_CONTENT</code> task on the Page
+                    represented in the Page access token and give your app the following permissions:</p>
+                  <ul>
+                    <li><code>pages_manage_posts</code> </li>
+                    <li><code>pages_read_engagement</code> </li>
+                    <li><code>pages_show_list</code></li>
+                  </ul>
+                </li>
+              </ul>
+              <p>If you are using a business system user in your API requests, the <code>business_management</code>
+                permission is also required.</p>
+              <h3>Media requirements</h3>
+              <p>You must provide a photo or video that fit the following specifications.</p>
+              <h4>Photo specifications</h4>
+              <div>
+                <div class="_57-c">
+                  <table class="_4-ss _5k9x">
+                    <thead>
+                      <th style="width:20%">Property</th>
+                      <th>Specification</th>
+                    </thead>
+                    <tbody class="_5m37" id="u_0_2_Pu">
+                      <tr class="row_0">
+                        <td>
+                          <p>File type</p>
+                        </td>
+                        <td>
+                          <p>.jpeg, .bmp, .png, .gif, .tiff</p>
+                        </td>
+                      </tr>
+                      <tr class="row_1 _5m29">
+                        <td>
+                          <p>File size</p>
+                        </td>
+                        <td>
+                          <p>Files can not exceed 10MB. For .png files, we recommend not exceeding 1MB or the image may
+                            appear pixelated.</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <h4>Video specifications</h4>
+              <div>
+                <div class="_57-c">
+                  <table class="_4-ss _5k9x">
+                    <thead>
+                      <th style="width:14%">Property</th>
+                      <th style="width:54%">Specification</th>
+                    </thead>
+                    <tbody class="_5m37" id="u_0_3_80">
+                      <tr class="row_0">
+                        <td>
+                          <p>File Type</p>
+                        </td>
+                        <td>
+                          <p>.mp4 (recommended)</p>
+                        </td>
+                      </tr>
+                      <tr class="row_1 _5m29">
+                        <td>
+                          <p>Aspect Ratio</p>
+                        </td>
+                        <td>
+                          <p>9 x 16</p>
+                        </td>
+                      </tr>
+                      <tr class="row_2">
+                        <td>
+                          <p>Resolution</p>
+                        </td>
+                        <td>
+                          <p>1080 x 1920 pixels (recommended). Minimum is 540 x 960 pixels</p>
+                        </td>
+                      </tr>
+                      <tr class="row_3 _5m29">
+                        <td>
+                          <p>Frame Rate</p>
+                        </td>
+                        <td>
+                          <p>24 to 60 frames per second</p>
+                        </td>
+                      </tr>
+                      <tr class="row_4">
+                        <td>
+                          <p>Duration</p>
+                        </td>
+                        <td>
+                          <p>3 to 90 seconds.</p>
+                          <p>A reel published as a story on a Facebook Page can not exceed 60 seconds.</p>
+                        </td>
+                      </tr>
+                      <tr class="row_5 _5m29">
+                        <td>
+                          <p>Video Settings</p>
+                        </td>
+                        <td>
+                          <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                            <tbody>
+                              <tr class="_51mx">
+                                <td class="_51m- vTop hLeft _57v2">
+                                  <ul>
+                                    <li>Chroma subsampling 4:2:0</li>
+                                    <li>Closed GOP (2-5 seconds)</li>
+                                    <li>Compression – H.264, H.265 (VP9, AV1 are also supported)</li>
+                                  </ul>
+                                </td>
+                                <td class="_51m- vTop hLeft _57v2 _51mw">
+                                  <ul>
+                                    <li>Fixed frame rate</li>
+                                    <li>Progressive scan</li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr class="row_6">
+                        <td>
+                          <p>Audio Settings</p>
+                        </td>
+                        <td>
+                          <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                            <tbody>
+                              <tr class="_51mx">
+                                <td class="_51m- vTop hLeft _57v2">
+                                  <ul>
+                                    <li>Audio bitrate – 128kbs+</li>
+                                    <li>Channels – Stereo</li>
+                                  </ul>
+                                </td>
+                                <td class="_51m- vTop hLeft _57v2 _51mw">
+                                  <ul>
+                                    <li>Codec – AAC Low Complexity</li>
+                                    <li>Sample rate – 48kHz</li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <h3>Limitations</h3>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">A photo or video uploaded for a story can not have been used in a previously
+                    published post</div>
+                </li>
+                <li>
+                  <div class="fcb">A video story can not exceed 60 seconds</div>
+                </li>
+                <li>
+                  <div class="fcb">
+                    To include archived stories in your <code>GET</code> requests to see a list of your stories, you
+                    must
+                    <a href="https://www.facebook.com/help/2058997717520567" target="_blank">
+                      turn your Facebook story archive on
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=9-89WaNmDBmkzvBZxrw0XA&amp;oh=00_AftR85ZRtFjRB3Tt17tfo4qGIuU0rUHVzlXMYp_57WNnpA&amp;oe=69A0DBE2"
+                        width="10px" /></a>
+                  </div>
+                </li>
+              </ul>
+              <h3>Best practices</h3>
+              <div>
+                <p>
+                  When testing an API call, you can include the <code>access_token</code> parameter set to your access
+                  token. However, when making secure calls from your app, use the <a
+                    href="https://developers.facebook.com/docs/facebook-login/guides/access-tokens#portabletokens"
+                    target="_blank">access token class.</a></p>
+              </div>
+              <p>Code examples within this document are formatted for readability. Replace <i><b>bold, italics
+                    values</b></i>, such as <i><b>page_id</b></i>, with your values.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Video stories</h2>
+              <p>To publish a video story on a Facebook Page, you will initialize a video upload session with Meta
+                servers, upload the video to Meta servers, then publish the video story.</p>
+              <h3 id="initialize">Step 1: Initialize session</h3>
+              <p>To initialize an upload session, send a <code>POST</code> request to the
+                <code>/page_id/video_stories</code> endpoint, where <code>page_id</code> is the ID for your Facebook
+                Page, with the <code>upload_phase</code> parameter set to <code>start</code>.
+              </p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code>/page_id</i></b>/video_stories" \
+      -d '{
+           "upload_phase":"start",
+         }'
+</pre>
+              <p>On success, your app receives a JSON response with the ID for the video and the Facebook URL where you
+                will be uploading the video.</p>
+              <h4>Example response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "video_id": "<b><i>video_id</i></b>",
+  "upload_url": "https://rupload.facebook.com/video-upload/<b><i><code>v24.0</code>/video_id</i></b>",
+}  </pre>
+              <h3>Step 2: Upload a video</h3>
+              <p>Now that you have initialized an upload session and received the upload URL, you can upload your video.
+                You can upload either:</p>
+              <ul>
+                <li>a <a href="#hosted">hosted video file</a> on a public facing http/https server, such as a CDN</li>
+                <li>a <a href="#local">local video file</a> from your device </li>
+              </ul>
+              <h4 id="hosted">Upload a hosted file</h4>
+              <p>To upload a hosted file, send a <code>POST</code> request to the <code>upload_url</code> endpoint you
+                received in the <a href="#initialize">initialization step</a> with the following parameters:</p>
+              <ul>
+                <li><code>file_url</code> set to the URL for your video file</li>
+              </ul>
+              <p>Be sure the host is <strong><em><code>rupload.facebook.com</code></em></strong>.</p>
+              <p>The API will now reject files hosted on sites that restrict access via robots.txt. Developers need to
+                ensure that the hosting site allows the “facebookexternalhit/1.1
+                (+http://www.facebook.com/externalhit_uatext.php)” user agent to fetch the hosted file.</p>
+              <p>Files hosted on Meta CDN (e.g.. fbcdn URLs) will get rejected. Instead, developers can use the
+                crossposting feature to publish a video on multiple pages without uploading the video to each page.
+                Refer to our <a href="https://developers.facebook.com/docs/video-api/guides/crossposting/">detailed
+                  guidance</a> on crossposting.</p>
+              <h5>Example request</h5>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://rupload.facebook.com/video-upload/<b><i><code>v24.0</code>/video_id</i></b>" \
+	-H "file_url: <b><i>https://some.cdn.url/video.mp4</i></b>"
+</pre>
+              <h4 id="local">Upload a local file</h4>
+              <p>To upload a local file, send a <code>POST</code> request to the <code>upload_url</code> endpoint you
+                received in the <a href="#initialize">initialization step</a> with the following parameters:</p>
+              <ul>
+                <li><code>offset</code> set to <code>0</code></li>
+                <li><code>file_size</code> set to the total size in bytes of the video being uploaded</li>
+              </ul>
+              <h5>Example request</h5>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://rupload.facebook.com/video-upload/<b><i><code>v24.0</code>/video_id</i></b>" \
+	-H "offset: 0" \
+        -H "file_size: <b><i>file_size_in_bytes</i></b>" \
+	--data-binary "@<b><i>/path/to/file/my_video_file.mp4</i></b>"
+</pre>
+              <p>On upload success, your app receives a JSON response with <code>success</code> set to
+                <code>true</code>.
+              </p>
+              <h5>Example upload response</h5>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+    "success": true
+}  </pre>
+              <h4>Interrupted upload</h4>
+              <p>If the video upload is interrupted, you can either restart the upload or resume it.</p>
+              <ul>
+                <li>To restart the upload, resend the <code>POST</code> request and set <code>offset</code> to
+                  <code>0</code>.
+                </li>
+                <li>To resume the upload, resend the <code>POST</code> request with <code>offset</code> set to the
+                  <code>bytes_transfered</code> value from a status check.
+                </li>
+              </ul>
+              <h4>Get the upload status</h4>
+              <p>To check a status of your video, during upload or publishing, send a <code>GET</code> request to the
+                <strong><code>/video_id</code></strong> endpoint with the following parameter:
+              </p>
+              <ul>
+                <li><code>fields</code> set to <code>status</code></li>
+              </ul>
+              <h5>Example request</h5>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X GET "https://graph.facebook.com/<b><i><code>v24.0</code>/video_id</i></b>" \
+	-d "fields=status"
+</pre>
+              <p>On success, your app receives a JSON response that contains:</p>
+              <ul>
+                <li>A <code>status</code> object that contains:
+
+                  <ul>
+                    <li><code>video_status</code> with a value of <code>ready</code>, <code>processing</code>,
+                      <code>expired</code>, or <code>error</code>
+                    </li>
+                    <li><code>uploading_phase</code> object with the following key-value pairs:
+
+                      <ul>
+                        <li><code>status</code> set to <code>in_progress</code>, <code>not_started</code>,
+                          <code>complete</code>, or <code>error</code>
+                        </li>
+                        <li><code>bytes_transfered</code> set to the bytes that have been uploaded. can be used as the
+                          value for <code>offset</code> if the upload is interrupted.</li>
+                      </ul>
+                    </li>
+                    <li><code>processing_phase</code> object with the following key-value pairs:
+
+                      <ul>
+                        <li><code>status</code> set to <code>in_progress</code>, <code>not_started</code>,
+                          <code>complete</code>, or <code>error</code>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><code>processing_phase</code> object with the following key-value pairs:
+
+                      <ul>
+                        <li><code>status</code> set to <code>in_progress</code>, <code>not_started</code>,
+                          <code>complete</code>, or <code>error</code>
+                        </li>
+                        <li><code>publish_status</code> set to <code>published</code> or <code>not_published</code></li>
+                        <li><code>publish_time</code> set to a UNIX timestamp of the actual or published time</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <h5>Example response</h5>
+              <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                <tbody>
+                  <tr class="_51mx">
+                    <td class="_51m- vTop hLeft _57v2">
+                      <div style="width:350px">
+                        The following response shows a file that has been successfully uploaded.
+
+                        <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "status": {
+    "video_status": "processing", 
+    "uploading_phase": {
+      "status": "in_progress", 
+      "bytes_transfered": 50002 
+    },
+    "processing_phase": {
+      "status": "not_started"
+    }
+    "publishing_phase": {
+      "status": "not_started",
+      "publish_status": "published",
+      "publish_time": 234523452 
+    }
+  }
+}
+</pre>
+                      </div>
+                    </td>
+                    <td class="_51m- vTop hLeft _57v2 _51mw">
+                      <div style="width:350px">
+                        The following response shows an error has occurred in the processing phase.
+
+                        <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "status": {
+    "video_status": "processing", 
+    "uploading_phase": {
+      "status": "complete"
+    },
+    "processing_phase": {
+      "status": "not_started",
+      "error": {
+        "message": "Resolution too low. Video must have a minimum resolution of 540p."
+      }
+    }
+    "publishing_phase": {
+      "status": "not_started"
+    }
+  }
+}
+</pre>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3>Step 3. Publish a video story</h3>
+              <p>To publish your video story to your Page, you will send a <code>POST</code> to the
+                <strong><em><code>/page_id</code></em></strong><code>/video_stories</code> endpoint with the following
+                parameters:
+              </p>
+              <ul>
+                <li><code>video_id</code> set to the ID for your uploaded video</li>
+                <li><code>upload_phase</code> set to <code>finish</code></li>
+              </ul>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code>/page_id</i></b>/video_stories" \
+      -d '{
+           "video_id": "<b><i>video_id</i></b>",
+           "upload_phase": "finish"
+         }'
+</pre>
+              <p>On success, your app receives a JSON response that contains the following key-value pairs:</p>
+              <ul>
+                <li><code>success</code> set to <code>true</code></li>
+                <li><code>post_id</code> set to the ID for your story post</li>
+              </ul>
+              <h4>Example response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "success": true,
+  "post_id": 1234
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Photo stories</h2>
+              <h3>Step 1. Upload a photo</h3>
+              <p>
+                Visit the
+                <a href="https://developers.facebook.com/docs/graph-api/reference/page/photos#upload" target="_blank">
+                  Page Posts Reference
+                  <img alt="" class="img"
+                    src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=9-89WaNmDBmkzvBZxrw0XA&amp;oh=00_AftR85ZRtFjRB3Tt17tfo4qGIuU0rUHVzlXMYp_57WNnpA&amp;oe=69A0DBE2"
+                    width="10px" /></a> to learn how to upload a photo to Meta servers using the
+                <code>/page_id/photos</code> endpoint. Be sure to include the <code>published</code> parameter and set
+                it to <code>false</code>.
+              </p>
+              <h3>Step 2. Publish a photo story</h3>
+              <p>To publish your photo story to your Page, you will send a <code>POST</code> to the
+                <strong><em><code>/page_id</code></em></strong><code>/photo_stories</code> endpoint with the following
+                parameters:
+              </p>
+              <ul>
+                <li><code>photo_id</code> set to the ID for your uploaded photo</li>
+              </ul>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code>/page_id</i></b>/photo_stories" \
+      -d '{
+           "photo_id": "<b><i>photo_id</i></b>"
+         }'
+</pre>
+              <p>On success, your app receives a JSON response that contains the following key-value pairs:</p>
+              <ul>
+                <li><code>success</code> set to <code>true</code></li>
+                <li><code>post_id</code> set to the ID for your story post</li>
+              </ul>
+              <h4>Example response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "success": true,
+  "post_id": 1234
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get stories</h2>
+              <p>To get a list of all stories for a Page and data about each story, send a <code>GET</code> request to
+                the <code>/</code><strong><em><code>page_id</code></em></strong><code>/stories</code> endpoint where
+                <code>page_id</code> is the ID for the Page you want to view.
+              </p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.facebook.com/<b><i><code>v24.0</code>/page_id</i></b>/stories"
+</pre>
+              <p>On success, your app receives a JSON response with an array of objects where each object contains
+                information about a story published on the Page. Each object contains the following key-value pairs:</p>
+              <ul>
+                <li>The <code>post_id</code> set to the ID for the published story post</li>
+                <li>The <code>status</code> set to <code>PUBLISHED</code>, <code>ARCHIVED</code></li>
+                <li>The <code>creation_time</code> set to UNIX timestamp when the story was published</li>
+                <li>The <code>media_type</code> set to either <code>video</code> or <code>photo</code></li>
+                <li>The <code>media_id</code> set to the ID for the video or photo in the story post</li>
+                <li>The <code>url</code> set to the Facebook URL for the story post, such as
+                  <code>https://facebook.com/stories/8283482737484972</code>
+                </li>
+              </ul>
+              <h4>Example Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "data": [
+    {
+      "post_id": "<b><i>post_id</i></b>",
+      "status": "PUBLISHED",
+      "creation_time": "123456",
+      "media_type": "video",
+      "media_id": "<b><i>video_id</i></b>",
+      "url": "<b><i>https://facebook.com/stories…</i></b>"
+    },
+    {
+      "post_id": "<b><i>post_id</i></b>",
+      "status": "PUBLISHED",
+      "creation_time": "123456",
+      "media_type": "photo",
+      "media_id": "<b><i>photo_id</i></b>",
+      "url": "<b><i>https://facebook.com/stories…</i></b>"
+    },
+    {
+      "post_id": "<b><i>post_id</i></b>",
+      "status": "ARCHIVED",
+      "creation_time": "123456",
+      "media_type": "photo",
+      "media_id": "<b><i>photo_id</i></b>",
+      "url": "<b><i>https://facebook.com/stories…</i></b>"
+    },
+    ...
+  ],
+}
+</pre>
+              <p>You can filter stories by status, published or archived, and date, using the <code>since</code> and
+                <code>until</code> parameters.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See also</h2>
+              <p>Learn more about the endpoints and concepts discussed in this guide.</p>
+              <h4>Relevant guides</h4>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/marketing-api/system-users"
+                      target="_blank">
+                      Business system user
+                    </a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/facebook-login" target="_blank">
+                      Facebook Login
+                    </a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a
+                      href="https://developers.facebook.com/docs/facebook-login/facebook-login-for-business"
+                      target="_blank">
+                      Facebook Login for Business
+                    </a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/results#time"
+                      target="_blank">
+                      Graph API – Paginated Results with since and until
+                    </a></div>
+                </li>
+              </ul>
+              <h4>Endpoint references</h4>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/reference/page"
+                      target="_blank">
+                      Page Reference
+
+                    </a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/reference/page/video_stories"
+                      target="_blank">
+                      Page Video Stories Reference
+
+                    </a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/reference/page/photo_stories"
+                      target="_blank">
+                      Page Photo Stories Reference
+
+                    </a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/reference/video"
+                      target="_blank">
+                      Video Reference
+
+                    </a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/reference/stories/insights/"
+                      target="_blank">
+                      Stories Insights Reference
+
+                    </a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

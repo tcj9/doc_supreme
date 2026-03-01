@@ -1,0 +1,370 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Captions<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+                  <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title"
+                        class="devsite-key-takeaways-panel-header" role="button" tabindex="0">
+                        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+                        <div class="devsite-key-takeaways-panel-title">
+                              <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI"
+                                    id="key-takeaways-panel-title">Page Summary</h2>
+                        </div>
+                        <span aria-hidden="true"
+                              class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+                        </img>
+                  </div>
+                  <div class="devsite-key-takeaways-panel-content">
+                        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+                              <button aria-label="Report Key Takeaways!"
+                                    class="button-flat button-primary devsite-key-takeaways-report-button"
+                                    data-title="Report Key Takeaways!">
+                                    <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+                              </button>
+                        </devsite-feedback>
+                        <ul class="devsite-key-takeaways-panel-list">
+                              <li>
+                                    <p>YouTube deprecated the <code>sync</code> parameter for the
+                                          <code>captions.insert</code> and <code>captions.update</code> API endpoints on
+                                          March 13, 2024, but auto-syncing remains available in YouTube Creator Studio.
+                                    </p>
+                              </li>
+                              <li>
+                                    <p>A caption resource represents a YouTube caption track, which is associated with
+                                          one specific YouTube video, and the API provides methods to list, insert,
+                                          update, download, and delete these tracks.</p>
+                              </li>
+                              <li>
+                                    <p>The <code>captions</code> resource includes a <code>snippet</code> object that
+                                          contains details like the associated <code>videoId</code>, the
+                                          <code>language</code>, the <code>trackKind</code>, and whether it's a draft,
+                                          among others.</p>
+                              </li>
+                              <li>
+                                    <p>The caption track's <code>snippet.isAutoSynced</code> boolean property indicates
+                                          if YouTube synchronized the caption track to the audio, with a
+                                          <code>false</code> value indicating that YouTube used the time codes in the
+                                          uploaded track.</p>
+                              </li>
+                              <li>
+                                    <p>Caption track properties include status indicators such as <code>serving</code>,
+                                          <code>syncing</code>, or <code>failed</code>, with <code>failureReason</code>
+                                          providing the specific reason for any failures, such as
+                                          <code>processingFailed</code> or <code>unsupportedFormat</code>.</p>
+                              </li>
+                        </ul>
+                  </div>
+            </devsite-key-takeaways-panel>
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="captions" itemprop="name">
+                  <div class="note"><b>Note:</b> On March 13, 2024, YouTube announced that
+                        it is deprecating the <code dir="ltr" translate="no">sync</code> parameter for the
+                        <code dir="ltr"
+                              translate="no"><a href="/youtube/v3/docs/captions/insert">captions.insert</a></code> and
+                        <code dir="ltr"
+                              translate="no"><a href="/youtube/v3/docs/captions/insert">captions.update</a></code> API
+                        endpoints.
+                        Captions auto-syncing is still available in YouTube Creator Studio. See the
+                        <a href="/youtube/v3/revision_history#release_notes_03_13_2024">API revision history</a> for
+                        more details.
+                  </div>
+                  <section id="overview">
+                        <p>A <code dir="ltr" translate="no"><strong>caption</strong></code> resource represents a
+                              YouTube caption track. A caption track is associated with exactly one YouTube video.</p>
+                  </section>
+                  <section id="methods">
+                        <h2 data-text="Methods" id="methods" tabindex="-1">Methods</h2>
+                        <p>The API supports the following methods for <code dir="ltr" translate="no">captions</code>
+                              resources:</p>
+                        <dl>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/captions/list">list</a></dt>
+                              <dd>Retrieve a list of caption tracks that are associated with a specified video. Note
+                                    that the API response does not contain the actual captions and that the <code
+                                          dir="ltr"
+                                          translate="no"><a href="/youtube/v3/docs/captions/download">captions.download</a></code>
+                                    method provides the ability to retrieve a caption track.
+                                    <a href="/youtube/v3/docs/captions/list#usage">Try it now</a>.
+                              </dd>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/captions/insert">insert</a></dt>
+                              <dd>Upload a caption track.
+                                    <a href="/youtube/v3/docs/captions/insert">Try it now</a>.
+                              </dd>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/captions/update">update</a></dt>
+                              <dd>Update a caption track. When updating a caption track, you can change the track's <a
+                                          href="/youtube/v3/docs/captions#snippet.isDraft">draft status</a>, upload a
+                                    new caption file for the track, or both.
+                                    <a href="/youtube/v3/docs/captions/update">Try it now</a>.
+                              </dd>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/captions/download">download</a></dt>
+                              <dd>Download a caption track. The caption track is returned to its original format unless
+                                    the request specifies a value for the <code dir="ltr" translate="no">tfmt</code>
+                                    parameter and to its original language unless the request specifies a value for the
+                                    <code dir="ltr" translate="no">tlang</code> parameter.
+                                    <a href="/youtube/v3/docs/captions/download">Try it now</a>.
+                              </dd>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/captions/delete">delete</a></dt>
+                              <dd>Delete a specified caption track.
+                                    <a href="/youtube/v3/docs/captions/delete">Try it now</a>.
+                              </dd>
+                        </dl>
+                  </section>
+                  <section id="resource">
+                        <h2 data-text="Resource representation" id="resource-representation" tabindex="-1">Resource
+                              representation</h2>
+                        <p>The following JSON structure shows the format of a <code dir="ltr"
+                                    translate="no">captions</code> resource:</p>
+                        <div></div><devsite-code>
+                              <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json" is-upgraded=""
+                                    style="max-height: 500px; overflow: auto" syntax="Text only">{
+  "<a href="#kind">kind</a>": "youtube#caption",
+  "<a href="#etag">etag</a>": <var class="apiparam" translate="no">etag</var>,
+  "<a href="#id">id</a>": <var class="apiparam" translate="no">string</var>,
+  "<a href="#snippet">snippet</a>": {
+    "<a href="#snippet.videoId">videoId</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.lastUpdated">lastUpdated</a>": <var class="apiparam" translate="no">datetime</var>,
+    "<a href="#snippet.trackKind">trackKind</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.language">language</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.name">name</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.audioTrackType">audioTrackType</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.isCC">isCC</a>": <var class="apiparam" translate="no">boolean</var>,
+    "<a href="#snippet.isLarge">isLarge</a>": <var class="apiparam" translate="no">boolean</var>,
+    "<a href="#snippet.isEasyReader">isEasyReader</a>": <var class="apiparam" translate="no">boolean</var>,
+    "<a href="#snippet.isDraft">isDraft</a>": <var class="apiparam" translate="no">boolean</var>,
+    "<a href="#snippet.isAutoSynced">isAutoSynced</a>": <var class="apiparam" translate="no">boolean</var>,
+    "<a href="#snippet.status">status</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.failureReason">failureReason</a>": <var class="apiparam" translate="no">string</var>
+  }
+}</pre>
+                        </devsite-code>
+                  </section>
+                  <section id="properties">
+                        <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                        <p>The following table defines the properties that appear in this resource:</p>
+                        <table class="responsive properties" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th colspan="2">Properties</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="kind">
+                                          <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                Identifies the API resource's type. The value will be <code dir="ltr"
+                                                      translate="no">youtube#caption</code>.</td>
+                                    </tr>
+                                    <tr id="etag">
+                                          <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                The Etag of this resource.</td>
+                                    </tr>
+                                    <tr id="id">
+                                          <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the caption track.</td>
+                                    </tr>
+                                    <tr id="snippet">
+                                          <td><code dir="ltr" itemprop="property" translate="no">snippet</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">snippet</code> object contains basic
+                                                details about the caption.</td>
+                                    </tr>
+                                    <tr id="snippet.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the video associated with
+                                                the caption track.</td>
+                                    </tr>
+                                    <tr id="snippet.lastUpdated">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>lastUpdated</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">datetime</code><br />
+                                                The date and time when the caption track was last updated. The value is
+                                                specified in <a href="//www.w3.org/TR/NOTE-datetime">ISO 8601</a>
+                                                format.</td>
+                                    </tr>
+                                    <tr id="snippet.trackKind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>trackKind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The caption track's type.<br><br>Valid values for this property are:
+                                                <ul>
+                                                      <li><code dir="ltr" translate="no">ASR</code> – A caption track
+                                                            generated using automatic speech recognition.</li>
+                                                      <li><code dir="ltr" translate="no">forced</code> – A caption track
+                                                            that plays when no other track is selected in the player.
+                                                            For example, a video that shows aliens speaking in an alien
+                                                            language might have a forced caption track to only show
+                                                            subtitles for the alien language.</li>
+                                                      <li><code dir="ltr" translate="no">standard</code> – A regular
+                                                            caption track. This is the default value.</li>
+                                                </ul>
+                                                </br></br>
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.language">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>language</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The language of the caption track. The property value is a <a
+                                                      href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a>
+                                                language tag.</td>
+                                    </tr>
+                                    <tr id="snippet.name">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>name</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The name of the caption track. The name is intended to be visible to the
+                                                user as an option during playback. The maximum name length supported is
+                                                150 characters.</td>
+                                    </tr>
+                                    <tr id="snippet.audioTrackType">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>audioTrackType</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of audio track associated with the caption track.<br><br>Valid
+                                                values for this property are:
+                                                <ul>
+                                                      <li><code dir="ltr" translate="no">commentary</code> – The caption
+                                                            track corresponds to an alternate audio track that includes
+                                                            commentary, such as directory commentary.</li>
+                                                      <li><code dir="ltr" translate="no">descriptive</code> – The
+                                                            caption track corresponds to an alternate audio track that
+                                                            includes additional descriptive audio.</li>
+                                                      <li><code dir="ltr" translate="no">primary</code> – The caption
+                                                            track corresponds to the primary audio track for the video,
+                                                            which is the audio track normally associated with the video.
+                                                      </li>
+                                                      <li><code dir="ltr" translate="no">unknown</code> – This is the
+                                                            default value.</li>
+                                                </ul>
+                                                </br></br>
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.isCC">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>isCC</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">boolean</code><br />
+                                                Indicates whether the track contains closed captions for the deaf and
+                                                hard of hearing. The default value is <code dir="ltr"
+                                                      translate="no">false</code>.</td>
+                                    </tr>
+                                    <tr id="snippet.isLarge">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>isLarge</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">boolean</code><br />
+                                                Indicates whether the caption track uses large text for the
+                                                vision-impaired. The default value is <code dir="ltr"
+                                                      translate="no">false</code>.</td>
+                                    </tr>
+                                    <tr id="snippet.isEasyReader">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>isEasyReader</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">boolean</code><br />
+                                                Indicates whether caption track is formatted for "easy reader," meaning
+                                                it is at a third-grade level for language learners. The default value is
+                                                <code dir="ltr" translate="no">false</code>.</td>
+                                    </tr>
+                                    <tr id="snippet.isDraft">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>isDraft</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">boolean</code><br />
+                                                Indicates whether the caption track is a draft. If the value is <code
+                                                      dir="ltr" translate="no">true</code>, then the track is not
+                                                publicly visible. The default value is <code dir="ltr"
+                                                      translate="no">false</code>.</td>
+                                    </tr>
+                                    <tr id="snippet.isAutoSynced">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>isAutoSynced</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">boolean</code><br />
+                                                Indicates whether YouTube synchronized the caption track to the audio
+                                                track in the video. The value will be <code dir="ltr"
+                                                      translate="no">true</code> if a sync was explicitly requested when
+                                                the caption track was uploaded. For example, when calling the <code
+                                                      dir="ltr" translate="no">captions.insert</code> or <code dir="ltr"
+                                                      translate="no">captions.update</code> methods, you can set the
+                                                <code dir="ltr" translate="no">sync</code> parameter to <code dir="ltr"
+                                                      translate="no">true</code> to instruct YouTube to sync the
+                                                uploaded track to the video. If the value is <code dir="ltr"
+                                                      translate="no">false</code>, YouTube uses the time codes in the
+                                                uploaded caption track to determine when to display captions.</td>
+                                    </tr>
+                                    <tr id="snippet.status">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>status</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The caption track's status.<br><br>Valid values for this property are:
+                                                <ul>
+                                                      <li><code dir="ltr" translate="no">failed</code></li>
+                                                      <li><code dir="ltr" translate="no">serving</code></li>
+                                                      <li><code dir="ltr" translate="no">syncing</code></li>
+                                                </ul>
+                                                </br></br>
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.failureReason">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>failureReason</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The reason that YouTube failed to process the caption track. This
+                                                property is only present if the <code dir="ltr"
+                                                      translate="no"><a href="#state">state</a></code> property's value
+                                                is <code dir="ltr" translate="no">failed</code>.<br><br>Valid values for
+                                                this property are:
+                                                <ul>
+                                                      <li><code dir="ltr" translate="no">processingFailed</code> –
+                                                            YouTube failed to process the uploaded caption track.</li>
+                                                      <li><code dir="ltr" translate="no">unknownFormat</code> – The
+                                                            caption track's format was not recognized.</li>
+                                                      <li><code dir="ltr" translate="no">unsupportedFormat</code> – The
+                                                            caption track's format is not supported.</li>
+                                                </ul>
+                                                </br></br>
+                                          </td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

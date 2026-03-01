@@ -1,0 +1,156 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_L6">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Get Insights using the Facebook Video API from Meta</h1>
+              <p>This guide shows you how to get insights for a video that has been published on a Facebook Page.</p>
+              <p><a
+                  href="https://developers.facebook.com/docs/graph-api/reference/video/video_insights#reels-metrics">Learn
+                  more about Reels Insights</a></p>
+              <h2>Before You Start</h2>
+              <p>You will need:</p>
+              <ul>
+                <li>The <a href="/docs/permissions/reference/pages_read_engagement"><code>pages_read_engagement</code>
+                    Permission</a> </li>
+                <li>A Page access token requested from a person who can perform the <a
+                    href="/docs/pages/overview#tasks"><code>ANALYZE</code> task</a> on the Page</li>
+              </ul>
+              <h3>Limitations</h3>
+              <ul>
+                <li>Insights for Videos published on Facebook groups or users are not available.</li>
+                <li>A crossposted Video will have its own unique <code>&lt;VIDEO_ID&gt;</code> for each Page it was
+                  posted to.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Total Insights</h2>
+              <p>Send a <code>GET</code> request to the <code>/&lt;VIDEO_ID&gt;/video_insights</code> endpoint to get
+                total insights from all video posts associated with this video.</p>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+GET &lt;API_VERSION&gt;/&lt;VIDEO_ID&gt;/video_insights?access_token=&lt;PAGE_ACCESS_TOKEN&gt;"
+</pre>
+              <h4>EXample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">curl -X GET \
+ "https://graph.facebook.com/v20.0/323790578640877/video_insights?access_token=EAABkW..."</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "data": [
+    {
+      "name": "total_video_views",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 89
+        }
+      ],
+      "title": "Lifetime Total Video Views",
+      "description": "Lifetime: Total number of times your video was viewed for 3 seconds or viewed to the end, whichever came first. (Total Count)",
+      "id": "323790578640877/video_insights/total_video_views/lifetime"
+    },
+    {
+      "name": "total_video_views_unique",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 56
+        }
+      ],
+      "title": "Lifetime Unique Video Views",
+      "description": "Lifetime: Number of unique people who viewed your video for 3 seconds or viewed to the end, whichever came first. (Unique Users)",
+      "id": "323790578640877/video_insights/total_video_views_unique/lifetime"
+    },
+    {
+      "name": "total_video_views_autoplayed",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 23
+        }
+      ],
+      "title": "Lifetime Auto-Played Video Views",
+      "description": "Lifetime: Number of times your video started automatically playing and people viewed it for 3 seconds or viewed it to the end, whichever came first. (Total Count)",
+      "id": "323790578640877/video_insights/total_video_views_autoplayed/lifetime"
+    },
+    {
+      "name": "total_video_views_clicked_to_play",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 12
+        }
+      ],
+    }
+    ...
+  ]
+}   </pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Specific Insight Metrics</h2>
+              <p>Send a <code>GET</code> request to the <a
+                  href="/docs/graph-api/reference/video/video_insights/">VideoVideoInsights</a> endpoint with the
+                <code>metric</code> parameter and <a
+                  href="/docs/graph-api/reference/video/video_insights#metrics">specific metrics</a> you wish to
+                receive.
+              </p>
+              <pre class="_5s-8 prettyprint lang-http" style="">GET /&amp;lt;API_VERSION&gt;/&amp;lt;VIDEO_ID&gt;/video_insights
+  ?metric=total_video_views,total_video_views_unique
+  &amp;access_token=&amp;lt;PAGE_ACCESS_TOKEN&gt;"</pre>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl"
+                style="">curl -X GET \
+  "https://graph.facebook.com/v20.0/323790578640877/video_insights?metric=total_video_views,total_video_views_unique&amp;access_token=EAABkW..."</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "data": [
+    {
+      "name": "total_video_views",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 2206
+        }
+      ],
+      "title": "Lifetime Total Video Views",
+      "description": "Lifetime: Total number of times your video was viewed for 3 seconds or viewed to the end, whichever came first. (Total Count)",
+      "id": "323790578640877/video_insights/total_video_views/lifetime"
+    },
+    {
+      "name": "total_video_views_unique",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 6
+        }
+      ],
+      "title": "Lifetime Unique Video Views",
+      "description": "Lifetime: Number of unique people who viewed your video for 3 seconds or viewed to the end, whichever came first. (Unique Users)",
+      "id": "323790578640877/video_insights/total_video_views_unique/lifetime"
+    }
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Learn More</h2>
+              <ul>
+                <li><a href="/docs/graph-api/reference/video/video_insights/">Video Insights Reference guide</a></li>
+                <li>Get Video insights using the <a href="/docs/pages/insights">Pages API</a></li>
+                <li><a href="/docs/platforminsights/page">Page Platform Insights guide</a></li>
+                <li><a href="/docs/graph-api/reference/page/videos/">Pages Video Reference guide</a></li>
+                <li><a href="/docs/graph-api/reference/page/insights#videoviews">Pages Insights Reference guide</a></li>
+                <li><a href="/docs/graph-api/reference/v7.0/insights">Insights Reference guide</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,504 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+        <div class="_34yh" id="u_0_1_1Q">
+                <div class="_4cel"><span data-click-area="main">
+                                <div>
+                                        <div>
+                                                <div class="_57yz _57z1 _3-8p">
+                                                        <div class="_57y-">
+                                                                <p>
+                                                                        The following content is from the Meta App
+                                                                        Development documentation. Please refer to the
+                                                                        Development documentation to learn more about
+                                                                        the
+                                                                        <a href="https://developers.facebook.com/docs/development"
+                                                                                target="_blank">
+                                                                                Meta App Development process.
+                                                                        </a>
+                                                                </p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div>
+                                                <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                                                        <div class="_4-u3 _588p">
+                                                                <h1>Customize the Authenticate and request data from
+                                                                        users with Facebook Login Use Case</h1>
+                                                                <p>This document shows you how to customize the
+                                                                        <strong>Facebook Login Use Case</strong> use
+                                                                        case you added to your app during the <a
+                                                                                href="/docs/development/create-an-app/">app
+                                                                                creation process</a>.
+                                                                </p>
+                                                                <h2 id="customize">Customize use cases</h2>
+                                                                <div><span>
+                                                                                <h3>Permissions and features</h3>
+                                                                                <ol>
+                                                                                        <li>If you are not already on
+                                                                                                the <strong>Use
+                                                                                                        cases</strong>
+                                                                                                page of the dashboard,
+                                                                                                click <strong>Use
+                                                                                                        cases</strong>,
+                                                                                                or pencil icon, in the
+                                                                                                left-side menu. </li>
+                                                                                        <li>Click on a use case to view
+                                                                                                the permissions and
+                                                                                                features that are
+                                                                                                available, both required
+                                                                                                and optional, for that
+                                                                                                use case.</li>
+                                                                                        <li>Click the
+                                                                                                <strong>Add</strong>
+                                                                                                button to the right of
+                                                                                                each permission or
+                                                                                                feature you'd like to
+                                                                                                add. If, during
+                                                                                                development, you find
+                                                                                                that your app doesn't
+                                                                                                use the permission or
+                                                                                                feature, you can return
+                                                                                                here and remove it.
+                                                                                        </li>
+                                                                                        <li>Additional actions are
+                                                                                                available for certain
+                                                                                                permissions and
+                                                                                                features.
+
+                                                                                                <ul>
+                                                                                                        <li>To request a
+                                                                                                                higher
+                                                                                                                rate
+                                                                                                                limit
+                                                                                                                for the
+                                                                                                                Ads
+                                                                                                                Management
+                                                                                                                Standard
+                                                                                                                Access
+                                                                                                                feature,
+                                                                                                                click
+                                                                                                                the
+                                                                                                                <strong>Actions</strong>
+                                                                                                                button
+                                                                                                                and
+                                                                                                                select
+                                                                                                                <strong>Request
+                                                                                                                        higher
+                                                                                                                        limit</strong>.
+
+                                                                                                                <ul>
+                                                                                                                        <li>If you
+                                                                                                                                are
+                                                                                                                                ready
+                                                                                                                                to
+                                                                                                                                submit
+                                                                                                                                your
+                                                                                                                                app
+                                                                                                                                for
+                                                                                                                                App
+                                                                                                                                Review,
+                                                                                                                                continue
+                                                                                                                                to
+                                                                                                                                the
+                                                                                                                                <a
+                                                                                                                                        href="#review">App
+                                                                                                                                        Review
+                                                                                                                                        section</a>.
+                                                                                                                                If
+                                                                                                                                not,
+                                                                                                                                click
+                                                                                                                                <strong>Use
+                                                                                                                                        cases</strong>,
+                                                                                                                                or
+                                                                                                                                pencil
+                                                                                                                                icon,
+                                                                                                                                in
+                                                                                                                                the
+                                                                                                                                left-side
+                                                                                                                                menu
+                                                                                                                                to
+                                                                                                                                continue
+                                                                                                                                to
+                                                                                                                                customize
+                                                                                                                                your
+                                                                                                                                use
+                                                                                                                                cases.
+                                                                                                                        </li>
+                                                                                                                </ul>
+                                                                                                        </li>
+                                                                                                        <li>To increase
+                                                                                                                access
+                                                                                                                for the
+                                                                                                                <code>public_profile</code>
+                                                                                                                permission,
+                                                                                                                allow
+                                                                                                                your app
+                                                                                                                to serve
+                                                                                                                user who
+                                                                                                                don't
+                                                                                                                have a
+                                                                                                                role on
+                                                                                                                your app
+                                                                                                                or the
+                                                                                                                business
+                                                                                                                connected
+                                                                                                                to your
+                                                                                                                app,
+                                                                                                                click
+                                                                                                                the
+                                                                                                                <strong>Increase
+                                                                                                                        access</strong>
+                                                                                                                button.
+                                                                                                        </li>
+                                                                                                        <li>If, during
+                                                                                                                development,
+                                                                                                                you find
+                                                                                                                that
+                                                                                                                your app
+                                                                                                                doesn't
+                                                                                                                need a
+                                                                                                                higher
+                                                                                                                rate
+                                                                                                                limir or
+                                                                                                                increased
+                                                                                                                access
+                                                                                                                to
+                                                                                                                <code>public_profile</code>,
+                                                                                                                you can
+                                                                                                                return
+                                                                                                                here and
+                                                                                                                remove
+                                                                                                                it.
+                                                                                                        </li>
+                                                                                                </ul>
+                                                                                        </li>
+                                                                                </ol>
+                                                                        </span></div>
+                                                                <div>
+                                                                        <div class="_57-c">
+                                                                                <table class="_4-ss _5k9x">
+                                                                                        <thead>
+                                                                                                <th>Use Case Feature or
+                                                                                                        Permission</th>
+                                                                                                <th>Allowed Actions</th>
+                                                                                        </thead>
+                                                                                        <tbody class="_5m37"
+                                                                                                id="u_0_2_5p">
+                                                                                                <tr class="row_0">
+                                                                                                        <td>
+                                                                                                                <p><a href="/docs/permissions#email"><code>email</code></a>
+                                                                                                                </p>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                                <div><span>
+                                                                                                                                <p>Optional
+                                                                                                                                        for
+                                                                                                                                        all
+                                                                                                                                        use
+                                                                                                                                        cases.
+                                                                                                                                </p>
+                                                                                                                        </span>
+                                                                                                                </div>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                <tr class="row_1 _5m29">
+                                                                                                        <td>
+                                                                                                                <p><a href="/docs/permissions#public_profile"><code>public_profile</code></a>
+                                                                                                                </p>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                                <div><span>
+                                                                                                                                <p><strong>Required
+                                                                                                                                                for
+                                                                                                                                                all
+                                                                                                                                                use
+                                                                                                                                                cases</strong>.
+                                                                                                                                </p>
+                                                                                                                        </span>
+                                                                                                                </div>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                        </tbody>
+                                                                                </table>
+                                                                        </div>
+                                                                </div>
+                                                                <h4>Settings</h4>
+                                                                <p>Facebook Login allows you to control oAuth settings,
+                                                                        and add a deauthorization callback URL and
+                                                                        redirect URI validator.</p>
+                                                                <h4>Quickstart</h4>
+                                                                <p>The Facebook Login quickstart allows you to quickly
+                                                                        get the code to implement Facebook Login into
+                                                                        your app.</p>
+                                                                <div>
+
+
+                                                                        After you add a permission to your app, you can
+                                                                        see the status for that permission:
+                                                                        <ul class="uiList _4of _4kg">
+                                                                                <li>
+                                                                                        <div class="fcb">Ready for live
+                                                                                                mode – This permission
+                                                                                                has been approved in App
+                                                                                                Review and you can
+                                                                                                publish your app</div>
+                                                                                </li>
+                                                                                <li>
+                                                                                        <div class="fcb">Ready for
+                                                                                                testing – You can test
+                                                                                                API calls to endpoints
+                                                                                                that require this
+                                                                                                permission and complete
+                                                                                                App Review permission
+                                                                                                testing requirements
+                                                                                        </div>
+                                                                                </li>
+                                                                                <li>
+                                                                                        <div class="fcb">Verification
+                                                                                                required – This
+                                                                                                permission requires a
+                                                                                                verified Meta Business
+                                                                                                Account added to the app
+                                                                                        </div>
+                                                                                </li>
+                                                                        </ul>
+
+
+
+
+                                                                        You can also see the number of successful API
+                                                                        calls you have made to endpoints that require
+                                                                        each permission.
+
+
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                                                        <div class="_4-u3 _588p">
+                                                                <h2>Add more use cases</h2>
+                                                                <p>Click the <strong>Go back</strong> button in the
+                                                                        upper right or <strong>Use cases</strong> in the
+                                                                        left side menu to add more use cases to your
+                                                                        app.</p>
+                                                                <p>These are the use cases most commonly used with the
+                                                                        use case you chose when you created this app.
+                                                                </p>
+                                                                <div class="_57-c">
+                                                                        <table class="_4-ss _5k9x">
+                                                                                <thead>
+                                                                                        <th style="width:60%">Use case
+                                                                                        </th>
+                                                                                        <th>Available permissions to add
+                                                                                                and code to implement
+                                                                                        </th>
+                                                                                </thead>
+                                                                                <tbody class="_5m37" id="u_0_3_7n">
+                                                                                        <tr class="row_0">
+                                                                                                <td>
+                                                                                                        <p><strong>Use additional
+                                                                                                                        Facebook
+                                                                                                                        user
+                                                                                                                        data
+                                                                                                                        for
+                                                                                                                        personalization</strong>
+                                                                                                                –
+                                                                                                                Choose
+                                                                                                                data
+                                                                                                                permissions
+                                                                                                                to
+                                                                                                                personalize
+                                                                                                                the app
+                                                                                                                experience
+                                                                                                                for
+                                                                                                                users
+                                                                                                                logging
+                                                                                                                in with
+                                                                                                                their
+                                                                                                                Facebook
+                                                                                                                account.
+                                                                                                        </p>
+                                                                                                        <br />
+                                                                                                        <p><b>
+                                                                                                                        Only
+                                                                                                                        add
+                                                                                                                        permissions
+                                                                                                                        that
+                                                                                                                        your
+                                                                                                                        app
+                                                                                                                        will
+                                                                                                                        use.
+                                                                                                                </b></p>
+                                                                                                        <br />
+                                                                                                        <p>All of these
+                                                                                                                permissions
+                                                                                                                require
+                                                                                                                App
+                                                                                                                Review
+                                                                                                                before
+                                                                                                                you can
+                                                                                                                publish
+                                                                                                                your app
+                                                                                                                and go
+                                                                                                                live.
+                                                                                                        </p>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                        <p><code>user_age_range</code>
+                                                                                                        </p>
+                                                                                                        <code>user_birthday</code>
+                                                                                                        <p><code>user_friends</code>
+                                                                                                        </p>
+                                                                                                        <code>user_gender</code>
+                                                                                                        <p><code>user_hometown</code>
+                                                                                                        </p>
+                                                                                                        <code>user_likes</code>
+                                                                                                        <p><code>user_link</code>
+                                                                                                        </p>
+                                                                                                        <code>user_location</code>
+                                                                                                        <p><code>user_photos</code>
+                                                                                                        </p>
+                                                                                                        <code>user_posts</code>
+                                                                                                        <p><code>user_videos</code>
+                                                                                                        </p>
+                                                                                                </td>
+                                                                                        </tr>
+                                                                                        <tr class="row_1 _5m29">
+                                                                                                <td>
+                                                                                                        <p><strong>Track engagement
+                                                                                                                        with
+                                                                                                                        App
+                                                                                                                        Events</strong>
+                                                                                                                – Meta
+                                                                                                                App
+                                                                                                                Events
+                                                                                                                allows
+                                                                                                                your app
+                                                                                                                to
+                                                                                                                understand
+                                                                                                                how
+                                                                                                                people
+                                                                                                                engage
+                                                                                                                with
+                                                                                                                your
+                                                                                                                business
+                                                                                                                across,
+                                                                                                                devices,
+                                                                                                                platforms
+                                                                                                                and
+                                                                                                                websites.
+                                                                                                        </p>
+                                                                                                </td>
+                                                                                                <td><a href="https://developers.facebook.com/docs/app-events/overview/"
+                                                                                                                target="_blank">
+                                                                                                                Meta App
+                                                                                                                Events
+                                                                                                                <img alt=""
+                                                                                                                        class="img"
+                                                                                                                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=xlN7u98NCh9mVam6kDrmVA&amp;oh=00_Aftxv7otAzXIV9zuryZoj89MuPpBwvcU_OydudsxDmQmZA&amp;oe=69A0DBE2"
+                                                                                                                        width="10px" /></a>
+                                                                                                </td>
+                                                                                        </tr>
+                                                                                        <tr class="row_2">
+                                                                                                <td>
+                                                                                                        <p><strong>Get real-time
+                                                                                                                        notifications
+                                                                                                                        with
+                                                                                                                        Webhooks</strong>
+                                                                                                                – Get
+                                                                                                                automatic
+                                                                                                                HTML
+                                                                                                                notifications
+                                                                                                                when app
+                                                                                                                users
+                                                                                                                make
+                                                                                                                changes
+                                                                                                                related
+                                                                                                                to the
+                                                                                                                permissions
+                                                                                                                that
+                                                                                                                you've
+                                                                                                                added to
+                                                                                                                your
+                                                                                                                app.</p>
+                                                                                                </td>
+                                                                                                <td><a href="https://developers.facebook.com/docs/graph-api/webhooks/"
+                                                                                                                target="_blank">
+                                                                                                                Meta
+                                                                                                                Webhooks
+                                                                                                                <img alt=""
+                                                                                                                        class="img"
+                                                                                                                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=xlN7u98NCh9mVam6kDrmVA&amp;oh=00_Aftxv7otAzXIV9zuryZoj89MuPpBwvcU_OydudsxDmQmZA&amp;oe=69A0DBE2"
+                                                                                                                        width="10px" /></a>
+                                                                                                </td>
+                                                                                        </tr>
+                                                                                </tbody>
+                                                                        </table>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                                                        <div class="_4-u3 _588p">
+                                                                <h2>Next Steps</h2>
+                                                                <p>Now that you have successfully customized your
+                                                                        Facebook Login use case, let's <a
+                                                                                href="https://developers.facebook.com/docs/development/create-an-app/app-dashboard/basic-settings">update
+                                                                                the settings for your app</a> on the app
+                                                                        Dashboard.</p>
+                                                        </div>
+                                                </div>
+                                                <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                                                        <div class="_4-u3 _588p">
+                                                                <h2>See Also</h2>
+                                                                <p>To learn more about the concepts, endpoints, and
+                                                                        permissions mentioned in this document, please
+                                                                        visit the following guides:</p>
+                                                                <ul class="uiList _4of _4kg">
+                                                                        <li>
+                                                                                <div class="fcb"><a
+                                                                                                href="https://developers.facebook.com/docs/facebook-login"
+                                                                                                target="_blank">
+                                                                                                Facebook Login Overview
+                                                                                                <img alt="" class="img"
+                                                                                                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=xlN7u98NCh9mVam6kDrmVA&amp;oh=00_Aftxv7otAzXIV9zuryZoj89MuPpBwvcU_OydudsxDmQmZA&amp;oe=69A0DBE2"
+                                                                                                        width="10px" /></a>
+                                                                                </div>
+                                                                        </li>
+                                                                        <li>
+                                                                                <div class="fcb"><a
+                                                                                                href="https://developers.facebook.com/docs/app-events/overview/"
+                                                                                                target="_blank">
+                                                                                                Meta App Events Overview
+                                                                                                <img alt="" class="img"
+                                                                                                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=xlN7u98NCh9mVam6kDrmVA&amp;oh=00_Aftxv7otAzXIV9zuryZoj89MuPpBwvcU_OydudsxDmQmZA&amp;oe=69A0DBE2"
+                                                                                                        width="10px" /></a>
+                                                                                </div>
+                                                                        </li>
+                                                                        <li>
+                                                                                <div class="fcb"><a
+                                                                                                href="https://developers.facebook.com/docs/graph-api/webhooks/"
+                                                                                                target="_blank">
+                                                                                                Meta Webhooks Overview
+                                                                                                <img alt="" class="img"
+                                                                                                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=xlN7u98NCh9mVam6kDrmVA&amp;oh=00_Aftxv7otAzXIV9zuryZoj89MuPpBwvcU_OydudsxDmQmZA&amp;oe=69A0DBE2"
+                                                                                                        width="10px" /></a>
+                                                                                </div>
+                                                                        </li>
+                                                                        <li>
+                                                                                <div class="fcb"><a
+                                                                                                href="https://developers.facebook.com/docs/permissions"
+                                                                                                target="_blank">
+                                                                                                Permissions Reference
+                                                                                                <img alt="" class="img"
+                                                                                                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=xlN7u98NCh9mVam6kDrmVA&amp;oh=00_Aftxv7otAzXIV9zuryZoj89MuPpBwvcU_OydudsxDmQmZA&amp;oe=69A0DBE2"
+                                                                                                        width="10px" /></a>
+                                                                                </div>
+                                                                        </li>
+                                                                </ul>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </span>
+                </div>
+        </div>
+</div>

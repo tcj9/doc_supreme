@@ -1,0 +1,74 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_Ci">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Page</h1>
+              <p>Represents a Facebook Page.</p>
+              <p>This node allows you to:</p>
+              <ul>
+                <li>get the <a href="/docs/instagram-api/reference/ig-user">IG User</a> connected to a Facebook Page.
+                </li>
+              </ul>
+              <p>Available via Facebook Login for Business only.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="create">Creating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="read">Reading</h2>
+              <h3>Getting a Page's IG User</h3>
+              <p><code>GET /&lt;PAGE_ID&gt;?fields=instagram_business_account</code></p>
+              <p>Returns the <a href="/docs/instagram-api/reference/ig-user">IG User</a> connected to the Facebook Page.
+              </p>
+              <h4>Permissions</h4>
+              <div style="margin-bottom:10px"></div>
+              <p>A Facebook User <a href="/docs/instagram-api/overview#authentication">access token</a> with the
+                following permissions:</p>
+              <ul>
+                <li><code>instagram_basic</code></li>
+                <li><code>pages_show_list</code></li>
+              </ul>
+              <div><span>
+                  <p>If the token is from a User whose <strong>Page role was granted via the Business Manager</strong>,
+                    one of the following permissions is also required:</p>
+                  <ul>
+                    <li><code>ads_management</code></li>
+                    <li><code>ads_read</code></li>
+                  </ul>
+                </span></div>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">GET graph.facebook.com
+  /134895793791914?fields=instagram_business_account</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "instagram_business_account": {
+    "id": "17841405822304914"
+  },
+  "id": "134895793791914"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="update">Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="delete">Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

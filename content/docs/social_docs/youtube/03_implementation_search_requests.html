@@ -1,0 +1,195 @@
+<article class="devsite-article">
+        <h1 class="devsite-page-title" tabindex="-1">
+                Implementation: Search requests<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                                ack-key="AckCollectionsBookmarkTooltipDismiss"
+                                analytics-action-close="Callout Profile dismissed"
+                                analytics-action-show="Callout Profile displayed"
+                                analytics-category="Site-Wide Custom Events" analytics-label="Create Collection Callout"
+                                class="devsite-page-bookmark-tooltip nocontent" close-button-text="Got it"
+                                dismiss-button="true" dismiss-button-text="Dismiss" id="devsite-collections-dropdown">
+                                <devsite-bookmark></devsite-bookmark>
+                                <span slot="popout-heading">
+
+                                        Stay organized with collections
+                                </span>
+                                <span slot="popout-contents">
+
+                                        Save and categorize content based on your preferences.
+                                </span>
+                        </devsite-feature-tooltip></devsite-actions>
+        </h1>
+        <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+        <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+        </devsite-toc>
+        <div class="devsite-article-body clearfix">
+                <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+                        <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title"
+                                class="devsite-key-takeaways-panel-header" role="button" tabindex="0">
+                                <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+                                <div class="devsite-key-takeaways-panel-title">
+                                        <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI"
+                                                id="key-takeaways-panel-title">Page Summary</h2>
+                                </div>
+                                <span aria-hidden="true"
+                                        class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+                                </img>
+                        </div>
+                        <div class="devsite-key-takeaways-panel-content">
+                                <devsite-feedback bucket="8963846920012181156" disable-product-feedback=""
+                                        product-id="5123748">
+                                        <button aria-label="Report Key Takeaways!"
+                                                class="button-flat button-primary devsite-key-takeaways-report-button"
+                                                data-title="Report Key Takeaways!">
+                                                <span aria-label="Report Key Takeaways!"
+                                                        class="material-icons">outlined_flag</span>
+                                        </button>
+                                </devsite-feedback>
+                                <ul class="devsite-key-takeaways-panel-list">
+                                        <li>
+                                                <p>This content demonstrates various search requests using the v3 API's
+                                                        <code>search.list</code> method for finding different types of
+                                                        content.</p>
+                                        </li>
+                                        <li>
+                                                <p>You can filter search results to include only videos, playlists, or
+                                                        channels by specifying the <code>type</code> parameter in the
+                                                        API request.</p>
+                                        </li>
+                                        <li>
+                                                <p>The <code>order</code>, <code>q</code>, and
+                                                        <code>videoDefinition</code> parameters are used to refine video
+                                                        searches, as seen with the "skateboarding dog" example, allowing
+                                                        specification of search order, search query, and video
+                                                        definition.</p>
+                                        </li>
+                                        <li>
+                                                <p>Search results can be tailored to specific languages using the
+                                                        <code>relevanceLanguage</code> parameter, enabling targeted
+                                                        content discovery.</p>
+                                        </li>
+                                        <li>
+                                                <p>The <code>forDeveloper</code> parameter allows searching for videos
+                                                        uploaded through the developer's app, utilizing the developer's
+                                                        project number, but not within the API's Explorer.</p>
+                                        </li>
+                                </ul>
+                        </div>
+                </devsite-key-takeaways-panel>
+                <p>The following examples demonstrate how to complete several different types of search requests in the
+                        v3 API.</p>
+                <h2 data-text="Videos" id="search-videos" tabindex="-1">Videos</h2>
+                <div style="padding-left: 25px">
+                        <p>This example calls the <code dir="ltr"
+                                        translate="no"><a href="/youtube/v3/docs/search/list">search.list</a></code>
+                                method to find the most viewed, high-definition (HD) videos associated with the query
+                                "skateboarding dog." The query sets the <code dir="ltr" translate="no">order</code>,
+                                <code dir="ltr" translate="no">part</code>, <code dir="ltr" translate="no">q</code>,
+                                <code dir="ltr" translate="no">type</code>, and <code dir="ltr"
+                                        translate="no">videoDefinition</code> parameters.</p>
+                        <div></div><devsite-code>
+                                <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?part=snippet&amp;order=viewCount&amp;q=skateboarding+dog&amp;type=video&amp;videoDefinition=high">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?
+        part=snippet
+        &amp;order=viewCount
+        &amp;q=skateboarding+dog
+        &amp;type=video
+        &amp;videoDefinition=high</a></pre>
+                        </devsite-code>
+                        <p>See the <code dir="ltr"
+                                        translate="no"><a href="/youtube/v3/docs/search/list#usage">search.list</a></code>
+                                method's documentation for code samples.</p>
+                </div>
+                <h2 data-text="Playlists" id="search-playlists" tabindex="-1">Playlists</h2>
+                <div style="padding-left: 25px">
+                        <p>This example shows how to find playlists matching the query term "GoogleDevelopers." It calls
+                                the <code dir="ltr"
+                                        translate="no"><a href="/youtube/v3/docs/search/list">search.list</a></code>
+                                method and sets the <code dir="ltr"
+                                        translate="no"><a href="/youtube/v3/docs/search/list#type">type</a></code>
+                                parameter's value to <code dir="ltr" translate="no">playlist</code> so that the result
+                                set only includes playlists.
+                        <div></div><devsite-code>
+                                <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?part=snippet&amp;q=GoogleDevelopers&amp;type=playlist">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?
+        part=snippet
+        &amp;q=GoogleDevelopers
+        &amp;type=playlist</a></pre>
+                        </devsite-code>
+                        </p>
+                </div>
+                <h2 data-text="Channels" id="search-channels" tabindex="-1">Channels</h2>
+                <div style="padding-left: 25px">
+                        <p>This example shows how to find channels matching the query term "travel." It calls the <code
+                                        dir="ltr"
+                                        translate="no"><a href="/youtube/v3/docs/search/list">search.list</a></code>
+                                method and sets the <code dir="ltr"
+                                        translate="no"><a href="/youtube/v3/docs/search/list#type">type</a></code>
+                                parameter's value to <code dir="ltr" translate="no">channel</code> so that the result
+                                set only includes channels.
+                        <div></div><devsite-code>
+                                <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?part=snippet&amp;q=travel&amp;type=channel">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?
+        part=snippet
+        &amp;q=travel
+        &amp;type=channel</a></pre>
+                        </devsite-code>
+                        </p>
+                </div>
+                <h2 data-text="Results relevant to a specific language" id="search-relevance-language" tabindex="-1">
+                        Results relevant to a specific language</h2>
+                <div style="padding-left: 25px">
+                        <p>This example calls the <code dir="ltr"
+                                        translate="no"><a href="/youtube/v3/docs/search/list">search.list</a></code>
+                                method to find search results that are most relevant to a specific language. The example
+                                shows that the query term is <b>marine</b> (<code dir="ltr"
+                                        translate="no">q=marine</code>) and that the API response should contain results
+                                most relevant to the French language (<code dir="ltr"
+                                        translate="no">relevanceLanguage=fr</code>).</p>
+                        <div></div><devsite-code>
+                                <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?part=snippet&amp;q=marine&amp;relevanceLanguage=fr">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?
+        part=snippet
+        &amp;q=marine
+        &amp;relevanceLanguage=fr</a></pre>
+                        </devsite-code>
+                        <p>Note that the request does not set a value for the <code dir="ltr" translate="no">type</code>
+                                parameter, which means each search result could reference a video, playlist, or channel.
+                        </p>
+                </div>
+                <h2 data-text="Videos uploaded via the developer's app or website"
+                        id="videos-uploaded-via-the-developers-app-or-website" tabindex="-1">Videos uploaded via the
+                        developer's app or website</h2>
+                <div style="padding-left: 25px">
+                        <p>This example shows how to use the <code dir="ltr"
+                                        translate="no"><a href="/youtube/v3/docs/search/list#forDeveloper">forDeveloper</a></code>
+                                parameter to restrict a search to only retrieve videos uploaded via the developer's
+                                application or website. This parameter can be used in conjunction with optional search
+                                parameters, like the <code dir="ltr" translate="no">q</code> parameter.</p>
+                        <p class="note"><b>Note:</b> This query does not actually return results in the APIs Explorer
+                                because the APIs Explorer doesn't support video uploads. You can run this query for your
+                                own application outside of the APIs Explorer, but you can't get results for <i>your</i>
+                                application using the APIs Explorer.</p>
+                        <p>Each uploaded video is automatically tagged with the project number that is associated with
+                                the developer's application in the <a
+                                        href="https://console.developers.google.com/">Google API Console</a>.</p>
+                        <p>When a search request subsequently sets the <code dir="ltr"
+                                        translate="no">forDeveloper</code> parameter to true, the API service uses the
+                                request's authorization credentials to identify the developer. Thus, a developer can
+                                restrict results to videos uploaded through the developer's own app or website but not
+                                to videos uploaded through other apps or sites.</p>
+                        <div></div><devsite-code>
+                                <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?part=snippet&amp;q=fun&amp;forDeveloper=true">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?
+        part=snippet
+        &amp;q=fun
+        &amp;forDeveloper=true</a></pre>
+                        </devsite-code>
+                </div>
+                <devsite-recommendations display="in-page" hidden="" yield="">
+                </devsite-recommendations>
+                <devsite-thumb-rating position="footer">
+                </devsite-thumb-rating>
+                <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+                <div class="devsite-floating-action-buttons"></div>
+        </div>
+</article>

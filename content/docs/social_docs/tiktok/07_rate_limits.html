@@ -1,0 +1,81 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="rate_limits_on_api_requests">Rate Limits on API Requests</h1>
+        <p style="text-align:left">TikTok API limits the number of requests you can send in a given timeframe. Limits
+            for each API are set and enforced separately. Default limits are provided below. </p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>API</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Limit</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">/v2/user/info/</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">600</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">/v2/video/query/</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">600</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">/v2/video/list/</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">600</p>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:left">Request rate calculation is based on a one minute sliding window. If the number of
+            requests exceeds the threshold, new requests will be throttled and a response will be returned with HTTP
+            status <code>429</code> and error code <code>rate_limit_exceeded</code>.</p>
+        <p style="text-align:left">If your application needs higher limits, please contact us using our <style
+                data-emotion="css ap4ivw">
+                .css-ap4ivw {
+                    font-size: inherit;
+                    color: var(--ui-text-primary-display);
+                }
+
+                .css-ap4ivw *:hover {
+                    -webkit-text-decoration: none !important;
+                    text-decoration: none !important;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+            </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/support/"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">Support Page</span></a>. We will review your request. If
+            approved, rate limits will be increased.</p><br />
+    </div>
+</div>

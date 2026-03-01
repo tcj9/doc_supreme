@@ -1,0 +1,197 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_Du">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1>Enabling HTTPS</h1>
+                            <p>The HTTPS protocol provides greater security for your websites that use Facebook Login.
+                                By encrypting communications, it safeguards the privacy and integrity of the information
+                                exchanged.</p>
+                            <h3>Reasons to Enable HTTPS</h3>
+                            <ul>
+                                <li>
+                                    <p>Using HTTPS for your site is often free, <a data-lynx-mode="hover"
+                                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fistlsfastyet.com%2F&amp;h=AT0sS6EECAHhDqB7K3QeiM3uOIsnzwCp2ljyMEqvb4BD_8x4g6k_cxAu4u2WLGeoZi_BOxehTOBvXQtqw8dVVHvE3Eb1WPSkHi901vzc3wOWa0lBkntldlNya6L2XXJER2Gs-EjqqmVDJDbQTUPcxQ"
+                                            rel="nofollow" target="_blank">fast</a> and can even <a
+                                            data-lynx-mode="hover"
+                                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwebmasters.googleblog.com%2F2014%2F08%2Fhttps-as-ranking-signal.html&amp;h=AT0oxsPSjNZOQioLF11CPE6NT3z4GKMKpitEs3HMs-DyC37s6tx8YGQvI7ZfW918nFNIlwnvv-wwE4LqJdIv9N3MELfL16PXsCISk6P-EjZwrL6V7RE79zHG3j7f1R-GAl2tGWa_qVVxY-nAHaoBiA"
+                                            rel="nofollow" target="_blank">boost your search engine rankings</a>.</p>
+                                </li>
+                                <li>
+                                    <p><a data-lynx-mode="hover"
+                                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fblog.chromium.org%2F2018%2F02%2Fa-secure-web-is-here-to-stay.html&amp;h=AT22Hx2Po6A3EsocGjfBDoq2cZ15X4QLoKks29oM6Wx5hM0OzalcHS1SOuQ_PIx9oNfVkuds7ILhg2odtTCH4R8UiYkGavpBkJrASHecZF9D8xzVg6b2FlupcvDpqph-kZCoVMLr8NJWqhrD8YEZaw"
+                                            rel="nofollow" target="_blank">Google Chrome marks sites without HTTPS as
+                                            "Not secure."</a> Upgrading to HTTPS is an important step in establishing
+                                        and maintaining customer trust.</p>
+                                </li>
+                                <li>
+                                    <p>Facebook will soon require all uses of Facebook Login on the web, including API
+                                        calls with our JavaScript SDK, to happen exclusively from pages served over
+                                        HTTPS. This protects user access tokens from disclosure on the network, keeping
+                                        people's data and your application's authenticated sessions more secure.</p>
+                                </li>
+                            </ul>
+                            <h3>How to Enable HTTPS</h3>
+                            <ol>
+                                <li>
+                                    <p>To enable HTTPS, use a <a href="#recommended-certificate-authority">certificate
+                                            authority</a> to get a certificate identifying your website.</p>
+                                </li>
+                                <li>
+                                    <p>Install that certificate on your web server and configure TLS. There are number
+                                        of free tools available for <a
+                                            href="#popular-web-hosting-providers-and-platforms">popular web hosting
+                                            providers and platforms</a> that can automate most or all of this process in
+                                        many common situations.</p>
+                                </li>
+                                <li>
+                                    <p>After you've enabled HTTPS for your site, you'll need to test and make sure
+                                        everything works as expected. The <a href="#upgrade-insecure-requests">Upgrade
+                                            Insecure Requests</a> HTTP header can you help automatically fix the most
+                                        common issues encountered during an upgrade.</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Recommended Certificate Authority</h2>
+                            <p><a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fletsencrypt.org%2F&amp;h=AT02ijVH6E4BzqSF-50pE1nfTWkOQ4zpXrDNSDNbMrI6kObPKfcNHdbQAjEPb7Z9FbrBqylGwaQB90NDgX3J4FRpVK4XfKHwUuADYgOnIl-7_WJ0G6XQk4vyMwY7MO_r3tBZ9MCmjm-dy_Myz5l1ig"
+                                    rel="nofollow" target="_blank">Let's Encrypt</a> is a free, automated and open
+                                certificate authority recommended and supported by Facebook.</p>
+                            <h3>For Web Hosting Services</h3>
+                            <p>Let's Encrypt integrates with more than 100 web hosting providers. If you don't see your
+                                provider listed below, <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fcommunity.letsencrypt.org%2Ft%2Fweb-hosting-who-support-lets-encrypt%2F6920&amp;h=AT0WUlic8TlH0x-A1Njo91_FBLVSjlXnSptbb9ZgwUsJHyr9DxgiflauPyRN2bzZwmjG8y2ns8pRDpP_7j8kvh7TJuwWKkSvZCcnA5a-dlT3_x8n6RJ-VNpaB76rb3ik3StHHwKZvj0e76T54sLqRg"
+                                    rel="nofollow" target="_blank">check to see if your provider supports Let's
+                                    Encrypt</a>. If you have shell access to your server, you can usually follow the
+                                steps for using Let's Encrypt for self-hosted websites, even if you don't find your
+                                hosting provider listed on this page.</p>
+                            <h3>For Self-Hosted Websites</h3>
+                            <p>If you host your own website, Let's Encrypt provides <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fletsencrypt.org%2Fgetting-started%2F&amp;h=AT1akpNa10scs2Nrd1hLGkgeo5xSkrpnDm5wCfFQ7tDo5trVgOsDB5SsKZF6KvuDnJhFf17h2_a5lkPTGh7moZazFrkBPIjPcqc-qIOcJ3e7W-X4qqHNCVjS2Eu4nziCJDudaZOIABhQRaKbI65zBA"
+                                    rel="nofollow" target="_blank">automated tools to obtain and install a
+                                    certificate</a> for a variety of operating systems and web server software. If
+                                you're configuring your own web server, a useful tool is <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fmozilla.github.io%2Fserver-side-tls%2Fssl-config-generator%2F&amp;h=AT0WYGGiyOQoHn4B4n95AGVKbVc76CkpCldOzztEBfnk5qiIpyZpehbh9BV-fAw0W7d4X6p3VvN3t2Qf8agfEvruWXgzEm6TQY8hl3RSA2KW1VmkvPbIDrGbwpxWHvcuXr7M9xBLefxKJB0BnK0jbQ"
+                                    rel="nofollow" target="_blank">Mozilla's SSL Configuration Generator</a>.</p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Popular Web Hosting Providers and Platforms</h2>
+                            <p>If you're deploying your application with a cloud hosting provider, many provide support
+                                for HTTPS as part of their core service offerings. You can often enable it through the
+                                administrative tools you're already using.</p>
+                            <p>Here are links for some of the most popular hosting providers offering integrated
+                                support.</p>
+                            <h3>Amazon Web Services</h3>
+                            <p>The <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Faws.amazon.com%2Fcertificate-manager%2F&amp;h=AT1ai3uVDYi0wMQ0ivx6JLwNdoGGI9wtBmpVj5ANNfU6aEM4QJv89Fk4QlLK7A041ROArO_AoGrI1YEHWE0JBvczEsvkkpR8EIp1wra0OUnF4Ct2TY2aKeN-7ilr0oz_Od-uh-6CDbC2_ZUEFhTLfQ"
+                                    rel="nofollow" target="_blank">AWS Certificate Manager</a> provides free and
+                                integrated management and deployment of SSL/TLS certificates for AWS resources such as
+                                Elastic Load Balancers, Amazon CloudFront distributions and more.</p>
+                            <h3>Microsoft Azure</h3>
+                            <p>The Azure Portal has <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fapp-service%2Fweb-sites-purchase-ssl-web-site&amp;h=AT2mnOjN6z1upWt2KPfcRq5bOjmsUcFCqfLtURC2AVFO3ZC-AOocRcno3T1kcSvVagrG5gsN7TQP41UAhRo8J-BUdsbkiX5-ESlSDIOK7QvgifkuKVLYU0ljukq-90QVz9M1Waoj49arsLBd0-x1JYcHczFEWc6Xs8s"
+                                    rel="nofollow" target="_blank">built-in support for purchasing and installing a
+                                    commercial certificate</a>. It's also possible to use an <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.hanselman.com%2Fblog%2FSecuringAnAzureAppServiceWebsiteUnderSSLInMinutesWithLetsEncrypt.aspx&amp;h=AT3hZLYvDEP7z1QAxz6E2sHKdrgh29PK5wqifoL1ZyMrPOnaJy4olkJ-qhf6jdI4I6bqh_owcAu-92BqE0IjqRgmabjrWNn9wasvmy_61pLsMxQfqCUZeIuc3pzGfB6p4Vqm3k6_MX9kgC0QUgkK8A"
+                                    rel="nofollow" target="_blank">automatically renewing, free certificate from Let's
+                                    Encrypt</a> with an unofficial site extension.</p>
+                            <h3>IBM Cloud</h3>
+                            <p>The <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.ibm.com%2Fblogs%2Fbluemix%2F2017%2F12%2Fintroducing-ibm-cloud-certificate-manager-manage-ssltls-certificates-apps%2F&amp;h=AT3ErRFclmTr2I4DI25fnTVD4kZJIT3zQk0M0k19IjHXd7x-zPAY8j8gUWnuW0RGT39Fu6nYO_7DuVBPti08Z2967pyxVObwc6kg2lQUfm2QGMdFMbf4MqX-PXjSuJJNOAaLC2uYu0_kr3bD9BYuNg"
+                                    rel="nofollow" target="_blank">IBM Cloud Certificate Manager</a> provides a free
+                                tool to manage many of the configuration tasks associated with certificate management
+                                and service configuration. You'll need to obtain your own certificates for custom
+                                domains from a certificate authority such as <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fletsencrypt.org%2F&amp;h=AT0CPq647tHr3I-dpJNM-Sv1v0Ozw-TWZpGqvw9w0ElqFbAsuJKg0YU-iVnF0udstPeOM4RVD7IRDClee_7IDFSFYlENCTmNMcKlOhJjMBJ9l32zbKM99QwhvDhxQEsZVlZ6MXxWjhbRTPpJq0FCXw"
+                                    rel="nofollow" target="_blank">Let's Encrypt</a>.</p>
+                            <h3>Google App Engine</h3>
+                            <p>Google App Engine offers HTTPS support with globally distributed and load-balanced
+                                endpoints and can be enabled automatically with free, managed certificates. <a
+                                    data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fcloud.google.com%2Fappengine%2Fdocs%2Fstandard%2Fpython%2Fsecuring-custom-domains-with-ssl&amp;h=AT1CgvdK2zLdOVfL8KgLeeTalslEQ8HRbZ93hiijqcyJgDisy-VDGq76_Iy02iceH1f5axfAKxTcCtzTw0PX6i14o1F9E9dU9H5SiQkM5aS7RiCko0hKesJzPOTMuQwrHm6Winf2FX-1cgaC9Qrn3w"
+                                    rel="nofollow" target="_blank">Learn how to enable HTTPS for your custom domains in
+                                    Google App Engine</a>.</p>
+                            <h3>Alibaba Cloud</h3>
+                            <p>The <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.alibabacloud.com%2Fproduct%2Fcertificates&amp;h=AT0gILbn5ewLxHWX-LFCcAOgOB8TB--cYb6to9XXAJ3jVJMrvplhz61D21BEO_anBi06S4QLWvEEOB-zFNdZVf3vw54_DmQ50COi5AHspLNCMw5dM4k4SaolrORdZQahL8-IbSGVkhnX9NiYEAFAAQ"
+                                    rel="nofollow" target="_blank">Alibaba Cloud SSL Certificates Service</a> allows
+                                customers to directly apply, purchase and manage SSL certificates on Alibaba Cloud.</p>
+                            <h3>Heroku</h3>
+                            <p><a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fdevcenter.heroku.com%2Farticles%2Fautomated-certificate-management&amp;h=AT3KRVagpzfc7VhN8noj__TS4Oj7daVqqWzNal7PN4sPpXteCe-z4W62sbpJKW8zHSVypwi7_lTHEPTsv1l-J_oQgUbysVLvTKQ2cptNqFlGdoJGeayd3ylmVrJavSWdCN1jq5vt7j3iRei-lm4wY6ZBDxkp-KfB51k"
+                                    rel="nofollow" target="_blank">Automated Certificate Management</a> automatically
+                                manages TLS certificates for apps with Hobby and Professional dynos on the Common
+                                Runtime, and for apps in Private Spaces that enable the feature.</p>
+                            <h3>Other platforms:</h3>
+                            <ul>
+                                <li><a data-lynx-mode="hover"
+                                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.shopify.com%2Fen%2Fmanual%2Fdomains%2Fssl&amp;h=AT2Twk-a80UZomoGPDYXA8cQ_R875dERN_mC5PuZIel4GHQwEWfC8xTIJ_uYCF2xkWoRh85xbilzpCVMnCh2n9Od-nkF5irMP8VXig_RmuNMIvD5Vsqcuhx6vFZ5EO0mdB4Y9tauUd7U-FZTRauN7Q"
+                                        rel="nofollow" target="_blank">Shopify</a></li>
+                                <li><a data-lynx-mode="hover"
+                                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fsupport.squarespace.com%2Fhc%2Fen-us%2Farticles%2F205815898-Squarespace-and-SSL&amp;h=AT2H7nBfEpxUJFvI75S71Fpw2ZErAYpTmifwpHhE_QOG3ozmSYmNsSsS3RVzWSDn7_FuedFkpJQSON2GKJnwcyMJnqhRaj_O0qsE-gags8yDscE54fcMoMGLt3Hu5RW3unrqybcQrw5AuEnV338oog"
+                                        rel="nofollow" target="_blank">Squarespace</a></li>
+                                <li><a data-lynx-mode="hover"
+                                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fsupport.wix.com%2Fen%2Farticle%2Fenabling-https-for-your-wix-site&amp;h=AT1iZO-WZ03qkcHtdL3wORovM0rR8_hMRCUHVygaxaeyNI9bmqQuHFntZME-IqmywNkIQWgDXPe_JQHp_VqsmEVSF9-ycf_tUMUFwQ1W1xXDQH-Yx3-988pgtzqJePbZCCl99IGMnQBzJ3gVxQnnnw"
+                                        rel="nofollow" target="_blank">Wix</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Enabling HTTPS through a CDN</h2>
+                            <p>If you're using a Content Delivery Network (CDN), they may have managed offerings to
+                                assist you in deploying HTTPS, such as <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.cloudflare.com%2Fssl%2F&amp;h=AT28evnVii8M4OuKcEYTZ2cCdoa0dzAQHJ3OzRDxchnYx0poTX6HApmK2k8_L43g3v_Xz0X88kc17K8SP5PYZ_5OlkyWbxOnIMG-N-Ro8KDtGLbiLGsrQ4pdR1FaEjcBfnBrCf90omw7980M2XBRJQ"
+                                    rel="nofollow" target="_blank">Cloudflare's one-click SSL</a> or <a
+                                    data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.akamai.com%2Fus%2Fen%2Fsolutions%2Fintelligent-platform%2Fsecure-cdn.jsp&amp;h=AT29FJOmJrHfmV-TKz3OCoJMpRYqzl1ptNei7_bft30UyqILQGhgUeForLpz22W7fxa81bnhfv_min_fqn0pB07VVY09SUrBI-BFfzPpko85RMLgamO6bj1_IkLuaCc3IVw5B_lAMT03aDGACbwXCg"
+                                    rel="nofollow" target="_blank">Akamai's secure CDN</a>.</p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="upgrade-insecure-requests">Testing Your Site and Fixing Common Issues</h2>
+                            <p>For a page to be secure, all the parts that make it up must load over HTTPS. If your site
+                                doesn't work or the browser is showing warnings after installing your certificate and
+                                configuring your web host to support HTTPS, you probably have <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fdevelopers.google.com%2Fweb%2Ffundamentals%2Fsecurity%2Fprevent-mixed-content%2Fwhat-is-mixed-content&amp;h=AT1XM3JxuafG6jaOVmQWMQKsNVg3KSBFBh_4Ztoqpr4LEiReWidm2KfEHcc2h4jLyhYDGagxEthGm6xX6SVXINl2bx4Fr7FEBII5wZJMAFpDJl4_lYemsRJW7Yc8ykMu70fBSdlBLfyp0gB5-JBApQ"
+                                    rel="nofollow" target="_blank">mixed content</a>. This happens when a secure page
+                                tries to load insecure things. For example, from an HTTPS page, browsers display a
+                                warning when loading media like
+                                <code>&lt;img src="http://example.com/test.png"&gt;</code>, and will completely block
+                                scripts and other active content loaded insecurely, such as
+                                <code>&lt;script src="http://example.com/sdk.js"&gt;</code>.
+                            </p>
+                            <p>There are a few ways to fix this, such as using a script or a rewrite rule to update link
+                                paths across your site. But the easiest fix is to use the <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.w3.org%2FTR%2Fupgrade-insecure-requests%2F&amp;h=AT0lPsqdwD8_mvuNN4UfdHMzLpS8NhO-fhOGQZWM650cDX9J5jfHwPbXra0LtLMPThoZqyNT-iY85Mwr_T2EHiYc5HyF5x8rqntm4K5hUWBssT-lfozMJvdGTxLqbJOMijdMog3n9cpqZTsmMk3JbA"
+                                    rel="nofollow" target="_blank">upgrade insecure requests</a> feature of Content
+                                Security Policy.</p>
+                            <p>You can do this by setting the following HTTP header:</p>
+                            <pre class="prettyprint"><code class="language-Content">-Security-Policy: upgrade-insecure-requests```
+
+Or by adding the following tag to the ```&lt;head&gt;``` of your HTML resources:
+</code></pre>
+                            <p>```</p>
+                            <p>The web browser will automatically attempt to request all resources in the document
+                                securely. You should still test your site after applying this directive, in case some
+                                resources you depend on are not available over HTTPS and fail to load.</p>
+                            <p>If you're using a CDN service to upgrade your site to HTTPS, it may automatically provide
+                                link rewriting services to avoid mixed content and other issues. If modifying your site
+                                is difficult for your business, a CDN service like <a data-lynx-mode="hover"
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.cloudflare.com%2Fssl%2F&amp;h=AT3StGZ7bvmYoRyAQpzGo1smCIr7pNo2tnqeyDGs9Xo2Fblhnj258b3Qod4_D2e4LmU8yOkTo5LGydBhG10BK11xjLVnbP0wvaD5M0IOH3VQ779NiR25tl7z08gzuMnps9vcEqbSMnMP4DlRm190ew"
+                                    rel="nofollow" target="_blank">Cloudflare's one-click SSL</a> may be a
+                                cost-effective way for you to deploy HTTPS with little technical expertise required.</p>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

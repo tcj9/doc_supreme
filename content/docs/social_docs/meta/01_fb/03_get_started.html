@@ -1,0 +1,274 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_KU">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Get Started</h1>
+              <p>This document explains how to successfully call the Pages API to post to your Page.</p>
+              <h2>Before You Start</h2>
+              <p>You will need the following:</p>
+              <ul>
+                <li>A Facebook Page, this can be an unpublished or published Page on which you can perform the
+                  <code>CREATE_CONTENT</code> task.
+                </li>
+                <li>A Page access token for the Page</li>
+                <li>The following permissions:
+
+                  <ul>
+                    <li><code>pages_manage_metadata</code></li>
+                    <li><code>pages_manage_posts</code></li>
+                    <li><code>pages_manage_read_engagement</code></li>
+                    <li><code>pages_show_list</code></li>
+                  </ul>
+                </li>
+              </ul>
+              <h3>Best Practices</h3>
+              <div>
+                <p>
+                  When testing an API call, you can include the <code>access_token</code> parameter set to your access
+                  token. However, when making secure calls from your app, use the <a
+                    href="https://developers.facebook.com/docs/facebook-login/guides/access-tokens#portabletokens"
+                    target="_blank">access token class.</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 1. Get Your Page ID</h2>
+              <p>To get a list of IDs and Page access tokens for Facebook Pages on which you can perform a task, send a
+                <code>GET</code> request to <code>/user_id/accounts</code> endpoint where <code>user_id</code> is your
+                user ID.
+              </p>
+              <h4>Example Request</h4>
+              <i>Formatted for readability. Replace <b>bold, italics values</b>, such as <b>page_id</b>, with your
+                values.</i>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>user_id</i></b>/accounts?access_token=<b><i>user_access_token</i></b>"
+</pre>
+              <p>On success, your app receives the following JSON response that includes an array of objects. Each
+                object contains information about a specific Page including the name, ID, a short-lived Page access
+                token, tasks you can perform on the Page, and more:</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "data": [
+    {
+      "access_token": "<b><i>page_access_token</i></b>",
+      "category": "Internet Company",
+      "category_list": [
+        {
+          "id": "2256",
+          "name": "Internet Company"
+        }
+      ],
+      "name": "Name of this Page",
+      "id": "<b><i>page_id</i></b>",
+      "tasks": [
+        "ANALYZE",
+        "ADVERTISE",
+        "MODERATE",
+        "CREATE_CONTENT"
+      ]
+    },
+...
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="post">Step 2. Publish a post</h2>
+              <p>To publish a post, send a <code>POST</code> request to the <code>/page_id/feed</code> endpoint, where
+                <code>page_id</code> is the ID for the Page you are publishing to, with the <code>message</code>
+                parameter set to your message content and the <code>access_token</code> parameter set to the Page access
+                token:
+              </p>
+              <h4>Example Request</h4>
+              <i>Formatted for readability. Replace <b>bold, italics values</b>, such as <b>page_id</b>, with your
+                values.</i>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page_id</i></b>/feed" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "message":"<b><i>your_message_text</i></b>",
+           "access_token":"<b><i>page_access_token</i></b>",
+         }'</pre>
+              <p>Your post will be published immediately.</p>
+              <p>On success, your app receives the following JSON response with the ID for the post:</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id": "<b><i>page_post_id</i></b>" 
+}
+</pre>
+              <p>
+                Visit your
+                <a href="https://www.facebook.com/" target="_blank">
+                  Facebook Page
+                  <img alt="" class="img"
+                    src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                    width="10px" /></a>
+                to view the post.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 3. Verify Your Post</h2>
+              <p>To verify that the post was published to your Page, send a <code>GET</code> request to the
+                <code>/page_id/feed</code> endpoint:
+              </p>
+              <h4>Example Request</h4>
+              <i>Formatted for readability. Replace <b>bold, italics values</b>, such as <b>page_id</b>, with your
+                values.</i>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+      curl -i -X GET "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page_id</i></b>/feed?access_token=<b><i>page_access_token</i></b>"
+</pre>
+              <p>On success, your app will receive the following JSON response with an array of objects. Each object
+                includes the post ID, the message content, and the time the post was created:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data": [
+    {
+      "created_time": "2020-03-25T17:33:34+0000",
+      "message": "Hello World!",
+      "id": "422575694827569_917077345377399"  
+    },
+...
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Use the Graph Explorer</h2>
+              <p>The <a href="/tools/explorer" target="_blank">Graph Explorer tool</a> is a UI that allows you to
+                experiment with Facebook APIs without adding code to your app or website. You can select permissions,
+                get access tokens, test <code>GET</code>, <code>POST</code>, and <code>DELETE</code> methods, and get
+                code snippets of these queries for Android, iOS, JavaScript, PHP, and cURL.</p>
+              <p>Note, you will need a <a href="/docs/apps#register" target="_blank">Facebook App ID</a> to use the
+                Graph Explorer.</p>
+              <h3>Step 1. Get Your Page ID</h3>
+              <p>Select the the <code>pages_manage_metadata</code>, <code>pages_manage_posts</code>,
+                <code>pages_manage_read_engagement</code>, and <code>pages_show_list</code> permissions, which ever
+                appear within the Permission dropdown menu, set the <code>GET</code> request to the
+                <code>/me/accounts</code> endpoint in the query box, and click <strong>Submit</strong>.
+              </p>
+              <div style="padding-bottom:10px"><img alt="" class="img"
+                  src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/90753453_681635615710365_5353285943979671552_n.png?_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=7l3a147wyo8Q7kNvwF6j9vG&amp;_nc_oc=Admeu47Zq-UIjAMpiVNoJvknSLssUsQbj_XCukNLfgg8YhPb-4sJOrX8VqCVMXCVIKg&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_Aftj8tERN09l2dG6vnm_MOk0wpTJS2_4hLEdcfeM3BX41g&amp;oe=69A0FB2F" />
+              </div>
+              <p>Click on the ID of your Page, displayed directly beneath the name of your Page, to move the ID to the
+                query box.</p>
+              <h3>Step 2. Post as a Page</h3>
+              <p>Under the <strong>User or Page</strong> drop down menu, select the Page access token for your Page.
+                Next, set the method to <code>POST</code> with a request to the <code>/{page-id}/feed</code> endpoint,
+                then set the <strong>Params</strong> <code>key</code> to <code>message</code> and the <code>value</code>
+                to your post text. Click <strong>Submit</strong>.</p>
+              <p>On success, the Graph Explorer will show the ID of the Page post.</p>
+              <img alt="" class="img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/90633006_2691623697632705_6919549723854503936_n.png?_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=Wga1ZHiTGtkQ7kNvwF_TVme&amp;_nc_oc=AdnjYsUcx6C5Xj-EwMmRTSZT7zMGDr0FDcuUo3thOzlAf27pAzIrJ4N_G-8oU-elhko&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfstTil6o3B5QKeDkRwc32shsr9xJDdD6aQcAWKGRZXKcg&amp;oe=69A0FDD3" />
+              <div style="padding:10px"></div>
+              <p>Visit your <a href="https://www.facebook.com/">Facebook Page</a> to view the post.</p>
+              <h3>Step 3. Verify Your Post</h3>
+              <p>Send a <code>GET</code> request to the <code>/page-id/feed</code> endpoint.</p>
+              <p>On success, the Graph Explorer will display the time the post was created, the text of the post, and
+                the ID of the Page post.</p>
+              <img alt="" class="img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/91310472_212075259856088_1405481786523254784_n.png?_nc_cat=104&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=2WUb4p4zFc0Q7kNvwERaICr&amp;_nc_oc=AdlJ185Cu3LhFtVZdejHYuS8j169hpoAEqR5w5MyTsjTRsV_zS3pMNaHoL1IjJ76svQ&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvHEMoYKTKRrWDogUwPKPho5He4bQKgkUeFVMKmeU1wFA&amp;oe=69A0E762" />
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Next steps</h2>
+              <p>Learn how to get and update information about your Facebook Page include Page details, access tokens,
+                blocked users, and user recommendations, using the <a href="/docs/pages-api/manage-pages">Manage a
+                  Facebook Page guide</a>.</p>
+              <p>Learn how to <a href="/docs/pages-api/posts">publish links, photos, and videos to your Page</a>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See Also</h2>
+              <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                <tbody>
+                  <tr class="_51mx">
+                    <td class="_51m- vTop hLeft _57v2">
+                      <h4>Graph API guides</h4>
+                      <ul class="uiList _4of _4kg">
+                        <li>
+                          <div class="fcb"><a href="#" role="button" target="_blank">
+                              Access Tokens
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/using-graph-api" target="_blank">
+                              Graph API User Guide
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/explorer" target="_blank">
+                              Graph Explorer User Guide
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/pages/overview#tasks" target="_blank">
+                              Pages API Overview – Tasks
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                      </ul>
+                    </td>
+                    <td class="_51m- vTop hLeft _57v2 _51mw">
+                      <h4>References</h4>
+                      <ul class="uiList _4of _4kg">
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/reference/page" target="_blank">
+                              Page Reference
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/reference/page/feed" target="_blank">
+                              Page Feed Reference
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/reference/page-post" target="_blank">
+                              Page Post Reference
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/permissions" target="_blank">
+                              Permissions Reference
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/reference/user/accounts" target="_blank">
+                              User Accounts Reference
+                              <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=mLeUt-8qSepFLXivQLGhbg&amp;oh=00_AfvJJwXv27SU6M1GjGdBSk3rx97bEeTAPNvrLv6ajD7bdg&amp;oe=69A0DBE2"
+                                width="10px" /></a></div>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

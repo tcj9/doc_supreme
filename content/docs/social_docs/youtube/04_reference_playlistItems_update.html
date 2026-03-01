@@ -1,0 +1,285 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    PlaylistItems: update<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta content="update" itemprop="name">
+      <meta content="playlistItems" itemprop="path">
+      <section id="overview">
+        <p>Modifies a playlist item. For example, you could update the item's position in the playlist.</p>
+        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+            href="/youtube/v3/getting-started#quota">quota cost</a> of 50 units.</p>
+      </section>
+      <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common use cases
+      </h2>
+      <style>
+        iframe+section>h2 {
+          margin-top: 12px;
+        }
+      </style>
+      <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+          allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+          src="https://developers.google.com/frame/youtube/v3/docs/playlistItems/update_8c1e39a4ba8e2aedb38c528ae06418d04d35cbafff05de6dda154825f9177ef9.frame"></iframe></devsite-iframe>
+      <section id="request">
+        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+        <section id="request_url">
+          <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+          <div></div><devsite-code>
+            <pre dir="ltr" is-upgraded="" translate="no">PUT https://www.googleapis.com/youtube/v3/playlistItems</pre>
+          </devsite-code>
+        </section>
+        <section id="auth_required">
+          <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+          <p>This request requires authorization with at least one of the following scopes (<a
+              href="/youtube/v3/guides/authentication">read more about authentication and authorization</a>).</p>
+          <table class="matchpre">
+            <thead>
+              <tr>
+                <th>Scope</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtubepartner</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="params">
+          <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+          <p>The following table lists the parameters that this query supports. All of the parameters listed are query
+            parameters.</p>
+          <table class="responsive details">
+            <thead>
+              <tr>
+                <th colspan="2">Parameters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="alt" id="required-parameters">
+                <td colspan="3"><b>Required parameters</b></td>
+              </tr>
+              <tr id="part">
+                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  The <code dir="ltr" translate="no"><strong>part</strong></code> parameter serves two purposes in this
+                  operation. It identifies the properties that the write operation will set as well as the properties
+                  that the API response will include.<br><br />Note that this method will override the existing values
+                  for all of the mutable properties that are contained in any parts that the parameter value specifies.
+                  For example, a playlist item can specify a start time and end time, which identify the times portion
+                  of the video that should play when users watch the video in the playlist. If your request is updating
+                  a playlist item that sets these values, and the request's <code dir="ltr" translate="no">part</code>
+                  parameter value includes the <code dir="ltr" translate="no">contentDetails</code> part, the playlist
+                  item's start and end times will be updated to whatever value the request body specifies. If the
+                  request body does not specify values, the existing start and end times will be removed and replaced
+                  with the default settings.<br /><br />The following list contains the <code dir="ltr"
+                    translate="no">part</code> names that you can include in the parameter value:<br />
+                  <ul>
+                    <li><code dir="ltr" translate="no">contentDetails</code></li>
+                    <li><code dir="ltr" translate="no">id</code></li>
+                    <li><code dir="ltr" translate="no">snippet</code></li>
+                    <li><code dir="ltr" translate="no">status</code></li>
+                  </ul>
+                  </br>
+                </td>
+              </tr>
+              <tr class="alt" id="optional-parameters">
+                <td colspan="3"><b>Optional parameters</b></td>
+              </tr>
+              <tr id="onBehalfOfContentOwner">
+                <td><code dir="ltr" itemprop="property" translate="no">onBehalfOfContentOwner</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  <strong>Note:</strong> The <code dir="ltr"
+                    translate="no"><strong>onBehalfOfContentOwner</strong></code> parameter is intended exclusively for
+                  YouTube content partners and can only be used in a properly <a
+                    href="/youtube/v3/guides/authentication">authorized request</a>.<br /><br />This parameter is
+                  designed for YouTube content partners that own and manage many different YouTube channels. It enables
+                  users affiliated with the content owner to authenticate once and then be able to access and manage all
+                  of the content owner's video and channel data, without having to provide authentication credentials
+                  for each individual channel.<br /><br />When the parameter is present, its value identifies a content
+                  owner, and the request's authorization credentials identify a YouTube user who is authorized to act on
+                  behalf of that content owner. The account that the user authenticates with must be <a
+                    href="https://support.google.com/youtube/answer/4524878">linked to the specified content owner</a>
+                  in the YouTube Creator Studio settings.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="request_body">
+          <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+          <p>Provide a <a href="/youtube/v3/docs/playlistItems#resource">playlistItem resource</a> in the request body.
+            For that resource:
+          <ul>
+            <li>
+              <p>You must specify a value for these properties:</p>
+              <p>
+              <ul>
+                <li><code dir="ltr" translate="no">id</code></li>
+                <li><code dir="ltr" translate="no">snippet.playlistId</code></li>
+                <li><code dir="ltr" translate="no">snippet.resourceId</code></li>
+              </ul>
+              </p>
+            </li>
+            <li>
+              <p>You can set values for these properties:</p>
+              <p>
+              <ul>
+                <li><code dir="ltr" translate="no">snippet.position</code></li>
+                <li><code dir="ltr" translate="no">contentDetails.note</code></li>
+                <li><code dir="ltr" translate="no">contentDetails.startAt</code></li>
+                <li><code dir="ltr" translate="no">contentDetails.endAt</code></li>
+              </ul>
+              </p>
+              <p>If you are submitting an update request, and your request does not specify a value for a property that
+                already has a value, the property's existing value will be deleted.</p>
+            </li>
+          </ul>
+          </p>
+        </section>
+      </section>
+      <section id="response">
+        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+        <p>If successful, this method returns a <a href="/youtube/v3/docs/playlistItems#resource">playlistItem
+            resource</a> in the response body.</p>
+      </section>
+      <section id="errors">
+        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+        <p>The following table identifies error messages that the API could return in response to a call to this method.
+          Please see the <a href="/youtube/v3/docs/errors">error message</a> documentation for more detail.</p>
+        <table class="matchpre" id="property-table">
+          <thead>
+            <tr>
+              <th>Error type</th>
+              <th>Error detail</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="youtube.playlistItems.update-forbidden-playlistItemsNotAccessible">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">playlistItemsNotAccessible</code></td>
+              <td class="error-cause">The request is not properly authorized to update the specified playlist item.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-invalidValue-invalidPlaylistItemPosition">
+              <td class="error-name"><code dir="ltr" translate="no">invalidValue (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">invalidPlaylistItemPosition</code></td>
+              <td class="error-cause">The request attempts to set the playlist item's position to an invalid or
+                unsupported value. Check the value of the <code dir="ltr" translate="no">position</code> property in the
+                resource's <code dir="ltr" translate="no">snippet</code>.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-invalidValue-invalidResourceType">
+              <td class="error-name"><code dir="ltr" translate="no">invalidValue (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidResourceType</code>
+              </td>
+              <td class="error-cause">The <code dir="ltr" translate="no">type</code> specified for the resource ID is
+                not supported for this operation. The resource ID identifies the item being added to the playlist – e.g.
+                <code dir="ltr" translate="no">youtube#video</code>.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-invalidValue-invalidSnippet">
+              <td class="error-name"><code dir="ltr" translate="no">invalidValue (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidSnippet</code></td>
+              <td class="error-cause">The request does not specify a valid <code dir="ltr" translate="no">snippet</code>
+                property.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-invalidValue-manualSortRequired">
+              <td class="error-name"><code dir="ltr" translate="no">invalidValue (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">manualSortRequired</code></td>
+              <td class="error-cause">The request attempts to set the playlist item's position, but the playlist does
+                not use manual sorting. (For example, playlist items might be sorted by date or popularity.) You can
+                address the error by removing the <code dir="ltr" translate="no">snippet.position</code> element from
+                the resource that the request is inserting. If you want the playlist item to have a particular position
+                in the list, you need to first update the playlist's <strong>Ordering</strong> option to
+                <strong>Manual</strong> in the playlist's settings. This settings can be adjusted in the <a
+                  href="https://www.youtube.com/view_all_playlists">YouTube Video Manager</a>.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-notFound-playlistItemNotFound">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">playlistItemNotFound</code>
+              </td>
+              <td class="error-cause">The playlist item identified with the request's <code dir="ltr"
+                  translate="no">id</code> property cannot be found.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-notFound-playlistNotFound">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">playlistNotFound</code></td>
+              <td class="error-cause">The playlist identified with the request's <code dir="ltr"
+                  translate="no">playlistId</code> parameter cannot be found.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-required-channelIdRequired">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">channelIdRequired</code></td>
+              <td class="error-cause">The request does not specify a value for the required <code dir="ltr"
+                  translate="no">channelId</code> property.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-required-playlistIdRequired">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">playlistIdRequired</code></td>
+              <td class="error-cause">The request does not specify a value for the required <code dir="ltr"
+                  translate="no">playlistId</code> property.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-required-playlistItemIdRequired">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">playlistItemIdRequired</code>
+              </td>
+              <td class="error-cause">The playlist item resource specified in the request must use the <code dir="ltr"
+                  translate="no">id</code> property to identify the playlist item that is being updated.</td>
+            </tr>
+            <tr id="youtube.playlistItems.update-invalidValue-playlistOperationUnsupported">
+              <td class="error-name"><code dir="ltr" translate="no">invalidValue (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">playlistOperationUnsupported</code></td>
+              <td class="error-cause">The API does not support the ability to update videos in the specified playlist.
+                For example, you can't update a video in your uploaded videos playlist.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="try-it">
+        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API request and response.
+        </p>
+        <div class="devsite-apix">
+          <div class="apis-explorer" data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+            data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+            data-method-id="youtube.playlistItems.update" data-show-code-button="true"></div>
+        </div>
+      </section>
+      </meta>
+      </meta>
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

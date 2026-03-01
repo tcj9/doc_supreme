@@ -1,0 +1,506 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_8b">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Content Publishing</h1>
+              <p>This guide shows you how to publish single images, videos, reels (single media posts), or posts
+                containing multiple images and videos (carousel posts) on Instagram professional accounts using the
+                Instagram Platform.</p>
+              <div>
+                <div class="_57yz _5s-k _3-8p">
+                  <div class="_57y-">
+                    <p>On March 24, 2025, we introduced the new <code>alt_text</code> field for image posts on the
+                      <code>/&lt;INSTAGRAM_PROFESSIONAL_ACCOUNT_ID&gt;/media</code> endpoint. Reels and stories are not
+                      supported.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <h2>Requirements</h2>
+              <div><span>
+                  <p>This guide assumes you have read the <a
+                      href="https://developers.facebook.com/docs/instagram-platform/overview">Instagram Platform
+                      Overview</a> and implemented the needed components for using this API, such as a Meta login flow
+                    and a webhooks server to receive notifications.</p>
+                </span></div>
+              <h4>Media on a public server</h4>
+              <p>We cURL media used in publishing attempts, so the media must be hosted on a publicly accessible server
+                at the time of the attempt.</p>
+              <h4>Page Publishing Authorization</h4>
+              <p>An Instagram professional account connected to a <a href="/docs/instagram-api/overview#pages">Page</a>
+                that requires <a
+                  href="https://www.facebook.com/business/m/one-sheeters/page-publishing-authorization">Page Publishing
+                  Authorization</a> (PPA) cannot be published to until PPA has been completed.</p>
+              <p>It's possible that an app user may be able to perform <a
+                  href="/docs/instagram-api/overview#tasks">Tasks</a> on a Page that initially does not require PPA but
+                later requires it. In this scenario, the app user would not be able to publish content to their
+                Instagram professional account until completing PPA. Since there's no way for you to determine if an app
+                user's Page requires PPA, we recommend that you advise app users to preemptively complete PPA.</p>
+              <p>You will need the following:</p>
+              <div><span>
+                  <div class="_57-c">
+                    <table class="_4-ss _5k9x">
+                      <thead>
+                        <th style="width:12%"></th>
+                        <th style="width:45%">Instagram API with Instagram Login</th>
+                        <th>Instagram API with Facebook Login</th>
+                      </thead>
+                      <tbody class="_5m37" id="u_0_2_VX">
+                        <tr class="row_0">
+                          <td>
+                            <p><strong>Access Levels</strong></p>
+                          </td>
+                          <td>
+                            <ul>
+                              <li>Advanced Access</li>
+                              <li>Standard Access</li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li>Advanced Access</li>
+                              <li>Standard Access</li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr class="row_1 _5m29">
+                          <td>
+                            <p><strong>Access Tokens</strong></p>
+                          </td>
+                          <td>
+                            <ul>
+                              <li>Instagram User access token</li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li>Facebook Page access token</li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr class="row_2">
+                          <td>
+                            <p><strong>Host URL</strong></p>
+                          </td>
+                          <td>
+                            <p><code>graph.instagram.com</code></p>
+                          </td>
+                          <td>
+                            <p><code>graph.facebook.com</code>
+                              <code>rupload.facebook.com</code> (For resumable video uploads)
+                            </p>
+                          </td>
+                        </tr>
+                        <tr class="row_3 _5m29">
+                          <td>
+                            <p><strong>Login Type</strong></p>
+                          </td>
+                          <td>
+                            <p>Business Login for Instagram</p>
+                          </td>
+                          <td>
+                            <p>Facebook Login for Business</p>
+                          </td>
+                        </tr>
+                        <tr class="row_4">
+                          <td><a href="/docs/permissions/reference#i" target="_blank"><b>Permissions</b></a></td>
+                          <td>
+                            <ul>
+                              <li><code>instagram_business_basic</code></li>
+                              <li><code>instagram_business_content_publish</code></li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li><code>instagram_basic</code></li>
+                              <li><code>instagram_content_publish</code></li>
+                              <li><code>pages_read_engagement</code></li>
+                            </ul>
+                            <p>If the app user was granted a role on the <a
+                                href="/docs/instagram-api/overview#pages">Page</a> connected to your app user's
+                              Instagram professional account via the Business Manager, your app will also need:</p>
+                            <ul>
+                              <li><code>ads_management</code></li>
+                              <li><code>ads_read</code></li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr class="row_5 _5m29">
+                          <td>
+                            <p><strong>Webhooks</strong></p>
+                          </td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </span></div>
+              <h4>Endpoints</h4>
+              <ul>
+                <li><a href="/docs/instagram-api/reference/ig-user/media#creating"><code>/&lt;IG_ID&gt;/media</code></a>
+                  — Create media container and upload the media
+
+                  <ul>
+                    <li><code>upload_type=resumable</code> — Create a resumbable upload session to upload large videos
+                      from an area with frequent network interruptions or other transmission failures. Only for apps
+                      that have implemented Facebook Login for Business.</li>
+                  </ul>
+                </li>
+                <li><a
+                    href="/docs/instagram-api/reference/ig-user/media_publish#creating"><code>/&lt;IG_ID&gt;/media_publish</code></a>
+                  — publish uploaded media using their media containers.</li>
+                <li><a
+                    href="/docs/instagram-api/reference/ig-container#reading"><code>/&lt;IG_CONTAINER_ID&gt;?fields=status_code</code></a>
+                  — check media container publishing eligibility and status.</li>
+                <li>
+                  <p><a
+                      href="/docs/instagram-api/reference/ig-user/content_publishing_limit"><code>/&lt;IG_ID&gt;/content_publishing_limit</code></a>
+                    — check app user's current publishing rate limit usage.</p>
+                </li>
+                <li>
+                  <p><code>POST https://rupload.facebook.com/ig-api-upload/&lt;IG_MEDIA_CONTAINER_ID&gt;</code> — Upload
+                    the video to Meta servers</p>
+                </li>
+                <li>
+                  <p><code>GET /&lt;IG_MEDIA_CONTAINER_ID&gt;?fields=status_code</code> — Check publishing eligibility
+                    and status of the video</p>
+                </li>
+              </ul>
+              <h4>HTML URL encoding troubleshooting</h4>
+              <ul>
+                <li>Some of the parameters are supported in list/dict format. </li>
+                <li>Some characters need to be encoded into a format that can be transmitted over the Internet. For
+                  example: <code>user_tags=[{username:’ig_user_name’}]</code> is encoded to
+                  <code>user_tags=%5B%7Busername:ig_user_name%7D%5D</code> where <code>[</code> is encoded to
+                  <code>%5B</code> and <code>{</code> is encoded to <code>%7B</code>. For more conversions, please refer
+                  to the HTML URL Encoding standard.
+                </li>
+              </ul>
+              <h3>Limitations</h3>
+              <ul>
+                <li>JPEG is the only image format supported. Extended JPEG formats such as MPO and JPS are not
+                  supported.</li>
+                <li>Shopping tags are not supported.</li>
+                <li>Branded content tags are not supported.</li>
+                <li>Filters are not supported.</li>
+              </ul>
+              <p>For additional limitations, see each endpoint's reference.</p>
+              <h4>Rate Limit</h4>
+              <p>Instagram accounts are limited to 100 API-published posts within a 24-hour moving period. Carousels
+                count as a single post. This limit is enforced on the <code>POST /&lt;IG_ID&gt;/media_publish</code>
+                endpoint when attempting to publish a media container. We recommend that your app also enforce the
+                publishing rate limit, especially if your app allows app users to schedule posts to be published in the
+                future.</p>
+              <p>To check an Instagram professional account's current rate limit usage, query the
+                <code>GET /&lt;IG_ID&gt;/content_publishing_limit</code> endpoint.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Create a container</h2>
+              <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                <tbody>
+                  <tr class="_51mx">
+                    <td class="_51m- vTop hLeft _57v2">
+                      <p>In order to publish a media object, it must have a container. To create the media container and
+                        upload a media file, send a <code>POST</code> request to the <code>/&lt;IG_ID&gt;/media</code>
+                        endpoint with the following parameters:</p>
+                      <ul>
+                        <li><code>access_token</code> – Set to your app user's access token</li>
+                        <li><code>image_url</code> or <code>video_url</code> – Set to the path of the image or video. We
+                          will cURL your image using the passed in URL so it must be on a public server.</li>
+                        <li><code>media_type</code> — If the container will be for a video, set to <code>VIDEO</code>,
+                          <code>REELS</code>, or <code>STORIES</code>.
+                        </li>
+                        <li><code>is_carousel_item</code> – If the media will be part of a carousel, set to
+                          <code>true</code>
+                        </li>
+                        <li><code>upload_type</code> – Set to <code>resumable</code>, if creating a resumable upload
+                          session for a large video file</li>
+                      </ul>
+                      <p>Visit the <a
+                          href="https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media#query-string-parameters">Instagram
+                          User Media Endpoint Reference</a> for additional optional parameters.</p>
+                    </td>
+                    <td class="_51m- vTop hLeft _57v2 _51mw"><img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/480730075_1720310908885450_3341858114925327726_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=3GPvkJxZ4H4Q7kNvwE3LqMF&amp;_nc_oc=Adlp5BbvAxfFK_ed9BdKfUDE8Aojr7szh1HSo4aFbFzLhPg50dmZaoKWZNfkQcCV38o&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=sEZZYoApoEIc7JiH0jXYBQ&amp;oh=00_AftJOGvMLs-mD5-I1cV3Sj8DE5uPP8ApO0j0oIc3-ycWfg&amp;oe=69A0ED24" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Example Request</h4>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+curl -X POST "https://&lt;HOST_URL&gt;/&lt;LATEST_API_VERSION&gt;/&lt;IG_ID&gt;/media"
+     -H "Content-Type: application/json" 
+     -H "Authorization: Bearer &lt;ACCESS_TOKEN&gt;" 
+     -d '{
+           "image_url":"https://www.example.com/images/bronz-fonz.jpg"
+         }'
+</pre>
+              <p>On success, your app receives a JSON response with the Instagram Container ID.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id": "&lt;IG_CONTAINER_ID&gt;"  
+}
+</pre>
+              <h3>Create a carousel container</h3>
+              <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                <tbody>
+                  <tr class="_51mx">
+                    <td class="_51m- vTop hLeft _57v2">
+                      <p>To publish up to 10 images, videos, or a combination of the two, in a single post, a carousel
+                        post, you must create a carousel container. This carousel containter will contain a list of all
+                        media containers.</p>
+                      <p>To create the carousel container, send a <code>POST</code> request to the
+                        <code>/&lt;IG_ID&gt;/media</code> endpoint with the following parameters:
+                      </p>
+                      <ul>
+                        <li><code>media_type</code> — Set to <code>CAROUSEL</code>. Indicates that the container is for
+                          a carousel.</li>
+                        <li><code>children</code> — A comma separated list of up to 10 container IDs of each image and
+                          video that should appear in the published carousel.</li>
+                      </ul>
+                    </td>
+                    <td class="_51m- vTop hLeft _57v2 _51mw"><img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/481244262_1166248521755437_1763081748565619554_n.png?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=brCL7-jEPfIQ7kNvwEX-pzB&amp;_nc_oc=AdnNVLffRTwt61Akm8KYu5f_zyjlBrsB1awBJT5zBixDW4VfLb-QdzJ4SZCk2XgZi8c&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=sEZZYoApoEIc7JiH0jXYBQ&amp;oh=00_AfthrdR7lw03cNzXNycIj4aotQNHG_U7GhZOtvDrmtWVpA&amp;oe=69A0D179"
+                        width="300px" /></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Limitations</h4>
+              <ul>
+                <li>Carousels are limited to 10 images, videos, or a mix of the two.</li>
+                <li>Carousel images are all cropped based on the first image in the carousel, with the default being a
+                  1:1 aspect ratio.</li>
+                <li>Accounts are limited to 50 published posts within a 24-hour period. Publishing a carousel counts as
+                  a single post.</li>
+              </ul>
+              <h4>Example Request</h4>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.instagram.com/<code>v24.0</code>/90010177253934/media"
+     -H "Content-Type: application/json" 
+     -d '{  
+           "caption":"Fruit%20candies"
+           "media_type":"CAROUSEL"
+           "children":"&lt;IG_CONTAINER_ID_1&gt;,&lt;IG_CONTAINER_ID_2&gt;,&lt;IG_CONTAINER_ID_3&gt;"
+         }'
+</pre>
+              <p>On success, your app receives a JSON response with the Instagram Carousel Container ID.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+{
+  "id": "&lt;IG_CAROUSEL_CONTAINER_ID&gt;" 
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Resumable Upload Session</h2>
+              <p>If you created a container for a resumable video upload in Step 1, your need to upload the video before
+                it can be published.</p>
+              <p>Most API calls use the <code>graph.facebook.com</code> host however, calls to upload videos for Reels
+                use <code>rupload.facebook.com</code>.</p>
+              <p>The following file sources are supported for uploaded video files:</p>
+              <ul>
+                <li>A file located on your computer</li>
+                <li>A file hosted on a public facing server, such as a CDN</li>
+              </ul>
+              <p>To start the upload session, send a <code>POST</code> request to the
+                <code>/&lt;IG_MEDIA_CONTAINER_ID</code> endpoint on the <code>rupload.facebook.com</code> host with the
+                following parameters:
+              </p>
+              <ul>
+                <li><code>access_token</code></li>
+                <li></li>
+              </ul>
+              <h4>Sample request upload a local video file</h4>
+              <p>With the <code>ig-container-id</code> returned from a resumable upload session call, upload the video.
+              </p>
+              <ul>
+                <li>Be sure the host is <code>rupload.facebook.com</code>.</li>
+                <li>All <code>media_type</code> shares the same flow to upload the video.</li>
+                <li><code>ig-container-id</code> is the ID returned from resumable upload session calls. </li>
+                <li><code>access-token</code> is the same one used in previous steps.</li>
+                <li><code>offset</code> is set to the first byte being upload, generally <code>0</code>.</li>
+                <li><code>file_size</code> is set to the size of your file in bytes.</li>
+                <li><code>Your_file_local_path</code> is set to the file path of your local file, for example, if
+                  uploading a file from, the <strong>Downloads</strong> folder on macOS, the path is
+                  <strong>@Downloads/example.mov</strong>.
+                </li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+curl -X POST "https://rupload.facebook.com/ig-api-upload/&lt;API_VERSION&gt;/&lt;IG_MEDIA_CONTAINER_ID&gt;`" \
+     -H "Authorization: OAuth &lt;ACCESS_TOKEN&gt;" \
+     -H "offset: 0" \
+     -H "file_size: Your_file_size_in_bytes" \
+     --data-binary "@my_video_file.mp4"
+</pre>
+              <h4>Sample request upload a public hosted video</h4>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+curl -X POST "https://rupload.facebook.com/ig-api-upload/&lt;API_VERSION&gt;/&lt;IG_MEDIA_CONTAINER_ID&gt;`" \
+     -H "Authorization: OAuth &lt;ACCESS_TOKEN&gt;" \
+     -H "file_url: https://example_hosted_video.com"
+</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+// Success Response Message
+{
+  "success":true,
+  "message":"Upload successful."
+}
+
+// Failure Response Message
+{
+  "debug_info":{
+    "retriable":false,
+    "type":"ProcessingFailedError",
+    "message":"{\"success\":false,\"error\":{\"message\":\"unauthorized user request\"}}"
+  }
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Publish the container</h2>
+              <p>To publish the media,</p>
+              <p>Send a <code>POST</code> request to the <code>/&lt;IG_ID&gt;/media_publish</code> endpoint with the
+                following parameters:</p>
+              <ul>
+                <li><code>creation_id</code> set to the container ID, either for a single media container or a carousel
+                  container</li>
+              </ul>
+              <h4>Example Request</h4>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+curl -X POST "https://&lt;HOST_URL&gt;/&lt;LATEST_API_VERSION&gt;/&lt;IG_ID&gt;/media_publish"
+     -H "Content-Type: application/json" 
+     -H "Authorization: Bearer &lt;ACCESS_TOKEN&gt;"     
+     -d '{
+           "creation_id":"&lt;IG_CONTAINER_ID&gt;" 
+         }'
+</pre>
+              <p>On success, your app receives a JSON response with the Instagram Media ID.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id": "&lt;IG_MEDIA_ID&gt;"
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Reels posts</h2>
+              <p>Reels are short-form videos that appears in the <strong>Reels</strong> tab of the Instagram app. To
+                publish a reel, create a container for the video and include the <code>media_type=REELS</code> parameter
+                along with the path to the video using the <code>video_url</code> parameter.</p>
+              <p>If you publish a reel and then request its <code>media_type</code> field, the value returned is
+                <code>VIDEO</code>. To determine if a published video has been designated as a reel, request its
+                <code>media_product_type</code> field instead.
+              </p>
+              <p>You can use the <a data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Ffbsamples%2Freels_publishing_apis%2Ftree%2Fmain%2Finsta_reels_publishing_api_sample&amp;h=AT1u5tEhfk3imdPesLavR0mb-GZXbOOY3l9nHLOi0MVj796tkLJjzKH6vKW_kukQcAVbBWKLolsEltOQTTvGk4UeYFpXVjw9k1e4x1jomM1DWdFazZ1Z-zowR7aqd7Wkf0zJsT4BV7mqi6jysE1Y2A"
+                  rel="nofollow" target="_blank">code sample on GitHub (insta_reels_publishing_api_sample)</a> to learn
+                how to publish Reels to Instagram.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Trial Reels posts</h2>
+              <p>Trial reels are reels that are only shared to non-followers. To publish a trial reel, create a
+                container for the video and include a valid <code>trial_params</code> parameter along with the
+                parameters required to create reels. <code>trial_params</code> consists of the following fields:</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Field Name</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_Dw">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>graduation_strategy</code></p>
+                      </td>
+                      <td>
+                        <p>The graduation strategy specifies the conditions to graduate a reel (convert the trial reel
+                          to a reel, sharing it to followers). Possible values:</p>
+                        <ul>
+                          <li><code>MANUAL</code> — The trial reel can be manually graduated in the native app.</li>
+                          <li><code>SS_PERFORMANCE</code> — The trial reel will be automatically graduated if the trial
+                            reel performs well.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Example Request</h4>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.instagram.com/<code>v24.0</code>/90010177253934/media"
+     -H "Content-Type: application/json" 
+     -d '{  
+           "media_type":"REELS"
+           "video_url":"https://www.example.com/videos/bronz-fonz.mp4"
+           "trial_params":{
+             “graduation_strategy”: “MANUAL”
+           }
+         }'
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Story posts</h2>
+              <p>To publish a reel, create a container for the media object and include the <code>media_type</code>
+                parameter set to <code>STORIES</code>.</p>
+              <p>If you publish a story and then request its <code>media_type</code> field, the value will be returned
+                as <code>IMAGE/VIDEO</code>. To determine if a published image/video is a story, request its
+                <code>media_product_type</code> field instead.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Troubleshooting</h2>
+              <p>If you are able to create a container for a video but the
+                <code>POST /&lt;IG_ID&gt;/media_publish</code> endpoint does not return the published media ID, you can
+                get the container's publishing status by querying the
+                <code>GET /&lt;IG_CONTAINER_ID&gt;?fields=status_code</code> endpoint. This endpoint will return one of
+                the following:
+              </p>
+              <ul>
+                <li><code>EXPIRED</code> — The container was not published within 24 hours and has expired.</li>
+                <li><code>ERROR</code> — The container failed to complete the publishing process.</li>
+                <li><code>FINISHED</code> — The container and its media object are ready to be published.</li>
+                <li><code>IN_PROGRESS</code> — The container is still in the publishing process.</li>
+                <li><code>PUBLISHED</code> — The container's media object has been published.</li>
+              </ul>
+              <p>We recommend querying a container's status once per minute, for no more than 5 minutes.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Errors</h2>
+              <p>See the <a href="/docs/instagram-api/reference/error-codes">Error Codes</a> reference.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Next Steps</h2>
+              <p>Now that you have published to an Instagram professional account, learn how to <a
+                  href="https://developers.facebook.com/docs/instagram/platform/instagram-api/comment-moderation">moderate
+                  comments on your media</a>.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

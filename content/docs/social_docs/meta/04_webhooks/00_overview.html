@@ -1,0 +1,125 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_5Y">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Webhooks from Meta</h1>
+              <p>Webhooks allows you to receive real-time HTTP notifications of changes to specific objects in the Meta
+                social graph. For example, we could send you a notification when any of your app Users change their
+                email address or whenever they comment on your Facebook Page. This prevents you from having to query the
+                Graph API for changes to objects that may or may not have happened, and helps you avoid reaching your <a
+                  href="/docs/graph-api/advanced/rate-limiting">rate limit</a>.</p>
+              <div class="_57yz _57z0 _3-8p">
+                <div class="_57y-">
+                  <p><a href="/docs/games_payments/webhooks">Webhooks for Payments</a> and <a
+                      href="/docs/messenger-platform/webhook">Webhooks for Messenger</a> have slightly differently
+                    configuration steps. If you are setting up a Webhook for either of these products, please refer to
+                    their respective documents for setup instructions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Objects, Fields, and Values</h2>
+              <p>There are many types of objects in the Meta social graph, such as User objects and Page objects, so
+                whenever you configure a Webhook you must first <strong>choose an object</strong> type. Since different
+                objects have different fields, you must then <strong>subscribe to specific fields</strong> for that
+                object type. Whenever there's a <strong>change to the value</strong> of any object field you have
+                subscribed to, we'll send you a notification.</p>
+              <p>Notifications are sent to you as HTTP POST requests and contain a JSON payload that describes the
+                change. For example, let's say you set up a <code>User</code> Webhook and subscribed to the
+                <code>Photos</code> field. If one of your app's Users uploads a photo, we'd send you a notification that
+                would look like this:
+              </p>
+              <h4>Sample Notification</h4>
+              <pre class="_5s-8 prettyprint lang-js" style="">
+{
+  "entry": [
+    {
+      "time": 1520383571,
+      "changes": [
+        {
+          "field": "photos",
+          "value": {
+            "verb": "update",
+            "object_id": "10211885744794461"
+          }
+        }
+      ],
+      "id": "10210299214172187",
+      "uid": "10210299214172187"
+    }
+  ],
+  "object": "user"
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>HTTPS Server</h2>
+              <p>Webhooks are sent using HTTPS, so your server must must be able to receive and process HTTPS requests,
+                and it must have a valid TLS/SSL certificate installed. Self-signed certificates are not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>App Review</h2>
+              <p>Webhooks does not require <a href="/docs/apps/review/">App Review</a>. However, in order to receive
+                Webhooks notifications of changes to objects when your app is in Live mode, your app must have been
+                granted relevant permissions to access those objects. See <a href="#permissions">Permissions</a> below.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Permissions</h2>
+              <p>Before an app can be made public, it typically must go through App Review. During review, apps can
+                request approval for specific permissions, which control the types of data the app can access when using
+                the Graph API.</p>
+              <p>Although the Webhooks product does not require App Review, it does respect permissions. This means that
+                even if you set up a Webhook and subscribe to specific fields on an object type, you won't receive
+                notifications of any changes to an object of that type unless:</p>
+              <ul>
+                <li>your app has been approved for the permission(s) that corresponds to that type of data, and</li>
+                <li>the object that owns the data has granted your app permission to access that data (e.g., a User
+                  allowing your app to access their Feed)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="development-mode">Development Mode</h2>
+              <p>Apps in <a href="/docs/apps#development-mode">development mode</a> can only receive test notifications
+                initiated through the app dashboard or notifications initiated by people who have a role on the app.</p>
+              <p>Note that development mode behavior is different for Messenger Webhooks Events. Refer to the <a
+                  href="/docs/messenger-platform/webhook#development-mode">Webhooks for Messenger</a> document for
+                details.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Setup</h2>
+              <p>To use Webhooks, you will need to set up an endpoint on a secure (HTTPS) server, then add and configure
+                the Webhooks product in your app's dashboard. The rest of these documents explain how to complete both
+                of these steps.</p>
+              <p>Ready? <a href="/docs/graph-api/webhooks/getting-started">Let's get started!</a></p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Learn More</h2>
+              <ul>
+                <li>Learn how to get notifications when a conversation is passed from one app to another using the <a
+                    href="https://developers.facebook.com/docs/messenger-platform/handover-protocol/#subscribe-to-webhook-events">Messenger
+                    Handover Protocol</a>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,262 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <div class="callout-info">
+            <p style="text-align:left"><b>Tip</b>: You can enable <style data-emotion="css ap4ivw">
+                    .css-ap4ivw {
+                        font-size: inherit;
+                        color: var(--ui-text-primary-display);
+                    }
+
+                    .css-ap4ivw *:hover {
+                        -webkit-text-decoration: none !important;
+                        text-decoration: none !important;
+                    }
+
+                    .css-ap4ivw:hover {
+                        -webkit-text-decoration: underline;
+                        text-decoration: underline;
+                    }
+
+                    .css-ap4ivw:hover {
+                        -webkit-text-decoration: underline;
+                        text-decoration: underline;
+                    }
+                </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://developers.tiktok.com/settings/#notification-setting"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">email notifications</span></a> to get our latest product
+                updates.</p>
+        </div>
+        <div class="callout-info">
+            <p style="text-align:left"><b>New: </b>Content Posting API now supports <a
+                    href="/doc/content-posting-api-reference-photo-post#upload_">sending photos</a>!</p>
+        </div>
+        <h1 id="get_started">Get Started</h1>
+        <p style="text-align:left">This guide shows you how to use the Content Posting API to upload content to TikTok.
+        </p>
+        <h2 id="prerequisites">Prerequisites</h2>
+        <p style="text-align:left">To successfully complete this tutorial, you will need the following:</p>
+        <ol>
+            <li>A valid video if you want to upload videos:</li>
+            <ul>
+                <li>Ensure you have a video file in one of the <a
+                        href="/doc/content-posting-api-media-transfer-guide#video_restrictions">supported formats</a>,
+                    such as MP4 + H.264, stored on your local machine.</li>
+                <li>Alternatively, you can provide a URL of a video from your verified domain or URL prefix. Learn how
+                    to <a href="/doc/content-posting-api-media-transfer-guide#pull_from_url">verify your domain or URL
+                        prefix</a>.</li>
+                <li>Learn more about <a href="/doc/content-posting-api-media-transfer-guide#video_restrictions">video
+                        restrictions</a>.</li>
+            </ul>
+            <li>A valid photo if you want to upload photos:</li>
+            <ul>
+                <li>You need to provide a URL of a photo from your verified domain or URL prefix. Learn how to <a
+                        href="/doc/content-posting-api-media-transfer-guide#pull_from_url">verify your domain or URL
+                        prefix</a>.</li>
+                <li>Learn more about <a href="/doc/content-posting-api-media-transfer-guide#image_restrictions">photo
+                        restrictions.</a></li>
+            </ul>
+            <li>A <a href="/doc/getting-started-create-an-app">registered app</a> on the TikTok for Developers website.
+            </li>
+            <li>Add the content posting API product to your app as shown below.</li>
+        </ol>
+        <div style="display:flex;justify-content:center"><img height="742px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/f7e446de7adf4a97a8e606d1db9f0003"
+                width="832px" /></div>
+        <ol>
+            <li>Get approval and authorization of the <code>video.upload</code> scope. Learn more about <a
+                    href="/doc/scopes-overview">scopes</a>.</li>
+            <ol>
+                <li>Your app must be approved for the <code>video.upload</code> scope.</li>
+                <li>The target TikTok user must have authorized your app for the <code>video.upload</code> scope.</li>
+            </ol>
+            <li>The access token and open ID of the TikTok user who authorized your app. Learn how to <a
+                    href="/doc/login-kit-manage-user-access-tokens">obtain the access token and open ID</a>.</li>
+        </ol>
+        <p style="text-align:left"><br /></p>
+        <h2 id="upload_draft_to_tiktok">Upload draft to TikTok</h2>
+        <p style="text-align:left">This section demonstrates how to successfully upload videos or photos to TikTok for
+            the user to review and post.</p>
+        <div class="callout-warning">
+            <p style="text-align:left">You should inform users that they must click on inbox notifications to continue
+                the editing flow in TikTok and complete the post.</p>
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <div style="display:flex;justify-content:center"><img height="2796px"
+                            src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/ac09fc68fa44ee57607dd758be37d5ec"
+                            width="1290px" /></div>
+                    <p style="text-align:center"><i>User notified of video upload</i></p>
+                </td>
+                <td>
+                    <div style="display:flex;justify-content:center"><img height="2340px"
+                            src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/06c4bc17718775074a9b2edaffa0e146"
+                            width="1080px" /></div>
+                    <p style="text-align:center"><i>User reviews and posts video</i></p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="upload_a_video">Upload a video</h3>
+        <p style="text-align:left">To initiate video upload on TikTok's servers, you must invoke the <a
+                href="/doc/content-posting-api-reference-upload-video">Content Posting API - Video Upload</a> endpoint.
+            You have the following two options:</p>
+        <ul>
+            <li>If you have the video file locally, set the source parameter to <code>FILE_UPLOAD</code> in your
+                request.</li>
+            <li>if the video is hosted on a URL, set the source parameter to <code>PULL_FROM_URL</code>.</li>
+        </ul>
+        <h4 id="example">Example</h4>
+        <p style="text-align:left">Example using <code>source=FILE_UPLOAD</code>:</p>
+        <p style="text-align:left">Request:</p>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl --location </span><span style="color:#d14">'https://open.tiktokapis.com/v2/post/publish/inbox/video/init/'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Content-Type: application/json'</span><span> \
+</span></span><span style="color:#d14"><span>--data </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "source_info": {
+</span><span style="color:#d14">        "source": "FILE_UPLOAD",
+</span><span style="color:#d14">        "video_size": exampleVideoSize,
+</span><span style="color:#d14">        "chunk_size" : exampleVideoSize,
+</span><span style="color:#d14">        "total_chunk_count": 1
+</span><span style="color:#d14">    }
+</span><span style="color:#d14">}'</span></code></pre>
+        <p style="text-align:left">Response:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span style="color:#008080">200</span><span> OK
+</span></span><span>
+</span><span>{
+</span><span><span>    </span><span>"data"</span><span>: {
+</span></span><span><span>        </span><span>"publish_id"</span><span>: </span><span style="color:#d14">"v_inbox_file~v2.123456789"</span><span>,
+</span></span><span><span>        </span><span>"upload_url"</span><span>: </span><span style="color:#d14">"https://open-upload.tiktokapis.com/video/?upload_id=67890&amp;upload_token=Xza123"</span><span>    
+</span></span><span>    },
+</span><span><span>    </span><span>"error"</span><span>: {
+</span></span><span><span>         </span><span>"code"</span><span>: </span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>         </span><span>"message"</span><span>: </span><span style="color:#d14">""</span><span>,
+</span></span><span><span>         </span><span>"log_id"</span><span>: </span><span style="color:#d14">"202210112248442CB9319E1FB30C1073F3"</span><span>
+</span></span><span>     }
+</span><span>}</span></code></pre>
+        <p style="text-align:left"><br /></p>
+        <p style="text-align:left">Example using <code>source=PULL_FROM_URL</code>:</p>
+        <p style="text-align:left">Request:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl --location </span><span style="color:#d14">'https://open.tiktokapis.com/v2/post/publish/inbox/video/init/'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Content-Type: application/json'</span><span> \
+</span></span><span style="color:#d14"><span>--data </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "source_info": {
+</span><span style="color:#d14">        "source": "PULL_FROM_URL",
+</span><span style="color:#d14">        "video_url": "https://example.verified.domain.com/example_video.mp4",
+</span><span style="color:#d14">    }
+</span><span style="color:#d14">}'</span></code></pre>
+        <p style="text-align:left">Response:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span style="color:#008080">200</span><span> OK
+</span></span><span>
+</span><span>{
+</span><span><span>    </span><span>"data"</span><span>: {
+</span></span><span><span>        </span><span>"publish_id"</span><span>: </span><span style="color:#d14">"v_inbox_url~v2.123456789"</span><span>
+</span></span><span>    },
+</span><span><span>    </span><span>"error"</span><span>: {
+</span></span><span><span>         </span><span>"code"</span><span>: </span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>         </span><span>"message"</span><span>: </span><span style="color:#d14">""</span><span>,
+</span></span><span><span>         </span><span>"log_id"</span><span>: </span><span style="color:#d14">"202210112248442CB9319E1FB30C1073F4"</span><span>
+</span></span><span>     }
+</span><span>}</span></code></pre>
+        <p style="text-align:left">If you are using <code>source=FILE_UPLOAD</code>:</p>
+        <ol>
+            <li>Extract the <code>upload_url</code> and <code>publish_id</code> from the response data.</li>
+            <li><a href="/doc/content-posting-api-reference-upload-video#">Send the video</a> from your local filesystem
+                to the extracted <code>upload_url</code> using a PUT request. The video processing will occur
+                asynchronously once the upload is complete.</li>
+        </ol>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span><span>curl --location --request PUT </span><span style="color:#d14">'https://open-upload.tiktokapis.com/video/?upload_id=67890&amp;upload_token=Xza123'</span><span> \
+</span></span><span><span>--header </span><span style="color:#d14">'Content-Range: bytes 0-30567099/30567100'</span><span> \
+</span></span><span><span>--header </span><span style="color:#d14">'Content-Type: video/mp4'</span><span> \
+</span></span><span><span>--data </span><span style="color:#d14">'@/path/to/file/example.mp4'</span></span></code></pre>
+        <p style="text-align:left">With the <code>publish_id</code> returned earlier, check for status updates using the
+            <a href="/doc/content-posting-api-reference-get-video-status">Get Post Status</a> endpoint.
+        </p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl --location </span><span style="color:#d14">'https://open.tiktokapis.com/v2/post/publish/status/fetch/'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Content-Type: application/json; charset=UTF-8'</span><span> \
+</span></span><span style="color:#d14"><span>--data </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "publish_id": "v_inbox_file~v2.123456789"
+</span><span style="color:#d14">}'</span></code></pre>
+        <h3 id="upload_photos">Upload photos</h3>
+        <p style="text-align:left">To initiate photo upload on TikTok's server, you must invoke the <a
+                href="/doc/content-posting-api-reference-photo-post">Content Posting API endpoint.</a></p>
+        <div class="callout-info">
+            <p style="text-align:left">Note:</p>
+            <p style="text-align:left">There are differences between the photo post endpoint and the existing video post
+                endpoint.</p>
+            <ul>
+                <li>Use /v2/post/publish/content/init/ to upload photos instead of /v2/post/publish/inbox/video/init/
+                </li>
+                <li>The <code>post_mode</code> and <code>media_type</code> are required parameters in request.body</li>
+                <li>There are additional parameters supported, such as title and description.</li>
+            </ul>
+        </div>
+        <h4 id="example_2">Example</h4>
+        <p style="text-align:left">Request:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl --location </span><span style="color:#d14">'https://open.tiktokapis.com/v2/post/publish/content/init/'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Content-Type: application/json'</span><span> \
+</span></span><span style="color:#d14"><span>--data-raw </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "post_info": {
+</span><span style="color:#d14">        "title": "funny cat",
+</span><span style="color:#d14">        "description": "this will be a #funny photo on your @tiktok #fyp"
+</span><span style="color:#d14">    },
+</span><span style="color:#d14">    "source_info": {
+</span><span style="color:#d14">        "source": "PULL_FROM_URL",
+</span><span style="color:#d14">        "photo_cover_index": 1,
+</span><span style="color:#d14">        "photo_images": [
+</span><span style="color:#d14">            "https://tiktokcdn.com/obj/example-image-01.webp",
+</span><span style="color:#d14">            "https://tiktokcdn.com/obj/example-image-02.webp"
+</span><span style="color:#d14">        ]
+</span><span style="color:#d14">    },
+</span><span style="color:#d14">    "post_mode": "MEDIA_UPLOAD",
+</span><span style="color:#d14">    "media_type": "PHOTO"
+</span><span style="color:#d14">}'</span></code></pre>
+        <p style="text-align:left">Response:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span style="color:#008080">200</span><span> OK
+</span></span><span>
+</span><span>{
+</span><span><span>    </span><span>"data"</span><span>: {
+</span></span><span><span>        </span><span>"publish_id"</span><span>: </span><span style="color:#d14">"p_pub_url~v2.123456789"</span><span>
+</span></span><span>    },
+</span><span><span>    </span><span>"error"</span><span>: {
+</span></span><span><span>         </span><span>"code"</span><span>: </span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>         </span><span>"message"</span><span>: </span><span style="color:#d14">""</span><span>,
+</span></span><span><span>         </span><span>"log_id"</span><span>: </span><span style="color:#d14">"202210112248442CB9319E1FB30C1073F3"</span><span>
+</span></span><span>     }
+</span><span>}</span></code></pre>
+        <p style="text-align:left"><br /></p>
+    </div>
+</div>

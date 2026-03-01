@@ -1,0 +1,1567 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Search: list<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="list" itemprop="name">
+                  <meta content="search" itemprop="path">
+                  <section id="overview">
+                        <p>Returns a collection of search results that match the query parameters specified in the API
+                              request. By default, a search result set identifies matching <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videos">video</a></code>, <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channels">channel</a></code>, and <code
+                                    dir="ltr" translate="no"><a href="/youtube/v3/docs/playlists">playlist</a></code>
+                              resources, but you can also configure queries to only retrieve a specific type of
+                              resource.</p>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of 100 units.</p>
+                  </section>
+                  <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common
+                        use cases</h2>
+                  <style>
+                        iframe+section>h2 {
+                              margin-top: 12px;
+                        }
+                  </style>
+                  <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+                              allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+                              src="https://developers.google.com/frame/youtube/v3/docs/search/list_593fe130bb73aaa02e03d2942916bc30069221f436b574fda3ea5369bb0e02ea.frame"></iframe></devsite-iframe>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">GET https://www.googleapis.com/youtube/v3/search</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The following table lists the parameters that this query supports. All of the
+                                    parameters listed are query parameters.</p>
+                              <table class="responsive details">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="required-parameters">
+                                                <td colspan="3"><b>Required parameters</b></td>
+                                          </tr>
+                                          <tr id="part">
+                                                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>part</strong></code>
+                                                      parameter specifies a comma-separated list of one or more <code
+                                                            dir="ltr" translate="no">search</code> resource properties
+                                                      that the API response will include. Set the parameter value to
+                                                      <code dir="ltr" translate="no">snippet</code>.
+                                                </td>
+                                          </tr>
+                                          <tr class="alt" id="filter-parameters">
+                                                <td colspan="3"><b>Filters <span style="color:#555">(specify 0 or 1 of
+                                                                  the following parameters)</span></b></td>
+                                          </tr>
+                                          <tr id="forContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">forContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">boolean</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>, and it is intended exclusively for YouTube
+                                                      content partners.<br /><br />The <code dir="ltr"
+                                                            translate="no"><strong>forContentOwner</strong></code>
+                                                      parameter restricts the search to only retrieve videos owned by
+                                                      the content owner identified by the <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter. If <code dir="ltr"
+                                                            translate="no">forContentOwner</code> is set to true, the
+                                                      request must also meet these requirements:<ul>
+                                                            <li>The <code dir="ltr"
+                                                                        translate="no">onBehalfOfContentOwner</code>
+                                                                  parameter is required.</li>
+                                                            <li>The user authorizing the request must be using an
+                                                                  account linked to the specified content owner.</li>
+                                                            <li>The <code dir="ltr" translate="no">type</code> parameter
+                                                                  value must be set to <code dir="ltr"
+                                                                        translate="no">video</code>.</li>
+                                                            <li>None of the following other parameters can be set: <code
+                                                                        dir="ltr" translate="no">videoDefinition</code>,
+                                                                  <code dir="ltr" translate="no">videoDimension</code>,
+                                                                  <code dir="ltr" translate="no">videoDuration</code>,
+                                                                  <code dir="ltr" translate="no">videoEmbeddable</code>,
+                                                                  <code dir="ltr" translate="no">videoLicense</code>,
+                                                                  <code dir="ltr"
+                                                                        translate="no">videoPaidProductPlacement</code>,
+                                                                  <code dir="ltr" translate="no">videoSyndicated</code>,
+                                                                  <code dir="ltr" translate="no">videoType</code>.</li>
+                                                      </ul>
+                                                </td>
+                                          </tr>
+                                          <tr id="forDeveloper">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">forDeveloper</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">boolean</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. The <code dir="ltr"
+                                                            translate="no"><strong>forDeveloper</strong></code>
+                                                      parameter restricts the search to only retrieve videos uploaded
+                                                      via the developer's application or website. The API server uses
+                                                      the request's authorization credentials to identify the developer.
+                                                      The <code dir="ltr" translate="no">forDeveloper</code> parameter
+                                                      can be used in conjunction with optional search parameters like
+                                                      the <code dir="ltr" translate="no">q</code>
+                                                      parameter.<br /><br />For this feature, each uploaded video is
+                                                      automatically tagged with the project number that is associated
+                                                      with the developer's application in the <a
+                                                            href="https://console.developers.google.com">Google
+                                                            Developers Console</a>.<br /><br />When a search request
+                                                      subsequently sets the <code dir="ltr"
+                                                            translate="no">forDeveloper</code> parameter to <code
+                                                            dir="ltr" translate="no">true</code>, the API server uses
+                                                      the request's authorization credentials to identify the developer.
+                                                      Therefore, a developer can restrict results to videos uploaded
+                                                      through the developer's own app or website but not to videos
+                                                      uploaded through other apps or sites.</td>
+                                          </tr>
+                                          <tr id="forMine">
+                                                <td><code dir="ltr" itemprop="property" translate="no">forMine</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">boolean</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. The <code dir="ltr"
+                                                            translate="no"><strong>forMine</strong></code> parameter
+                                                      restricts the search to only retrieve videos owned by the
+                                                      authenticated user. If you set this parameter to <code dir="ltr"
+                                                            translate="no">true</code>, then the <code dir="ltr"
+                                                            translate="no">type</code> parameter's value must also be
+                                                      set to <code dir="ltr" translate="no">video</code>. In addition,
+                                                      none of the following other parameters can be set in the same
+                                                      request: <code dir="ltr" translate="no">videoDefinition</code>,
+                                                      <code dir="ltr" translate="no">videoDimension</code>, <code
+                                                            dir="ltr" translate="no">videoDuration</code>, <code
+                                                            dir="ltr" translate="no">videoEmbeddable</code>, <code
+                                                            dir="ltr" translate="no">videoLicense</code>, <code
+                                                            dir="ltr" translate="no">videoPaidProductPlacement</code>,
+                                                      <code dir="ltr" translate="no">videoSyndicated</code>, <code
+                                                            dir="ltr" translate="no">videoType</code>.</td>
+                                          </tr>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="channelId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">channelId</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>channelId</strong></code> parameter
+                                                      indicates that the API response should only contain resources
+                                                      created by the channel. <br /><br /><strong>Note:</strong> Search
+                                                      results are constrained to a maximum of 500 videos if your request
+                                                      specifies a value for the <code dir="ltr"
+                                                            translate="no">channelId</code> parameter and sets the <code
+                                                            dir="ltr" translate="no"><a href="#type">type</a></code>
+                                                      parameter value to <code dir="ltr" translate="no">video</code>,
+                                                      but it does not also set one of the <code dir="ltr"
+                                                            translate="no"><a href="#forContentOwner">forContentOwner</a></code>,
+                                                      <code dir="ltr"
+                                                            translate="no"><a href="#forDeveloper">forDeveloper</a></code>,
+                                                      or <code dir="ltr"
+                                                            translate="no"><a href="#forMine">forMine</a></code>
+                                                      filters.</td>
+                                          </tr>
+                                          <tr id="channelType">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">channelType</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>channelType</strong></code> parameter
+                                                      lets you restrict a search to a particular type of
+                                                      channel.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> –
+                                                                  Return all channels.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>show</strong></code> –
+                                                                  Only retrieve shows.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="eventType">
+                                                <td><code dir="ltr" itemprop="property" translate="no">eventType</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>eventType</strong></code> parameter
+                                                      restricts a search to broadcast events. If you specify a value for
+                                                      this parameter, you must also set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code> parameter's
+                                                      value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>completed</strong></code>
+                                                                  – Only include completed broadcasts.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>live</strong></code> –
+                                                                  Only include active broadcasts.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>upcoming</strong></code>
+                                                                  – Only include upcoming broadcasts.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="location">
+                                                <td><code dir="ltr" itemprop="property" translate="no">location</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>location</strong></code> parameter,
+                                                      in conjunction with the <code dir="ltr"
+                                                            translate="no">locationRadius</code> parameter, defines a
+                                                      circular geographic area and also restricts a search to videos
+                                                      that specify, in their metadata, a geographic location that falls
+                                                      within that area. The parameter value is a string that specifies
+                                                      latitude/longitude coordinates e.g. (<code dir="ltr"
+                                                            translate="no">37.42307,-122.08427</code>).<br /><br />
+                                                      <ul>
+                                                            <li>The <code dir="ltr" translate="no">location</code>
+                                                                  parameter value identifies the point at the center of
+                                                                  the area.</li>
+                                                            <li>The <code dir="ltr" translate="no">locationRadius</code>
+                                                                  parameter specifies the maximum distance that the
+                                                                  location associated with a video can be from that
+                                                                  point for the video to still be included in the search
+                                                                  results.</li>
+                                                      </ul>The API returns an error if your request specifies a value
+                                                      for the <code dir="ltr" translate="no">location</code> parameter
+                                                      but does not also specify a value for the <code dir="ltr"
+                                                            translate="no">locationRadius</code>
+                                                      parameter.<br /><br /><strong>Note:</strong> If you specify a
+                                                      value for this parameter, you must also set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code> parameter's
+                                                      value to <code dir="ltr" translate="no">video</code>.
+                                                </td>
+                                          </tr>
+                                          <tr id="locationRadius">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">locationRadius</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>locationRadius</strong></code>
+                                                      parameter, in conjunction with the <code dir="ltr"
+                                                            translate="no">location</code> parameter, defines a circular
+                                                      geographic area.<br /><br />The parameter value must be a floating
+                                                      point number followed by a measurement unit. Valid measurement
+                                                      units are <code dir="ltr" translate="no">m</code>, <code dir="ltr"
+                                                            translate="no">km</code>, <code dir="ltr"
+                                                            translate="no">ft</code>, and <code dir="ltr"
+                                                            translate="no">mi</code>. For example, valid parameter
+                                                      values include <code dir="ltr" translate="no">1500m</code>, <code
+                                                            dir="ltr" translate="no">5km</code>, <code dir="ltr"
+                                                            translate="no">10000ft</code>, and <code dir="ltr"
+                                                            translate="no">0.75mi</code>. The API does not support <code
+                                                            dir="ltr" translate="no">locationRadius</code> parameter
+                                                      values larger than 1000
+                                                      kilometers.<br /><br /><strong>Note:</strong> See the definition
+                                                      of the <code dir="ltr"
+                                                            translate="no"><a href="#location">location</a></code>
+                                                      parameter for more information.</td>
+                                          </tr>
+                                          <tr id="maxResults">
+                                                <td><code dir="ltr" itemprop="property" translate="no">maxResults</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr"
+                                                            translate="no">unsigned integer</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>maxResults</strong></code> parameter
+                                                      specifies the maximum number of items that should be returned in
+                                                      the result set. Acceptable values are <code dir="ltr"
+                                                            translate="no">0</code> to <code dir="ltr"
+                                                            translate="no">50</code>, inclusive. The default value is
+                                                      <code dir="ltr" translate="no">5</code>.</td>
+                                          </tr>
+                                          <tr id="onBehalfOfContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">onBehalfOfContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. <strong>Note:</strong> This parameter is
+                                                      intended exclusively for YouTube content partners.<br /><br />The
+                                                      <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter indicates that the request's authorization credentials
+                                                      identify a YouTube CMS user who is acting on behalf of the content
+                                                      owner specified in the parameter value. This parameter is intended
+                                                      for YouTube content partners that own and manage many different
+                                                      YouTube channels. It allows content owners to authenticate once
+                                                      and get access to all their video and channel data, without having
+                                                      to provide authentication credentials for each individual channel.
+                                                      The CMS account that the user authenticates with must be linked to
+                                                      the specified YouTube content owner.</td>
+                                          </tr>
+                                          <tr id="order">
+                                                <td><code dir="ltr" itemprop="property" translate="no">order</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>order</strong></code>
+                                                      parameter specifies the method that will be used to order
+                                                      resources in the API response. The default value is <code
+                                                            dir="ltr" translate="no">relevance</code>.<br><br>Acceptable
+                                                      values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>date</strong></code> –
+                                                                  Resources are sorted in reverse chronological order
+                                                                  based on the date they were created.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>rating</strong></code> –
+                                                                  Resources are sorted from highest to lowest rating.
+                                                            </li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>relevance</strong></code>
+                                                                  – Resources are sorted based on their relevance to the
+                                                                  search query. This is the default value for this
+                                                                  parameter.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>title</strong></code> –
+                                                                  Resources are sorted alphabetically by title.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>videoCount</strong></code>
+                                                                  – Channels are sorted in descending order of their
+                                                                  number of uploaded videos.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>viewCount</strong></code>
+                                                                  – Resources are sorted from highest to lowest number
+                                                                  of views. For live broadcasts, videos are sorted by
+                                                                  number of concurrent viewers while the broadcasts are
+                                                                  ongoing.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="pageToken">
+                                                <td><code dir="ltr" itemprop="property" translate="no">pageToken</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>pageToken</strong></code> parameter
+                                                      identifies a specific page in the result set that should be
+                                                      returned. In an API response, the <code dir="ltr"
+                                                            translate="no">nextPageToken</code> and <code dir="ltr"
+                                                            translate="no">prevPageToken</code> properties identify
+                                                      other pages that could be retrieved.</td>
+                                          </tr>
+                                          <tr id="publishedAfter">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">publishedAfter</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">datetime</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>publishedAfter</strong></code>
+                                                      parameter indicates that the API response should only contain
+                                                      resources created at or after the specified time. The value is an
+                                                      RFC 3339 formatted date-time value (1970-01-01T00:00:00Z).</td>
+                                          </tr>
+                                          <tr id="publishedBefore">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">publishedBefore</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">datetime</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>publishedBefore</strong></code>
+                                                      parameter indicates that the API response should only contain
+                                                      resources created before or at the specified time. The value is an
+                                                      RFC 3339 formatted date-time value (1970-01-01T00:00:00Z).</td>
+                                          </tr>
+                                          <tr id="q">
+                                                <td><code dir="ltr" itemprop="property" translate="no">q</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>q</strong></code>
+                                                      parameter specifies the query term to search for.<br /><br />Your
+                                                      request can also use the Boolean NOT (<code dir="ltr"
+                                                            translate="no">-</code>) and OR (<code dir="ltr"
+                                                            translate="no">|</code>) operators to exclude videos or to
+                                                      find videos that are associated with one of several search terms.
+                                                      For example, to search for videos matching either "boating" or
+                                                      "sailing", set the <code dir="ltr" translate="no">q</code>
+                                                      parameter value to <code dir="ltr"
+                                                            translate="no">boating|sailing</code>. Similarly, to search
+                                                      for videos matching either "boating" or "sailing" but not
+                                                      "fishing", set the <code dir="ltr" translate="no">q</code>
+                                                      parameter value to <code dir="ltr"
+                                                            translate="no">boating|sailing -fishing</code>. Note that
+                                                      the pipe character must be URL-escaped when it is sent in your API
+                                                      request. The URL-escaped value for the pipe character is <code
+                                                            dir="ltr" translate="no">%7C</code>.</td>
+                                          </tr>
+                                          <tr id="regionCode">
+                                                <td><code dir="ltr" itemprop="property" translate="no">regionCode</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>regionCode</strong></code> parameter
+                                                      instructs the API to return search results for videos that can be
+                                                      viewed in the specified country. The parameter value is an <a
+                                                            href="http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm">ISO
+                                                            3166-1 alpha-2</a> country code.</td>
+                                          </tr>
+                                          <tr id="relevanceLanguage">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">relevanceLanguage</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>relevanceLanguage</strong></code>
+                                                      parameter instructs the API to return search results that are most
+                                                      relevant to the specified language. The parameter value is
+                                                      typically an <a
+                                                            href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO
+                                                            639-1 two-letter language code</a>. However, you should use
+                                                      the values <code dir="ltr" translate="no">zh-Hans</code> for
+                                                      simplified Chinese and <code dir="ltr"
+                                                            translate="no">zh-Hant</code> for traditional Chinese.
+                                                      Please note that results in other languages will still be returned
+                                                      if they are highly relevant to the search query term.</td>
+                                          </tr>
+                                          <tr id="safeSearch">
+                                                <td><code dir="ltr" itemprop="property" translate="no">safeSearch</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>safeSearch</strong></code> parameter
+                                                      indicates whether the search results should include restricted
+                                                      content as well as standard content.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>moderate</strong></code>
+                                                                  – YouTube will filter some content from search results
+                                                                  and, at the least, will filter content that is
+                                                                  restricted in your locale. Based on their content,
+                                                                  search results could be removed from search results or
+                                                                  demoted in search results. This is the default
+                                                                  parameter value.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>none</strong></code> –
+                                                                  YouTube will not filter the search result set.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>strict</strong></code> –
+                                                                  YouTube will try to exclude all restricted content
+                                                                  from the search result set. Based on their content,
+                                                                  search results could be removed from search results or
+                                                                  demoted in search results.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="topicId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">topicId</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>topicId</strong></code>
+                                                      parameter indicates that the API response should only contain
+                                                      resources associated with the specified topic. The value
+                                                      identifies a Freebase topic ID.<br /><br /><b>Important:</b> Due
+                                                      to the deprecation of Freebase and the Freebase API, the <code
+                                                            dir="ltr" translate="no">topicId</code> parameter started
+                                                      working differently as of February 27, 2017. At that time, YouTube
+                                                      started supporting a small set of curated topic IDs, and you can
+                                                      only use that smaller set of IDs as values for this
+                                                      parameter.<br /><br />
+                                                      <section class="expandable" id="supported-topic-ids"
+                                                            style="margin-left: 0;">
+                                                            <a class="expand-control" href="#">See topic IDs supported
+                                                                  as of February 15, 2017</a>
+                                                            <table class="responsive">
+                                                                  <tr>
+                                                                        <th colspan="2">Topics</th>
+                                                                  </tr>
+                                                                  <tr class="alt">
+                                                                        <td colspan="2"><b>Music topics</b></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/04rlf</td>
+                                                                        <td>Music (parent topic)</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/02mscn</td>
+                                                                        <td>Christian music</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0ggq0m</td>
+                                                                        <td>Classical music</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/01lyv</td>
+                                                                        <td>Country</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/02lkt</td>
+                                                                        <td>Electronic music</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0glt670</td>
+                                                                        <td>Hip hop music</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/05rwpb</td>
+                                                                        <td>Independent music</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/03_d0</td>
+                                                                        <td>Jazz</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/028sqc</td>
+                                                                        <td>Music of Asia</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0g293</td>
+                                                                        <td>Music of Latin America</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/064t9</td>
+                                                                        <td>Pop music</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/06cqb</td>
+                                                                        <td>Reggae</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/06j6l</td>
+                                                                        <td>Rhythm and blues</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/06by7</td>
+                                                                        <td>Rock music</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0gywn</td>
+                                                                        <td>Soul music</td>
+                                                                  </tr>
+                                                                  <tr class="alt">
+                                                                        <td colspan="2"><b>Gaming topics</b></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0bzvm2</td>
+                                                                        <td>Gaming (parent topic)</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/025zzc</td>
+                                                                        <td>Action game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/02ntfj</td>
+                                                                        <td>Action-adventure game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0b1vjn</td>
+                                                                        <td>Casual game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/02hygl</td>
+                                                                        <td>Music video game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/04q1x3q</td>
+                                                                        <td>Puzzle video game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/01sjng</td>
+                                                                        <td>Racing video game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0403l3g</td>
+                                                                        <td>Role-playing video game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/021bp2</td>
+                                                                        <td>Simulation video game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/022dc6</td>
+                                                                        <td>Sports game</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/03hf_rm</td>
+                                                                        <td>Strategy video game</td>
+                                                                  </tr>
+                                                                  <tr class="alt">
+                                                                        <td colspan="2"><b>Sports topics</b></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/06ntj</td>
+                                                                        <td>Sports (parent topic)</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0jm_</td>
+                                                                        <td>American football</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/018jz</td>
+                                                                        <td>Baseball</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/018w8</td>
+                                                                        <td>Basketball</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/01cgz</td>
+                                                                        <td>Boxing</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/09xp_</td>
+                                                                        <td>Cricket</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/02vx4</td>
+                                                                        <td>Football</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/037hz</td>
+                                                                        <td>Golf</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/03tmr</td>
+                                                                        <td>Ice hockey</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/01h7lh</td>
+                                                                        <td>Mixed martial arts</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0410tth</td>
+                                                                        <td>Motorsport</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/07bs0</td>
+                                                                        <td>Tennis</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/07_53</td>
+                                                                        <td>Volleyball</td>
+                                                                  </tr>
+                                                                  <tr class="alt">
+                                                                        <td colspan="2"><b>Entertainment topics</b></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/02jjt</td>
+                                                                        <td>Entertainment (parent topic)</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/09kqc</td>
+                                                                        <td>Humor</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/02vxn</td>
+                                                                        <td>Movies</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/05qjc</td>
+                                                                        <td>Performing arts</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/066wd</td>
+                                                                        <td>Professional wrestling</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0f2f9</td>
+                                                                        <td>TV shows</td>
+                                                                  </tr>
+                                                                  <tr class="alt">
+                                                                        <td colspan="2"><b>Lifestyle topics</b></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/019_rr</td>
+                                                                        <td>Lifestyle (parent topic)</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/032tl</td>
+                                                                        <td>Fashion</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/027x7n</td>
+                                                                        <td>Fitness</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/02wbm</td>
+                                                                        <td>Food</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/03glg</td>
+                                                                        <td>Hobby</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/068hy</td>
+                                                                        <td>Pets</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/041xxh</td>
+                                                                        <td>Physical attractiveness [Beauty]</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/07c1v</td>
+                                                                        <td>Technology</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/07bxq</td>
+                                                                        <td>Tourism</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/07yv9</td>
+                                                                        <td>Vehicles</td>
+                                                                  </tr>
+                                                                  <tr class="alt">
+                                                                        <td colspan="2"><b>Society topics</b></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/098wr</td>
+                                                                        <td>Society (parent topic)</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/09s1f</td>
+                                                                        <td>Business</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/0kt51</td>
+                                                                        <td>Health</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/01h6rj</td>
+                                                                        <td>Military</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/05qt0</td>
+                                                                        <td>Politics</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/06bvp</td>
+                                                                        <td>Religion</td>
+                                                                  </tr>
+                                                                  <tr class="alt">
+                                                                        <td colspan="2"><b>Other topics</b></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                        <td>/m/01k8wb</td>
+                                                                        <td>Knowledge</td>
+                                                                  </tr>
+                                                            </table>
+                                                      </section>
+                                                </td>
+                                          </tr>
+                                          <tr id="type">
+                                                <td><code dir="ltr" itemprop="property" translate="no">type</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>type</strong></code>
+                                                      parameter restricts a search query to only retrieve a particular
+                                                      type of resource. The value is a comma-separated list of resource
+                                                      types. The default value is <code dir="ltr"
+                                                            translate="no">video,channel,playlist</code>.<br><br>Acceptable
+                                                      values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>channel</strong></code>
+                                                            </li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>playlist</strong></code>
+                                                            </li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>video</strong></code>
+                                                            </li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoCaption">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoCaption</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoCaption</strong></code>
+                                                      parameter indicates whether the API should filter video search
+                                                      results based on whether they have captions. If you specify a
+                                                      value for this parameter, you must also set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code> parameter's
+                                                      value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> – Do
+                                                                  not filter results based on caption availability.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>closedCaption</strong></code>
+                                                                  – Only include videos that have captions.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>none</strong></code> –
+                                                                  Only include videos that do not have captions.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoCategoryId">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoCategoryId</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoCategoryId</strong></code>
+                                                      parameter filters video search results based on their <a
+                                                            href="/youtube/v3/docs/videoCategories">category</a>. If you
+                                                      specify a value for this parameter, you must also set the <code
+                                                            dir="ltr" translate="no"><a href="#type">type</a></code>
+                                                      parameter's value to <code dir="ltr" translate="no">video</code>.
+                                                </td>
+                                          </tr>
+                                          <tr id="videoDefinition">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoDefinition</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoDefinition</strong></code>
+                                                      parameter lets you restrict a search to only include either high
+                                                      definition (HD) or standard definition (SD) videos. HD videos are
+                                                      available for playback in at least 720p, though higher
+                                                      resolutions, like 1080p, might also be available. If you specify a
+                                                      value for this parameter, you must also set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code> parameter's
+                                                      value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> –
+                                                                  Return all videos, regardless of their resolution.
+                                                            </li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>high</strong></code> –
+                                                                  Only retrieve HD videos.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>standard</strong></code>
+                                                                  – Only retrieve videos in standard definition.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoDimension">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoDimension</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoDimension</strong></code>
+                                                      parameter lets you restrict a search to only retrieve 2D or 3D
+                                                      videos. If you specify a value for this parameter, you must also
+                                                      set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code> parameter's
+                                                      value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>2d</strong></code> –
+                                                                  Restrict search results to exclude 3D videos.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>3d</strong></code> –
+                                                                  Restrict search results to only include 3D videos.
+                                                            </li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> –
+                                                                  Include both 3D and non-3D videos in returned results.
+                                                                  This is the default value.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoDuration">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoDuration</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoDuration</strong></code>
+                                                      parameter filters video search results based on their duration. If
+                                                      you specify a value for this parameter, you must also set the
+                                                      <code dir="ltr" translate="no"><a href="#type">type</a></code>
+                                                      parameter's value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> – Do
+                                                                  not filter video search results based on their
+                                                                  duration. This is the default value.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>long</strong></code> –
+                                                                  Only include videos longer than 20 minutes.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>medium</strong></code> –
+                                                                  Only include videos that are between four and 20
+                                                                  minutes long (inclusive).</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>short</strong></code> –
+                                                                  Only include videos that are less than four minutes
+                                                                  long.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoEmbeddable">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoEmbeddable</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoEmbeddable</strong></code>
+                                                      parameter lets you to restrict a search to only videos that can be
+                                                      embedded into a webpage. If you specify a value for this
+                                                      parameter, you must also set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code> parameter's
+                                                      value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> –
+                                                                  Return all videos, embeddable or not.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>true</strong></code> –
+                                                                  Only retrieve embeddable videos.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoLicense">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoLicense</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoLicense</strong></code>
+                                                      parameter filters search results to only include videos with a
+                                                      particular license. YouTube lets video uploaders choose to attach
+                                                      either the Creative Commons license or the standard YouTube
+                                                      license to each of their videos. If you specify a value for this
+                                                      parameter, you must also set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code> parameter's
+                                                      value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> –
+                                                                  Return all videos, regardless of which license they
+                                                                  have, that match the query parameters.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>creativeCommon</strong></code>
+                                                                  – Only return videos that have a Creative Commons
+                                                                  license. Users can reuse videos with this license in
+                                                                  other videos that they create. <a
+                                                                        href="http://www.google.com/support/youtube/bin/answer.py?answer=1284989">Learn
+                                                                        more</a>.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>youtube</strong></code> –
+                                                                  Only return videos that have the standard YouTube
+                                                                  license.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoPaidProductPlacement">
+                                                <td>
+                                                      <nobr><code dir="ltr" itemprop="property"
+                                                                  translate="no">videoPaidProductPlacement</code></nobr>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoPaidProductPlacement</strong></code>
+                                                      parameter filters search results
+                                                      to only include videos that the creator has denoted as having a
+                                                      paid promotion. If you specify
+                                                      a value for this parameter, you must also set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code>
+                                                      parameter's value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> –
+                                                                  Return all videos, regardless of whether they contain
+                                                                  paid promotions.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>true</strong></code> –
+                                                                  Only retrieve videos with paid promotions.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoSyndicated">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoSyndicated</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoSyndicated</strong></code>
+                                                      parameter lets you to restrict a search to only videos that can be
+                                                      played outside youtube.com. If you specify a value for this
+                                                      parameter, you must also set the <code dir="ltr"
+                                                            translate="no"><a href="#type">type</a></code> parameter's
+                                                      value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> –
+                                                                  Return all videos, syndicated or not.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>true</strong></code> –
+                                                                  Only retrieve syndicated videos.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoType">
+                                                <td><code dir="ltr" itemprop="property" translate="no">videoType</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoType</strong></code> parameter
+                                                      lets you restrict a search to a particular type of videos. If you
+                                                      specify a value for this parameter, you must also set the <code
+                                                            dir="ltr" translate="no"><a href="#type">type</a></code>
+                                                      parameter's value to <code dir="ltr"
+                                                            translate="no">video</code>.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>any</strong></code> –
+                                                                  Return all videos.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>episode</strong></code> –
+                                                                  Only retrieve episodes of shows.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>movie</strong></code> –
+                                                                  Only retrieve movies.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>Do not provide a request body when calling this method.</p>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <section id="resource">
+                              <p>If successful, this method returns a response body with the following structure:</p>
+                              <div></div><devsite-code>
+                                    <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json"
+                                          is-upgraded="" style="max-height: 500px; overflow: auto" syntax="Objective-C">{
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#searchListResponse"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">etag</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"nextPageToken"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"prevPageToken"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"regionCode"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"pageInfo"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"totalResults"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">integer</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"resultsPerPage"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">integer</span></var>
+<span class="devsite-syntax-w">  </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"items"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">    </span><a class="resource-link" href="/youtube/v3/docs/search#resource" resource="search"><span class="devsite-syntax-n">search</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Resource</span></a>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">]</span>
+}</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="properties">
+                              <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                              <p>The following table defines the properties that appear in a search result:</p>
+                              <table class="responsive properties" id="property-table">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Properties</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr id="kind">
+                                                <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Identifies the API resource's type. The value will be <code
+                                                            dir="ltr" translate="no">youtube#searchListResponse</code>.
+                                                </td>
+                                          </tr>
+                                          <tr id="etag">
+                                                <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                      The Etag of this resource.</td>
+                                          </tr>
+                                          <tr id="nextPageToken">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">nextPageToken</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The token that can be used as the value of the <code dir="ltr"
+                                                            translate="no">pageToken</code> parameter to retrieve the
+                                                      next page in the result set.</td>
+                                          </tr>
+                                          <tr id="prevPageToken">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">prevPageToken</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The token that can be used as the value of the <code dir="ltr"
+                                                            translate="no">pageToken</code> parameter to retrieve the
+                                                      previous page in the result set.</td>
+                                          </tr>
+                                          <tr id="regionCode">
+                                                <td><code dir="ltr" itemprop="property" translate="no">regionCode</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The region code that was used for the search query. The property
+                                                      value is a two-letter ISO country code that identifies the region.
+                                                      The <code dir="ltr"
+                                                            translate="no"><a href="/youtube/v3/docs/i18nRegions/list">i18nRegions.list</a></code>
+                                                      method returns a list of supported regions. The default value is
+                                                      <code dir="ltr" translate="no">US</code>. If a non-supported
+                                                      region is specified, YouTube might still select another region,
+                                                      rather than the default value, to handle the query.</td>
+                                          </tr>
+                                          <tr id="pageInfo">
+                                                <td><code dir="ltr" itemprop="property" translate="no">pageInfo</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                      The <code dir="ltr" translate="no">pageInfo</code> object
+                                                      encapsulates paging information for the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo.totalResults">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">pageInfo.</span>totalResults</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">integer</code><br />
+                                                      The total number of results in the result set.Please note that the
+                                                      value is an approximation and may not represent an exact value. In
+                                                      addition, the maximum value is 1,000,000.<br /><br />You should
+                                                      not use this value to create pagination links. Instead, use the
+                                                      <code dir="ltr" translate="no">nextPageToken</code> and <code
+                                                            dir="ltr" translate="no">prevPageToken</code> property
+                                                      values to determine whether to show pagination links.</td>
+                                          </tr>
+                                          <tr id="pageInfo.resultsPerPage">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">pageInfo.</span>resultsPerPage</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">integer</code><br />
+                                                      The number of results included in the API response.</td>
+                                          </tr>
+                                          <tr id="items[]">
+                                                <td><code dir="ltr" itemprop="property" translate="no">items[]</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">list</code><br />
+                                                      A list of results that match the search criteria.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                  </section>
+                  <section id="examples">
+                        <h2 data-text="Examples" id="examples" tabindex="-1">Examples</h2>
+                        <p class="note"><strong>Note:</strong> The following code samples may not represent all
+                              supported programming languages. See the <a href="/youtube/v3/libraries">client
+                                    libraries</a> documentation for a list of supported languages.</p>
+                        <div class="ds-selector-tabs" data-ds-scope="code-sample" id="code-sample">
+                              <section>
+                                    <h3 data-text="Apps Script" id="apps-script" tabindex="-1">Apps Script</h3>
+                                    This function searches for videos related to the keyword 'dogs'. The video IDs and
+                                    titles of the search results are logged to Apps Script's log.<br /><br /> Note that
+                                    this sample limits the results to 25. To return more results, pass additional
+                                    parameters as documented here:
+                                    https://developers.google.com/youtube/v3/docs/search/list
+
+                                    <div></div><devsite-code>
+                                          <pre class="devsite-click-to-copy" dir="ltr" is-upgraded=""
+                                                syntax="Transact-SQL"
+                                                translate="no"><span class="devsite-syntax-k">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchByKeyword</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nf">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">results</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-k">Search</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">list</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'id,snippet'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">{</span><span class="devsite-syntax-nl">q</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'dogs'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nl">maxResults</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">25</span><span class="devsite-syntax-err">}</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nf">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">i</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">results</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">items</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nf">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">item</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">results</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">items</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-n">i</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">Logger</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nf">log</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'[%s] Title: %s'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">id</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">videoId</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">title</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-err">}</span>
+<span class="devsite-syntax-err">}</span><div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/apps-script/youtube.gs" data-indented-block="function searchByKeyword" data-label="youtube/api-samples/apps-script/youtube.gs" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/apps-script/youtube.gs" target="_top"><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">gs</span></a></div></pre>
+                                    </devsite-code>
+                              </section>
+                              <section>
+                                    <h3 data-text="Go" id="go" tabindex="-1">Go</h3>
+                                    This code sample calls the API's <code dir="ltr" translate="no">search.list</code>
+                                    method to retrieve search results associated
+                                    with a particular keyword.
+                                    <p>This example uses the <a href="https://github.com/google/google-api-go-client"
+                                                target="_blank">Go client library</a>.</p>
+                                    <div></div><devsite-code>
+                                          <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Go"
+                                                translate="no"><span class="devsite-syntax-kn">package</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">main</span>
+
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"flag"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"fmt"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"log"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"net/http"</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"google.golang.org/api/googleapi/transport"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"google.golang.org/api/youtube/v3"</span>
+<span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-kd">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">query</span><span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">String</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"query"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Google"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Search term"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">maxResults</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Int64</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"max-results"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">25</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Max YouTube results"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">developerKey</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"YOUR DEVELOPER KEY"</span>
+
+<span class="devsite-syntax-kd">func</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">main</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Parse</span><span class="devsite-syntax-p">()</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span>&amp;<span class="devsite-syntax-nx">http</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Client</span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">Transport</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>&amp;<span class="devsite-syntax-nx">transport</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">APIKey</span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-nx">Key</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">developerKey</span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">New</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">client</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">!=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">nil</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Fatalf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Error creating new YouTube client: %v"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-c1">// Make the API call to YouTube.</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Search</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">List</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"id,snippet"</span><span class="devsite-syntax-p">).</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">Q</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">query</span><span class="devsite-syntax-p">).</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">MaxResults</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">maxResults</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">response</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Do</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">handleError</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-c1">// Group video, channel, and playlist results in separate lists.</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">videos</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">make</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-kd">map</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">]</span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">channels</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">make</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-kd">map</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">]</span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">playlists</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">make</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-kd">map</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">]</span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-c1">// Iterate through each item and add it to the correct list.</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">_</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">item</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">range</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">response</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Items</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-k">switch</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Id</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Kind</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-k">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#video"</span><span class="devsite-syntax-p">:</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">videos</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-nx">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Id</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">VideoId</span><span class="devsite-syntax-p">]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Title</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-k">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#channel"</span><span class="devsite-syntax-p">:</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">channels</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-nx">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Id</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">ChannelId</span><span class="devsite-syntax-p">]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Title</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-k">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#playlist"</span><span class="devsite-syntax-p">:</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">playlists</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-nx">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Id</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">PlaylistId</span><span class="devsite-syntax-p">]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">item</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Title</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">printIDs</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Videos"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">videos</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">printIDs</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Channels"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">channels</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">printIDs</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Playlists"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlists</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-c1">// Print the ID and title of each result in a list as well as a name that</span>
+<span class="devsite-syntax-c1">// identifies the list. For example, print the word section name "Videos"</span>
+<span class="devsite-syntax-c1">// above a list of video search results, followed by the video ID and title</span>
+<span class="devsite-syntax-c1">// of each matching video.</span>
+<span class="devsite-syntax-kd">func</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">printIDs</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">sectionName</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">matches</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kd">map</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">]</span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">fmt</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Printf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"%v:\n"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">sectionName</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">id</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">title</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">range</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">matches</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">fmt</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Printf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"[%v] %v\n"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">id</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">title</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">fmt</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Printf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"\n\n"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-p">}</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/go/search_by_keyword.go" data-label="youtube/api-samples/go/search_by_keyword.go" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/go/search_by_keyword.go" target="_top"><span class="devsite-syntax-nx">search_by_keyword</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-k">go</span></a></div></pre>
+                                    </devsite-code>
+                              </section>
+                              <section>
+                                    <h3 data-text=".NET" id=".net" tabindex="-1">.NET</h3>
+                                    The following code sample calls the API's <code dir="ltr"
+                                          translate="no">search.list</code> method to retrieve search results
+                                    associated with a particular keyword.
+                                    <p>This example uses the <a href="/api-client-library/dotnet" target="_blank">.NET
+                                                client library</a>.</p>
+                                    <div></div><devsite-code>
+                                          <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="GDScript"
+                                                translate="no"><span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Collections</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Generic</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">IO</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Reflection</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Threading</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Threading</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Tasks</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Auth</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">OAuth2</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Services</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Upload</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Util</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Store</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Data</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-n">namespace</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Samples</span>
+<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span>&lt;<span class="devsite-syntax-n">summary</span>&gt;
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Data</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">sample</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">search</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">by</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">keyword</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Relies</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">on</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">APIs</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Library</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">NET</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">v1</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-mf">7.0</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">or</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">higher</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">See</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">https</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-n">developers</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">com</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">api</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">library</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">dotnet</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">get_started</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Set</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ApiKey</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">to</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">key</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">value</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">APIs</span><span class="devsite-syntax-w"> &amp; </span><span class="devsite-syntax-n">auth</span><span class="devsite-syntax-w"> &gt; </span><span class="devsite-syntax-n">Registered</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">apps</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">tab</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">of</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w">   </span><span class="devsite-syntax-n">https</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-n">cloud</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">com</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">console</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Please</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ensure</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">that</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">you</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">have</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">enabled</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Data</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">your</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">project</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span>&lt;<span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">summary</span>&gt;
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">internal</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">class</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Search</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-n">STAThread</span><span class="devsite-syntax-p">]</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">static</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb devsite-syntax-nb-Type">void</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Main</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">string</span><span class="devsite-syntax-p">[]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">args</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"YouTube Data API: Search"</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"========================"</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">try</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Search</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Run</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Wait</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">catch</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">AggregateException</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ex</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">foreach</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ex</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">InnerExceptions</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Error: "</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">+</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Message</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Press any key to continue..."</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ReadKey</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">private</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Task</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Run</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtubeService</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTubeService</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">BaseClientService</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Initializer</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">ApiKey</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"REPLACE_ME"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">ApplicationName</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">this</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">GetType</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ToString</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">});</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchListRequest</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtubeService</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Search</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">List</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"snippet"</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">searchListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Q</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Google"</span><span class="devsite-syntax-p">;</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Replace</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">with</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">your</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">search</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">term</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">searchListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">MaxResults</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">50</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Call</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">search</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">list</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">method</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">to</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">retrieve</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">results</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">matching</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">specified</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">query</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">term</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchListResponse</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ExecuteAsync</span><span class="devsite-syntax-p">();</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">List&lt;string&gt;</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">List&lt;string&gt;</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">List&lt;string&gt;</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channels</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">List&lt;string&gt;</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">List&lt;string&gt;</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlists</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">List&lt;string&gt;</span><span class="devsite-syntax-p">();</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Add</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">each</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">result</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">to</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">appropriate</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">list</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">and</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">then</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">display</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">lists</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">of</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">matching</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channels</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">and</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlists</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">foreach</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchResult</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchListResponse</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Items</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">switch</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">searchResult</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Id</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Kind</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"youtube#video"</span><span class="devsite-syntax-p">:</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Add</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nb devsite-syntax-nb-Type">String</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Format</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"{0} ({1})"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchResult</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Title</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchResult</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Id</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">VideoId</span><span class="devsite-syntax-p">));</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-k">break</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"youtube#channel"</span><span class="devsite-syntax-p">:</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">channels</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Add</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nb devsite-syntax-nb-Type">String</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Format</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"{0} ({1})"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchResult</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Title</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchResult</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Id</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ChannelId</span><span class="devsite-syntax-p">));</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-k">break</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"youtube#playlist"</span><span class="devsite-syntax-p">:</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">playlists</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Add</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nb devsite-syntax-nb-Type">String</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Format</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"{0} ({1})"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchResult</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Title</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">searchResult</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Id</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">PlaylistId</span><span class="devsite-syntax-p">));</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-k">break</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nb devsite-syntax-nb-Type">String</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Format</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Videos:</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">{0}</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">string</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Join</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-p">)));</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nb devsite-syntax-nb-Type">String</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Format</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Channels:</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">{0}</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">string</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Join</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channels</span><span class="devsite-syntax-p">)));</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nb devsite-syntax-nb-Type">String</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Format</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Playlists:</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">{0}</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">string</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Join</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlists</span><span class="devsite-syntax-p">)));</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/dotnet/Search.cs" data-label="youtube/api-samples/dotnet/Search.cs" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/dotnet/Search.cs" target="_top"><span class="devsite-syntax-n">Search</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">cs</span></a></div></pre>
+                                    </devsite-code>
+                              </section>
+                              <section>
+                                    <h3 data-text="Ruby" id="ruby" tabindex="-1">Ruby</h3>
+                                    This sample calls the API's <code dir="ltr" translate="no">search.list</code> method
+                                    to retrieve search results
+                                    associated with a particular keyword.
+                                    <p>This example uses the <a href="/api-client-library/ruby" target="_blank">Ruby
+                                                client library</a>.</p>
+                                    <div></div><devsite-code>
+                                          <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Ruby"
+                                                translate="no"><span class="devsite-syntax-ch">#!/usr/bin/ruby</span>
+
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'rubygems'</span>
+<span class="devsite-syntax-n">gem</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google-api-client'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'&gt;0.7'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'trollop'</span>
+
+<span class="devsite-syntax-c1"># Set DEVELOPER_KEY to the API key value from the APIs &amp; auth &gt; Credentials</span>
+<span class="devsite-syntax-c1"># tab of</span>
+<span class="devsite-syntax-c1"># {{ Google Cloud Console }} &lt;{{ https://cloud.google.com/console }}</span>&gt;
+<span class="devsite-syntax-c1"># Please ensure that you have enabled the YouTube Data API for your project.</span>
+<span class="devsite-syntax-no">DEVELOPER_KEY</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'REPLACE_ME'</span>
+<span class="devsite-syntax-no">YOUTUBE_API_SERVICE_NAME</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'youtube'</span>
+<span class="devsite-syntax-no">YOUTUBE_API_VERSION</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'v3'</span>
+
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">get_service</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-ss">:key</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">DEVELOPER_KEY</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-ss">:authorization</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-kp">nil</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-ss">:application_name</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-vg">$PROGRAM_NAME</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-ss">:application_version</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'1.0.0'</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">discovered_api</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-no">YOUTUBE_API_SERVICE_NAME</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">YOUTUBE_API_VERSION</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span>
+<span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">main</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Trollop</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-n">options</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">do</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">opt</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:q</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Search term'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">String</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:default</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Google'</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">opt</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:max_results</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Max results'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:int</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:default</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">25</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">get_service</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">begin</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-c1"># Call the search.list method to retrieve results matching the specified</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-c1"># query term.</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">search_response</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">execute!</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:api_method</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">search</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">list</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:parameters</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:part</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'snippet'</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:q</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:q</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:maxResults</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:max_results</span><span class="devsite-syntax-o">]</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">[]</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">channels</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">[]</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">playlists</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">[]</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-c1"># Add each result to the appropriate list, and then display the lists of</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-c1"># matching videos, channels, and playlists.</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">search_response</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">data</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">items</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">each</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">do</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">|</span><span class="devsite-syntax-n">search_result</span><span class="devsite-syntax-o">|</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">search_result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">id</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">kind</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">when</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'youtube#video'</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-w"> &lt;&lt; </span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">search_result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">snippet</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">title</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2"> (</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">search_result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">id</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">videoId</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2">)"</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">when</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'youtube#channel'</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">channels</span><span class="devsite-syntax-w"> &lt;&lt; </span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">search_result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">snippet</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">title</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2"> (</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">search_result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">id</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">channelId</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2">)"</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">when</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'youtube#playlist'</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">playlists</span><span class="devsite-syntax-w"> &lt;&lt; </span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">search_result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">snippet</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">title</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2"> (</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">search_result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">id</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">playlistId</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2">)"</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">end</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Videos:</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Channels:</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channels</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Playlists:</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlists</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s2">"</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">rescue</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">TransmissionError</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">body</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">end</span>
+<span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-n">main</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/ruby/search.rb" data-label="youtube/api-samples/ruby/search.rb" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/ruby/search.rb" target="_top"><span class="devsite-syntax-n">search</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">rb</span></a></div></pre>
+                                    </devsite-code>
+                              </section>
+                        </div>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The following table identifies error messages that the API could return in response to a call
+                              to this method. Please see the <a href="/youtube/v3/docs/errors">error message</a>
+                              documentation for more detail.</p>
+                        <table class="matchpre" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th>Error type</th>
+                                          <th>Error detail</th>
+                                          <th>Description</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="youtube.search.list-badRequest-invalidChannelId">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">invalidChannelId</code></td>
+                                          <td class="error-cause">The <code dir="ltr" translate="no">channelId</code>
+                                                parameter specified an invalid channel ID.</td>
+                                    </tr>
+                                    <tr id="youtube.search.list-badRequest-invalidLocation">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">invalidLocation</code></td>
+                                          <td class="error-cause">The <code dir="ltr" translate="no">location</code>
+                                                and/or <code dir="ltr" translate="no">locationRadius</code> parameter
+                                                value was formatted incorrectly.</td>
+                                    </tr>
+                                    <tr id="youtube.search.list-badRequest-invalidRelevanceLanguage">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">invalidRelevanceLanguage</code></td>
+                                          <td class="error-cause">The <code dir="ltr"
+                                                      translate="no">relevanceLanguage</code> parameter value was
+                                                formatted incorrectly.</td>
+                                    </tr>
+                                    <tr id="youtube.search.list-badRequest-invalidSearchFilter">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">invalidSearchFilter</code></td>
+                                          <td class="error-cause">The request contains an invalid combination of search
+                                                filters and/or restrictions. Note that you must set the <code dir="ltr"
+                                                      translate="no">type</code> parameter to <code dir="ltr"
+                                                      translate="no">video</code> if you set either the <code dir="ltr"
+                                                      translate="no">forContentOwner</code> or <code dir="ltr"
+                                                      translate="no">forMine</code> parameters to <code dir="ltr"
+                                                      translate="no">true</code>. You must also set the <code dir="ltr"
+                                                      translate="no">type</code> parameter to <code dir="ltr"
+                                                      translate="no">video</code> if you set a value for the <code
+                                                      dir="ltr" translate="no">eventType</code>, <code dir="ltr"
+                                                      translate="no">videoCaption</code>, <code dir="ltr"
+                                                      translate="no">videoCategoryId</code>, <code dir="ltr"
+                                                      translate="no">videoDefinition</code>, <code dir="ltr"
+                                                      translate="no">videoDimension</code>, <code dir="ltr"
+                                                      translate="no">videoDuration</code>, <code dir="ltr"
+                                                      translate="no">videoEmbeddable</code>, <code dir="ltr"
+                                                      translate="no">videoLicense</code>, <code dir="ltr"
+                                                      translate="no">videoSyndicated</code>, or <code dir="ltr"
+                                                      translate="no">videoType</code> parameters.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  <section id="try-it">
+                        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                              request and response.</p>
+                        <div class="devsite-apix">
+                              <div class="apis-explorer"
+                                    data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+                                    data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                    data-method-id="youtube.search.list" data-show-code-button="true"></div>
+                        </div>
+                  </section>
+                  </meta>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

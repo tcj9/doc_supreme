@@ -1,0 +1,171 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_U4">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Refresh Access Token</h1>
+              <p>This endpoint allows you to refresh long-lived Instagram User Access Tokens.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Creating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Reading</h2>
+              <p><strong><code>GET /refresh_access_token</code></strong></p>
+              <p>Refresh a long-lived accesstoken that is at least 24 hours old but has not expired. Refreshed tokens
+                are valid for 60 days from the date at which they are refreshed.</p>
+              <h3>Requirements</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Type</th>
+                    <th>Requirement</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_zG">
+                    <tr class="row_0">
+                      <td>
+                        <p>Access tokens</p>
+                      </td>
+                      <td>
+                        <p>Instagram User (long-lived)</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p>Permissions</p>
+                      </td>
+                      <td>
+                        <p><code>instagram_business_basic</code></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Request Syntax</h3>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+GET https://graph.instagram.com/refresh_access_token
+  ?grant_type=ig_refresh_token
+  &amp;access_token=&lt;LONG_LIVED_ACCESS_TOKENS&gt;</pre>
+              <h3>Query String Parameters</h3>
+              <p>Include the following query string parameters to augment the request.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Key</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_3A">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>grant_type</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Set this to <code>ig_refresh_token</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>access_token</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The valid (unexpired) long-lived Instagram User Access Token that you want to refresh.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Response</h3>
+              <p>A JSON-formatted object containing the following properties and values.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "access_token": "&lt;ACCESS_TOKEN&gt;",
+  "token_type": "&lt;TOKEN_TYPE&gt;",
+  "expires_in": &lt;EXPIRES_IN&gt;
+}
+</pre>
+              <p><strong>Response Contents</strong></p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Value Placeholder</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_TP">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>&lt;ACCESS_TOKEN&gt;</code><br />
+                          <em>Numeric string</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>A long-lived Instagram User Access Token.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>&lt;TOKEN_TYPE&gt;</code><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>bearer</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>&lt;EXPIRES_IN&gt;</code><br />
+                          <em>Integer</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The number of seconds until the long-lived token expires.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>cURL Example</h3>
+              <h4>Request</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+curl -X GET \
+  'https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&amp;access_token=F4RVB...'
+</pre>
+              <h4>Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "access_token": "c3oxd...",
+  "token_type": "bearer",
+  "expires_in": 5183944
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

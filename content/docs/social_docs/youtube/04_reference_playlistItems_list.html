@@ -1,0 +1,694 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            PlaylistItems: list<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="list" itemprop="name">
+                  <meta content="playlistItems" itemprop="path">
+                  <section id="overview">
+                        <p>Returns a collection of playlist items that match the API request parameters. You can
+                              retrieve all of the playlist items in a specified playlist or retrieve one or more
+                              playlist items by their unique IDs.</p>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of 1 unit.</p>
+                  </section>
+                  <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common
+                        use cases</h2>
+                  <style>
+                        iframe+section>h2 {
+                              margin-top: 12px;
+                        }
+                  </style>
+                  <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+                              allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+                              src="https://developers.google.com/frame/youtube/v3/docs/playlistItems/list_78ca6a4515b8b094592b3ebec59565077f0ed0bbb6be96d157ad7995288b9bdc.frame"></iframe></devsite-iframe>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">GET https://www.googleapis.com/youtube/v3/playlistItems</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The following table lists the parameters that this query supports. All of the
+                                    parameters listed are query parameters.</p>
+                              <table class="responsive details">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="required-parameters">
+                                                <td colspan="3"><b>Required parameters</b></td>
+                                          </tr>
+                                          <tr id="part">
+                                                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>part</strong></code>
+                                                      parameter specifies a comma-separated list of one or more <code
+                                                            dir="ltr" translate="no">playlistItem</code> resource
+                                                      properties that the API response will include.<br /><br />If the
+                                                      parameter identifies a property that contains child properties,
+                                                      the child properties will be included in the response. For
+                                                      example, in a <code dir="ltr" translate="no">playlistItem</code>
+                                                      resource, the <code dir="ltr" translate="no">snippet</code>
+                                                      property contains numerous fields, including the <code dir="ltr"
+                                                            translate="no">title</code>, <code dir="ltr"
+                                                            translate="no">description</code>, <code dir="ltr"
+                                                            translate="no">position</code>, and <code dir="ltr"
+                                                            translate="no">resourceId</code> properties. As such, if you
+                                                      set <code dir="ltr"
+                                                            translate="no"><strong>part=snippet</strong></code>, the API
+                                                      response will contain all of those properties.<br /><br />The
+                                                      following list contains the <code dir="ltr"
+                                                            translate="no">part</code> names that you can include in the
+                                                      parameter value:<br />
+                                                      <ul>
+                                                            <li><code dir="ltr" translate="no">contentDetails</code>
+                                                            </li>
+                                                            <li><code dir="ltr" translate="no">id</code></li>
+                                                            <li><code dir="ltr" translate="no">snippet</code></li>
+                                                            <li><code dir="ltr" translate="no">status</code></li>
+                                                      </ul>
+                                                </td>
+                                          </tr>
+                                          <tr class="alt" id="filter-parameters">
+                                                <td colspan="3"><b>Filters <span style="color:#555">(specify exactly one
+                                                                  of the following parameters)</span></b></td>
+                                          </tr>
+                                          <tr id="id">
+                                                <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>id</strong></code>
+                                                      parameter specifies a comma-separated list of one or more unique
+                                                      playlist item IDs.</td>
+                                          </tr>
+                                          <tr id="playlistId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">playlistId</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>playlistId</strong></code> parameter
+                                                      specifies the unique ID of the playlist for which you want to
+                                                      retrieve playlist items. Note that even though this is an optional
+                                                      parameter, every request to retrieve playlist items must specify a
+                                                      value for either the <code dir="ltr" translate="no">id</code>
+                                                      parameter or the <code dir="ltr" translate="no">playlistId</code>
+                                                      parameter.</td>
+                                          </tr>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="maxResults">
+                                                <td><code dir="ltr" itemprop="property" translate="no">maxResults</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr"
+                                                            translate="no">unsigned integer</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>maxResults</strong></code> parameter
+                                                      specifies the maximum number of items that should be returned in
+                                                      the result set. Acceptable values are <code dir="ltr"
+                                                            translate="no">0</code> to <code dir="ltr"
+                                                            translate="no">50</code>, inclusive. The default value is
+                                                      <code dir="ltr" translate="no">5</code>.</td>
+                                          </tr>
+                                          <tr id="onBehalfOfContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">onBehalfOfContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. <strong>Note:</strong> This parameter is
+                                                      intended exclusively for YouTube content partners.<br /><br />The
+                                                      <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter indicates that the request's authorization credentials
+                                                      identify a YouTube CMS user who is acting on behalf of the content
+                                                      owner specified in the parameter value. This parameter is intended
+                                                      for YouTube content partners that own and manage many different
+                                                      YouTube channels. It allows content owners to authenticate once
+                                                      and get access to all their video and channel data, without having
+                                                      to provide authentication credentials for each individual channel.
+                                                      The CMS account that the user authenticates with must be linked to
+                                                      the specified YouTube content owner.</td>
+                                          </tr>
+                                          <tr id="pageToken">
+                                                <td><code dir="ltr" itemprop="property" translate="no">pageToken</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>pageToken</strong></code> parameter
+                                                      identifies a specific page in the result set that should be
+                                                      returned. In an API response, the <code dir="ltr"
+                                                            translate="no">nextPageToken</code> and <code dir="ltr"
+                                                            translate="no">prevPageToken</code> properties identify
+                                                      other pages that could be retrieved.</td>
+                                          </tr>
+                                          <tr id="videoId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">videoId</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>videoId</strong></code>
+                                                      parameter specifies that the request should return only the
+                                                      playlist items that contain the specified video.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>Do not provide a request body when calling this method.</p>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <section id="resource">
+                              <p>If successful, this method returns a response body with the following structure:</p>
+                              <div></div><devsite-code>
+                                    <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json"
+                                          is-upgraded="" style="max-height: 500px; overflow: auto" syntax="Objective-C">{
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#playlistItemListResponse"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">etag</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"nextPageToken"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"prevPageToken"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"pageInfo"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"totalResults"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">integer</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"resultsPerPage"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">integer</span></var>
+<span class="devsite-syntax-w">  </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"items"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">    </span><a class="resource-link" href="/youtube/v3/docs/playlistItems#resource" resource="playlistItem"><span class="devsite-syntax-n">playlistItem</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Resource</span></a>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">]</span>
+}</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="properties">
+                              <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                              <p>The following table defines the properties that appear in this resource:</p>
+                              <table class="responsive properties" id="property-table">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Properties</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr id="kind">
+                                                <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Identifies the API resource's type. The value will be <code
+                                                            dir="ltr"
+                                                            translate="no">youtube#playlistItemListResponse</code>.</td>
+                                          </tr>
+                                          <tr id="etag">
+                                                <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                      The Etag of this resource.</td>
+                                          </tr>
+                                          <tr id="nextPageToken">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">nextPageToken</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The token that can be used as the value of the <code dir="ltr"
+                                                            translate="no">pageToken</code> parameter to retrieve the
+                                                      next page in the result set.</td>
+                                          </tr>
+                                          <tr id="prevPageToken">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">prevPageToken</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The token that can be used as the value of the <code dir="ltr"
+                                                            translate="no">pageToken</code> parameter to retrieve the
+                                                      previous page in the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo">
+                                                <td><code dir="ltr" itemprop="property" translate="no">pageInfo</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                      The <code dir="ltr" translate="no">pageInfo</code> object
+                                                      encapsulates paging information for the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo.totalResults">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">pageInfo.</span>totalResults</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">integer</code><br />
+                                                      The total number of results in the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo.resultsPerPage">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">pageInfo.</span>resultsPerPage</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">integer</code><br />
+                                                      The number of results included in the API response.</td>
+                                          </tr>
+                                          <tr id="items[]">
+                                                <td><code dir="ltr" itemprop="property" translate="no">items[]</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">list</code><br />
+                                                      A list of playlist items that match the request criteria.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                  </section>
+                  <section id="examples">
+                        <h2 data-text="Examples" id="examples" tabindex="-1">Examples</h2>
+                        <p class="note"><strong>Note:</strong> The following code samples may not represent all
+                              supported programming languages. See the <a href="/youtube/v3/libraries">client
+                                    libraries</a> documentation for a list of supported languages.</p>
+                        <div class="ds-selector-tabs" data-ds-scope="code-sample" id="code-sample">
+                              <section>
+                                    <h3 data-text="Go" id="go" tabindex="-1">Go</h3>
+                                    This code sample calls the API's <code dir="ltr"
+                                          translate="no">playlistItems.list</code> method to retrieve a list of
+                                    videos uploaded to the channel associated with the request. The code also calls the
+                                    <code dir="ltr" translate="no">channels.list</code>
+                                    method with the <code dir="ltr" translate="no">mine</code> parameter set to <code
+                                          dir="ltr" translate="no">true</code> to retrieve the playlist ID that
+                                    identifies
+                                    the channel's uploaded videos.
+                                    <p>This example uses the <a href="https://github.com/google/google-api-go-client"
+                                                target="_blank">Go client library</a>.</p>
+                                    <div></div><devsite-code>
+                                          <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Go"
+                                                translate="no"><span class="devsite-syntax-kn">package</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">main</span>
+
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"fmt"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"log"</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"google.golang.org/api/youtube/v3"</span>
+<span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-c1">// Retrieve playlistItems in the specified playlist</span>
+<span class="devsite-syntax-kd">func</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistItemsList</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Service</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">part</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">pageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">PlaylistItemListResponse</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">PlaylistItems</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">List</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">part</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">PlaylistId</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">playlistId</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">pageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">!=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">PageToken</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">pageToken</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">response</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Do</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">handleError</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">response</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-c1">// Retrieve resource for the authenticated user's channel</span>
+<span class="devsite-syntax-kd">func</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">channelsListMine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Service</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">part</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kt">string</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">ChannelListResponse</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Channels</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">List</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">part</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Mine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">response</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Do</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">handleError</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">response</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-kd">func</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">main</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getClient</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">YoutubeReadonlyScope</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">New</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">client</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">!=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">nil</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Fatalf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Error creating YouTube client: %v"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">response</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">channelsListMine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"contentDetails"</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">_</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">channel</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">range</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">response</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Items</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">playlistId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">channel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">ContentDetails</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">RelatedPlaylists</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Uploads</span>
+<span class="devsite-syntax-w">		</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-c1">// Print the playlist ID for the list of uploaded videos.</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">fmt</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Printf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Videos in list %s\r\n"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistId</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">nextPageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-c1">// Retrieve next set of items in the playlist.</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">playlistResponse</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistItemsList</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"snippet"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistId</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">nextPageToken</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">			</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">_</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistItem</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">range</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistResponse</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Items</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">				</span><span class="devsite-syntax-nx">title</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistItem</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Title</span>
+<span class="devsite-syntax-w">				</span><span class="devsite-syntax-nx">videoId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistItem</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">ResourceId</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">VideoId</span>
+<span class="devsite-syntax-w">				</span><span class="devsite-syntax-nx">fmt</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Printf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"%v, (%v)\r\n"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">title</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">videoId</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-c1">// Set the token to retrieve the next page of results</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-c1">// or exit the loop if all results have been retrieved.</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">nextPageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playlistResponse</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">NextPageToken</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">nextPageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">==</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">				</span><span class="devsite-syntax-k">break</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">fmt</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Println</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/go/my_uploads.go" data-label="youtube/api-samples/go/my_uploads.go" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/go/my_uploads.go" target="_top"><span class="devsite-syntax-nx">my_uploads</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-k">go</span></a></div></pre>
+                                    </devsite-code>
+                              </section>
+                              <section>
+                                    <h3 data-text=".NET" id=".net" tabindex="-1">.NET</h3>
+                                    The following code sample calls the API's <code dir="ltr"
+                                          translate="no">playlistItems.list</code> method to retrieve a list of videos
+                                    uploaded to the channel associated with the request. The code also calls the <code
+                                          dir="ltr" translate="no">channels.list</code> method with the
+                                    <code dir="ltr" translate="no">mine</code> parameter set to <code dir="ltr"
+                                          translate="no">true</code> to retrieve the playlist ID that identifies the
+                                    channel's uploaded
+                                    videos.
+                                    <p>This example uses the <a href="/api-client-library/dotnet" target="_blank">.NET
+                                                client library</a>.</p>
+                                    <div></div><devsite-code>
+                                          <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="GDScript"
+                                                translate="no"><span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">IO</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Reflection</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Threading</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Threading</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Tasks</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Auth</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">OAuth2</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Services</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Upload</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Util</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Store</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Data</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-n">namespace</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Samples</span>
+<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span>&lt;<span class="devsite-syntax-n">summary</span>&gt;
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Data</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">sample</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">retrieve</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">my</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">uploads</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Relies</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">on</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">APIs</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Library</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">NET</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">v1</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-mf">7.0</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">or</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">higher</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">See</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">https</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-n">developers</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">google</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">com</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">api</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">library</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">dotnet</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">get_started</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">///</span><span class="devsite-syntax-w"> </span>&lt;<span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">summary</span>&gt;
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">internal</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">class</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">MyUploads</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-n">STAThread</span><span class="devsite-syntax-p">]</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">static</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb devsite-syntax-nb-Type">void</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Main</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">string</span><span class="devsite-syntax-p">[]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">args</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"YouTube Data API: My Uploads"</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"============================"</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">try</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">MyUploads</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Run</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Wait</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">catch</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">AggregateException</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ex</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">foreach</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ex</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">InnerExceptions</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Error: "</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">+</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Message</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Press any key to continue..."</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ReadKey</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">private</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Task</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Run</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">UserCredential</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">credential</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">stream</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileStream</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"client_secrets.json"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileMode</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Open</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileAccess</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Read</span><span class="devsite-syntax-p">))</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">credential</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">GoogleWebAuthorizationBroker</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">AuthorizeAsync</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">GoogleClientSecrets</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Load</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">stream</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Secrets</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">This</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">OAuth</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mf">2.0</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">access</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">scope</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">allows</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">read</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">only</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">access</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">to</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">authenticated</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">user</span><span class="devsite-syntax-s1">'s account, but not other types of account access.</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">[]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTubeService</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Scope</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">YoutubeReadonly</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-s2">"user"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">CancellationToken</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">None</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileDataStore</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">this</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">GetType</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ToString</span><span class="devsite-syntax-p">())</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtubeService</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTubeService</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">BaseClientService</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Initializer</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">HttpClientInitializer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">credential</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">ApplicationName</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">this</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">GetType</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ToString</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">});</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channelsListRequest</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtubeService</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Channels</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">List</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"contentDetails"</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">channelsListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Mine</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-bp">true</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Retrieve</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">contentDetails</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">part</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">of</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channel</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">resource</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">for</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">authenticated</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">user</span><span class="devsite-syntax-s1">'s channel.</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channelsListResponse</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channelsListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ExecuteAsync</span><span class="devsite-syntax-p">();</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">foreach</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channel</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channelsListResponse</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Items</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">From</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">extract</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlist</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ID</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">that</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">identifies</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">list</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">of</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">uploaded</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">to</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">authenticated</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">user</span><span class="devsite-syntax-s1">'s channel.</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">uploadsListId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channel</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ContentDetails</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">RelatedPlaylists</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Uploads</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Videos in list {0}"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">uploadsListId</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">nextPageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">""</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">while</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">nextPageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">!=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb devsite-syntax-nb-Type">null</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistItemsListRequest</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtubeService</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">PlaylistItems</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">List</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"snippet"</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">playlistItemsListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">PlaylistId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">uploadsListId</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">playlistItemsListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">MaxResults</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">50</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">playlistItemsListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">PageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">nextPageToken</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Retrieve</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">list</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">of</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">uploaded</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">to</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">authenticated</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">user</span><span class="devsite-syntax-s1">'s channel.</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistItemsListResponse</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistItemsListRequest</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ExecuteAsync</span><span class="devsite-syntax-p">();</span>
+
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">foreach</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-k">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistItem</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistItemsListResponse</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Items</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-o">//</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Print</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">information</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">about</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">each</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-o">.</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"{0} ({1})"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistItem</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Title</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistItem</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ResourceId</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">VideoId</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">nextPageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistItemsListResponse</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">NextPageToken</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/dotnet/MyUploads.cs" data-label="youtube/api-samples/dotnet/MyUploads.cs" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/dotnet/MyUploads.cs" target="_top"><span class="devsite-syntax-n">MyUploads</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">cs</span></a></div></pre>
+                                    </devsite-code>
+                              </section>
+                              <section>
+                                    <h3 data-text="Ruby" id="ruby" tabindex="-1">Ruby</h3>
+                                    This sample calls the API's <code dir="ltr" translate="no">playlistItems.list</code>
+                                    method to retrieve a list of videos uploaded
+                                    to the channel associated with the request. The code also calls the <code dir="ltr"
+                                          translate="no">channels.list</code> method with the
+                                    <code dir="ltr" translate="no">mine</code> parameter set to <code dir="ltr"
+                                          translate="no">true</code> to retrieve the playlist ID that identifies the
+                                    channel's
+                                    uploaded videos.
+                                    <p>This example uses the <a href="/api-client-library/ruby" target="_blank">Ruby
+                                                client library</a>.</p>
+                                    <div></div><devsite-code>
+                                          <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Ruby"
+                                                translate="no"><span class="devsite-syntax-ch">#!/usr/bin/ruby</span>
+
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'rubygems'</span>
+<span class="devsite-syntax-n">gem</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google-api-client'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'&gt;0.7'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client/client_secrets'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client/auth/file_storage'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client/auth/installed_app'</span>
+
+<span class="devsite-syntax-c1"># This OAuth 2.0 access scope allows for read-only access to the authenticated</span>
+<span class="devsite-syntax-c1"># user's account, but not other types of account access.</span>
+<span class="devsite-syntax-no">YOUTUBE_READONLY_SCOPE</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'https://www.googleapis.com/auth/youtube.readonly'</span>
+<span class="devsite-syntax-no">YOUTUBE_API_SERVICE_NAME</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'youtube'</span>
+<span class="devsite-syntax-no">YOUTUBE_API_VERSION</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'v3'</span>
+
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">get_authenticated_service</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-ss">:application_name</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-vg">$PROGRAM_NAME</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-ss">:application_version</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'1.0.0'</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">discovered_api</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-no">YOUTUBE_API_SERVICE_NAME</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">YOUTUBE_API_VERSION</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">file_storage</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">FileStorage</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-vg">$PROGRAM_NAME</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2">-oauth2.json"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">file_storage</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorization</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">nil?</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">client_secrets</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">ClientSecrets</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">load</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">flow</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">InstalledAppFlow</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:client_id</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client_secrets</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">client_id</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:client_secret</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client_secrets</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">client_secret</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:scope</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-no">YOUTUBE_READONLY_SCOPE</span><span class="devsite-syntax-o">]</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorization</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">flow</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorize</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">file_storage</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">else</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorization</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">file_storage</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorization</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span>
+<span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">main</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">get_authenticated_service</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">begin</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-c1"># Retrieve the "contentDetails" part of the channel resource for the</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-c1"># authenticated user's channel.</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">channels_response</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">execute!</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:api_method</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">channels</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">list</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:parameters</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:mine</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-kp">true</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:part</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'contentDetails'</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">channels_response</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">data</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">items</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">each</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">do</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">|</span><span class="devsite-syntax-n">channel</span><span class="devsite-syntax-o">|</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-c1"># From the API response, extract the playlist ID that identifies the list</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-c1"># of videos uploaded to the authenticated user's channel.</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">uploads_list_id</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">channel</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-s1">'contentDetails'</span><span class="devsite-syntax-o">][</span><span class="devsite-syntax-s1">'relatedPlaylists'</span><span class="devsite-syntax-o">][</span><span class="devsite-syntax-s1">'uploads'</span><span class="devsite-syntax-o">]</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-c1"># Retrieve the list of videos uploaded to the authenticated user's channel.</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">next_page_token</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">''</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">until</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">next_page_token</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">nil?</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">playlistitems_response</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">execute!</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-ss">:api_method</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">playlist_items</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">list</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-ss">:parameters</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-ss">:playlistId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">uploads_list_id</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-ss">:part</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'snippet'</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-ss">:maxResults</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">50</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-ss">:pageToken</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">next_page_token</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Videos in list </span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">uploads_list_id</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2">"</span>
+
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-c1"># Print information about each video.</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">playlistitems_response</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">data</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">items</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">each</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">do</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">|</span><span class="devsite-syntax-n">playlist_item</span><span class="devsite-syntax-o">|</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">title</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlist_item</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-s1">'snippet'</span><span class="devsite-syntax-o">][</span><span class="devsite-syntax-s1">'title'</span><span class="devsite-syntax-o">]</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">video_id</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlist_item</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-s1">'snippet'</span><span class="devsite-syntax-o">][</span><span class="devsite-syntax-s1">'resourceId'</span><span class="devsite-syntax-o">][</span><span class="devsite-syntax-s1">'videoId'</span><span class="devsite-syntax-o">]</span>
+
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">title</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2"> (</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">video_id</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2">)"</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">next_page_token</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">playlistitems_response</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">next_page_token</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-nb">puts</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">end</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">rescue</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">TransmissionError</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">body</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">end</span>
+<span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-n">main</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/ruby/my_uploads.rb" data-label="youtube/api-samples/ruby/my_uploads.rb" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/ruby/my_uploads.rb" target="_top"><span class="devsite-syntax-n">my_uploads</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">rb</span></a></div></pre>
+                                    </devsite-code>
+                              </section>
+                        </div>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The following table identifies error messages that the API could return in response to a call
+                              to this method. Please see the <a href="/youtube/v3/docs/errors">error message</a>
+                              documentation for more detail.</p>
+                        <table class="matchpre" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th>Error type</th>
+                                          <th>Error detail</th>
+                                          <th>Description</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="youtube.playlistItems.list-forbidden-playlistItemsNotAccessible">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">playlistItemsNotAccessible</code></td>
+                                          <td class="error-cause">The request is not properly authorized to retrieve the
+                                                specified playlist.</td>
+                                    </tr>
+                                    <tr id="youtube.playlistItems.list-forbidden-watchHistoryNotAccessible">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">watchHistoryNotAccessible</code></td>
+                                          <td class="error-cause">Watch history data cannot be retrieved through the
+                                                API.</td>
+                                    </tr>
+                                    <tr id="youtube.playlistItems.list-forbidden-watchLaterNotAccessible">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">watchLaterNotAccessible</code></td>
+                                          <td class="error-cause">Items in "watch later" playlists cannot be retrieved
+                                                through the API.</td>
+                                    </tr>
+                                    <tr id="youtube.playlistItems.list-notFound-playlistNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">playlistNotFound</code></td>
+                                          <td class="error-cause">The playlist identified with the request's <code
+                                                      dir="ltr" translate="no">playlistId</code> parameter cannot be
+                                                found.</td>
+                                    </tr>
+                                    <tr id="youtube.playlistItems.list-notFound-videoNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">videoNotFound</code></td>
+                                          <td class="error-cause">The video identified with the request's <code
+                                                      dir="ltr" translate="no">videoId</code> parameter cannot be found.
+                                          </td>
+                                    </tr>
+                                    <tr id="youtube.playlistItems.list-required-playlistIdRequired">
+                                          <td class="error-name"><code dir="ltr" translate="no">required (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">playlistIdRequired</code></td>
+                                          <td class="error-cause">The subscribe request does not specify a value for the
+                                                required <code dir="ltr" translate="no">playlistId</code> property.</td>
+                                    </tr>
+                                    <tr id="youtube.playlistItems.list-invalidValue-playlistOperationUnsupported">
+                                          <td class="error-name"><code dir="ltr"
+                                                      translate="no">invalidValue (400)</code></td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">playlistOperationUnsupported</code></td>
+                                          <td class="error-cause">The API does not support the ability to list videos in
+                                                the specified playlist. For example, you can't list a video in your
+                                                watch later playlist.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  <section id="try-it">
+                        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                              request and response.</p>
+                        <div class="devsite-apix">
+                              <div class="apis-explorer"
+                                    data-default-scopes="https://www.googleapis.com/auth/youtube.readonly"
+                                    data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                    data-method-id="youtube.playlistItems.list" data-show-code-button="true"></div>
+                        </div>
+                  </section>
+                  </meta>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

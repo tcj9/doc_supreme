@@ -1,0 +1,275 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Captions: list<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="list" itemprop="name">
+                  <meta content="captions" itemprop="path">
+                  <section id="overview">
+                        <p>Returns a list of caption tracks that are associated with a specified video. Note that the
+                              API response does not contain the actual captions and that the <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/captions/download">captions.download</a></code>
+                              method provides the ability to retrieve a caption track.</p>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of 50 units.</p>
+                  </section>
+                  <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common
+                        use cases</h2>
+                  <style>
+                        iframe+section>h2 {
+                              margin-top: 12px;
+                        }
+                  </style>
+                  <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+                              allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+                              src="https://developers.google.com/frame/youtube/v3/docs/captions/list_659cd1d97474b03d628a72a634542850adfe35e30fc9539ab75ec0b99faed71f.frame"></iframe></devsite-iframe>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">GET https://www.googleapis.com/youtube/v3/captions</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="auth_required">
+                              <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+                              <p>This request requires authorization with at least one of the following scopes (<a
+                                          href="/youtube/v3/guides/authentication">read more about authentication and
+                                          authorization</a>).</p>
+                              <table class="matchpre">
+                                    <thead>
+                                          <tr>
+                                                <th>Scope</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtubepartner</code>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The following table lists the parameters that this query supports. All of the
+                                    parameters listed are query parameters.</p>
+                              <table class="responsive details">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="required-parameters">
+                                                <td colspan="3"><b>Required parameters</b></td>
+                                          </tr>
+                                          <tr id="part">
+                                                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>part</strong></code>
+                                                      parameter specifies the <code dir="ltr"
+                                                            translate="no">caption</code> resource parts that the API
+                                                      response will include.<br /><br />The list below contains the
+                                                      <code dir="ltr" translate="no">part</code> names that you can
+                                                      include in the parameter value:<br />
+                                                      <ul>
+                                                            <li><code dir="ltr" translate="no">id</code></li>
+                                                            <li><code dir="ltr" translate="no">snippet</code></li>
+                                                      </ul>
+                                                </td>
+                                          </tr>
+                                          <tr id="videoId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">videoId</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>videoId</strong></code>
+                                                      parameter specifies the YouTube video ID of the video for which
+                                                      the API should return caption tracks.</td>
+                                          </tr>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="id">
+                                                <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>id</strong></code>
+                                                      parameter specifies a comma-separated list of IDs that identify
+                                                      the <code dir="ltr" translate="no">caption</code> resources that
+                                                      should be retrieved. Each ID must identify a caption track
+                                                      associated with the specified video.</td>
+                                          </tr>
+                                          <tr id="onBehalfOfContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">onBehalfOfContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. <strong>Note:</strong> This parameter is
+                                                      intended exclusively for YouTube content partners.<br /><br />The
+                                                      <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter indicates that the request's authorization credentials
+                                                      identify a YouTube CMS user who is acting on behalf of the content
+                                                      owner specified in the parameter value. This parameter is intended
+                                                      for YouTube content partners that own and manage many different
+                                                      YouTube channels. It allows content owners to authenticate once
+                                                      and get access to all their video and channel data, without having
+                                                      to provide authentication credentials for each individual channel.
+                                                      The actual CMS account that the user authenticates with must be
+                                                      linked to the specified YouTube content owner.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>Do not provide a request body when calling this method.</p>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <section id="resource">
+                              <p>If successful, this method returns a response body with the following structure:</p>
+                              <div></div><devsite-code>
+                                    <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json"
+                                          is-upgraded="" style="max-height: 500px; overflow: auto" syntax="Objective-C">{
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#captionListResponse"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">etag</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"items"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">    </span><a class="resource-link" href="/youtube/v3/docs/captions#resource" resource="caption"><span class="devsite-syntax-n">caption</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Resource</span></a>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">]</span>
+}</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="properties">
+                              <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                              <p>The following table defines the properties that appear in this resource:</p>
+                              <table class="responsive properties" id="property-table">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Properties</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr id="kind">
+                                                <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Identifies the API resource's type. The value will be <code
+                                                            dir="ltr" translate="no">youtube#captionListResponse</code>.
+                                                </td>
+                                          </tr>
+                                          <tr id="etag">
+                                                <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                      The Etag of this resource.</td>
+                                          </tr>
+                                          <tr id="items[]">
+                                                <td><code dir="ltr" itemprop="property" translate="no">items[]</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">list</code><br />
+                                                      A list of captions that match the request criteria.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The following table identifies error messages that the API could return in response to a call
+                              to this method. Please see the <a href="/youtube/v3/docs/errors">error message</a>
+                              documentation for more detail.</p>
+                        <table class="matchpre" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th>Error type</th>
+                                          <th>Error detail</th>
+                                          <th>Description</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="youtube.captions.list-forbidden-forbidden">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">forbidden</code></td>
+                                          <td class="error-cause">One or more caption tracks could not be retrieved
+                                                because the permissions associated with the request are not sufficient
+                                                to retrieve the requested resources. The request might not be properly
+                                                authorized.</td>
+                                    </tr>
+                                    <tr id="youtube.captions.list-notFound-captionNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">captionNotFound</code></td>
+                                          <td class="error-cause">One or more of the specified caption tracks could not
+                                                be found. This error occurs if the <code dir="ltr"
+                                                      translate="no">videoId</code> parameter identifies an actual
+                                                video, but the <code dir="ltr" translate="no">id</code> parameter either
+                                                identifies caption track IDs that do not exist or track IDs that are
+                                                associated with other videos. Check the values of the request's <code
+                                                      dir="ltr" translate="no">id</code> and <code dir="ltr"
+                                                      translate="no">videoId</code> parameters to ensure that they are
+                                                correct.</td>
+                                    </tr>
+                                    <tr id="youtube.captions.list-notFound-videoNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">videoNotFound</code></td>
+                                          <td class="error-cause">The video identified by the <code dir="ltr"
+                                                      translate="no">videoId</code> parameter could not be found.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  <section id="try-it">
+                        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                              request and response.</p>
+                        <div class="devsite-apix">
+                              <div class="apis-explorer"
+                                    data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+                                    data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                    data-method-id="youtube.captions.list" data-show-code-button="true"></div>
+                        </div>
+                  </section>
+                  </meta>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

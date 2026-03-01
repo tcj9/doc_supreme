@@ -1,0 +1,1056 @@
+<article class="devsite-article">
+    <h1 class="devsite-page-title" tabindex="-1">
+        API Reference<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+                analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                id="devsite-collections-dropdown">
+                <devsite-bookmark></devsite-bookmark>
+                <span slot="popout-heading">
+
+                    Stay organized with collections
+                </span>
+                <span slot="popout-contents">
+
+                    Save and categorize content based on your preferences.
+                </span>
+            </devsite-feature-tooltip></devsite-actions>
+    </h1>
+    <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+    <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+    </devsite-toc>
+    <div class="devsite-article-body clearfix">
+        <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+            <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title"
+                class="devsite-key-takeaways-panel-header" role="button" tabindex="0">
+                <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+                <div class="devsite-key-takeaways-panel-title">
+                    <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">
+                        Page Summary</h2>
+                </div>
+                <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+                </img>
+            </div>
+            <div class="devsite-key-takeaways-panel-content">
+                <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+                    <button aria-label="Report Key Takeaways!"
+                        class="button-flat button-primary devsite-key-takeaways-report-button"
+                        data-title="Report Key Takeaways!">
+                        <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+                    </button>
+                </devsite-feedback>
+                <ul class="devsite-key-takeaways-panel-list">
+                    <li>
+                        <p>The YouTube Data API allows integration of YouTube features into external applications, with
+                            resources like videos and playlists represented as JSON objects.</p>
+                    </li>
+                    <li>
+                        <p>Authentication for the API requires either an API key or an OAuth 2.0 token, with
+                            authorization tokens being mandatory for operations that modify data or access private user
+                            information.</p>
+                    </li>
+                    <li>
+                        <p>The API uses standard HTTP methods such as <code>LIST</code>, <code>POST</code>,
+                            <code>DELETE</code>, and <code>PUT</code> to manage various resource types, including
+                            captions, playlists, channels, and videos.</p>
+                    </li>
+                    <li>
+                        <p>The API offers a wide array of resources and methods for channels, such as managing channel
+                            banners, sections, and memberships, alongside actions related to comments, subscriptions,
+                            and user activities.</p>
+                    </li>
+                    <li>
+                        <p>The API also allows you to retrieve different data sets related to the application, such as
+                            getting supported regions, supported languages, and reasons for video abuse reports.</p>
+                    </li>
+                </ul>
+            </div>
+        </devsite-key-takeaways-panel>
+        <section id="overview">
+            <p>The YouTube Data API lets you incorporate functions normally executed on the YouTube website into your
+                own website or application. The following sections identify the different types of resources that you
+                can retrieve using the API. The API also supports methods to insert, update, or delete many of these
+                resources.</p>
+            <p>This reference guide explains how to use the API to perform all of these operations. The guide is
+                organized by resource type. A resource represents a type of item that comprises part of the YouTube
+                experience, such as a video, a playlist, or a subscription. For each resource type, the guide lists one
+                or more data representations, and resources are represented as JSON objects. The guide also lists one or
+                more supported methods (<code dir="ltr" translate="no">LIST</code>, <code dir="ltr"
+                    translate="no">POST</code>, <code dir="ltr" translate="no">DELETE</code>, etc.) for each resource
+                type and explains how to use those methods in your application.</p>
+            <h2 data-text="Call the API" id="call-the-api" tabindex="-1">Call the API</h2>
+            <p>The following requirements apply to YouTube Data API requests:</p>
+            <ol>
+                <li>
+                    <p>Every request must either specify an API key (with the <code dir="ltr" translate="no">key</code>
+                        parameter) or provide an OAuth 2.0 token. Your API key is available in the <a
+                            href="https://console.developers.google.com/">Developer Console's</a> <strong>API
+                            Access</strong> pane for your project.</p>
+                </li>
+                <li>
+                    <p>You <strong>must</strong> send an authorization token for every insert, update, and delete
+                        request. You must also send an authorization token for any request that retrieves the
+                        authenticated user's private data.</p>
+                    <p>In addition, some API methods for retrieving resources may support parameters that require
+                        authorization or may contain additional metadata when requests are authorized. For example, a
+                        request to retrieve a user's uploaded videos may also contain private videos if the request is
+                        authorized by that specific user.</p>
+                </li>
+                <li>
+                    <p>The API supports the OAuth 2.0 authentication protocol. You can provide an OAuth 2.0 token in
+                        either of the following ways:</p>
+                    <ul>
+                        <li>Use the <code dir="ltr" translate="no">access_token</code> query parameter like this: <code
+                                dir="ltr" translate="no">?access_token=</code><code class="apivar" dir="ltr"
+                                translate="no">oauth2-token</code></li>
+                        <li>Use the HTTP <code dir="ltr" translate="no">Authorization</code> header like this: <code
+                                dir="ltr" translate="no">Authorization: Bearer</code> <code class="apivar" dir="ltr"
+                                translate="no">oauth2-token</code></li>
+                    </ul>
+                    <p>Complete instructions for implementing OAuth 2.0 authentication in your application can be found
+                        in the <a href="/youtube/v3/guides/authentication">authentication guide</a>.</p>
+                </li>
+            </ol>
+        </section>
+        <section id="resource_types">
+            <h2 data-text="Resource types" id="resource-types" tabindex="-1">Resource types</h2>
+            <section id="Activities_resource_details">
+                <h3 class="notranslate" data-text="Activities" id="Activities" tabindex="-1">Activities</h3>
+                <p>An <code dir="ltr" translate="no"><strong>activity</strong></code> resource contains information
+                    about an action that a particular channel, or user, has taken on YouTube. The actions reported in
+                    activity feeds include rating a video, sharing a video, marking a video as a favorite, uploading a
+                    video, and so forth. Each <code dir="ltr" translate="no">activity</code> resource identifies the
+                    type of action, the channel associated with the action, and the resource(s) associated with the
+                    action, such as the video that was rated or uploaded.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/activities#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/activities#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/activities/list">list</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /activities</code></td>
+                            <td>Returns a list of channel activity events that match the request criteria. For example,
+                                you can retrieve events associated with a particular channel or with the user's own
+                                channel.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Captions_resource_details">
+                <h3 class="notranslate" data-text="Captions" id="Captions" tabindex="-1">Captions</h3>
+                <p>A <code dir="ltr" translate="no"><strong>caption</strong></code> resource represents a YouTube
+                    caption track. A caption track is associated with exactly one YouTube video.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/captions#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/captions#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/captions/delete">delete</a></code></td>
+                            <td><code dir="ltr" translate="no">DELETE /captions</code></td>
+                            <td>Deletes the specified caption track.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/captions/download">download</a></code></td>
+                            <td><code dir="ltr"
+                                    translate="no">GET /captions/<var class="apiparam" translate="no">id</var></code>
+                            </td>
+                            <td>Downloads a caption track. The caption track is returned in its original format unless
+                                the request specifies a value for the <code dir="ltr" translate="no">tfmt</code>
+                                parameter and in its original language unless the request specifies a value for the
+                                <code dir="ltr" translate="no">tlang</code> parameter.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/captions/insert">insert</a></code></td>
+                            <td><code dir="ltr" translate="no">POST /captions</code></td>
+                            <td>Uploads a caption track.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/captions/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /captions</code></td>
+                            <td>Returns a list of caption tracks that are associated with a specified video. The API
+                                response does not contain the actual captions and that the <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/captions/download">captions.download</a></code>
+                                method provides the ability to retrieve a caption track.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/captions/update">update</a></code></td>
+                            <td><code dir="ltr" translate="no">PUT /captions</code></td>
+                            <td>Updates a caption track. When updating a caption track, you can change the track's <a
+                                    href="/youtube/v3/docs/captions#snippet.isDraft">draft status</a>, upload a new
+                                caption file for the track, or both.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="ChannelBanners_resource_details">
+                <h3 class="notranslate" data-text="ChannelBanners" id="ChannelBanners" tabindex="-1">ChannelBanners</h3>
+                <p>A <code dir="ltr" translate="no">channelBanner</code> resource contains the URL that you would use to
+                    set a newly uploaded image as the banner image for a channel.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/channelBanners#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/channelBanners#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channelBanners/insert">insert</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /channelBanners/insert</code></td>
+                            <td>Uploads a channel banner image to YouTube. This method represents the first two steps in
+                                a three-step process to update the banner image for a channel:<ol>
+                                    <li>Call the <code dir="ltr" translate="no">channelBanners.insert</code> method to
+                                        upload the binary image data to YouTube. The image must have a 16:9 aspect ratio
+                                        and be at least 2048x1152 pixels. We recommend uploading a 2560px by 1440px
+                                        image.</li>
+                                    <li>Extract the <code dir="ltr" translate="no">url</code> property's value from the
+                                        response that the API returns for step 1.</li>
+                                    <li>Call the <code dir="ltr"
+                                            translate="no"><a href="/youtube/v3/docs/channels/update">channels.update</a></code>
+                                        method to update the channel's branding settings. Set the <code dir="ltr"
+                                            translate="no"><a href="/youtube/v3/docs/channels#brandingSettings.image.bannerExternalUrl">brandingSettings.image.bannerExternalUrl</a></code>
+                                        property's value to the URL obtained in step 2.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="ChannelSections_resource_details">
+                <h3 class="notranslate" data-text="ChannelSections" id="ChannelSections" tabindex="-1">ChannelSections
+                </h3>
+                <p>A <code dir="ltr" translate="no"><strong>channelSection</strong></code> resource contains information
+                    about a set of videos that a channel has chosen to feature. For example, a section could feature a
+                    channel's latest uploads, most popular uploads, or videos from one or more playlists.<br /><br />A
+                    channel's sections are only visible if the channel displays content in a browse view (rather than a
+                    feed view). To enable a channel to display content in a browse view, set the <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/channels#brandingSettings.channel.showBrowseView">brandingSettings.channel.showBrowseView</a></code>
+                    property to <code dir="ltr" translate="no">true</code> for the specified channel.<br /><br />A
+                    channel can create a maximum of 10 shelves.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/channelSections#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/channelSections#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channelSections/delete">delete</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">DELETE /channelSections</code></td>
+                            <td>Deletes a channel section.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channelSections/insert">insert</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /channelSections</code></td>
+                            <td>Adds a channel section to the authenticated user's channel. A channel can create a
+                                maximum of 10 shelves.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channelSections/list">list</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /channelSections</code></td>
+                            <td>Returns a list of <code dir="ltr" translate="no">channelSection</code> resources that
+                                match the API request criteria.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channelSections/update">update</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">PUT /channelSections</code></td>
+                            <td>Updates a channel section.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Channels_resource_details">
+                <h3 class="notranslate" data-text="Channels" id="Channels" tabindex="-1">Channels</h3>
+                <p>A <code dir="ltr" translate="no"><strong>channel</strong></code> resource contains information about
+                    a YouTube channel.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/channels#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/channels#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/channels/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /channels</code></td>
+                            <td>Returns a collection of zero or more <code dir="ltr"
+                                    translate="no"><strong>channel</strong></code> resources that match the request
+                                criteria.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channels/update">update</a></code></td>
+                            <td><code dir="ltr" translate="no">PUT /channels</code></td>
+                            <td>Updates a channel's metadata. This method only supports updates to the <code dir="ltr"
+                                    translate="no">channel</code> resource's <code dir="ltr"
+                                    translate="no">brandingSettings</code> and <code dir="ltr"
+                                    translate="no">invideoPromotion</code> objects and their child properties.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="CommentThreads_resource_details">
+                <h3 class="notranslate" data-text="CommentThreads" id="CommentThreads" tabindex="-1">CommentThreads</h3>
+                <p>A <code dir="ltr" translate="no"><strong>commentThread</strong></code> resource contains information
+                    about a YouTube comment thread, which comprises a top-level comment and replies, if any exist, to
+                    that comment. A <code dir="ltr" translate="no">commentThread</code> resource can represent comments
+                    about either a video or a channel.<br /><br />Both the top-level comment and the replies are
+                    actually <code dir="ltr" translate="no"><a href="/youtube/v3/docs/comments">comment</a></code>
+                    resources nested inside the <code dir="ltr" translate="no">commentThread</code> resource. The <code
+                        dir="ltr" translate="no">commentThread</code> resource does not necessarily contain all replies
+                    to a comment, and you need to use the <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/comments/list">comments.list</a></code> method if you
+                    want to retrieve all replies for a particular comment. Also, some comments don't have replies.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/commentThreads#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/commentThreads#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/commentThreads/list">list</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /commentThreads</code></td>
+                            <td>Returns a list of comment threads that match the API request parameters.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/commentThreads/insert">insert</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /commentThreads</code></td>
+                            <td>Creates a new top-level comment. To add a reply to an existing comment, use the <code
+                                    dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/comments/insert">comments.insert</a></code>
+                                method instead.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Comments_resource_details">
+                <h3 class="notranslate" data-text="Comments" id="Comments" tabindex="-1">Comments</h3>
+                <p>A <code dir="ltr" translate="no"><strong>comment</strong></code> resource contains information about
+                    a single YouTube comment. A <code dir="ltr" translate="no">comment</code> resource can represent a
+                    comment about either a video or a channel. In addition, the comment could be a top-level comment or
+                    a reply to a top-level comment.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/comments#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/comments#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/comments/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /comments</code></td>
+                            <td>Returns a list of comments that match the API request parameters.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/comments/setModerationStatus">setModerationStatus</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /comments/setModerationStatus</code></td>
+                            <td>Sets the moderation status of one or more comments. The API request must be authorized
+                                by the owner of the channel or video associated with the comments.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/comments/insert">insert</a></code></td>
+                            <td><code dir="ltr" translate="no">POST /comments</code></td>
+                            <td>Creates a reply to an existing comment. <strong>Note:</strong> To create a top-level
+                                comment, use the <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/commentThreads/insert">commentThreads.insert</a></code>
+                                method.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/comments/delete">delete</a></code></td>
+                            <td><code dir="ltr" translate="no">DELETE /comments</code></td>
+                            <td>Deletes a comment.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/comments/update">update</a></code></td>
+                            <td><code dir="ltr" translate="no">PUT /comments</code></td>
+                            <td>Modifies a comment.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="I18nLanguages_resource_details">
+                <h3 class="notranslate" data-text="I18nLanguages" id="I18nLanguages" tabindex="-1">I18nLanguages</h3>
+                <p>An <code dir="ltr" translate="no"><strong>i18nLanguage</strong></code> resource identifies an
+                    application language that the YouTube website supports. The application language can also be
+                    referred to as a UI language. For the YouTube website, an application language could be
+                    automatically selected based on Google Account settings, browser language, or IP location. A user
+                    could also manually select the UI language from the YouTube site footer.<br /><br />Each <code
+                        dir="ltr" translate="no">i18nLanguage</code> resource identifies a language code and a name. The
+                    language code can be used as the value of the <code dir="ltr" translate="no">hl</code> parameter
+                    when calling API methods like <code dir="ltr" translate="no">videoCategories.list</code>.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/i18nLanguages#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/i18nLanguages#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/i18nLanguages/list">list</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /i18nLanguages</code></td>
+                            <td>Returns a list of application languages that the YouTube website supports.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="I18nRegions_resource_details">
+                <h3 class="notranslate" data-text="I18nRegions" id="I18nRegions" tabindex="-1">I18nRegions</h3>
+                <p>An <code dir="ltr" translate="no"><strong>i18nRegion</strong></code> resource identifies a geographic
+                    area that a YouTube user can select as the preferred content region. The content region can also be
+                    referred to as a content locale. For the YouTube website, a content region could be automatically
+                    selected based on heuristics like the YouTube domain or the user's IP location. A user could also
+                    manually select the content region from the YouTube site footer.<br /><br />Each <code dir="ltr"
+                        translate="no">i18nRegion</code> resource identifies a region code and a name. The region code
+                    can be used as the value of the <code dir="ltr" translate="no">regionCode</code> parameter when
+                    calling API methods like <code dir="ltr" translate="no">search.list</code>, <code dir="ltr"
+                        translate="no">videos.list</code>, <code dir="ltr" translate="no">activities.list</code>, and
+                    <code dir="ltr" translate="no">videoCategories.list</code>.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/i18nRegions#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/i18nRegions#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/i18nRegions/list">list</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /i18nRegions</code></td>
+                            <td>Returns a list of content regions that the YouTube website supports.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Members_resource_details">
+                <h3 class="notranslate" data-text="Members" id="Members" tabindex="-1">Members</h3>
+                <p>A <code dir="ltr" translate="no"><strong>member</strong></code> resource represents a channel member
+                    for a YouTube
+                    channel. A member provides recurring monetary support to a creator and receives special
+                    benefits. For example, members are able to chat when the creator turns on members-only mode for
+                    a chat.</p>
+                <p>For more information about this resource, see its
+                    <a href="/youtube/v3/docs/members#resource">resource representation</a> and list of
+                    <a href="/youtube/v3/docs/members#properties">properties</a>.
+                </p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/members/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /members</code></td>
+                            <td>Lists members (formerly known as "sponsors") for a channel. The API request must be
+                                authorized by the channel owner.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="MembershipsLevels_resource_details">
+                <h3 class="notranslate" data-text="MembershipsLevels" id="MembershipsLevels" tabindex="-1">
+                    MembershipsLevels</h3>
+                <p>A <code dir="ltr" translate="no"><strong>membershipsLevel</strong></code> resource identifies a
+                    pricing level for the
+                    creator that authorized the API request.</p>
+                <p>For more information about this resource, see its
+                    <a href="/youtube/v3/docs/membershipsLevels#resource">resource representation</a> and list of
+                    <a href="/youtube/v3/docs/membershipsLevels#properties">properties</a>.
+                </p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/membershipsLevels/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /membershipsLevels</code></td>
+                            <td>Returns a collection of zero or more <code dir="ltr"
+                                    translate="no"><strong>membershipsLevel</strong></code>
+                                resources owned by the channel that authorized the API request. Levels are returned in
+                                implicit display order.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="PlaylistItems_resource_details">
+                <h3 class="notranslate" data-text="PlaylistItems" id="PlaylistItems" tabindex="-1">PlaylistItems</h3>
+                <p>A <code dir="ltr" translate="no"><strong>playlistItem</strong></code> resource identifies another
+                    resource, such as a
+                    video, that is included in a playlist. In addition, the <code dir="ltr"
+                        translate="no">playlistItem </code> resource
+                    contains details about the included resource that pertain specifically to how that resource
+                    is used in that playlist.<br><br>
+                    YouTube also uses a playlist to identify a channel's list of uploaded videos, with each
+                    <code dir="ltr" translate="no">playlistItem</code> in that list representing one uploaded video. You
+                    can retrieve the
+                    playlist ID for that list from the <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/channels">channel resource</a></code>
+                    for a given channel. You can then use the
+                    <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/playlistItems/list">playlistItems.list</a></code>
+                    method to the
+                    list.</br></br>
+                </p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/playlistItems#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/playlistItems#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/playlistItems/delete">delete</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">DELETE /playlistItems</code></td>
+                            <td>Deletes a playlist item.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/playlistItems/insert">insert</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /playlistItems</code></td>
+                            <td>Adds a resource to a playlist.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/playlistItems/list">list</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /playlistItems</code></td>
+                            <td>Returns a collection of playlist items that match the API request parameters. You can
+                                retrieve all of the playlist items in a specified playlist or retrieve one or more
+                                playlist items by their unique IDs.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/playlistItems/update">update</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">PUT /playlistItems</code></td>
+                            <td>Modifies a playlist item. For example, you could update the item's position in the
+                                playlist.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Playlists_resource_details">
+                <h3 class="notranslate" data-text="Playlists" id="Playlists" tabindex="-1">Playlists</h3>
+                <p>A <code dir="ltr" translate="no"><strong>playlist</strong></code> resource represents a YouTube
+                    playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other
+                    users. By default, playlists are publicly visible to other users, but playlists can be public or
+                    private.<br><br> YouTube also uses playlists to identify special collections of videos for a
+                    channel, such as:</br></br></p>
+                <ul>
+                    <li>uploaded videos</li>
+                    <li>positively rated (liked) videos</li>
+                    <li>watch history</li>
+                    <li>watch later</li>
+                </ul>
+                <p>To be more specific, these lists are associated with a channel, which is a collection of a person,
+                    group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist
+                    IDs for each of these lists from the <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/channels">channel resource</a></code> for a given
+                    channel.<br><br> You can then use the <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/playlistItems/list">playlistItems.list</a></code>
+                    method to retrieve any of those lists. You can also add or remove items from those lists by calling
+                    the <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/playlistItems/insert">playlistItems.insert</a></code>
+                    and <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/playlistItems/delete">playlistItems.delete</a></code>
+                    methods.</br></br></p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/playlists#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/playlists#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/playlists/delete">delete</a></code></td>
+                            <td><code dir="ltr" translate="no">DELETE /playlists</code></td>
+                            <td>Deletes a playlist.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/playlists/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /playlists</code></td>
+                            <td>Returns a collection of playlists that match the API request parameters. For example,
+                                you can retrieve all playlists that the authenticated user owns, or you can retrieve one
+                                or more playlists by their unique IDs.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/playlists/insert">insert</a></code></td>
+                            <td><code dir="ltr" translate="no">POST /playlists</code></td>
+                            <td>Creates a playlist.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/playlists/update">update</a></code></td>
+                            <td><code dir="ltr" translate="no">PUT /playlists</code></td>
+                            <td>Modifies a playlist. For example, you could change a playlist's title, description, or
+                                privacy status.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Search_resource_details">
+                <h3 class="notranslate" data-text="Search" id="Search" tabindex="-1">Search</h3>
+                <p>A search result contains information about a YouTube video, channel, or playlist that matches the
+                    search parameters specified in an API request. While a search result points to a uniquely
+                    identifiable resource, like a video, it does not have its own persistent data.</p>
+                <p>For more information about this resource, see its <a href="/youtube/v3/docs/search#resource">resource
+                        representation</a> and list of <a href="/youtube/v3/docs/search#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/search/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /search</code></td>
+                            <td>Returns a collection of search results that match the query parameters specified in the
+                                API request. By default, a search result set identifies matching <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videos">video</a></code>, <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channels">channel</a></code>, and <code
+                                    dir="ltr" translate="no"><a href="/youtube/v3/docs/playlists">playlist</a></code>
+                                resources, but you can also configure queries to only retrieve a specific type of
+                                resource.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Subscriptions_resource_details">
+                <h3 class="notranslate" data-text="Subscriptions" id="Subscriptions" tabindex="-1">Subscriptions</h3>
+                <p>A <code dir="ltr" translate="no"><strong>subscription</strong></code> resource contains information
+                    about a YouTube user subscription. A subscription notifies a user when new videos are added to a
+                    channel or when another user takes one of several actions on YouTube, such as uploading a video,
+                    rating a video, or commenting on a video.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/subscriptions#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/subscriptions#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/subscriptions/delete">delete</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">DELETE /subscriptions</code></td>
+                            <td>Deletes a subscription.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/subscriptions/insert">insert</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /subscriptions</code></td>
+                            <td>Adds a subscription for the authenticated user's channel.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/subscriptions/list">list</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /subscriptions</code></td>
+                            <td>Returns subscription resources that match the API request criteria.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Thumbnails_resource_details">
+                <h3 class="notranslate" data-text="Thumbnails" id="Thumbnails" tabindex="-1">Thumbnails</h3>
+                <p>A <code dir="ltr" translate="no"><strong>thumbnail</strong></code> resource identifies different
+                    thumbnail image sizes associated with a resource. The following characteristics of thumbnail images:
+                </p>
+                <ul>
+                    <li>A resource's <code dir="ltr" translate="no">snippet.thumbnails</code> property is an object that
+                        identifies the thumbnail images available for that resource.</li>
+                    <li>A <code dir="ltr" translate="no">thumbnail</code> resource contains a series of objects. The
+                        name of each object (<code dir="ltr" translate="no">default</code>, <code dir="ltr"
+                            translate="no">medium</code>, <code dir="ltr" translate="no">high</code>, etc.) refers to
+                        the thumbnail image size.</li>
+                    <li>Different types of resources may support different thumbnail image sizes.</li>
+                    <li>Different types of resources may define different sizes for thumbnail images with the same name.
+                        For example, the <code dir="ltr" translate="no">default</code> thumbnail image for a <code
+                            dir="ltr" translate="no">video</code> resource is typically 120px by 90px, and the <code
+                            dir="ltr" translate="no">default</code> thumbnail image for a <code dir="ltr"
+                            translate="no">channel</code> resource is typically 88px by 88px.</li>
+                    <li>Resources of the same type may still have different thumbnail image sizes for certain images
+                        depending on the resolution of the original image or content uploaded to YouTube. For example,
+                        an HD video may support higher resolution thumbnails than non-HD videos.</li>
+                    <li>Each object that contains information about a thumbnail image size has a <code dir="ltr"
+                            translate="no">width</code> property and a <code dir="ltr" translate="no">height</code>
+                        property. However, the width and height properties may not be returned for that image.</li>
+                    <li>If an uploaded thumbnail image does not match the required dimensions, the image is resized to
+                        match the correct size without changing its aspect ratio. The image is not cropped, but may
+                        include black bars so that the size is correct.</li>
+                </ul>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/thumbnails#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/thumbnails#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/thumbnails/set">set</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /thumbnails/set</code></td>
+                            <td>Uploads a custom video thumbnail to YouTube and sets it for a video.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="VideoAbuseReportReasons_resource_details">
+                <h3 class="notranslate" data-text="VideoAbuseReportReasons" id="VideoAbuseReportReasons" tabindex="-1">
+                    VideoAbuseReportReasons</h3>
+                <p>A <code dir="ltr" translate="no"><strong>videoAbuseReportReason</strong></code> resource contains
+                    information about a reason that a video would be flagged for containing abusive content. When your
+                    application calls the <code dir="ltr"
+                        translate="no"><a href="/youtube/v3/docs/videos/reportAbuse">videos.reportAbuse</a></code>
+                    method to report an abusive video, the request uses the information from a <code dir="ltr"
+                        translate="no">videoAbuseReportReason</code> resource to identify the reason that the video is
+                    being reported.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/videoAbuseReportReasons#resource">resource representation</a> and list of
+                    <a href="/youtube/v3/docs/videoAbuseReportReasons#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videoAbuseReportReasons/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /videoAbuseReportReasons</code></td>
+                            <td>Retrieve a list of reasons that can be used to report abusive videos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="VideoCategories_resource_details">
+                <h3 class="notranslate" data-text="VideoCategories" id="VideoCategories" tabindex="-1">VideoCategories
+                </h3>
+                <p>A <code dir="ltr" translate="no"><strong>videoCategory</strong></code> resource identifies a category
+                    that has been or could be associated with uploaded videos.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/videoCategories#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/videoCategories#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videoCategories/list">list</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /videoCategories</code></td>
+                            <td>Returns a list of categories that can be associated with YouTube videos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Videos_resource_details">
+                <h3 class="notranslate" data-text="Videos" id="Videos" tabindex="-1">Videos</h3>
+                <p>A <code dir="ltr" translate="no"><strong>video</strong></code> resource represents a YouTube video.
+                </p>
+                <p>For more information about this resource, see its <a href="/youtube/v3/docs/videos#resource">resource
+                        representation</a> and list of <a href="/youtube/v3/docs/videos#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videos/insert">insert</a></code></td>
+                            <td><code dir="ltr" translate="no">POST /videos</code></td>
+                            <td>Uploads a video to YouTube and optionally sets the video's metadata.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos/list">list</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">GET /videos</code></td>
+                            <td>Returns a list of videos that match the API request parameters.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videos/delete">delete</a></code></td>
+                            <td><code dir="ltr" translate="no">DELETE /videos</code></td>
+                            <td>Deletes a YouTube video.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videos/update">update</a></code></td>
+                            <td><code dir="ltr" translate="no">PUT /videos</code></td>
+                            <td>Updates a video's metadata.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos/rate">rate</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /videos/rate</code></td>
+                            <td>Add a like or dislike rating to a video or remove a rating from a video.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videos/getRating">getRating</a></code></td>
+                            <td><code dir="ltr" translate="no">GET /videos/getRating</code></td>
+                            <td>Retrieves the ratings that the authorized user gave to a list of specified videos.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/videos/reportAbuse">reportAbuse</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /videos/reportAbuse</code></td>
+                            <td>Report a video for containing abusive content.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="Watermarks_resource_details">
+                <h3 class="notranslate" data-text="Watermarks" id="Watermarks" tabindex="-1">Watermarks</h3>
+                <p>A <code dir="ltr" translate="no"><strong>watermark</strong></code> resource identifies an image that
+                    displays during playbacks of a specified channel's videos. You can also specify a target channel to
+                    which the image will link as well as timing details that determine when the watermark appears during
+                    video playbacks and the length of time it is visible.</p>
+                <p>For more information about this resource, see its <a
+                        href="/youtube/v3/docs/watermarks#resource">resource representation</a> and list of <a
+                        href="/youtube/v3/docs/watermarks#properties">properties</a>.</p>
+                <table class="methods">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>HTTP request</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alt">
+                            <td colspan="3">URIs relative to <code dir="ltr"
+                                    translate="no">https://www.googleapis.com/youtube/v3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr" translate="no"><a href="/youtube/v3/docs/watermarks/set">set</a></code>
+                            </td>
+                            <td><code dir="ltr" translate="no">POST /watermarks/set</code></td>
+                            <td>Uploads a watermark image to YouTube and sets it for a channel.</td>
+                        </tr>
+                        <tr>
+                            <td><code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/watermarks/unset">unset</a></code></td>
+                            <td><code dir="ltr" translate="no">POST /watermarks/unset</code></td>
+                            <td>Deletes a channel's watermark image.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+    </div>
+    <devsite-recommendations display="in-page" hidden="" yield="">
+    </devsite-recommendations>
+    <devsite-thumb-rating position="footer">
+    </devsite-thumb-rating>
+    <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+    <div class="devsite-floating-action-buttons"></div>
+</article>

@@ -1,0 +1,487 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_pQ">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Get Page Insights</h1>
+              <p>This guide explains how to get <a href="/docs/graph-api/reference/insights">metrics</a> for your
+                Facebook Pages. Get the total number of people who liked your Page or the number of people who shared
+                stories about your Page.</p>
+              <div>
+                <div class="_57yz _57z1 _3-8p">
+                  <div class="_57y-">
+                    <p>On November 15, 2025, a <a
+                        href="https://developers.facebook.com/docs/platforminsights/page/deprecated-metrics">number of
+                        the Page Insights metrics</a> will be deprecated for all API versions. The API returns an
+                      invalid metric error when calling any of these metrics. <a
+                        href="https://developers.facebook.com/blog/post/2025/08/15/page-insights-api-updates/">Read our
+                        blog to learn more.</a></p>
+                  </div>
+                </div>
+                <div class="_57yz _57z1 _3-8p">
+                  <div class="_57y-">
+                    <p>On November 1, 2023, a <a
+                        href="https://developers.facebook.com/docs/platforminsights/page/deprecated-metrics">number of
+                        the Page Insights metrics</a> were deprecated for all API versions. The API returns an invalid
+                      metric error when calling any of these metrics. <a
+                        href="https://developers.facebook.com/blog/post/2023/12/14/page-insights-metrics-deprecation">Read
+                        our blog to learn more.</a></p>
+                  </div>
+                </div>
+              </div>
+              <h4>Limitations</h4>
+              <ul>
+                <li>Metric data of public Pages is stored by Facebook for 2 years. </li>
+                <li>Metric data of unpublished Pages is stored for only 5 days. </li>
+                <li>When viewing daily metrics with <code>since</code> and <code>until</code>, the first
+                  <code>end_time</code> value will be the date specified by <code>since</code> plus 1 so that it
+                  includes the <code>since</code> date data. For example, if you set <code>since</code> to January 1,
+                  2018, the <code>end_time</code> will be January 2, 2018 at 8:00 GMT.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Before You Start</h2>
+              <ul>
+                <li><a href="/docs/apps/review/login-permissions#manage-pages"><code>pages_read_engagement</code>
+                    permission</a></li>
+                <li><a href="/docs/apps/review/login-permissions#read-insights"><code>read_insights</code>
+                    permission</a></li>
+                <li>A <a href="/docs/pages/access-tokens">Page Access Token</a> - The person requesting the token must
+                  be able to perform the <a href="/docs/pages/overview#tasks">analyze</a> task on the Page. </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get a Single Metric</h2>
+              <p>Send a <code>GET</code> request to the <code>/{page-id}/insights/{metric-name}</code> endpoint:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X GET "https://graph.facebook.com/{page-id}/insights/page_impressions_unique
+  ?access_token={page-access-token}"</pre>
+              <p>On success your app receives the following response:</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "data": [
+    {
+      "name": "page_impressions_unique",
+      "period": "day",
+      "values": [
+        {
+          "value": 66226,
+          "end_time": "2020-03-10T07:00:00+0000"
+        },
+        {
+          "value": 78037,
+          "end_time": "2020-03-11T07:00:00+0000"
+        }
+      ],
+      "title": "Daily Total Reach",
+      "description": "Daily: The number of people who had any content from your Page or about your Page enter their screen. This includes posts, check-ins, ads, social information from people who interact with your Page and more. (Unique Users)",
+      "id": "{page-id}/insights/page_impressions_unique/day"
+    },
+    {
+      "name": "page_impressions_unique",
+      "period": "week",
+      "values": [
+        {
+          "value": 202229,
+          "end_time": "2020-03-10T07:00:00+0000"
+        },
+        {
+          "value": 206982,
+          "end_time": "2020-03-11T07:00:00+0000"
+        }
+      ],
+      "title": "Weekly Total Reach",
+      "description": "Weekly: The number of people who had any content from your Page or about your Page enter their screen. This includes posts, check-ins, ads, social information from people who interact with your Page and more. (Unique Users)",
+      "id": "{page-id}/insights/page_impressions_unique/week"
+    },
+    {
+      "name": "page_impressions_unique",
+      "period": "days_28",
+      "values": [
+        {
+          "value": 427380,
+          "end_time": "2020-03-10T07:00:00+0000"
+        },
+        {
+          "value": 432909,
+          "end_time": "2020-03-11T07:00:00+0000"
+        }
+      ],
+      "title": "28 Days Total Reach",
+      "description": "28 Days: The number of people who had any content from your Page or about your Page enter their screen. This includes posts, check-ins, ads, social information from people who interact with your Page and more. (Unique Users)",
+      "id": "{page-id}/insights/page_impressions_unique/days_28"
+    }
+  ],
+  "paging": {
+    "previous": "https://graph.facebook.com/{page-id}/insights?access_token={page-access-token}&amp;pretty=0&amp;metric=page_impressions_unique&amp;since=1583568000&amp;until=1583737200",
+    "next": "https://graph.facebook.com/{page-id}/insights?access_token={page-access-token}&amp;pretty=0&amp;metric=page_impressions_unique&amp;since=1583910000&amp;until=1584082800"
+  }
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Multiple Metrics</h2>
+              <p>Send a <code>GET</code> request to the <code>/{page-id}/insights</code> endpoint with the
+                <code>metric</code> field:
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X GET "https://graph.facebook.com/{page-id}/insights
+  ?metric=page_impressions_unique,page_impressions_paid
+  &amp;access_token={page-access-token}"</pre>
+              <p>On success, your app receives the following response:</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "data": [
+    {
+      "name": "page_impressions_unique",
+      "period": "day",
+      "values": [
+        {
+          "value": 60,
+          "end_time": "2024-03-11T07:00:00+0000"
+        },
+        {
+          "value": 50,
+          "end_time": "2024-03-12T07:00:00+0000"
+        }
+      ],
+      "title": "Daily Total Reach",
+      "description": "Daily: The number of people who had any content from your Page or about your Page enter their screen. This includes posts, check-ins, ads, social information from people who interact with your Page and more. (Unique Users)",
+      "id": "PAGE_ID/insights/page_impressions_unique/day"
+    },
+    {
+      "name": "page_impressions_paid",
+      "period": "day",
+      "values": [
+        {
+          "value": 8,
+          "end_time": "2024-03-11T07:00:00+0000"
+        },
+        {
+          "value": 10,
+          "end_time": "2024-03-12T07:00:00+0000"
+        }
+      ],
+      "title": "Daily Paid Impressions",
+      "description": "Daily: The number of times any post or story content from your Page or about your Page entered a person's screen through paid distribution such as an ad. (Total Count)",
+      "id": "PAGE_ID/insights/page_impressions_paid/day"
+    },
+    {
+      "name": "page_impressions_unique",
+      "period": "week",
+      "values": [
+        {
+          "value": 40,
+          "end_time": "2024-03-11T07:00:00+0000"
+        },
+        {
+          "value": 50,
+          "end_time": "2024-03-12T07:00:00+0000"
+        }
+      ],
+      "title": "Weekly Total Reach",
+      "description": "Weekly: The number of people who had any content from your Page or about your Page enter their screen. This includes posts, check-ins, ads, social information from people who interact with your Page and more. (Unique Users)",
+      "id": "PAGE_ID/insights/page_impressions_unique/week"
+    },
+    {
+      "name": "page_impressions_paid",
+      "period": "week",
+      "values": [
+        {
+          "value": 50,
+          "end_time": "2024-03-11T07:00:00+0000"
+        },
+        {
+          "value": 106,
+          "end_time": "2024-03-12T07:00:00+0000"
+        }
+      ],
+      "title": "Weekly Paid Impressions",
+      "description": "Weekly: The number of times any post or story content from your Page or about your Page entered a person's screen through paid distribution such as an ad. (Total Count)",
+      "id": "PAGE_ID/insights/page_impressions_paid/week"
+    },
+    {
+      "name": "page_impressions_unique",
+      "period": "days_28",
+      "values": [
+        {
+          "value": 110,
+          "end_time": "2024-03-11T07:00:00+0000"
+        },
+        {
+          "value": 10,
+          "end_time": "2024-03-12T07:00:00+0000"
+        }
+      ],
+      "title": "28 Days Total Reach",
+      "description": "28 Days: The number of people who had any content from your Page or about your Page enter their screen. This includes posts, check-ins, ads, social information from people who interact with your Page and more. (Unique Users)",
+      "id": "PAGE_ID/insights/page_impressions_unique/days_28"
+    },
+    {
+      "name": "page_impressions_paid",
+      "period": "days_28",
+      "values": [
+        {
+          "value": 120,
+          "end_time": "2024-03-11T07:00:00+0000"
+        },
+        {
+          "value": 20,
+          "end_time": "2024-03-12T07:00:00+0000"
+        }
+      ],
+      "title": "28 Days Paid Impressions",
+      "description": "28 days: The number of times any post or story content from your Page or about your Page entered a person's screen through paid distribution such as an ad. (Total Count)",
+      "id": "PAGE_ID/insights/page_impressions_paid/days_28"
+    }
+  ],
+...</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Metrics of a Page Post</h2>
+              <p>Send a <code>GET</code> request to the <code>/{page-post-id}/insights</code> endpoint with the
+                <code>metric</code> fields:
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X GET "https://graph.facebook.com{page-post-id}/insights
+  ?metric=post_reactions_like_total,post_reactions_love_total,post_reactions_wow_total
+  &amp;access_token={page-access-token}"</pre>
+              <p>On success, your app receives the following response:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data": [
+    {
+      "name": "post_reactions_like_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 226
+        }
+      ],
+      "title": "Lifetime Total Like Reactions of a post.",
+      "description": "Lifetime: Total like reactions of a post.",
+      "id": "{page-post-id}/insights/post_reactions_like_total/lifetime"
+    },
+    {
+      "name": "post_reactions_love_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 17
+        }
+      ],
+      "title": "Lifetime Total Love Reactions of a post.",
+      "description": "Lifetime: Total love reactions of a post.",
+      "id": "{page-post-id}/insights/post_reactions_love_total/lifetime"
+    },
+    {
+      "name": "post_reactions_wow_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 1
+        }
+      ],
+      "title": "Lifetime Total wow Reactions of a post.",
+      "description": "Lifetime: Total wow Reactions of a post.",
+      "id": "{page-post-id}/insights/post_reactions_wow_total/lifetime"
+    }
+  ],
+  "paging": {
+    "previous": "https://graph.facebook.com/{page-post-id}/insights?access_token={page-access-token}b&amp;pretty=0&amp;metric=post_reactions_like_total%2Cpost_reactions_love_total%2Cpost_reactions_wow_total&amp;since=1583568000&amp;until=1583737200",
+    "next": "https://graph.facebook.com/{page-post-id}/insights?access_token={page-access-token}&amp;pretty=0&amp;metric=post_reactions_like_total%2Cpost_reactions_love_total%2Cpost_reactions_wow_total&amp;since=1583910000&amp;until=1584082800"
+  }
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Video Ad Breaks Impressions</h2>
+              <h4>Additional Requirements</h4>
+              <ul>
+                <li>The person requesting the Page access token must be able to <a
+                    href="/business/help/442345745885606?id=180505742745347">access the monetization insights</a>.</li>
+              </ul>
+              <p>Send a <code>GET</code> request to the <code>/{page-id}</code> endpoint to get daily Video Ad Breaks
+                impressions for a Page:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X GET \
+  "https://graph.facebook.com/{page-id}/insights
+    ?metric=page_daily_video_ad_break_ad_impressions_by_crosspost_status
+    &amp;period=day
+    &amp;since=2017-12-10
+    &amp;until=2017-12-14"</pre>
+              <p>On success, your app receives the following response:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data": [
+    {
+      "name": "page_daily_video_ad_breaks_ad_impressions_by_crosspost_status",
+      "period": "day",
+      "values": [
+        {
+          "value": {
+          "crossposted": 27584,
+          "owned": 692730
+          },
+          "end_time": "2017-12-11T08:00:00+0000"
+          },
+          {
+            "value": {
+              "owned": 757456,
+              "crossposted": 20593
+            },
+            "end_time": "2017-12-12T08:00:00+0000"
+          },
+          {
+            "value": {
+              "owned": 690092,
+              "crossposted": 15372
+            },
+            "end_time": "2017-12-13T08:00:00+0000"
+          }
+        ],
+        "title": "Daily page level videos ad impression",
+        "description": "Number of times an ad was shown during ad breaks in your Page's videos, by distribution type (page_owned and crossposted).",
+        "id": "{page-id}/insights/page_daily_video_ad_break_ad_impressions_by_crosspost_status/day"
+      }
+...</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Daily Video Ad Break Impressions of a Page Post</h2>
+              <p>Send a <code>GET</code> request to the <code>/{page-post-id}/insights</code> endpoint with the
+                <code>metric</code> field:
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X GET "https://graph.facebook.com/{page-post-id}/insights
+  ?metric=post_video_ad_break_ad_impressions
+  &amp;period=day
+  &amp;since=2017-12-10
+  &amp;until=2017-12-14
+  &amp;access_token={page-access-token}"</pre>
+              <p>On success, your app will receive the following response:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{ 
+  "data": [
+    {
+      "name": "total_video_ad_break_ad_impressions",
+      "period": "day",
+      "values": [
+        {
+          "value": 2612,
+          "end_time": "2017-12-11T08:00:00+0000"
+        },
+        {
+          "value": 1038,
+          "end_time": "2017-12-12T08:00:00+0000"
+        },
+        {
+          "value": 818,
+          "end_time": "2017-12-13T08:00:00+0000"
+        },
+        {
+          "value": 553,
+          "end_time": "2017-12-14T08:00:00+0000"
+        }
+      ],
+      "title": "Daily Video Ad Break Ad Impressions",
+      "description": "Number of times an ad was shown during your video ad breaks.",
+      "id": "{video-id}/video_insights/total_video_ad_break_ad_impressions/day"
+    }
+...</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get Lifetime Video Ad Break Impressions of a Page Post</h2>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X GET "https://graph.facebook.com/{page-post-id}/insights
+  ?metric=post_video_ad_break_ad_impressions
+  &amp;period=lifetime
+  &amp;access_token={page-access-token}"</pre>
+              <p>On success, your app will receive the following response:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data": [
+    {
+      "name": "total_video_ad_break_ad_impressions",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 55468
+        }
+      ],
+      "title": "Lifetime Video Ad Break Ad Impressions",
+      "description": "Number of times an ad was shown during your video ad breaks.",
+      "id": "{video-id}/video_insights/total_video_ad_break_ad_impressions/lifetime"
+    }
+...</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Common Error Codes</h2>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th>Error Code</th>
+                    <th>Error Message</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_Us">
+                    <tr class="row_0">
+                      <td>
+                        <p>None</p>
+                      </td>
+                      <td>
+                        <p>An empty dataset is returned.</p>
+                      </td>
+                      <td>
+                        <p>You need the <code>read_insights</code> permission in order to access this endpoint.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>100</code></p>
+                      </td>
+                      <td>
+                        <p>"(#100) The value must be a valid insights metric"</p>
+                      </td>
+                      <td>
+                        <p>The may be a spelling or syntax issue.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>3001</code> with <code>"error_subcode": 1504028</code></p>
+                      </td>
+                      <td>
+                        <p>"No metric was specified to be fetched. Please specify one or more metrics to be fetched and
+                          try again."</p>
+                      </td>
+                      <td>
+                        <p>When using the <code>metric</code> parameter, at least one metric must be included in the
+                          query.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See Also</h2>
+              <ul>
+                <li><a href="https://www.facebook.com/insights">Insights Dashboard</a></li>
+                <li><a href="/docs/graph-api/reference/insights">Insights Reference Guide</a> </li>
+                <li><a href="/docs/graph-api/reference/insights#video-ad-breaks">Page Video Ad Breaks Metrics Reference
+                    Guide</a></li>
+                <li><a href="/docs/graph-api/reference/video/video_insights/">Video Insights Reference Guide</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

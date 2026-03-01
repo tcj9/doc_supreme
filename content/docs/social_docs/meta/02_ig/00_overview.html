@@ -1,0 +1,1020 @@
+<div id="documentation_body_pagelet" data-referrer="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_lI">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1 id="overview">Overview</h1>
+
+                            <p>The Instagram Platform is a collection of APIs that allows your app to access data for
+                                Instagram professional accounts including both businesses and creators. You can build an
+                                app that only serves your Instagram professional account, or you can build an app that
+                                servers other Instagram professional accounts that you do not own or manage.</p>
+
+                            <p>There are two Instagram API configurations you can use in your app:</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <tr>
+                                            <th>Instagram API with Facebook Login for Business</th>
+                                            <th>Instagram API with Business Login for Instagram</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_2_jJ">
+                                        <tr class="row_0">
+                                            <td>
+                                                <ul>
+                                                    <li>Your app serves Instagram professional accounts that are linked
+                                                        to a Facebook Page</li>
+                                                    <li>Your app users use their Facebook credentials to log in to your
+                                                        app</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Your app serves Instagram professional accounts with a presence
+                                                        on Instagram only</li>
+                                                    <li>Your app users use their Instagram credentials to log in to your
+                                                        app</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>Depending on the configuration you choose, your app users will be able to have
+                                conversations with their customers or people interested in their Instagram professional
+                                account, moderate comments on their media, send private replies, publish content,
+                                publish ads, and get insights.</p>
+
+                            <h3>Which API is right for my app?</h3>
+                            <div>
+                                <div class="_57-c">
+                                    <table class="_4-ss _5k9x">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:25%">
+                                                    <div style="padding-top:5%;">Component</div>
+                                                </th>
+                                                <th><a
+                                                        href="https://developers.facebook.com/docs/instagram/platform/instagram-api">
+                                                        Instagram API setup with Instagram Login
+                                                    </a></th>
+                                                <th><a
+                                                        href="https://developers.facebook.com/docs/instagram-platform/instagram-graph-api">
+                                                        Instagram API setup with Facebook Login
+                                                    </a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="_5m37" id="u_0_3_7X">
+                                            <tr class="row_0">
+                                                <td><b>Access token type</b></td>
+                                                <td>
+                                                    <p>Instagram User</p>
+                                                </td>
+                                                <td>
+                                                    <p>Facebook User or Page</p>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_1 _5m29">
+                                                <td><b>
+                                                        Authorization type
+                                                    </b></td>
+                                                <td><a href="https://developers.facebook.com/docs/instagram/platform/instagram-api/business-login"
+                                                        target="_blank">
+                                                        Business Login for Instagram
+                                                    </a></td>
+                                                <td><a href="https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/"
+                                                        target="_blank">
+                                                        Facebook Login for Business
+                                                    </a></td>
+                                            </tr>
+                                            <tr class="row_2">
+                                                <td><b>
+                                                        Comment moderation
+                                                    </b></td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_3 _5m29">
+                                                <td><b>
+                                                        Content publishing
+                                                    </b></td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_4">
+                                                <td><b>
+                                                        Facebook Page
+                                                    </b></td>
+                                                <td>
+                                                    <div style="padding-left:45%;">x</div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        Required
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_5 _5m29">
+                                                <td><b>Hashtag search</b></td>
+                                                <td>
+                                                    <div style="padding-left:45%;padding-top:3%;">x</div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_6">
+                                                <td><a href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/insights"
+                                                        target="_blank" data-auto-logging-id="f930fc084"><b>
+                                                            Insights
+                                                        </b></a></td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_7 _5m29">
+                                                <td><b>
+                                                        Mentions
+                                                    </b></td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_8">
+                                                <td><b>Messaging </b></td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:15%;"><a
+                                                            href="https://developers.facebook.com/docs/messenger-platform/instagram">
+                                                            via Messenger Platform</a></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_9 _5m29">
+                                                <td><a href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/product-tagging"
+                                                        target="_blank"><b>
+                                                            Product tagging
+                                                        </b></a></td>
+                                                <td>
+                                                    <div style="padding-left:45%;padding-top:3%;">x</div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="row_10">
+                                                <td><a href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/partnership-ads"
+                                                        target="_blank" data-auto-logging-id="f39d9e249"><b>
+                                                            Partnership Ads
+                                                        </b></a></td>
+                                                <td>
+                                                    <div style="padding-left:45%;padding-top:3%;">x</div>
+                                                </td>
+                                                <td>
+                                                    <div style="padding-left:35%;">
+                                                        <div class="clearfix _rhc _3-9d"><i
+                                                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                                                            <div class="_42ef"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="access-levels">Access levels</h2>
+                            <p>There are two access levels available to your app: <b>Standard Access</b> and <b>Advanced
+                                    Access</b>. </p>
+                            <p style="font-size:16px;"><b>Standard Access</b></p>
+                            <p>Standard Access is the default access level for all apps and limits the data your app can
+                                get. It is intended for apps that will only be used by people who have roles on them,
+                                during app development, or for testing your app. If your app only serves your Instagram
+                                professional account or an account you manage, Standard Access is all your app needs.
+                            </p>
+                            <p style="font-size:16px"><b>Advanced Access</b></p>
+                            <p>Advanced Access is the access level required if your app serves Instagram professional
+                                accounts that you don't own or manage and can be used by app users who do not have a
+                                role on your app or a role on a business portfolio that has claimed your app. This
+                                access level requires App Review and Business Verification.</p>
+
+                            <p><strong>Note:</strong> Because of the limited scope of Standard Access, some features
+                                might not work properly until your app has been granted Advanced Access. This might
+                                limit the functionality of any test apps you use.</p>
+                            <p>Learn more about
+                                <a href="https://developers.facebook.com/docs/graph-api/overview/access-levels"
+                                    target="_blank">
+                                    Advanced and Standard Access.
+                                </a>
+                            </p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="app-review">App Review</h2>
+                            <p>Meta App Review enables Meta to verify that your app uses our products and APIs in an
+                                approved manner. Your app must complete Meta App Review to be granted Advanced Access.
+                                Learn more about
+                                <a href="https://developers.facebook.com/docs/resp-plat-initiatives/individual-processes/app-review"
+                                    target="_blank">
+                                    Meta App Review.
+                                </a>
+                            </p>
+                            <h4>Private apps</h4>
+
+                            <p>If reviewers are unable to test your app because it is behind a private intranet, has no
+                                user interface, or has not implemented Facebook Login for Business, you can request
+                                approval only for the following permissions:</p>
+
+                            <ul>
+                                <li><code>instagram_basic</code></li>
+                                <li><code>instagram_manage_comments</code></li>
+                            </ul>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="app-users">App users</h2>
+                            <p>To use the APIs, your app users must have an <a
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fbusiness.instagram.com%2Fgetting-started&amp;h=AT0cblUBFF7QGWA_nvaiRjmlMQj-NKdiigKTaKibkWNj1ZZs2AKhSqw2a9X0853JkiqT6VNo6xnTfHPTon2oPX7MrzYMwiiVXvgz1FZ2lRBwK5KoFNonSAuAv_xl0u4kmTcxfAm6oiYYRPDNCqSBRNLmsEe3If0QUxihwBuWEwU_cc3fZTU"
+                                    rel="nofollow" target="_blank" data-lynx-mode="async">Instagram professional
+                                    account</a>. An Instagram professional account can be for a business or creator. You
+                                can build your app so that it serves businesses and creators with Instagram professional
+                                accounts that only have a presence on Instagram and use Business Login for Instagram, or
+                                businesses and creators with Instagram professional accounts that are linked to a
+                                Facebook Page and use Facebook Login for Business. For an Instagram professional account
+                                that is linked to a Facebook Page, your app user must also be able to perform
+                                admin-equivalent tasks on the linked Facebook Page.</p>
+                            <p>Your app will also interact with Instagram users who interact with your app users'
+                                Instagram professional accounts. These interactions can happen through comments and
+                                reactions on your app users' Instagram comments, posts, reels, and stories, ads, and
+                                Instagram Direct.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <h2 id="authentication-and-authorization">Authentication and authorization
+                                            </h2>
+                                            <p>Endpoint authorization is handled through <a
+                                                    href="#features-and-permissions">permissions and features.</a>
+                                                Before your app can use an endpoint to access an app user's Instagram
+                                                professional account data, you must first request all permissions
+                                                required by those endpoints from the app user.
+
+
+
+
+                                                You can request permissions from app users by implementing Business
+                                                Login for Instagram or Facebook Login for Business. If you implement
+                                                Business Login for Instagram, your app users log in with their Instagram
+                                                credentials. If you implement Facebook Login for Business your app users
+                                                log in with their Facebook credentials. </p>
+                                            <p>To start the log in flow, an app user clicks your <b>embed URL</b>. Meta
+                                                opens an authorization window where the user grants your app the
+                                                requested permissions. Meta then redirects the user to your app’s
+                                                redirect URI and sends your app an <b>Authorization Code</b>. This code
+                                                is valid for <b>one hour</b>.</p>
+                                            <p>Next, exchange the authorization code for a <b>short-lived access
+                                                    token</b>, an ID for your app user, and a list of permissions
+                                                granted by your app user. This access token is valid for <b>one
+                                                    hour</b>. Access tokens follow the OAuth 2.0 protocol, are
+                                                app-scoped (unique to your app and app user), and required for most API
+                                                calls. Apps using Business Login for Instagram receive Instagram User
+                                                access tokens and apps using Facebook Login for Business receive
+                                                Facebook User access tokens.</p>
+                                            <p>Before the short-lived access token expires, your app exchange it for a
+                                                <b>long-lived access token</b>. This access token is valid for <b>60
+                                                    days</b> and can be refreshed before they expire.
+                                            </p>
+                                            <p>Once permissions have been granted and your app receives an access token,
+                                                your app can query the endpoints to access the user's data. Note that a
+                                                permission only allows access to data created by the app user who
+                                                granted the permission. There are a few endpoints that allow apps to
+                                                access data not created by the app user, but the accessible data is
+                                                limited and public.</p>
+
+                                            <p>If your app serves only your Instagram professional accounts, or accounts
+                                                you manage, you do not need to implement a login flow. However, you will
+                                                need to configure the business login settings in the App Dashboard to
+                                                obtain an Instagram app ID and an Instagram app secret, as well as
+                                                obtain long-lived access tokens to use in your API calls.</p>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw"><img class="img"
+                                                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/471917229_913199460797484_8193269479944173834_n.png?_nc_cat=105&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=2CEQggnCtv8Q7kNvwH6KPfZ&amp;_nc_oc=AdmSS5HX3H15AKj7UOO5YVc1MQsMnzaqSNLxfnRMeztsf17wANDjN5GydJZummvLj-cbTg4ORVklbF1fBFTquABi&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=dE2tzxzOGbZfHyeV6aHoIw&amp;oh=00_AfsQKdjE999Z6fuXfve79KT_vjxnCS7sE4EUSgpbeCq_4Q&amp;oe=69A06E1F"
+                                                width="400px" alt=""></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h4>Features and permissions</h4>
+
+                            <p>The API uses the following permissions and features, which are based on login type:</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <tr>
+                                            <th>Instagram login</th>
+                                            <th>Facebook login</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_4_uJ">
+                                        <tr class="row_0">
+                                            <td>
+                                                <ul>
+                                                    <li><code>instagram_business_basic</code></li>
+                                                    <li><code>instagram_business_content_publish</code></li>
+                                                    <li><code>instagram_business_manage_comments</code></li>
+                                                    <li><code>instagram_business_manage_messages</code></li>
+                                                    <li>Human Agent</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li><code>instagram_basic</code></li>
+                                                    <li><code>instagram_content_publish</code></li>
+                                                    <li><code>instagram_manage_comments</code></li>
+                                                    <li><code>instagram_manage_insights</code></li>
+                                                    <li><code>instagram_manage_messages</code></li>
+                                                    <li><code>pages_show_list</code></li>
+                                                    <li><code>pages_read_engagement</code></li>
+                                                    <li>Human Agent</li>
+                                                    <li>Instagram Public Content Access</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><br> The <b>Human Agent</b> feature allows your app to have a human agent respond to
+                            user messages using the <b>human_agent</b> tag within 7 days of a user's message. The
+                            allowed usage for this feature is to provide human agent support in cases where a user’s
+                            issue cannot be resolved in the standard messaging window. Examples include when the
+                            business is closed for the weekend, or if the issue requires more than 24 hours to resolve.
+                            <br><br> The <b>Instagram Public Content Access</b> feature allows your app to access
+                            Instagram Graph API's Hashtag Search endpoints. The allowed usages for this feature is to
+                            discover content associated with your hashtag campaigns, understand public sentiment around
+                            your brand or identify contest, competition and sweepstakes entrants. It can also be used to
+                            provide customer support and better understand and manage your audience. <br><br>
+                            <p>See our <a href="https://developers.facebook.com/docs/instagram-platform/reference"
+                                    target="_blank"> API Reference </a> to determine which permission and features your
+                                app will need to request from app users.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="base-urls">Base URLs</h2>
+
+                            <p>For apps using Business Login for Instagram, where your app users log in with their
+                                Instagram credentials, all endpoints are accessed via the
+                                <strong><code>graph.instagram.com</code></strong> host.
+                            </p>
+
+                            <p>For apps using Facebook Login for Business, where your app users' Instagram professional
+                                account is linked to a Facebook Page and your app users log in with their Facebook
+                                credentials, all endpoints are accessed via the
+                                <strong><code>graph.facebook.com</code></strong> host.
+                            </p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="business-verification"><a
+                                    href="https://developers.facebook.com/docs/development/release/business-verification"
+                                    target="_blank">Business verification</a></h2>
+                            <p>You must complete Business Verification if your app requires Advanced Access; if your app
+                                will be used by app users who do not have a Role on the app itself, or a Role in a
+                                Business that has claimed the app.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="comment-moderation">Comment moderation</h2>
+
+                            <p>An Instagram user comments on your app user's Instagram professional account's media.
+                                Your app can use the API to get comments, reply to comments, delete comments,
+                                hide/unhide comments, and disable/enable comments on Instagram media owned by your app
+                                user's Instagram professional account. The API can also identify media where the
+                                Instagram professional account has been @mentioned by other Instagram users.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="content-publishing">Content publishing</h2>
+
+                            <p>Your app can use the API to publish single images, videos, reels (single media posts), or
+                                posts containing multiple images and videos (carousel posts) on behalf of your app
+                                user's Instagram professional accounts.</p>
+
+                            <h4>Content Delivery Network URLs</h4>
+
+                            <p>Instagram Platform leverages Content Delivery Network (CDN) URLs which allow you to
+                                retrieve rich media content shared by Instagram users. The CDN URL is privacy-aware and
+                                will not return the media when the content has been deleted or has expired.</p>
+
+                            <h3 id="collaborators">Collaborators</h3>
+
+                            <p><em>Facebook Login for Business only.</em></p>
+                            <p>
+                                The <a href="https://www.facebook.com/help/instagram/291200585956732"
+                                    target="_blank">Instagram Collaborator Tags</a> allows Instagram users to co-author
+                                content, such as publish media with other accounts (collaborators).
+                            </p>
+                            <p>
+                                With a few exceptions, data on or about co-authored media can only be accessed through
+                                the API by the user who published the media; collaborators are unable to access this
+                                data via the API. The only exceptions are when searching for top performing media or
+                                recently published media that has been tagged with a specific hashtag.
+                            </p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="develop-with-meta"><a href="https://developers.facebook.com/docs/development"
+                                    target="_blank">Develop with Meta</a></h2>
+                            <p>Before you can integrate a Meta Technologies API into your app, you must <a
+                                    href="https://developers.facebook.com/docs/development/register"
+                                    target="_blank">register as a Meta developer</a> and then create an app in the Meta
+                                App Dashboard that represents your app.</p>
+                            <p>When creating an app, you will add the following products depending on login type:</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:15%">
+                                                <div style="padding-top:5%;"></div>
+                                            </th>
+                                            <th>
+                                                Business Login for Instagram
+                                            </th>
+                                            <th>
+                                                Facebook Login for Business
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_5_vM">
+                                        <tr class="row_0">
+                                            <td><b>
+                                                    Products Required
+                                                </b></td>
+                                            <td>
+                                                <ul>
+                                                    <li><strong>Instagram</strong> &gt; Instagram API setup with
+                                                        Instagram login</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul class="uiList _4of _4kg">
+                                                    <li>
+                                                        <div class="fcb"><b>Facebook Login for Business</b></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="fcb"><b>Messenger</b>, including Instagram settings
+                                                            for sending and receiving messages
+
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="fcb"><b>Instagram</b> &gt; Instagram API setup with
+                                                            Facebook login</div>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h3 id="app-ids">App IDs</h3>
+
+                            <p>App IDs are required during authentication and can be found in the app's Meta App
+                                Dashboard. Apps that use Facebook Login for Business will use the Meta app ID displayed
+                                at the top of the Meta App Dashboard for your app. Apps that use Business Login for
+                                Instagram will use the Instagram app ID displayed on the <strong>Instagram &gt; API
+                                    setup with Instagram login</strong> section of the dashboard.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="facebook-pages"><a
+                                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F570895513091465&amp;h=AT36Ra3YUucC3w3AWq2NYyLLRXaJSZ1Fa82blFGNjgNDzdmTkebxqv8Y2Xzrk1nQrP3XBeLdXzqMWrWz8mN6lws_SWqCksYAZEaa3WmAn0Y-CcfDlTQJscFXqORVScLzsXSGFolIFxIvrpLgBEYt_MIpZthCNiEwio7BFg"
+                                    rel="nofollow" target="_blank" data-lynx-mode="asynclazy">Facebook Pages</a></h2>
+                            <p>If your app implements Facebook Login for Business, your app users' Instagram
+                                professional accounts must be connected to a Facebook Page.</p>
+                            <p style="font-size:16px"><a href="/docs/pages/access-tokens#page-tasks"
+                                    target="_blank">Tasks</a></p>
+                            <p> Your app users must be able to perform <b>tasks</b> on the Facebook Page linked to their
+                                Instagram professional account so that they can grant your app permissions related to
+                                those tasks. The following table maps the name of the task in our UIs, such as Facebook
+                                Page Settings or Meta Business Suite, with task names returned in <a
+                                    href="/docs/graph-api/reference/user/accounts#Reading"
+                                    target="_blank"><code>GET /me/accounts</code></a> endpoint requests, and the
+                                permission the user can grant if they can perform that task.</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:20%">Task name in UIs</th>
+                                            <th style="width:40%">Task name in API</th>
+                                            <th>Grantable Permissions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_6_f7">
+                                        <tr class="row_0">
+                                            <td>
+                                                <p>Ads</p>
+                                            </td>
+                                            <td>
+                                                <p><code>PROFILE_PLUS_ADVERTISE</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>instagram_basic</code></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_1 _5m29">
+                                            <td>
+                                                <p>Content</p>
+                                            </td>
+                                            <td>
+                                                <p><code>PROFILE_PLUS_CREATE_CONTENT</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>instagram_basic</code>
+                                                    <code>instagram_content_publish</code>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_2">
+                                            <td>
+                                                <p>Full control</p>
+                                            </td>
+                                            <td>
+                                                <p><code>PROFILE_PLUS_FULL_CONTROL</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>instagram_basic</code>
+                                                    <code>instagram_content_publish</code>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_3 _5m29">
+                                            <td>
+                                                <p>Insights</p>
+                                            </td>
+                                            <td>
+                                                <p><code>PROFILE_PLUS_ANALYZE</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>instagram_basic</code>
+                                                    <code>instagram_manage_insights</code>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_4">
+                                            <td>
+                                                <p>Messages</p>
+                                            </td>
+                                            <td>
+                                                <p><code>PROFILE_PLUS_MESSAGING</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>instagram_basic</code><br>
+                                                    <code>instagram_manage_messages</code>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_5 _5m29">
+                                            <td>
+                                                <p>Community Activity</p>
+                                            </td>
+                                            <td>
+                                                <p><code>PROFILE_PLUS_MODERATE</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>instagram_basic</code><br>
+                                                    <code>instagram_manage_comments</code>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>See our <a href="/docs/instagram-platform/reference" target="_blank">Instagram API
+                                    Reference</a> to see which permissions each endpoint requires.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="scoped-user-ids">Scoped User IDs</h2>
+                            <p style="font-size:16px"> Instagram-scoped User IDs</p>
+                            <p>When an Instagram user comments on a post, reel, or story, or sends a message to an
+                                Instagram professional account, an Instagram-scoped User ID is created that represents
+                                that person on that app. This ID is specific to the person and the Instagram account
+                                they are interacting with. This allows your app users, businesses and creators, to map
+                                interactions for the same person across multiple apps.</p>
+                            <p style="font-size:16px"> Page-scoped User IDs </p>
+                            <p>When an Instagram user comments on a post, reel, or story, or sends a message to an
+                                Instagram professional account, an Page-scoped User ID is created that represents that
+                                person on that app. This ID is specific to the person and the Instagram account they are
+                                interacting with. This allows your app users, businesses and creators, to map
+                                interactions for the same person across multiple apps.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="-me-endpoint"><code>/me</code> endpoint</h2>
+
+                            <p>The <code>/me</code> endpoint is a special endpoint that translates to the object ID of
+                                the account, Facebook Page or Instagram professional account, whose access token is
+                                currently being used to make the API calls. This special endpoint can also represent any
+                                ID, comments, conversations, media, posts, reels, and stories owned by your app user's
+                                Instagram professional account.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="messaging">Messaging</h2>
+
+                            <p>An Instagram user sends a message to your app user's Instagram professional account while
+                                logged in to Instagram. The message is delivered to your app user's Instagram inbox and
+                                a webhook notification is sent to your server. Your app can use the API to respond
+                                within 24 hours. If more time is needed to allow a human agent to respond, you can use
+                                the human agent tag to send a response within 7 days.</p>
+                            <p>If your app uses Facebook Login for Business, your app will use the <a
+                                    href="https://developers.facebook.com/docs/messenger-platform/instagram"
+                                    target="_blank">Messenger Platform's Instagram Messaging API</a> to send and receive
+                                messages.</p>
+                            <p style="font-size:16px"> Instagram Inbox </p>
+                            <p>An Instagram professional account has a messaging inbox that allows you to control
+                                notifications and organize messages. By default notifications are off. You can turn
+                                notifications on in the Inbox Settings. The inbox is organized into different
+                                categories, <strong>Primary</strong>, <strong>General</strong>, and
+                                <strong>Requests</strong>. By default, all new conversations from followers will appear
+                                in the Primary folder.
+                                Conversations that existed before you implemented Instagram Messaging will be in the
+                                folders you have placed them within.
+                            </p>
+                            <p>Messages that you receive from people who are not followers of your account are in
+                                Requests folder. You can choose to accept or deny these requests, and request messages
+                                aren’t marked as <b>Seen</b> until you accept them. Once a request is accepted you can
+                                move the conversation to the Primary or General folder. All message requests that you
+                                answer using a third-party app will be moved to the General folder.
+                            </p>
+                            <p style="font-size:14px"> Inbox Limitations </p>
+                            <ul>
+                                <li>If you reply to a message using a third-party app, the conversation will be moved to
+                                    the <strong>General</strong> folder regardless of your Setting configuration</li>
+                                <li>Inbox folders are not supported and messages delivered by the Messenger Platform do
+                                    not include folder information that is shown in the Instagram from Meta app inbox
+                                    folder</li>
+                                <li>Webhooks notifications or messages delivered via the API will not be considered as
+                                    <strong>Read</strong> in the Instagram app inbox. Only after a reply is sent will a
+                                    message be considered <strong>Read</strong>.
+                                </li>
+                            </ul>
+
+                            <h3 id="automated-experiences">Automated Experiences</h3>
+
+                            <p>You can provide an escalation path for automated messaging experiences using one of the
+                                following:</p>
+                            <ul class="uiList _4of _4kg">
+                                <li>
+                                    <div class="fcb"><b>A Single App</b> – You can create a custom inbox to receive or
+                                        reply to messages from a person. This custom inbox is powered by the same
+                                        messaging app that also provides the automated experience
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="fcb"><b>Multiple Apps</b> – <a
+                                            href="https://developers.facebook.com/docs/messenger-platform/handover-protocol"
+                                            target="_blank">Handover Protocol <img class="img"
+                                                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=dE2tzxzOGbZfHyeV6aHoIw&amp;oh=00_AfsIAYDMU640ARrMRZSlHrBcGlMQ1GZSebctor5UH4-E0A&amp;oe=69A06B62"
+                                                width="10px" alt=""></a> allows you pass the conversation from one app
+                                        or inbox to another. For example, one app would handle the conversation with an
+                                        automated experience and, when needed, would pass the conversation to another
+                                        app to continue the conversation with a human agent.
+                                    </div>
+                                </li>
+                            </ul>
+                            <div><span>
+                                    <h4>Informing Users About Your Automated Experience</h4>
+                                    <div style="padding:10px"></div>
+                                    <p>When required by applicable law, automated chat experiences must disclose that a
+                                        person is interacting with an automated service:</p>
+
+                                    <ul>
+                                        <li>at the beginning of any conversation or message thread,</li>
+                                        <li>after a significant lapse of time, or</li>
+                                        <li>when a chat moves from human interaction to automated experience.</li>
+                                    </ul>
+
+                                    <p>Automated chat experiences that serve the following groups should pay special
+                                        attention to this requirement:</p>
+
+                                    <ul>
+                                        <li>California market or California users</li>
+                                        <li>German market or German users</li>
+                                    </ul>
+
+                                    <p>Disclosures may include but are not limited to: “I’m the [Page Name] bot,”“You
+                                        are interacting with an automated experience,” “You are talking to a bot,” or “I
+                                        am an automated chatbot.”</p>
+
+                                    <p>Even where not legally required, we recommend informing users when they’re
+                                        interacting with an automated chat as best practice, as this helps manage user
+                                        expectations about their interaction with your messaging experience.</p>
+                                    <p>
+                                        Visit our
+                                        <a href="https://developers.facebook.com/devpolicy/#messengerplatform"
+                                            target="_blank">
+                                            Developer Policies
+                                            <img class="img"
+                                                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=dE2tzxzOGbZfHyeV6aHoIw&amp;oh=00_AfsIAYDMU640ARrMRZSlHrBcGlMQ1GZSebctor5UH4-E0A&amp;oe=69A06B62"
+                                                width="10px" alt=""></a>
+                                        for more information.
+                                    </p>
+                                </span></div>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="policies">Policies</h2>
+
+                            <p>To gain and retain access to the Meta social graph you must adhere to the following:</p>
+                            <ul class="uiList _4of _4kg">
+                                <li>
+                                    <div class="fcb"><a
+                                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F655277382759165&amp;h=AT0VpQrkU5jkwQR4lbb431IM1NltVMCOBPB8fHlshZng2fWvQ200drXU_Ob8AhIL5wMGmvxY59UkdMZ53_JD708ehOeqUOj4ONOhvdEkbPtigHLRSoNRGKKj73b6_GIfGMY2chGFrR3o28YrWh3kzM_sG2NYrsm8-hcxTvgxFQ6S1kAB6mc"
+                                            rel="nofollow" target="_blank" data-lynx-mode="async">
+                                            Automated chats on Instagram
+                                            <img class="img"
+                                                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=dE2tzxzOGbZfHyeV6aHoIw&amp;oh=00_AfsIAYDMU640ARrMRZSlHrBcGlMQ1GZSebctor5UH4-E0A&amp;oe=69A06B62"
+                                                width="10px" alt=""></a></div>
+                                </li>
+                                <li>
+                                    <div class="fcb"><a href="https://developers.facebook.com/terms/" target="_blank">
+                                            Meta Platform Terms
+                                            <img class="img"
+                                                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=dE2tzxzOGbZfHyeV6aHoIw&amp;oh=00_AfsIAYDMU640ARrMRZSlHrBcGlMQ1GZSebctor5UH4-E0A&amp;oe=69A06B62"
+                                                width="10px" alt=""></a></div>
+                                </li>
+                                <li>
+                                    <div class="fcb"><a href="https://developers.facebook.com/devpolicy"
+                                            target="_blank">
+                                            Developer Policies
+                                            <img class="img"
+                                                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=dE2tzxzOGbZfHyeV6aHoIw&amp;oh=00_AfsIAYDMU640ARrMRZSlHrBcGlMQ1GZSebctor5UH4-E0A&amp;oe=69A06B62"
+                                                width="10px" alt=""></a></div>
+                                </li>
+                                <li>
+                                    <div class="fcb"><a
+                                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fpolicies%2Fcommunity-standards%2F&amp;h=AT0AYCxhAnkyl8jnsEtBzCoMksT5LIWwGD2LMf2EnzGUuetgNj-cVu0X9qXiaRjXX_WL5foBcud7ctNrh_Lbvg2_T2wOA4_KZowPAWWzD4tdEYkWXQXM8zOd_ZeeeAokMdtlED8o8BLYD1Z9_1LPHVl6icLecd5cM81uvA"
+                                            rel="nofollow" target="_blank" data-lynx-mode="asynclazy">
+                                            Community Standards
+                                            <img class="img"
+                                                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=dE2tzxzOGbZfHyeV6aHoIw&amp;oh=00_AfsIAYDMU640ARrMRZSlHrBcGlMQ1GZSebctor5UH4-E0A&amp;oe=69A06B62"
+                                                width="10px" alt=""></a></div>
+                                </li>
+                                <li>
+                                    <div class="fcb"><a
+                                            href="https://developers.facebook.com/docs/resp-plat-initiatives"
+                                            target="_blank">
+                                            Responsible Platform Initiatives
+                                            <img class="img"
+                                                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=dE2tzxzOGbZfHyeV6aHoIw&amp;oh=00_AfsIAYDMU640ARrMRZSlHrBcGlMQ1GZSebctor5UH4-E0A&amp;oe=69A06B62"
+                                                width="10px" alt=""></a></div>
+                                </li>
+                            </ul>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="rate-limiting">Rate Limiting</h2>
+                            <p>
+                                All endpoints are subject to
+                                <a href="/docs/graph-api/overview/rate-limiting#instagram-graph-api" target="_blank">
+                                    Instagram Business Use Case rate limiting
+                                </a>
+                                except for
+                                <a href="/docs/instagram-api/guides/business-discovery" target="_blank">
+                                    Business Discovery
+                                </a>
+                                and
+                                <a href="/docs/instagram-api/guides/hashtag-search" target="_blank">
+                                    Hashtag Search
+                                </a>
+                                endpoints, which are subject to
+                                <a href="/docs/graph-api/overview/rate-limiting#platform-rate-limits" target="_blank">
+                                    Platform Rate limiting.
+                                </a>
+                            </p>
+                            <div><span>
+                                    <p>Calls to the Instagram Platform endpoints, excluding messaging, are counted
+                                        against the calling app's call count. An app's call count is unique for each app
+                                        and app user pair, and is the number of calls the app has made in a rolling 24
+                                        hour window. It is calculated as follows:</p>
+                                    <div style="background-color:#CFE2F3;text-align:center;padding:10px;">
+                                        <code>Calls within 24 hours = 4800 * Number of Impressions</code>
+                                    </div>
+                                    <div style="padding:10px"></div>
+                                    <p>The Number of Impressions is the number of times any content from the app user's
+                                        Instagram professional account has entered a person's screen within the last 24
+                                        hours.</p>
+
+                                    <h4>Notes</h4>
+                                    <li>Business Discovery and Hashtag Search API are subject to <a
+                                            href="/docs/graph-api/overview/rate-limiting#platform-rate-limits"
+                                            target="_blank">Platform Rate Limits</a>.</li>
+                                    <h3 id="messaging-rate-limits">Messaging Rate Limits</h3>
+
+                                    <p>Calls to the Instagram messaging endpoints are counted against the number of
+                                        calls your app can make per Instagram professional account and the API used.</p>
+
+                                    <h4>Conversations API</h4>
+
+                                    <ul>
+                                        <li>Your app can make 2 calls per second per Instagram professional account.
+                                        </li>
+                                    </ul>
+
+                                    <h4>Private Replies API</h4>
+
+                                    <ul>
+                                        <li>Your app can make 100 calls per second per Instagram professional account
+                                            for private replies to Instagram Live comments</li>
+                                        <li>Your app can make 750 calls per hour per Instagram professional account for
+                                            private replies to comments on Instagram posts and reels</li>
+                                    </ul>
+
+                                    <h4>Send API</h4>
+
+                                    <ul>
+                                        <li>Your app can make 100 calls per second per Instagram professional account
+                                            for messages that contain text, links, reactions, and stickers</li>
+                                        <li>Your app can make 10 calls per second per Instagram professional account for
+                                            messages that contain audio or video content</li>
+                                    </ul>
+                                </span></div>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="webhooks">Webhooks</h2>
+
+                            <p>We strongly recommend using webhooks to receive notifications about your app users' media
+                                objects or messages. Using webhooks will reduce the number of needed API calls made by
+                                your app and hence, reducing the risk of being rate limited.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="next-steps">Next steps</h2>
+
+                            <p>Now that you are familiar with the components of this API, set up your <a
+                                    href="/docs/instagram-platform/webhooks">webhooks server and subscribe to
+                                    events</a>.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="see-also">See also</h2>
+                            <p>Learn more about <a href="https://developers.facebook.com/docs/graph-api"
+                                    target="_blank">Meta's Graph API</a> and the <a href="/docs/messenger-platform"
+                                    target="_blank" data-auto-logging-id="fed647005">Messenger Platform</a>.</p>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

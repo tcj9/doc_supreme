@@ -1,0 +1,280 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="list_videos">List Videos</h1>
+        <h2 id="overview">Overview</h2>
+        <p style="text-align:left">The <code>/v2/video/list/</code> endpoint can return a paginated list for the given
+            user's <b>public</b> TikTok video posts, sorted by <code>create_time</code> in descending order.</p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>HTTP URL</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">https://open.tiktokapis.com/v2/video/list/</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>HTTP Method</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">POST</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Scope</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video.list</p>
+                </td>
+            </tr>
+        </table>
+        <h2 id="request">Request</h2>
+        <h3 id="headers">Headers</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Example</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Required</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Authorization</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The token that bears the authorization of the TikTok user, which is
+                        obtained through /oauth/access_token/.</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Bearer act.example12345Example12345Example</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Content-Type</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">indicate the original media type of the resource</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">application/json</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="body">Body</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Example</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Required</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">cursor</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Cursor for pagination. If <code>response.has_more</code> is true, pass in
+                        the <code>response.cursor</code> to the next request will yield the results for the next page.
+                    </p><br />
+                    <p style="text-align:left"><i>Note: the cursor value is a </i><i>UTC</i><i> Unix timestamp in
+                            milli-seconds. You can pass in a customized timestamp to fetch the user's videos posted
+                            before the provided timestamp.</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">1643332803000</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">false</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">max_count</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int32</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The maximum number of videos that will be returned from each page.
+                        Default is 10. Maximum is 20.</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">20</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">false</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="example">Example</h3>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl -L -X POST </span><span style="color:#d14">'https://open.tiktokapis.com/v2/video/list/?fields=cover_image_url,id,title'</span><span> \
+</span></span><span style="color:#d14"><span>-H </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>-H </span><span style="color:#d14">'Content-Type: application/json'</span><span> \
+</span></span><span style="color:#d14"><span>--data-raw </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "max_count": 20
+</span><span style="color:#d14">}'</span></code></pre>
+        <h2 id="response">Response</h2>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="0" rowspan="1">
+                    <p style="text-align:left">data</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">map&lt;string, UserVideoListPostResponseData&gt;</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">error</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><a href="/doc/tiktok-api-v2-error-handling">Error Object</a></p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="uservideolistpostresponsedata">UserVideoListPostResponseData</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">videos</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">list&lt;<a href="/doc/tiktok-api-v2-video-object">Video Object</a>&gt;
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">A list of video objects</p><br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">cursor</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">i64</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Cursor for pagination. If <code>response.has_more</code> is true, pass in
+                        the <code>response.cursor</code> to the next request will yield the results for the next page.
+                    </p><br />
+                    <p style="text-align:left"><i>Note: the cursor value is a </i><i>UTC</i><i> Unix timestamp in
+                            milli-seconds. You can pass in a customized timestamp to fetch the user's videos posted
+                            before the provided timestamp.</i></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">has_more</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">bool</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Whether there is more videos</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="example_2">Example</h3>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>   </span><span>"data"</span><span>:{
+</span></span><span><span>      </span><span>"videos"</span><span>:[
+</span></span><span>         {
+</span><span><span>            </span><span>"cover_image_url"</span><span>:</span><span style="color:#d14">"https://p16-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/979e93dbc5df40198f7ac935fb3e3342~tplv-noop.image?x-expires=1659000367&amp;x-signature=EZIo1pVYVGYh%2FaNNaHHlbWEvw%2BM%3D"</span><span>,
+</span></span><span><span>            </span><span>"id"</span><span>:</span><span style="color:#d14">"12345123451234512345"</span><span>,
+</span></span><span><span>            </span><span>"title"</span><span>: </span><span style="color:#d14">"Video Title"</span><span>,
+</span></span><span>         }
+</span><span>      ],
+</span><span><span>      </span><span>"cursor"</span><span>:</span><span style="color:#008080">1643332803000</span><span>,
+</span></span><span><span>      </span><span>"has_more"</span><span>:</span><span style="color:#008080">false</span><span>
+</span></span><span>   },
+</span><span><span>   </span><span>"error"</span><span>: {
+</span></span><span><span>      </span><span>"code"</span><span>:</span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>      </span><span>"message"</span><span>:</span><span style="color:#d14">""</span><span>,
+</span></span><span><span>      </span><span>"log_id"</span><span>:</span><span style="color:#d14">"20220829194722CBE87ED59D524E727021"</span><span>
+</span></span><span>   }
+</span><span>}</span></code></pre><br />
+    </div>
+</div>

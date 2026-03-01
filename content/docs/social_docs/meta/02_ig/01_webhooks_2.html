@@ -1,0 +1,839 @@
+<div id="documentation_body_pagelet" data-referrer="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_qM">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1 id="instagram-platform-webhook-notification-examples">Instagram Platform Webhook
+                                Notification Examples</h1>
+
+                            <p>This guide contains example JSON payloads for Instagram webhook notifications sent from
+                                Meta when a webhook field has been triggered. Syntax returned in notifications vary
+                                slightly depending on log in type implemented in your app and triggering event.</p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="business-login-for-instagram">Business Login for Instagram</h2>
+
+                            <p>The following notification examples are for apps that have implemented Business Login for
+                                Instagram.</p>
+                            <div></div>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <p>Common parameters of notifications</p>
+
+                                            <p><code>object</code> string</p>
+
+                                            <p>Platform on which the webhook event was triggered. In this instance,
+                                                <code>instagram</code>.
+                                            </p>
+
+                                            <p><code>entry.id</code> string</p>
+
+                                            <p>The Instagram professional account ID of your app user</p>
+
+                                            <p><code>entry.time</code> int</p>
+
+                                            <p>The time Meta sent the notification</p>
+
+                                            <p><code>entry</code> array of objects</p>
+
+                                            <p>An array containing the contents of the notification</p>
+                                            <hr>
+                                            <p><code>entry</code> array of objects</p>
+
+                                            <p>An array containing the contents of the notification</p>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-html prettyprinted" style=""><span class="pln">[
+  {
+    "object":"instagram",
+    "entry":[
+      {
+        "id":"</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_ACCOUNT_ID&gt;</span><span class="pln">",
+        "time":</span><span class="tag">&lt;TIME_META_SENT_THIS_NOTIFICATION&gt;</span><span class="pln">,
+        </span><span class="tag">&lt;NOTIFICATION_PAYLOAD&gt;</span><span class="pln">
+      }
+    ]
+  } 
+]</span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 id="comments-payload">Comments payload</h3>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <p>The comment event notification payloads include the following:</p>
+
+                                            <ul>
+                                                <li><code>field</code> set to <code>comments</code> or
+                                                    <code>live_comments</code>
+                                                </li>
+                                                <li><code>value</code> set to an array that contains:
+
+                                                    <ul>
+                                                        <li>The comment ID</li>
+                                                        <li>The Instagram-scoped user ID of the Instagram user who
+                                                            commented on your app user's media</li>
+                                                        <li>The username of the Instagram user who commented on your app
+                                                            user's media</li>
+                                                        <li>Any text that was included in the comment</li>
+                                                        <li>The media's ID </li>
+                                                        <li>Where the media was located, in an ad, feed, story, or reel
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-html prettyprinted" style=""><span class="pln">[
+  {
+    "object": "instagram",
+    "entry": [
+      {
+        "id": "</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_ACCOUNT_ID&gt;</span><span class="pln">",
+        "time": </span><span class="tag">&lt;TIME_META_SENT_THIS_NOTIFICATION&gt;</span><span class="pln">
+
+    // Comment or live comment payload
+        "field": "comments",
+        "value": {
+          "id": "</span><span class="tag">&lt;COMMENT_ID&gt;</span><span class="pln">",
+          "from": {
+            "id": "</span><span class="tag">&lt;INSTAGRAM_SCOPED_USER_ID&gt;</span><span class="pln">",
+            "username": "</span><span class="tag">&lt;USERNAME&gt;</span><span class="pln">"
+          },
+          "text": "</span><span class="tag">&lt;COMMENT_TEXT&gt;</span><span class="pln">",
+          "media": {
+            "id": "</span><span class="tag">&lt;MEDIA_ID&gt;</span><span class="pln">",
+            "media_product_type": "</span><span class="tag">&lt;MEDIA_PRODUCT_TYPE&gt;</span><span class="pln">"
+          }
+        }
+      }
+    ]
+  }
+]</span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <h3 id="messaging-payload">Messaging payload</h3>
+
+                                            <p>All messaging webhook notifications included the following:</p>
+
+                                            <ul>
+                                                <li><code>object</code> set to <code>instagram</code></li>
+                                                <li><code>entry</code> set to an array containing:
+
+                                                    <ul>
+                                                        <li>The Instagram professional account ID of your app user who
+                                                            is in the conversation</li>
+                                                        <li>The time Meta sent the notification</li>
+                                                        <li>The sender's ID</li>
+                                                        <li>The recipient's ID</li>
+                                                        <li>The time when the message was sent</li>
+                                                        <li>The notification payload for the specific webhook that was
+                                                            triggered</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-html prettyprinted" style=""><span class="pln">[
+  {
+    "object":"instagram",
+    "entry":[
+      {
+        "id": "</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_ACCOUNT_ID&gt;</span><span class="pln">",
+        "time": </span><span class="tag">&lt;TIME_META_SENT_NOTIFICATION&gt;</span><span class="pln">,
+        "messaging": [
+          {
+            "sender": { "id": "</span><span class="tag">&lt;SENDER_ID&gt;</span><span class="pln">" },
+            "recipient": { "id": "</span><span class="tag">&lt;RECIPIENT_ID&gt;</span><span class="pln">" },
+            "timestamp": </span><span class="tag">&lt;TIME_WEBHOOK_WAS_TRIGGERED&gt;</span><span class="pln">
+            </span><span class="tag">&lt;NOTIFICATION_PAYLOAD&gt;</span><span class="pln">
+          }
+        ]
+      }
+    ]
+  }
+]</span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>Identifying the values for the multiple <code>id</code>s within a notification can be
+                                confusing since the recipient and sender can vary depending on the action that triggered
+                                the webhook. The following table shows the action that triggered the webhook and the ID
+                                set for each <code>id</code> parameter.</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <tr>
+                                            <th>Action that triggers a messaging webhook</th>
+                                            <th>
+                                                <div style="padding-left:40%;"><code>id</code></div>
+                                            </th>
+                                            <th>
+                                                <div style="padding-left:20%;"><code>recipient.id</code></div>
+                                            </th>
+                                            <th>
+                                                <div style="padding-left:20%;"><code>sender.id</code></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_2_HB">
+                                        <tr class="row_0">
+                                            <td>
+                                                <p>Your app user <strong>receives</strong> a message from an Instagram
+                                                    user</p>
+                                            </td>
+                                            <td>
+                                                <p>Your app user's Instagram professional account ID</p>
+                                            </td>
+                                            <td>
+                                                <p>Your app user's Instagram professional account ID</p>
+                                            </td>
+                                            <td>
+                                                <p>The Instagram user's Instagram-scoped ID</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_1 _5m29">
+                                            <td>
+                                                <p>Your app user <strong>sends</strong> a message to an Instagram user
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p>Your app user's Instagram professional account ID</p>
+                                            </td>
+                                            <td>
+                                                <p>The Instagram user's Instagram-scoped ID</p>
+                                            </td>
+                                            <td>
+                                                <p>Your app user's Instagram professional account ID</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h3 id="message"><code>message</code></h3>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <p>The <code>message</code> event notification payloads include the
+                                                following:</p>
+
+                                            <ul>
+                                                <li><code>message</code> set to object that contains data about the
+                                                    message that was sent with:
+
+                                                    <ul>
+                                                        <li><code>mid</code> set to the message ID that was sent</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+
+                                            <p>The payload might also include the following depending on the contents of
+                                                the message:</p>
+
+                                            <ul>
+                                                <li><code>text</code> included when the message contains text</li>
+                                                <li><code>is_deleted</code> set to <code>true</code> is included when
+                                                    the Instagram user deleted the message</li>
+                                                <li><code>is_echo</code> set to <code>true</code> is included when the
+                                                    message was sent by your app user</li>
+                                                <li><code>is_self</code> set to <code>true</code> is included when you
+                                                    send a test message to your Instagram professional account (a public
+                                                    Instagram professional account linked to your app in the Meta App
+                                                    Dashboard)</li>
+                                                <li><code>is_unsupported</code> set to true when the message contains
+                                                    unsupported media</li>
+                                                <li><code>quick_reply</code> set to an object with <code>payload</code>
+                                                    set to the payload your app user wants to see for the quick reply
+                                                    chosen by the Instagram user </li>
+                                                <li><code>referral</code> set to an object that includes information
+                                                    about the CTD ad the Instagram user clicked:
+
+                                                    <ul>
+                                                        <li><code>ref</code> set to the <code>ref</code> parameter value
+                                                            of the ad, if set by your app user</li>
+                                                        <li><code>ad_id</code> set to the ad ID</li>
+                                                        <li><code>source</code> set to <code>ADS</code></li>
+                                                        <li><code>type</code> set to <code>OPEN_THREAD</code></li>
+                                                        <li><code>ads_context_data</code> set to an object that contains
+                                                            the ad title, photo url if the Instagram user clicked an
+                                                            image in the ad or video url if the Instagram user clicked a
+                                                            video in the ad</li>
+                                                    </ul>
+                                                </li>
+                                                <li><code>reply_to</code> set to an object with the message ID if the
+                                                    user sends an inline reply</li>
+                                                <li><code>reply_to</code> set to an object with a <code>story</code>
+                                                    object that include the URL of the story and the story ID</li>
+                                                <li><code>attachments</code> set to an array that includes one or more
+                                                    objects with supported type and the payload that contains the URL
+                                                    for the media.
+                                                    (Supported type: <code>media</code>, <code>audio</code>,
+                                                    <code>file</code>, <code>image</code> (image, gif, or sticker),
+                                                    <code>video</code>, <code>share</code>(legacy IG post share,
+                                                    deprecated after Feb 2026), <code>ig_post</code>,
+                                                    <code>story_mention</code>, <code>video</code>,
+                                                    <code>ig_reel</code>, <code>reel</code>, <code>story</code>,
+                                                    <code>ig_story</code>)
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-html prettyprinted" style=""><span class="pln">[
+  {
+    "object":"instagram",
+    "entry":[
+      {
+        "id":"</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;</span><span class="pln">",
+        "time":</span><span class="tag">&lt;TIME_NOTIFICATION_WAS_SENT&gt;</span><span class="pln">,
+        "messaging":[
+          {
+            "sender":{ "id":"</span><span class="tag">&lt;SENDER_ID&gt;</span><span class="pln">" },
+            "recipient":{ "id":"</span><span class="tag">&lt;RECIPIENT_ID&gt;</span><span class="pln">" },
+            "timestamp":</span><span class="tag">&lt;TIME_WEBHOOK_WAS_TRIGGERED&gt;</span><span class="pln">,
+  
+  // </span><span class="tag">&lt;MESSAGE_WEBHOOK_PAYLOAD&gt;</span><span class="pln"> 
+            "message": { 
+              "mid": "</span><span class="tag">&lt;MESSAGE_ID&gt;</span><span class="pln">",
+  
+ // Optional parameters included for specific message types
+  
+              "attachments": [
+                {                             
+                  "type":"</span><span class="tag">&lt;ATTACHMENT_MEDIA_TYPE&gt;</span><span class="pln">",
+                  "payload":{ "url":"</span><span class="tag">&lt;URL_FOR_THE_MEDIA&gt;</span><span class="pln">" }  
+                },
+                // Can include multiple media objects
+              ],
+  
+              "is_deleted": true,   
+  
+              "is_echo": true,    
+  
+              "is_self": true,  // Sent to self for testing webhooks setup
+
+              "is_unsupported": true,
+  
+              "quick_reply": { "payload": "</span><span class="tag">&lt;QUICK_REPLY_OPTION_SELECTED&gt;</span><span class="pln">" }, 
+
+              "referral": {
+                "ref": "</span><span class="tag">&lt;AD_REF_PARAMETER_VALUE_IF_SET&gt;</span><span class="pln">"
+                "ad_id": "</span><span class="tag">&lt;AD_ID&gt;</span><span class="pln">",
+                "source": "ADS",
+                "type": "OPEN_THREAD",
+                "ads_context_data": {
+                  "ad_title": "</span><span class="tag">&lt;AD_TITLE&gt;</span><span class="pln">",
+                  "photo_url": "</span><span class="tag">&lt;IMAGE_URL_THAT_WAS_SELECTED&gt;</span><span class="pln">",
+                  "video_url": "</span><span class="tag">&lt;THUMBNAIL_URL_FOR_THE_AD_VIDEO&gt;</span><span class="pln">",
+                }
+              },
+
+              "reply_to":{ "mid":"</span><span class="tag">&lt;MESSAGE_ID&gt;</span><span class="pln">" } 
+  
+              "reply_to": {
+              "story": {
+                "url":"</span><span class="tag">&lt;CDN_URL_FOR_THE_STORY&gt;</span><span class="pln">",
+                "id":"</span><span class="tag">&lt;STORY_ID&gt;</span><span class="pln">"       
+              }
+            }
+  
+              "text": "</span><span class="tag">&lt;MESSAGE_TEXT&gt;</span><span class="pln">",
+  
+          }
+        }
+      ]
+    }
+  ]
+}</span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 id="message-reactions"><code>message_reactions</code></h3>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <p>The <code>message_reactions</code> event notification payloads include
+                                                the following:</p>
+
+                                            <ul>
+                                                <li><code>reaction</code> set to an object with the following:
+
+                                                    <ul>
+                                                        <li><code>mid</code> set to the message ID</li>
+                                                        <li><code>action</code> set to <code>react</code> or
+                                                            <code>unreact</code>, if removing a reaction
+                                                        </li>
+                                                        <li>If reacting, <code>reaction</code> set to <code>love</code>
+                                                            and <code>emoji</code> set to <code>\u{2764}\u{FE0F}</code>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-json prettyprinted" style=""><span class="pun">{</span><span class="pln">
+  </span><span class="str">"object"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"instagram"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"entry"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+    </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;"</span><span class="pun">,</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID for your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+      </span><span class="str">"time"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1569262486134</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"messaging"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+        </span><span class="pun">{</span><span class="pln">
+          </span><span class="str">"sender"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;INSTAGRAM_SCOPED_ID&gt;"</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Instagram</span><span class="pun">-</span><span class="pln">scoped ID for the </span><span class="typ">Instagram</span><span class="pln"> user who sent the message
+          </span><span class="pun">},</span><span class="pln">
+          </span><span class="str">"recipient"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;"</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID for your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+          </span><span class="pun">},</span><span class="pln">
+          </span><span class="str">"timestamp"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1569262485349</span><span class="pun">,</span><span class="pln">
+          </span><span class="str">"reaction"</span><span class="pln"> </span><span class="pun">:{</span><span class="pln">
+            </span><span class="str">"mid"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;MESSAGE_ID&gt;"</span><span class="pun">,</span><span class="pln">
+            </span><span class="str">"action"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"react"</span><span class="pun">,</span><span class="pln">          </span><span class="pun">//</span><span class="pln"> or unreact if removing the reaction
+            </span><span class="str">"reaction"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"love"</span><span class="pun">,</span><span class="pln">         </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Not</span><span class="pln"> included when action is unreact
+            </span><span class="str">"emoji"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"\u{2764}\u{FE0F}"</span><span class="pln"> </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Not</span><span class="pln"> included when action is unreact
+          </span><span class="pun">}</span><span class="pln"> 
+        </span><span class="pun">}</span><span class="pln">
+      </span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">]</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">  </span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 id="messaging-postbacks"><code>messaging_postbacks</code></h3>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <p>The <code>messaging_postbacks</code> event notification payloads include
+                                                the following:</p>
+
+                                            <ul>
+                                                <li><code>postback</code> set to an object with:
+
+                                                    <ul>
+                                                        <li><code>mid</code> set to the message ID</li>
+                                                        <li><code>title</code> set to the icebreaker or CTA button the
+                                                            Instagram user selected</li>
+                                                        <li><code>payload</code> set to the payload your app user wants
+                                                            to receive for that selection</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-json prettyprinted" style=""><span class="pun">{</span><span class="pln">
+  </span><span class="str">"object"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"instagram"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"entry"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+    </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;INSTAGRAM_SCOPED_ID&gt;"</span><span class="pun">,</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID of your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+      </span><span class="str">"time"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1502905976963</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"messaging"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+        </span><span class="pun">{</span><span class="pln">
+          </span><span class="str">"sender"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;INSTAGRAM_SCOPED_ID&gt;"</span><span class="pln"> </span><span class="pun">},</span><span class="pln">    </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Instagram</span><span class="pun">-</span><span class="pln">scoped ID for the </span><span class="typ">Instagram</span><span class="pln"> user who sent the message
+          </span><span class="str">"recipient"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;"</span><span class="pln"> </span><span class="pun">},</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID of your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+          </span><span class="str">"timestamp"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1502905976377</span><span class="pun">,</span><span class="pln">
+          </span><span class="str">"postback"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"mid"</span><span class="pun">:</span><span class="str">"&lt;MESSAGE_ID&gt;"</span><span class="pun">,</span><span class="pln">           </span><span class="pun">//</span><span class="pln"> ID for the message sent to your app user
+            </span><span class="str">"title"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;USER_SELECTED_ICEBREAKER_OPTION_OR_CTA_BUTTON&gt;"</span><span class="pun">,</span><span class="pln">
+            </span><span class="str">"payload"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;OPTION_OR_BUTTON_PAYLOAD&gt;"</span><span class="pun">,</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> </span><span class="typ">The</span><span class="pln"> payload with the option selected by the </span><span class="typ">Instagram</span><span class="pln"> user
+          </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+      </span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">]</span><span class="pln">
+</span><span class="pun">}</span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 id="igme"><code>messaging_referral</code></h3>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <p>The <code>messaging_referral</code> event notification payloads include
+                                                the following:</p>
+
+                                            <ul>
+                                                <li><code>referral</code> set to an object with:
+
+                                                    <ul>
+                                                        <li><code>ref</code> set to the value of the <code>ref</code>
+                                                            parameter in your <code>ig.me</code> link that an Instagram
+                                                            user clicked</li>
+                                                        <li><code>source</code> set to the <code>ig.me</code> link that
+                                                            was clicked by an Instagram user</li>
+                                                        <li><code>type</code> set to <code>OPEN_THREAD</code> when a
+                                                            message is part of an existing conversation</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-json prettyprinted" style=""><span class="pun">{</span><span class="pln">
+  </span><span class="str">"object"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"instagram"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"entry"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+    </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;INSTAGRAM_SCOPED_ID&gt;"</span><span class="pun">,</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID of your </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account  
+      </span><span class="str">"time"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1502905976963</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"messaging"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+        </span><span class="pun">{</span><span class="pln">
+          </span><span class="str">"sender"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;INSTAGRAM_SCOPED_ID&gt;"</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Instagram</span><span class="pun">-</span><span class="pln">scoped ID for the </span><span class="typ">Instagram</span><span class="pln"> user who sent the message
+          </span><span class="pun">},</span><span class="pln">
+          </span><span class="str">"recipient"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;"</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID of your </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+          </span><span class="pun">},</span><span class="pln">
+          </span><span class="str">"timestamp"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1502905976377</span><span class="pun">,</span><span class="pln">
+          </span><span class="str">"referral"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                 </span><span class="str">"ref"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;IGME_LINK_REF_PARAMETER_VALUE&gt;"</span><span class="pln">
+                 </span><span class="str">"source"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;IGME_SOURCE_LINK&gt;"</span><span class="pln">  
+                 </span><span class="str">"type"</span><span class="pun">:</span><span class="pln">  </span><span class="str">"OPEN_THREAD"</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Included</span><span class="pln"> when a message is part of an existing conversation
+          </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+      </span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">]</span><span class="pln">
+</span><span class="pun">}</span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 id="messaging-seen"><code>messaging_seen</code></h3>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <p>The <code>messaging_seen</code> event notification payloads include the
+                                                following:</p>
+
+                                            <ul>
+                                                <li><code>read</code> set to an object with:
+
+                                                    <ul>
+                                                        <li><code>mid</code> set to the message ID that was read</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-json prettyprinted" style=""><span class="pun">{</span><span class="pln">
+   </span><span class="str">"object"</span><span class="pun">:</span><span class="str">"instagram"</span><span class="pun">,</span><span class="pln">
+   </span><span class="str">"entry"</span><span class="pun">:[</span><span class="pln">
+      </span><span class="pun">{</span><span class="pln">
+         </span><span class="str">"id"</span><span class="pun">:</span><span class="str">"&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;"</span><span class="pun">,</span><span class="pln">     </span><span class="pun">//</span><span class="pln"> ID for your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+         </span><span class="str">"time"</span><span class="pun">:</span><span class="lit">1569262486134</span><span class="pun">,</span><span class="pln">
+         </span><span class="str">"messaging"</span><span class="pun">:[</span><span class="pln">
+            </span><span class="pun">{</span><span class="pln">
+               </span><span class="str">"sender"</span><span class="pun">:{</span><span class="pln">
+                  </span><span class="str">"id"</span><span class="pun">:</span><span class="str">"&lt;INSTAGRAM_SCOPED_ID&gt;"</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Instagram</span><span class="pun">-</span><span class="pln">scoped ID for the </span><span class="typ">Instagram</span><span class="pln"> user who sent the message
+               </span><span class="pun">},</span><span class="pln">
+               </span><span class="str">"recipient"</span><span class="pun">:{</span><span class="pln">
+                  </span><span class="str">"id"</span><span class="pun">:</span><span class="str">"&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;"</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID for your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+               </span><span class="pun">},</span><span class="pln">
+               </span><span class="str">"timestamp"</span><span class="pun">:</span><span class="lit">1569262485349</span><span class="pun">,</span><span class="pln">
+               </span><span class="str">"read"</span><span class="pun">:{</span><span class="pln">
+                  </span><span class="str">"mid"</span><span class="pun">:</span><span class="str">"&lt;MESSAGE_ID&gt;"</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID for the message that was seen
+               </span><span class="pun">}</span><span class="pln">
+            </span><span class="pun">}</span><span class="pln">
+         </span><span class="pun">]</span><span class="pln">
+      </span><span class="pun">}</span><span class="pln">
+   </span><span class="pun">]</span><span class="pln">
+</span><span class="pun">}</span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 id="message-edit"><code>message_edit</code></h3>
+                            <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr class="_51mx">
+                                        <td class="_51m- vTop hLeft _57v2">
+                                            <p>The <code>message_edit</code> event notification payloads include the
+                                                following:</p>
+
+                                            <ul>
+                                                <li><code>message_edit</code> set to an object with:
+
+                                                    <ul>
+                                                        <li><code>mid</code> set to the message ID that was read</li>
+                                                        <li><code>text</code> set to the edited text message by user
+                                                        </li>
+                                                        <li><code>num_edit</code> set to the number of times message has
+                                                            been edited</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="_51m- vTop hLeft _57v2 _51mw">
+                                            <div>
+                                                <pre class="_5s-8 prettyprint lang-html prettyprinted" style=""><span class="pln">[
+  {
+    "object":"instagram",
+    "entry":[
+      {
+        "id":"</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;</span><span class="pln">",
+        "time":</span><span class="tag">&lt;TIME_NOTIFICATION_WAS_SENT&gt;</span><span class="pln">,
+        "messaging":[
+          {
+            "sender":{ "id":"</span><span class="tag">&lt;INSTAGRAM_SCOPED_ID&gt;</span><span class="pln">" },
+            "recipient":{ "id":"</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;</span><span class="pln">" },
+            "timestamp":</span><span class="tag">&lt;TIME_WEBHOOK_WAS_TRIGGERED&gt;</span><span class="pln">,
+  
+         // </span><span class="tag">&lt;MESSAGE_EDIT_PAYLOAD&gt;</span><span class="pln"> 
+            "message_edit": {
+              "mid":"</span><span class="tag">&lt;MESSAGE_ID&gt;</span><span class="pln">",
+              "text": "</span><span class="tag">&lt;USER_EDITED_MESSAGE&gt;</span><span class="pln">",
+              "num_edit": "</span><span class="tag">&lt;NUMBER_OF_TIMES_MESSAGE_IS_EDITED&gt;</span><span class="pln">"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]</span></pre>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="facebook-login-for-business">Facebook Login for Business</h2>
+                            <pre class="_5s-8 prettyprint lang-html prettyprinted" style=""><span class="pln">[
+  {
+    "object": "instagram",
+    "entry": [
+      {
+        "id": "</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_ACCOUNT_ID&gt;</span><span class="pln">",      // ID of your app user's Instagram professional account
+        "time": </span><span class="tag">&lt;TIME_META_SENT_THIS_NOTIFICATION&gt;</span><span class="pln">              // Time Meta sent the notification
+        "changes": [
+          {
+            "field": "</span><span class="tag">&lt;WEBHOOK_FIELD&gt;</span><span class="pln">",
+            "value": {
+             
+              </span><span class="tag">&lt;NOTIFICATION_PAYLOAD&gt;</span><span class="pln">
+    
+            }
+          }
+        ]
+      }
+    ]
+  }
+]</span></pre>
+                            <h3 id="comments"><code>comments</code></h3>
+                            <div>
+                                <pre class="_5s-8 prettyprint lang-html prettyprinted" style=""><span class="pln">[
+  {
+    "object": "instagram",
+    "entry": [
+      {
+        "id": "</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_ACCOUNT_ID&gt;</span><span class="pln">",      // ID of your app user's Instagram professional account
+        "time": </span><span class="tag">&lt;TIME_META_SENT_THIS_NOTIFICATION&gt;</span><span class="pln">          // Time Meta sent the notification
+        "changes": [
+          {
+            "field": "comments",
+            "value": {
+              "from": {
+                "id": "</span><span class="tag">&lt;INSTAGRAM_USER_SCOPED_ID&gt;</span><span class="pln">",         // Instagram-scoped ID of the Instagram user who made the comment
+                "username": "</span><span class="tag">&lt;INSTAGRAM_USER_USERNAME&gt;</span><span class="pln">"     // Username of the Instagram user who made the comment
+              }',
+              "comment_id": "</span><span class="tag">&lt;COMMENT_ID&gt;</span><span class="pln">",                 // Comment ID of the comment with the mention
+              "parent_id": "</span><span class="tag">&lt;PARENT_COMMENT_ID&gt;</span><span class="pln">",           // Parent comment ID, included if the comment was made on a comment
+              "text": "</span><span class="tag">&lt;TEXT_ID&gt;</span><span class="pln">",                          // Comment text, included if comment included text
+              "media": {                                       
+                "id": "</span><span class="tag">&lt;MEDIA_ID&gt;</span><span class="pln">",                             // Media's ID that was commented on
+                "ad_id": "</span><span class="tag">&lt;AD_ID&gt;</span><span class="pln">",                             // Ad's ID, included if the comment was on an ad post
+                "ad_title": "</span><span class="tag">&lt;AD_TITLE_ID&gt;</span><span class="pln">",                    // Ad's title, included if the comment was on an ad post
+                "original_media_id": "</span><span class="tag">&lt;ORIGINAL_MEDIA_ID&gt;</span><span class="pln">",     // Original media's ID, included if the comment was on an ad post
+                "media_product_type": "</span><span class="tag">&lt;MEDIA_PRODUCT_ID&gt;</span><span class="pln">"      // Product ID, included if the comment was on a specific product in an ad
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]</span></pre>
+                            </div>
+                            <h3 id="live-comments"><code>live_comments</code></h3>
+
+                            <h4>Facebook Login for Business objects</h4>
+                            <div>
+                                <pre class="_5s-8 prettyprint lang-html prettyprinted" style=""><span class="pln">[
+  {
+    "object": "instagram",
+    "entry": [
+      {
+        "id": "</span><span class="tag">&lt;YOUR_APP_USERS_INSTAGRAM_ACCOUNT_ID&gt;</span><span class="pln">",      // ID of your app user's Instagram professional account
+        "time": </span><span class="tag">&lt;TIME_META_SENT_THIS_NOTIFICATION&gt;</span><span class="pln">          // Time Meta sent the notification
+        "changes": [
+          {
+            "field": "live_comments",
+            "value": {
+              "from": {
+                "id": "</span><span class="tag">&lt;INSTAGRAM_USER_SCOPED_ID&gt;</span><span class="pln">",         // Instagram-scoped ID of the Instagram user who made the comment
+                "username": "</span><span class="tag">&lt;INSTAGRAM_USER_USERNAME&gt;</span><span class="pln">"     // Username of the Instagram user who made the comment
+              }',
+              "comment_id": "</span><span class="tag">&lt;COMMENT_ID&gt;</span><span class="pln">",                 // Comment ID of the comment with the mention
+              "parent_id": "</span><span class="tag">&lt;PARENT_COMMENT_ID&gt;</span><span class="pln">",           // Parent comment ID, included if the comment was made on a comment
+              "text": "</span><span class="tag">&lt;TEXT_ID&gt;</span><span class="pln">",                          // Comment text, included if comment included text
+              "media": {                                       
+                "id": "</span><span class="tag">&lt;MEDIA_ID&gt;</span><span class="pln">",                             // Media's ID that was commented on
+                "ad_id": "</span><span class="tag">&lt;AD_ID&gt;</span><span class="pln">",                             // Ad's ID, included if the comment was on an ad post
+                "ad_title": "</span><span class="tag">&lt;AD_TITLE_ID&gt;</span><span class="pln">",                    // Ad's title, included if the comment was on an ad post
+                "original_media_id": "</span><span class="tag">&lt;ORIGINAL_MEDIA_ID&gt;</span><span class="pln">",     // Original media's ID, included if the comment was on an ad post
+                "media_product_type": "</span><span class="tag">&lt;MEDIA_PRODUCT_ID&gt;</span><span class="pln">"      // Product ID, included if the comment was on a specific product in an ad
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]</span></pre>
+                            </div>
+                            <h3 id="mentions-on-media"><code>mentions</code> on media</h3>
+
+                            <h4>Business Login for Instagram objects</h4>
+                            <br>
+                            <p>@mention on apps that use Business Login for Instagram are included in the
+                                <code>comments</code> notifications.
+                            </p>
+
+                            <h4>Facebook Login for Business objects</h4>
+                            <div>
+                                <pre class="_5s-8 prettyprint lang-json prettyprinted" style=""><span class="pun">[</span><span class="pln">
+  </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"entry"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+      </span><span class="pun">{</span><span class="pln">
+        </span><span class="str">"changes"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+          </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"field"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"mentions"</span><span class="pun">,</span><span class="pln">
+            </span><span class="str">"value"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+              </span><span class="str">"media_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"17918195224117851"</span><span class="pln">   </span><span class="pun">//</span><span class="pln"> ID of the media where your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> professional account was mentioned
+            </span><span class="pun">}</span><span class="pln">
+          </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">],</span><span class="pln">
+        </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"17841405726653026"</span><span class="pun">,</span><span class="pln">   </span><span class="pun">//</span><span class="pln"> ID of your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> professional account
+        </span><span class="str">"time"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1520622968</span><span class="pln">           </span><span class="pun">//</span><span class="pln"> </span><span class="typ">The</span><span class="pln"> time </span><span class="typ">Meta</span><span class="pln"> sent the notification
+      </span><span class="pun">}</span><span class="pln">
+    </span><span class="pun">],</span><span class="pln">
+    </span><span class="str">"object"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"instagram"</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">]</span></pre>
+                            </div>
+                            <h3 id="mentions-on-comments"><code>mentions</code> on comments</h3>
+
+                            <h4>Business Login for Instagram objects</h4>
+                            <br>
+                            <p>@mention on apps that use Business Login for Instagram are included in the
+                                <code>comments</code> notifications.
+                            </p>
+
+                            <h4>Facebook Login for Business objects</h4>
+                            <div>
+                                <pre class="_5s-8 prettyprint lang-json prettyprinted" style=""><span class="pun">[</span><span class="pln">
+  </span><span class="pun">{</span><span class="pln">
+    </span><span class="str">"entry"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+      </span><span class="pun">{</span><span class="pln">
+        </span><span class="str">"changes"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+          </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"field"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"mentions"</span><span class="pun">,</span><span class="pln">
+            </span><span class="str">"value"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+              </span><span class="str">"comment_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"17894227972186120"</span><span class="pun">,</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID of the comment in which your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> professional account was mentioned
+              </span><span class="str">"media_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"17918195224117851"</span><span class="pln">     </span><span class="pun">//</span><span class="pln"> ID of the media the </span><span class="typ">Instagram</span><span class="pln"> user commented on
+            </span><span class="pun">}</span><span class="pln">
+          </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">],</span><span class="pln">
+        </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"17841405726653026"</span><span class="pun">,</span><span class="pln">   </span><span class="pun">//</span><span class="pln"> ID of your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> professional account
+        </span><span class="str">"time"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1520622968</span><span class="pln">           </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Time</span><span class="pln"> the notification was sent
+      </span><span class="pun">}</span><span class="pln">
+    </span><span class="pun">],</span><span class="pln">
+    </span><span class="str">"object"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"instagram"</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">]</span></pre>
+                            </div>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                        <div class="_4-u3 _588p">
+                            <h2 id="insights">Insights</h2>
+
+                            <h3 id="story-insights"><code>story_insights</code></h3>
+                            <div>
+                                <pre class="_5s-8 prettyprint lang-json prettyprinted" style=""><span class="pun">{</span><span class="pln">
+  </span><span class="str">"object"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"instagram"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"entry"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+    </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;INSTAGRAM_SCOPED_ID&gt;"</span><span class="pun">,</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID of your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+      </span><span class="str">"time"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1502905976963</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"messaging"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+        </span><span class="pun">{</span><span class="pln">
+          </span><span class="str">"sender"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;INSTAGRAM_SCOPED_ID&gt;"</span><span class="pln"> </span><span class="pun">},</span><span class="pln">    </span><span class="pun">//</span><span class="pln"> </span><span class="typ">Instagram</span><span class="pun">-</span><span class="pln">scoped ID for the </span><span class="typ">Instagram</span><span class="pln"> user who sent the message
+          </span><span class="str">"recipient"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;"</span><span class="pln"> </span><span class="pun">},</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> ID of your app user</span><span class="str">'</span><span class="pln">s </span><span class="typ">Instagram</span><span class="pln"> </span><span class="typ">Professional</span><span class="pln"> account
+          </span><span class="str">"timestamp"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1502905976377</span><span class="pun">,</span><span class="pln">
+          </span><span class="str">"postback"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"mid"</span><span class="pun">:</span><span class="str">"&lt;MESSAGE_ID&gt;"</span><span class="pun">,</span><span class="pln">           </span><span class="pun">//</span><span class="pln"> ID for the message sent to your app user
+            </span><span class="str">"title"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;USER_SELECTED_ICEBREAKER_OPTION_OR_CTA_BUTTON&gt;"</span><span class="pun">,</span><span class="pln">
+            </span><span class="str">"payload"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"&lt;OPTION_OR_BUTTON_PAYLOAD&gt;"</span><span class="pun">,</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> </span><span class="typ">The</span><span class="pln"> payload with the option selected by the </span><span class="typ">Instagram</span><span class="pln"> user
+          </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+      </span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">]</span><span class="pln">
+</span><span class="pun">}</span></pre>
+                            </div>
+                            <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                        data-visualcompletion="css-img" class="img sp_FsXE2S8xhbg sx_95432d"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

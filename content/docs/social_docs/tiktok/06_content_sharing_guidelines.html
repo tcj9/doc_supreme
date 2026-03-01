@@ -1,0 +1,219 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <div class="callout-info">
+            <p style="text-align:left"><b>New: </b>Content Posting API now supports <a
+                    href="/doc/content-posting-api-reference-photo-post">posting photos</a>!</p>
+        </div>
+        <h1 id="general_guidelines">General Guidelines</h1>
+        <h2 id="watermark_guidelines">Watermark Guidelines</h2>
+        <p style="text-align:left">We expect you to avoid adding unwanted material to content posted to TikTok. That
+            means your apps and integrations should not superimpose or otherwise include any brand name, logo,
+            watermark, other promotional branding, link or promotional text, on or in any content which is shared to
+            TikTok. Doing so is a violation of these guidelines, and may also lead to deleted content or disabled
+            accounts.</p><br />
+        <h2 id="direct_post_api_-_developer_guidelines">Direct Post API - Developer Guidelines</h2>
+        <p style="text-align:left">Direct Post API enables developers to build "Share to TikTok" experiences in their
+            app, which allows creators to share content directly to their TikTok profile. As a developer, you can use
+            this API in an unverified status, but all content uploaded via this endpoint will be restricted to private
+            viewing mode. To lift this restriction, your API client must <style data-emotion="css ap4ivw">
+                .css-ap4ivw {
+                    font-size: inherit;
+                    color: var(--ui-text-primary-display);
+                }
+
+                .css-ap4ivw *:hover {
+                    -webkit-text-decoration: none !important;
+                    text-decoration: none !important;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+            </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/application/content-posting-api"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">undergo an audit</span></a> to verify compliance with our <a
+                class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://www.tiktok.com/legal/tik-tok-developer-terms-of-service?lang=en"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">Terms of Service</span></a>. </p><br />
+        <p style="text-align:left">If your API client has not been audited, the following restrictions will apply:</p>
+        <ul class="list-1" type="disc">
+            <li><b>User cap</b>: Unaudited API Clients can allow up to 5 users to post in a 24 hour window. All user
+                accounts using the API client to post must be set to private at the time of posting.</li>
+            <li><b>Private Viewership</b>: Unaudited API Clients can only post contents in <code>SELF_ONLY</code>
+                viewership. To make the contents publicly viewable later on, the account owner must first change their
+                account visibility to public, and then change the privacy settings of each content to "Everyone."</li>
+        </ul>
+        <p style="text-align:left">Additionally, both audited and unaudited API clients will be subject to the following
+            caps:</p>
+        <ul class="list-1" type="disc">
+            <li><b>Creator cap</b>: There will be a 24-hour active creator cap for each API client based on the usage
+                estimates provided in the audit application form.</li>
+            <li><b>Posting cap</b>: There is a limit on the number of posts that can be made to a creator account in a
+                24-hour window via Direct Post API. The upper limit may vary among creators (typically around 15 posts
+                per day/ creator account) and is shared across all API Clients using Direct Post.</li>
+        </ul><br />
+        <h3 id="intended_use">Intended Use</h3>
+        <p style="text-align:left">1) API Clients should facilitate authentic creators to post original content to
+            TikTok.</p>
+        <p style="text-align:left">Not acceptable: An app that copies arbitrary contents from other platforms to TikTok.
+            â</p>
+        <p style="text-align:left">2) API Clients must not be limited to test applications and should be intended for a
+            wide audience, not limited to internal groups/private use.</p>
+        <p style="text-align:left">Not acceptable: A utility tool to help upload contents to the account(s) you or your
+            team manages. â</p><br />
+        <h3 id="required_ux_implementation_in_your_app">Required UX Implementation in Your App</h3>
+        <p style="text-align:left"><b>1) API Clients must retrieve the latest creator info when rendering the Post to
+                TikTok page.</b></p>
+        <p style="text-align:left">a. The upload page must display the creator's nickname, so users are aware of which
+            TikTok account the content will be uploaded to.</p>
+        <p style="text-align:left">b. When the <i>creator_info API</i> returns that the creator can not make more posts
+            at this moment, API Clients must stop the current publishing attempt and prompt users to try again later.
+        </p>
+        <p style="text-align:left">c. When posting a video, API clients must check if the duration of the to-be-posted
+            video follows the <code>max_video_post_duration_sec</code> returned in the <i>creator_info API</i>.</p>
+        <br />
+        <p style="text-align:left"><b>2) API Clients must allow users to enter or select the following metadata for a
+                post:</b></p>
+        <p style="text-align:left">a. Title</p>
+        <p style="text-align:left">b. Privacy Status, with the following mandatory requirements:</p>
+        <ul class="list-1" type="disc">
+            <li>The options listed in the UX must follow the <code>privacy_level_options</code> returned in the
+                <i>creator_info API</i>.
+            </li>
+            <li>Users must manually select the privacy status from a dropdown and there should be no default value.</li>
+        </ul>
+        <p style="text-align:left">c. Interaction Ability - Allow Comment, Duet, and Stitch - with the following style
+            requirements:</p>
+        <ul class="list-1" type="disc">
+            <li>If the creator_info API returns that one or more of these interactions have been disabled in their app
+                settings, your UX must disable and grey out the checkbox for the interaction.</li>
+            <li>Users must manually turn on these interaction settings and none should be checked by default.</li>
+            <li>Duet and Stitch features are not applicable to photo posts. So, for Photo Posts, only 'Allow Comment'
+                can be displayed in the UX.</li>
+        </ul>
+        <div class="callout-warning">
+            <p style="text-align:left">NOTE: Before allowing users to post through your platform, there should be a
+                declaration asking for a user's consent before the publish button. It should clearly state: "By posting,
+                you agree to TikTok's <a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Music Usage Confirmation</span></a>"</p>
+        </div><br />
+        <p style="text-align:left"><b>3) API Clients must allow users to disclose Commercial Content:</b></p>
+        <p style="text-align:left">a. <b>Content Disclosure Setting</b> - Indicate whether this content promotes
+            yourself, a brand, product or service, with this feature <code>turned off</code> by default. Enabling this
+            feature will display checkboxes for "Your brand" and "Branded content" below, allowing users to select their
+            preferences.</p>
+        <ul class="list-1" type="disc">
+            <li><b>Your Brand</b>: You are promoting yourself or your own business. This content will be classified as
+                Brand Organic. <b>If this option is selected by the user, a</b><b> prompt should state: "</b><b>Your
+                    photo/video will be labeled as 'Promotional content'</b><b>"</b></li>
+            <li><b>Branded Content</b>: You are promoting another brand or a third party. This content will be
+                classified as Branded Content. <b>If this option is selected by the user, a</b><b> prompt should state:
+                    "</b><b>Your photo/video will be labeled as 'Paid partnership'</b><b>"</b></li>
+            <li>If both the above options are selected by the user, a prompt should state "<i>Your photo/video will be
+                    labeled as 'Paid partnership'</i>"</li>
+        </ul>
+        <p style="text-align:left">It is a multiple selection, and at least one of the options above must be chosen to
+            proceed with publishing. If the commercial content disclosure toggle is <code>turned on</code> but no
+            options are selected, the publish button should be <code>disabled</code>. To make it easier for users to
+            follow, <b>hovering over will show a notification: "</b><b>You need to indicate if your content promotes
+                yourself, a third party, or both</b><b>.</b><b>"</b></p>
+        <p style="text-align:left">b. <b>Privacy Management:</b> </p>
+        <ul class="list-1" type="disc">
+            <li>If a user wants to choose Branded Content, it is important to <b>note that it can only be configured
+                    with visibility as public/friends</b>. </li>
+            <li>If the visibility setting is chosen as "private" (only me):</li>
+            <ul class="list-2" type="circle">
+                <li>Either the "Branded Content" option should be <code>disabled</code>, <b>informing the user that
+                        visibility for branded content can't be private</b>.</li>
+                <li>OR, the visibility setting should be automatically switched to public if the user wants to choose
+                    Branded Content, <b>informing the user about the same</b>.</li>
+            </ul>
+            <li>Before selecting the privacy/visibility setting, if a user has <code>turned on</code> the commercial
+                content disclosure toggle and checked the branded content option, then the "only me" permission should
+                be <code>disabled</code>, and <b>hovering over it will display a prompt stating, "Branded content
+                    visibility cannot be set to private."</b></li>
+        </ul><br />
+        <p style="text-align:left"><b>4) Compliance requirements:</b></p>
+        <p style="text-align:left">If the user is trying to post commercial content (i.e. commercial content toggle is
+            <code>turned on</code>):
+        </p>
+        <ul class="list-1" type="disc">
+            <li>When only "Your Brand" is checked, the declaration should be the same as mentioned above: "By posting,
+                you agree to TikTok's <a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Music Usage Confirmation</span></a>."</li>
+            <li>When only "Branded Content" is checked, the declaration should be changed to: "By posting, you agree to
+                TikTok's <a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/page/global/bc-policy/en"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Branded Content Policy</span></a> and <a
+                    class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Music Usage Confirmation.</span></a>"</li>
+            <li>Additionally, when both options are selected, the declaration should be: "By posting, you agree to
+                TikTok's <a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/page/global/bc-policy/en"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Branded Content Policy</span></a> and <a
+                    class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Music Usage Confirmation</span></a>."</li>
+        </ul><br />
+        <div style="display:flex;justify-content:center"><img height="2420.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/0a0d2b2d52bb33c76e7b356d4f142750"
+                width="4976.000000px" /></div><br />
+        <p style="text-align:left"><b>5) The users of API Clients must have full awareness and control of what is being
+                posted to their TikTok accounts.</b></p>
+        <p style="text-align:left">a. API Clients should display a preview of the to-be-posted content.</p>
+        <p style="text-align:left">b. API Clients should not add promotional watermarks/logos to creators' content.
+            Preset text, including any text in the title field or hashtags, should be allowed to be edited by the user
+            before posting content.</p>
+        <p style="text-align:left">c. API Clients must only start sending content materials to TikTok after the user has
+            expressly consent to the upload.</p>
+        <p style="text-align:left">d. API Clients must clearly notify users that after they finish publishing their
+            content, it may take a few minutes for the content to process and be visible on their profile. </p>
+        <p style="text-align:left">e. API clients should poll the <a
+                href="/doc/content-posting-api-reference-get-video-status">publish/status/fetch API</a> or handle status
+            update webhooks, so users can understand the status of their posts.</p><br />
+        <h3 id="technical_considerations">Technical Considerations</h3>
+        <p style="text-align:left"><b>1) Keep client_secret confidential</b></p>
+        <p style="text-align:left">a. You must not share your API Credentials with any other third-party or embed your
+            client_secret in open source projects.</p>
+        <p style="text-align:left">b. Maintain appropriate technical and administrative controls to ensure the security
+            and confidentiality of client_secret.</p>
+        <p style="text-align:left"><b>2) Choose efficient means to send contents to TikTok</b></p>
+        <p style="text-align:left">a. PULL_FROM_URL should be used when API Clients already have the to-be-posted
+            contents on server-side file storage services.</p>
+        <p style="text-align:left">b. The supplied URL must be under the path of a domain or URL prefix API Clients have
+            ownership on. The ownership needs to be verified through the Manage URL properties flow on the Manage Apps
+            page in your TT4D app.</p>
+        <p style="text-align:left">c. FILE_UPLOAD should be used when the to-be-posted video is on the users' devices
+            (PC, Mac, Switch, etc) of API Clients.</p>
+        <p style="text-align:left">d. If video resources are already on API Clients' servers, do not use FILE_UPLOAD;
+            use PULL_FROM_URL instead.</p><br />
+    </div>
+</div>

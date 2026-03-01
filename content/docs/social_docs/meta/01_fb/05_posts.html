@@ -1,0 +1,338 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_oo">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Posts</h1>
+              <p>This guide explains how to create, publish, and update a post, and reply to a post on your Facebook
+                Page as the Page, and delete a post using the Pages API from Meta.</p>
+              <h2>Before you start</h2>
+              <div><span>
+                  <p>This guide assumes you have read the <a href="/docs/pages/overview">Overview</a></p>
+                  <p>For a person who can perform tasks on the page, you will need to implement Facebook Login to ask
+                    for the following permissions and receive a Page access token:</p>
+                  <ul>
+                    <li><code>pages_manage_engagement</code></li>
+                    <li><code>pages_manage_posts</code> </li>
+                    <li><code>pages_read_engagement</code> </li>
+                    <li><code>pages_read_user_engagement</code> </li>
+                    <li><code>publish_video</code> permission, if you are publishing a video to the Page</li>
+                  </ul>
+                  <p>Your app user must be able to perform the <code>CREATE_CONTENT</code>, <code>MANAGE</code>, and
+                    <code>MODERATE</code> tasks on the Page in the API requests.
+                  </p>
+                  <p>If your app users do not own or manage the Page in the API requests, your app will need a User
+                    access token and the following features:</p>
+                  <ul>
+                    <li>Page Public Content Access</li>
+                  </ul>
+                </span></div>
+              <h3>Best practices</h3>
+              <div>
+                <p>
+                  When testing an API call, you can include the <code>access_token</code> parameter set to your access
+                  token. However, when making secure calls from your app, use the <a
+                    href="https://developers.facebook.com/docs/facebook-login/guides/access-tokens#portabletokens"
+                    target="_blank">access token class.</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Publish posts</h2>
+              <p>To publish a post to a Page, send a <code>POST</code> request to the <code>/page_id/feed</code>
+                endpoint, where <code>page_id</code> is the ID for your Page, with the following parameters:</p>
+              <ul>
+                <li><code>message</code> set to the text for your post</li>
+                <li><code>link</code> set to your URL if you want to post a link</li>
+                <li><code>published</code> set to <code>true</code> to publish the post immediately (default) or
+                  <code>false</code> to publish later
+
+                  <ul>
+                    <li>Include <code>scheduled_publish_time</code> if set to <code>false</code> with the date in one of
+                      the following formats:
+
+                      <ul>
+                        <li>An integer UNIX timestamp [in seconds] (e.g. <code>1530432000</code>)</li>
+                        <li>An <a data-lynx-mode="hover"
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FISO_8601&amp;h=AT15GU9-3GU7Izgf_aTdO_07D_7hkeXlFwa3gBwHld1B4sHc2DGSr8qcPweKfZwczSyn1SdxbwGx7mWMROyb48HVAQ463z00PWLl_s4hg5Q8Tf8kIfwLLBhi_jIrthW8koY0PY6YT_RSPS9OL_B8eg"
+                            rel="nofollow" target="_blank">ISO 8061</a> timestamp string (e.g.
+                          <code>2018-09-01T10:15:30+01:00</code>)
+                        </li>
+                        <li>Any string otherwise parsable by PHP's <a data-lynx-mode="hover"
+                            href="http://l.facebook.com/l.php?u=http%3A%2F%2Fphp.net%2Fmanual%2Fen%2Ffunction.strtotime.php&amp;h=AT3NFF-BX8hAOVVmaInQMbsawHz8p71JnCrhrm3mY49JhmEN38oVM5140AZfBpnJwYQqNpXsIDvi58LalI5kcAyUiHcsZM3ODO2XDGKLdDRBORCXPQVv5onFZM9dBb5Ix2ZYPxJiIYfsEn8Jjf7HCQ"
+                            rel="nofollow" target="_blank"><code>strtotime()</code></a> (e.g. <code>+2 weeks</code>,
+                          <code>tomorrow</code>)
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <h4>Notes about scheduled posts</h4>
+              <ul>
+                <li>The publish date must be between 10 minutes and 30 days from the time of the API request. </li>
+                <li>If you are relying on <code>strtotime()</code>'s relative date strings you can <a
+                    href="https://developers.facebook.com/docs/graph-api/advanced#read-after-write">read-after-write</a>
+                  the <code>scheduled_publish_time</code> of the created post to make sure it is what is expected.</li>
+              </ul>
+              <h4>Example Request</h4>
+              <i>Formatted for readability. Replace <b>bold, italics values</b>, such as <b>page_id</b>, with your
+                values.</i>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page_id</i></b>/feed" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "message":"<b><i>your_message_text</i></b>",
+           "link":"<b><i>your_url</i></b>",
+           "published":"<b><i>false</i></b>",
+           "scheduled_publish_time":"<b><i>unix_time_stamp_of_a_future_date</i></b>",
+         }'</pre>
+              <p>On success, your app receives the following JSON response with the ID for the post:</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id": "<b><i>page_post_id</i></b>" 
+}
+</pre>
+              <h3>Add audience targeting</h3>
+              <p>To limit who can see a Page post, you can add the <code>targeting.geo_locations</code> object or
+                <code>feed_targeting.geo_locations</code> parameter in your <code>POST</code> request.
+              </p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">-d '{
+      ...
+      "targeting": {
+        "geo_locations": {
+          "countries": [
+            "CA"
+          ],
+          "cities": [
+            {
+              "key": "296875",
+              "name": "Toronto"
+            }
+          ]
+        }
+      },
+      ...
+    }'</pre>
+              <h4>Troubleshooting</h4>
+              <p>In some cases using both a country and a region within that country will result in an error: "Some of
+                your locations overlap. Try removing a location." In these cases target the region or the country
+                depending on the coverage you want.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Publish Media Posts</h2>
+              <p>You can publish photos and videos to a Page.</p>
+              <h3>Publish a photo</h3>
+              <p>To publish a photo to a Page, send a <code>POST</code> request to the <code>/page_id/photos</code>
+                endpoint, where <code>page_id</code> is the ID for your Page, with the <code>url</code> parameter set to
+                the photo for your post.</p>
+              <h4>Example Request</h4>
+              <i>Formatted for readability. Replace <b>bold, italics values</b>, such as <b>page_id</b>, with your
+                values.</i>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page_id</i></b>/photos" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "url":"<b><i>path_to_photo</i></b>",
+</pre>
+              <p>On success, your app receives the following JSON response with the ID for the photo and the ID for the
+                post:</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id":"<b><i>photo_id</i></b>",
+  "post_id":"<b><i>page_post_id</i></b>" 
+}
+</pre>
+              <h3>Publish a video</h3>
+              <p>Please visit the <a href="https://developers.facebook.com/docs/video-api/guides/publishing"
+                  target="_blank"><b>Video API documentation</b> to publish a video post to your Page</a>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="posts">Get Posts</h2>
+              <p>To get a list of Page posts, send a <code>GET</code> request to the <code>/page_id/feed</code>
+                endpoint.</p>
+              <h4>Example Request</h4>
+              <i>Formatted for readability. Replace <b>bold, italics values</b>, such as <b>page_id</b>, with your
+                values.</i>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page_id</i></b>/feed"
+</pre>
+              <p>On success, your app receives the following JSON response with an array of objects that include the
+                post ID, the time the post was created, and the content for the post, for each post on your Page:</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "data": [
+    {
+      "created_time": "2019-01-02T18:31:28+0000",
+      "message": "This is my test post on my Page.",
+      "id": "page_post_id"
+    }
+  ],
+...
+}
+</pre>
+              <h4>Limitations</h4>
+              <div style="padding:10px"></div>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><b>Live Videos</b> - If a Page post contains a video that has expired, such as a live
+                    broadcast, you can get some post fields but not fields related to the video. The video has its own
+                    privacy rules. If the video has expired, you must be the page admin to view its information.</div>
+                </li>
+                <li>
+                  <div class="fcb"><b>Message CTA</b> - Any access token can be used to request publicly shared Page
+                    posts as long as your app has been approved for the <a
+                      href="https://developers.facebook.com/docs/apps/review/feature/#reference-PAGES_ACCESS"
+                      target="_blank">Page Public Content Access Feature</a>. However, posts with message CTAs cannot be
+                    accessed using another Page's access token since pages cannot message other pages.</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h3>Page Post URLs</h3>
+              <p>The URL, or permalink, for a Page post is
+                <code>https://www.facebook.com/</code><strong><em><code>page_post_id</code></em></strong>.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Update a Post</h2>
+              <p>To update a Page post, send a <code>POST</code> request to the <code>/page_post_id</code> endpoint with
+                the parameters you want to update set to the new content.</p>
+              <h4>Example Request</h4>
+              <i>Formatted for readability. Replace <b>bold, italics values</b>, such as <b>page_post_id</b>, with your
+                values.</i>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page_post_id</i></b>" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "message":"<b><i>I am updating my Page post</i></b>",
+         }'
+</pre>
+              <p>On success, your app receives the following JSON response with <code>success</code> set to true:</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "success": true
+}
+</pre>
+              <h4>Limitations</h4>
+              <p>An app can only update a Page post if the post was made using that app.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Delete a Post</h2>
+              <p>To delete a Page post, send a <code>DELETE</code> request to the <code>/page_post_id</code> endpoint
+                where <code>page_post_id</code> is the ID for post you want to delete.</p>
+              <h4>Example Request</h4>
+              <i>Formatted for readability. Replace <b>bold, italics values</b>, such as <b>page_post_id</b>, with your
+                values.</i>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+curl -i -X DELETE "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page_post_id</i></b>"
+</pre>
+              <p>On success, your app receives the following JSON response with <code>success</code> set to
+                <code>true</code>:
+              </p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "success": true
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Next Steps</h2>
+              <p>Learn how to <a href="/docs/pages/comments">comment on Page posts and @mention</a> a specific person or
+                Page who posted or commented on your Page.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See Also</h2>
+              <h4>Video API guides</h4>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/video-api/guides/publishing"
+                      target="_blank">
+                      Video Uploads Guide
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/video" target="_blank">
+                      Video API Guide
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+              </ul>
+              <h4>References</h4>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/page" target="_blank">
+                      Page Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/page/feed" target="_blank">
+                      Page Feed Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/page-post" target="_blank">
+                      Page Post Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/permissions" target="_blank">
+                      Permissions Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/photo" target="_blank">
+                      Photo Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/pages/overview#tasks" target="_blank">
+                      Page Tasks
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="#" role="button" target="_blank">
+                      Video Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=eYnuvZgSOqR5Owzgexzywg&amp;oh=00_Afszb1u7MEkc1T_Kzj5sKE3-tG5aglmImYO_puc2wWfjtA&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,205 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_90">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Oauth Authorize</h1>
+              <p>This endpoint returns the Authorization Window, which app users use to authenticate their identity and
+                grant your app permissions and Instagram User Access Tokens.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Creating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Reading</h2>
+              <p><strong><code>GET /oauth/authorize</code></strong></p>
+              <p>Get the Authorization Window.</p>
+              <h3>Requirements</h3>
+              <p>None.</p>
+              <h3>Request Syntax</h3>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+GET https://api.instagram.com/oauth/authorize
+  ?client_id=&lt;APP_ID&gt;,
+  &amp;redirect_uri=&lt;REDIRECT_URI&gt;,
+  &amp;response_type=code,
+  &amp;scope=&lt;PERMISSIONS_APP_NEEDS&gt;</pre>
+              <h3>Query String Parameters</h3>
+              <p>Augment the request with the following query parameters.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Key</th>
+                    <th style="width:35%">Sample Value</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_7m">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>client_id</code><br />
+                          <strong>Required</strong><br />
+                          <em>Numeric string</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>990602627938098</code></p>
+                      </td>
+                      <td>
+                        <p>Your Instagram App ID displayed in the <strong>Meta App Dashboard</strong></p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>redirect_uri</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>https://socialsizzle.herokuapp.com/auth/</code></p>
+                      </td>
+                      <td>
+                        <p>A URI where we will redirect users after they authenticate. Make sure this exactly matches
+                          one of the base URIs in your list of valid oAuth URIs. Keep in mind that the App Dashboard may
+                          have added a trailing slash to your URIs, so we recommend that you verify by checking the
+                          list.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>response_type</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>code</code></p>
+                      </td>
+                      <td>
+                        <p>Set this value to <code>code</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>scope</code><br />
+                          <strong>Required</strong><br />
+                          <em>Comma-separated list</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>instagram_basic</code> or <code>instagram_business_basic</code></p>
+                      </td>
+                      <td>
+                        <p>A comma-separated list, or URL-encoded space-separated list, of permissions to request from
+                          the app user. <code>instagram_basic</code> or <code>instagram_business_basic</code> is
+                          required.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>state</code><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>1</code></p>
+                      </td>
+                      <td>
+                        <p>An optional value indicating a server-specific state. For example, you can use this to
+                          protect against CSRF issues. We will include this parameter and value when redirecting the
+                          user back to you.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Response</h3>
+              <p>The Authorization Window, which you should display to the app user. Once the user authenticates, the
+                window will redirect to your <code>redirect_uri</code> and include an Authentication Code, which you can
+                then exchange for a short-lived Instagram User Access Token.</p>
+              <p>Note that we <code>#_</code> append to the end of the redirect URI, but it is not part of the code
+                itself, so strip it out before exchanging it for a short-lived token.</p>
+              <h3>HTTP Example</h3>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+https://api.instagram.com/oauth/authorize
+  ?client_id=990602627938098
+  &amp;redirect_uri=https://socialsizzle.herokuapp.com/auth/
+  &amp;scope=instagram_business_basic
+  &amp;response_type=code</pre>
+              <h3>Successful Authorization</h3>
+              <p>If authentication is successful, the Authorization Window will redirect the user to your
+                <code>redirect_uri</code> and include an Authorization Code. Capture the code so you can exchange it for
+                a short-lived access token.
+              </p>
+              <p>Codes are valid for 1 hour and can only be used once.</p>
+              <h4>Sample Successful Authorization Redirect</h4>
+              <pre class="_5s-8 prettyprint lang-code"
+                style="">https://socialsizzle.herokuapp.com/auth?code=AQBx-hBsH3...</pre>
+              <h3>Canceled Authorization</h3>
+              <p>If the user cancels the authorization flow, we will redirect the user to your <code>redirect_uri</code>
+                and append the following error parameters. <em>It is your responsibility to fail gracefully in these
+                  situations and display an appropriate message to your users</em>.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Parameter</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_lD">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>error</code></p>
+                      </td>
+                      <td>
+                        <p><code>access_denied</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>error_reason</code></p>
+                      </td>
+                      <td>
+                        <p><code>user_denied</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>error_description</code></p>
+                      </td>
+                      <td>
+                        <p><code>The+user+denied+your+request</code></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Sample Canceled Authentication Redirect</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+https://socialsizzle.herokuapp.com/auth/
+  ?error=access_denied
+  &amp;error_reason=user_denied
+  &amp;error_description=The+user+denied+your+request</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

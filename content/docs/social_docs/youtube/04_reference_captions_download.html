@@ -1,0 +1,250 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Captions: download<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="download" itemprop="name">
+                  <meta content="captions" itemprop="path">
+                  <section id="overview">
+                        <p>Downloads a caption track. The caption track is returned in its original format unless the
+                              request specifies a value for the <code dir="ltr" translate="no">tfmt</code> parameter and
+                              in its original language unless the request specifies a value for the <code dir="ltr"
+                                    translate="no">tlang</code> parameter.</p>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of 200 units.</p>
+                        <p class="note">This method is requires the user to have permission to edit the video.</p>
+                  </section>
+                  <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common
+                        use cases</h2>
+                  <style>
+                        iframe+section>h2 {
+                              margin-top: 12px;
+                        }
+                  </style>
+                  <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+                              allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+                              src="https://developers.google.com/frame/youtube/v3/docs/captions/download_de6c6564445dcc838f46fa37727edc0f83f72fb95adf8bbac2faeea232480ce3.frame"></iframe></devsite-iframe>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">GET https://www.googleapis.com/youtube/v3/captions/<var class="apiparam" translate="no">id</var></pre>
+                              </devsite-code>
+                        </section>
+                        <section id="auth_required">
+                              <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+                              <p>This request requires authorization with at least one of the following scopes (<a
+                                          href="/youtube/v3/guides/authentication">read more about authentication and
+                                          authorization</a>).</p>
+                              <table class="matchpre">
+                                    <thead>
+                                          <tr>
+                                                <th>Scope</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtubepartner</code>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The table below lists the parameters that this query supports. All of the parameters
+                                    listed are query parameters.</p>
+                              <table class="details responsive">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="required-parameters">
+                                                <td colspan="3"><b>Required parameters</b></td>
+                                          </tr>
+                                          <tr id="id">
+                                                <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>id</strong></code>
+                                                      parameter identifies the caption track that is being retrieved.
+                                                      The value is a caption track ID as identified by the <code
+                                                            dir="ltr"
+                                                            translate="no"><a href="/youtube/v3/docs/captions#id">id</a></code>
+                                                      property in a <code dir="ltr" translate="no">caption</code>
+                                                      resource.</td>
+                                          </tr>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="onBehalfOfContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">onBehalfOfContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. <strong>Note:</strong> This parameter is
+                                                      intended exclusively for YouTube content partners.<br /><br />The
+                                                      <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter indicates that the request's authorization credentials
+                                                      identify a YouTube CMS user who is acting on behalf of the content
+                                                      owner specified in the parameter value. This parameter is intended
+                                                      for YouTube content partners that own and manage many different
+                                                      YouTube channels. It allows content owners to authenticate once
+                                                      and get access to all their video and channel data, without having
+                                                      to provide authentication credentials for each individual channel.
+                                                      The actual CMS account that the user authenticates with must be
+                                                      linked to the specified YouTube content owner.</td>
+                                          </tr>
+                                          <tr id="tfmt">
+                                                <td><code dir="ltr" itemprop="property" translate="no">tfmt</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>tfmt</strong></code>
+                                                      parameter specifies that the caption track should be returned in a
+                                                      specific format. If the parameter is not included in the request,
+                                                      the track is returned in its original format.<br /><br />Supported
+                                                      values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>sbv</strong></code> –
+                                                                  SubViewer subtitle</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>scc</strong></code> –
+                                                                  Scenarist Closed Caption format</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>srt</strong></code> –
+                                                                  SubRip subtitle</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>ttml</strong></code> –
+                                                                  Timed Text Markup Language caption</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>vtt</strong></code> – Web
+                                                                  Video Text Tracks caption</li>
+                                                      </ul>
+                                                </td>
+                                          </tr>
+                                          <tr id="tlang">
+                                                <td><code dir="ltr" itemprop="property" translate="no">tlang</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>tlang</strong></code>
+                                                      parameter specifies that the API response should return a
+                                                      translation of the specified caption track. The parameter value is
+                                                      an <a
+                                                            href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO
+                                                            639-1 two-letter language code</a> that identifies the
+                                                      desired caption language. The translation is generated by using
+                                                      machine translation, such as Google Translate.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>Do not provide a request body when calling this method.</p>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <p>If successful, this method returns a binary file. The <code dir="ltr"
+                                    translate="no">Content-Type</code> header for the response is <code dir="ltr"
+                                    translate="no">application/octet-stream</code>.</p>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The table below identifies error messages that the API could return in response to a call to
+                              this method. Please see the <a href="/youtube/v3/docs/errors">error message</a>
+                              documentation for more detail.</p>
+                        <table class="matchpre" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th>Error type</th>
+                                          <th>Error detail</th>
+                                          <th>Description</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="youtube.captions.download-forbidden-forbidden">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">forbidden</code></td>
+                                          <td class="error-cause">The permissions associated with the request are not
+                                                sufficient to download the caption track. The request might not be
+                                                properly authorized.</td>
+                                    </tr>
+                                    <tr id="youtube.captions.download-invalidValue-couldNotConvert">
+                                          <td class="error-name"><code dir="ltr"
+                                                      translate="no">invalidValue (400)</code></td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">couldNotConvert</code></td>
+                                          <td class="error-cause">The caption track data could not be converted to the
+                                                requested language and/or format. Ensure that the requested <code
+                                                      dir="ltr" translate="no">tfmt</code> and <code dir="ltr"
+                                                      translate="no">tlang</code> values are valid, and that the <code
+                                                      dir="ltr" translate="no">snippet.status</code> of the requested
+                                                caption track is not <code dir="ltr" translate="no">failed</code>.</td>
+                                    </tr>
+                                    <tr id="youtube.captions.download-notFound-captionNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">captionNotFound</code></td>
+                                          <td class="error-cause">The caption track could not be found. Check the value
+                                                of the request's <code dir="ltr" translate="no">id</code> parameter to
+                                                ensure that it is correct.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  <section id="try-it">
+                        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                              request and response.</p>
+                        <div class="devsite-apix">
+                              <div class="apis-explorer"
+                                    data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+                                    data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                    data-method-id="youtube.captions.download" data-show-code-button="true"></div>
+                        </div>
+                  </section>
+                  </meta>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

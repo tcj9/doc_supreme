@@ -1,0 +1,239 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_2Q">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>IG User Content Publishing Limit</h1>
+              <p>Represents an <a href="/docs/instagram-api/reference/ig-user">IG User's</a> current <a
+                  href="/docs/instagram-api/guides/content-publishing">content publishing</a> usage.</p>
+              <div><span>
+                  <h3>Requirements</h3>
+                  <div class="_57-c">
+                    <table class="_4-ss _5k9x">
+                      <thead>
+                        <th style="width:12%"></th>
+                        <th style="width:40%">Instagram API with Instagram Login</th>
+                        <th>Instagram API with Facebook Login</th>
+                      </thead>
+                      <tbody class="_5m37" id="u_0_2_u0">
+                        <tr class="row_0">
+                          <td>
+                            <p><strong>Access Tokens</strong></p>
+                          </td>
+                          <td>
+                            <ul>
+                              <li>Instagram User user access token</li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li><a href="/docs/facebook-login/access-tokens/#usertokens">Facebook User access
+                                  token</a></li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr class="row_1 _5m29">
+                          <td>
+                            <p><strong>Host URL</strong></p>
+                          </td>
+                          <td>
+                            <p><code>graph.instagram.com</code></p>
+                          </td>
+                          <td>
+                            <p><code>graph.facebook.com</code></p>
+                          </td>
+                        </tr>
+                        <tr class="row_2">
+                          <td>
+                            <p><strong>Login Type</strong></p>
+                          </td>
+                          <td>
+                            <p>Business Login for Instagram</p>
+                          </td>
+                          <td>
+                            <p>Facebook Login for Business</p>
+                          </td>
+                        </tr>
+                        <tr class="row_3 _5m29">
+                          <td><a href="/docs/permissions/reference#i" target="_blank"><b>Permissions</b></a></td>
+                          <td>
+                            <ul>
+                              <li><code>instagram_business_basic</code></li>
+                              <li><code>instagram_business_content_publish</code></li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li><code>instagram_basic</code></li>
+                              <li><code>instagram_content_publish</code></li>
+                              <li><code>pages_read_engagement</code></li>
+                            </ul>
+                            <p>If the app user was granted a role via the Business Manager on the <a
+                                href="/docs/instagram-api/overview#pages">Page</a> connected to the targeted IG User,
+                              you will also need one of:</p>
+                            <ul>
+                              <li><code>ads_management</code></li>
+                              <li><code>ads_read</code></li>
+                            </ul>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </span></div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Creating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Reading</h2>
+              <p><strong><code>GET /&lt;IG_USER_ID&gt;/content_publishing_limit</code></strong></p>
+              <p>Get the number of times an <a href="/docs/instagram-api/reference/ig-user">IG User</a> has published
+                and <a href="/docs/instagram-api/reference/ig-container">IG Container</a> within a given time period.
+                Refer to the <a href="/docs/instagram-api/guides/content-publishing">Content Publishing</a> guide for
+                complete publishing steps.</p>
+              <h3>Request Syntax</h3>
+              <pre class="_5s-8 prettyprint lang-http" style="">GET https://graph.facebook.com/&amp;lt;API_VERSION&gt;/&amp;lt;IG_USER_ID&gt;/content_publishing_limit
+  ?fields=&amp;lt;LIST_OF_FIELDS&gt;
+  &amp;since=&amp;lt;UNIX_TIMESTAMP&gt;
+  &amp;access_token=&amp;lt;ACCESS_TOKEN&gt;</pre>
+              <h3>Query String Parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">
+                      Placeholder
+                    </th>
+                    <th>
+                      Value Description
+                    </th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_r6">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>&lt;ACCESS_TOKEN&gt;</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The app user's User Access Token.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>&lt;LIST_OF_FIELDS&gt;</code><br />
+                          <em>Comma-separated list</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>A comma-separated list of <a href="#fields">fields</a> you want returned. If omitted, the
+                          <code>quota_usage</code> field will be returned by default.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>&lt;UNIX_TIMESTAMP&gt;</code><br />
+                          <em>Unix timestamp</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>A Unix timestamp no older than 24 hours.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Fields</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">
+                      Field
+                    </th>
+                    <th>
+                      Value Description
+                    </th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_sB">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>config</code><br />
+                          <em>Object</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Returns these values:</p>
+                        <ul>
+                          <li><code>quota_total</code> — The maximum number of <a
+                              href="/docs/instagram-api/reference/ig-container">IG Containers</a> the app user can
+                            publish within the <code>quota_duration</code> time period (currently <code>50</code>).</li>
+                          <li><code>quota_duration</code> — The period of time in seconds against which the
+                            <code>quota_total</code> is calculated (currently <code>86400</code> seconds, or 24 hours).
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>quota_usage</code><br />
+                          <em>Comma-separated list</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The number of times the app user has published an <a
+                            href="/docs/instagram-api/reference/ig-container">IG Container</a> since the time specified
+                          in the <code>since</code> query string parameter. If the <code>since</code> parameter is
+                          omitted, this value will be the number of times the app user has published a container within
+                          the last 24 hours. This field is returned by default if the <code>fields</code> query string
+                          parameter is omitted from the query.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Example Request</h3>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X GET \
+  'https://graph.facebook.com/<code>v24.0</code>/17841405822304914/content_publishing_limit?fields=quota_usage,rate_limit_settings&amp;since=1609969714&amp;access_token=IGQVJ...'
+</pre>
+              <h3>Example Response</h3>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "data": [
+    {
+      "quota_usage": 2,
+      "config": {
+        "quota_total": 50,
+        "quota_duration": 86400
+      }
+    }
+  ]
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,305 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_MS">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Overview</h1>
+              <p>The Pages API is a set of Facebook Graph API endpoints that apps can use to create and manage a Page's
+                settings and content.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Components</h2>
+              <h3>Access Tokens</h3>
+              <p>API authentication is handled through Access Tokens. Most endpoints require Page access tokens, which
+                are unique to each Page, app User, and app, and have an expiration time. In order to get a token from an
+                app User, the app User must own or be able to perform a Task on the Page.</p>
+              <p>You can get access tokens from your app Users by implementing Facebook Login for Business.</p>
+              <h3>Graph API</h3>
+              <p>If you are unfamiliar with the Graph API, please read our Graph API documentation before proceeding to
+                learn more about the Meta social graph.</p>
+              <h3>Facebook Login</h3>
+              <p>Facebook Login allows app users to log into your app and for your app to ask your users for permissions
+                to access data.</p>
+              <h3>Facebook Login for Business</h3>
+              <p>Facebook Login for Business is the preferred authentication and authorization solution for Tech
+                Providers and business app developers who need access to their business clients' assets</p>
+              <h3>Features</h3>
+              <p>Some endpoints require a Feature which must be approved through the App Review process before your app
+                can use them when your app goes live. Features allow you to access public Page data without a permission
+                or the ability to perform a task on the Page. Refer to each endpoint's reference to determine which Page
+                Feature it requires.</p>
+              <h3>Mentions</h3>
+              <p>@mentions allows your Page to publicly reply to a specific person, who has posted on your Page or
+                commented on your Page post, in a comment or reply.</p>
+              <h3 id="psids">Page-Scoped User IDs</h3>
+              <p>Users who interact with Pages are identified by Page-Scoped User IDs (PSID). PSIDs are IDs that are
+                unique to each User-Page pair. Pages API and Messenger Platform endpoints rely on PSIDs, so you can use
+                a PSID to identify a User's interactions with a Page, as well as the User's public Messenger
+                conversations with that Page.</p>
+              <h3>Permissions</h3>
+              <p>Most endpoints require one or more permissions which must be granted to your app by app users.
+                Typically this can be done through Facebook Login but can also be done through the Business Manager, if
+                your app has been claimed by a Business.</p>
+              <p>All permissions require App Review before an app user can grant them to your app after it is live. For
+                Business apps, which do not have app modes, permissions must be approved for Advanced access before they
+                can be granted to your app by an app user without a role on the app itself or a role in a Business that
+                has claimed it.</p>
+              <h3>Page Search</h3>
+              <p>Find information about Facebook Pages including names, locations, and find Pages to @Mention, Page
+                locations, and tag a Page to show branded content.</p>
+              <h3>Rate Limits</h3>
+              <p>All Pages endpoint requests are subject to Rate Limiting. You can see your app's current call count
+                consumption in the <strong>App Dashboard</strong>.</p>
+              <h3>Tasks</h3>
+              <p>Tasks allow Users to perform specific actions on a Page. When a User uses an app to interact with a
+                Page, depending on the attempted action, we will first check if the User has been approved for a task
+                that permits that type of action.</p>
+              <p>You can approve individual users for the following tasks:</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:150px">Task</th>
+                    <th>Permitted Actions</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_jI">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>ADVERTISE</code></p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>Create ads </li>
+                          <li>Create unpublished Page Posts</li>
+                          <li>If an Instagram account is connected to the Page, create ads</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>ANALYZE</code></p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>View Insights of the Page</li>
+                          <li>View which Page admin published a post or comment</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>CREATE_CONTENT</code></p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>Publish content as the Page on the Page</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>MANAGE</code></p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>Assign and manage Page tasks</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>MANAGE_LEADS</code></p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>View and manage leads</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>MESSAGING</code></p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>Send messages as the Page</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>MODERATE</code></p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>Respond to comments on Page posts as the Page</li>
+                          <li>Delete comments on Page posts</li>
+                          <li>If an Instagram account is connected to the Page, publish content to Instagram from
+                            Facebook, respond to and delete comments, send Direct messages, sync business contact info,
+                            and create ads.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_7 _5m29">
+                      <td>
+                        <p><code>VIEW_MONETIZATION_INSIGHTS</code></p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>View monetization insights</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>If a person is given Admin access to a Page in the UI, that person is able to perform all tasks on that
+                Page.</p>
+              <h3>Messenger Platform</h3>
+              <p>Have Messenger conversations with your customers or people interested in your Page.</p>
+              <h3>Meta Webhooks for Pages</h3>
+              <p>Get get real-time notifications when a user comments on a Page post or reacts to your Page post.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>App Review</h2>
+              <p>All Page-related Permissions and Features require approval through the App Review process before your
+                app can use them when your app goes live.</p>
+              <p>Apps in Development Mode can request any Permission from any app User who has a Role on the app.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>How It Works</h2>
+              <p>This is a typical flow for accessing the Pages API:</p>
+              <ol>
+                <li>Get a User Access Token from your app user through Facebook Login for Business.</li>
+                <li>Query the <code>/me/accounts</code> endpoint to get the ID and Page Access Token of the Page the app
+                  User has permitted your app to access.</li>
+                <li>Capture the returned Page ID and Page Access Token.</li>
+                <li>Use the ID and token to query the Page node.</li>
+              </ol>
+              <p>Note that in some cases the app User may grant your app access to more than one Page, in which case you
+                should capture each Page ID and its respective token, and provide a way for the app User to target each
+                of those Pages.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Next Steps</h2>
+              <p>Follow our <a href="/docs/pages/getting-started">Get Started guide</a> to learn how to publish a Page
+                post using the Pages API.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See Also</h2>
+              <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                <tbody>
+                  <tr class="_51mx">
+                    <td class="_51m- vTop hLeft _57v2">
+                      <h4>App Development with Meta</h4>
+                      <ul class="uiList _4of _4kg">
+                        <li>
+                          <div class="fcb"><a href="/docs/development/build-and-test/app-roles" target="_blank">App
+                              Roles </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/development" target="_blank">Developing with Meta </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/" target="_blank">Graph API </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/overview#me" target="_blank"><code>/me</code>
+                              Endpoint</a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/overview/rate-limiting#pages" target="_blank">Rate
+                              Limits </a></div>
+                        </li>
+                      </ul>
+                      <h4>Authentication and Authorization</h4>
+                      <ul class="uiList _4of _4kg">
+                        <li>
+                          <div class="fcb"><a href="/docs/facebook-login/access-tokens" target="_blank">Access Tokens
+                            </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/overview/access-levels" target="_blank">Advanced
+                              Access for Business apps </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/facebook-login" target="_blank">Facebook Login </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/facebook-login/facebook-login-for-business"
+                              target="_blank">Facebook Login for Business </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/pages/access-tokens/psid-api" target="_blank">Page-scoped User
+                              IDs</a></div>
+                        </li>
+                      </ul>
+                    </td>
+                    <td class="_51m- vTop hLeft _57v2 _51mw">
+                      <h4>Page Guides</h4>
+                      <ul class="uiList _4of _4kg">
+                        <li>
+                          <div class="fcb"><a href="/docs/pages/mentions" target="_blank">
+                              Mentions
+                            </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/messenger-platform" target="_blank">
+                              Messenger Platform Documentation
+                            </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/pages/searching" target="_blank">
+                              Pages Search
+                            </a></div>
+                        </li>
+                      </ul>
+                      <h4>References</h4>
+                      <ul class="uiList _4of _4kg">
+                        <li>
+                          <div class="fcb"><a href="/docs/features-reference" target="_blank">
+                              Features Reference
+                            </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/reference/page" target="_blank">
+                              Page Endpoint Reference
+                            </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/permissions#p" target="_blank">
+                              Permissions Reference
+                            </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/permissions#permission-dependencies" target="_blank">
+                              Permission Dependencies Reference
+                            </a></div>
+                        </li>
+                        <li>
+                          <div class="fcb"><a href="/docs/graph-api/reference/user/accounts" target="_blank">
+                              User Accounts Endpoint Reference
+                            </a></div>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

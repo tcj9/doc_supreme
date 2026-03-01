@@ -1,0 +1,483 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Videos: list<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <section id="overview">
+                        <p>Returns a list of videos that match the API request parameters.</p>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of 1 unit.</p>
+                  </section>
+                  <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common
+                        use cases</h2>
+                  <style>
+                        iframe+section>h2 {
+                              margin-top: 12px;
+                        }
+                  </style>
+                  <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+                              allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+                              src="https://developers.google.com/frame/youtube/v3/docs/videos/list_672904e2448b4bf7d5bb2c4a083949963af03eb84911a229a3f3d81167ac8e9b.frame"></iframe></devsite-iframe>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">GET https://www.googleapis.com/youtube/v3/videos</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The following table lists the parameters that this query supports. All of the
+                                    parameters listed are query parameters.</p>
+                              <table class="responsive details">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="required-parameters">
+                                                <td colspan="3"><b>Required parameters</b></td>
+                                          </tr>
+                                          <tr id="part">
+                                                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>part</strong></code>
+                                                      parameter specifies a comma-separated list of one or more <code
+                                                            dir="ltr" translate="no">video</code> resource properties
+                                                      that the API response will include.<br /><br />If the parameter
+                                                      identifies a property that contains child properties, the child
+                                                      properties will be included in the response. For example, in a
+                                                      <code dir="ltr" translate="no">video</code> resource, the <code
+                                                            dir="ltr" translate="no">snippet</code> property contains
+                                                      the <code dir="ltr" translate="no">channelId</code>, <code
+                                                            dir="ltr" translate="no">title</code>, <code dir="ltr"
+                                                            translate="no">description</code>, <code dir="ltr"
+                                                            translate="no">tags</code>, and <code dir="ltr"
+                                                            translate="no">categoryId</code> properties. As such, if you
+                                                      set <code dir="ltr"
+                                                            translate="no"><strong>part=snippet</strong></code>, the API
+                                                      response will contain all of those properties.<br /><br />The
+                                                      following list contains the <code dir="ltr"
+                                                            translate="no">part</code> names that you can include in the
+                                                      parameter value:<br />
+                                                      <ul>
+                                                            <li><code dir="ltr" translate="no">contentDetails</code>
+                                                            </li>
+                                                            <li><code dir="ltr" translate="no">fileDetails</code></li>
+                                                            <li><code dir="ltr" translate="no">id</code></li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no">liveStreamingDetails</code></li>
+                                                            <li><code dir="ltr" translate="no">localizations</code></li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no">paidProductPlacementDetails</code>
+                                                            </li>
+                                                            <li><code dir="ltr" translate="no">player</code></li>
+                                                            <li><code dir="ltr" translate="no">processingDetails</code>
+                                                            </li>
+                                                            <li><code dir="ltr" translate="no">recordingDetails</code>
+                                                            </li>
+                                                            <li><code dir="ltr" translate="no">snippet</code></li>
+                                                            <li><code dir="ltr" translate="no">statistics</code></li>
+                                                            <li><code dir="ltr" translate="no">status</code></li>
+                                                            <li><code dir="ltr" translate="no">suggestions</code></li>
+                                                            <li><code dir="ltr" translate="no">topicDetails</code></li>
+                                                      </ul>
+                                                </td>
+                                          </tr>
+                                          <tr class="alt" id="filter-parameters">
+                                                <td colspan="3"><b>Filters <span style="color:#555">(specify exactly one
+                                                                  of the following parameters)</span></b></td>
+                                          </tr>
+                                          <tr id="chart">
+                                                <td><code dir="ltr" itemprop="property" translate="no">chart</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>chart</strong></code>
+                                                      parameter identifies the chart that you want to
+                                                      retrieve.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>mostPopular</strong></code>
+                                                                  – Return the most popular videos for the specified <a
+                                                                        href="#regionCode">content region</a> and <a
+                                                                        href="#videoCategoryId">video category</a>.</li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr id="id">
+                                                <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>id</strong></code>
+                                                      parameter specifies a comma-separated list of the YouTube video
+                                                      ID(s) for the resource(s) that are being retrieved. In a <code
+                                                            dir="ltr" translate="no">video</code> resource, the <code
+                                                            dir="ltr" translate="no">id</code> property specifies the
+                                                      video's ID.</td>
+                                          </tr>
+                                          <tr id="myRating">
+                                                <td><code dir="ltr" itemprop="property" translate="no">myRating</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. Set this parameter's value to <code dir="ltr"
+                                                            translate="no">like</code> or <code dir="ltr"
+                                                            translate="no">dislike</code> to instruct the API to only
+                                                      return videos liked or disliked by the authenticated
+                                                      user.<br><br>Acceptable values are:
+                                                      <ul>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>dislike</strong></code> –
+                                                                  Returns only videos disliked by the authenticated
+                                                                  user.</li>
+                                                            <li><code dir="ltr"
+                                                                        translate="no"><strong>like</strong></code> –
+                                                                  Returns only video liked by the authenticated user.
+                                                            </li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="hl">
+                                                <td><code dir="ltr" itemprop="property" translate="no">hl</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>hl</strong></code>
+                                                      parameter instructs the API to retrieve localized resource
+                                                      metadata for a specific <a
+                                                            href="/youtube/v3/docs/i18nLanguages">application language
+                                                            that the YouTube website supports</a>. The parameter value
+                                                      must be a language code included in the list returned by the <code
+                                                            dir="ltr"
+                                                            translate="no"><a href="/youtube/v3/docs/i18nLanguages/list">i18nLanguages.list</a></code>
+                                                      method.<br /><br />If localized resource details are available in
+                                                      that language, the resource's <code dir="ltr"
+                                                            translate="no">snippet.localized</code> object will contain
+                                                      the localized values. However, if localized details are not
+                                                      available, the <code dir="ltr"
+                                                            translate="no">snippet.localized</code> object will contain
+                                                      resource details in the resource's <a
+                                                            href="/youtube/v3/docs/videos#snippet.defaultLanguage">default
+                                                            language</a>.</td>
+                                          </tr>
+                                          <tr id="maxHeight">
+                                                <td><code dir="ltr" itemprop="property" translate="no">maxHeight</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr"
+                                                            translate="no">unsigned integer</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>maxHeight</strong></code> parameter
+                                                      specifies the maximum height of the embedded player returned in
+                                                      the <code dir="ltr"
+                                                            translate="no"><a href="/youtube/v3/docs/videos#player.embedHtml">player.embedHtml</a></code>
+                                                      property. You can use this parameter to specify that instead of
+                                                      the default dimensions, the embed code should use a height
+                                                      appropriate for your application layout. If the <code dir="ltr"
+                                                            translate="no">maxWidth</code> parameter is also provided,
+                                                      the player may be shorter than the <code dir="ltr"
+                                                            translate="no">maxHeight</code> in order to not violate the
+                                                      maximum width. Acceptable values are <code dir="ltr"
+                                                            translate="no">72</code> to <code dir="ltr"
+                                                            translate="no">8192</code>, inclusive.</td>
+                                          </tr>
+                                          <tr id="maxResults">
+                                                <td><code dir="ltr" itemprop="property" translate="no">maxResults</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr"
+                                                            translate="no">unsigned integer</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>maxResults</strong></code> parameter
+                                                      specifies the maximum number of items that should be returned in
+                                                      the result set.<br /><br /><strong>Note:</strong> This parameter
+                                                      is supported for use in conjunction with the <code dir="ltr"
+                                                            translate="no"><a href="#myRating">myRating</a></code>
+                                                      parameter, but it is not supported for use in conjunction with the
+                                                      <code dir="ltr" translate="no"><a href="#id">id</a></code>
+                                                      parameter. Acceptable values are <code dir="ltr"
+                                                            translate="no">1</code> to <code dir="ltr"
+                                                            translate="no">50</code>, inclusive. The default value is
+                                                      <code dir="ltr" translate="no">5</code>.</td>
+                                          </tr>
+                                          <tr id="maxWidth">
+                                                <td><code dir="ltr" itemprop="property" translate="no">maxWidth</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr"
+                                                            translate="no">unsigned integer</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>maxWidth</strong></code> parameter
+                                                      specifies the maximum width of the embedded player returned in the
+                                                      <code dir="ltr"
+                                                            translate="no"><a href="/youtube/v3/docs/videos#player.embedHtml">player.embedHtml</a></code>
+                                                      property. You can use this parameter to specify that instead of
+                                                      the default dimensions, the embed code should use a width
+                                                      appropriate for your application layout.<br /><br />If the <code
+                                                            dir="ltr" translate="no">maxHeight</code> parameter is also
+                                                      provided, the player may be narrower than <code dir="ltr"
+                                                            translate="no">maxWidth</code> in order to not violate the
+                                                      maximum height. Acceptable values are <code dir="ltr"
+                                                            translate="no">72</code> to <code dir="ltr"
+                                                            translate="no">8192</code>, inclusive.</td>
+                                          </tr>
+                                          <tr id="onBehalfOfContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">onBehalfOfContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. <strong>Note:</strong> This parameter is
+                                                      intended exclusively for YouTube content partners.<br /><br />The
+                                                      <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter indicates that the request's authorization credentials
+                                                      identify a YouTube CMS user who is acting on behalf of the content
+                                                      owner specified in the parameter value. This parameter is intended
+                                                      for YouTube content partners that own and manage many different
+                                                      YouTube channels. It allows content owners to authenticate once
+                                                      and get access to all their video and channel data, without having
+                                                      to provide authentication credentials for each individual channel.
+                                                      The CMS account that the user authenticates with must be linked to
+                                                      the specified YouTube content owner.</td>
+                                          </tr>
+                                          <tr id="pageToken">
+                                                <td><code dir="ltr" itemprop="property" translate="no">pageToken</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>pageToken</strong></code> parameter
+                                                      identifies a specific page in the result set that should be
+                                                      returned. In an API response, the <code dir="ltr"
+                                                            translate="no">nextPageToken</code> and <code dir="ltr"
+                                                            translate="no">prevPageToken</code> properties identify
+                                                      other pages that could be
+                                                      retrieved.<br /><br /><strong>Note:</strong> This parameter is
+                                                      supported for use in conjunction with the <code dir="ltr"
+                                                            translate="no"><a href="#myRating">myRating</a></code>
+                                                      parameter, but it is not supported for use in conjunction with the
+                                                      <code dir="ltr" translate="no"><a href="#id">id</a></code>
+                                                      parameter.</td>
+                                          </tr>
+                                          <tr id="regionCode">
+                                                <td><code dir="ltr" itemprop="property" translate="no">regionCode</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>regionCode</strong></code> parameter
+                                                      instructs the API to select a video chart available in the
+                                                      specified region. This parameter can only be used in conjunction
+                                                      with the <code dir="ltr"
+                                                            translate="no"><a href="#chart">chart</a></code> parameter.
+                                                      The parameter value is an ISO 3166-1 alpha-2 country code.</td>
+                                          </tr>
+                                          <tr id="videoCategoryId">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">videoCategoryId</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>videoCategoryId</strong></code>
+                                                      parameter identifies the <a
+                                                            href="/youtube/v3/docs/videoCategories">video category</a>
+                                                      for which the chart should be retrieved. This parameter can only
+                                                      be used in conjunction with the <code dir="ltr"
+                                                            translate="no"><a href="#chart">chart</a></code> parameter.
+                                                      By default, charts are not restricted to a particular category.
+                                                      The default value is <code dir="ltr" translate="no">0</code>.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>Do not provide a request body when calling this method.</p>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <section id="resource">
+                              <p>If successful, this method returns a response body with the following structure:</p>
+                              <div></div><devsite-code>
+                                    <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json"
+                                          is-upgraded="" style="max-height: 500px; overflow: auto" syntax="Objective-C">{
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#videoListResponse"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">etag</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"nextPageToken"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"prevPageToken"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"pageInfo"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"totalResults"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">integer</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"resultsPerPage"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">integer</span></var>
+<span class="devsite-syntax-w">  </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"items"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">    </span><a class="resource-link" href="/youtube/v3/docs/videos#resource" resource="video"><span class="devsite-syntax-n">video</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Resource</span></a>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">]</span>
+}</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="properties">
+                              <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                              <p>The following table defines the properties that appear in this resource:</p>
+                              <table class="responsive properties" id="property-table">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Properties</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr id="kind">
+                                                <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Identifies the API resource's type. The value will be <code
+                                                            dir="ltr" translate="no">youtube#videoListResponse</code>.
+                                                </td>
+                                          </tr>
+                                          <tr id="etag">
+                                                <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                      The Etag of this resource.</td>
+                                          </tr>
+                                          <tr id="nextPageToken">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">nextPageToken</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The token that can be used as the value of the <code dir="ltr"
+                                                            translate="no">pageToken</code> parameter to retrieve the
+                                                      next page in the result set.</td>
+                                          </tr>
+                                          <tr id="prevPageToken">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">prevPageToken</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The token that can be used as the value of the <code dir="ltr"
+                                                            translate="no">pageToken</code> parameter to retrieve the
+                                                      previous page in the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo">
+                                                <td><code dir="ltr" itemprop="property" translate="no">pageInfo</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                      The <code dir="ltr" translate="no">pageInfo</code> object
+                                                      encapsulates paging information for the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo.totalResults">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">pageInfo.</span>totalResults</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">integer</code><br />
+                                                      The total number of results in the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo.resultsPerPage">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">pageInfo.</span>resultsPerPage</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">integer</code><br />
+                                                      The number of results included in the API response.</td>
+                                          </tr>
+                                          <tr id="items[]">
+                                                <td><code dir="ltr" itemprop="property" translate="no">items[]</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">list</code><br />
+                                                      A list of videos that match the request criteria.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The following table identifies error messages that the API could return in response to a call
+                              to this method. See the <a href="/youtube/v3/docs/errors">error message</a> documentation
+                              for more detail.</p>
+                        <table class="matchpre" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th>Error type</th>
+                                          <th>Error detail</th>
+                                          <th>Description</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="youtube.videos.list-badRequest-videoChartNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">videoChartNotFound</code></td>
+                                          <td class="error-cause">The requested video chart is not supported or is not
+                                                available.</td>
+                                    </tr>
+                                    <tr id="youtube.videos.list-forbidden-forbidden-feedback">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">forbidden</code></td>
+                                          <td class="error-cause">The request is not properly authorized to access video
+                                                file or processing information. Note that the <code dir="ltr"
+                                                      translate="no">fileDetails</code>, <code dir="ltr"
+                                                      translate="no">processingDetails</code>, and <code dir="ltr"
+                                                      translate="no">suggestions</code> parts are only available to that
+                                                video's owner.</td>
+                                    </tr>
+                                    <tr id="youtube.videos.list-forbidden-forbidden-parameters.myRating">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">forbidden</code></td>
+                                          <td class="error-cause">The request cannot access user rating information.
+                                                This error may occur because the request is not properly authorized to
+                                                use the <code dir="ltr" translate="no">myRating</code> parameter.</td>
+                                    </tr>
+                                    <tr id="youtube.videos.list-notFound-videoNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">videoNotFound</code></td>
+                                          <td class="error-cause">The video that you are trying to retrieve cannot be
+                                                found. Check the value of the request's <code dir="ltr"
+                                                      translate="no">id</code> parameter to ensure that it is correct.
+                                          </td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  <section id="try-it">
+                        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                              request and response.</p>
+                        <div class="devsite-apix">
+                              <div class="apis-explorer"
+                                    data-default-scopes="https://www.googleapis.com/auth/youtube.readonly"
+                                    data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                    data-method-id="youtube.videos.list" data-show-code-button="true"></div>
+                        </div>
+                  </section>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

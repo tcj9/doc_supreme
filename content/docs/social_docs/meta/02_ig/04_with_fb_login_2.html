@@ -1,0 +1,361 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_5M">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Facebook Login for Business</h1>
+              <p>Facebook Login for Business is a custom, <a
+                  href="/docs/facebook-login/guides/advanced/manual-flow">manual Facebook Login flow</a> that makes it
+                easier for you to onboard Instagram users who still need to configure their account for API access.</p>
+              <p>In order to make their account accessible to our APIs, Instagram users must first convert their account
+                to a Professional account, create a Facebook Page that represents their business, then connect that Page
+                to their account.</p>
+              <p>Facebook Login for Business simplifies this process by allowing Instagram users to complete all of
+                these steps in a single window instead of having to complete them in the Facebook and Instagram apps.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Before You Start</h2>
+              <p>You will need a Meta <a
+                  href="https://developers.facebook.com/docs/development/create-an-app/other-app-types"
+                  target="_blank">Business type app</a> to add the following products:</p>
+              <ul>
+                <li>Instagram &gt; API setup with Facebook login</li>
+                <li>Facebook Login for Business</li>
+                <li>Webhooks</li>
+              </ul>
+              <p>Add the Facebook Login for B product to your app and add a redirect URL. We will redirect users to this
+                URL after they complete the onboarding flow.</p>
+              <ol>
+                <li>Go to the <a href="https://developers.facebook.com/apps">Apps Panel</a> and select your app to load
+                  it in the App Dashboard.</li>
+                <li>In the left-hand menu, click <strong>Add Products</strong>, locate <strong>Facebook Login for
+                    Business</strong>, then click <strong>Set Up</strong> to add it to your app.</li>
+                <li>In the left-hand menu under <strong>Facebook Login for Business</strong>, click
+                  <strong>Settings</strong>.
+                </li>
+                <li>In the <strong>Client OAuth Settings</strong> &gt; <strong>Valid OAuth Redirect URIs</strong> field,
+                  enter your redirect URL.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 1: Construct the Login URL</h2>
+              <p>Construct the Business Login URL using its base URL and query string parameters.</p>
+              <h3>URL Syntax</h3>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+https://www.facebook.com/dialog/oauth
+  ?client_id={client-id}
+  &amp;display={display}
+  &amp;extras={extras}
+  &amp;redirect_uri={redirect-uri}
+  &amp;response_type={response_type}
+  &amp;scope={scope}</pre>
+              <h3>Query String Parameters</h3>
+              <p>All parameters are <strong>required</strong>.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:15%">Key</th>
+                    <th style="width:17%">Placeholder</th>
+                    <th>Description</th>
+                    <th>Sample Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_ne">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>client_id</code></p>
+                      </td>
+                      <td>
+                        <p><code>{client-id}</code></p>
+                      </td>
+                      <td>
+                        <p>Your Meta app ID.</p>
+                      </td>
+                      <td>
+                        <p><code>442224939723604</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>display</code></p>
+                      </td>
+                      <td>
+                        <p><code>{display}</code></p>
+                      </td>
+                      <td>
+                        <p>Set to <code>page</code>.</p>
+                      </td>
+                      <td>
+                        <p><code>page</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>extras</code></p>
+                      </td>
+                      <td>
+                        <p><code>{extras}</code></p>
+                      </td>
+                      <td>
+                        <p>Set to <code>{"setup":{"channel":"IG_API_ONBOARDING"}}</code>.</p>
+                      </td>
+                      <td>
+                        <p><code>{"setup":{"channel":"IG_API_ONBOARDING"}}</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>redirect_uri</code></p>
+                      </td>
+                      <td>
+                        <p><code>{redirect_uri}</code></p>
+                      </td>
+                      <td>
+                        <p>URL to redirect user to after completing login flow. This URL must match a URL in the
+                          <strong>Facebook Login</strong> &gt; <strong>Settings</strong> &gt; <strong>Client OAuth
+                            Settings</strong> &gt; <strong>Valid OAuth Redirect URI</strong> field in the <strong>App
+                            Dashboard</strong>.
+                        </p>
+                        <br />
+                        <p>See <a href="#before-you-start">Before you start</a>.</p>
+                      </td>
+                      <td>
+                        <p><code>https://my-clever-redirect-url.com/success/</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>response_type</code></p>
+                      </td>
+                      <td>
+                        <p><code>{response_type}</code></p>
+                      </td>
+                      <td>
+                        <p>Set to <code>token</code>.</p>
+                      </td>
+                      <td>
+                        <p><code>token</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>scope</code></p>
+                      </td>
+                      <td>
+                        <p><code>{scope}</code></p>
+                      </td>
+                      <td>
+                        <p>A list of permissions you want to request from the user.</p>
+                        <br />
+                        <p>The list of permission you request will depend on which APIs your app relies on. Refer the
+                          endpoint references for any endpoints your app uses to determine which permission you should
+                          request.</p>
+                      </td>
+                      <td>
+                        <p>
+                          <code>instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement</code>
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Example URL</h3>
+              <p>This is an example of a URL constructed by an app that relies on the Instagram Messaging API and has
+                therefore requested permissions required by Messaging API endpoints.</p>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+https://www.facebook.com/<code>v24.0</code>/dialog/oauth?client_id=442224939723604&amp;display=page&amp;extras={"setup":{"channel":"IG_API_ONBOARDING"}}&amp;redirect_uri=https://my-clever-redirect-url.com/success/&amp;response_type=token&amp;scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 2: Assign the URL to a Button</h2>
+              <p>Assign the URL to a standard anchor link or button of your own design and display it to any users who
+                you are certain have not completed the onboarding flow.</p>
+              <h3>Example Anchor Link</h3>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+&lt;a href="https://www.facebook.com/<code>v24.0</code>/dialog/oauth?client_id=442224939723604&amp;display=page&amp;extras={"setup":{"channel":"IG_API_ONBOARDING"}}&amp;redirect_uri=https://my-clever-redirect-url.com/success/&amp;response_type=token&amp;scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement"&gt;Login to Facebook&lt;/a&gt;</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 3: Capture User access token</h2>
+              <p>After a user clicks your link or button and completes the Business Login for Instagram flow, we will
+                redirect the user to the URL you assigned to the <code>redirect_uri</code>. We will also append a URL
+                fragment (<code>#</code>) with the user's short-lived <a
+                  href="/docs/facebook-login/guides/access-tokens#usertokens">User access token</a>, some metadata about
+                the token, and the user's <a href="/docs/facebook-login/guides/access-tokens/get-long-lived">long-lived
+                  access token</a>. Capture the long-lived access token.</p>
+              <h3>Canceled Login</h3>
+              <p>If a user cancels out of the login flow we will still redirect the user to your
+                <code>redirect_uri</code> but append different data. Refer to the <a
+                  href="/docs/facebook-login/guides/advanced/manual-flow">Manually Build a Login Flow</a> document's <a
+                  href="/docs/facebook-login/guides/advanced/manual-flow#nonjscancel">Canceled Login</a> section to
+                learn how process these redirects.
+              </p>
+              <h3>Redirect Syntax</h3>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+{redirect-url}?
+  #access_token={access-token}
+  &amp;data_access_expiration_time={data-access-expiration-time}
+  &amp;expires_in={expires-in}
+  &amp;long_lived_token={long-lived-token}
+</pre>
+              <h3>Fragment Providers</h3>
+              <p>Token values have been truncated (<code>...</code>) in this example for readibility.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:20%">Key</th>
+                    <th style="width:20%">Placeholder</th>
+                    <th>Description</th>
+                    <th style="width:15%">Sample Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_V6">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>access_token</code></p>
+                      </td>
+                      <td>
+                        <p><code>{access-token}</code></p>
+                      </td>
+                      <td>
+                        <p>The user's short-lived <a href="/docs/facebook-login/guides/access-tokens#usertokens">User
+                            access token</a>.</p>
+                      </td>
+                      <td>
+                        <p><code>EAAHm...</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>data_access_expiration_time</code></p>
+                      </td>
+                      <td>
+                        <p><code>{data-access-expiration-time}</code></p>
+                      </td>
+                      <td>
+                        <p>ISO 8601 timestamp when <a
+                            href="/docs/facebook-login/auth-vs-data/#data-access-expiration">data access expires</a>.
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>1658889585</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>expires_in</code></p>
+                      </td>
+                      <td>
+                        <p><code>{expires-in}</code></p>
+                      </td>
+                      <td>
+                        <p>Number of seconds until the short-lived User access token expires.</p>
+                      </td>
+                      <td>
+                        <p><code>4815</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>long_lived_token</code></p>
+                      </td>
+                      <td>
+                        <p><code>{long-lived-token}</code></p>
+                      </td>
+                      <td>
+                        <p>The user's <a href="/docs/facebook-login/guides/access-tokens/get-long-lived">long-lived
+                            access token</a>.</p>
+                      </td>
+                      <td>
+                        <p><code>ABAEs...</code></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Example Redirect</h3>
+              <p>Token values have been truncated (<code>...</code>) in this example for readability.</p>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+https://my-clever-redirect-url.com/success/?#access_token=EAAHm...&amp;data_access_expiration_time=1658889585&amp;expires_in=4815&amp;long_lived_token=ABAEs...</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 4: Get the User's Page, Page Access Token, and Instagram Business Account</h2>
+              <p>Send a request to the <code>GET /me/accounts</code> endpoint and request the following fields:</p>
+              <ul>
+                <li><code>id</code></li>
+                <li><code>name</code></li>
+                <li><code>access_token</code></li>
+                <li><code>instagram_business_account</code></li>
+              </ul>
+              <p>This will return a collection of Facebook Pages that the user can perform tasks on. For each Page in
+                the result set, the response will include its:</p>
+              <ul>
+                <li>ID</li>
+                <li>Name</li>
+                <li><a href="/docs/facebook-login/guides/access-tokens#pagetokens">Page access token</a></li>
+                <li>Instagram Business account ID connected to the Page</li>
+              </ul>
+              <h3>cURL Example</h3>
+              <p>Token values have been truncated (<code>...</code>) in this example for readability.</p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET \
+ "https://graph.facebook.com/<code>v24.0</code>/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&amp;access_token=EAACw..."</pre>
+              <h3>Example Response</h3>
+              <p>Token values have been truncated (<code>...</code>) in this example for readability.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "data": [
+    {
+      "id": "134895793791914",
+      "name": "Metricsaurus",
+      "access_token": "EAACw...",
+      "instagram_business_account": {
+        "id": "17841405309211844"
+      }
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "MTc1NTg0Nzc2ODAzNDQwMgZDZD",
+      "after": "MTc1NTg0Nzc2ODAzNDQwMgZDZD"
+    }
+  }
+}</pre>
+              <p>Capture the Page ID (<code>id</code>), Page access token (<code>access_token</code>), and Instagram
+                Professional account ID (<code>instagram_business_account</code>) for the Page that the user has
+                connected to their Instagram Professional account.</p>
+              <p>Keep in mind that some users may be able to perform tasks on more than one Page. If multiple Pages are
+                included in the response, you may have to surface each Page's name (<code>name</code>) to the user so
+                they can identify which Page's data to capture.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Conclusion</h2>
+              <p>You should now have everything you need to help your access and work with their data using our various
+                APIs:</p>
+              <ul>
+                <li>Instagram Business account ID</li>
+                <li>ID of the Facebook Page connected to the Instagram Business account</li>
+                <li>the Facebook Page's access token (required by the <a
+                    href="/docs/messenger-platform/instagram">Instagram Messaging API</a>)</li>
+                <li>a User access token from the user, who is able to perform tasks on the Facebook Page connected to
+                  the Instagram Business account (required by the <a href="/docs/instagram-api">Instagram Graph API</a>)
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

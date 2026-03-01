@@ -1,0 +1,753 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <div class="callout-info">
+            <p style="text-align:left"><b>New: </b>Content Posting API now supports <a
+                    href="/doc/content-posting-api-reference-photo-post">posting photos</a>!</p>
+        </div>
+        <h1 id="media_transfer_guide">Media Transfer Guide</h1>
+        <p style="text-align:left">This guide explains the process of transferring media files to TikTok servers when
+            using the Content Posting API.</p>
+        <h2 id="file_upload">File upload</h2>
+        <p style="text-align:left">Using this method, you can transfer your media to TikTok using HTTP. Upon <a
+                href="/doc/content-posting-api-reference-upload-video#initialize_video_upload">initializing your video
+                upload</a> with <code>source=FILE_UPLOAD</code>, an <code>upload_url</code> will be returned. You must
+            send the media binary to this URL.</p>
+        <p style="text-align:left">To learn how to send videos to TikTok servers and for details on the HTTP request
+            (endpoint, request and response schema, and headers), see the API reference for the <a
+                href="/doc/content-posting-api-reference-upload-video">Upload Video endpoint</a> or the <a
+                href="/doc/content-posting-api-reference-direct-post">Direct Post endpoint</a>.</p>
+        <h3 id="work_with_chunks">Work with chunks</h3>
+        <h4 id="chunk_restrictions">Chunk restrictions</h4>
+        <ul class="list-1" type="disc">
+            <li>The value of <code>total_chunk_count</code> should be equal to <code>video_size</code> divided by
+                <code>chunk_size</code>, rounded down to the nearest integer.</li>
+            <li>Each chunk must be at least 5 MB but no greater than 64 MB, except for the final chunk, which can be
+                greater than <code>chunk_size</code> (up to 128 MB) to accommodate any trailing bytes.</li>
+            <li>Videos with a total size less than 5 MB must be uploaded as a whole, with <code>chunk_size</code> equal
+                to the entire video's byte size. Videos with a total size greater than 64 MB must be uploaded in
+                multiple chunks.</li>
+            <li>There must be a minimum of 1 chunk and a maximum of 1000 chunks.</li>
+            <li>File chunks must be uploaded sequentially.</li>
+        </ul>
+        <h4 id="media_transfer_http_schema">Media transfer HTTP schema</h4>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-thrift css-63unw6" style="white-space:pre-wrap"><span><span>PUT {UPLOAD_URL} HTTP /</span><span style="color:#008080">1.1</span><span>
+</span></span><span><span></span><span style="color:#000080;font-weight:normal">Content</span><span>-Type: {MIME_TYPE}
+</span></span><span><span></span><span style="color:#000080;font-weight:normal">Content</span><span>-Length: {BYTE_SIZE_OF_THIS_CHUNK}
+</span></span><span><span></span><span style="color:#000080;font-weight:normal">Content</span><span>-Range: bytes {FIRST_BYTE}-{LAST_BYTE}/{TOTAL_BYTE_LENGTH}
+</span></span><span>
+</span><span>BINARY_FILE_DATA</span></code></pre>
+        <h4 id="examples">Examples</h4>
+        <h5 id="chunk_upload">Chunk upload</h5>
+        <p style="text-align:left">In this example, there is a file with a size of 50,000,123 bytes. The chunk size is
+            specified to be 10,000,000 bytes. The trailing 123 bytes is merged into the 10,000,000-byte chunk to meet
+            the restriction that each chunk must be greater than 5 MB.</p>
+        <p style="text-align:left">Example
+            <i>UPLOAD_URL=</i><code>https://upload.us.tiktokapis.com/video/?upload_id=67890&amp;upload_token=chunkexample</code>
+            will be shared across all chunks.</p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Variable</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>1st Request</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>2nd Request</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>3rd Request</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>4th Request</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>5th Request</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>MIME_TYPE</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video/mp4</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video/mp4</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video/mp4</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video/mp4</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video/mp4</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>TOTAL_BYTE_LENGTH</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">50,000,123</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">50,000,123</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">50,000,123</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">50,000,123</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">50,000,123</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>BYTE_SIZE_OF_THIS_CHUNK</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">10,000,000</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">10,000,000</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">10,000,000</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">10,000,000</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">10,000,123</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>FIRST_BYTE</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">0</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">10,000,000</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">20,000,000</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">30,000,000</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">40,000,000</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>LAST_BYTE</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">9,999,999</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">19,999,999</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">29,999,999</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">39,999,999</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">50,000,122</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>BINARY_FILE_DATA</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">BINARY1</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">BINARY2</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">BINARY3</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">BINARY4</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">BINARY5</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">response HTTP status</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">206</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">206</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">206</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">206</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">201</p>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:left">The following is the corresponding <code>source_info</code> for <a
+                href="/doc/content-posting-api-reference-upload-video#initialize_video_upload">initializing video
+                upload</a>.</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span style="color:#d14">"source_info"</span><span>: {
+</span></span><span><span>      </span><span>"source"</span><span>: </span><span style="color:#d14">"FILE_UPLOAD"</span><span>,
+</span></span><span><span>      </span><span>"video_size"</span><span>: </span><span style="color:#008080">50000123</span><span>
+</span></span><span><span>      </span><span style="color:#d14">"chunk_size"</span><span>:  </span><span style="color:#008080">10000000</span><span>
+</span></span><span><span>      </span><span style="color:#d14">"total_chunk_count"</span><span>: </span><span style="color:#008080">5</span><span>
+</span></span><span>  }</span></code></pre>
+        <h5 id="whole_upload">Whole upload</h5>
+        <p style="text-align:left">In this example, the media file is 4 MB, which must be uploaded as a whole in one
+            request.</p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Variable</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Single Request</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>UPLOAD_URL</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">
+                        https://open-upload.tiktokapis.com/video/?upload_id=123&amp;upload_token=wholeexample</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>MIME_TYPE</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video/mp4</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>TOTAL_BYTE_LENGTH</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">4,194,304</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>BYTE_SIZE_OF_THIS_CHUNK</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">4,194,304</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>FIRST_BYTE</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">0</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>LAST_BYTE</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">4,194,303</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><i>BINARY_FILE_DATA</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">BINARY1</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">response status code</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">201</p>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:left">The following is the corresponding <code>source_info</code> for <a
+                href="/doc/content-posting-api-reference-upload-video#initialize_video_upload">initializing video
+                upload</a>.</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span style="color:#d14">"source_info"</span><span>: {
+</span></span><span><span>      </span><span>"source"</span><span>: </span><span style="color:#d14">"FILE_UPLOAD"</span><span>,
+</span></span><span><span>      </span><span>"video_size"</span><span>: </span><span style="color:#008080">4194304</span><span>
+</span></span><span><span>      </span><span style="color:#d14">"chunk_size"</span><span>:  </span><span style="color:#008080">4194304</span><span>
+</span></span><span><span>      </span><span style="color:#d14">"total_chunk_count"</span><span>: </span><span style="color:#008080">1</span><span>
+</span></span><span>  }</span></code></pre>
+        <h4 id="response">Response</h4>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>HTTP Code</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Status</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">201</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Created</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">All parts are uploaded.</p>
+                    <p style="text-align:left">TikTok will start the posting process.</p><br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">206</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">PartialContent</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The current chunk has been successfully processed. There are additional
+                        chunks yet to be uploaded.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">400</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">BadRequest</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Malformated request headers, or <i>BYTE_SIZE_OF_THIS_CHUNK</i><b>
+                        </b>does not reflect the true byte size of the binary in the request body.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">403</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Forbidden</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The <code>upload_url</code> has expired.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">404</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">NotFound</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">TikTok cannot find a valid upload task given the <code>upload_url</code>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">416</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">RequestedRangeNotSatisfiable</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>Content-Range</code> does not reflect the actual upload progress.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">5xx</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">InternalServerError</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Gateway connection error or TikTok Internal error. You should retry
+                        submitting this chunk.</p>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:left">The response header includes the following key-value pair indicating the number of
+            bytes uploaded:</p>
+        <p style="text-align:left"><code>Content-Range:bytes 0-{UPLOADED_BYTES}/{TOTAL_BYTE_LENGTH}</code>.</p><br />
+        <h2 id="pull_from_url">Pull from URL</h2>
+        <p style="text-align:left">By initializing your content post using /init endpoints with
+            <code>source=PULL_FROM_URL</code>, the TikTok server starts to download the media resource using the URL you
+            provide. Learn more about <a href="/doc/content-posting-api-reference-get-video-status">getting post
+                status.</a></p>
+        <p style="text-align:left">TikTok server's ingress bandwidth for file downloads can reach 100 Mbps.</p>
+        <h3 id="prerequisites">Prerequisites</h3>
+        <ul class="list-1" type="disc">
+            <li>Ensure that the media URL you provided belongs to a path that you own. To confirm ownership, log into
+                the <style data-emotion="css ap4ivw">
+                    .css-ap4ivw {
+                        font-size: inherit;
+                        color: var(--ui-text-primary-display);
+                    }
+
+                    .css-ap4ivw *:hover {
+                        -webkit-text-decoration: none !important;
+                        text-decoration: none !important;
+                    }
+
+                    .css-ap4ivw:hover {
+                        -webkit-text-decoration: underline;
+                        text-decoration: underline;
+                    }
+
+                    .css-ap4ivw:hover {
+                        -webkit-text-decoration: underline;
+                        text-decoration: underline;
+                    }
+                </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://developers.tiktok.com/"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">TikTok for Developers website</span></a> and add your
+                Domain or URL Prefix property to your application in the URL properties widget as shown below. You must
+                have manage or write access to the property.</li>
+        </ul>
+        <div style="display:flex;justify-content:left"><img height="208.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/60c69aa13982332ea628cdbb3fec30bb"
+                width="625.000000px" /></div>
+        <div style="display:flex;justify-content:left"><img height="261.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/69b8cc19584034b417d927714b0db14d"
+                width="587.000000px" /></div><br />
+        <ul class="list-1" type="disc">
+            <li>The media URL must use "https" and should not redirect to another URL.</li>
+            <li>The URL must remain accessible for the entire duration of the download process, which times out one hour
+                after the download task is initiated.</li>
+        </ul>
+        <div class="callout-info">
+            <p style="text-align:left"><b>Note: </b>To conveniently test the Pull from URL feature, you can try <a
+                    class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://sf16-va.tiktokcdn.com/obj/eden-va2/uvpapzpbxjH-aulauvJ-WV[[/ljhwZthlaukjlkulzlp/3min.mp4"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">this</span></a> URL without any verification.</p>
+        </div>
+        <h3 id="ownership_verification_rules">Ownership verification rules</h3>
+        <h4 id="domain">Domain</h4>
+        <h5 id="definition">Definition</h5>
+        <p style="text-align:left">A domain can be a base domain (for example, example.com) or a subdomain (for example,
+            subdomain.example.com).</p>
+        <h5 id="verification">Verification</h5>
+        <p style="text-align:left">To verify domain ownership, it is recommended that you add a signature string to the
+            domain's DNS records.</p>
+        <p style="text-align:left">Once the ownership of a domain is verified, all paths under that domain or its
+            subdomains are considered owned by the developer application.</p>
+        <p style="text-align:left">For example, if you have verified the domain <code>static.example.com</code>, then
+            URLs like <code>https://video.static.example.com/tiktok/example.mp4</code> are considered verified, while
+            URLs like <code>https://example.com/videos/example.mp4</code> are still considered unverified.</p><br />
+        <h4 id="url_prefix">URL Prefix</h4>
+        <h5 id="definition_2">Definition</h5>
+        <p style="text-align:left">A URL prefix consists of: https:// + host + path + /.</p>
+        <p style="text-align:left">The host must be a domain and should not be an IP address.</p>
+        <p style="text-align:left">Redirections are not followed. URLs that return HTTP 3xx are considered invalid.</p>
+        <h5 id="verification_2">Verification</h5>
+        <p style="text-align:left">Once a URL prefix's ownership is verified, all URLs with the exact prefix are
+            considered owned by the developer application.</p>
+        <p style="text-align:left">For example, if you have already verified the domain
+            <code>https://example.com/videos/user/</code>, then URLs like
+            <code>https://example.com/videos/user/123/example.mp4</code> are considered verified, while URLs like
+            <code>https://example.com/videos/2023/user/123/example.mp4</code> are still considered unverified.</p>
+        <h2 id="cancel_ongoing_pull_from_url_tasks">Cancel ongoing pull from URL tasks</h2>
+        <p style="text-align:left">The API can cancel downloads for both Direct Post and Content Upload endpoints on a
+            <i>best-effort</i> basis.</p>
+        <p style="text-align:left">While it is possible to cancel ongoing slow downloads, it is not feasible to cancel
+            downloads that are nearing completion or already in the file processing state.</p>
+        <h2 id="request">Request</h2>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span><span>POST /v2/post/publish/cancel/ HTTP /1.1
+</span></span><span>Host: open.tiktokapis.com
+</span><span>Authorization: Bearer {{AccessToken}}
+</span><span>Content-Type: application/json; charset=UTF-8
+</span><span>
+</span><span>{
+</span><span><span>    </span><span style="color:#d14">"publish_id"</span><span>: {PUBLISH_ID}
+</span></span><span>}</span></code></pre>
+        <h2 id="response_2">Response</h2>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span><span>200 OK
+</span></span><span>
+</span><span>{
+</span><span><span>    </span><span style="color:#d14">"error"</span><span>: {
+</span></span><span><span>         </span><span style="color:#d14">"code"</span><span>: </span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>         </span><span style="color:#d14">"message"</span><span>: </span><span style="color:#d14">""</span><span>,
+</span></span><span><span>         </span><span style="color:#d14">"log_id"</span><span>: </span><span style="color:#d14">"202210112248442CB9319E1FB30C1073F3"</span><span>
+</span></span><span>     }
+</span><span>}</span></code></pre>
+        <p style="text-align:left"><b>response.error.code specification</b></p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>HTTP Status</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>error.code</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">200</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">ok</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The request was successful </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="3">
+                    <p style="text-align:left">400</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">invalid_publish_id</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The <code>publish_id</code> does not exist</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">token_not_authorized_for_specified_publish_id</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The <code>access_token</code> does not have authorization to cancel the
+                        publish</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">publish_not_cancellable</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The task associated with this <code>publish_id</code> is already in a
+                        final state and can't be cancelled</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">403</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">url_ownership_unverified</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">To use <code>PULL_FROM_URL</code> as the media transfer method, developer
+                        must verify the ownership of the URL prefix or domain</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="2">
+                    <p style="text-align:left">401</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">access_token_invalid</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The access_token is invalid or has expired</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">scope_not_authorized</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The access_token does not bear user's grant on <code>video.upload</code>
+                        or <code>video.publish</code></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">429</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">rate_limit_exceeded</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Your request is blocked due to exceeding the API rate limit</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">5xx</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">internal_error </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">TikTok server or network error. Try again later.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 id="video_restrictions">Video restrictions</h2>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Supported media formats</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>MP4 (recommended)</li>
+                        <li>WebM</li>
+                        <li>MOV</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Supported codecs</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>H.264 (recommended)</li>
+                        <li>H.265</li>
+                        <li>VP8</li>
+                        <li>VP9</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Framerate restrictions</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>Minimum of 23 FPS</li>
+                        <li>Maximum of 60 FPS</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Picture size restrictions</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>Minimum of 360 pixels for both height and width</li>
+                        <li>Maximum of 4096 pixels for both height and width</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Duration restrictions</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>All TikTok creators can post 3-minute videos, while some have access to post 5-minute or
+                            10-minute videos.</li>
+                        <li>The longest video a developer can send via the initialize <a
+                                href="/doc/content-posting-api-reference-upload-video">Upload Video</a> endpoint is 10
+                            minutes. TikTok users may trim developer-sent videos inside the TikTok app to fit their
+                            accounts' actual maximum publish durations.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Size restrictions</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>Maximum of 4GB</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <h2 id="image_restrictions">Image restrictions</h2>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Supported media formats</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>WebP</li>
+                        <li>JPEG</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Picture size restrictions</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>Maximum 1080p</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Size restrictions</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <ul class="list-1" type="disc">
+                        <li>Maximum of 20MB for each image</li>
+                    </ul>
+                </td>
+            </tr>
+        </table><br />
+    </div>
+</div>

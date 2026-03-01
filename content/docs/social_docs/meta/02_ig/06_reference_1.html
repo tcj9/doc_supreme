@@ -1,0 +1,497 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_ai">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Error Codes</h1>
+              <p>This document describes the error messages that can be returned by the Instragram API. The sample
+                response below shows an example of code <code>3600</code> and subcode <code>2207004</code> with the
+                subsequent error codes defined.</p>
+              <h3>Sample Response</h3>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "error": 
+    {
+      "message": "The image size is too large.",
+      "type": "OAuthException",
+      "code": 36000,
+      "error_subcode": 2207004,
+      "is_transient": false,
+      "error_user_title": "Image size too large",
+      "error_user_msg": "The image is too large to download. It should be less than 8 MiB.",
+      "fbtrace_id": "A6LJylpZRKw2xKLFsAP-cJh"
+   }
+ }</pre>
+              <h3>Error Codes Defined</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:7%">HTTP Status Code</th>
+                    <th style="width:7%">Code</th>
+                    <th style="width:9%">Subcode</th>
+                    <th>User Message</th>
+                    <th>Recommended Solution</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_dU">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>-2</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207003</code></p>
+                      </td>
+                      <td>
+                        <p><code>It takes too long to download the media.</code></p>
+                      </td>
+                      <td>
+                        <p>A timeout occured while downloading the media. Try again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>-2</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207020</code></p>
+                      </td>
+                      <td>
+                        <p><code>The media you are trying to access has expired. Please try to upload again.</code></p>
+                      </td>
+                      <td>
+                        <p>Generate a new container ID and use it to try again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>-1</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207001</code></p>
+                      </td>
+                      <td></td>
+                      <td>
+                        <p>Instagram server error. Try again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>-1</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207032</code></p>
+                      </td>
+                      <td>
+                        <p><code>Create media fail, please try to re-create media</code></p>
+                      </td>
+                      <td>
+                        <p>Failed to create a media container. Try again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>-1</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207053</code></p>
+                      </td>
+                      <td>
+                        <p><code>unknown upload error</code></p>
+                      </td>
+                      <td>
+                        <p>An unknown error occured during upload. Generate a new container and use it to try again.
+                          This should only affect video uploads.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>1</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207057</code></p>
+                      </td>
+                      <td>
+                        <p>
+                          <code>Thumbnail offset must be greater than or equal to 0 and less than video duration, i.e.</code>
+                          {video-length}
+                        </p>
+                      </td>
+                      <td>
+                        <p>The thumbnail offset you entered is out of bounds for the video duration. Add the right
+                          offset in milliseconds.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>4</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207051</code></p>
+                      </td>
+                      <td>
+                        <p>
+                          <code>We restrict certain activity to protect our community. Tell us if you think we made a mistake.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The publishing action is suspected to be spam. We restrict certain activity to protect our
+                          community. Let us know if you can determine that the publishing actions is not spam.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_7 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>9</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207042</code></p>
+                      </td>
+                      <td>
+                        <p>
+                          <code>You reached maximum number of posts that is allowed to be published by Content Publishing API.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The app user has reached their daily publishing limit. Advise the app's user to try again the
+                          following day.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_8">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>24</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207006</code></p>
+                      </td>
+                      <td>
+                        <p><code>The media with</code> {media-id} <code>cannot be found</code></p>
+                      </td>
+                      <td>
+                        <p>Possible permission error due to missing permission or expired token. Generate a new
+                          container and use it to try again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_9 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>24</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207008</code></p>
+                      </td>
+                      <td>
+                        <p><code>The media builder with creation id =</code> {creation-id}
+                          <code>does not exist or has been expired.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Temporary error publishing a container. Try again 1–2 times in the next 30 seconds to 2
+                          minutes. If unsuccessful, generate a new container ID and use it to try again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_10">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>25</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207050</code></p>
+                      </td>
+                      <td>
+                        <p><code>The Instagram account is restricted.</code></p>
+                      </td>
+                      <td>
+                        <p>The app user's Instagram Professional account is inactive, checkpointed, or restricted.
+                          Advise the app user to sign in to the Instagram app and complete any actions the app requires
+                          to re-enable their account.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_11 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>100</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207023</code></p>
+                      </td>
+                      <td>
+                        <p><code>The media type</code> {media-type} <code>is unknown.</code></p>
+                      </td>
+                      <td>
+                        <p>The media type entered is not one of the <a
+                            href="https://developers.facebook.com/docs/instagram-api/reference/ig-media#fields">expected
+                            media types</a>. Please enter the correct one.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_12">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>100</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207028</code></p>
+                      </td>
+                      <td>
+                        <p>
+                          <code>Your post won't work as a carousel. Carousels need at least 2 photos/videos and no more than 10 photos/videos.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Try again using an acceptable number of photos/videos.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_13 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>100</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207035</code></p>
+                      </td>
+                      <td>
+                        <p><code>Product tag positions should not be specified for video media.</code></p>
+                      </td>
+                      <td>
+                        <p>Videos do not support X/Y coordinates. Disallow X/Y coordinates with videos.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_14">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>100</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207036</code></p>
+                      </td>
+                      <td>
+                        <p><code>Product tag positions are required for photo media.</code></p>
+                      </td>
+                      <td>
+                        <p>Image product tags must include X/Y coordinates. Require X/Y coordinates for images.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_15 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>100</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207037</code></p>
+                      </td>
+                      <td>
+                        <p>
+                          <code>We couldn't add all of your product tags. The product ID may be incorrect, the product may be deleted, or you may not have permission to tag the product.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>One or more of the products being used to tag the item is invalid (deleted, rejected, app
+                          user lacks permission, product ID is invalid, etc.). Get the app user's catalogs and eligible
+                          products again and allow the app user to only use those product IDs when tagging.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_16">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>100</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207040</code></p>
+                      </td>
+                      <td>
+                        <p><code>Cannot use more than</code> {max-tag-count} <code>tags per created media.</code></p>
+                      </td>
+                      <td>
+                        <p>The app user exceeded the maximum number (20) of @ tags. Advise user to use fewer @ tags.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_17 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>352</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207026</code></p>
+                      </td>
+                      <td>
+                        <p><code>The video format is not supported. Please check spec for supported</code> {video}
+                          <code>format</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Unsupported video format. Advise the app user to upload an MOV or MP4 (MPEG-4 Part 14). See
+                          <a href="/docs/instagram-api/reference/ig-user/media#video-specifications">Video
+                            Specifications</a>.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_18">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>9004</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207052</code></p>
+                      </td>
+                      <td>
+                        <p><code>The media could not be fetched from this uri:</code> {uri}</p>
+                      </td>
+                      <td>
+                        <p>The media could not be fetched from the supplied URI. Advise the app user to make sure the
+                          URI is valid and publicly available.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_19 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>9007</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207027</code></p>
+                      </td>
+                      <td>
+                        <p><code>The media is not ready for publishing, please wait for a moment</code></p>
+                      </td>
+                      <td>
+                        <p><a
+                            href="https://developers.facebook.com/docs/instagram-api/reference/ig-container#fields">Check
+                            the container status</a> and publish when its status is <code>FINISHED</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_20">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>36000</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207004</code></p>
+                      </td>
+                      <td>
+                        <p><code>The image is too large to download. It should be less than</code> {size}<code>.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Image exceeded maximum file size of 8MiB. Advise the user to try again with a smaller image.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_21 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>36001</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207005</code></p>
+                      </td>
+                      <td>
+                        <p><code>The image format</code> {current-image-format}
+                          <code>is not supported. Supported formats are:</code> {format}<code>.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Possible permission error due to missing permission or expired token. Generate a new
+                          container and use it to try again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_22">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>36003</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207009</code></p>
+                      </td>
+                      <td>
+                        <p><code>The submitted image with aspect ratio</code> {submitted-ratio}
+                          <code>cannot be published. Please submit an image with a valid aspect ratio.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The image's aspect ratio does not fall within our acceptable range. Advise the app user to
+                          try again with an image that falls withing a 4:5 to 1.91:1 range.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_23 _5m29">
+                      <td>
+                        <p><code>400</code></p>
+                      </td>
+                      <td>
+                        <p><code>36004</code></p>
+                      </td>
+                      <td>
+                        <p><code>2207010</code></p>
+                      </td>
+                      <td>
+                        <p><code>The submitted image's caption was</code> {submitted-caption-length}
+                          <code>characters long. The maximum number of characters permitted for a caption is</code>
+                          {maximum-caption-length}. <code>Please submit media with a shorter caption.</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The user exceeded the maximum amount of characters for a caption. Advise user to use a
+                          shorter caption. Maximum 2,200 characters, 30 hashtags, and 20 @ tags.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

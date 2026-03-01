@@ -1,0 +1,458 @@
+<article class="devsite-article">
+      <style>
+            .deprecated {
+                  color: red
+            }
+      </style>
+      <h1 class="devsite-page-title" tabindex="-1">
+            PlaylistItems<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+                  <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title"
+                        class="devsite-key-takeaways-panel-header" role="button" tabindex="0">
+                        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+                        <div class="devsite-key-takeaways-panel-title">
+                              <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI"
+                                    id="key-takeaways-panel-title">Page Summary</h2>
+                        </div>
+                        <span aria-hidden="true"
+                              class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+                        </img>
+                  </div>
+                  <div class="devsite-key-takeaways-panel-content">
+                        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+                              <button aria-label="Report Key Takeaways!"
+                                    class="button-flat button-primary devsite-key-takeaways-report-button"
+                                    data-title="Report Key Takeaways!">
+                                    <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+                              </button>
+                        </devsite-feedback>
+                        <ul class="devsite-key-takeaways-panel-list">
+                              <li>
+                                    <p>A <code>playlistItem</code> resource represents a resource, such as a video,
+                                          within a playlist and contains details about how that resource is used within
+                                          that specific playlist.</p>
+                              </li>
+                              <li>
+                                    <p>YouTube uses <code>playlistItem</code> resources to manage a channel's uploaded
+                                          videos, with each item representing an individual uploaded video.</p>
+                              </li>
+                              <li>
+                                    <p>The API provides methods for managing <code>playlistItems</code>, including
+                                          listing, inserting, updating, and deleting items in a playlist.</p>
+                              </li>
+                              <li>
+                                    <p><code>playlistItem</code> resources contain properties like <code>snippet</code>
+                                          for basic details, <code>contentDetails</code> for video-specific information,
+                                          and <code>status</code> for privacy settings.</p>
+                              </li>
+                              <li>
+                                    <p>The <code>snippet</code> property contains information on the item's title,
+                                          description, position, thumbnails, the channels associated to it, and the
+                                          resource included in the playlist.</p>
+                              </li>
+                        </ul>
+                  </div>
+            </devsite-key-takeaways-panel>
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="playlistItems" itemprop="name">
+                  <section id="overview">
+                        <p>A <code dir="ltr" translate="no"><strong>playlistItem</strong></code> resource identifies
+                              another resource, such as a
+                              video, that is included in a playlist. In addition, the <code dir="ltr"
+                                    translate="no">playlistItem </code> resource
+                              contains details about the included resource that pertain specifically to how that
+                              resource
+                              is used in that playlist.<br /><br />
+                              YouTube also uses a playlist to identify a channel's list of uploaded videos, with each
+                              <code dir="ltr" translate="no">playlistItem</code> in that list representing one uploaded
+                              video. You can retrieve the
+                              playlist ID for that list from the <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/channels">channel</a></code>
+                              resource for a given channel. You can then use the
+                              <code dir="ltr"
+                                    translate="no"><a href="/youtube/v3/docs/playlistItems/list">playlistItems.list</a></code>
+                              method to the
+                              list.
+                        </p>
+                  </section>
+                  <section id="methods">
+                        <h2 data-text="Methods" id="methods" tabindex="-1">Methods</h2>
+                        <p>The API supports the following methods for <code dir="ltr"
+                                    translate="no">playlistItems</code> resources:</p>
+                        <dl>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/playlistItems/list">list</a></dt>
+                              <dd>Returns a collection of playlist items that match the API request parameters. You can
+                                    retrieve all of the playlist items in a specified playlist or retrieve one or more
+                                    playlist items by their unique IDs.
+                                    <a href="/youtube/v3/docs/playlistItems/list#usage">Try it now</a>.
+                              </dd>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/playlistItems/insert">insert</a></dt>
+                              <dd>Adds a resource to a playlist.
+                                    <a href="/youtube/v3/docs/playlistItems/insert#usage">Try it now</a>.
+                              </dd>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/playlistItems/update">update</a></dt>
+                              <dd>Modifies a playlist item. For example, you could update the item's position in the
+                                    playlist.
+                                    <a href="/youtube/v3/docs/playlistItems/update#usage">Try it now</a>.
+                              </dd>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/playlistItems/delete">delete</a></dt>
+                              <dd>Deletes a playlist item.
+                                    <a href="/youtube/v3/docs/playlistItems/delete#usage">Try it now</a>.
+                              </dd>
+                        </dl>
+                  </section>
+                  <section id="resource">
+                        <h2 data-text="Resource representation" id="resource-representation" tabindex="-1">Resource
+                              representation</h2>
+                        <p>The following JSON structure shows the format of a <code dir="ltr"
+                                    translate="no">playlistItems</code> resource:</p>
+                        <div></div><devsite-code>
+                              <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json" is-upgraded=""
+                                    style="max-height: 500px; overflow: auto" syntax="Text only">{
+  "<a href="#kind">kind</a>": "youtube#playlistItem",
+  "<a href="#etag">etag</a>": <var class="apiparam" translate="no">etag</var>,
+  "<a href="#id">id</a>": <var class="apiparam" translate="no">string</var>,
+  "<a href="#snippet">snippet</a>": {
+    "<a href="#snippet.publishedAt">publishedAt</a>": <var class="apiparam" translate="no">datetime</var>,
+    "<a href="#snippet.channelId">channelId</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.title">title</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.description">description</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.thumbnails">thumbnails</a>": {
+      <var class="apiparam" translate="no">(key)</var>: {
+        "<a href="#snippet.thumbnails.(key).url">url</a>": <var class="apiparam" translate="no">string</var>,
+        "<a href="#snippet.thumbnails.(key).width">width</a>": <var class="apiparam" translate="no">unsigned integer</var>,
+        "<a href="#snippet.thumbnails.(key).height">height</a>": <var class="apiparam" translate="no">unsigned integer</var>
+      }
+    },
+    "<a href="#snippet.channelTitle">channelTitle</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.videoOwnerChannelTitle">videoOwnerChannelTitle</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.videoOwnerChannelId">videoOwnerChannelId</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.playlistId">playlistId</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#snippet.position">position</a>": <var class="apiparam" translate="no">unsigned integer</var>,
+    "<a href="#snippet.resourceId">resourceId</a>": {
+      "<a href="#snippet.resourceId.kind">kind</a>": <var class="apiparam" translate="no">string</var>,
+      "<a href="#snippet.resourceId.videoId">videoId</a>": <var class="apiparam" translate="no">string</var>,
+    }
+  },
+  "<a href="#contentDetails">contentDetails</a>": {
+    "<a href="#contentDetails.videoId">videoId</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#contentDetails.startAt">startAt</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#contentDetails.endAt">endAt</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#contentDetails.note">note</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#contentDetails.videoPublishedAt">videoPublishedAt</a>": <var class="apiparam" translate="no">datetime</var>
+  },
+  "<a href="#status">status</a>": {
+    "<a href="#status.privacyStatus">privacyStatus</a>": <var class="apiparam" translate="no">string</var>
+  }
+}</pre>
+                        </devsite-code>
+                  </section>
+                  <section id="properties">
+                        <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                        <p>The following table defines the properties that appear in this resource:</p>
+                        <table class="responsive properties" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th colspan="2">Properties</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="kind">
+                                          <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                Identifies the API resource's type. The value will be <code dir="ltr"
+                                                      translate="no">youtube#playlistItem</code>.</td>
+                                    </tr>
+                                    <tr id="etag">
+                                          <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                The Etag of this resource.</td>
+                                    </tr>
+                                    <tr id="id">
+                                          <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the playlist item.</td>
+                                    </tr>
+                                    <tr id="snippet">
+                                          <td><code dir="ltr" itemprop="property" translate="no">snippet</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">snippet</code> object contains basic
+                                                details about the playlist item, such as its title and position in the
+                                                playlist.</td>
+                                    </tr>
+                                    <tr id="snippet.publishedAt">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>publishedAt</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">datetime</code><br />
+                                                The date and time that the item was added to the playlist. The value is
+                                                specified in <a href="//www.w3.org/TR/NOTE-datetime">ISO 8601</a>
+                                                format.</td>
+                                    </tr>
+                                    <tr id="snippet.channelId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>channelId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the user that added the
+                                                item to the playlist.</td>
+                                    </tr>
+                                    <tr id="snippet.title">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>title</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The item's title.</td>
+                                    </tr>
+                                    <tr id="snippet.description">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>description</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The item's description.</td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>thumbnails</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                A map of thumbnail images associated with the playlist item. For each
+                                                object in the map, the key is the name of the thumbnail image, and the
+                                                value is an object that contains other information about the thumbnail.
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails.(key)">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.thumbnails.</span>(key)</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                Valid key values are:<ul>
+                                                      <li><code dir="ltr" translate="no">default</code> – The default
+                                                            thumbnail image. The default thumbnail for a video – or a
+                                                            resource that refers to a video, such as a playlist item or
+                                                            search result – is 120px wide and 90px tall. The default
+                                                            thumbnail for a channel is 88px wide and 88px tall.</li>
+                                                      <li><code dir="ltr" translate="no">medium</code> – A higher
+                                                            resolution version of the thumbnail image. For a video (or a
+                                                            resource that refers to a video), this image is 320px wide
+                                                            and 180px tall. For a channel, this image is 240px wide and
+                                                            240px tall.</li>
+                                                      <li><code dir="ltr" translate="no">high</code> – A high resolution
+                                                            version of the thumbnail image. For a video (or a resource
+                                                            that refers to a video), this image is 480px wide and 360px
+                                                            tall. For a channel, this image is 800px wide and 800px
+                                                            tall.</li>
+                                                      <li><code dir="ltr" translate="no">standard</code> – An even
+                                                            higher resolution version of the thumbnail image than the
+                                                            <code dir="ltr" translate="no">high</code> resolution image.
+                                                            This image is available for some videos and other resources
+                                                            that refer to videos, like playlist items or search results.
+                                                            This image is 640px wide and 480px tall.</li>
+                                                      <li><code dir="ltr" translate="no">maxres</code> – The highest
+                                                            resolution version of the thumbnail image. This image size
+                                                            is available for some videos and other resources that refer
+                                                            to videos, like playlist items or search results. This image
+                                                            is 1280px wide and 720px tall.</li>
+                                                </ul>
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails.(key).url">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.thumbnails.(key).</span>url</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The image's URL.</td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails.(key).width">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.thumbnails.(key).</span>width</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's width.</td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails.(key).height">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.thumbnails.(key).</span>height</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's height.</td>
+                                    </tr>
+                                    <tr id="snippet.channelTitle">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>channelTitle</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The channel title of the channel that the playlist item belongs to.</td>
+                                    </tr>
+                                    <tr id="snippet.videoOwnerChannelTitle">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>videoOwnerChannelTitle</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The channel title of the channel that uploaded this video.</td>
+                                    </tr>
+                                    <tr id="snippet.videoOwnerChannelId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>videoOwnerChannelId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The channel ID of the channel that uploaded this video.</td>
+                                    </tr>
+                                    <tr id="snippet.playlistId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>playlistId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the playlist that the
+                                                playlist item is in.</td>
+                                    </tr>
+                                    <tr id="snippet.position">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>position</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The order in which the item appears in the playlist. The value uses a
+                                                zero-based index, so the first item has a position of <code dir="ltr"
+                                                      translate="no">0</code>, the second item has a position of <code
+                                                      dir="ltr" translate="no">1</code>, and so forth.</td>
+                                    </tr>
+                                    <tr id="snippet.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">id</code> object contains information
+                                                that can be used to uniquely identify the resource that is included in
+                                                the playlist as the playlist item.</td>
+                                    </tr>
+                                    <tr id="snippet.resourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.resourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The kind, or type, of the referred resource.</td>
+                                    </tr>
+                                    <tr id="snippet.resourceId.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.resourceId.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                If the <code dir="ltr" translate="no">snippet.resourceId.kind</code>
+                                                property's value is <code dir="ltr" translate="no">youtube#video</code>,
+                                                then this property will be present and its value will contain the ID
+                                                that YouTube uses to uniquely identify the video in the playlist.</td>
+                                    </tr>
+                                    <tr id="contentDetails">
+                                          <td><code dir="ltr" itemprop="property" translate="no">contentDetails</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">contentDetails</code> object is
+                                                included in the resource if the included item is a YouTube video. The
+                                                object contains additional information about the video.</td>
+                                    </tr>
+                                    <tr id="contentDetails.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify a video. To <a
+                                                      href="/youtube/v3/docs/videos/list">retrieve the <code dir="ltr"
+                                                            translate="no">video</code> resource</a>, set the <code
+                                                      dir="ltr" translate="no">id</code> query parameter to this value
+                                                in your API request.</td>
+                                    </tr>
+                                    <tr id="contentDetails.startAt">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>startAt</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                <span class="deprecated"><b>Note:</b> This property has been deprecated
+                                                      and, if set, its value is ignored.</span><br /><br />The time,
+                                                measured in seconds from the start of the video, when the video should
+                                                start playing. (The playlist owner can specify the times when the video
+                                                should start and stop playing when the video is played in the context of
+                                                the playlist.) The default value is <code dir="ltr"
+                                                      translate="no">0</code>.
+                                          </td>
+                                    </tr>
+                                    <tr id="contentDetails.endAt">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>endAt</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                <span class="deprecated"><b>Note:</b> This property has been deprecated
+                                                      and, if set, its value is ignored.</span><br /><br />The time,
+                                                measured in seconds from the start of the video, when the video should
+                                                stop playing. (The playlist owner can specify the times when the video
+                                                should start and stop playing when the video is played in the context of
+                                                the playlist.) By default, assume that the <code dir="ltr"
+                                                      translate="no">video.endTime</code> is the end of the video.
+                                          </td>
+                                    </tr>
+                                    <tr id="contentDetails.note">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>note</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                A user-generated note for this item. The property value has a maximum
+                                                length of 280 characters.</td>
+                                    </tr>
+                                    <tr id="contentDetails.videoPublishedAt">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>videoPublishedAt</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">datetime</code><br />
+                                                The date and time that the video was published to YouTube. The value is
+                                                specified in <a href="//www.w3.org/TR/NOTE-datetime">ISO 8601</a>
+                                                format.</td>
+                                    </tr>
+                                    <tr id="status">
+                                          <td><code dir="ltr" itemprop="property" translate="no">status</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">status</code> object contains
+                                                information about the playlist item's privacy status.</td>
+                                    </tr>
+                                    <tr id="status.privacyStatus">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">status.</span>privacyStatus</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The playlist item's privacy status. The channel that uploaded the video
+                                                that the playlist item represents can set this value using either the
+                                                <code dir="ltr" translate="no">videos.insert</code> or <code dir="ltr"
+                                                      translate="no">videos.update</code> method.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

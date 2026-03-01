@@ -1,0 +1,131 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_mu">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Session Info Access Tokens</h1>
+              <p>If your app or website authenticates people with Facebook Login but manages users' logged-in state
+                without an access token, you should create and use a session info token to monitor and log people out
+                when the connection to their Facebook account is invalidated.</p>
+              <p>A session info access token is an access token tied to a Facebook Login session that does not grant
+                access to user data. You can create a session info access token from a long-lived access token. A
+                session info access token will become invalid when the session associated with the original access token
+                expires or is invalidated.</p>
+              <p>Session Info access tokens can be used to improve security for your app by reducing access to data and
+                tracking the status of a user's connection to your app.</p>
+              <h2>Tracking Logged-In State</h2>
+              <p>In the event of a security incident at Facebook, or when Facebook detects suspicious activity on an
+                account, a person reports their account as hacked, or changes their password as a precaution, it is
+                important that the accounts belonging to that person at the other services where they use Facebook Login
+                are also protected. People can also choose to disconnect your app from their Facebook account from your
+                app or website at any time, and such choices should also be reflected in the experience of your app. If
+                you use Facebook's Android, iOS and JavaScript SDKs, access tokens are periodically checked in the
+                background and your users will be automatically be logged out when these events happen.</p>
+              <p>If your app or website uses Facebook Login but keeps your users logged in with your own state
+                management mechanisms, it is still important to monitor the Facebook Login sessions for your app and log
+                people out in a timely fashion when they experience a security event or if they choose to disconnect
+                your app from their Facebook account. If your app does not access user data from your server, you can
+                retain and periodically verify a session info token instead of a full access token. This allows you to
+                protect your users and their data in your app while also reducing any risk to Facebook user data should
+                these tokens leak in a data breach or other security event at your servers.</p>
+              <h2>Server-side proof of authentication</h2>
+              <p>On Android and iOS, apps are required to use our SDK. Our SDK completes Facebook Login and gets a
+                long-lived access token on the client device only. If your app needs to provision a user account
+                server-side to enable login from other devices, it is important to have proof of the authentication
+                event. Historically, this was done by passing the access token back to the server over a secure channel,
+                and calling the <code>debug_token</code> endpoint to verify that it is valid and belongs to the app. If
+                your app does not access user data server-side, we recommend using a session info token to provide the
+                proof of authentication.</p>
+              <h2>Tech Providers / Service Providers integrating Facebook Login on behalf of an app</h2>
+              <p>Many apps use a service provider to integrate various federated authentication options (e.g. to offer
+                Google, Apple, or Twitter products alongside Facebook Login) into their application behind a uniform
+                API. If your app needs to share an access token with such a service provider as proof of authentication,
+                to provision new users, or the provider wants to retain long-lived tokens for session monitoring and
+                management, it is recommended that you give them a session info token for these purposes.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Exchanging Long-Lived Tokens for Session Info Tokens</h2>
+              <p>If you need a session info access token you can generate one from a long-lived token. The workflow for
+                generating a long-lived token is as follows:</p>
+              <h3 id="generate-session-info-token">Generate a Session Info Access Token</h3>
+              <p>You will need the following:</p>
+              <ul>
+                <li>A valid long-lived User or Page Access Token</li>
+                <li>Your App ID</li>
+              </ul>
+              <p>Query the <code>GET oauth/access_token</code> endpoint.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X GET "https://graph.facebook.com/{graph-api-version}/oauth/access_token?  
+    grant_type=fb_attenuate_token           
+    client_id={app-id}&amp;
+    fb_exchange_token={your-access-token}" </pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "access_token":"{session-info-access-token}",
+  "token_type": "bearer",
+  "expires_in": 5183944            //The number of seconds until the token expires
+}</pre>
+              <p>Once you have retrieved the session info token, you can use it from your server or send it back to the
+                client to use there.</p>
+              <h4>Caveats</h4>
+              <ul>
+                <li>
+                  <p><strong>You can not use an expired token to request a session info token.</strong> If the token has
+                    expired, your app must send the user through the login flow again to generate a new access token.
+                  </p>
+                </li>
+                <li>
+                  <p><strong>You can not use a short-lived access token to request a session info token.</strong> <a
+                      href="/docs/facebook-login/access-tokens/refreshing">Exchange your short-lived token for a
+                      long-lived token</a> first if you are trying to obtain a debug-only token for your web
+                    application.</p>
+                </li>
+                <li>
+                  <p><strong>Generating a session info token does not require a client secret or app access
+                      token.</strong> <em>Do not include your client secret or app access token in your app's source
+                      code.</em> For Android and iOS apps, creation of the session info token should be done in your app
+                    before sending it to your server.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Using Session Info Tokens With the <code>/debug_token</code> Endpoint</h2>
+              <p>To use the API, you can issue a Graph API request:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">GET /debug_token?
+  input_token={session-info-token}&amp;
+  access_token={your-access-token}</pre>
+              <ul>
+                <li><code>input_token</code>: the session info token you want to get information about</li>
+                <li><code>app-access_token</code>: an <a href="/docs/facebook-login/access-tokens/#apptokens">app access
+                    token</a> or a valid user access token from a developer of the app</li>
+              </ul>
+              <p>Please see the full documentation on <a
+                  href="/docs/facebook-login/access-tokens/debugging-and-error-handling">Debugging and Error
+                  Handling</a> for how to interpret return values and error messages from the API.</p>
+              <h4>Caveats</h4>
+              <ul>
+                <li>
+                  <p><strong>Querying debug info for a session info access token still requires an app or developer
+                      access token.</strong> Session info tokens are intended for server-side use.</p>
+                </li>
+                <li>
+                  <p><strong>Session info tokens are valid only for the <code>/debug_token</code> GraphAPI
+                      endpoint,</strong> they cannot be used with the interactive access token debugger tool at this
+                    time.</p>
+                </li>
+                <li>
+                  <p><strong>Granular scopes are not returned for session info tokens</strong> to limit exposure of user
+                    data.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

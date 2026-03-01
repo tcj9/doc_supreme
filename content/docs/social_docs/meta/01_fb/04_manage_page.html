@@ -1,0 +1,425 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_bT">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Manage a Page</h1>
+              <p>This document shows you how to perform the following tasks for a Facebook Page:</p>
+              <ul>
+                <li>Get a list of pages that you can perform a task on including:
+
+                  <ul>
+                    <li>Specific tasks you can perform on each Page</li>
+                    <li>Page access tokens for each Page that you can use to test API calls</li>
+                  </ul>
+                </li>
+                <li>Get and update details about a Page</li>
+                <li>Get and update settings for a Page </li>
+                <li>Get notifications about suggested changes Meta will be implementing on a Page
+
+                  <ul>
+                    <li>Accept or reject these suggested changes</li>
+                  </ul>
+                </li>
+                <li>Get reviews for a Page</li>
+                <li>Block a person from a Page</li>
+              </ul>
+              <h2>Before you start</h2>
+              <p>This guide assumes you have read the <a href="/docs/pages/overview">Pages API Overview</a>.</p>
+              <p>For a person who can perform tasks on the page, you will need to implement Facebook Login for Business
+                to ask for the following permissions and receive a User or Page access token:</p>
+              <ul>
+                <li><code>pages_manage_engagement</code></li>
+                <li><code>pages_manage_metadata</code></li>
+                <li><code>pages_manage_posts</code> </li>
+                <li><code>pages_read_engagement</code> </li>
+                <li><code>pages_read_user_engagement</code> </li>
+                <li><code>pages_show_list</code></li>
+                <li><code>publish_video</code> permission, if you are publishing a video to the Page</li>
+              </ul>
+              <p>If using a business system user in your API requests, the <code>business_management</code> permission
+                is required.</p>
+              <p>Your app user must be able to perform the <code>CREATE_CONTENT</code>, <code>MANAGE</code>, and/or
+                <code>MODERATE</code> tasks on the Page in the API requests.
+              </p>
+              <h3>Best practices</h3>
+              <div>
+                <p>
+                  When testing an API call, you can include the <code>access_token</code> parameter set to your access
+                  token. However, when making secure calls from your app, use the <a
+                    href="https://developers.facebook.com/docs/facebook-login/guides/access-tokens#portabletokens"
+                    target="_blank">access token class.</a></p>
+              </div><i>Example requests are formatted for readability. Replace <b>bold, italics values</b>, such as
+                <b>page_id</b>, with your values.</i>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Pages, tasks, and tokens</h2>
+              <p>A single API call can give you a lot of information for Pages on which you can perform a task.</p>
+              <h3>Get your Pages</h3>
+              <p>To get a list of all Pages on which you can perform tasks, the tasks you can perform on each page, and
+                a short-lived Page access token for each Page, send a <code>GET</code> request to
+                <code>/user_id/accounts</code> endpoint using a User access token.
+              </p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET 
+     "https://graph.facebook.com/<b><i>user_id</i></b>/accounts"
+</pre>
+              <p>On success, your app will receive a JSON response with an array of Page objects. Each Page object
+                contains:</p>
+              <ul>
+                <li>The name for the Page</li>
+                <li>The ID for the Page</li>
+                <li>The Page category, category name and ID</li>
+                <li>A short-lived Page access token</li>
+                <li>All tasks the user can perform on the Page</li>
+              </ul>
+              <h4>Example response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "data": [
+    {
+      "access_token": "{facebook-for-developers-page-access-token}",
+      "category": "Internet Company",
+      "category_list": [
+        {
+          "id": "2256",
+          "name": "Internet Company"
+        }
+      ],
+      "name": "Facebook for Developers",
+      "id": "{facebook-for-developers-page-id}",
+      "tasks": [
+        "ANALYZE",
+        "ADVERTISE",
+        "MODERATE",
+        "CREATE_CONTENT"
+      ]
+    },
+    {
+      "access_token": "{my-outlandish-stories-page-access-token}",
+      "category": "Blogger",
+      "category_list": [
+        {
+          "id": "361282040719868",
+          "name": "Blogger"
+        }
+      ],
+      "name": "My Outlandish Stories",
+      "id": "{my-outlandish-stories-page-id}",
+      "tasks": [
+        "ANALYZE",
+        "ADVERTISE",
+        "MODERATE",
+        "CREATE_CONTENT",
+        "MANAGE"
+      ]
+    },
+...
+  ]
+}</pre>
+              <h3>Get tasks for others</h3>
+              <p>If you can perform the <code>MANAGE</code> task on the Page, you can get a list of other people who can
+                perform tasks on that Page including the tasks each person can perform.</p>
+              <p>To get a list of people and the tasks they can perform on the Page, send a <code>GET</code> request to
+                the <code>/page_id/roles</code> endpoint.</p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.facebook.com/<b><i>page_id</i></b>/roles"
+</pre>
+              <p>On success, your app receives a JSON response with the person's name, their Page-scoped ID, and tasks
+                each person can perform on a Page.</p>
+              <h4>Example response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "data": [
+    {
+      "name": "Person One",
+      "id": "page_scoped_id_for_one"
+        "tasks": [
+          "ANALYZE"
+        ]
+    },
+    {
+      "name": "Person Two",
+      "id": "page_scoped_id_for_two",
+      "tasks": [
+        "ANALYZE",
+        "ADVERTISE",
+        "MODERATE",
+        "CREATE_CONTENT",
+        "MANAGE"
+      ]
+    },
+...
+  ],
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Page details</h2>
+              <p>If you can perform the <code>MANAGE</code> task on the Page, you can use a Page access token or if your
+                app has been approved for the Page Public Content Access feature, you can use a User access token, to
+                view details for a Page such as about, email, hours of operation, etc.</p>
+              <h3>Get details</h3>
+              <p>To get details about a Page, send a <code>GET</code> request to the <code>/page_id</code> endpoint with
+                the <code>fields</code> parameter set to the Page details you would like to view.</p>
+              <p><strong>Note:</strong> You can use the <code>/pages/search</code> endpoint to find Page IDs when using
+                the Page Public Content Access feature.</p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.facebook.com/<b><i>page_id</i></b> \
+     ?fields=about,attire,bio,location,parking,hours,emails,website"
+</pre>
+              <p>On success, your app receives a JSON response with value for the fields you requested. If a field is
+                not returned in the response, the Page does not have this value set. For example, if the Page has not
+                set the <code>attire</code> field, this field will not be returned in the response.</p>
+              <h3>Update details</h3>
+              <p>If you can perform the <code>MANAGE</code> task on the Page, you can use a Page access token to send a
+                <code>POST</code> request to the <code>/page_id</code> endpoint with the parameters that you want to
+                update, such as the <code>about</code> parameter.
+              </p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X POST "https://graph.facebook.com/<b><i><code>v24.0</code>/page_id</i></b>" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "about":"This is an awesome cafe located downtown!",
+         }'
+</pre>
+              <p>On success, your app will receive a JSON response with <code>success</code> set to <code>true</code>.
+              </p>
+              <h3>Meta proposed changes</h3>
+              <p>On occassion, Meta will propose changes to the details for your Page, such as fixing a typo, or
+                updating the categories on your Page to help people better find your Page. In order to get these
+                notifications, you must be subscribed to the <code>page_upcoming_change</code> and/or the
+                <code>page_change_proposal</code> webhook.
+              </p>
+              <p>Once you receive the notification, you can do one of the following:</p>
+              <ul>
+                <li>Do nothing and the changes will take affect at the time designated in the notification</li>
+                <li>Actively accept the changes and the changes will take affect immediately</li>
+                <li>Actively reject the changes and no changes will be made</li>
+              </ul>
+              <h4>Accept or reject a proposed change</h4>
+              <p>To actively accept or reject a proposed change, send a <code>POST</code> request to the
+                <code>/page_change_proposal_id</code> endpoint with the <code>accept</code> field set to
+                <code>true</code> to accept the change or <code>false</code> to reject it. The
+                <code>page_change_proposal_id</code> is the <code>proposal.id</code> value you received in the
+                <code>page_upcoming_change</code> webhook notification or <code>value.id</code> value you received in
+                the <code>page_change_proposal</code> webhook notification.
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+curl -i -X POST "https://graph.facebook.com/<b><i><code>v24.0</code>/page_change_proposal_id</i></b>" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "accept":"true",
+         }'
+</pre>
+              <p>On success, your app receives a JSON response with <code>success</code> set to <code>true</code>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="update_settings">Page settings</h2>
+              <p>If you can perform the <code>MANAGE</code> task on the Page, you can use a Page access token to send a
+                <code>GET</code> request to the <code>/page_id/settings</code> endpoint to get a list of all the
+                settings for that Page.
+              </p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.facebook.com/<b><i><code>v24.0</code>/page_id</i></b>/settings"
+</pre>
+              <p>On success, your app will receive a JSON response with an array of objects where each object is the
+                <code>setting</code> set to a Page setting and the value, either <code>true</code> or
+                <code>false</code>.
+              </p>
+              <h4>Example response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "data": [
+    {
+      "setting": "USERS_CAN_POST",
+      "value": false
+    },
+    {
+      "setting": "USERS_CAN_MESSAGE",
+      "value": true
+    },
+    {
+      "setting": "USERS_CAN_POST_PHOTOS",
+      "value": true
+    },
+    ...
+  ]
+}</pre>
+              <h3>Update a setting</h3>
+              <p>To update the settings for a Page, send a <code>POST</code> request to the
+                <code>/page_id/settings</code> endpoint with the <code>option</code> parameter set to the setting you
+                want to update.
+              </p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+curl -i -X POST "https://graph.facebook.com/<b><i><code>v24.0</code>/page_id</i></b>/settings" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "option":{"USERS_CAN_MESSAGE": "true"},
+         }'
+</pre>
+              <p>On success, your app receives a JSON response with <code>success</code> set to <code>true</code>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get reviews</h2>
+              <p>You can get reviews for a Page, including the name of the reviewer, their Page-scoped ID, whether it
+                was a positive or negative recommendation, and the review text, send a <code>GET</code> request to the
+                <code>/page_id/ratings</code> endpoint.
+              </p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.facebook.com/<b><i>page_id</i></b>/ratings" 
+</pre>
+              <p>On success, your app receives a JSON array with review objects. Each object contains:</p>
+              <ul>
+                <li><code>created_time</code> set to the time the review was created, </li>
+                <li><code>recommendation_type</code> set to <code>positive</code> or <code>negative</code></li>
+                <li><code>review_text</code> set to the content for the review</li>
+                <li>a <code>reviewer</code> object with the <code>name</code> and <code>id</code> for the person who
+                  wrote that review</li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data": [
+    {
+      "created_time": "unixtimestamp",
+      "recommendation_type": "positive",
+      "review_text": "I love this page!",
+      "reviewer": {
+        "name": "Person One",
+        "id": "psid_for_one"
+      }
+    },
+    {
+      "created_time": "unixtimestamp",
+      "recommendation_type": "positive",
+      "review_text": "This page is wonderful!",
+      "reviewer": {
+        "name": "Person Two",
+        "id": "psid_for_two"
+      }
+    },
+...
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Block a person</h2>
+              <p>To block a person from commenting on a Page, send a <code>POST</code> request to the
+                <code>/page_id/blocked</code> endpoint with the <code>user</code> parameter set to Page-scoped ID for
+                the person you want to block.
+              </p>
+              <h4>Example request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X POST "https://graph.facebook.com/<b><i><code>v24.0</code>/page_id</i></b>/blocked"
+     -H "Content-Type: application/json" \
+     -d '{
+           "user":"<b><i>psid_to_block</i></b>",
+         }'
+</pre>
+              <p>On success, your app receives a JSON response with the Page-scoped ID set to <code>true</code>.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+{
+ "<b><i>psid_to_block</i></b>": true
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Next steps</h2>
+              <p>Learn how to <a href="/docs/pages-api/posts">publish links, photos, and videos to your Page</a>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See also</h2>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><a
+                      href="https://developers.facebook.com/docs/graph-api/webhooks/getting-started/webhooks-for-pages"
+                      target="_blank">Meta Webhooks for Pages </a><img alt="" class="img"
+                      src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                      width="10px" /></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://www.facebook.com/business/help/327596604689624">Meta Business Help
+                      Center – Business System User</a><img alt="" class="img"
+                      src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                      width="10px" /></div>
+                </li>
+              </ul>
+              <h4>References</h4>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/page" target="_blank">
+                      Page Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/page/blocked" target="_blank">Page Blocked
+                      Reference</a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/page/feed" target="_blank">
+                      Page Feed Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/page-post" target="_blank">
+                      Page Post Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="https://developers.facebook.com/docs/graph-api/reference/page/settings">Page
+                      Settings</a><img alt="" class="img"
+                      src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                      width="10px" /></div>
+                </li>
+                <li>
+                  <div class="fcb"><a
+                      href="https://developers.facebook.com/docs/graph-api/reference/page-upcoming-change">Page Upcoming
+                      Change Reference</a><img alt="" class="img"
+                      src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                      width="10px" /></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/permissions" target="_blank">
+                      Permissions Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+                <li>
+                  <div class="fcb"><a href="/docs/graph-api/reference/user/accounts" target="_blank">
+                      User Accounts Reference
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=lFRAwqUmVGn5RTJXkd_cFw&amp;oh=00_Afs9XtxB1VKYUEfHZwzsuKY0ApyhpnM302Df5cQ1pwMJjQ&amp;oe=69A0DBE2"
+                        width="10px" /></a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

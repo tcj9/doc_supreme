@@ -1,0 +1,140 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Subscribe to Push Notifications<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>The YouTube Data API v3 uses PubSubHubbub for push notifications, enabling near real-time updates without
+              the need for constant polling.</p>
+          </li>
+          <li>
+            <p>Your server will receive notifications when a YouTube channel uploads a video or updates a video's title
+              or description.</p>
+          </li>
+          <li>
+            <p>To subscribe, set up a callback server, use the Google hub with the 'subscribe' mode, provide your
+              callback URL, and specify the YouTube channel ID in the topic URL.</p>
+          </li>
+          <li>
+            <p>Notifications are sent as Atom feeds, and the <code>&lt;yt:videoId&gt;</code> and
+              <code>&lt;yt:channelId&gt;</code> elements within these feeds can be used to identify the specific video
+              and channel.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <p>The YouTube Data API (v3) supports push notifications via <a
+        href="https://github.com/pubsubhubbub/">PubSubHubbub</a>, a server-to-server publish/subscribe protocol for
+      Web-accessible resources. Notifications are pushed out to subscribers via HTTP webhooks, which is much more
+      efficient than polling-based solutions. With PubSubHubbub, your server finds out about events in near real-time,
+      without having to determine the optimal polling interval or repeatedly fetching data that hasn’t changed.</p>
+    <p>Your PubSubHubbub callback server receives Atom feed notifications when a channel does any of the following
+      activities:</p>
+    <p>
+    <ul>
+      <li>uploads a video</li>
+      <li>updates a video's title</li>
+      <li>updates a video's description</li>
+    </ul>
+    </p>
+    <p>The following steps explain how to subscribe to notifications:</p>
+    <ol>
+      <li>
+        <p>Set up a callback server that can handle incoming Atom feed notifications.</p>
+      </li>
+      <li>
+        <p>Use the <a href="https://pubsubhubbub.appspot.com/subscribe">Google</a> hub to subscribe to receive push
+          notifications:</p>
+        <ul>
+          <li>
+            <p>Set the <b>mode</b> to <code dir="ltr" translate="no">subscribe</code>. (Or set the mode to <code
+                dir="ltr" translate="no">unsubscribe</code> to cancel a subscription.)</p>
+          </li>
+          <li>
+            <p>Set the <b>callback URL</b> to the URL that you set up in step 1.</p>
+          </li>
+          <li>
+            <p>Set the <b>topic URL</b> to <code dir="ltr"
+                translate="no">https://www.youtube.com/feeds/videos.xml?channel_id=<b>CHANNEL_ID</b></code>, where <code
+                dir="ltr" translate="no"><b>CHANNEL_ID</b></code> is the <a href="/youtube/v3/docs/channels#id">YouTube
+                channel ID</a> for which you want to retrieve push notifications.</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Process notifications sent to your callback server. The notification format is shown below. Note that you can
+          use the <code dir="ltr" translate="no">&lt;yt:videoId&gt;</code> element's value to identify the newly added
+          or updated video. You can also use the <code dir="ltr" translate="no">&lt;yt:channelId&gt;</code> element's
+          value to identify the channel that owns that video.</p>
+        <div></div><devsite-code>
+          <pre dir="ltr" is-upgraded="" translate="no">
+&lt;feed xmlns:yt="http://www.youtube.com/xml/schemas/2015"
+         xmlns="http://www.w3.org/2005/Atom"&gt;
+  &lt;link rel="hub" href="https://pubsubhubbub.appspot.com"/&gt;
+  &lt;link rel="self" href="https://www.youtube.com/xml/feeds/videos.xml?channel_id=<i>CHANNEL_ID</i>"/&gt;
+  &lt;title&gt;YouTube video feed&lt;/title&gt;
+  &lt;updated&gt;2015-04-01T19:05:24.552394234+00:00&lt;/updated&gt;
+  &lt;entry&gt;
+    &lt;id&gt;yt:video:<i>VIDEO_ID</i>&lt;/id&gt;
+    &lt;yt:videoId&gt;<i>VIDEO_ID</i>&lt;/yt:videoId&gt;
+    &lt;yt:channelId&gt;<i>CHANNEL_ID</i>&lt;/yt:channelId&gt;
+    &lt;title&gt;Video title&lt;/title&gt;
+    &lt;link rel="alternate" href="http://www.youtube.com/watch?v=<i>VIDEO_ID</i>"/&gt;
+    &lt;author&gt;
+     &lt;name&gt;Channel title&lt;/name&gt;
+     &lt;uri&gt;http://www.youtube.com/channel/<i>CHANNEL_ID</i>&lt;/uri&gt;
+    &lt;/author&gt;
+    &lt;published&gt;2015-03-06T21:40:57+00:00&lt;/published&gt;
+    &lt;updated&gt;2015-03-09T19:05:24.552394234+00:00&lt;/updated&gt;
+  &lt;/entry&gt;
+&lt;/feed&gt;
+</pre>
+        </devsite-code>
+      </li>
+    </ol>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

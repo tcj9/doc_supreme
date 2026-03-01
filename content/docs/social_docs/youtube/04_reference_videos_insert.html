@@ -1,0 +1,650 @@
+<article class="devsite-article">
+  <style>
+    .deprecated {
+      color: red
+    }
+  </style>
+  <h1 class="devsite-page-title" tabindex="-1">
+    Videos: insert<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <div class="note">
+        All videos uploaded via the <code dir="ltr" translate="no">videos.insert</code> endpoint from unverified API
+        projects
+        created after 28 July 2020 will be restricted to private viewing mode. To lift this restriction,
+        each API project must <a href="https://support.google.com/youtube/contact/yt_api_form">undergo an
+          audit</a> to verify compliance with the
+        <a href="https://developers.google.com/youtube/terms/api-services-terms-of-service">Terms of Service</a>. Please
+        see
+        the <a href="/youtube/v3/revision_history#release_notes_07_28_2020">API Revision History</a> for
+        more details.
+      </div>
+      <section id="overview">
+        <p>Uploads a video to YouTube and optionally sets the video's metadata.</p>
+        <p>This method supports media upload. Uploaded files must conform to these constraints:</p>
+        <ul>
+          <li><strong>Maximum file size:</strong> 256GB</li>
+          <li><strong>Accepted Media MIME types:</strong> <code dir="ltr" translate="no">video/*</code>, <code dir="ltr"
+              translate="no">application/octet-stream</code></li>
+        </ul>
+        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+            href="/youtube/v3/getting-started#quota">quota cost</a> of 100 units.</p>
+      </section>
+      <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common use cases
+      </h2>
+      <style>
+        iframe+section>h2 {
+          margin-top: 12px;
+        }
+      </style>
+      <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+          allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+          src="https://developers.google.com/frame/youtube/v3/docs/videos/insert_9bafc243df7671d3b827dcb85b513aaf1a67154ebf05be861c99c2cdc5309e19.frame"></iframe></devsite-iframe>
+      <section id="request">
+        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+        <section id="request_url">
+          <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+          <div></div><devsite-code>
+            <pre dir="ltr" is-upgraded="" translate="no">POST https://www.googleapis.com/upload/youtube/v3/videos</pre>
+          </devsite-code>
+        </section>
+        <section id="auth_required">
+          <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+          <p>This request requires authorization with at least one of the following scopes (<a
+              href="/youtube/v3/guides/authentication">read more about authentication and authorization</a>).</p>
+          <table class="matchpre">
+            <thead>
+              <tr>
+                <th>Scope</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube.upload</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtubepartner</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="params">
+          <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+          <p>The following table lists the parameters that this query supports. All of the parameters listed are query
+            parameters.</p>
+          <table class="responsive details">
+            <thead>
+              <tr>
+                <th colspan="2">Parameters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="alt" id="required-parameters">
+                <td colspan="3"><b>Required parameters</b></td>
+              </tr>
+              <tr id="part">
+                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  The <code dir="ltr" translate="no"><strong>part</strong></code> parameter serves two purposes in this
+                  operation. It identifies the properties that the write operation will set as well as the properties
+                  that the API response will include.<br><br />Note that not all parts contain properties that can be
+                  set when inserting or updating a video. For example, the <code dir="ltr"
+                    translate="no">statistics</code> object encapsulates statistics that YouTube calculates for a video
+                  and does not contain values that you can set or modify. If the parameter value specifies a <code
+                    dir="ltr" translate="no">part</code> that does not contain mutable values, that <code dir="ltr"
+                    translate="no">part</code> will still be included in the API response.<br /><br />The following list
+                  contains the <code dir="ltr" translate="no">part</code> names that you can include in the parameter
+                  value:<br />
+                  <ul>
+                    <li><code dir="ltr" translate="no">contentDetails</code></li>
+                    <li><code dir="ltr" translate="no">fileDetails</code></li>
+                    <li><code dir="ltr" translate="no">id</code></li>
+                    <li><code dir="ltr" translate="no">liveStreamingDetails</code></li>
+                    <li><code dir="ltr" translate="no">localizations</code></li>
+                    <li><code dir="ltr" translate="no">paidProductPlacementDetails</code></li>
+                    <li><code dir="ltr" translate="no">player</code></li>
+                    <li><code dir="ltr" translate="no">processingDetails</code></li>
+                    <li><code dir="ltr" translate="no">recordingDetails</code></li>
+                    <li><code dir="ltr" translate="no">snippet</code></li>
+                    <li><code dir="ltr" translate="no">statistics</code></li>
+                    <li><code dir="ltr" translate="no">status</code></li>
+                    <li><code dir="ltr" translate="no">suggestions</code></li>
+                    <li><code dir="ltr" translate="no">topicDetails</code></li>
+                  </ul>
+                  </br>
+                </td>
+              </tr>
+              <tr class="alt" id="optional-parameters">
+                <td colspan="3"><b>Optional parameters</b></td>
+              </tr>
+              <tr id="notifySubscribers">
+                <td><code dir="ltr" itemprop="property" translate="no">notifySubscribers</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">boolean</code><br />
+                  The <code dir="ltr" translate="no"><strong>notifySubscribers</strong></code> parameter indicates
+                  whether YouTube should send a notification about the new video to users who subscribe to the video's
+                  channel. A parameter value of <code dir="ltr" translate="no">True</code> indicates that subscribers
+                  will be notified of newly uploaded videos. However, a channel owner who is uploading many videos might
+                  prefer to set the value to <code dir="ltr" translate="no">False</code> to avoid sending a notification
+                  about each new video to the channel's subscribers. The default value is <code dir="ltr"
+                    translate="no">True</code>.</td>
+              </tr>
+              <tr id="onBehalfOfContentOwner">
+                <td><code dir="ltr" itemprop="property" translate="no">onBehalfOfContentOwner</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  This parameter can only be used in a properly <a href="/youtube/v3/guides/authentication">authorized
+                    request</a>. <strong>Note:</strong> This parameter is intended exclusively for YouTube content
+                  partners.<br /><br />The <code dir="ltr" translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                  parameter indicates that the request's authorization credentials identify a YouTube CMS user who is
+                  acting on behalf of the content owner specified in the parameter value. This parameter is intended for
+                  YouTube content partners that own and manage many different YouTube channels. It allows content owners
+                  to authenticate once and get access to all their video and channel data, without having to provide
+                  authentication credentials for each individual channel. The CMS account that the user authenticates
+                  with must be linked to the specified YouTube content owner.</td>
+              </tr>
+              <tr id="onBehalfOfContentOwnerChannel">
+                <td><code dir="ltr" itemprop="property" translate="no">onBehalfOfContentOwnerChannel</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  This parameter can only be used in a properly <a href="/youtube/v3/guides/authentication">authorized
+                    request</a>. This parameter can only be used in a properly <a
+                    href="/youtube/v3/guides/authentication">authorized request</a>. <strong>Note:</strong> This
+                  parameter is intended exclusively for YouTube content partners.<br /><br />The <code dir="ltr"
+                    translate="no"><strong>onBehalfOfContentOwnerChannel</strong></code> parameter specifies the YouTube
+                  channel ID of the channel to which a video is being added. This parameter is required when a request
+                  specifies a value for the <code dir="ltr" translate="no">onBehalfOfContentOwner</code> parameter, and
+                  it can only be used in conjunction with that parameter. In addition, the request must be authorized
+                  using a CMS account that is linked to the content owner that the <code dir="ltr"
+                    translate="no">onBehalfOfContentOwner</code> parameter specifies. Finally, the channel that the
+                  <code dir="ltr" translate="no">onBehalfOfContentOwnerChannel</code> parameter value specifies must be
+                  linked to the content owner that the <code dir="ltr" translate="no">onBehalfOfContentOwner</code>
+                  parameter specifies.<br /><br />This parameter is intended for YouTube content partners that own and
+                  manage many different YouTube channels. It allows content owners to authenticate once and perform
+                  actions on behalf of the channel specified in the parameter value, without having to provide
+                  authentication credentials for each separate channel.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="request_body">
+          <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+          <p>Provide a <a href="/youtube/v3/docs/videos#resource">video resource</a> in the request body.
+            For that resource:
+          <ul>
+            <li>
+              <p>You can set values for these properties:</p>
+              <p>
+              <ul>
+                <li><code dir="ltr" translate="no">snippet.title</code></li>
+                <li><code dir="ltr" translate="no">snippet.description</code></li>
+                <li><code dir="ltr" translate="no">snippet.tags[]</code></li>
+                <li><code dir="ltr" translate="no">snippet.categoryId</code></li>
+                <li><code dir="ltr" translate="no">snippet.defaultLanguage</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key)</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key).title</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key).description</code></li>
+                <li><code dir="ltr" translate="no">status.embeddable</code></li>
+                <li><code dir="ltr" translate="no">status.license</code></li>
+                <li><code dir="ltr" translate="no">status.privacyStatus</code></li>
+                <li><code dir="ltr" translate="no">status.publicStatsViewable</code></li>
+                <li><code dir="ltr" translate="no">status.publishAt</code></li>
+                <li><code dir="ltr" translate="no">status.selfDeclaredMadeForKids</code></li>
+                <li><code dir="ltr" translate="no">status.containsSyntheticMedia</code></li>
+                <li><code dir="ltr" translate="no">recordingDetails.recordingDate</code></li>
+              </ul>
+              </p>
+            </li>
+          </ul>
+          </p>
+        </section>
+      </section>
+      <section id="response">
+        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+        <p>If successful, this method returns a <a href="/youtube/v3/docs/videos#resource">video resource</a> in the
+          response body.</p>
+      </section>
+      <section id="examples">
+        <h2 data-text="Examples" id="examples" tabindex="-1">Examples</h2>
+        <p class="note"><strong>Note:</strong> The following code samples may not represent all supported programming
+          languages. See the <a href="/youtube/v3/libraries">client libraries</a> documentation for a list of supported
+          languages.</p>
+        <div class="ds-selector-tabs" data-ds-scope="code-sample" id="code-sample">
+          <section>
+            <h3 data-text="Go" id="go" tabindex="-1">Go</h3>
+            This code sample calls the API's <code dir="ltr" translate="no">videos.insert</code> method to upload a
+            video to the channel
+            associated with the request.
+            <p>This example uses the <a href="https://github.com/google/google-api-go-client" target="_blank">Go client
+                library</a>.</p>
+            <div></div><devsite-code>
+              <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Go"
+                translate="no"><span class="devsite-syntax-kn">package</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">main</span>
+
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"flag"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"fmt"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"log"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"os"</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"strings"</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-s">"google.golang.org/api/youtube/v3"</span>
+<span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-kd">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">filename</span><span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">String</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"filename"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Name of video file to upload"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">title</span><span class="devsite-syntax-w">       </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">String</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"title"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Test Title"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Video title"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">description</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">String</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"description"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Test Description"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Video description"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">category</span><span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">String</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"category"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"22"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Video category"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">keywords</span><span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">String</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"keywords"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Comma separated list of video keywords"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">privacy</span><span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">String</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"privacy"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"unlisted"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Video privacy status"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-kd">func</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">main</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">flag</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Parse</span><span class="devsite-syntax-p">()</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">filename</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">==</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Fatalf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"You must provide a filename of a video file to upload"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getClient</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">YoutubeUploadScope</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">New</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">client</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">!=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">nil</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Fatalf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Error creating YouTube client: %v"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">upload</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span>&amp;<span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Video</span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">Snippet</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>&amp;<span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">VideoSnippet</span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">Title</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w">       </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">title</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">Description</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">description</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">			</span><span class="devsite-syntax-nx">CategoryId</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w">  </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">category</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">Status</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>&amp;<span class="devsite-syntax-nx">youtube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">VideoStatus</span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-nx">PrivacyStatus</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">privacy</span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-c1">// The API returns a 400 Bad Request response if tags is an empty string.</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">strings</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Trim</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">keywords</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">!=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">upload</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Tags</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">strings</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Split</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">keywords</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">","</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">service</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Videos</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Insert</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"snippet,status"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">upload</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">file</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">os</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Open</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">filename</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">defer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">file</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Close</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">!=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">nil</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">		</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Fatalf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Error opening %v: %v"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">*</span><span class="devsite-syntax-nx">filename</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">response</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">:=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">call</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Media</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">file</span><span class="devsite-syntax-p">).</span><span class="devsite-syntax-nx">Do</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">handleError</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">err</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">	</span><span class="devsite-syntax-nx">fmt</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Printf</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Upload successful! Video ID: %v\n"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">response</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">Id</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-p">}</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/go/upload_video.go" data-label="youtube/api-samples/go/upload_video.go" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/go/upload_video.go" target="_top"><span class="devsite-syntax-nx">upload_video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-k">go</span></a></div></pre>
+            </devsite-code>
+          </section>
+          <section>
+            <h3 data-text=".NET" id=".net" tabindex="-1">.NET</h3>
+            The following code sample calls the API's <code dir="ltr" translate="no">videos.insert</code> method to
+            upload a video to the channel
+            associated with the request.
+            <p>This example uses the <a href="/api-client-library/dotnet" target="_blank">.NET client library</a>.</p>
+            <div></div><devsite-code>
+              <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Objective-C"
+                translate="no"><span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">IO</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Reflection</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Threading</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">System</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Threading</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Tasks</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Auth</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">OAuth2</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Services</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Upload</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Util</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Store</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Data</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-n">namespace</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">YouTube</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Samples</span>
+<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-c1">/// &lt;summary&gt;</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-c1">/// YouTube Data API v3 sample: upload a video.</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-c1">/// Relies on the Google APIs Client Library for .NET, v1.7.0 or higher.</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-c1">/// See https://developers.google.com/api-client-library/dotnet/get_started</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-c1">/// &lt;/summary&gt;</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">internal</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">class</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">UploadVideo</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-n">STAThread</span><span class="devsite-syntax-p">]</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">static</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kt">void</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Main</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">string</span><span class="devsite-syntax-p">[]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">args</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"YouTube Data API: Upload Video"</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"=============================="</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">try</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">UploadVideo</span><span class="devsite-syntax-p">().</span><span class="devsite-syntax-n">Run</span><span class="devsite-syntax-p">().</span><span class="devsite-syntax-n">Wait</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">catch</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">AggregateException</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ex</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">foreach</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">ex</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">InnerExceptions</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Error: "</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">+</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Message</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Press any key to continue..."</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">ReadKey</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">private</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Task</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Run</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">UserCredential</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">credential</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">stream</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileStream</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"client_secrets.json"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileMode</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Open</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileAccess</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Read</span><span class="devsite-syntax-p">))</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">credential</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">GoogleWebAuthorizationBroker</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">AuthorizeAsync</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">GoogleClientSecrets</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Load</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">stream</span><span class="devsite-syntax-p">).</span><span class="devsite-syntax-n">Secrets</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-c1">// This OAuth 2.0 access scope allows an application to upload files to the</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-c1">// authenticated user's YouTube channel, but doesn't allow other types of access.</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">[]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTubeService</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Scope</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">YoutubeUpload</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-s">"user"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-n">CancellationToken</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">None</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtubeService</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">YouTubeService</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">BaseClientService</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Initializer</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">HttpClientInitializer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">credential</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">ApplicationName</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Assembly</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">GetExecutingAssembly</span><span class="devsite-syntax-p">().</span><span class="devsite-syntax-n">GetName</span><span class="devsite-syntax-p">().</span><span class="devsite-syntax-n">Name</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">});</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Video</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">VideoSnippet</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Title</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Default Video Title"</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Description</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Default Video Description"</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Tags</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">string</span><span class="devsite-syntax-p">[]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"tag1"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"tag2"</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">};</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Snippet</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">CategoryId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"22"</span><span class="devsite-syntax-p">;</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-c1">// See https://developers.google.com/youtube/v3/docs/videoCategories/list</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Status</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">VideoStatus</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Status</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">PrivacyStatus</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"unlisted"</span><span class="devsite-syntax-p">;</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-c1">// or "private" or "public"</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">filePath</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">@"REPLACE_ME.mp4"</span><span class="devsite-syntax-p">;</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-c1">// Replace with path to actual movie file.</span>
+
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">using</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">fileStream</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileStream</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">filePath</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">FileMode</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Open</span><span class="devsite-syntax-p">))</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">var</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videosInsertRequest</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtubeService</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Videos</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Insert</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"snippet,status"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">fileStream</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"video/*"</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">videosInsertRequest</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">ProgressChanged</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">+=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videosInsertRequest_ProgressChanged</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">videosInsertRequest</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">ResponseReceived</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">+=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videosInsertRequest_ResponseReceived</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-n">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videosInsertRequest</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">UploadAsync</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kt">void</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videosInsertRequest_ProgressChanged</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">Google</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Apis</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Upload</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">IUploadProgress</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">progress</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-k">switch</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">progress</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Status</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">UploadStatus</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-no">Uploading</span><span class="devsite-syntax-p">:</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"{0} bytes sent."</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">progress</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">BytesSent</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-k">break</span><span class="devsite-syntax-p">;</span>
+
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">case</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">UploadStatus</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-no">Failed</span><span class="devsite-syntax-p">:</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"An error prevented the upload from completing.</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-s">{0}"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">progress</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Exception</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-k">break</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kt">void</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">videosInsertRequest_ResponseReceived</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">Video</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-n">Console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">WriteLine</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s">"Video id '{0}' was successfully uploaded."</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">Id</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/dotnet/UploadVideo.cs" data-label="youtube/api-samples/dotnet/UploadVideo.cs" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/dotnet/UploadVideo.cs" target="_top"><span class="devsite-syntax-n">UploadVideo</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-n">cs</span></a></div></pre>
+            </devsite-code>
+          </section>
+          <section>
+            <h3 data-text="Ruby" id="ruby" tabindex="-1">Ruby</h3>
+            This sample calls the API's <code dir="ltr" translate="no">videos.insert</code> method to upload a video to
+            the channel
+            associated with the request.
+            <p>This example uses the <a href="/api-client-library/ruby" target="_blank">Ruby client library</a>.</p>
+            <div></div><devsite-code>
+              <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Ruby"
+                translate="no"><span class="devsite-syntax-ch">#!/usr/bin/ruby</span>
+
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'rubygems'</span>
+<span class="devsite-syntax-n">gem</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google-api-client'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'&gt;0.7'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client/client_secrets'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client/auth/file_storage'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'google/api_client/auth/installed_app'</span>
+<span class="devsite-syntax-nb">require</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'trollop'</span>
+
+<span class="devsite-syntax-c1"># A limited OAuth 2 access scope that allows for uploading files, but not other</span>
+<span class="devsite-syntax-c1"># types of account access.</span>
+<span class="devsite-syntax-no">YOUTUBE_UPLOAD_SCOPE</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'https://www.googleapis.com/auth/youtube.upload'</span>
+<span class="devsite-syntax-no">YOUTUBE_API_SERVICE_NAME</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'youtube'</span>
+<span class="devsite-syntax-no">YOUTUBE_API_VERSION</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'v3'</span>
+
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">get_authenticated_service</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-ss">:application_name</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-vg">$PROGRAM_NAME</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-ss">:application_version</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'1.0.0'</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">discovered_api</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-no">YOUTUBE_API_SERVICE_NAME</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">YOUTUBE_API_VERSION</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">file_storage</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">FileStorage</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-vg">$PROGRAM_NAME</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2">-oauth2.json"</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">file_storage</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorization</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">nil?</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">client_secrets</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">ClientSecrets</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">load</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">flow</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">InstalledAppFlow</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:client_id</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client_secrets</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">client_id</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:client_secret</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client_secrets</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">client_secret</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:scope</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-no">YOUTUBE_UPLOAD_SCOPE</span><span class="devsite-syntax-o">]</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorization</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">flow</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorize</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">file_storage</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">else</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorization</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">file_storage</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorization</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span>
+<span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">main</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Trollop</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-n">options</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">do</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">opt</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:file</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Video file to upload'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">String</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">opt</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:title</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Video title'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:default</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Test Title'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">String</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">opt</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:description</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Video description'</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-ss">:default</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Test Description'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">String</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">opt</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:category_id</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Numeric video category. See https://developers.google.com/youtube/v3/docs/videoCategories/list'</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-ss">:default</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">22</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:int</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">opt</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:keywords</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Video keywords, comma-separated'</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-ss">:default</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">''</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">String</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">opt</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:privacy_status</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'Video privacy status: public, private, or unlisted'</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">          </span><span class="devsite-syntax-ss">:default</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'public'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">String</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:file</span><span class="devsite-syntax-o">].</span><span class="devsite-syntax-n">nil?</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">or</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">not</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">File</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">file?</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:file</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-no">Trollop</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-n">die</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">:file</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'does not exist'</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">get_authenticated_service</span>
+
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">begin</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">body</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:snippet</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:title</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:title</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:description</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:description</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:tags</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:keywords</span><span class="devsite-syntax-o">].</span><span class="devsite-syntax-n">split</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">','</span><span class="devsite-syntax-p">),</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:categoryId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:category_id</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:status</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:privacyStatus</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:privacy_status</span><span class="devsite-syntax-o">]</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">videos_insert_response</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">execute!</span><span class="devsite-syntax-p">(</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:api_method</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">insert</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:body_object</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">body</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:media</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">UploadIO</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">new</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">opts</span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-ss">:file</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'video/*'</span><span class="devsite-syntax-p">),</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-ss">:parameters</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:uploadType</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'resumable'</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-ss">:part</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">body</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">keys</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">join</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">','</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-n">videos_insert_response</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">resumable_upload</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">send_all</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">client</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Video id '</span><span class="devsite-syntax-si">#{</span><span class="devsite-syntax-n">videos_insert_response</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">data</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">id</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-s2">' was successfully uploaded."</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">rescue</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-no">Google</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">APIClient</span><span class="devsite-syntax-o">::</span><span class="devsite-syntax-no">TransmissionError</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nb">puts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">result</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">body</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-k">end</span>
+<span class="devsite-syntax-k">end</span>
+
+<span class="devsite-syntax-n">main</span>
+<div class="devsite-github-link nocode no-select"><a class="gc-analytics-event" data-category="github_link" data-code-snippet="true" data-github-path="youtube/api-samples/ruby/upload_video.rb" data-label="youtube/api-samples/ruby/upload_video.rb" href="https://github.com/youtube/api-samples/blob/07263305b59a7c3275bc7e925f9ce6cabf774022/ruby/upload_video.rb" target="_top"><span class="devsite-syntax-n">upload_video</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">rb</span></a></div></pre>
+            </devsite-code>
+          </section>
+        </div>
+      </section>
+      <section id="errors">
+        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+        <p>The following table identifies error messages that the API could return in response to a call to this method.
+          Please see the <a href="/youtube/v3/docs/errors">error message</a> documentation for more detail.</p>
+        <table class="matchpre" id="property-table">
+          <thead>
+            <tr>
+              <th>Error type</th>
+              <th>Error detail</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="youtube.videos.insert-badRequest-defaultLanguageNotSet">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">defaultLanguageNotSet</code>
+              </td>
+              <td class="error-cause">The request is trying to add localized video details without specifying the
+                default language of the video details.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidCategoryId-resource.snippet.category_id">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidCategoryId</code></td>
+              <td class="error-cause">The <code dir="ltr" translate="no">snippet.categoryId</code> property specifies an
+                invalid category ID. Use the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/videoCategories/list">videoCategories.list</a></code> method
+                to retrieve supported categories.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidDescription-resource.snippet.description">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidDescription</code></td>
+              <td class="error-cause">The request metadata specifies an invalid video description.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidFilename-context.slug">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidFilename</code></td>
+              <td class="error-cause">The video filename specified in the <code dir="ltr" translate="no">Slug</code>
+                header is invalid.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidPublishAt-resource.status.publish_at">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidPublishAt</code></td>
+              <td class="error-cause">The request metadata specifies an invalid scheduled publishing time.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidRecordingDetails-resource.recording_details">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidRecordingDetails</code>
+              </td>
+              <td class="error-cause">The <code dir="ltr" translate="no">recordingDetails</code> object in the request
+                metadata specifies invalid recording details.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidTags-resource.snippet.tags">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidTags</code></td>
+              <td class="error-cause">The request metadata specifies invalid video keywords.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidTitle-resource.snippet.title">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidTitle</code></td>
+              <td class="error-cause">The request metadata specifies an invalid or empty video title.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidVideoGameRating-resource.age_gating.video_game_rating">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidVideoGameRating</code>
+              </td>
+              <td class="error-cause">The request metadata specifies an invalid video game rating.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-invalidVideoMetadata-resource">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidVideoMetadata</code>
+              </td>
+              <td class="error-cause">The request metadata is invalid.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-mediaBodyRequired">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">mediaBodyRequired</code></td>
+              <td class="error-cause">The request does not include the video content.</td>
+            </tr>
+            <tr id="youtube.videos.insert-badRequest-uploadLimitExceeded">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">uploadLimitExceeded</code>
+              </td>
+              <td class="error-cause">The user has exceeded the number of videos they may upload.</td>
+            </tr>
+            <tr id="youtube.videos.insert-forbidden-forbidden">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">forbidden</code></td>
+              <td class="error-cause"></td>
+            </tr>
+            <tr id="youtube.videos.insert-forbidden-forbiddenLicenseSetting">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">forbiddenLicenseSetting</code>
+              </td>
+              <td class="error-cause">The request attempts to set an invalid license for the video.</td>
+            </tr>
+            <tr id="youtube.videos.insert-forbidden-forbiddenPrivacySetting">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">forbiddenPrivacySetting</code>
+              </td>
+              <td class="error-cause">The request attempts to set an invalid privacy setting for the video.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="try-it">
+        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API request and response.
+        </p>
+        <div class="devsite-apix">
+          <div class="apis-explorer" data-default-scopes="https://www.googleapis.com/auth/youtube.upload"
+            data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+            data-method-id="youtube.videos.insert" data-show-code-button="true"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

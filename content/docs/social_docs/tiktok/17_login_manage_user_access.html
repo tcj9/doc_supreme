@@ -1,0 +1,90 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="manage_user_access_tokens_with_oauth_v2">Manage User Access Tokens with OAuth v2</h1>
+        <p style="text-align:left">TikTok Login Kit manages the token life cycle, allowing you to integrate login and
+            authentication flows directly in your application. A successful authorization flow grants you refreshable
+            access tokens. Those tokens enable you to perform endpoint access with user permissions.</p>
+        <h3 id="authorization_scopes">Authorization scopes</h3>
+        <p style="text-align:left">Most endpoints provided by TikTok for Developers require direct consent from TikTok
+            users before you can invoke them. The permissions are granted on a scope level. Users have the rights to
+            only agree to a subset of scopes you requested from them.</p>
+        <p style="text-align:left">The following are some example scopes:</p>
+        <ul class="list-1" type="disc">
+            <li><b>user.info</b><b>.basic</b> gives read-only access to a user's avatar and display name.</li>
+            <li><b>video.list</b> gives read-only access to a user's public TikTok videos.</li>
+        </ul>
+        <p style="text-align:left">Learn more about <a href="/doc/scopes-overview">scopes</a>.</p>
+        <h3 id="token_security">Token security</h3>
+        <p style="text-align:left">Tokens must be handled with caution. It is recommended that you store and manage all
+            tokens on the server side.</p>
+        <ul class="list-1" type="disc">
+            <li>Access token is a user authorization token that can be used to directly access user information in the
+                TikTok ecosystem.</li>
+            <li>Refresh token is used to renew the access token. </li>
+        </ul>
+        <h2 id="endpoints_for_web">Endpoints For Web</h2>
+        <p style="text-align:left">If you have already registered a redirect URI for your web app and use
+            <code>https://www.tiktok.com/v2/auth/authorize/</code> to authorize, please refer to the <style
+                data-emotion="css ap4ivw">
+                .css-ap4ivw {
+                    font-size: inherit;
+                    color: var(--ui-text-primary-display);
+                }
+
+                .css-ap4ivw *:hover {
+                    -webkit-text-decoration: none !important;
+                    text-decoration: none !important;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+            </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/doc/oauth-user-access-token-management"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">new generation user access token management API
+                    guide</span></a>.</p>
+        <p style="text-align:left">If you are an existing client, have not registered a redirect URI for your web app
+            and use <code>https://www.tiktok.com/auth/authorize/</code> to authorize, please refer to the <a
+                class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/doc/legacy-user-access-guide"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">legacy user access token management API guide</span></a>. To
+            register a redirect URI, go to the <a class="css-ap4ivw" color="var(--ui-text-primary-display)"
+                data-e2e="StyledLink" href="https://developers.tiktok.com/apps/"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">Manage apps</span></a> page of the TikTok for Developers
+            website and migrate to the new endpoints as soon as possible.</p>
+        <h2 id="endpoints_for_mobile">Endpoints for Mobile</h2>
+        <p style="text-align:left"><b>Preferred: </b>If you are using the new <a
+                href="/doc/mobile-sdk-android-quickstart">Android</a> or <a
+                href="/doc/mobile-sdk-ios-quickstart">iOS</a> TikTok OpenSDK, please refer to the new <a
+                href="/doc/oauth-user-access-token-management">user access token management guide</a>.</p>
+        <p style="text-align:left"><b>Legacy: </b>If you are using the old <a
+                href="/doc/mobile-sdk-android-quickstart">Android</a> or <a
+                href="/doc/mobile-sdk-ios-quickstart">iOS</a> TikTok OpenSDK, please refer to the <a
+                href="/doc/legacy-user-access-guide">legacy user access token management guide</a>.</p>
+        <h2 id="endpoints_for_desktop">Endpoints for Desktop</h2>
+        <p style="text-align:left">You must register a redirect URI for your desktop app and use
+            <code>https://www.tiktok.com/v2/auth/authorize/</code> to authorize. Please refer to the <a
+                href="/doc/oauth-user-access-token-management">new generation user access token management API guide</a>
+            to manage the user access token. </p><br />
+    </div>
+</div>

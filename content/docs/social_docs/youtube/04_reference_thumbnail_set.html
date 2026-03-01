@@ -1,0 +1,283 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Thumbnails: set<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="set" itemprop="name">
+                  <meta content="thumbnails" itemprop="path">
+                  <section id="overview">
+                        <p>Uploads a custom video thumbnail to YouTube and sets it for a video.</p>
+                        <p>This method supports media upload. Uploaded files must conform to these constraints:</p>
+                        <ul>
+                              <li><strong>Maximum file size:</strong> 2MB</li>
+                              <li><strong>Accepted Media MIME types:</strong> <code dir="ltr"
+                                          translate="no">image/jpeg</code>, <code dir="ltr"
+                                          translate="no">image/png</code>, <code dir="ltr"
+                                          translate="no">application/octet-stream</code></li>
+                        </ul>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of approximately 50 units.
+                        </p>
+                  </section>
+                  <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common
+                        use cases</h2>
+                  <style>
+                        iframe+section>h2 {
+                              margin-top: 12px;
+                        }
+                  </style>
+                  <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+                              allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+                              src="https://developers.google.com/frame/youtube/v3/docs/thumbnails/set_3ddcf6b80215167bed861aa7de5b5d72052d32ffa6564c449fcc7708c3eb996e.frame"></iframe></devsite-iframe>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">POST https://www.googleapis.com/upload/youtube/v3/thumbnails/set</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="auth_required">
+                              <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+                              <p>This request requires authorization with at least one of the following scopes (<a
+                                          href="/youtube/v3/guides/authentication">read more about authentication and
+                                          authorization</a>).</p>
+                              <table class="matchpre">
+                                    <thead>
+                                          <tr>
+                                                <th>Scope</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtubepartner</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube.upload</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The following table lists the parameters that this query supports. All of the
+                                    parameters listed are query parameters.</p>
+                              <table class="responsive details">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="required-parameters">
+                                                <td colspan="3"><b>Required parameters</b></td>
+                                          </tr>
+                                          <tr id="videoId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">videoId</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>videoId</strong></code>
+                                                      parameter specifies a YouTube video ID for which the custom video
+                                                      thumbnail is being provided.</td>
+                                          </tr>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="onBehalfOfContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">onBehalfOfContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      <strong>Note:</strong> This parameter is intended exclusively for
+                                                      YouTube content partners.<br /><br />The <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter indicates that the request's authorization credentials
+                                                      identify a YouTube CMS user who is acting on behalf of the content
+                                                      owner specified in the parameter value. This parameter is intended
+                                                      for YouTube content partners that own and manage many different
+                                                      YouTube channels. It allows content owners to authenticate once
+                                                      and get access to all their video and channel data, without having
+                                                      to provide authentication credentials for each individual channel.
+                                                      The actual CMS account that the user authenticates with must be
+                                                      linked to the specified YouTube content owner.
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>The body of the request contains the thumbnail image that you are uploading. The
+                                    request body does not contain a <code dir="ltr"
+                                          translate="no"><a href="/youtube/v3/docs/thumbnails#resource-representation">thumbnail</a></code>
+                                    resource.</p>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <section id="resource">
+                              <p>If successful, this method returns a response body with the following structure:</p>
+                              <div></div><devsite-code>
+                                    <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json"
+                                          is-upgraded="" style="max-height: 500px; overflow: auto" syntax="Objective-C">{
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#thumbnailSetResponse"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">etag</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"items"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">    </span><a class="resource-link" href="/youtube/v3/docs/thumbnails#resource" resource="thumbnails"><span class="devsite-syntax-n">thumbnail</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">resource</span></a>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">]</span>
+}</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="properties">
+                              <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                              <p>The following table defines the properties that appear in this resource:</p>
+                              <table class="responsive properties" id="property-table">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Properties</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr id="kind">
+                                                <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Identifies the API resource's type. The value will be <code
+                                                            dir="ltr"
+                                                            translate="no">youtube#thumbnailSetResponse</code>.</td>
+                                          </tr>
+                                          <tr id="etag">
+                                                <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                      The Etag of this resource.</td>
+                                          </tr>
+                                          <tr id="items[]">
+                                                <td><code dir="ltr" itemprop="property" translate="no">items[]</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">list</code><br />
+                                                      A list of thumbnails.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The following table identifies error messages that the API could return in response to a call
+                              to this method. Please see the <a href="/youtube/v3/docs/errors">error message</a>
+                              documentation for more detail.</p>
+                        <table class="matchpre" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th>Error type</th>
+                                          <th>Error detail</th>
+                                          <th>Description</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="youtube.thumbnails.set-badRequest-invalidImage">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">invalidImage</code></td>
+                                          <td class="error-cause">The provided image content is invalid.</td>
+                                    </tr>
+                                    <tr id="youtube.thumbnails.set-badRequest-mediaBodyRequired">
+                                          <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">mediaBodyRequired</code></td>
+                                          <td class="error-cause">The request does not include the image content.</td>
+                                    </tr>
+                                    <tr id="youtube.thumbnails.set-forbidden-forbidden">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">forbidden</code></td>
+                                          <td class="error-cause">The thumbnail can't be set for the specified video.
+                                                The request might not be properly authorized.</td>
+                                    </tr>
+                                    <tr id="youtube.thumbnails.set-forbidden-forbidden">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">forbidden</code></td>
+                                          <td class="error-cause">The authenticated user doesn't have permissions to
+                                                upload and set custom video thumbnails.</td>
+                                    </tr>
+                                    <tr id="youtube.thumbnails.set-notFound-videoNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">videoNotFound</code></td>
+                                          <td class="error-cause">The video that you are trying to insert a thumbnail
+                                                image for cannot be found. Check the value of the request's <code
+                                                      dir="ltr" translate="no">videoId</code> parameter to ensure that
+                                                it is correct.</td>
+                                    </tr>
+                                    <tr id="youtube.thumbnails.set-tooManyRequests-uploadRateLimitExceeded">
+                                          <td class="error-name"><code dir="ltr"
+                                                      translate="no">tooManyRequests (429)</code></td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">uploadRateLimitExceeded</code></td>
+                                          <td class="error-cause">The channel has uploaded too many thumbnails recently.
+                                                Please try the request again later.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  <section id="try-it">
+                        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                              request and response.</p>
+                        <div class="devsite-apix">
+                              <div class="apis-explorer"
+                                    data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+                                    data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                    data-method-id="youtube.thumbnails.set" data-show-code-button="true"></div>
+                        </div>
+                  </section>
+                  </meta>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>
