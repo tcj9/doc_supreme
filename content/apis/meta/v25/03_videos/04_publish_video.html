@@ -1,0 +1,196 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_/e">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Publishing</h1>
+              <p>The Video API allows you to publish <a href="/docs/graph-api/reference/video">Videos</a> and <a
+                  href="/docs/video-api/guides/reels-publishing">Reels</a> on <a
+                  href="/docs/graph-api/reference/page">Facebook Pages</a>.</p>
+              <h2>Requirements</h2>
+              <p>To publish a video on a Page you will need:</p>
+              <ul>
+                <li>A Page access token requested by a person who can perform the <code>CREATE_CONTENT</code> task on
+                  the Page</li>
+                <li>The person requesting the token must grant your app access to the following permissions via Facebook
+                  Login:
+
+                  <ul>
+                    <li><a href="/docs/permissions/reference/pages_show_list"><code>pages_show_list</code></a></li>
+                    <li><a
+                        href="/docs/permissions/reference/pages_read_engagement"><code>pages_read_engagement</code></a>
+                    </li>
+                    <li><a href="/docs/permissions/reference/pages_manage_posts"><code>pages_manage_posts</code></a>
+                    </li>
+                  </ul>
+                </li>
+                <li>A video handle
+
+                  <ul>
+                    <li>This handle is received when you upload your video file to Meta servers using the <a
+                        href="#upload-a-video-file">Resumable Upload API</a> </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Publish a video</h2>
+              <p>To publish a video send a <code>POST</code> request to the <code>/&lt;PAGE_ID&gt;/videos</code>
+                endpoint with</p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST \
+  "https://graph-video.facebook.com/<code>v24.0</code>/&lt;PAGE_ID&gt;/videos" \
+  -F "access_token=&lt;PAGE_ACCESS_TOKEN&gt;" \
+  -F "title=&lt;VIDEO_TITLE&gt;" \
+  -F "description=&lt;VIDEO_DESCRIPTION&gt;" \ 
+  -F "fbuploader_video_file_chunk=&lt;UPLOADED_FILE_HANDLE&gt;"
+</pre>
+              <p>On success, your app receives a JSON response with the Video ID.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id":"&lt;VIDEO_ID&gt;"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Upload a video file</h2>
+              <div class="_57yz _57z0 _3-8p">
+                <div class="_57y-">
+                  <p>The following content is from the <a
+                      href="https://developers.facebook.com/docs/graph-api/guides/upload/">Resumable Upload API
+                      documentation</a>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+              <div class="_4-u3 _588p">
+                <h1>Upload a file</h1>
+                <p>The Resumable Upload API allows you to upload large files to Meta's social graph and resume
+                  interrupted upload sessions without having to start over. Once you have uploaded your file, you can
+                  publish it.</p>
+                <p>References for endpoints that support uploaded file handles will indicate if the endpoints support
+                  handles returned by the Resumable Upload API.</p>
+                <h3>Before you start</h3>
+                <p>This guide assumes you have read the <a href="/docs/graph-api/overview">Graph API Overview</a> and
+                  the <a href="/docs/development">Meta Development</a> guides and performed the necessary actions needed
+                  to develop with Meta.</p>
+                <p>You will need:</p>
+                <ul>
+                  <li>A Meta app ID</li>
+                  <li>A file in one of the following formats:
+
+                    <ul>
+                      <li><code>pdf</code></li>
+                      <li><code>jpeg</code></li>
+                      <li><code>jpg</code></li>
+                      <li><code>png</code></li>
+                      <li><code>mp4</code></li>
+                    </ul>
+                  </li>
+                  <li>A User access token</li>
+                </ul>
+              </div>
+            </div>
+            <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+              <div class="_4-u3 _588p">
+                <h2 id="step-1">Step 1: Start an upload session</h2>
+                <p>To start an upload session send a <code>POST</code> request to the
+                  <code>/&lt;APP_ID&gt;/uploads</code> endpoint, where <code>&lt;APP_ID&gt;</code> is your app's Meta
+                  ID, with the following required parameters:
+                </p>
+                <ul>
+                  <li><code>file_name</code> - the name of your file</li>
+                  <li><code>file_length</code> - file size in bytes</li>
+                  <li><code>file_type</code> - The file's MIME type. Valid values are: <code>application/pdf</code>,
+                    <code>image/jpeg</code>, <code>image/jpg</code>, <code>image/png</code>, and <code>video/mp4</code>
+                  </li>
+                </ul>
+                <h4>Request Syntax</h4>
+                <p><em>Formatted for readability.</em></p>
+                <pre class="_5s-8 prettyprint lang-http" style="">
+curl -i -X POST "https://graph.facebook.com/<code>v24.0</code>/&lt;APP_ID&gt;/uploads
+  ?file_name=&lt;FILE_NAME&gt;
+  &amp;file_length=&lt;FILE_LENGTH&gt;
+  &amp;file_type=&lt;FILE_TYPE&gt;
+  &amp;access_token=&lt;USER_ACCESS_TOKEN&gt;"</pre>
+                <p>Upon success, your app will receive a JSON response with the upload session ID.</p>
+                <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id": "upload:&lt;UPLOAD_SESSION_ID&gt;"
+}</pre>
+              </div>
+            </div>
+            <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+              <div class="_4-u3 _588p">
+                <h2 id="step-2">Step 2: Start the upload</h2>
+                <p>Start uploading the file by sending a <code>POST</code> request to the
+                  <code>/upload:&lt;UPLOAD_SESSION_ID&gt;</code> endpoint with the following <code>file_offset</code>
+                  set to <code>0</code>.
+                </p>
+                <h4>Request Syntax</h4>
+                <pre class="_5s-8 prettyprint lang-html" style="">
+curl -i -X POST "https://graph.facebook.com/<code>v24.0</code>/upload:&lt;UPLOAD_SESSION_ID&gt;"
+  --header "Authorization: OAuth &lt;USER_ACCESS_TOKEN&gt;"
+  --header "file_offset: 0"
+  --data-binary @&lt;FILE_NAME&gt;
+</pre>
+                <p>You must include the access token in the header or the call will fail.</p>
+                <p>On success, your app receives the file handle which you will use in your API calls to publish the
+                  file to your endpoint.</p>
+                <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "h": "&lt;UPLOADED_FILE_HANDLE&gt;"
+}
+</pre>
+                <h4>Sample Response</h4>
+                <pre class="_5s-8 prettyprint lang-json" style="">
+{
+    "h": "2:c2FtcGxl..."
+}</pre>
+                <h3>Resume an interrupted upload</h3>
+                <p>If you have initiated an upload session but it is taking longer than expected or has been
+                  interrupted, send a <code>GET</code> request to the <code>/upload:&lt;UPLOAD_SESSION_ID&gt;</code>
+                  endpoint from <a href="#step-1">Step 1</a>.</p>
+                <pre class="_5s-8 prettyprint lang-html" style="">
+curl -i -X GET "https://graph.facebook.com/<code>v24.0</code>/upload:&lt;UPLOAD_SESSION_ID&gt;"
+  --header "Authorization: OAuth &lt;USER_ACCESS_TOKEN&gt;"</pre>
+                <p>Upon success, your app will receive a JSON response with the <code>file_offset</code> value that you
+                  can use to resume the upload process from the point of interruption.</p>
+                <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id": "upload:&lt;UPLOAD_SESSION_ID&gt;"
+  "file_offset": "&lt;FILE_OFFSET&gt;"
+}</pre>
+                <p>Send another <code>POST</code> request, like the you sent in <a href="#step-2">Step 2</a>, with
+                  <code>file_offset</code> set to this <code>file_offset</code> value you just received. This will
+                  resume the upload process from the point of interruption.
+                </p>
+                <pre class="_5s-8 prettyprint lang-html" style="">
+curl -i -X POST "https://graph.facebook.com/<code>v24.0</code>/upload:&lt;UPLOAD_SESSION_ID&gt;"
+  --header "Authorization: OAuth &lt;USER_ACCESS_TOKEN&gt;"
+  --header "file_offset: &lt;FILE_OFFSET&gt;"
+  --data-binary @&lt;FILE_NAME&gt;
+</pre>
+              </div>
+            </div>
+            <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+              <div class="_4-u3 _588p">
+                <h2>Next Steps</h2>
+                <ul>
+                  <li>Visit the <a href="https://developers.facebook.com/docs/video-api/guides/publishing">Video API
+                      documentation</a> to publish a video to a Facebook Page.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

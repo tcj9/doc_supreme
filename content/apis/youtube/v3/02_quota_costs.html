@@ -1,0 +1,409 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Quota Calculator<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>Every API request, even if invalid, will cost at least one quota point.</p>
+          </li>
+          <li>
+            <p>Retrieving multiple pages of results from a single method call, like <code>search.list</code>, incurs the
+              quota cost for each additional page request.</p>
+          </li>
+          <li>
+            <p>Methods from the YouTube Live Streaming API, being part of the YouTube Data API, will incur the same
+              quota costs as other methods.</p>
+          </li>
+          <li>
+            <p>The table shows that methods like <code>videos.insert</code> have the highest cost of 1600 points, while
+              several methods, such as <code>activities.list</code>, have the minimal cost of 1 point.</p>
+          </li>
+          <li>
+            <p>There are numerous methods that cost 50 points such as <code>captions.delete</code>,
+              <code>channels.update</code>, <code>comment.delete</code> and others.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <p>The following table shows the quota cost for calling each API method. All API requests, including invalid
+      requests, incur a quota cost of at least one point.</p>
+    <p>Projects that enable the YouTube Data API have a default quota allocation of 10,000 units per day, an amount
+      sufficient for the majority of our API users. You can see your quota usage on <a
+        href="https://console.cloud.google.com/iam-admin/quotas">Quotas </a> page in the Google API Console. Daily
+      quotas reset at midnight Pacific Time (PT).</p>
+    <p>The following two points are worth calling out as they both affect your quota usage:</p>
+    <ul>
+      <li>If your application calls a method, such as <code dir="ltr" translate="no">search.list</code>, that returns
+        multiple
+        pages of results, each request to retrieve an additional page of results incurs the estimated
+        quota cost.</li>
+      <li>
+        <a href="/youtube/v3/live">YouTube Live Streaming API</a> methods are, technically, part of the YouTube Data
+        API, and calls to
+        those methods also incur quota costs. As such, API methods for live streaming are also listed in
+        the table.
+      </li>
+    </ul>
+    <style>
+      .header {
+        font-weight: bold;
+      }
+
+      .quota-cost {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .no-bottom-border {
+        border-bottom: solid 1px #f1f3f4;
+      }
+    </style>
+    <table class="responsive details">
+      <thead>
+        <tr>
+          <th colspan="3">Quota costs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="header">resource</td>
+          <td class="header">method</td>
+          <td class="header" style="text-align: center;">cost</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="activities" id="activities" tabindex="-1">activities</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="captions" id="captions" tabindex="-1">captions</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>insert</td>
+          <td class="quota-cost">400</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>update</td>
+          <td class="quota-cost">450</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>delete</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="channelBanners" id="channelBanners" tabindex="-1">channelBanners</h3>
+          </td>
+          <td>insert</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="channels" id="channels" tabindex="-1">channels</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>update</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="channelSections" id="channelSections" tabindex="-1">channelSections</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>insert</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>update</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>delete</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="comments" id="comments" tabindex="-1">comments</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>insert</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>update</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>setModerationStatus</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>delete</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="commentThreads" id="commentThreads" tabindex="-1">commentThreads</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>insert</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>update</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="guideCategories" id="guideCategories" tabindex="-1">guideCategories</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="i18nLanguages" id="i18nLanguages" tabindex="-1">i18nLanguages</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="i18nRegions" id="i18nRegions" tabindex="-1">i18nRegions</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="members" id="members" tabindex="-1">members</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="membershipsLevels" id="membershipsLevels" tabindex="-1">membershipsLevels</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="playlistItems" id="playlistItems" tabindex="-1">playlistItems</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>insert</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>update</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>delete</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="playlists" id="playlists" tabindex="-1">playlists</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>insert</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>update</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>delete</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="search" id="videoCategories" tabindex="-1">search</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">100</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="subscriptions" id="subscriptions" tabindex="-1">subscriptions</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>insert</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>delete</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="thumbnails" id="thumbnails" tabindex="-1">thumbnails</h3>
+          </td>
+          <td>set</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="videoAbuseReportReasons" id="videoAbuseReportReasons" tabindex="-1">videoAbuseReportReasons
+            </h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td>
+            <h3 data-text="videoCategories" id="videoCategories" tabindex="-1">videoCategories</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="videos" id="videos" tabindex="-1">videos</h3>
+          </td>
+          <td>list</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>insert</td>
+          <td class="quota-cost">100</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>update</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>rate</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>getRating</td>
+          <td class="quota-cost">1</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border"> </td>
+          <td>reportAbuse</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>delete</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td class="no-bottom-border">
+            <h3 data-text="watermarks" id="watermarks" tabindex="-1">watermarks</h3>
+          </td>
+          <td>set</td>
+          <td class="quota-cost">50</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>unset</td>
+          <td class="quota-cost">50</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

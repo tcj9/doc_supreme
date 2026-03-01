@@ -1,0 +1,765 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    YouTube Data API Overview<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>The YouTube Data API v3 requires a Google Account, a project in the Google Developers Console, and
+              enablement of the API, with OAuth 2.0 for user authorization, and the option to use a client library.</p>
+          </li>
+          <li>
+            <p>The API provides access to various resource types such as activities, channels, playlists, videos, and
+              others, with supported operations including listing, inserting, updating, and deleting, depending on the
+              resource.</p>
+          </li>
+          <li>
+            <p>The API employs a quota system with default limits, different costs for different operations, and a
+              monitoring system, allowing for extensions by requesting them.</p>
+          </li>
+          <li>
+            <p>The <code>part</code> parameter is mandatory for retrieving resources and specifies which properties to
+              include, while the <code>fields</code> parameter further filters the response, reducing data transfer by
+              omitting unnecessary nested properties.</p>
+          </li>
+          <li>
+            <p>Performance optimizations include the use of ETags for caching and overwrite protection, and gzip
+              compression to reduce bandwidth usage.</p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <h2 data-text="Introduction" id="intro" tabindex="-1">Introduction</h2>
+    <p>This document is intended for developers who want to write applications that interact with YouTube. It explains
+      basic concepts of YouTube and of the API itself. It also provides an overview of the different functions that the
+      API supports.</p>
+    <h3 data-text="Before you start" id="before-you-start" tabindex="-1">Before you start</h3>
+    <ol>
+      <li>
+        <p>You need a <a href="https://www.google.com/accounts/NewAccount">Google Account</a> to access the Google API
+          Console, request an API key, and register your application.</p>
+      </li>
+      <li>
+        <p>Create a project in the <a href="https://console.developers.google.com">Google Developers Console</a> and <a
+            href="/youtube/registering_an_application">obtain authorization credentials</a> so your application can
+          submit API requests.</p>
+      </li>
+      <li>
+        <p>After creating your project, make sure the YouTube Data API is one of the services that your application is
+          registered to use:</p>
+        <p>
+        <ol>
+          <li>Go to the <a href="https://console.cloud.google.com/">API Console</a> and select the project that you just
+            registered.</li>
+          <li>
+
+
+
+
+
+
+
+
+
+
+            Visit the <a href="https://console.cloud.google.com/apis/enabled">Enabled APIs page</a>.
+
+
+
+
+
+
+            In the list of APIs, make sure the status is <b>ON</b> for the <b>YouTube Data API v3</b>.
+
+          </li>
+        </ol>
+        </p>
+      </li>
+      <li>
+        <p>If your application will use any API methods that require user authorization, read the <a
+            href="/youtube/v3/guides/authentication">authentication</a> guide to learn how to implement OAuth 2.0
+          authorization.</p>
+      </li>
+      <li>
+        <p>Select a <a href="/youtube/v3/libraries">client library</a> to simplify your API implementation.</p>
+      </li>
+      <li>
+        <p>Familiarize yourself with the core concepts of the JSON (JavaScript Object Notation) data format. JSON is a
+          common, language-independent data format that provides a simple text representation of arbitrary data
+          structures. For more information, see <a href="http://json.org">json.org</a>.</p>
+      </li>
+    </ol>
+    <h2 data-text="Resources and resource types" id="resources" tabindex="-1">Resources and resource types</h2>
+    <p>A resource is an individual data entity with a unique identifier. The table below describes the different types
+      of resources that you can interact with using the API.</p>
+    <table class="responsive">
+      <tr>
+        <th colspan="2">Resources</th>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">activity</code></td>
+        <td>Contains information about an action that a particular user has taken on the YouTube site. User actions that
+          are reported in activity feeds include rating a video, sharing a video, marking a video as a favorite, and
+          posting a channel bulletin, among others.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">channel</code></td>
+        <td>Contains information about a single YouTube channel.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">channelBanner</code></td>
+        <td>Identifies the URL to use to set a newly uploaded image as the banner image for a channel.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">channelSection</code></td>
+        <td>Contains information about a set of videos that a channel has chosen to feature. For example, a section
+          could feature a channel's latest uploads, most popular uploads, or videos from one or more playlists.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">guideCategory</code></td>
+        <td>Identifies a category that YouTube associates with channels based on their content or other indicators, such
+          as popularity. Guide categories seek to organize channels in a way that makes it easier for YouTube users to
+          find the content they're looking for. While channels could be associated with one or more guide categories,
+          they are not guaranteed to be in any guide categories.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">i18nLanguage</code></td>
+        <td>Identifies an application language that the YouTube website supports. The application language can also be
+          referred to as a UI language.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">i18nRegion</code></td>
+        <td>Identifies a geographic area that a YouTube user can select as the preferred content region. The content
+          region can also be referred to as a content locale.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">playlist</code></td>
+        <td>Represents a single YouTube playlist. A playlist is a collection of videos that can be viewed sequentially
+          and shared with other users.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">playlistItem</code></td>
+        <td>Identifies a resource, such as a video, that is part of a playlist. The playlistItem resource also contains
+          details that explain how the included resource is used in the playlist.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">search result</code></td>
+        <td>Contains information about a YouTube video, channel, or playlist that matches the search parameters
+          specified in an API request. While a search result points to a uniquely identifiable resource, like a video,
+          it does not have its own persistent data.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">subscription</code></td>
+        <td>Contains information about a YouTube user subscription. A subscription notifies a user when new videos are
+          added to a channel or when another user takes one of several actions on YouTube, such as uploading a video,
+          rating a video, or commenting on a video.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">thumbnail</code></td>
+        <td>Identifies thumbnail images associated with a resource.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">video</code></td>
+        <td>Represents a single YouTube video.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">videoCategory</code></td>
+        <td>Identifies a category that has been or could be associated with uploaded videos.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">watermark</code></td>
+        <td>Identifies an image that displays during playbacks of a specified channel's videos. The channel owner can
+          also specify a target channel to which the image links as well as timing details that determine when the
+          watermark appears during video playbacks and then length of time it is visible.</td>
+      </tr>
+    </table>
+    <p>Note that, in many cases, a resource contains references to other resources. For example, a <code dir="ltr"
+        translate="no">playlistItem</code> resource's <code dir="ltr" translate="no">snippet.resourceId.videoId</code>
+      property identifies a video resource that, in turn, contains complete information about the video. As another
+      example, a search result contains either a <code dir="ltr" translate="no">videoId</code>, <code dir="ltr"
+        translate="no">playlistId</code>, or <code dir="ltr" translate="no">channelId</code> property that identifies a
+      particular video, playlist, or channel resource.</p>
+    <h3 data-text="Supported operations" id="supported-operations" tabindex="-1">Supported operations</h3>
+    <p>The following table shows the most common methods that the API supports. Some resources also support other
+      methods that perform functions more specific to those resources. For example, the <code dir="ltr"
+        translate="no">videos.rate</code> method associates a user rating with a video, and the <code dir="ltr"
+        translate="no">thumbnails.set</code> method uploads a video thumbnail image to YouTube and associates it with a
+      video.</p>
+    <table class="responsive">
+      <tr>
+        <th colspan="2">Operations</th>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">list</code></td>
+        <td>Retrieves (<code dir="ltr" translate="no">GET</code>) a list of zero or more resources.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">insert</code></td>
+        <td>Creates (<code dir="ltr" translate="no">POST</code>) a new resource.</td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">update</code></td>
+        <td>Modifies (<code dir="ltr" translate="no">PUT</code>) an existing resource to reflect data in your request.
+        </td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no">delete</code></td>
+        <td>Removes (<code dir="ltr" translate="no">DELETE</code>) a specific resource.</td>
+      </tr>
+    </table>
+    <p>The API currently supports methods to list each of the supported resource types, and it supports write operations
+      for many resources as well.</p>
+    <p>The table below identifies the operations that are supported for different types of resources. Operations that
+      insert, update, or delete resources always require <a href="/youtube/v3/guides/authentication">user
+        authorization</a>. In some cases, <code dir="ltr" translate="no">list</code> methods support both authorized and
+      unauthorized requests, where unauthorized requests only retrieve public data while authorized requests can also
+      retrieve information about or private to the currently authenticated user.</p>
+    <table wborder="1">
+      <thead>
+        <th colspan="5">Supported Operations</th>
+      </thead>
+      <tr>
+        <td></td>
+        <td><strong><span class="apimethod notranslate">list</span></strong></td>
+        <td><strong><span class="apimethod notranslate">insert</span></strong></td>
+        <td><strong><span class="apimethod notranslate">update</span></strong></td>
+        <td><strong><span class="apimethod notranslate">delete</span></strong></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>activity</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>caption</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>channel</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>channelBanner</strong></code></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>channelSection</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>comment</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>commentThread</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>guideCategory</strong></code></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>i18nLanguage</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>i18nRegion</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>playlist</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>playlistItem</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>search result</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>subscription</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>thumbnail</strong></code></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>video</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-yes"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>videoCategory</strong></code></td>
+        <td><span class="compare-yes"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+      <tr>
+        <td><code dir="ltr" translate="no"><strong>watermark</strong></code></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+        <td><span class="compare-no"></span></td>
+      </tr>
+    </table>
+    <h2 data-text="Quota usage" id="quota" tabindex="-1">Quota usage</h2>
+    <p>The <span class="notranslate">YouTube Data API</span> uses a quota to ensure that developers use the service as
+      intended and do not create applications that unfairly reduce service quality or limit access for others. All API
+      requests, including invalid requests, incur at least a one-point quota cost. You can find the quota available to
+      your application in the <a class="notranslate" href="https://console.cloud.google.com/">API Console</a>.</p>
+    <p>Projects that enable the YouTube Data API have a default quota allocation of 10,000 units per day, an amount
+      sufficient for the overwhelming majority of our API users. Default quota, which is subject to change, helps us
+      optimize quota allocations and scale our infrastructure in a way that is more meaningful to our API users. You can
+      see your quota usage on the <a href="https://console.developers.google.com/iam-admin/quotas">Quotas</a> page in
+      the API Console.</p>
+    <p class="special"><b>Note:</b> If you reach the quota limit, you can request additional quota by
+      completing the <a href="https://support.google.com/youtube/contact/yt_api_form">Quota extension
+        request form</a> for YouTube API Services.</p>
+    <h3 data-text="Calculating quota usage" id="calculating-quota-usage" tabindex="-1">Calculating quota usage</h3>
+    <p>Google calculates your quota usage by assigning a cost to each request. Different types of
+      operations have different quota costs. For example:</p>
+    <ul>
+      <li>A read operation that retrieves a list of resources -- channels, videos, playlists -- usually
+        costs 1 unit.</li>
+      <li>A write operation that creates, updates, or deletes a resource usually has costs
+        <code dir="ltr" translate="no">50</code> units.
+      </li>
+      <li>A search request costs <code dir="ltr" translate="no">100</code> units.</li>
+      <li>A video upload costs <code dir="ltr" translate="no">100</code> units.</li>
+    </ul>
+    <p>The <a href="/youtube/v3/determine_quota_cost">Quota costs for API requests</a> table shows the
+      quota cost of each API method. With these rules in mind, you can estimate the number of requests
+      that your application could send per day without exceeding your quota.</p>
+    <h2 data-text="Partial resources" id="partial" tabindex="-1">Partial resources</h2>
+    <p>The API allows, and actually requires, the retrieval of partial resources so that applications avoid
+      transferring, parsing, and storing unneeded data. This approach also ensures that the API uses network, <span
+        class="notranslate">CPU</span>, and memory resources more efficiently.</p>
+    <p>The API supports two request parameters, which are explained in the following sections, that enable you to
+      identify the resource properties that should be included in API responses.</p>
+    <p>
+    <ul>
+      <li>The <code dir="ltr" translate="no"><a href="#part">part</a></code> parameter identifies groups of properties
+        that should be returned for a resource.</li>
+      <li>The <code dir="ltr" translate="no"><a href="#fields">fields</a></code> parameter filters the API response to
+        only return specific properties within the requested resource parts.</li>
+    </ul>
+    </p>
+    <h3 data-text="How to use the part parameter" id="part" tabindex="-1">How to use the <code dir="ltr"
+        translate="no">part</code> parameter</h3>
+    <p>The <code dir="ltr" translate="no">part</code> parameter is a required parameter for any API request that
+      retrieves or returns a resource. The parameter identifies one or more top-level (non-nested) resource properties
+      that should be included in an API response. For example, a <code dir="ltr"
+        translate="no"><a href="/youtube/v3/docs/videos#resource">video</a></code> resource has the following parts:</p>
+    <ul style="list-style-type:none">
+      <li><code dir="ltr" translate="no">snippet</code></li>
+      <li><code dir="ltr" translate="no">contentDetails</code></li>
+      <li><code dir="ltr" translate="no">fileDetails</code></li>
+      <li><code dir="ltr" translate="no">player</code></li>
+      <li><code dir="ltr" translate="no">processingDetails</code></li>
+      <li><code dir="ltr" translate="no">recordingDetails</code></li>
+      <li><code dir="ltr" translate="no">statistics</code></li>
+      <li><code dir="ltr" translate="no">status</code></li>
+      <li><code dir="ltr" translate="no">suggestions</code></li>
+      <li><code dir="ltr" translate="no">topicDetails</code></li>
+    </ul>
+    <p>All of these parts are objects that contain nested properties, and you can think of these objects as groups of
+      metadata fields that the API server might (or might not) retrieve. As such, the <code dir="ltr"
+        translate="no">part</code> parameter requires you to select the resource components that your application
+      actually uses. This requirement serves two key purposes:</p>
+    <ul>
+      <li>It reduces latency by preventing the API server from spending time retrieving metadata fields that your
+        application doesn't use.</li>
+      <li>It reduces bandwidth usage by reducing (or eliminating) the amount of unnecessary data that your application
+        might retrieve.</li>
+    </ul>
+    <p>Over time, as resources add more parts, these benefits will only increase since your application will not be
+      requesting newly introduced properties that it doesn't support.</p>
+    <h3 data-text="How to use the fields parameter" id="fields" tabindex="-1">How to use the <code dir="ltr"
+        translate="no">fields</code> parameter</h3>
+    <p>The <code dir="ltr" translate="no">fields</code> parameter filters the API response, which only contains the
+      resource parts identified in the <code dir="ltr" translate="no">part</code> parameter value, so that the response
+      only includes a specific set of fields. The <code dir="ltr" translate="no">fields</code> parameter lets you remove
+      nested properties from an API response and thereby further reduce your bandwidth usage. (The <code dir="ltr"
+        translate="no">part</code> parameter cannot be used to filter nested properties from a response.)</p>
+    <p>The following rules explain the supported syntax for the <code dir="ltr" translate="no">fields</code> parameter
+      value, which is loosely based on <span class="notranslate">XPath</span> syntax:</p>
+    <p>
+    <ul>
+      <li>Use a comma-separated list (<code dir="ltr" translate="no">fields=a,b</code>) to select multiple fields.</li>
+      <li>Use an asterisk (<code dir="ltr" translate="no">fields=*</code>) as a wildcard to identify all fields.</li>
+      <li>Use parentheses (<code dir="ltr" translate="no">fields=a(b,c)</code>) to specify a group of nested properties
+        that will be included in the API response.</li>
+      <li>Use a forward slash (<code dir="ltr" translate="no">fields=a/b</code>) to identify a nested property.</li>
+    </ul>
+    </p>
+    <p>In practice, these rules often allow several different <code dir="ltr" translate="no">fields</code> parameter
+      values to retrieve the same API response. For example, if you want to retrieve the playlist item ID, title, and
+      position for every item in a playlist, you could use any of the following values:</p>
+    <p>
+    <ul>
+      <li><code dir="ltr"
+          translate="no">fields=items/id,playlistItems/snippet/title,playlistItems/snippet/position</code></li>
+      <li><code dir="ltr" translate="no">fields=items(id,snippet/title,snippet/position)</code></li>
+      <li><code dir="ltr" translate="no">fields=items(id,snippet(title,position))</code></li>
+    </ul>
+    </p>
+    <p class="note"><strong>Note:</strong> As with all query parameter values, the <code dir="ltr"
+        translate="no">fields</code> parameter value must be URL encoded. For better readability, the examples in this
+      document omit the encoding.</p>
+    <h3 data-text="Sample partial requests" id="Sample_Partial_Requests" tabindex="-1">Sample partial requests</h3>
+    <p>The examples below demonstrate how you can use the <code dir="ltr" translate="no">part</code> and <code dir="ltr"
+        translate="no">fields</code> parameters to ensure that API responses only include the data that your application
+      uses:</p>
+    <ol>
+      <li>Example 1 returns a video resource that includes four parts as well as <code dir="ltr"
+          translate="no">kind</code> and <code dir="ltr" translate="no">etag</code> properties.</li>
+      <li>Example 2 returns a video resource that includes two parts as well as <code dir="ltr"
+          translate="no">kind</code> and <code dir="ltr" translate="no">etag</code> properties.</li>
+      <li>Example 3 returns a video resource that includes two parts but excludes <code dir="ltr"
+          translate="no">kind</code> and <code dir="ltr" translate="no">etag</code> properties.</li>
+      <li>Example 4 returns a video resource that includes two parts but excludes <code dir="ltr"
+          translate="no">kind</code> and <code dir="ltr" translate="no">etag</code> as well as some nested properties in
+        the resource's <code dir="ltr" translate="no">snippet</code> object.</li>
+    </ol>
+    <section class="kd-tabbed-horz" id="partial-examples">
+      <article class="selected">
+        <header>Example 1</header>
+        <div></div><devsite-code>
+          <pre class="devsite-click-to-copy devsite-code-highlight" dir="ltr" is-upgraded="" syntax="Protocol Buffer"
+            translate="no"><strong><span class="devsite-syntax-n">URL</span><span class="devsite-syntax-o">:</span></strong><span class="devsite-syntax-w"> </span><span class="notranslate"><span class="devsite-syntax-n">https</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-c1">//www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&amp;key=<span class="replaceable-credential"><var translate="no">YOUR_API_KEY</var></span><br/>     ∂=snippet,contentDetails,statistics,status</span></span>
+
+<strong><span class="devsite-syntax-n">Description</span><span class="devsite-syntax-o">:</span></strong><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">This</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">example</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">retrieves</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">a</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">video</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">resource</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">and</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">identifies</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">several</span>
+<span class="devsite-syntax-w">             </span><span class="devsite-syntax-n">resource</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">parts</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">that</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">should</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">be</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">included</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response.</span>
+
+<strong><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response</span><span class="devsite-syntax-o">:</span></strong>
+<div class="notranslate">
+<span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#videoListResponse"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"\"</span><span class="devsite-syntax-n">UCBpFjp2h75_b92t44sqraUcyu0</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">sDAlsG9NGKfr6v5AlPZKSEZdtqA</span><span class="devsite-syntax-err">\</span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"videos"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"id"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"7lCDEYXw3mM"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#video"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"\"</span><span class="devsite-syntax-n">UCBpFjp2h75_b92t44sqraUcyu0</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">iYynQR8AtacsFUwWmrVaw4Smb_Q</span><span class="devsite-syntax-err">\</span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"snippet"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"publishedAt"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"2012-06-20T22:45:24.000Z"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"channelId"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"UC_x5XG1OV2P6uZZ5FSM9Ttw"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"title"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Google I/O 101: Q&amp;A On Using Google APIs"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"description"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Antonio Fuentes speaks to us and takes questions on working with Google APIs and OAuth 2.0."</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"thumbnails"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"default"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/default.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"medium"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/mqdefault.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"high"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/hqdefault.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"categoryId"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"28"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"contentDetails"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"duration"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"PT15M51S"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"aspectRatio"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"RATIO_16_9"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"statistics"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"viewCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"3057"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"likeCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"25"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"dislikeCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"0"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"favoriteCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"17"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"commentCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"12"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"status"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"uploadStatus"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"STATUS_PROCESSED"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"privacyStatus"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"PRIVACY_PUBLIC"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">]</span>
+<span class="devsite-syntax-p">}</span></div></pre>
+        </devsite-code>
+      </article>
+      <article>
+        <header>Example 2</header>
+        <div></div><devsite-code>
+          <pre class="devsite-click-to-copy devsite-code-highlight" dir="ltr" is-upgraded="" syntax="Protocol Buffer"
+            translate="no"><strong><span class="devsite-syntax-n">URL</span><span class="devsite-syntax-o">:</span></strong><span class="devsite-syntax-w"> </span><span class="notranslate"><span class="devsite-syntax-n">https</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-c1">//www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&amp;key=<span class="replaceable-credential"><var translate="no">YOUR_API_KEY</var></span><br/>     ∂=snippet,statistics</span></span>
+
+<strong><span class="devsite-syntax-n">Description</span><span class="devsite-syntax-o">:</span></strong><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">This</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">example</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">modifies</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">part</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">parameter</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">value</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">so</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">that</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span>
+<span class="devsite-syntax-w">             </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">contentDetails</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">and</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">status</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">properties</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">are</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">not</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">included</span>
+<span class="devsite-syntax-w">             </span><span class="devsite-syntax-n">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response.</span>
+
+<strong><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response</span><span class="devsite-syntax-o">:</span></strong>
+<div class="notranslate">
+<span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#videoListResponse"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"\"</span><span class="devsite-syntax-n">UCBpFjp2h75_b92t44sqraUcyu0</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">sDAlsG9NGKfr6v5AlPZKSEZdtqA</span><span class="devsite-syntax-err">\</span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"videos"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"id"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"7lCDEYXw3mM"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#video"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"\"</span><span class="devsite-syntax-n">UCBpFjp2h75_b92t44sqraUcyu0</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">iYynQR8AtacsFUwWmrVaw4Smb_Q</span><span class="devsite-syntax-err">\</span><span class="devsite-syntax-s">""</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"snippet"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"publishedAt"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"2012-06-20T22:45:24.000Z"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"channelId"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"UC_x5XG1OV2P6uZZ5FSM9Ttw"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"title"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Google I/O 101: Q&amp;A On Using Google APIs"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"description"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Antonio Fuentes speaks to us and takes questions on working with Google APIs and OAuth 2.0."</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"thumbnails"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"default"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/default.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"medium"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/mqdefault.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"high"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/hqdefault.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"categoryId"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"28"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"statistics"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"viewCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"3057"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"likeCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"25"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"dislikeCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"0"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"favoriteCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"17"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"commentCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"12"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">]</span>
+<span class="devsite-syntax-p">}</span></div></pre>
+        </devsite-code>
+      </article>
+      <article>
+        <header>Example 3</header>
+        <div></div><devsite-code>
+          <pre class="devsite-click-to-copy devsite-code-highlight" dir="ltr" is-upgraded="" syntax="Protocol Buffer"
+            translate="no"><strong><span class="devsite-syntax-n">URL</span><span class="devsite-syntax-o">:</span></strong><span class="devsite-syntax-w"> </span><span class="notranslate"><span class="devsite-syntax-n">https</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-c1">//www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&amp;key=<span class="replaceable-credential"><var translate="no">YOUR_API_KEY</var></span><br/>     ∂=snippet,statistics&amp;fields=items(id,snippet,statistics)</span></span>
+
+<strong><span class="devsite-syntax-n">Description</span><span class="devsite-syntax-o">:</span></strong><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">This</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">example</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">adds</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">fields</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">parameter</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">to</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">remove</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">all</span>
+<span class="devsite-syntax-w">             </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">kind</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">and</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">etag</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">properties</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response.</span>
+
+<strong><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response</span><span class="devsite-syntax-o">:</span></strong>
+<div class="notranslate">
+<span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"videos"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"id"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"7lCDEYXw3mM"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"snippet"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"publishedAt"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"2012-06-20T22:45:24.000Z"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"channelId"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"UC_x5XG1OV2P6uZZ5FSM9Ttw"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"title"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Google I/O 101: Q&amp;A On Using Google APIs"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"description"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Antonio Fuentes speaks to us and takes questions on working with Google APIs and OAuth 2.0."</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"thumbnails"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"default"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/default.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"medium"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/mqdefault.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-s">"high"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://i.ytimg.com/vi/7lCDEYXw3mM/hqdefault.jpg"</span>
+<span class="devsite-syntax-w">     </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"categoryId"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"28"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"statistics"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"viewCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"3057"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"likeCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"25"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"dislikeCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"0"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"favoriteCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"17"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"commentCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"12"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">]</span>
+<span class="devsite-syntax-p">}</span></div></pre>
+        </devsite-code>
+      </article>
+      <article>
+        <header>Example 4</header>
+        <div></div><devsite-code>
+          <pre class="devsite-click-to-copy devsite-code-highlight" dir="ltr" is-upgraded="" syntax="Protocol Buffer"
+            translate="no"><strong><span class="devsite-syntax-n">URL</span><span class="devsite-syntax-o">:</span></strong><span class="devsite-syntax-w"> </span><span class="notranslate"><span class="devsite-syntax-n">https</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-c1">//www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&amp;key=<span class="replaceable-credential"><var translate="no">YOUR_API_KEY</var></span><br/>     &amp;fields=items(id,snippet(channelId,title,categoryId),statistics)∂=snippet,statistics</span></span>
+
+<strong><span class="devsite-syntax-n">Description</span><span class="devsite-syntax-o">:</span></strong><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">This</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">example</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">modifies</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">fields</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">parameter</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">example</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">3</span>
+<span class="devsite-syntax-w">             </span><span class="devsite-syntax-n">so</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">that</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">in</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">each</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">video</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">resource</span><span class="devsite-syntax-err">'</span><span class="devsite-syntax-n">s</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">snippet</span></code>
+<span class="devsite-syntax-w">             </span><span class="devsite-syntax-n">object</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">only</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">includes</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">the</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">channelId</span></code><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">title</span></code><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">             </span><span class="devsite-syntax-n">and</span><span class="devsite-syntax-w"> </span><code dir="ltr" translate="no"><span class="devsite-syntax-n">categoryId</span></code><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">properties.</span>
+
+<strong><span class="devsite-syntax-n">API</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">response</span><span class="devsite-syntax-o">:</span></strong>
+<div class="notranslate">
+<span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"videos"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"id"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"7lCDEYXw3mM"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"snippet"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-w"> </span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"channelId"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"UC_x5XG1OV2P6uZZ5FSM9Ttw"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"title"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"Google I/O 101: Q&amp;A On Using Google APIs"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"categoryId"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"28"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-s">"statistics"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"viewCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"3057"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"likeCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"25"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"dislikeCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"0"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"favoriteCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"17"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"commentCount"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"12"</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">]</span>
+<span class="devsite-syntax-p">}</span></div></pre>
+        </devsite-code>
+      </article>
+    </section>
+    <h2 data-text="Optimizing performance" id="performance" tabindex="-1">Optimizing performance</h2>
+    <section>
+      <h3 data-text="Using ETags" id="etags" tabindex="-1">Using ETags</h3>
+      <p><span class="notranslate">ETags</span>, a standard part of the <a
+          href="https://www.rfc-editor.org/rfc/rfc9110.html#name-etag">HTTP protocol</a>, allow applications to refer to
+        a specific version of a particular API resource. The resource could be an entire feed or an item in that feed.
+        This functionality supports the following use cases:</p>
+      <ul>
+        <li>
+          <p><strong>Caching and conditional retrieval</strong> – Your application can cache API resources and their
+            ETags. Then, when your application requests a stored resource again, it specifies the ETag associated with
+            that resource. If the resource has changed, the API returns the modified resource and the ETag associated
+            with that version of the resource. If the resource has not changed, the API returns an HTTP 304 response
+            (<code dir="ltr" translate="no">Not Modified</code>), which indicates that the resource has not changed.
+            Your application can reduce latency and bandwidth usage by serving cached resources in this manner.</p>
+          <p>The client libraries for Google APIs differ in their support of ETags. For example, the JavaScript client
+            library supports ETags via a whitelist for allowed request headers that includes <code dir="ltr"
+              translate="no">If-Match</code> and <code dir="ltr" translate="no">If-None-Match</code>. The whitelist
+            allows normal browser caching to occur so that if a resource's ETag has not changed, the resource can be
+            served from the browser cache. The Obj-C client, on the other hand, does not support ETags.</p>
+        </li>
+        <li>
+          <p><strong>Protecting against inadvertent overwrites of changes</strong> – ETags help to ensure that multiple
+            API clients don't inadvertently overwrite each other's changes. When updating or deleting a resource, your
+            application can specify the resource's ETag. If the ETag doesn't match the most recent version of that
+            resource, then the API request fails.</p>
+        </li>
+      </ul>
+      <p>Using ETags in your application provides several benefits:</p>
+      <ul>
+        <li>The API responds more quickly to requests for cached but unchanged resources, yielding lower latency and
+          lower bandwidth usage.</li>
+        <li>Your application will not inadvertently overwrite changes to a resource that were made from another API
+          client.</li>
+      </ul>
+      <p>The <a class="notranslate" href="/api-client-library/javascript/start/start-js">Google APIs Client Library for
+          JavaScript</a> supports <code dir="ltr" translate="no">If-Match</code> and <code dir="ltr"
+          translate="no">If-None-Match</code> HTTP request headers, thereby enabling ETags to work within the context of
+        normal browser caching.</p>
+    </section>
+    <section>
+      <h3 data-text="Using gzip" id="gzip" tabindex="-1">Using gzip</h3>
+      <p>You can also reduce the bandwidth needed for each API response by enabling gzip compression. While your
+        application will need additional CPU time to uncompress API responses, the benefit of consuming fewer network
+        resources usually outweighs that cost.</p>
+      <p>To receive a gzip-encoded response you must do two things:</p>
+      <p>
+      <ul>
+        <li>Set the <code dir="ltr" translate="no">Accept-Encoding</code> HTTP request header to <code dir="ltr"
+            translate="no">gzip</code>.</li>
+        <li>Modify your user agent to contain the string <code dir="ltr" translate="no">gzip</code>.</li>
+      </ul>
+      </p>
+      <p>The sample HTTP headers below demonstrate these requirements for enabling gzip compression:</p>
+      <div></div><devsite-code>
+        <pre class="notranslate" dir="ltr" is-upgraded="">Accept-Encoding: gzip
+User-Agent: my program (gzip)
+</pre>
+      </devsite-code>
+    </section>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

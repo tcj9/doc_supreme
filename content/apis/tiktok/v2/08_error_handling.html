@@ -1,0 +1,184 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="error_handling">Error Handling</h1>
+        <p style="text-align:left">Starting with TikTok API 2.0, error responses include error codes represented as
+            readable strings with detailed error messages and a log ID. When contacting TikTok support team, these
+            details must be provided.</p>
+        <h3 id="error_struct">Error Struct</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">code</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The error category in string</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">message</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The detailed error description</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">log_id</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The unique id associated with every request for debugging purporse</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="all_error_codes">All Error Codes</h3>
+        <p style="text-align:left">The following list provides v2 error codes, their corresponding HTTP status codes,
+            and a description of the error including guidance on how to handle the issue. Error codes are sorted
+            alphabetically.</p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Error code</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description </b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>HTTP status code</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">access_token_invalid</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The access token is invalid or not found in the request. Please refresh
+                        the token and retry.</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">401</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">internal_error</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">This is the generic error code for TikTok internal errors. <i>Please
+                            refer to the error message for details and notify TikTok support.</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">500</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">invalid_file_upload</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The uploaded file does not meet API specifications. Please correct the
+                        file and try again.</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">400</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">invalid_params</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">One or more fields in request is invalid. <i>Please refer to the error
+                            message for details.</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">400</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">rate_limit_exceeded</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The API rate limit was exceeded. Please try again later.</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">429</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">scope_not_authorized</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The user did not authorize the scope required for completing this
+                        request. Please ask the user to authorize and then retry.</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">401</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">scope_permission_missed</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Access token is invalid, some fields need additional scopes. <i>Please
+                            refer to the error message for more details.</i></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">400</p>
+                </td>
+            </tr>
+        </table>
+        <h2 id="error_example">Error Example</h2>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>   </span><span>"code"</span><span>:</span><span style="color:#d14">"access_token_invalid"</span><span>,
+</span></span><span><span>   </span><span>"message"</span><span>:</span><span style="color:#d14">"Access token is invalid, please refresh token and retry"</span><span>,
+</span></span><span><span>   </span><span>"log_id"</span><span>:</span><span style="color:#d14">"20220829194722CBE87ED59D524E727021"</span><span>
+</span></span><span>}</span></code></pre><br />
+    </div>
+</div>

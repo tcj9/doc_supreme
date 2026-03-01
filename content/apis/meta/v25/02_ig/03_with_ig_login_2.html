@@ -1,0 +1,506 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_1H">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Business Login for Instagram</h1>
+              <p>Business Login is a custom login flow that allows your app to ask for permissions to access your app
+                user's Instagram professional account data and to get an access token to use in your app's API requests.
+              </p>
+              <div>
+                <div class="_57yz _7_72 _3-8p">
+                  <div class="_57y-">
+                    <p>To ensure consistency between scope values and permission names, we are introducing new
+                      <code>scope</code> values for the Instagram API with Instagram login. The new <code>scope</code>
+                      values are:
+                    </p>
+                    <ul>
+                      <li><code>instagram_business_basic</code></li>
+                      <li><code>instagram_business_content_publish</code></li>
+                      <li><code>instagram_business_manage_messages</code></li>
+                      <li><code>instagram_business_manage_comments</code></li>
+                    </ul>
+                    <p>These will replace the existing <code>business_basic</code>,
+                      <code>business_content_publish</code>, <code>business_manage_comments</code> and
+                      <code>business_manage_messages</code> <code>scope</code> values, respectively.
+                    </p>
+                    <p>Please note that the old scope values will be deprecated on <strong>January 27, 2025</strong>. It
+                      is essential to update your code before this date to avoid any disruption in your app's
+                      functionality. Failure to do so will result in your app being unable to call the Instagram
+                      endpoints.</p>
+                  </div>
+                </div>
+              </div>
+              <h3>How it works</h3>
+              <p>Your app user launches the login flow on your app or website by clicking your embed URL link or button.
+                This embed URL, that you set up in the App Dashboard with the permissions you are requesting from your
+                app users, opens an authorization window. Your app user uses this window to grant your app permissions.
+                When the user submits the login flow, Meta redirects your app user to your redirect URI and sends an
+                authorization code. Your app can then exchange this authorization code for a short-lived Instagram User
+                access token, an Instagram-scoped user ID for your app user, and a list of permissions the app user
+                granted your app. Your app can exchanged this short-lived access token for a long-lived Instagram user
+                access token that is valid for 60 days.</p>
+              <h2>Before you start</h2>
+              <p>If you haven't already, <a
+                  href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/create-a-meta-app-with-instagram">add
+                  the Instagram product</a> to your app and configure your <a
+                  href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/create-a-meta-app-with-instagram#step-9--set-up-business-login"><strong>Business
+                    login settings</strong></a> in the Meta App Dashboard.</p>
+              <h3>Embed the business login URL</h3>
+              <p>You should have completed this step during Instagram app setup in the App Dashboard, but if not,
+                complete the following steps.</p>
+              <ol>
+                <li>Copy the <strong>Embed URL</strong> from the <strong>Set up business login</strong> in the App
+                  Dashboard. </li>
+                <li>Paste the URL in an anchor tag or button on your app or website to launch the login flow.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Requirements</h2>
+              <div><span>
+                  <p>This guide assumes you have read the <a
+                      href="https://developers.facebook.com/docs/instagram-platform/overview">Instagram Platform
+                      Overview</a> and implemented the needed components for using this API, such as a Meta login flow
+                    and a webhooks server to receive notifications.</p>
+                </span></div>
+              <p>You will need the following:</p>
+              <h4>Access Level</h4>
+              <ul>
+                <li>Advanced Access if your app serves Instagram professional accounts you don't own or manage</li>
+                <li>Standard Access if your app serves Instagram professional accounts you own or manage and have added
+                  to your app in the App Dashboard</li>
+              </ul>
+              <h4>Endpoints</h4>
+              <ul>
+                <li><code>https://www.instagram.com/oauth/authorize</code> – To get an authorization code from your app
+                  user</li>
+                <li><code>https://api.instagram.com/oauth/access_token</code> – To exchange an authorization code for a
+                  short-lived access token</li>
+                <li><code>https://graph.instagram.com/access_token</code> – To exchange a valid short-lived access token
+                  for a long-lived access token</li>
+                <li><code>https://graph.instagram.com/refresh_access_token</code> – To refresh a valid long-lived access
+                  token for another 60 days</li>
+              </ul>
+              <h4>IDs from the Meta App Dashboard</h4>
+              <p>In the <strong>App Dashboard &gt; Instagram &gt; API setup with Instagram login &gt; 3. Set up
+                  Instagram business login &gt; Business login settings</strong>, you will need:</p>
+              <ul>
+                <li>Your app's Instagram App ID</li>
+                <li>Your app's Instagram App Secret</li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 1. Get authorization</h2>
+              <p>When a person clicks your embed URL link or button to log in to your app, they are directed to an
+                authorization window. This window allows your app users to grant your app permissions and short-lived
+                Instagram User access tokens.</p>
+              <h4>Example embed URL</h4>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-html" style="background-color:">
+https://www.instagram.com/oauth/authorize
+  ?client_id=990602627938098
+  &amp;redirect_uri=https://my.m.redirect.net/
+  &amp;response_type=code
+  &amp;scope=
+    instagram_business_basic,
+    instagram_business_manage_messages,
+    instagram_business_manage_comments,
+    instagram_business_content_publish
+</pre>
+              <h3>Query string parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Parameter</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_3v">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>client_id</code><br />
+                          <strong>Required</strong><br />
+                          <em>Numeric string</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Your app's Instagram App ID displayed in <strong>App Dashboard &gt; Instagram &gt; API setup
+                            with Instagram login &gt;
+                            3. Set up Instagram business login &gt; Business login settings &gt; Instagram App
+                            ID</strong>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>enable_fb_login</code><br />
+                          <em>Boolean</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Controls whether the Facebook Login option is displayed on the Instagram login page during
+                          OAuth authorization (the login page is only shown if the user is not logged in prior to
+                          beginning authorization flow or if the <code>force_reauth</code> parameter field is passed
+                          in).</p>
+                        <p>If set to <code>true</code> (default), users will see the option to log in with Facebook when
+                          redirected to the Instagram login page. If set to <code>false</code>, the Facebook Login
+                          option will be hidden.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>force_reauth</code><br />
+                          <em>Boolean</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Value can be <code>true</code> or <code>false</code>. When set to <code>true</code> it forces
+                          an app user to use their Instagram professional account credentials to log into your app even
+                          if the user is logged into Instagram.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>redirect_uri</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>A URI where we will redirect users after they allow or deny permission request. Make sure
+                          this exactly matches one of the base URIs in your list of valid OAuth URIs you set during API
+                          setup in the App Dashboard. Keep in mind that the App Dashboard might have added a trailing
+                          slash to your URIs, so we recommend that you verify by checking the list.</p>
+                        <p><strong>App Dashboard &gt; Instagram &gt; API setup with Instagram login &gt;
+                            3. Set up Instagram business login &gt; Business login settings&gt; OAuth redirect
+                            URIs</strong>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>response_type</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Set this value to <code>code</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>scope</code><br />
+                          <strong>Required</strong><br />
+                          <em>List</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>A comma-separated or URL-encoded space-separated list of <a
+                            href="https://developers.facebook.com/docs/instagram/platform/instagram-api/overview#authorization">permissions</a>
+                          to request from the app user.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>state</code><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>An optional value indicating a server-specific state. For example, you can use this to
+                          protect against CSRF issues. We will include this parameter and value when redirecting the
+                          user back to you.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Successful authorization</h3>
+              <p>If authorization is successful, we will redirect your app user to your <code>redirect_uri</code> and
+                pass you an <strong>Authorization Code</strong> through the <code>code</code> query string parameter.
+                This code is valid for <strong>1 hour</strong> and can only be used once.</p>
+              <p>Capture the code so your app can exchange it for a short-lived Instagram User access token.</p>
+              <h4>Example redirect URI response</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="background-color:">
+https://my.m.redirect.net/?code=<b>abcdefghijklmnopqrstuvwxyz</b>#_
+</pre>
+              <p><strong>NOTE:</strong> The <code>#_</code> appended to the end of the redirect URI is not part of the
+                code itself, so strip it out.</p>
+              <h3>Canceled authorization</h3>
+              <p>If the user cancels the authorization flow, we will redirect the user to your <code>redirect_uri</code>
+                and attach the following error parameters. <em>It is your responsibility to fail gracefully in these
+                  situations and display an appropriate message to your app users</em>.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Parameter</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_wC">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>error</code></p>
+                      </td>
+                      <td>
+                        <p><code>access_denied</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>error_reason</code></p>
+                      </td>
+                      <td>
+                        <p><code>user_denied</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>error_description</code></p>
+                      </td>
+                      <td>
+                        <p><code>The+user+denied+your+request</code></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Sample Canceled Authorization Redirect</h4>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+https://my.m.redirect.net/auth/
+  ?error=access_denied
+  &amp;error_reason=user_denied
+  &amp;error_description=The+user+denied+your+request
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 2. Exchange the Code For a Token</h2>
+              <p>To get the access token, send a <code>POST</code> request to the
+                <code>https://api.instagram.com/oauth/access_token</code> endpoint with the following parameters:
+              </p>
+              <ul>
+                <li><code>client_id</code> set to your app's Instagram app ID from the App Dashboard</li>
+                <li><code>client_secret</code> set to your app's Instagram App Secret from the App Dashboard</li>
+                <li><code>grant_type</code> set to <code>authorization_code</code></li>
+                <li><code>redirect_uri</code> set to your redirect URI</li>
+                <li><code>code</code> set to the <code>code</code> value from the redirect URI response</li>
+              </ul>
+              <h4>Sample request</h4>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+curl -X POST https://api.instagram.com/oauth/access_token \
+  -F 'client_id=990602627938098' \
+  -F 'client_secret=a1b2C3D4' \
+  -F 'grant_type=authorization_code' \
+  -F 'redirect_uri=https://my.m.redirect.net/' \
+  -F 'code=AQBx-hBsH3...'
+</pre>
+              <p>On success, your app receives a JSON response containing the app user's short-lived access token, their
+                Instagram App-scoped User ID, and a list of the permissions granted by the app user.</p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+{
+  "data": [
+    {
+      "access_token": "EAACEdEose0...", 
+      "user_id": "1020...",                // Your app user's Instagram-scoped user ID
+      "permissions": "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish"
+    }
+  ]
+}         
+</pre>
+              <p>Capture the <code>access_token</code> value. This is the user’s short-lived Instagram User access token
+                which your app can use to access Instagram API with Instagram Login <a
+                  href="https://developers.facebook.com/docs/instagram/platform/instagram-api/get-started">endpoints</a>.
+              </p>
+              <h3>Parameter reference</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:20%">Parameter</th>
+                    <th style="width:25%">Sample Value</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_pR">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>client_id</code><br />
+                          <strong>Required</strong><br />
+                          <em>Numeric string</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>990602627938098</code></p>
+                      </td>
+                      <td>
+                        <p>Your app's Instagram App ID displayed in <strong>App Dashboard &gt; Instagram &gt; API setup
+                            with Instagram login &gt;
+                            3. Set up Instagram business login &gt; Business login settings &gt; Instagram App
+                            ID</strong>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>client_secret</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>a1b2C3D4</code></p>
+                      </td>
+                      <td>
+                        <p>Your Instagram App Secret displayed in <strong>App Dashboard &gt; Instagram &gt; API setup
+                            with Instagram login &gt;
+                            3. Set up Instagram business login &gt; Business login settings &gt; Instagram app
+                            secret</strong>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>code</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>AQBx-hBsH3...</code></p>
+                      </td>
+                      <td>
+                        <p>The authorization code we passed you in the <code>code</code> parameter when redirecting the
+                          user to your <code>redirect_uri</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>grant_type</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>authorization_code</code></p>
+                      </td>
+                      <td>
+                        <p>Set this value to <code>authorization_code</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>redirect_uri</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p><code>https://my.m.redirect.net/</code></p>
+                      </td>
+                      <td>
+                        <p>The redirect URI you passed us when you directed the user to our Authorization Window. This
+                          must be the same URI or we will reject the request. <strong>App Dashboard &gt; Instagram &gt;
+                            API setup with Instagram login &gt;
+                            3. Set up Instagram business login &gt; Business login settings&gt; OAuth redirect
+                            URIs</strong>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Sample Rejected Response</h3>
+              <p>If the request is malformed in some way, the API will return an error.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "error_type": "OAuthException",
+  "code": 400,
+  "error_message": "Matching code was not found or was already used"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="long-lived">Step 3. Get a long-lived access token</h2>
+              <p>You can exchange your app user's short-lived access token for a long-lived access token that is valid
+                for 60 days.</p>
+              <h3>Requirements</h3>
+              <ul>
+                <li>The short-lived access token must be valid (not expired)</li>
+                <li>Requests for long-lived tokens <strong>must be made in server-side code</strong>. These requesting
+                  include your app secret which you never want to expose in client-side code or in an app binary that
+                  could be decompiled. Do not share your app secret with anyone, expose it in code, send it to a client,
+                  or store it in a device.</li>
+              </ul>
+              <p>To get a long-lived access token, send a <code>GET</code> request to the <code>/access_token</code>
+                endpoint with the following parameters:</p>
+              <ul>
+                <li><code>grant_type</code> set to <code>ig_exchange_token</code></li>
+                <li><code>client_secret</code> set to your Instagram app secret </li>
+                <li>Your app user's valid (unexpired) short-lived Instagram user access token </li>
+              </ul>
+              <h4>Sample Requests</h4>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.instagram.com/access_token
+  ?grant_type=ig_exchange_token
+  &amp;client_secret=a1b2C3D4
+  &amp;access_token=EAACEdEose0..."
+</pre>
+              <p>On success, your app receives a JSON response with your app user's long-lived access token, the token
+                type, and the expiration.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "access_token":"EAACEdEose0...",
+  "token_type": "bearer",
+  "expires_in": 5183944  // Number of seconds until token expires
+}
+</pre>
+              <h3>Refresh a long-lived token</h3>
+              <p>Your app user's long-lived access token can be refreshed for another 60 days as long as the existing
+                conditions are true:</p>
+              <ul>
+                <li>The existing long-lived access token is at least 24 hours old </li>
+                <li>The existing long-lived access token is valide (not expired)</li>
+                <li>The app user has granted your app the <code>instagram_business_basic</code> permission</li>
+              </ul>
+              <p>Tokens that have not been refreshed in 60 days will expire and can no longer be refreshed.</p>
+              <p>To exchange your app user's long-lived token that is set to expire, send a <code>GET</code> request to
+                the <code>/refresh_access_token</code> endpoint with the following parameters:</p>
+              <ul>
+                <li><code>grant_type</code> set to <code>ig_refresh_token</code></li>
+                <li><code>access_token</code> set to the long-lived access token that is about to expire</li>
+              </ul>
+              <h3>Sample Requests</h3>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X GET "https://graph.instagram.com/refresh_access_token
+  ?grant_type=ig_refresh_token
+  &amp;access_token=EAACEdEose0..."
+</pre>
+              <p>On success, your app receives a JSON response with your app user's long-lived access token, the token
+                type, and the expiration.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "access_token":"EAACEdEose0...",
+  "token_type": "bearer",
+  "expires_in": 5183944  // Number of seconds until token expires
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Next Steps</h2>
+              <p>Now that you have an access token, <a
+                  href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/get-started">learn
+                  how to get information about your app user's Instagram professional accounts in our Get Started
+                  guide.</a>.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

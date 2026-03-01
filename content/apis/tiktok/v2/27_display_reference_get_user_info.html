@@ -1,0 +1,402 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="get_user_info">Get User Info</h1>
+        <div class="callout-info">
+            <p style="text-align:left">There is a migration plan related to this API. Learn more <a
+                    href="/bulletin/user-info-scope-migration">here</a>.</p>
+        </div>
+        <h2 id="overview">Overview</h2>
+        <p style="text-align:left">The <code>/v2/user/info/</code> endpoint returns some basic information for a given
+            TikTok user.</p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>HTTP </b><b>URL</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">https://open.tiktokapis.com/v2/user/info/</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>HTTP Method</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">GET</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Scope</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Needs <a href="#user_object">relevant scopes</a> to be authorized by the
+                        TikTok user through the authorization flow.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 id="request">Request</h2>
+        <h3 id="headers">Headers</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Example</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Required</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Authorization</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The token that bears the authorization of the TikTok user, which is
+                        obtained through /oauth/access_token/.</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Bearer act.example12345Example12345Example</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="query_parameters">Query Parameters</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Example</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Required</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">fields</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The set of user fields to request for</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">open_id,union_id,avatar_url</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="example">Example</h3>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span><span>curl -L -X GET </span><span style="color:#d14">'https://open.tiktokapis.com/v2/user/info/?fields=open_id,union_id,avatar_url'</span><span> \
+</span></span><span><span>-H </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span></span></code></pre>
+        <h2 id="response">Response</h2>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">data</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">map&lt;string, User Object&gt;</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">error</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><a href="/doc/tiktok-api-v2-error-handling">Error Object</a></p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="user_object">User Object</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Field</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Authorized </b><b>Scope</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">open_id</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The unique identification of the user in the current application.Open id
+                        for the client</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.basic</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">union_id</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The unique identification of the user across different apps for the same
+                        developer. For example, if a partner has X number of clients, it will get X number of open_id
+                        for the same TikTok user, but one persistent union_id for the particular user</p>
+                </td>
+                <td colspan="1" rowspan="1"><br />
+                    <p style="text-align:left">user.info.basic</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">avatar_url</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">User's profile image</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.basic</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">avatar_url_100</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">User`s profile image in 100x100 size</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.basic</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">avatar_large_url</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">User's profile image with higher resolution</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.basic</p><br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">display_name</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">User's profile name</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.basic</p><br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">bio_description</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">User's bio description if there is a valid one</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.profile</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">profile_deep_link</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The link to user's TikTok profile page</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.profile</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">is_verified</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">boolean</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Whether TikTok has provided a verified badge to the account after
+                        confirming that it belongs to the user it represents</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.profile</p><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">username</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">User's username.</p>
+                </td>
+                <td>
+                    <p style="text-align:left">user.info.profile</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">follower_count</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">User's followers count</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.stats</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">following_count</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The number of accounts that the user is following </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.stats</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">likes_count</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The total number of likes received by the user across all of their videos
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.stats</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video_count</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The total number of publicly posted videos by the user</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">user.info.stats</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="example_2">Example</h3>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>   </span><span>"data"</span><span>:{
+</span></span><span><span>      </span><span>"user"</span><span>:{
+</span></span><span><span>         </span><span>"avatar_url"</span><span>:</span><span style="color:#d14">"https://p19-sign.tiktokcdn-us.com/tos-avt-0068-tx/b17f0e4b3a4f4a50993cf72cda8b88b8~c5_168x168.jpeg"</span><span>,
+</span></span><span><span>         </span><span>"open_id"</span><span>:</span><span style="color:#d14">"723f24d7-e717-40f8-a2b6-cb8464cd23b4"</span><span>,
+</span></span><span><span>         </span><span>"union_id"</span><span>:</span><span style="color:#d14">"c9c60f44-a68e-4f5d-84dd-ce22faeb0ba1"</span><span>
+</span></span><span>      }
+</span><span>   },
+</span><span><span>   </span><span>"error"</span><span>:{
+</span></span><span><span>      </span><span>"code"</span><span>:</span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>      </span><span>"message"</span><span>:</span><span style="color:#d14">""</span><span>,
+</span></span><span><span>      </span><span>"log_id"</span><span>:</span><span style="color:#d14">"20220829194722CBE87ED59D524E727021"</span><span>
+</span></span><span>   }
+</span><span>}</span></code></pre><br />
+    </div>
+</div>

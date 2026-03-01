@@ -1,0 +1,197 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="video_object">Video Object</h1>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Field</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">id</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Unique identifier for the TikTok video. Also called "item_id"</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">create_time</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">UTC Unix epoch (in seconds) of when the TikTok video was posted.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">cover_image_url</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">A CDN link for the video's cover image. The image is static. Due to our
+                        trust and safety policies, the link has a <b>TTL</b><b> of 6 hours.</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">share_url</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">A shareable link for this TikTok video. Note that the website behaves
+                        differently on Mobile and Desktop devices.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">video_description</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The description that the creator has set for the TikTok video. Max
+                        length: 150</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">duration</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int32</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The duration of the TikTok video in seconds.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">height</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int32</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The height of the TikTok video.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">width</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int32</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The width of the TikTok video.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">title</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The video title. Max length: 150</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">embed_html</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">HTML code for embedded video</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">embed_link</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">string</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Video embed link of tiktok.com</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">like_count</p>
+                </td>
+                <td>
+                    <p style="text-align:left">int32</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Number of likes for the video</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">comment_count</p>
+                </td>
+                <td>
+                    <p style="text-align:left">int32</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Number of comments on the video</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">share_count</p>
+                </td>
+                <td>
+                    <p style="text-align:left">int32</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Number of shares of the video</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">view_count</p>
+                </td>
+                <td>
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Number of views of the video</p>
+                </td>
+            </tr>
+        </table><br />
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Implementing OAuth 2.0 Authorization<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>The YouTube Data API uses the OAuth 2.0 protocol to authorize access to private user data, which is
+              initiated when a user attempts to use features requiring login.</p>
+          </li>
+          <li>
+            <p>During authorization, the application requests specific scopes of access, defining which resources it can
+              manage on behalf of the user.</p>
+          </li>
+          <li>
+            <p>Upon user consent, Google issues a token to the application, which may be exchanged for an access token
+              and a refresh token, allowing the application to act on the user's behalf.</p>
+          </li>
+          <li>
+            <p>Google APIs support various OAuth 2.0 flows tailored to different application types, such as server-side
+              web apps, JavaScript web apps, mobile and desktop apps, and limited-input devices.</p>
+          </li>
+          <li>
+            <p>While OAuth 2.0 includes a service account flow, the YouTube Data API does not support this method, and
+              using it will result in a <code>NoLinkedYouTubeAccount</code> error.</p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <p>
+
+      The <span class="notranslate">YouTube Data API</span> supports the <a href="http://oauth.net/2/"><span
+          class="notranslate">OAuth 2.0</span> protocol</a> for authorizing access to private user data.
+
+      The following list explains some core <span class="notranslate">OAuth 2.0</span> concepts:</p>
+    <ul>
+      <li>
+        <p>When a user first attempts to use features in your application that requires the user to be logged in to a
+          <span class="notranslate">Google Account or YouTube account</span>, your application initiates the <span
+            class="notranslate">OAuth 2.0</span> authorization process.</p>
+      </li>
+      <li>
+        <p>Your application directs the user to Google's authorization server. The link to that page specifies the <code
+            class="notranslate" dir="ltr"><strong>scope</strong></code> of access that your application is requesting
+          for the user's account. The <code class="notranslate" dir="ltr"><strong>scope</strong></code> specifies the
+          resources that your application can retrieve, insert, update, or delete when acting as the authenticated user.
+        </p>
+      </li>
+      <li>
+        <p>If the user consents to authorize your application to access those resources, Google returns a token to your
+          application. Depending on your application's type, it either validates the token or exchanges it for a
+          different type of token.</p>
+        <p>For example, a server-side web application exchanges the returned token for an access token and a refresh
+          token. The access token lets the application authorize requests on the user's behalf, and the refresh token
+          lets the application retrieve a new access token when the original access token expires.</p>
+      </li>
+    </ul>
+    <p class="note"><strong>Important:</strong> To use the OAuth 2.0 Authorization, you need to <a
+        href="/youtube/registering_an_application">obtain authorization credentials in the Google API Console</a>.</p>
+    <p>For more details, see the <a href="https://developers.google.com/identity/protocols/oauth2">OAuth 2.0
+        Authorization Guide</a>.</p>
+    <h2 data-text="OAuth 2.0 flows" id="OAuth2_Flows" tabindex="-1">OAuth 2.0 flows</h2>
+    <p>Google APIs support several OAuth 2.0 use cases:</p>
+    <ul>
+      <li>The <a href="/youtube/v3/guides/auth/server-side-web-apps">server-side web apps</a> flow supports web
+        applications that can securely store persistent information.</li>
+      <li>The <a href="/youtube/v3/guides/auth/client-side-web-apps">JavaScript web apps</a> flow supports JavaScript
+        applications running in a browser.</li>
+      <li>The <a href="/youtube/v3/guides/auth/installed-apps">mobile and desktop apps</a> flow supports applications
+        installed on a device, such as a phone or computer.</li>
+      <li>The <a href="/youtube/v3/guides/auth/devices">TVs and limited-input devices</a> flow supports devices with
+        limited input capabilities, such as game consoles and video cameras.
+
+
+      <li>The OAuth 2.0 flow for service account flow supports server-to-server interactions that do not access user
+        information.
+
+        However, the <span class="notranslate">YouTube Data API</span> does not support this flow.
+
+
+        <span class="notranslate">Since there is no way to link a Service Account to a YouTube account, attempts to
+          authorize requests with this flow will generate a <code dir="ltr" translate="no">NoLinkedYouTubeAccount</code>
+          error.</span>
+      </li>
+      </li>
+    </ul>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

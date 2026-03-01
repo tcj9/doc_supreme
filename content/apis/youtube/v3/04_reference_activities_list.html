@@ -1,0 +1,396 @@
+<article class="devsite-article">
+      <style>
+            .deprecated {
+                  color: red
+            }
+      </style>
+      <h1 class="devsite-page-title" tabindex="-1">
+            Activities: list<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="list" itemprop="name">
+                  <meta content="activities" itemprop="path">
+                  <div class="warning">
+                        YouTube has deprecated the channel bulletin feature. The <code dir="ltr"
+                              translate="no">activities.list</code> method does
+                        not still return channel bulletins, and the
+                        <code dir="ltr"
+                              translate="no"><a href="/youtube/v3/docs/activities/insert">activities.insert</a></code>
+                        method is no
+                        longer supported. For more details, please see the
+                        <a href="https://support.google.com/youtube?p=channel-bulletins">YouTube Help Center</a>.
+                  </div>
+                  <section id="overview">
+                        <p>Returns a list of channel activity events that match the request criteria. For example, you
+                              can retrieve events associated with a particular channel or with the user's own channel.
+                        </p>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of 1 unit.</p>
+                  </section>
+                  <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common
+                        use cases</h2>
+                  <style>
+                        iframe+section>h2 {
+                              margin-top: 12px;
+                        }
+                  </style>
+                  <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+                              allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+                              src="https://developers.google.com/frame/youtube/v3/docs/activities/list_f3f758f247c4a41ea7e2879c48f4f200839d5fde655c9207a4bb8e126a3236f0.frame"></iframe></devsite-iframe>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">GET https://www.googleapis.com/youtube/v3/activities</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The following table lists the parameters that this query supports. All of the
+                                    parameters listed are query parameters.</p>
+                              <table class="responsive details">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="required-parameters">
+                                                <td colspan="3"><b>Required parameters</b></td>
+                                          </tr>
+                                          <tr id="part">
+                                                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>part</strong></code>
+                                                      parameter specifies a comma-separated list of one or more <code
+                                                            dir="ltr" translate="no">activity</code> resource properties
+                                                      that the API response will include.<br /><br />If the parameter
+                                                      identifies a property that contains child properties, the child
+                                                      properties will be included in the response. For example, in an
+                                                      <code dir="ltr" translate="no">activity</code> resource, the <code
+                                                            dir="ltr" translate="no">snippet</code> property contains
+                                                      other properties that identify the type of activity, a display
+                                                      title for the activity, and so forth. If you set <code dir="ltr"
+                                                            translate="no"><strong>part=snippet</strong></code>, the API
+                                                      response will also contain all of those nested
+                                                      properties.<br /><br />The following list contains the <code
+                                                            dir="ltr" translate="no">part</code> names that you can
+                                                      include in the parameter value:<br />
+                                                      <ul>
+                                                            <li><code dir="ltr" translate="no">contentDetails</code>
+                                                            </li>
+                                                            <li><code dir="ltr" translate="no">id</code></li>
+                                                            <li><code dir="ltr" translate="no">snippet</code></li>
+                                                      </ul>
+                                                </td>
+                                          </tr>
+                                          <tr class="alt" id="filter-parameters">
+                                                <td colspan="3"><b>Filters <span style="color:#555">(specify exactly one
+                                                                  of the following parameters)</span></b></td>
+                                          </tr>
+                                          <tr id="channelId">
+                                                <td><code dir="ltr" itemprop="property" translate="no">channelId</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>channelId</strong></code> parameter
+                                                      specifies a unique YouTube channel ID. The API will then return a
+                                                      list of that channel's activities.</td>
+                                          </tr>
+                                          <tr id="home">
+                                                <td><code dir="ltr" itemprop="property" translate="no">home</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">boolean</code><br />
+                                                      <span class="deprecated"><b>Note:</b> This parameter has been
+                                                            deprecated.</span><br />For requests that set this
+                                                      parameter, the API response contains items similar to those that a
+                                                      logged-out user would see on the YouTube home page. Note that this
+                                                      parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>.
+
+                                                </td>
+                                          </tr>
+                                          <tr id="mine">
+                                                <td><code dir="ltr" itemprop="property" translate="no">mine</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">boolean</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. Set this parameter's value to <code dir="ltr"
+                                                            translate="no">true</code> to retrieve a feed of the
+                                                      authenticated user's activities.</td>
+                                          </tr>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="maxResults">
+                                                <td><code dir="ltr" itemprop="property" translate="no">maxResults</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr"
+                                                            translate="no">unsigned integer</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>maxResults</strong></code> parameter
+                                                      specifies the maximum number of items that should be returned in
+                                                      the result set. Acceptable values are <code dir="ltr"
+                                                            translate="no">0</code> to <code dir="ltr"
+                                                            translate="no">50</code>, inclusive. The default value is
+                                                      <code dir="ltr" translate="no">5</code>.
+                                                </td>
+                                          </tr>
+                                          <tr id="pageToken">
+                                                <td><code dir="ltr" itemprop="property" translate="no">pageToken</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>pageToken</strong></code> parameter
+                                                      identifies a specific page in the result set that should be
+                                                      returned. In an API response, the <code dir="ltr"
+                                                            translate="no">nextPageToken</code> and <code dir="ltr"
+                                                            translate="no">prevPageToken</code> properties identify
+                                                      other pages that could be retrieved.</td>
+                                          </tr>
+                                          <tr id="publishedAfter">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">publishedAfter</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">datetime</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>publishedAfter</strong></code>
+                                                      parameter specifies the earliest date and time that an activity
+                                                      could have occurred for that activity to be included in the API
+                                                      response. If the parameter value specifies a day, but not a time,
+                                                      then any activities that occurred that day will be included in the
+                                                      result set. The value is specified in <a
+                                                            href="//www.w3.org/TR/NOTE-datetime">ISO 8601</a> (<code
+                                                            dir="ltr" translate="no">YYYY-MM-DDThh:mm:ss.sZ</code>)
+                                                      format.</td>
+                                          </tr>
+                                          <tr id="publishedBefore">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">publishedBefore</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">datetime</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>publishedBefore</strong></code>
+                                                      parameter specifies the date and time before which an activity
+                                                      must have occurred for that activity to be included in the API
+                                                      response. If the parameter value specifies a day, but not a time,
+                                                      then any activities that occurred that day will be excluded from
+                                                      the result set. The value is specified in <a
+                                                            href="//www.w3.org/TR/NOTE-datetime">ISO 8601</a> (<code
+                                                            dir="ltr" translate="no">YYYY-MM-DDThh:mm:ss.sZ</code>)
+                                                      format.</td>
+                                          </tr>
+                                          <tr id="regionCode">
+                                                <td><code dir="ltr" itemprop="property" translate="no">regionCode</code>
+                                                </td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr"
+                                                            translate="no"><strong>regionCode</strong></code> parameter
+                                                      instructs the API to return results for the specified country. The
+                                                      parameter value is an <a
+                                                            href="http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm">ISO
+                                                            3166-1 alpha-2</a> country code. YouTube uses this value
+                                                      when the authorized user's previous activity on YouTube does not
+                                                      provide enough information to generate the activity feed.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>Do not provide a request body when calling this method.</p>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <section id="resource">
+                              <p>If successful, this method returns a response body with the following structure:</p>
+                              <div></div><devsite-code>
+                                    <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json"
+                                          is-upgraded="" style="max-height: 500px; overflow: auto" syntax="Objective-C">{
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"kind"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"youtube#activityListResponse"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"etag"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">etag</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"nextPageToken"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"prevPageToken"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"pageInfo"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"totalResults"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">integer</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s">"resultsPerPage"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">integer</span></var>
+<span class="devsite-syntax-w">  </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"items"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span>
+<span class="devsite-syntax-w">    </span><a class="resource-link" href="/youtube/v3/docs/activities#resource" resource="activity"><span class="devsite-syntax-n">activity</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Resource</span></a>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">]</span>
+}</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="properties">
+                              <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                              <p>The following table defines the properties that appear in this resource:</p>
+                              <table class="responsive properties" id="property-table">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Properties</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr id="kind">
+                                                <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Identifies the API resource's type. The value will be <code
+                                                            dir="ltr"
+                                                            translate="no">youtube#activityListResponse</code>.</td>
+                                          </tr>
+                                          <tr id="etag">
+                                                <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                      The Etag of this resource.</td>
+                                          </tr>
+                                          <tr id="nextPageToken">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">nextPageToken</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The token that can be used as the value of the <code dir="ltr"
+                                                            translate="no">pageToken</code> parameter to retrieve the
+                                                      next page in the result set.</td>
+                                          </tr>
+                                          <tr id="prevPageToken">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">prevPageToken</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The token that can be used as the value of the <code dir="ltr"
+                                                            translate="no">pageToken</code> parameter to retrieve the
+                                                      previous page in the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo">
+                                                <td><code dir="ltr" itemprop="property" translate="no">pageInfo</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                      The <code dir="ltr" translate="no">pageInfo</code> object
+                                                      encapsulates paging information for the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo.totalResults">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">pageInfo.</span>totalResults</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">integer</code><br />
+                                                      The total number of results in the result set.</td>
+                                          </tr>
+                                          <tr id="pageInfo.resultsPerPage">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">pageInfo.</span>resultsPerPage</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">integer</code><br />
+                                                      The number of results included in the API response.</td>
+                                          </tr>
+                                          <tr id="items[]">
+                                                <td><code dir="ltr" itemprop="property" translate="no">items[]</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">list</code><br />
+                                                      A list of activities, or events, that match the request criteria.
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The following table identifies error messages that the API could return in response to a call
+                              to this method. Please see the <a href="/youtube/v3/docs/errors">error message</a>
+                              documentation for more detail.</p>
+                        <table class="matchpre" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th>Error type</th>
+                                          <th>Error detail</th>
+                                          <th>Description</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="youtube.activities.list-forbidden-forbidden">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">forbidden</code></td>
+                                          <td class="error-cause">The request is not properly authorized.</td>
+                                    </tr>
+                                    <tr id="youtube.activities.list-forbidden-homeParameterDeprecated">
+                                          <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">homeParameterDeprecated</code></td>
+                                          <td class="error-cause">The user's home page activity data is not available
+                                                through this API. This error might occur if you set the <code dir="ltr"
+                                                      translate="no">home</code> parameter to <code dir="ltr"
+                                                      translate="no">true</code> in an unauthorized request.</td>
+                                    </tr>
+                                    <tr id="youtube.activities.list-notFound-channelNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">channelNotFound</code></td>
+                                          <td class="error-cause">The channel ID identified by the request's <code
+                                                      dir="ltr" translate="no">channelId</code> parameter cannot be
+                                                found.</td>
+                                    </tr>
+                                    <tr id="youtube.activities.list-notFound-homeChannelNotFound">
+                                          <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code>
+                                          </td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">homeChannelNotFound</code></td>
+                                          <td class="error-cause">A YouTube home page feed cannot be found for the
+                                                currently authenticated user.</td>
+                                    </tr>
+                                    <tr id="youtube.activities.list-unauthorized-authorizationRequired">
+                                          <td class="error-name"><code dir="ltr"
+                                                      translate="no">unauthorized (401)</code></td>
+                                          <td class="error-reason"><code dir="ltr" itemprop="property"
+                                                      translate="no">authorizationRequired</code></td>
+                                          <td class="error-cause">The request uses the <code dir="ltr"
+                                                      translate="no">home</code> parameter but is not properly
+                                                authorized.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  <section id="try-it">
+                        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                              request and response.</p>
+                        <div class="devsite-apix">
+                              <div class="apis-explorer"
+                                    data-default-scopes="https://www.googleapis.com/auth/youtube.readonly"
+                                    data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                    data-method-id="youtube.activities.list" data-show-code-button="true"></div>
+                        </div>
+                  </section>
+                  </meta>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

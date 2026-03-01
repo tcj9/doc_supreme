@@ -1,0 +1,231 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_sp">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Requesting &amp; Revoking Permissions</h1>
+              <p>Each type of login flow has its own method of requesting permissions, depending on your platform and
+                how you choose to integrate Facebook Login:</p>
+              <h3>Web</h3>
+              <ul>
+                <li><strong>The Facebook JavaScript SDK</strong> uses a <code>scope</code> option with the <a
+                    href="/docs/reference/javascript/FB.login/#permissions"><code>FB.login</code> function call</a>.
+                </li>
+                <li><strong>The Login Button</strong> uses a <code>scope</code> or <code>data-scope</code> parameter on
+                  the <a href="/docs/plugins/login-button"><code>fb:login-button</code></a> element.</li>
+                <li><strong>A Manually Built Login Flow</strong> should add the <code>scope</code> parameter to the <a
+                    href="/docs/facebook-login/login-flow-for-web-no-jssdk/#login">login dialog URL that they redirect
+                    to.</a></li>
+              </ul>
+              <h3>Mobile Apps</h3>
+              <ul>
+                <li><strong>Android Login</strong> can use a number of different classes to request and manage
+                  permissions. Please see our <a href="/docs/facebook-login/android">login tutorial for Android</a> for
+                  more information.</li>
+                <li><strong>iOS Login</strong> can use a number of different methods to request permissions. Please see
+                  our <a href="/docs/facebook-login/ios#permissions">login tutorial for iOS</a> for more information.
+                </li>
+                <li><strong>Windows Phone</strong> uses the <a
+                    href="/docs/facebook-login/login-for-windows-phone#login"><code>scope</code> parameter</a> when
+                  launching the URI association.</li>
+              </ul>
+              <p>Please note that many of the APIs listed above can also be used to ask for additional permissions later
+                during an app's lifetime, not just at initial login.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="optimizing">Optimizing Permissions Requests</h2>
+              <p>As a general rule, the more permissions an app requests, the less likely it is that people will use
+                Facebook to log into your app. In fact, our research shows that apps that ask for more than four
+                permissions experience a significant drop off in the number of completed logins.</p>
+              <h3>Guidelines</h3>
+              <p>Here are a few guidelines to use when asking for permissions, both during and after login:</p>
+              <ul>
+                <li>
+                  <p>Only ask for the permissions that are essential to an app.</p>
+                </li>
+                <li>
+                  <p>Ask for permission in the context in which they are required. For example, if your app wants to
+                    show places of interest near a person's location, asking for <code>user_location</code> just prior
+                    to displaying that information gives the person a greater understanding of why the permission is
+                    being requested.</p>
+                </li>
+                <li>
+                  <p>Separate the request of read and publish permissions. For more details, see <a
+                      href="#publishing">below</a>.</p>
+                </li>
+                <li>
+                  <p>Never ask for permissions you think you might need in the future. People will be suspicious and may
+                    reject your app.</p>
+                </li>
+                <li>
+                  <p>Tell people ahead of time why you are requesting a permission. Explaining why you need access to
+                    something will increase the chance that they are willing to share it.</p>
+                </li>
+              </ul>
+              <ul>
+                <li>Regulatory requirements applicable to collecting, processing and sharing personal data have
+                  continued to evolve around the world, and, depending on the jurisdiction, different laws will apply to
+                  your collection and processing of information (the European Union’s GDPR, the United Kingdom’s UKGDPR
+                  and Brazil’s Lei Geral de Proteção de Dados are examples of such laws). We strongly recommend that you
+                  familiarise yourself with the requirements under any applicable laws and seek any specific legal
+                  guidance where necessary.</li>
+              </ul>
+              <h3 id="publishing">Publishing Permissions</h3>
+              <p>Apps should separate the request of read and publish permissions. Plan your app around requesting the
+                bare minimum of read permissions at initial login and then any publish permissions when a person
+                actually needs them, for example when they want to create an Open Graph story from within the app. This
+                provides the best user experience and optimizes conversion.</p>
+              <div class="_57yz _57z0 _3-8p">
+                <div class="_57y-">
+                  <p>You may receive Developer Alerts if your app requests read and publish permissions back-to-back. To
+                    stop receiving these alerts, separate your requests or follow the guidelines below for exceptional
+                    cases.</p>
+                </div>
+              </div>
+              <p>In the rare case your app requires publishing permissions up front (for example, an app that does
+                nothing but publish a person's mood to Facebook) only request the bare minimum read permissions at
+                initial login. After the person logs in, show the person a screen explaining why your app needs
+                publishing permissions and let the person opt-in to the publishing permission request by clicking a
+                button. This will provide them with more context and improve your conversion.</p>
+              <p>One instance where you may have to request read and write permissions back-to-back is the first time
+                that you're associating an email-based account with a person's Facebook account. This is usually done
+                when someone wants to share a story on their Facebook Timeline. When your app creates the login dialog,
+                the person will see two dialogs in a row - one to connect their account to your app and another asking
+                for publish permissions. For this case, make sure that the only read permissions you request are <a
+                  href="#reference-public_profile">public_profile</a>. This provides the best user experience because
+                the user wants to publish from your app and is often not interested in providing additional read
+                permissions. It will also improve your conversion.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="checking">Checking Current Permissions</h2>
+              <p>Facebook offers people full control over the permissions they grant to an app. That control extends
+                beyond the point at which they see the login dialog. They can choose not to grant certain permissions
+                during the login process. They can also revoke permissions in their Facebook privacy settings at any
+                time. Apps should check for the validity of permissions before attempting to perform an API call where
+                they are required. For example, checking that <code>email</code> is still granted before sending a
+                message.</p>
+              <p>For web apps, we provide a graph API endpoint to retrieve a list of granted permissions:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">GET /{user-id}/permissions</pre>
+              <p>The call must be made with either a user <a href="/docs/facebook-login/access-tokens">access token</a>
+                or your app access token. The call will return a JSON string containing the permission names which have
+                been granted to the app and their status:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data": [
+    {
+      "permission": "public_profile",
+      "status": "granted"
+    },
+    {
+      "permission": "email",
+      "status": "granted"
+    },
+    {
+      "permission": "user_friends",
+      "status": "declined"
+    }
+  ]
+}</pre>
+              <p>We also provide methods in the <a
+                  href="/docs/facebook-login/ios/permissions#permissions-checking">iOS</a> and <a
+                  href="/docs/facebook-login/android/permissions">Android</a> SDKs that provide platform-friendly
+                representations of the permissions your app has been granted.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="handling">Handling Missing Permissions</h2>
+              <p>When an app requests permissions, people may completely deny those permissions, not fully grant those
+                permissions, or change them later. In order to provide a great experience, apps should be built to
+                handle these situations.</p>
+              <p>First, apps should be able to handle any permissions that were requested but not granted:</p>
+              <ul>
+                <li><a href="#checking">Check granted permissions</a> before trying to use APIs that require them.</li>
+                <li>Detect permissions errors returned when an API request is made without the correct permission. This
+                  is an example error:</li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "error": {
+    "message": "(#200) The user hasn't authorized the application
+     to perform this action",
+    "type": "OAuthException",
+    "code": 200
+  }
+}</pre>
+              <p>Once an app has detected that someone has denied some or all permissions, it may pass them back through
+                the login flow <strong>once</strong> and request any required permissions. However, this is a poor
+                experience and should be avoided if possible. If someone is actively choosing not to grant a specific
+                permission to an app they are unlikely to change their mind, even in the face of continued prompting.
+                Instead, do the following:</p>
+              <ul>
+                <li>
+                  <p>If a person declines the <a href="/docs/facebook-login/overview/#logindialog">login dialog</a> have
+                    a clear and upfront explanation about why you are requesting each permission. Then let them click or
+                    tap to opt back in to the permission request dialog. Do not immediately redirect them into a
+                    permission request dialog without an explanation.</p>
+                </li>
+                <li>
+                  <p>If someone has declined a permission for your app, the login dialog won't let your app re-request
+                    the permission <a
+                      href="/docs/facebook-login/login-flow-for-web#re-asking-declined-permissions">unless you pass
+                      <code>auth_type=rerequest</code> along with your request.</a></p>
+                </li>
+                <li>
+                  <p>For cases where someone has granted some permissions but not others, only prompt for missing
+                    permissions at the point at which they are needed. For example, if your app sends order
+                    confirmations to users' email, only request <code>email</code> when they make an order.</p>
+                </li>
+                <li>
+                  <p>Unless the permissions you are requesting in the login dialog are critical to the functionality of
+                    your app and a feature doesn't work without them, let people continue using your app without the
+                    permissions.</p>
+                </li>
+              </ul>
+              <div class="_57yz _57z0 _3-8p">
+                <div class="_57y-">
+                  <p>You may receive Developer Alerts if your app repeatedly directs users to permissions dialogs after
+                    they deny permissions. To stop receiving these alerts, follow these guidelines.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="revoking">Revoking Permissions</h2>
+              <p>Apps can let people revoke permissions that were previously granted. For example, your app could have a
+                settings page that lets someone disable sending them email messages. That settings page could also
+                revoke the <code>email</code> permission at the same time.</p>
+              <p>You can revoke a specific permission by making a call to a Graph API endpoint:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">DELETE /{user-id}/permissions/{permission-name}</pre>
+              <p>This request must be made with a user access token or an app access token for the current app. If the
+                request is successful, you will receive a response of <code>true</code>.</p>
+              <hr />
+              <h3 id="revokelogin">Revoking Authorization and Token Invalidation for Login</h3>
+              <p>You can also let people completely de-authorize an app, or revoke authorization for login, by making a
+                call to this Graph API endpoint:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">DELETE /{user-id}/permissions</pre>
+              <p>This request must be made with a valid user access token or an app access token for the current app. If
+                the request is successful, your app receives a response of <code>true</code>. If the call is successful,
+                any user access token for the person will be invalidated and they will have to log in again. Because
+                you're de-authorizing your app, they will also have to grant access to your app as if they were logging
+                in for the first time.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Platform Guides</h2>
+              <a class="_42ft _3g_o _3g_q _3g_v" href="/docs/facebook-login/android/permissions"
+                role="button">Android</a><a class="_42ft _3g_o _3g_q _3g_v" href="/docs/facebook-login/ios/permissions"
+                role="button">iOS</a><a class="_42ft _3g_o _3g_q _3g_v"
+                href="/docs/facebook-login/web#re-launching-permissions-dialog" role="button">Web</a>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

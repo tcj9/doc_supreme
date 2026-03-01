@@ -1,0 +1,128 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_DC">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Managing Permissions in Facebook Login for the Web</h1>
+              <p>One of the most important parts of launching the Login Dialog is choosing what data your app would like
+                access to. These examples have all used the <code>scope</code> parameter, which is how you ask for
+                access to someone's data. These are all called <em>Permissions</em>.</p>
+              <p>Permissions are covered in depth in our <a href="/docs/facebook-login/permissions">permissions
+                  guide</a>. However, there are a few things to remember when dealing with permissions and the login
+                dialog:</p>
+              <ul>
+                <li>You ask for permissions when the dialog is created. The resulting set of permissions is tied to the
+                  access token that's returned.</li>
+                <li>Other platforms may have a different set of permissions. For example, on iOS you can ask for places
+                  a person's been tagged, while in the web version of your app that permission is not required for the
+                  experience.</li>
+                <li>You can add permissions later when you need more capabilities. When you need a new permission, you
+                  simply add the permission you need to the list you've already granted, re-launch the Login Dialog and
+                  it will ask for the new permission.</li>
+                <li>The Login Dialog lets people <strong>decline to share certain permissions with your app that you ask
+                    for.</strong> Your app should handle this case. Learn more about this in our <a
+                    href="/docs/facebook-login/permissions#handling">permissions dialog</a>.</li>
+                <li>Apps that ask for more information than the default fields and the <code>email</code> permission
+                  <strong>must be reviewed by Facebook before they can be made available to the general public</strong>.
+                  Learn more in our documentation for <a href="/docs/apps/review/login">login review</a> and our general
+                  <a href="/docs/apps/review">review guidelines</a>.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="re-launching-permissions-dialog">Adding Permissions</h2>
+              <p>One of the <a href="/docs/facebook-login/checklist#avoidbacktoback">best practices with Facebook Login
+                  is to not request read permissions and publishing permissions at the same time</a>. To support this
+                your app can ask for more permissions later, well after someone has logged in. To do that, all you have
+                to do is launch the Login Dialog with the new permission that you're asking for.</p>
+              <p>For example, let's say you had a Login Button with the following permissions:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">&lt;fb:login-button scope="public_profile" onlogin="checkLoginState();"&gt;
+&lt;/fb:login-button&gt;</pre>
+              <p>And if you checked <code>/me/permissions</code> for <a
+                  href="/docs/facebook-login/permissions#checking">permissions granted after the person accepted</a> you
+                would find this:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{"data":
+  [
+    {
+      "permission":"public_profile",
+      "status":"granted"
+    }
+  ]
+}</pre>
+              <p>If you wanted to add the <code>email</code> permission later, you could re-launch it with the
+                <code>FB.login()</code> function like this:
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.login(function(response) {
+   console.log(response);
+}, {scope: 'email'});</pre>
+              <p>(This function must be called from a button's event handler otherwise it's likely to be blocked by
+                browser popup blockers.)</p>
+              <p>Note that it only asks for the new permission. If you accept the new permission checking
+                <code>/me/permissions</code> will result in this:
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{"data":
+  [
+    {
+      "permission":"public_profile",
+      "status":"granted"
+    },
+    {
+      "permission":"email",
+      "status":"granted"
+    }
+  ]
+}</pre>
+              <p>Note that the new <code>email</code> permission has been added to the list of allowed permissions.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="re-asking-declined-permissions">Re-asking for Declined Permissions</h2>
+              <p>Facebook Login lets people decline sharing some permissions with your app. If someone were to declines
+                <code>user_likes</code> (Likes), checking <code>/me/permissions</code> for what permissions have been
+                granted results in:
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data":
+    [
+      {
+        "permission":"public_profile",
+        "status":"granted"
+      },
+      {
+        "permission":"user_likes",
+        "status":"declined"
+      }
+    ]
+}</pre>
+              <p>Note that <code>user_likes</code> has been declined instead of granted.</p>
+              <p>It's OK to ask a person <strong>once</strong> to grant your app permissions that they've declined. You
+                should have a screen of education on why you think they should grant the permission to you and then
+                re-ask. But if you use the method described in the <a href="#re-launching-permissions-dialog">previous
+                  section</a>, the Login Dialog won't ask for that permission.</p>
+              <p><strong>This is because once someone has declined a permission, the Login Dialog will not re-ask them
+                  for it unless you explicitly tell the dialog you're re-asking for a declined permission.</strong></p>
+              <p>You do this by adding the <code>auth_type: rerequest</code> flag to your <code>FB.login()</code> call:
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.login(
+  function(response) {
+    console.log(response);
+  },
+  {
+    scope: 'user_likes',
+    auth_type: 'rerequest'
+  }
+);</pre>
+              <p>When you do that, the Login Dialog will re-ask for the declined permission. The dialog will look very
+                much like the dialog in the section on re-asking for permissions but will let you re-ask for a declined
+                permission.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

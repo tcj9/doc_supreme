@@ -1,0 +1,63 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="overview">Overview</h1>
+        <p style="text-align:left">The Display API contains a set of HTTP-based APIs that your product can use to
+            display a TikTok creator's videos and their profile information.</p>
+        <p style="text-align:left">Your platform's influencers can display their TikTok profile identities and videos to
+            enrich content, attract more audiences, and enable their followers to view their TikTok videos without
+            leaving your platform.</p>
+        <h2 id="components">Components</h2>
+        <p style="text-align:left">Display API has three major APIs: <code>/v2/user/info/</code>,
+            <code>/v2/video/list/</code>, and <code>/v2/video/query/</code>.
+        </p>
+        <p style="text-align:left"><b><a href="/doc/tiktok-api-v2-get-user-info">/v2/user/info/</a></b><b>:</b> Get a
+            TikTok user's basic profile information. This includes the user's open_id, avatar_url, display_name,
+            profile_deep_link, and bio_description.</p>
+        <p style="text-align:left"><b><a href="/doc/tiktok-api-v2-video-list">/v2/video/list/</a></b><b>:</b> Get the
+            metadata of a TikTok user's recently uploaded videos. </p>
+        <p style="text-align:left"><b><a href="/doc/tiktok-api-v2-video-query">/v2/video/query/</a></b><b>:</b> Get the
+            metadata of TikTok a user's videos filtered by video Id.</p>
+        <h2 id="permissions">Permissions</h2>
+        <ul class="list-1" type="disc">
+            <li><b>video.list:</b> Read a user's public videos on TikTok.</li>
+            <li><b>user.info</b><b>.basic:</b> Read a user's profile info (open id, avatar, display name, ...).</li>
+        </ul>
+        <h2 id="example_use_cases">Example Use Cases</h2>
+        <h3 id="display_user's_tiktok_profile">Display User's TikTok Profile</h3>
+        <p style="text-align:left">Use the /v2/user/info/ API to get a TikTok user's profile data and then display their
+            TikTok identity. In this example, when a visitor clicks the profile_deep_link, they will be redirected to
+            the creator's profile page on the TikTok app or website.</p>
+        <div style="display:flex"><img height="710.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/4361969ea3f4495260badccda4d91c63"
+                width="635.000000px" /></div><br />
+        <h3 id="display_user's_self-selected_tiktok_videos">Display User's Self-Selected TikTok Videos</h3>
+        <p style="text-align:left">Use the /v2/video/list/ and /v2/video/query/ APIs to get the metadata of a TikTok
+            user's videos and integrate an embedded video player into your product. In addition, you can design features
+            to allow users to select their TikTok videos to present on their profile and enable their followers to watch
+            the video in webview.</p>
+        <div style="display:flex"><img height="1062.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/fe807d250ee00c33d54a286eda148750"
+                width="2512.000000px" /></div><br />
+        <h3 id="display_user's_recent_tiktok_videos">Display User's Recent TikTok Videos</h3>
+        <p style="text-align:left">Use the /v2/video/list/ and /v2/video/query/ APIs to get the metadata of a TikTok
+            user's videos and integrate an embedded video player into your product. In addition, you can design features
+            to allow users to show their recent TikTok videos on your platform.</p>
+        <div style="display:flex;justify-content:center"><img height="1034.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/3db1b2f604b408850b0eb4cf19ac74ba"
+                width="1954.000000px" /></div>
+        <h2 id="next_steps">Next Steps</h2>
+        <p style="text-align:left"><a href="/doc/display-api-get-started">Get Started with Display API</a></p>
+        <br /><br />
+    </div>
+</div>

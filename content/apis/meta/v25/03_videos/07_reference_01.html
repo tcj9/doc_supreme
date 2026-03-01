@@ -1,0 +1,491 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_BY">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Error Codes</h1>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Video Publishing Errors</h2>
+              <h3>Session Initialization Phase</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:100px">
+                      Error Subcode
+                    </th>
+                    <th style="width:125px">
+                      Error Type
+                    </th>
+                    <th>
+                      Description
+                    </th>
+                    <th>
+                      Recommendations
+                    </th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_ua">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>6000</code></p>
+                      </td>
+                      <td>
+                        <p><code>GraphException</code></p>
+                      </td>
+                      <td>
+                        <p>There was a problem uploading your video file. Please try again with another file.</p>
+                      </td>
+                      <td>
+                        <p>Retry several times and report bug if this still doesn't work.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>1363042</code></p>
+                      </td>
+                      <td>
+                        <p><code>CodedException</code></p>
+                      </td>
+                      <td>
+                        <p>No Permission to Upload Video: You don't have permission to upload a video here.</p>
+                      </td>
+                      <td>
+                        <p>Get valid access token. See <a href="/docs/facebook-login/access-tokens">Access Tokens</a>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>1363023</code></p>
+                      </td>
+                      <td>
+                        <p><code>CodedException</code></p>
+                      </td>
+                      <td>
+                        <p>The video you tried to upload is too large. The maximum size for a video is <strong>2
+                            GB</strong>. Please try again with a smaller file.</p>
+                      </td>
+                      <td>
+                        <p>Upload with small file or talk to Facebook for capacity</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>1363022</code></p>
+                      </td>
+                      <td>
+                        <p><code>CodedException</code></p>
+                      </td>
+                      <td>
+                        <p>The video you tried to upload is too small. The minimum size for a video is <strong>1
+                            KB</strong>. Please try again with a larger file.</p>
+                      </td>
+                      <td>
+                        <p>Make sure your file is not empty.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Upload Phase</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:75px">Error Code</th>
+                    <th>Error Message</th>
+                    <th>Recommendations</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_V0">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>1363030</code></p>
+                      </td>
+                      <td>
+                        <p>Video Upload Timeout. Your video upload timed out before it could be completed. This is
+                          probably because of a slow network connection or because the video is too large. Please try
+                          again.</p>
+                      </td>
+                      <td>
+                        <p>Fix issues then retry upload.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>1363019</code></p>
+                      </td>
+                      <td>
+                        <p>There was a problem uploading your video. Please try uploading it again.</p>
+                      </td>
+                      <td>
+                        <p>Retry upload.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>1363037</code></p>
+                      </td>
+                      <td>
+                        <p>There was a problem uploading your video. Please try uploading it again.
+                          <code>error_data:{start_offset:0,end_offset:392695}</code>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Returned when the server receives an invalid start offset from the client. Try to parse the
+                          <code>start_offset</code> and <code>end_offset</code> from error message and do a retry again.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>1363033</code></p>
+                      </td>
+                      <td>
+                        <p>There was a problem uploading your video. Please try uploading it again.</p>
+                      </td>
+                      <td>
+                        <p>Typically caused by connection issue, which causes server to receive partial file. Need to
+                          retry.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>1363020</code></p>
+                      </td>
+                      <td>
+                        <p>No Video Selected. Please select the video you want to upload.</p>
+                      </td>
+                      <td>
+                        <p>Need to include a file name in the parameter</p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>1363005</code></p>
+                      </td>
+                      <td>
+                        <p>No Permission to Edit Video. You lack permission to edit this video.</p>
+                      </td>
+                      <td>
+                        <p>Need to include a file name in the parameter</p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>1363031</code></p>
+                      </td>
+                      <td>
+                        <p>No Video Detected. It looks like you are uploading a file that is not a video. Please try
+                          uploading a supported format. See <a href="/docs/graph-api/reference/page/videos">Graph API
+                            Reference, Supported Formats</a></p>
+                      </td>
+                      <td>
+                        <p>Provide supported format</p>
+                      </td>
+                    </tr>
+                    <tr class="row_7 _5m29">
+                      <td>
+                        <p><code>1363045</code></p>
+                      </td>
+                      <td>
+                        <p>There was a problem uploading your video. Please try uploading it again.</p>
+                      </td>
+                      <td>
+                        <p>The upload video does not match the size. For example, someone start an upload session to
+                          upload 1MB file, but uploads more than 1MB data.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_8">
+                      <td>
+                        <p><code>1363032</code></p>
+                      </td>
+                      <td>
+                        <p>No Video Detected. It looks like you are uploading a file that is not a video. Please try
+                          uploading a supported format. See <a href="/docs/graph-api/reference/page/videos">Graph API
+                            Reference, Supported Formats</a></p>
+                      </td>
+                      <td>
+                        <p>Provide supported format</p>
+                      </td>
+                    </tr>
+                    <tr class="row_9 _5m29">
+                      <td>
+                        <p><code>1363025</code></p>
+                      </td>
+                      <td>
+                        <p>Video Too Short: The video you tried to upload is too short. The minimum length for a video
+                          is <strong>1 second</strong>. Please upload a longer video.</p>
+                      </td>
+                      <td>
+                        <p>Provide video of minimum duration</p>
+                      </td>
+                    </tr>
+                    <tr class="row_10">
+                      <td>
+                        <p><code>1363026</code></p>
+                      </td>
+                      <td>
+                        <p>Video Too Long. The video you tried to upload is too long. The maximum length for a video is
+                          <strong>40 minutes</strong>. Please upload a shorter video.
+                        </p>
+                      </td>
+                      <td>
+                        <p>Provide video under maximum duration</p>
+                      </td>
+                    </tr>
+                    <tr class="row_11 _5m29">
+                      <td>
+                        <p><code>1363021</code></p>
+                      </td>
+                      <td>
+                        <p>Video Upload Problem: There was a problem uploading your video. Please try again.</p>
+                      </td>
+                      <td>
+                        <p>Retry upload</p>
+                      </td>
+                    </tr>
+                    <tr class="row_12">
+                      <td>
+                        <p><code>1363041</code></p>
+                      </td>
+                      <td>
+                        <p>Error Uploading Video: There was a problem uploading your video. Please try uploading it
+                          again.</p>
+                      </td>
+                      <td>
+                        <p>Retry upload</p>
+                      </td>
+                    </tr>
+                    <tr class="row_13 _5m29">
+                      <td>
+                        <p><code>1363022</code></p>
+                      </td>
+                      <td>
+                        <p>Video Too Small: The video you tried to upload is too small. The minimum size for a video is
+                          <strong>1 KB</strong>. Please try again with a larger file.
+                        </p>
+                      </td>
+                      <td>
+                        <p>Provide minimum sized video</p>
+                      </td>
+                    </tr>
+                    <tr class="row_14">
+                      <td>
+                        <p><code>1363023</code></p>
+                      </td>
+                      <td>
+                        <p>Video Too Large: The video you tried to upload is too large. The maximum size for a video is
+                          <strong>2 GB</strong>. Please try again with a smaller file.
+                        </p>
+                      </td>
+                      <td>
+                        <p>Provide video less than maximum allowed size.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_15 _5m29">
+                      <td>
+                        <p><code>1363024</code></p>
+                      </td>
+                      <td>
+                        <p>Unsupported Video Format: The video you try to upload is in a format that is not supported.
+                          Please try again with a video in a supported format, see <a
+                            href="/docs/graph-api/reference/page/videos">Graph API Reference, Supported Formats</a>.</p>
+                      </td>
+                      <td>
+                        <p>Provide supported format.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>End Session Phase</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:100px">Error Code</th>
+                    <th>Error Message</th>
+                    <th>Recommendation</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_iO">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>1617005</code></p>
+                      </td>
+                      <td>
+                        <p>Cannot Add Tag: You do not have permission to add this tag.</p>
+                      </td>
+                      <td>
+                        <p>See <a href="/docs/facebook-login/permissions">Permissions with Facebook Login</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>1617003</code></p>
+                      </td>
+                      <td>
+                        <p>Too Many User Tags: Sorry, we can not save your tag because this video has already been
+                          tagged with the maximum number of people allowed. Please see the <a
+                            href="https://www.facebook.com/help/?faq=16974">FAQ page on Tagging</a>.</p>
+                      </td>
+                      <td>
+                        <p>Limit allowed tags.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>1363011</code></p>
+                      </td>
+                      <td>
+                        <p>Error Storing or Editing Video: There was an error storing or editing your video. Please try
+                          again.</p>
+                      </td>
+                      <td>
+                        <p>Retry post.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>1617006</code></p>
+                      </td>
+                      <td>
+                        <p>Already Tagged: The specified user or page is already tagged in this video.</p>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>1357005</code></p>
+                      </td>
+                      <td>
+                        <p>User-provided request parameters do not match the types specified in
+                          <code>param_get/param_post</code>.
+                        </p>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>1607004</code></p>
+                      </td>
+                      <td>
+                        <p>The date provided is earlier than the one for User birthday.</p>
+                      </td>
+                      <td>
+                        <p>Check and verify the date is correct then retry the post</p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>1363041</code></p>
+                      </td>
+                      <td>
+                        <p>Error Uploading Video: There was a problem uploading your video. Please try uploading it
+                          again.</p>
+                      </td>
+                      <td>
+                        <p>Check that you do not use an expired upload session id.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_7 _5m29">
+                      <td>
+                        <p><code>1607002</code></p>
+                      </td>
+                      <td>
+                        <p>Invalid Date, <code>TIMELINE__INVALID_TIME_TOO_EARLY</code>. You cannot post to that time
+                          period.</p>
+                      </td>
+                      <td>
+                        <p>Change to a later date.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Slideshow Publishing Errors</h2>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th>
+                      ErrorCode
+                    </th>
+                    <th>
+                      Error Message
+                    </th>
+                    <th>
+                      Recommendation
+                    </th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_5_Eh">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>1363061</code></p>
+                      </td>
+                      <td>
+                        <p>You cannot upload both video and images at the same time.</p>
+                      </td>
+                      <td>
+                        <p>Retry with photos only.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>1363064</code></p>
+                      </td>
+                      <td>
+                        <p>The images you tried to upload are not enough. The minimum number of images for creating a
+                          video is 3.</p>
+                      </td>
+                      <td>
+                        <p>Retry with more images</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>1363063</code></p>
+                      </td>
+                      <td>
+                        <p>The images you tried to upload are too many. The maximum number of images for creating a
+                          video is 7.</p>
+                      </td>
+                      <td>
+                        <p>Retry with fewer images.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>1363065</code></p>
+                      </td>
+                      <td>
+                        <p>Unable to fetch image file from URL.</p>
+                      </td>
+                      <td>
+                        <p>Retry with valid image url.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>1363066</code></p>
+                      </td>
+                      <td>
+                        <p>The image file you selected is in a format gif that we don't support.</p>
+                      </td>
+                      <td>
+                        <p>Remove the unsupported image and retry.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

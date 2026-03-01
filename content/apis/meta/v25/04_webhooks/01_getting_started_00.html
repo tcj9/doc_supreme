@@ -1,0 +1,430 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_IQ">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Get started with webhooks</h1>
+              <p>This document explains how to set up a Webhook that will notify you whenever your app's Users publish
+                any changes to their User photos. Once you understand how to set up this Webhook you will know how to
+                set up all Webhooks.</p>
+              <p>Setting up any Webhook requires you to:</p>
+              <ol>
+                <li><a href="#create-an-endpoint">Create an endpoint</a> on a secure server that can process HTTPS
+                  requests.</li>
+                <li><a href="#configure-webhooks">Configure the Webhooks product</a> in your app's App Dashboard.</li>
+              </ol>
+              <p>These steps are explained in detail below.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Create an endpoint</h2>
+              <div><span>
+                  <p>This step must be completed before you can subscribe to any webhook fields in the App Dashboard.
+                  </p>
+                  <p>Your endpoint must be able to process two types of HTTPS requests: <a
+                      href="#verification-requests">Verification Requests</a> and <a href="#event-notifications">Event
+                      Notifications</a>. Since both requests use HTTPs, your server must have a valid TLS or SSL
+                    certificate correctly configured and installed. Self-signed certificates are not supported.</p>
+                  <p>The sections below explain what will be in each type of request and how to respond to them.
+                    Alternatively, you can use our <a href="/docs/graph-api/webhooks/sample-apps">sample app</a> which
+                    is already configured to process these requests.</p>
+                </span></div>
+              <h3 id="verification-requests">Verification Requests</h3>
+              <div><span>
+                  <p>Anytime you configure the Webhooks product in your App Dashboard, we'll send a <code>GET</code>
+                    request to your endpoint URL. Verification requests include the following query string parameters,
+                    appended to the end of your endpoint URL. They will look something like this:</p>
+                  <h4>Sample Verification Request</h4>
+                  <pre class="_5s-8 prettyprint lang-html" style="">
+GET https://www.your-clever-domain-name.com/webhooks?
+  hub.mode=subscribe&amp;
+  hub.challenge=1158201444&amp;
+  hub.verify_token=meatyhamhock
+</pre>
+                  <div class="_57-c">
+                    <table class="_4-ss _5k9x">
+                      <thead>
+                        <th>Parameter</th>
+                        <th>Sample Value</th>
+                        <th>Description</th>
+                      </thead>
+                      <tbody class="_5m37" id="u_0_2_Ws">
+                        <tr class="row_0">
+                          <td>
+                            <p><code>hub.mode</code></p>
+                          </td>
+                          <td>
+                            <p><code>subscribe</code></p>
+                          </td>
+                          <td>
+                            <p>This value will always be set to <code>subscribe</code>.</p>
+                          </td>
+                        </tr>
+                        <tr class="row_1 _5m29">
+                          <td>
+                            <p><code>hub.challenge</code></p>
+                          </td>
+                          <td>
+                            <p><code>1158201444</code></p>
+                          </td>
+                          <td>
+                            <p>An <code>int</code> you must pass back to us.</p>
+                          </td>
+                        </tr>
+                        <tr class="row_2">
+                          <td>
+                            <p><code>hub.verify_token</code></p>
+                          </td>
+                          <td>
+                            <p><code>meatyhamhock</code></p>
+                          </td>
+                          <td>
+                            <p>A string that we grab from the <strong>Verify Token</strong> field in your app's App
+                              Dashboard. You will set this string when you complete the <a
+                                href="#configure-webhooks-product">Webhooks configuration settings</a> steps.</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p><strong>Note:</strong> <a data-lynx-mode="hover"
+                      href="http://l.facebook.com/l.php?u=http%3A%2F%2Fwww.php.net%2Fmanual%2Fen%2Flanguage.variables.external.php&amp;h=AT1Brje-_OGbNbyYb58Nst2bRDBy_LuKF5j5lujalGdqi7GENx2yn2hwIkstEIB4XYo9xkMJwKmlLZCtkgTQhLq_e6HvRhhvFjhrozJxzKnQdTNEP8PyTxabLcYoXVtH-4bAS5Phf4gGGYzFkDjAoA"
+                      rel="nofollow" target="_blank">PHP converts periods (.) to underscores (_) in parameter names</a>.
+                  </p>
+                  <h4 id="validate-requests">Validating Verification Requests</h4>
+                  <div style="padding-bottom:10px"></div>
+                  <p>Whenever your endpoint receives a verification request, it must:</p>
+                  <ul>
+                    <li>Verify that the <code>hub.verify_token</code> value matches the string you set in the
+                      <strong>Verify Token</strong> field when you <a href="#configure-webhooks-product">configure the
+                        Webhooks product</a> in your App Dashboard (you haven't set up this token string yet).
+                    </li>
+                    <li>Respond with the <code>hub.challenge</code> value.</li>
+                  </ul>
+                  <p>If you are in your App Dashboard and configuring your Webhooks product (and thus, triggering a
+                    Verification Request), the dashboard will indicate if your endpoint validated the request correctly.
+                    If you are using the Graph API's <a
+                      href="/docs/graph-api/reference/app/subscriptions">/app/subscriptions endpoint</a> to configure
+                    the Webhooks product, the API will indicate success or failure with a response.</p>
+                </span></div>
+              <h3 id="event-notifications">Event Notifications</h3>
+              <div><span>
+                  <p>When you configure your Webhooks product, you will subscribe to specific <code>fields</code> on an
+                    <code>object</code> type (e.g., the <code>photos</code> field on the <code>user</code> object).
+                    Whenever there's a change to one of these fields, we will send your endpoint a <code>POST</code>
+                    request with a JSON payload describing the change.
+                  </p>
+                  <p>For example, if you subscribed to the <code>user</code> object's <code>photos</code> field and one
+                    of your app's Users posted a Photo, we would send you a <code>POST</code> request that would look
+                    something like this:</p>
+                  <pre class="_5s-8 prettyprint lang-html" style="">POST / HTTPS/1.1
+Host: your-clever-domain-name.com/webhooks
+Content-Type: application/json
+X-Hub-Signature-256: sha256={super-long-SHA256-signature}
+Content-Length: 311
+
+{
+  "entry": [
+    {
+      "time": 1520383571,
+      "changes": [
+        {
+          "field": "photos",
+          "value":
+            {
+              "verb": "update",
+              "object_id": "10211885744794461"
+            }
+        }
+      ],
+      "id": "10210299214172187",
+      "uid": "10210299214172187"
+    }
+  ],
+  "object": "user"
+}</pre>
+                  <h4>Payload Contents</h4>
+                  <div style="padding-bottom:10px"></div>
+                  <p>Payloads will contain an object describing the change. When you <a
+                      href="#configure-webhooks-product">configure the webhooks product</a>, you can indicate if
+                    payloads should only contain the names of changed fields, or if payloads should include the new
+                    values as well.</p>
+                  <p>We format all payloads with JSON, so you can parse the payload using common JSON parsing methods or
+                    packages.</p>
+                  <div class="_57yz _57z1 _3-8p">
+                    <div class="_57y-">
+                      <p>You will not be able to query historical webhook event notification data, so be sure to capture
+                        and store any webhook payload content that you want to keep.</p>
+                    </div>
+                  </div>
+                  <p>Most payloads will contain the following common properties, but the contents and structure of each
+                    payload varies depending on the object fields you are subscribed to. Refer to each object's <a
+                      href="/docs/graph-api/webhooks/reference">reference</a> document to see which fields will be
+                    included.</p>
+                  <div class="_57-c">
+                    <table class="_4-ss _5k9x">
+                      <thead>
+                        <th>
+                          Property
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                      </thead>
+                      <tbody class="_5m37" id="u_0_3_Or">
+                        <tr class="row_0">
+                          <td>
+                            <p><code>object</code></p>
+                          </td>
+                          <td>
+                            <p>The object's type (e.g., <code>user</code>, <code>page</code>, etc.)</p>
+                          </td>
+                          <td>
+                            <p><code>string</code></p>
+                          </td>
+                        </tr>
+                        <tr class="row_1 _5m29">
+                          <td>
+                            <p><code>entry</code></p>
+                          </td>
+                          <td>
+                            <p>An array containing an object describing the changes. Multiple changes from different
+                              objects that are of the same type may be batched together.</p>
+                          </td>
+                          <td>
+                            <p><code>array</code></p>
+                          </td>
+                        </tr>
+                        <tr class="row_2">
+                          <td>
+                            <p><code>id</code></p>
+                          </td>
+                          <td>
+                            <p>The object's ID</p>
+                          </td>
+                          <td>
+                            <p><code>string</code></p>
+                          </td>
+                        </tr>
+                        <tr class="row_3 _5m29">
+                          <td>
+                            <p><code>changed_fields</code></p>
+                          </td>
+                          <td>
+                            <p>An array of strings indicating the names of the fields that have been changed. Only
+                              included if you <em>disable</em> the <strong>Include Values</strong> setting when
+                              configuring the Webhooks product in your app's App Dashboard.</p>
+                          </td>
+                          <td>
+                            <p><code>array</code></p>
+                          </td>
+                        </tr>
+                        <tr class="row_4">
+                          <td>
+                            <p><code>changes</code></p>
+                          </td>
+                          <td>
+                            <p>An array containing an object describing the changed fields and their new values. Only
+                              included if you <em>enable</em> the <strong>Include Values</strong> setting when
+                              configuring the Webhooks product in your app's App Dashboard.</p>
+                          </td>
+                          <td>
+                            <p><code>array</code></p>
+                          </td>
+                        </tr>
+                        <tr class="row_5 _5m29">
+                          <td>
+                            <p><code>time</code></p>
+                          </td>
+                          <td>
+                            <p>A UNIX timestamp indicating when the Event Notification was sent (not when the change
+                              that triggered the notification occurred).</p>
+                          </td>
+                          <td>
+                            <p><code>int</code></p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <h4 id="validate-payloads">Validating Payloads</h4>
+                  <div style="padding-bottom:10px"></div>
+                  <p>We sign all Event Notification payloads with a <strong>SHA256</strong> signature and include the
+                    signature in the request's <code>X-Hub-Signature-256</code> header, preceded with
+                    <code>sha256=</code>. You don't have to validate the payload, but you should.
+                  </p>
+                  <p>To validate the payload:</p>
+                  <ol>
+                    <li>Generate a <strong>SHA256</strong> signature using the payload and your app's <strong>App
+                        Secret</strong>.</li>
+                    <li>Compare your signature to the signature in the <code>X-Hub-Signature-256</code> header
+                      (everything after <code>sha256=</code>). If the signatures match, the payload is genuine.</li>
+                  </ol>
+                  <div style="padding-bottom:10px"></div>
+                  <h4>Responding to Event Notifications</h4>
+                  <div style="padding-bottom:10px"></div>
+                  <p>Your endpoint should respond to all Event Notifications with <code>200 OK HTTPS</code>.</p>
+                  <h4>Frequency</h4>
+                  <div style="padding-bottom:10px"></div>
+                  <p>Event Notifications are aggregated and sent in a batch with a <strong>maximum</strong> of 1000
+                    updates. However batching cannot be guaranteed so be sure to adjust your servers to handle each
+                    Webhook individually.</p>
+                  <p>If any update sent to your server fails, we will retry immediately, then try a few more times with
+                    decreasing frequency over the next 36 hours. Your server should handle deduplication in these cases.
+                    Unacknowledged responses will be dropped after 36 hours.</p>
+                  <p>Note: The frequency with which Messenger event notifications are sent is different. Please refer to
+                    the <a href="https://developers.facebook.com/docs/messenger-platform/webhook/">Messenger Platform
+                      Webhooks documentation</a> for more information.</p>
+                </span></div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Configure webhooks</h2>
+              <p>To learn how to configure webhooks in your app, visit the <a
+                  href="/docs/development/app-customization">Use Case Customization page</a> for your use case.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <div class="_57yz _57z1 _3-8p">
+                <div class="_57y-">
+                  <h3>Upcoming changes on mTLS for Webhooks</h3>
+                  <p>Starting March 31, 2026, Meta will begin signing Webhooks mTLS certificates using a different
+                    Certificate Authority (CA) owned by Meta.</p>
+                  <p>If your servers are configured to require and verify the Webhooks mTLS certificate, you must trust
+                    the new Meta CA certificate. Failure to update your trust store by the deadline will result in TLS
+                    handshake failures, and your servers will stop receiving all webhooks events. You can download the
+                    new Meta CA certificate (<a
+                      href="/docs/graph-api/webhooks/getting-started/#downloadable-root-certificate"><code>meta-outbound-api-ca-2025-12.pem</code></a>),
+                    add it to your trust store, and verify the leaf certificate starting March 31, 2026.</p>
+                  <p>The leaf certificate will maintain the same Common Name and Subject Alternative Name
+                    (<code>client.webhooks.fbclientcerts.com</code>) as the current certificate. You should add the new
+                    Meta CA certificate to your trust store while the current one is still active.</p>
+                  <p>This change is happening because DigiCert is <a data-lynx-mode="hover"
+                      href="https://l.facebook.com/l.php?u=https%3A%2F%2Fknowledge.digicert.com%2Falerts%2Fsunsetting-client-authentication-eku-from-digicert-public-tls-certificates&amp;h=AT1I2qPsK41iFqIlyfegOXg9SEq2OXmNmjALfr0Lmh52R_kKN6LaPlLH7v7skxXBZGGLEtZXHN3rmH41OgnDE_Q5WaRuhfdwR0ijaOWTB4KZtmuXa07KSQ0ZuY2WfW2QNOQ6PypZfAi4jZZOTydcBA"
+                      rel="nofollow" target="_blank">deprecating</a> the use of the Client Authentication EKU. As a
+                    result, the current Webhooks mTLS certificate signed by DigiCert cannot be renewed and the
+                    certificate expires on April 15, 2026.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+              <div class="_4-u3 _588p">
+                <h2>mTLS for Webhooks</h2>
+                <p>Mutual TLS (mTLS) is a method for mutual authentication.</p>
+                <p>mTLS ensures that the parties at each end of a network connection are who they claim to be by
+                  verifying that they both have the correct private key. The information within their respective TLS
+                  certificates provides additional verification.</p>
+                <h3>How to configure mTLS</h3>
+                <p>Once you enable mTLS on your subscription to WhatsApp Business Account, Meta will present a client
+                  certificate together with its signing intermediate certificate. Both certificates are used to create a
+                  TLS handshake of Webhook requests to your server. Your server then can verify the sender’s identity of
+                  these requests by the trust chain and the common name (CN).</p>
+                <p>The client certificate is signed by an intermediate CA certificate, DigiCert SHA2 High Assurance
+                  Server CA, and then by a root CA certificate, DigiCert High Assurance EV Root CA. Note that the
+                  intermediate certificate also signs the certificate for graph.facebook.com:</p>
+                <h3>Client Certificate Verification</h3>
+                <p>After setting up HTTPS for receiving Webhook requests, complete the following steps to verify the
+                  client certificate and its common name <code>client.webhooks.fbclientcerts.com</code>:</p>
+                <ol>
+                  <li>Install the root certificate</li>
+                  <li>Verify the client certificate against the root certificate</li>
+                  <li>Verify the common name (<code>client.webhooks.fbclientcerts.com</code>) of the client certificate
+                  </li>
+                </ol>
+                <p>Note: Servers receiving Webhooks must be using HTTPS; and we are always verifying the certificate
+                  from your HTTPS server for security.</p>
+                <h3>Example</h3>
+                <p>Depending on your server’s setup, the above steps vary in details. We illustrate by two examples, one
+                  for Nginx and one for AWS Application Load Balancer (ALB).</p>
+                <h3>Nginx</h3>
+                <ol>
+                  <li>
+                    <p>Download the root certificate (DigiCert High Assurance EV Root CA) from DigiCert to your server,
+                      e.g. <code>/etc/ssl/certs/DigiCert_High_Assurance_EV_Root_CA.pem</code></p>
+                  </li>
+                  <li>
+                    <p>Turn on mTLS by Nginx directives (<a data-lynx-mode="hover"
+                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fpxl.cl%2F5tpBv&amp;h=AT1St1T_VglBFXj5MGMOsFuxp28LAJ4oS-K0qLxVVBoqzvy0nrDNfVaKrNWtdtDgRVeys0aO-lsW38D7EdnkyoI2M6abNUZMXJaRUAeuPMAQAZbsmEQyLcqv9mMRoVGEXbeIkjC3g0M790XrK6jnmA"
+                        rel="nofollow" target="_blank">example screenshot</a>)</p>
+                    <pre class="prettyprint"><code>ssl_verify_client       on;
+ssl_client_certificate  /etc/ssl/certs/DigiCert_High_Assurance_EV_Root_CA.pem;
+ssl_verify_depth        3;
+</code></pre>
+                  </li>
+                  <li>
+                    <p>Verify the CN from Nginx embedded variable <code>$ssl_client_s_dn</code> equals
+                      <code>"client.webhooks.fbclientcerts.com"</code> (<a data-lynx-mode="hover"
+                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fpxl.cl%2F5tqMx&amp;h=AT1321LIE0vNJ8CxwdiCosztoJDEGTe_a5f-GmEySRSh8NkOCH-OmCwT-gzE3K9jyba3sKwrMTKwfRAbsFTslbomHikyh-PPE4agNYXIEzpfUdtDf_iON4-x2fWAVvqtnvVr1gLzgBRiJ5raF823eg"
+                        rel="nofollow" target="_blank">example screenshot</a>)
+                    </p>
+                    <pre class="prettyprint"><code>if ($ssl_client_s_dn ~ "CN=client.webhooks.fbclientcerts.com") {
+    return 200 "$ssl_client_s_dn";
+}
+</code></pre>
+                  </li>
+                </ol>
+                <h3>AWS Application Load Balancer (ALB)</h3>
+                <ol>
+                  <li>Download the intermediate certificate (DigiCert SHA2 High Assurance Server CA) from <a
+                      data-lynx-mode="hover"
+                      href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.digicert.com%2Fkb%2Fdigicert-root-certificates.htm&amp;h=AT2OtwYk074mzORHyM6axBZAESJkltTf0oXP-6G8kEjVTOm8vvjOJ9V0hepTAH3Z9dYX903W-Qlud1F1cKYl1vRbu8lxGfXfOPOQTZy0VPwR4YPDwsCY3XY-oqbkvoXEvp5RKb_Dsh5CwOfIj2aivw"
+                      rel="nofollow" target="_blank">DigiCert</a> to a S3 bucket. The root certificate is <a
+                      data-lynx-mode="hover"
+                      href="https://l.facebook.com/l.php?u=https%3A%2F%2Faws.amazon.com%2Fsecurity%2Fsecurity-bulletins%2Faws-to-switch-to-sha256-hash-algorithm-for-ssl-certificates%2F&amp;h=AT1d7sZqM1uzPTOtNS5TbijZil76n1Rud9do_Se8PXN5odFZL0GyXW7bs64XYenJSXdGXQ--5YMPJ5EFLdOEYC2BqDz6FaMVgGVuDeeZZlEyF8sk7b0g1frSgRXWKh0wHE06PbpWfiOZ0L5YALkabQ"
+                      rel="nofollow" target="_blank">not accepted by AWS</a> because it is signed using algorithm
+                    SHA1withRSA; while the intermediate certificate is signed using SHA256withRSA thereby accepted.</li>
+                  <li>Configure the HTTPS listener on the ALB to enable mTLS with the trust store containing the
+                    certificate in the S3 bucket (<a data-lynx-mode="hover"
+                      href="https://l.facebook.com/l.php?u=https%3A%2F%2Fpxl.cl%2F5tqzs&amp;h=AT3anUu-BnI8bwFXO784TCc6Yc24Mu6U7_2OYmVVJY9cLn2N0ZTUnwUalFeHlAprgqRxUivIUVC9l3rGjwrM1jYDFOX3dASFpWxRlJRfxPbUDSKvyuwnFWSp2wQt7kYBIq0au0sf_o2QCBgKA9DFxQ"
+                      rel="nofollow" target="_blank">example screenshot</a>).</li>
+                  <li>In your application code, extract the CN from the HTTP header <a data-lynx-mode="hover"
+                      href="https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.aws.amazon.com%2Felasticloadbalancing%2Flatest%2Fapplication%2Fmutual-authentication.html&amp;h=AT2iGICoes5LBmWXqwsuzRPIirW-tKT8RYbD6dEGLaOZvhxAewH-VbnBgr3qEnUDK_IJ-r9jmhhAazuOIoKJOZj0frFM1S1jU9LRmCJZo7XKPOjFjLltG4rTQ0fE0vvsaIgZp7ujG-C0vTU8n3BLew"
+                      rel="nofollow" target="_blank">“X-Amzn-Mtls-Clientcert-Subject”</a>, and verify it equals
+                    <code>“client.webhooks.fbclientcerts.com”</code>.
+                  </li>
+                </ol>
+                <h3>Downloadable root certificate</h3>
+                <br /><a
+                  href="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/616047706_1570847757511995_2892285379725429023_n.zip?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=Y3KGbe_tykQQ7kNvwGcsezY&amp;_nc_oc=AdkTlcvW5kXKoQCZsIqboQegAKbS-giED4Q6u_JFRpCfl6pYppidJyF6dIOCCVx7whE&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=gyC0mBaPGcLXBdNL2FYV3g&amp;oh=00_AfteUPMynOjgPjnc_7491lWi3oQSmrzwZruwiDrh1v9SfA&amp;oe=69A0CBA5"
+                  target="_blank">
+                  meta-outbound-api-ca-2025-12.pem
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Next Steps</h2>
+              <p>Now that you know how to set up Webhooks, you may want to refer our additional documents that describe
+                the extra steps involved when setting up Webhooks for specific products:</p>
+              <ul>
+                <li><a href="/docs/development/create-an-app/marketing-api-use-cases#webhooks--optional-">Webhooks for
+                    Ad Accounts</a></li>
+                <li><a href="/docs/development/create-an-app/instagram-use-case#ig-login">Webhooks for Instagram</a>
+                </li>
+                <li><a href="/docs/development/create-an-app/marketing-api-use-cases#webhooks--optional-">Webhooks for
+                    Leads</a></li>
+                <li><a href="docs/development/create-an-app/messenger-use-case#messenger-api-setup">Webhooks for
+                    Messenger</a></li>
+                <li><a href="/docs/graph-api/webhooks/getting-started/webhooks-for-pages">Webhooks for Pages</a></li>
+                <li><a href="/docs/graph-api/webhooks/getting-started/webhooks-for-payments">Webhooks for Payments</a>
+                </li>
+                <li><a href="/documentation/business-messaging/whatsapp/webhooks/overview">Webhooks for WhatsApp</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

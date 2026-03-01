@@ -1,0 +1,238 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_M3">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Upload Video to Meta Servers</h1>
+              <p>This guide shows you how to upload large video files, from local and publicly hosted content, to be
+                published on Instagram. This is available only for apps that have implemented Facebook Login for
+                Business.</p>
+              <p>The API allows you resume a local file upload operation after a network interruption or other
+                transmission failure, saving time and bandwidth in the event of network failures.</p>
+              <h3>Host URLs</h3>
+              <ul>
+                <li><code>graph.facebook.com</code> – Create video media containers and publish and manage uploaded
+                  media</li>
+                <li><code>rupload.facebook.com</code> – Upload the video to Meta servers</li>
+              </ul>
+              <h3>Endpoints</h3>
+              <ul>
+                <li><code>POST https://graph.facebook.com/&lt;IG_USER_ID&gt;/media?upload_type=resumable</code> —
+                  Initialize the upload and create a media container for the video</li>
+                <li><code>POST https://rupload.facebook.com/ig-api-upload/&lt;IG_MEDIA_CONTAINER_ID&gt;</code> — Upload
+                  the video to Meta servers</li>
+                <li>
+                  <code>POST https://graph.facebook.com/&lt;IG_USER_ID&gt;/media_publish?creation_id=&lt;IG_MEDIA_CONTAINER_ID&gt;</code>
+                  — Publish the uploaded video
+                </li>
+                <li><code>GET /&lt;IG_MEDIA_CONTAINER_ID&gt;?fields=status_code</code> — Check publishing eligibility
+                  and status of the video</li>
+              </ul>
+              <h3>HTML URL encoding hints</h3>
+              <ul>
+                <li>Some of the parameters are supported in list/dict format. </li>
+                <li>Some characters need to be encoded into a format that can be transmitted over the Internet. For
+                  example: <code>user_tags=[{username:’ig_user_name’}]</code> is encoded to
+                  <code>user_tags=%5B%7Busername:ig_user_name%7D%5D</code> where <code>[</code> is encoded to
+                  <code>%5B</code> and <code>{</code> is encoded to <code>%7B</code>. For more conversions, please refer
+                  to the HTML URL Encoding standard.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Create a container</h2>
+              <p>To create a resumable upload session for the video, send a <code>POST</code> request to the
+                <code>/&lt;IG_USER_ID&gt;/media</code> endpoint on the <code>graph.facebook.com</code> host with the
+                following required parameters:
+              </p>
+              <ul>
+                <li><code>access_token</code> – Set to your app user's access token</li>
+                <li><code>upload_type</code> – Set to <code>resumable</code></li>
+                <li><code>media_type</code> – Set to <code>REELS</code>, <code>STORIES</code>, or <code>VIDEO</code>
+                  (for videos to be used in carousels)</li>
+                <li><code>is_carousel_item</code> – Set to <code>true</code> (for videos to be used in carousels)</li>
+              </ul>
+              <h3>Basic example request</h3>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+curl "https://graph.facebook.com/&lt;API_VERSION&gt;/&lt;IG_USER_ID&gt;/media" 
+     -H "Content-Type: application/json"
+     -H "Authorization: Bearer &lt;USER_ACCESS_TOKEN&gt;"
+     -d '{  
+            "media_type": "&lt;REELS_STORIES_VIDEO&gt;"
+            "upload_type=resumable"
+        }'
+</pre>
+              <h4>Optional parameters for Reels</h4>
+              <ul>
+                <li><code>audio_name</code> – Set to the name of the audio</li>
+                <li><code>caption</code> – Set to the caption for the reel video</li>
+                <li><code>collaborators</code> – Set to a comma-separated list of up to 3 Instagram usernames of
+                  collaborators</li>
+                <li><code>cover_url</code> – Set to the URL to the cover image for the Reels tab</li>
+                <li><code>location_id</code> – Set to the ID of a Facebook Page associated with a location</li>
+                <li><code>thumb_offset</code> – Set to frame in the video to be used as the thumbnail</li>
+                <li><code>user_tags</code> – Set to an array of <code>username</code> objects for public Instagram users
+                  your app user wants to tag in the video</li>
+              </ul>
+              <h3>Sample response</h3>
+              <p>On success your app receives a JSON object with the ID and the Meta URI for the container. These two
+                values will be used in Step 2.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+   "id": "&lt;IG_MEDIA_CONTAINER_ID&gt;",
+   "uri": "https://rupload.facebook.com/ig-api-upload/&lt;API_VERSION&gt;/&lt;IG_MEDIA_CONTAINER_ID&gt;`"
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Upload the Video</h2>
+              <p>Most Graph API calls use the <code>graph.facebook.com</code> host however, calls to upload videos for
+                Reels use <code>rupload.facebook.com</code>.</p>
+              <p>The following file sources are supported for uploaded video files:</p>
+              <ul>
+                <li>A file located on your computer</li>
+                <li>A file hosted on a public facing server, such as a CDN</li>
+              </ul>
+              <h4>Sample request upload a local video file</h4>
+              <p>With the <code>ig-container-id</code> returned from a resumable upload session call, upload the video.
+              </p>
+              <ul>
+                <li>Be sure the host is <code>rupload.facebook.com</code>.</li>
+                <li>All <code>media_type</code> shares the same flow to upload the video.</li>
+                <li><code>ig-container-id</code> is the ID returned from resumable upload session calls. </li>
+                <li><code>access-token</code> is the same one used in previous steps.</li>
+                <li><code>offset</code> is set to the first byte being upload, generally <code>0</code>.</li>
+                <li><code>file_size</code> is set to the size of your file in bytes.</li>
+                <li><code>Your_file_local_path</code> is set to the file path of your local file, for example, if
+                  uploading a file from, the <strong>Downloads</strong> folder on macOS, the path is
+                  <strong>@Downloads/example.mov</strong>.
+                </li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+curl -X POST "https://rupload.facebook.com/ig-api-upload/&lt;API_VERSION&gt;/&lt;IG_MEDIA_CONTAINER_ID&gt;`" \
+     -H "Authorization: OAuth &lt;ACCESS_TOKEN&gt;" \
+     -H "offset: 0" \
+     -H "file_size: Your_file_size_in_bytes" \
+     --data-binary "@my_video_file.mp4"
+</pre>
+              <h4>Sample request upload a public hosted video</h4>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+curl -X POST "https://rupload.facebook.com/ig-api-upload/&lt;API_VERSION&gt;/&lt;IG_MEDIA_CONTAINER_ID&gt;`" \
+     -H "Authorization: OAuth &lt;ACCESS_TOKEN&gt;" \
+     -H "file_url: https://example_hosted_video.com"
+</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+// Success Response Message
+{
+  "success":true,
+  "message":"Upload successful."
+}
+
+// Failure Response Message
+{
+  "debug_info":{
+    "retriable":false,
+    "type":"ProcessingFailedError",
+    "message":"{\"success\":false,\"error\":{\"message\":\"unauthorized user request\"}}"
+  }
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 3: (Carousel Only) Create Carousel Containers</h2>
+              <p>You can reuse step 1 and 2 to create multiple <code>ig-container-ids</code> with the
+                <code>is_carousel_item</code> parameter set to <code>true</code>. Then create a Carousel Container to
+                include all the carousel items, the carousel items can be mixed with Image and Videos.
+              </p>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+curl -X POST "https://graph.facebook.com/&lt;API_VERSION&gt;/&lt;IG_USER_ID&gt;/media" \
+    -d "media_type=CAROUSEL" \
+    -d "caption={caption}"\
+    -d "collaborators={collaborator-usernames}" \
+    -d "location_id={location-id}" \
+    -d "product_tags={product-tags}" \
+    -d "children=[&lt;IG_MEDIA_CONTAINER_ID_1&gt;`,&lt;IG_MEDIA_CONTAINER_ID_2&gt;`...]" \
+    -H "Authorization: OAuth &lt;ACCESS_TOKEN&gt;"
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 4: Publish the Media</h2>
+              <p>For Reels and Video Stories, the
+                <code>&lt;IG_MEDIA_CONTAINER_ID&gt;`` created in step 1 is used to publish the Video, and for Carousel Container, the</code>&lt;IG_MEDIA_CONTAINER_ID&gt;``
+                created in step 3 is used to publish the Carousel Container.
+              </p>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+curl -X POST "https://graph.facebook.com/&lt;API_VERSION&gt;/&lt;IG_USER_ID&gt;/media_publish" \
+    -d "creation_id=&lt;IG_MEDIA_CONTAINER_ID&gt;`" \
+    -H "Authorization: OAuth &lt;ACCESS_TOKEN&gt;"
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 5: Get Media Status</h2>
+              <p><code>graph.facebook.com</code> provides a <code>GET</code> endpoint to read the status of the upload,
+                the <code>video_status</code> field contains details about the local upload process.</p>
+              <ul>
+                <li>The <code>uploading_phase</code> tells whether the file has been uploaded successfully, and how many
+                  bytes transferred. </li>
+                <li>The <code>processing_phase</code> contains the details about the status of video processing after
+                  the video file is uploaded.</li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+// GET status from graph.facebook.com
+curl -X GET "https://graph.facebook.com/v19.0/&lt;IG_MEDIA_CONTAINER_ID&gt;`?fields=id,status,status_code,video_status" \
+    -H "Authorization: OAuth &lt;ACCESS_TOKEN&gt;"
+</pre>
+              <h4>Sample Response from the <code>graph.facebook.com</code> endpoint</h4>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+// A successfully created ig container
+{
+  "id": "&lt;IG_MEDIA_CONTAINER_ID&gt;`",
+  "status": "Published: Media has been successfully published.",
+  "status_code": "PUBLISHED",
+  "video_status": {
+    "uploading_phase": {
+      "status": "complete",
+      "bytes_transferred": 37006904
+    },
+    "processing_phase": {
+      "status": "complete"
+    }
+  }
+}
+
+// An interrupted ig container creation, from here you can resume your upload in step 2 with offset=50002. 
+{
+  "id": "&lt;IG_MEDIA_CONTAINER_ID&gt;`",
+  "status": "Published: Media has been successfully published.",
+  "status_code": "PUBLISHED",
+  "video_status": {
+    "uploading_phase": {
+      "status": "in_progress",
+      "bytes_transferred": 50002
+    },
+    "processing_phase": {
+      "status": "not_started"
+    }
+  }
+}
+</pre>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

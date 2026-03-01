@@ -1,0 +1,743 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Google APIs - Global domain errors<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <style>
+      .matchpre td.error-name {
+        width: 325px;
+      }
+    </style>
+    <p>This document identifies some of the error codes and messages that Google APIs return. Specifically, the errors
+      listed here are in the global, or default, domain for Google APIs. Many APIs also define their own domains, which
+      identify API-specific errors that are not in the global domain. For those errors, the value of the <code dir="ltr"
+        translate="no">domain</code> property in the JSON response will be an API-specific value, such as <code
+        dir="ltr" translate="no">youtube.parameter</code>.</p>
+    <p>This page lists errors by their HTTP status codes as defined in <a
+        href="https://tools.ietf.org/html/rfc7231#section-6">RFC 7231</a>.</p>
+    <p>The sample JSON response below demonstrates how a global error is communicated:</p>
+    <div></div><devsite-code>
+      <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Transact-SQL" translate="no"><span class="devsite-syntax-err">{</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-ss">"error"</span><span class="devsite-syntax-err">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-ss">"errors"</span><span class="devsite-syntax-err">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">[</span>
+<span class="devsite-syntax-n">   {</span>
+<span class="devsite-syntax-n">    "domain": "<b>global</b>",</span>
+<span class="devsite-syntax-n">    "reason": "invalidParameter",</span>
+<span class="devsite-syntax-n">    "message": "Invalid string value: 'asdf'. Allowed values: [mostpopular</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-ss">",</span>
+<span class="devsite-syntax-ss">    "</span><span class="devsite-syntax-n">locationType</span><span class="devsite-syntax-ss">": "</span><span class="devsite-syntax-k">parameter</span><span class="devsite-syntax-ss">",</span>
+<span class="devsite-syntax-ss">    "</span><span class="devsite-syntax-n">location</span><span class="devsite-syntax-ss">": "</span><span class="devsite-syntax-n">chart</span><span class="devsite-syntax-ss">"</span>
+<span class="devsite-syntax-ss">   }</span>
+<span class="devsite-syntax-ss">  ],</span>
+<span class="devsite-syntax-ss">  "</span><span class="devsite-syntax-n">code</span><span class="devsite-syntax-ss">": 400,</span>
+<span class="devsite-syntax-ss">  "</span><span class="devsite-syntax-n">message</span><span class="devsite-syntax-ss">": "</span><span class="devsite-syntax-n">Invalid</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">string</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">value</span><span class="devsite-syntax-err">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'asdf'</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">Allowed</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">values</span><span class="devsite-syntax-err">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">[</span><span class="devsite-syntax-n">mostpopular</span><span class="devsite-syntax-o">]</span><span class="devsite-syntax-err">"</span>
+<span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">}</span>
+<span class="devsite-syntax-err">}</span></pre>
+    </devsite-code>
+    <h2 data-text="Errors" id="Global_Errors" tabindex="-1">Errors</h2>
+    <ol class="toc">
+      <li><a href="#MOVED_PERMANENTLY">MOVED_PERMANENTLY (301)</a></li>
+      <li><a href="#SEE_OTHER">SEE_OTHER (303)</a></li>
+      <li><a href="#NOT_MODIFIED">NOT_MODIFIED (304)</a></li>
+      <li><a href="#TEMPORARY_REDIRECT">TEMPORARY_REDIRECT (307)</a></li>
+      <li><a href="#BAD_REQUEST">BAD_REQUEST (400)</a></li>
+      <li><a href="#UNAUTHORIZED">UNAUTHORIZED (401)</a></li>
+      <li><a href="#PAYMENT_REQUIRED">PAYMENT_REQUIRED (402)</a></li>
+      <li><a href="#FORBIDDEN">FORBIDDEN (403)</a></li>
+      <li><a href="#NOT_FOUND">NOT_FOUND (404)</a></li>
+      <li><a href="#METHOD_NOT_ALLOWED">METHOD_NOT_ALLOWED (405)</a></li>
+      <li><a href="#CONFLICT">CONFLICT (409)</a></li>
+      <li><a href="#GONE">GONE (410)</a></li>
+      <li><a href="#PRECONDITION_FAILED">PRECONDITION_FAILED (412)</a></li>
+      <li><a href="#REQUEST_ENTITY_TOO_LARGE">REQUEST_ENTITY_TOO_LARGE (413)</a></li>
+      <li><a href="#REQUESTED_RANGE_NOT_SATISFIABLE">REQUESTED_RANGE_NOT_SATISFIABLE (416)</a></li>
+      <li><a href="#EXPECTATION_FAILED">EXPECTATION_FAILED (417)</a></li>
+      <li><a href="#PRECONDITION_REQUIRED">PRECONDITION_REQUIRED (428)</a></li>
+      <li><a href="#TOO_MANY_REQUESTS">TOO_MANY_REQUESTS (429)</a></li>
+      <li><a href="#INTERNAL_SERVER_ERROR">INTERNAL_SERVER_ERROR (500)</a></li>
+      <li><a href="#NOT_IMPLEMENTED">NOT_IMPLEMENTED (501)</a></li>
+      <li><a href="#SERVICE_UNAVAILABLE">SERVICE_UNAVAILABLE (503)</a></li>
+    </ol>
+    <h3 class="notranslate" data-text="MOVED_PERMANENTLY (301)" id="MOVED_PERMANENTLY" tabindex="-1">MOVED_PERMANENTLY
+      (301)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_movedPermanently">
+          <td class="error-name"><code dir="ltr" translate="no">movedPermanently</code></td>
+          <td class="error-cause">This request and future requests for the same operation have to be sent to the URL
+            specified in the <code dir="ltr" translate="no">Location</code> header of this response instead of to the
+            URL to which this request was sent.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="SEE_OTHER (303)" id="SEE_OTHER" tabindex="-1">SEE_OTHER (303)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_seeOther">
+          <td class="error-name"><code dir="ltr" translate="no">seeOther</code></td>
+          <td class="error-cause">Your request was processed successfully. To obtain your response, send a <code
+              dir="ltr" translate="no">GET</code> request to the URL specified in the <code dir="ltr"
+              translate="no">Location</code> header.</td>
+        </tr>
+        <tr id="error_mediaDownloadRedirect">
+          <td class="error-name"><code dir="ltr" translate="no">mediaDownloadRedirect</code></td>
+          <td class="error-cause">Your request was processed successfully. To obtain your response, send a <code
+              dir="ltr" translate="no">GET</code> request to the URL specified in the <code dir="ltr"
+              translate="no">Location</code> header.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="NOT_MODIFIED (304)" id="NOT_MODIFIED" tabindex="-1">NOT_MODIFIED (304)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_notModified">
+          <td class="error-name"><code dir="ltr" translate="no">notModified</code></td>
+          <td class="error-cause">The condition set for an If-None-Match header was not met. This response indicates
+            that the requested document has not been modified and that a cached response should be retrieved. Check the
+            value of the <code dir="ltr" translate="no">If-None-Match</code> HTTP request header.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="TEMPORARY_REDIRECT (307)" id="TEMPORARY_REDIRECT" tabindex="-1">
+      TEMPORARY_REDIRECT (307)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_temporaryRedirect">
+          <td class="error-name"><code dir="ltr" translate="no">temporaryRedirect</code></td>
+          <td class="error-cause">To have your request processed, resend it to the URL specified in the <code dir="ltr"
+              translate="no">Location</code> header of this response.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="BAD_REQUEST (400)" id="BAD_REQUEST" tabindex="-1">BAD_REQUEST (400)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_badRequest">
+          <td class="error-name"><code dir="ltr" translate="no">badRequest</code></td>
+          <td class="error-cause">The API request is invalid or improperly formed. Consequently, the API server could
+            not understand the request.</td>
+        </tr>
+        <tr id="error_badBinaryDomainRequest">
+          <td class="error-name"><code dir="ltr" translate="no">badBinaryDomainRequest</code></td>
+          <td class="error-cause">The binary domain request is invalid.</td>
+        </tr>
+        <tr id="error_badContent">
+          <td class="error-name"><code dir="ltr" translate="no">badContent</code></td>
+          <td class="error-cause">The content type of the request data or the content type of a part of a multipart
+            request is not supported.</td>
+        </tr>
+        <tr id="error_badLockedDomainRequest">
+          <td class="error-name"><code dir="ltr" translate="no">badLockedDomainRequest</code></td>
+          <td class="error-cause">The locked domain request is invalid.</td>
+        </tr>
+        <tr id="error_corsRequestWithXOrigin">
+          <td class="error-name"><code dir="ltr" translate="no">corsRequestWithXOrigin</code></td>
+          <td class="error-cause">The CORS request contains an XD3 X-Origin header, which is indicative of a bad CORS
+            request.</td>
+        </tr>
+        <tr id="error_endpointConstraintMismatch">
+          <td class="error-name"><code dir="ltr" translate="no">endpointConstraintMismatch</code></td>
+          <td class="error-cause">The request failed because it did not match the specified API. Check the value of the
+            URL path to make sure it is correct.</td>
+        </tr>
+        <tr id="error_invalid">
+          <td class="error-name"><code dir="ltr" translate="no">invalid</code></td>
+          <td class="error-cause">The request failed because it contained an invalid value. The value could be a
+            parameter value, a header value, or a property value.</td>
+        </tr>
+        <tr id="error_invalidAltValue">
+          <td class="error-name"><code dir="ltr" translate="no">invalidAltValue</code></td>
+          <td class="error-cause">The <code dir="ltr" translate="no">alt</code> parameter value specifies an unknown
+            output format.</td>
+        </tr>
+        <tr id="error_invalidHeader">
+          <td class="error-name"><code dir="ltr" translate="no">invalidHeader</code></td>
+          <td class="error-cause">The request failed because it contained an invalid header.</td>
+        </tr>
+        <tr id="error_invalidParameter">
+          <td class="error-name"><code dir="ltr" translate="no">invalidParameter</code></td>
+          <td class="error-cause">The request failed because it contained an invalid parameter or parameter value.
+            Review the API documentation to determine which parameters are valid for your request.</td>
+        </tr>
+        <tr id="error_invalidQuery">
+          <td class="error-name"><code dir="ltr" translate="no">invalidQuery</code></td>
+          <td class="error-cause">The request is invalid. Check the API documentation to determine what parameters are
+            supported for the request and to see if the request contains an invalid combination of parameters or an
+            invalid parameter value. Check the value of the <code dir="ltr" translate="no">q</code> request parameter.
+          </td>
+        </tr>
+        <tr id="error_keyExpired">
+          <td class="error-name"><code dir="ltr" translate="no">keyExpired</code></td>
+          <td class="error-cause">The API key provided in the request expired, which means the API server is unable to
+            check the quota limit for the application making the request. Check the <a
+              href="https://console.developers.google.com">Google Developers Console</a> for more information or to
+            obtain a new key.</td>
+        </tr>
+        <tr id="error_keyInvalid">
+          <td class="error-name"><code dir="ltr" translate="no">keyInvalid</code></td>
+          <td class="error-cause">The API key provided in the request is invalid, which means the API server is unable
+            to check the quota limit for the application making the request. Use the <a
+              href="https://console.developers.google.com">Google Developers Console</a> to find your API key or to
+            obtain one.</td>
+        </tr>
+        <tr id="error_lockedDomainCreationFailure">
+          <td class="error-name"><code dir="ltr" translate="no">lockedDomainCreationFailure</code></td>
+          <td class="error-cause">The OAuth token was received in the query string, which this API forbids for response
+            formats other than JSON or XML. If possible, try sending the OAuth token in the Authorization header
+            instead.</td>
+        </tr>
+        <tr id="error_notDownload">
+          <td class="error-name"><code dir="ltr" translate="no">notDownload</code></td>
+          <td class="error-cause">Only media downloads requests can be sent to <code dir="ltr"
+              translate="no">/download/*</code> URL paths. Resend the request to the same path, but without the <code
+              dir="ltr" translate="no">/download</code> prefix.</td>
+        </tr>
+        <tr id="error_notUpload">
+          <td class="error-name"><code dir="ltr" translate="no">notUpload</code></td>
+          <td class="error-cause">The request failed because it is not an upload request, and only upload requests can
+            be sent to <code dir="ltr" translate="no">/upload/*</code> URIs. Try resending the request to the same path,
+            but without the <code dir="ltr" translate="no">/upload</code> prefix.</td>
+        </tr>
+        <tr id="error_parseError">
+          <td class="error-name"><code dir="ltr" translate="no">parseError</code></td>
+          <td class="error-cause">The API server cannot parse the request body.</td>
+        </tr>
+        <tr id="error_required">
+          <td class="error-name"><code dir="ltr" translate="no">required</code></td>
+          <td class="error-cause">The API request is missing required information. The required information could be a
+            parameter or resource property.</td>
+        </tr>
+        <tr id="error_tooManyParts">
+          <td class="error-name"><code dir="ltr" translate="no">tooManyParts</code></td>
+          <td class="error-cause">The multipart request failed because it contains too many parts</td>
+        </tr>
+        <tr id="error_unknownApi">
+          <td class="error-name"><code dir="ltr" translate="no">unknownApi</code></td>
+          <td class="error-cause">The API that the request is calling is not recognized.</td>
+        </tr>
+        <tr id="error_unsupportedMediaProtocol">
+          <td class="error-name"><code dir="ltr" translate="no">unsupportedMediaProtocol</code></td>
+          <td class="error-cause">The client is using an unsupported media protocol.</td>
+        </tr>
+        <tr id="error_unsupportedOutputFormat">
+          <td class="error-name"><code dir="ltr" translate="no">unsupportedOutputFormat</code></td>
+          <td class="error-cause">The <code dir="ltr" translate="no">alt</code> parameter value specifies an output
+            format that is not supported for this service. Check the value of the <code dir="ltr"
+              translate="no">alt</code> request parameter.</td>
+        </tr>
+        <tr id="error_wrongUrlForUpload">
+          <td class="error-name"><code dir="ltr" translate="no">wrongUrlForUpload</code></td>
+          <td class="error-cause">The request is an upload request, but it failed because it was not sent to the proper
+            URI. Upload requests must be sent to URIs that contain the <code dir="ltr" translate="no">/upload/*</code>
+            prefix. Try resending the request to the same path, but with the <code dir="ltr"
+              translate="no">/upload</code> prefix.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="UNAUTHORIZED (401)" id="UNAUTHORIZED" tabindex="-1">UNAUTHORIZED (401)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_unauthorized">
+          <td class="error-name"><code dir="ltr" translate="no">unauthorized</code></td>
+          <td class="error-cause">The user is not authorized to make the request.</td>
+        </tr>
+        <tr id="error_authError">
+          <td class="error-name"><code dir="ltr" translate="no">authError</code></td>
+          <td class="error-cause">The authorization credentials provided for the request are invalid. Check the value of
+            the <code dir="ltr" translate="no">Authorization</code> HTTP request header.</td>
+        </tr>
+        <tr id="error_expired">
+          <td class="error-name"><code dir="ltr" translate="no">expired</code></td>
+          <td class="error-cause">Session Expired. Check the value of the <code dir="ltr"
+              translate="no">Authorization</code> HTTP request header.</td>
+        </tr>
+        <tr id="error_lockedDomainExpired">
+          <td class="error-name"><code dir="ltr" translate="no">lockedDomainExpired</code></td>
+          <td class="error-cause">The request failed because a previously valid locked domain has expired.</td>
+        </tr>
+        <tr id="error_required">
+          <td class="error-name"><code dir="ltr" translate="no">required</code></td>
+          <td class="error-cause">The user must be logged in to make this API request. Check the value of the <code
+              dir="ltr" translate="no">Authorization</code> HTTP request header.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="PAYMENT_REQUIRED (402)" id="PAYMENT_REQUIRED" tabindex="-1">PAYMENT_REQUIRED
+      (402)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_dailyLimitExceeded402">
+          <td class="error-name"><code dir="ltr" translate="no">dailyLimitExceeded402</code></td>
+          <td class="error-cause">A daily budget limit set by the developer has been reached.</td>
+        </tr>
+        <tr id="error_quotaExceeded402">
+          <td class="error-name"><code dir="ltr" translate="no">quotaExceeded402</code></td>
+          <td class="error-cause">The requested operation requires more resources than the quota allows. Payment is
+            required to complete the operation.</td>
+        </tr>
+        <tr id="error_user402">
+          <td class="error-name"><code dir="ltr" translate="no">user402</code></td>
+          <td class="error-cause">The requested operation requires some kind of payment from the authenticated user.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="FORBIDDEN (403)" id="FORBIDDEN" tabindex="-1">FORBIDDEN (403)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_forbidden">
+          <td class="error-name"><code dir="ltr" translate="no">forbidden</code></td>
+          <td class="error-cause">The requested operation is forbidden and cannot be completed.</td>
+        </tr>
+        <tr id="error_accessNotConfigured">
+          <td class="error-name"><code dir="ltr" translate="no">accessNotConfigured</code></td>
+          <td class="error-cause">Your project is not configured to access this API. Please use the <a
+              href="https://console.developers.google.com">Google Developers Console</a> to activate the API for your
+            project.</td>
+        </tr>
+        <tr id="error_accessNotConfigured">
+          <td class="error-name"><code dir="ltr" translate="no">accessNotConfigured</code></td>
+          <td class="error-cause">The project has been blocked due to abuse. See <a
+              href="http://support.google.com/code/go/developer_compliance">http://support.google.com/code/go/developer_compliance</a>.
+          </td>
+        </tr>
+        <tr id="error_accessNotConfigured">
+          <td class="error-name"><code dir="ltr" translate="no">accessNotConfigured</code></td>
+          <td class="error-cause">The project has been marked for deletion.</td>
+        </tr>
+        <tr id="error_accountDeleted">
+          <td class="error-name"><code dir="ltr" translate="no">accountDeleted</code></td>
+          <td class="error-cause">The user account associated with the request's authorization credentials has been
+            deleted. Check the value of the <code dir="ltr" translate="no">Authorization</code> HTTP request header.
+          </td>
+        </tr>
+        <tr id="error_accountDisabled">
+          <td class="error-name"><code dir="ltr" translate="no">accountDisabled</code></td>
+          <td class="error-cause">The user account associated with the request's authorization credentials has been
+            disabled. Check the value of the <code dir="ltr" translate="no">Authorization</code> HTTP request header.
+          </td>
+        </tr>
+        <tr id="error_accountUnverified">
+          <td class="error-name"><code dir="ltr" translate="no">accountUnverified</code></td>
+          <td class="error-cause">The email address for the user making the request has not been verified. Check the
+            value of the <code dir="ltr" translate="no">Authorization</code> HTTP request header.</td>
+        </tr>
+        <tr id="error_concurrentLimitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">concurrentLimitExceeded</code></td>
+          <td class="error-cause">The request failed because a concurrent usage limit has been reached.</td>
+        </tr>
+        <tr id="error_dailyLimitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">dailyLimitExceeded</code></td>
+          <td class="error-cause">A daily quota limit for the API has been reached.</td>
+        </tr>
+        <tr id="error_dailyLimitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">dailyLimitExceeded</code></td>
+          <td class="error-cause">The daily quota limit has been reached, and the project has been blocked due to abuse.
+            See the <a href="http://support.google.com/code/go/developer_compliance">Google APIs compliance support
+              form</a> to help resolve the issue.</td>
+        </tr>
+        <tr id="error_dailyLimitExceededUnreg">
+          <td class="error-name"><code dir="ltr" translate="no">dailyLimitExceededUnreg</code></td>
+          <td class="error-cause">The request failed because a daily limit for unauthenticated API use has been hit.
+            Continued use of the API requires signup through the <a href="https://console.developers.google.com">Google
+              Developers Console</a>.</td>
+        </tr>
+        <tr id="error_downloadServiceForbidden">
+          <td class="error-name"><code dir="ltr" translate="no">downloadServiceForbidden</code></td>
+          <td class="error-cause">The API does not support a download service.</td>
+        </tr>
+        <tr id="error_insufficientAudience">
+          <td class="error-name"><code dir="ltr" translate="no">insufficientAudience</code></td>
+          <td class="error-cause">The request cannot be completed for this audience.</td>
+        </tr>
+        <tr id="error_insufficientAuthorizedParty">
+          <td class="error-name"><code dir="ltr" translate="no">insufficientAuthorizedParty</code></td>
+          <td class="error-cause">The request cannot be completed for this application.</td>
+        </tr>
+        <tr id="error_insufficientPermissions">
+          <td class="error-name"><code dir="ltr" translate="no">insufficientPermissions</code></td>
+          <td class="error-cause">The authenticated user does not have sufficient permissions to execute this request.
+          </td>
+        </tr>
+        <tr id="error_limitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">limitExceeded</code></td>
+          <td class="error-cause">The request cannot be completed due to access or rate limitations.</td>
+        </tr>
+        <tr id="error_lockedDomainForbidden">
+          <td class="error-name"><code dir="ltr" translate="no">lockedDomainForbidden</code></td>
+          <td class="error-cause">This API does not support locked domains.</td>
+        </tr>
+        <tr id="error_quotaExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">quotaExceeded</code></td>
+          <td class="error-cause">The requested operation requires more resources than the quota allows.</td>
+        </tr>
+        <tr id="error_rateLimitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">rateLimitExceeded</code></td>
+          <td class="error-cause">Too many requests have been sent within a given time span.</td>
+        </tr>
+        <tr id="error_rateLimitExceededUnreg">
+          <td class="error-name"><code dir="ltr" translate="no">rateLimitExceededUnreg</code></td>
+          <td class="error-cause">A rate limit has been exceeded and you must register your application to be able to
+            continue calling the API. Please sign up using the <a href="https://console.developers.google.com">Google
+              Developers Console</a>.</td>
+        </tr>
+        <tr id="error_responseTooLarge">
+          <td class="error-name"><code dir="ltr" translate="no">responseTooLarge</code></td>
+          <td class="error-cause">The requested resource is too large to return.</td>
+        </tr>
+        <tr id="error_servingLimitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">servingLimitExceeded</code></td>
+          <td class="error-cause">The overall rate limit specified for the API has already been reached.</td>
+        </tr>
+        <tr id="error_sslRequired">
+          <td class="error-name"><code dir="ltr" translate="no">sslRequired</code></td>
+          <td class="error-cause">SSL is required to perform this operation.</td>
+        </tr>
+        <tr id="error_unknownAuth">
+          <td class="error-name"><code dir="ltr" translate="no">unknownAuth</code></td>
+          <td class="error-cause">The API server does not recognize the authorization scheme used for the request. Check
+            the value of the <code dir="ltr" translate="no">Authorization</code> HTTP request header.</td>
+        </tr>
+        <tr id="error_userRateLimitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">userRateLimitExceeded</code></td>
+          <td class="error-cause">The request failed because a per-user rate limit has been reached.</td>
+        </tr>
+        <tr id="error_userRateLimitExceededUnreg">
+          <td class="error-name"><code dir="ltr" translate="no">userRateLimitExceededUnreg</code></td>
+          <td class="error-cause">The request failed because a per-user rate limit has been reached, and the client
+            developer was not identified in the request. Please use the Google Developer Console
+            (https://console.developers.google.com) to create a project for your application.</td>
+        </tr>
+        <tr id="error_variableTermExpiredDailyExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">variableTermExpiredDailyExceeded</code></td>
+          <td class="error-cause">The request failed because a variable term quota expired and a daily limit was
+            reached.</td>
+        </tr>
+        <tr id="error_variableTermLimitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">variableTermLimitExceeded</code></td>
+          <td class="error-cause">The request failed because a variable term quota limit was reached.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="NOT_FOUND (404)" id="NOT_FOUND" tabindex="-1">NOT_FOUND (404)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_notFound">
+          <td class="error-name"><code dir="ltr" translate="no">notFound</code></td>
+          <td class="error-cause">The requested operation failed because a resource associated with the request could
+            not be found.</td>
+        </tr>
+        <tr id="error_notFound">
+          <td class="error-name"><code dir="ltr" translate="no">notFound</code></td>
+          <td class="error-cause">A resource associated with the request could not be found. If you have not used this
+            API in the last two weeks, please re-deploy the App Engine app and try calling it again.</td>
+        </tr>
+        <tr id="error_unsupportedProtocol">
+          <td class="error-name"><code dir="ltr" translate="no">unsupportedProtocol</code></td>
+          <td class="error-cause">The protocol used in the request is not supported.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="METHOD_NOT_ALLOWED (405)" id="METHOD_NOT_ALLOWED" tabindex="-1">
+      METHOD_NOT_ALLOWED (405)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_httpMethodNotAllowed">
+          <td class="error-name"><code dir="ltr" translate="no">httpMethodNotAllowed</code></td>
+          <td class="error-cause">The HTTP method associated with the request is not supported.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="CONFLICT (409)" id="CONFLICT" tabindex="-1">CONFLICT (409)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_conflict">
+          <td class="error-name"><code dir="ltr" translate="no">conflict</code></td>
+          <td class="error-cause">The API request cannot be completed because the requested operation would conflict
+            with an existing item. For example, a request that tries to create a duplicate item would create a conflict,
+            though duplicate items are typically identified with more specific errors.</td>
+        </tr>
+        <tr id="error_duplicate">
+          <td class="error-name"><code dir="ltr" translate="no">duplicate</code></td>
+          <td class="error-cause">The requested operation failed because it tried to create a resource that already
+            exists.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="GONE (410)" id="GONE" tabindex="-1">GONE (410)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_deleted">
+          <td class="error-name"><code dir="ltr" translate="no">deleted</code></td>
+          <td class="error-cause">The request failed because the resource associated with the request has been deleted
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="PRECONDITION_FAILED (412)" id="PRECONDITION_FAILED" tabindex="-1">
+      PRECONDITION_FAILED (412)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_conditionNotMet">
+          <td class="error-name"><code dir="ltr" translate="no">conditionNotMet</code></td>
+          <td class="error-cause">The condition set in the request's <code dir="ltr" translate="no">If-Match</code> or
+            <code dir="ltr" translate="no">If-None-Match</code> HTTP request header was not met. See the <a
+              href="https://tools.ietf.org/html/rfc7232#section-2.3">ETag</a> section of the HTTP specification for
+            details. Check the value of the <code dir="ltr" translate="no">If-Match</code> HTTP request header.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="REQUEST_ENTITY_TOO_LARGE (413)" id="REQUEST_ENTITY_TOO_LARGE" tabindex="-1">
+      REQUEST_ENTITY_TOO_LARGE (413)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_backendRequestTooLarge">
+          <td class="error-name"><code dir="ltr" translate="no">backendRequestTooLarge</code></td>
+          <td class="error-cause">The request is too large.</td>
+        </tr>
+        <tr id="error_batchSizeTooLarge">
+          <td class="error-name"><code dir="ltr" translate="no">batchSizeTooLarge</code></td>
+          <td class="error-cause">The batch request contains too many elements.</td>
+        </tr>
+        <tr id="error_uploadTooLarge">
+          <td class="error-name"><code dir="ltr" translate="no">uploadTooLarge</code></td>
+          <td class="error-cause">The request failed because the data sent in the request is too large.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="REQUESTED_RANGE_NOT_SATISFIABLE (416)" id="REQUESTED_RANGE_NOT_SATISFIABLE"
+      tabindex="-1">REQUESTED_RANGE_NOT_SATISFIABLE (416)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_requestedRangeNotSatisfiable">
+          <td class="error-name"><code dir="ltr" translate="no">requestedRangeNotSatisfiable</code></td>
+          <td class="error-cause">The request specified a range that cannot be satisfied.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="EXPECTATION_FAILED (417)" id="EXPECTATION_FAILED" tabindex="-1">
+      EXPECTATION_FAILED (417)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_expectationFailed">
+          <td class="error-name"><code dir="ltr" translate="no">expectationFailed</code></td>
+          <td class="error-cause">A client expectation cannot be met by the server.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="PRECONDITION_REQUIRED (428)" id="PRECONDITION_REQUIRED" tabindex="-1">
+      PRECONDITION_REQUIRED (428)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_preconditionRequired">
+          <td class="error-name"><code dir="ltr" translate="no">preconditionRequired</code></td>
+          <td class="error-cause">The request requires a precondition that is not provided. For this request to succeed,
+            you need to provide either an <code dir="ltr" translate="no">If-Match</code> or <code dir="ltr"
+              translate="no">If-None-Match</code> header with the request.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="TOO_MANY_REQUESTS (429)" id="TOO_MANY_REQUESTS" tabindex="-1">TOO_MANY_REQUESTS
+      (429)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_rateLimitExceeded">
+          <td class="error-name"><code dir="ltr" translate="no">rateLimitExceeded</code></td>
+          <td class="error-cause">Too many requests have been sent within a given time span.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="INTERNAL_SERVER_ERROR (500)" id="INTERNAL_SERVER_ERROR" tabindex="-1">
+      INTERNAL_SERVER_ERROR (500)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_internalError">
+          <td class="error-name"><code dir="ltr" translate="no">internalError</code></td>
+          <td class="error-cause">The request failed due to an internal error.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="NOT_IMPLEMENTED (501)" id="NOT_IMPLEMENTED" tabindex="-1">NOT_IMPLEMENTED (501)
+    </h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_notImplemented">
+          <td class="error-name"><code dir="ltr" translate="no">notImplemented</code></td>
+          <td class="error-cause">The requested operation has not been implemented.</td>
+        </tr>
+        <tr id="error_unsupportedMethod">
+          <td class="error-name"><code dir="ltr" translate="no">unsupportedMethod</code></td>
+          <td class="error-cause">The request failed because it is trying to execute an unknown method or operation.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="notranslate" data-text="SERVICE_UNAVAILABLE (503)" id="SERVICE_UNAVAILABLE" tabindex="-1">
+      SERVICE_UNAVAILABLE (503)</h3>
+    <table class="matchpre">
+      <thead>
+        <tr>
+          <th>Error code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="error_backendError">
+          <td class="error-name"><code dir="ltr" translate="no">backendError</code></td>
+          <td class="error-cause">A backend error occurred.</td>
+        </tr>
+        <tr id="error_backendNotConnected">
+          <td class="error-name"><code dir="ltr" translate="no">backendNotConnected</code></td>
+          <td class="error-cause">The request failed due to a connection error.</td>
+        </tr>
+        <tr id="error_notReady">
+          <td class="error-name"><code dir="ltr" translate="no">notReady</code></td>
+          <td class="error-cause">The API server is not ready to accept requests.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

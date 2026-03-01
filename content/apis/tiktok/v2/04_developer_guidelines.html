@@ -1,0 +1,159 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="developer_guidelines">Developer Guidelines</h1>
+        <p style="text-align:left">We are excited that you are seeking to integrate your app with TikTok. As developers,
+            you can help us inspire creativity and bring joy by providing awesome experiences for TikTok users. This
+            page provides guidelines for you to better understand our integration processes and requirements.</p>
+        <h2 id="app_review_process">App review process</h2>
+        <p style="text-align:left">To provide a safe and reliable experience for TikTok users, all apps seeking to
+            integrate with our APIs and SDKs in Live are reviewed.</p>
+        <p style="text-align:left">If an app is in Live, it means it can integrate with our APIs and SDKs for authorized
+            access to data of TikTok end users.</p>
+        <p style="text-align:left">After your apps are approved, requests for modification may require further reviews
+            depending on the attributes being changed. Our review process may also provide feedback to improve your
+            integration with TikTok.</p>
+        <h3 id="submission_requirements">Submission requirements</h3>
+        <ol class="list-1" start="1" type="1">
+            <li>Make sure your app is functioning during our review process. You are required to provide demo accounts
+                and capabilities to our approvers free of charge, if requested.</li>
+            <ol class="list-2" start="1" type="a">
+                <li>For incomplete apps, beta or development versions, and test versions, you are encouraged to use <a
+                        href="/doc/add-a-sandbox">Sandbox mode</a> to test out our integrations.</li>
+            </ol>
+            <li>Follow our guidelines throughout the duration of your integration with TikTok. Any violations of our
+                guidelines found through auditing, user complaints, or other means will likely lead to immediate
+                revocation of your integration and a permanent ban on all future integrations by your account and
+                business entity.</li>
+            <li>Verify ownership of all configurations with a URL, including your Privacy Policy, Terms of Service, and
+                more. Learn more about <a href="/doc/getting-started-create-an-app#verify_url_ownership">URL
+                    verification</a>.</li>
+        </ol>
+        <div class="callout-warning">
+            <p style="text-align:left">Note: We do not provide an official review timeline or any guarantees for
+                approval. While we do our best to accommodate all requests and communicate promptly, this is a manual
+                process and response times may vary. We remind you to factor the review process into your launch
+                timelines and planning. </p>
+        </div>
+        <h2 id="developer_principles">Developer Principles</h2>
+        <h3 id="provide_great_experiences">Provide great experiences</h3>
+        <p style="text-align:left">By integrating with TikTok, you are helping us expand the ecosystem of experiences
+            available to our users. Therefore, we expect your app to provide significant additional value to TikTok and
+            its end users. Don't just build great experiences, maintain them! Even if your app is approved for
+            integration, failure to maintain a quality experience can lead to revocation of your integration.</p>
+        <h3 id="build_awesome_interfaces">Build awesome interfaces</h3>
+        <p style="text-align:left">Great experiences start with easy to understand and intuitive interfaces. Bad
+            experiences cause user frustration so we want to avoid them. All app UI must follow industry best practices
+            for user experience and interface design. Additionally, to maintain diversity and inclusion standards across
+            apps, be mindful of localized expectations such as language and prioritize accessibility capabilities.</p>
+        <p style="text-align:left">If your users are developers themselves, make sure your APIs and SDKs behave as
+            expected based on their interface and model. Avoid overly complicated or confusing API contracts.</p>
+        <h3 id="be_reliable">Be reliable</h3>
+        <p style="text-align:left">Apps with complaints of frequent outages, timeouts, or poor performance can be
+            rejected or have their integration revoked. To avoid this, regularly track your latency, success rates, and
+            service availability. Manage service incidents promptly and fix any bugs in your app. Treat issues related
+            to data security and critical functionality (for example, payments) with urgency.</p>
+        <h3 id="be_trustworthy">Be trustworthy</h3>
+        <p style="text-align:left">Great experiences are transparent with users and give them control of their data and
+            content. Be very clear with users about the purpose of your app and your integration with TikTok. Provide
+            mechanisms for users to contact you directly, and promptly address their concerns. Don't engage in any
+            deceptive or misleading communication. Never misguide users into thinking that you are part of the TikTok
+            app, or, for that matter, any other app or entity that doesn't belong to you. As a reminder, make sure you
+            have read and comply with our <style data-emotion="css ap4ivw">
+                .css-ap4ivw {
+                    font-size: inherit;
+                    color: var(--ui-text-primary-display);
+                }
+
+                .css-ap4ivw *:hover {
+                    -webkit-text-decoration: none !important;
+                    text-decoration: none !important;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+            </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://tiktokbrandbook.com/d/HhXfjVK1Poj9/legal"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">Branding Requirements</span></a>.</p>
+        <p style="text-align:left">Understand that the user's data belongs to them. You must safeguard their data. Don't
+            share it with anyone without their proper consent. </p>
+        <p style="text-align:left">Here are some example behaviors to maintain trust:</p>
+        <ol class="list-1" start="1" type="1">
+            <li>Never remove a creator's copyright mechanisms (such as watermarks) without consent.</li>
+            <li>Protect the user's identity and anonymity.</li>
+            <ol class="list-2" start="1" type="a">
+                <li>If you have access to a user's PII (Personally Identifiable Information), never share it with anyone
+                    without their consent.</li>
+            </ol>
+            <li>Follow all data sharing and privacy laws to build trust with users and governments.</li>
+            <li>Set an accurate description, title, and icon for your app.</li>
+            <li>Disclose your app's Terms of Service and Privacy Policy.</li>
+            <li>Verify URL ownership. </li>
+            <li>Provide all required data when configuring your app integration and developer profile.</li>
+        </ol>
+        <p style="text-align:left"><b>Note:</b> Providing fake or incomplete data may lead to the rejection of your app
+            and delays in your integration.</p>
+        <h2 id="tiktok_integration_maintenance_requirements">TikTok Integration Maintenance Requirements</h2>
+        <ol class="list-1" start="1" type="1">
+            <li>You must actively maintain communication with TikTok when requested. Failure to respond to
+                correspondence in a timely manner can lead to termination of your integration.</li>
+            <ol class="list-2" start="1" type="a">
+                <li>Check your email filters and make sure our communications are not landing in your spam or junk mail
+                    folders.</li>
+                <li>Any sensitive communication relating to topics including but not limited to security, privacy,
+                    compliance, and user deception must be addressed immediately regarding these matters.</li>
+            </ol>
+            <li>TikTok reserves the right to deprecate APIs and SDKs. You must prioritize and update your integration as
+                new features are offered by TikTok for Developers.</li>
+            <li>You will be given notice when backward incompatible changes are made to our APIs. You must prevent any
+                user interfaces from being broken because of deprecated integrations by promptly migrating to newer
+                APIs.</li>
+            <li>For any security, privacy, and compliance related concerns, you must immediately acknowledge
+                communication from TikTok and update your integration.</li>
+            <li>Respect our API throttling limits. It goes without saying, don't use your integration to attack us, our
+                users, or anyone else with denial of service attempts, spam, etc. That's a surefire way to get banned
+                forever and find yourself in more trouble than you or we need.</li>
+        </ol>
+        <h2 id="terms_and_policies">Terms and Policies</h2>
+        <p style="text-align:left">Below you can find our Terms of Service and other policy documents.</p>
+        <ul class="list-1" type="disc">
+            <li><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/tik-tok-developer-terms-of-service "><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Developer Terms of Service</span></a> </li>
+            <li><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/tiktok-data-sharing-agreement"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Developer Data Sharing Agreement</span></a></li>
+            <li><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://tiktokbrandbook.com/d/HhXfjVK1Poj9/legal"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Branding Requirements</span></a></li>
+            <li><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/community-guidelines"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Community Guidelines</span></a></li>
+        </ul>
+        <p style="text-align:left">You are responsible for adhering to all policies and guidelines. TikTok reserves the
+            right to reject your application for any reason, including failure to follow the guidelines mentioned in
+            this document. </p><br />
+    </div>
+</div>

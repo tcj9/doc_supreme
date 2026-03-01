@@ -1,0 +1,439 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Resumable Uploads<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>Resumable video uploads via Google APIs allow for uploads to be paused and resumed, improving
+              reliability, especially with large files or unstable connections.</p>
+          </li>
+          <li>
+            <p>The process begins with a <code>POST</code> request to initiate a session, receiving a unique upload URL
+              in the <code>Location</code> header, which is saved for subsequent steps.</p>
+          </li>
+          <li>
+            <p>The actual video file upload is done via <code>PUT</code> requests to the session URL, including specific
+              headers like <code>Content-Length</code>, <code>Content-Type</code>, and <code>Content-Range</code>, as
+              well as the binary file data in the body.</p>
+          </li>
+          <li>
+            <p>In case of interruptions, the upload status can be queried using another <code>PUT</code> request, and
+              then resumed from the last successful point, indicated by the <code>Range</code> header in the
+              <code>308</code> response.</p>
+          </li>
+          <li>
+            <p>Chunked uploading allows for videos to be uploaded in smaller segments, useful for progress indicators
+              and unstable networks, but it increases the amount of requests which might affect performance.</p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <p>You can upload videos more reliably by using the resumable upload protocol for Google APIs. This protocol lets
+      you resume an upload operation after a network interruption or other transmission failure, saving time and
+      bandwidth in the event of network failures.</p>
+    <p>Using resumable uploads is especially useful in any of the following cases:</p>
+    <p>
+    <ul>
+      <li>You are transferring large files.</li>
+      <li>The likelihood of a network interruption is high.</li>
+      <li>Uploads are originating from a device with a low-bandwidth or unstable Internet connection, such as a mobile
+        device.</li>
+    </ul>
+    </p>
+    <p>This guide explains the sequence of HTTP requests that an application makes to upload videos using a resumable
+      uploading process. This guide is primarily intended for developers who cannot use the <a
+        href="/youtube/v3/libraries">Google API client libraries</a>, some of which provide native support for resumable
+      uploads. In fact, the <a href="/youtube/v3/guides/uploading_a_video">YouTube Data API - Uploading a Video</a>
+      guide explains how to use the Google APIs Client Library for Python to upload a video using a resumable uploading
+      process.</p>
+    <p><strong>Note:</strong> You can also see the series of request made for resumable uploading or any other API
+      operation by using one of the Google API client libraries with HTTPS logging enabled. For example, to enable the
+      HTTP trace for Python, use the <code dir="ltr"
+        translate="no"><a href="http://bitworking.org/projects/httplib2/doc/html/libhttplib2.html#httplib2.debuglevel">httplib2</a></code>
+      library:</p>
+    <div></div><devsite-code>
+      <pre class="devsite-click-to-copy python" dir="ltr" is-upgraded="" syntax="Text only"
+        translate="no">httplib2.debuglevel = 4</pre>
+    </devsite-code>
+    <h2 data-text="Step 1 - Start a resumable session" id="#Start_Resumable_Session" tabindex="-1">Step 1 - Start a
+      resumable session</h2>
+    <p>To start a resumable video upload, send a POST request to the following URL. In the URL, set the <code dir="ltr"
+        translate="no"><a href="/youtube/v3/docs/videos/insert#part">part</a></code> parameter value to the appropriate
+      value for your request. Remember that the parameter value identifies the parts the contain properties that you are
+      setting, and it also identifies the parts that you want the API response to include. Parameter values in the
+      request URL must be URL-encoded.</p>
+    <div></div><devsite-code>
+      <pre dir="ltr" is-upgraded="" translate="no">
+https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable∂=<var translate="no">PARTS</var>
+</pre>
+    </devsite-code>
+    <p>Set the body of the request to a <code dir="ltr"
+        translate="no"><a href="/youtube/v3/docs/videos">video</a></code> resource. Also set the following HTTP request
+      headers:</p>
+    <p>
+    <ul>
+      <li><code dir="ltr" translate="no">Authorization</code> – The authorization token for the request.</li>
+      <li><code dir="ltr" translate="no">Content-Length</code> – The number of bytes provided in the body of the
+        request. Note that you do not need to provide this header if you are using <a
+          href="http://tools.ietf.org/html/rfc2616#section-3.6.1">chunked transfer encoding</a>.</li>
+      <li><code dir="ltr" translate="no">Content-Type</code> – Set the value to <code dir="ltr"
+          translate="no">application/json; charset=UTF-8</code>.
+      <li><code dir="ltr" translate="no">X-Upload-Content-Length</code> – The number of bytes that will be uploaded in
+        subsequent requests. Set this value to the size of the file you are uploading.</li>
+      <li><code dir="ltr" translate="no">x-upload-content-type</code> – the MIME type of the file that you are
+        uploading. You can upload files with any video MIME type (<code dir="ltr" translate="no">video/*</code>) or a
+        MIME type of <code dir="ltr" translate="no">application/octet-stream</code>.</li>
+      </li>
+    </ul>
+    </p>
+    <p>the following example shows how to initiate a resumable session for uploading a video. the request sets (and will
+      retrieve) properties in the <code dir="ltr" translate="no">video</code> resource's <code dir="ltr"
+        translate="no">snippet</code> and <code dir="ltr" translate="no">status</code> parts, and it will also retrieve
+      properties in the resource's <code dir="ltr" translate="no">contentdetails</code> part.</p>
+    <div></div><devsite-code>
+      <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="GDScript"
+        translate="no"><span class="devsite-syntax-n">post</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">upload</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">v3</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-err">?</span><span class="devsite-syntax-n">uploadType</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">resumable</span><span class="devsite-syntax-o">&amp;</span><span class="devsite-syntax-n">part</span><span class="devsite-syntax-o">=</span><var translate="no"><span class="devsite-syntax-n">parts</span></var><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">http</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-mf">1.1</span>
+<span class="devsite-syntax-n">host</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">www</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">googleapis</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">com</span>
+<span class="devsite-syntax-n">authorization</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">bearer</span><span class="devsite-syntax-w"> </span><var translate="no"><span class="devsite-syntax-n">auth_token</span></var>
+<span class="devsite-syntax-n">content</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">length</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var translate="no"><span class="devsite-syntax-n">content_length</span></var>
+<span class="devsite-syntax-n">content</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">type</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">application</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-n">json</span><span class="devsite-syntax-p">;</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">charset</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">utf</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-mi">8</span>
+<span class="devsite-syntax-n">x</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">upload</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">content</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">length</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var translate="no"><span class="devsite-syntax-n">x_upload_content_length</span></var>
+<span class="devsite-syntax-n">X</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">Upload</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">Content</span><span class="devsite-syntax-o">-</span><span class="devsite-syntax-n">Type</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var translate="no"><span class="devsite-syntax-n">X_UPLOAD_CONTENT_TYPE</span></var>
+
+<var translate="no"><a href="/youtube/v3/docs/videos"><span class="devsite-syntax-n">video</span></a><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">resource</span></var></pre>
+    </devsite-code>
+    <p>The following example shows a POST request that has all of these values populated with the exception of the
+      authentication token. The <code dir="ltr" translate="no">categoryId</code> value in the example corresponds to a
+      video category. The list of supported categories can be retrieved using the API's <code dir="ltr"
+        translate="no"><a href="/youtube/v3/docs/videoCategories/list">videoCategories.list</a></code> method.</p>
+    <div></div><devsite-code>
+      <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="HTTP" translate="no"><span class="devsite-syntax-nf">POST</span> <span class="devsite-syntax-nn">/upload/youtube/v3/videos?uploadType=resumable∂=snippet,status,contentDetails</span> <span class="devsite-syntax-kr">HTTP</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-m">1.1</span>
+<span class="devsite-syntax-na">Host</span><span class="devsite-syntax-o">:</span> <span class="devsite-syntax-l">www.googleapis.com</span>
+<span class="devsite-syntax-na">Authorization</span><span class="devsite-syntax-o">:</span> <span class="devsite-syntax-l">Bearer <var translate="no">AUTH_TOKEN</var></span>
+<span class="devsite-syntax-na">Content-Length</span><span class="devsite-syntax-o">:</span> <var translate="no"><span class="devsite-syntax-l">278</span></var>
+<span class="devsite-syntax-na">Content-Type</span><span class="devsite-syntax-o">:</span> <span class="devsite-syntax-l">application/json; charset=UTF-8</span>
+<span class="devsite-syntax-na">X-Upload-Content-Length</span><span class="devsite-syntax-o">:</span> <var translate="no"><span class="devsite-syntax-l">3000000</span></var>
+<span class="devsite-syntax-na">X-Upload-Content-Type</span><span class="devsite-syntax-o">:</span> <var translate="no"><span class="devsite-syntax-l">video/*</span></var>
+
+<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"snippet"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"title"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"My video title"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"description"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"This is a description of my video"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"tags"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-s2">"cool"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"video"</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"more keywords"</span><span class="devsite-syntax-p">],</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"categoryId"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">22</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"status"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"privacyStatus"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"public"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"embeddable"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">True</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"license"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"youtube"</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span></pre>
+    </devsite-code>
+    <h2 data-text="Step 2 - Save the resumable session URI" id="Save_Resumable_Session_URI" tabindex="-1">Step 2 - Save
+      the resumable session URI</h2>
+    <p>If your request succeeds, the API server will respond with a <code dir="ltr" translate="no">200</code> (<code
+        dir="ltr" translate="no">OK</code>) HTTP status code, and the response will include a <code dir="ltr"
+        translate="no">Location</code> HTTP header that specifies the URI for the resumable session. This is the URI
+      that you will use to upload your video file.</p>
+    <p>The example below shows a sample API response to the request in step 1:</p>
+    <div></div><devsite-code>
+      <pre dir="ltr" is-upgraded="" translate="no">
+HTTP/1.1 200 OK
+<strong>Location: https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&amp;upload_id=xa298sd_f∂=snippet,status,contentDetails</strong>
+Content-Length: 0
+</pre>
+    </devsite-code>
+    <h2 data-text="Step 3 - Upload the video file" id="Upload_File" tabindex="-1">Step 3 - Upload the video file</h2>
+    <p>After extracting the session URI from the API response, you then need to upload the actual video file content to
+      that location. The body of the request is the binary file content for the video that you are uploading. The
+      example below shows the request's format.</p>
+    <div></div><devsite-code>
+      <pre dir="ltr" is-upgraded="" translate="no">
+PUT <var translate="no">UPLOAD_URL</var> HTTP/1.1
+Authorization: Bearer <var translate="no">AUTH_TOKEN</var>
+Content-Length: <var translate="no">CONTENT_LENGTH</var>
+Content-Type: <var translate="no">CONTENT_TYPE</var>
+
+<var translate="no">BINARY_FILE_DATA</var>
+</pre>
+    </devsite-code>
+    <p>The request sets the following HTTP request headers:</p>
+    <p>
+    <ul>
+      <li><code dir="ltr" translate="no">Authorization</code> – The authorization token for the request.</li>
+      <li><code dir="ltr" translate="no">Content-Length</code> – The size of the file that you are uploading. This value
+        should be the same as the value of the <code dir="ltr" translate="no">X-Upload-Content-Length</code> HTTP
+        request header in step 1.</li>
+      <li><code dir="ltr" translate="no">Content-Type</code> – The MIME type of the file that you are uploading. This
+        value should be the same as the value of the <code dir="ltr" translate="no">X-Upload-Content-Type</code> HTTP
+        request header in step 1.</li>
+    </ul>
+    </p>
+    <h2 data-text="Step 4 - Complete the upload process" id="Complete_Upload" tabindex="-1">Step 4 - Complete the upload
+      process</h2>
+    <p>Your request will lead to one of the following scenarios:</p>
+    <ul>
+      <li>
+        <p><strong>Your upload is successful.</strong></p>
+        <p>The API server responds with an HTTP <code dir="ltr" translate="no">201</code> (<code dir="ltr"
+            translate="no">Created</code>) response code. The body of the response is the <code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/videos">video</a></code> resource that you created.</p>
+      </li>
+      <li>
+        <p><strong>Your upload did not succeed, but can be resumed.</strong></p>
+        <p>You should be able to resume an upload in either of the following cases:</p>
+        <ul>
+          <li>
+            <p>Your request is interrupted because the connection between your application and the API server is lost.
+              In this case, you will not receive an API response.</p>
+          </li>
+          <li>
+            <p>The API response specifies any of the following <code dir="ltr" translate="no">5xx</code> response codes.
+              Your code should use an <a href="http://www.wikipedia.org/wiki/Exponential_backoff">exponential
+                backoff</a> strategy when resuming uploads after receiving any of these response codes.</p>
+            <p>
+            <ul>
+              <li><code dir="ltr" translate="no">500</code> – <code dir="ltr"
+                  translate="no">Internal Server Error</code></li>
+              <li><code dir="ltr" translate="no">502</code> – <code dir="ltr" translate="no">Bad Gateway</code></li>
+              <li><code dir="ltr" translate="no">503</code> – <code dir="ltr" translate="no">Service Unavailable</code>
+              </li>
+              <li><code dir="ltr" translate="no">504</code> – <code dir="ltr" translate="no">Gateway Timeout</code></li>
+            </ul>
+            </p>
+          </li>
+        </ul>
+        <p>To resume an upload, follow the instructions for <a href="#Check_Upload_Status">checking the upload's
+            status</a> and <a href="#Resume_Upload">resuming an upload</a> below. Remember that each resumable session
+          URI has a finite lifetime and eventually expires. For this reason, we recommend starting a resumable upload as
+          soon as you obtain the session URI and resuming an interrupted upload shortly after the interruption occurs.
+        </p>
+      </li>
+      <li>
+        <p><strong>Your upload failed permanently.</strong></p>
+        <p>For a failed upload, the response contains an <a href="/youtube/v3/docs/errors">error response</a> that helps
+          to explain the cause of the failure. For an upload that fails permanently, the API response will have a <code
+            dir="ltr" translate="no">4xx</code> response code or a <code dir="ltr" translate="no">5xx</code> response
+          code other than the ones listed above.</p>
+        <p>If you send a request with an expired session URI, the server returns a <code dir="ltr"
+            translate="no">404</code> HTTP response code (<code dir="ltr" translate="no">Not Found</code>). In this
+          case, you will need to start a new resumable upload, obtain a new session URI, and start the upload from the
+          beginning using the new URI.</p>
+      </li>
+    </ul>
+    <h3 data-text="Step 4.1: Check the status of an upload" id="Check_Upload_Status" tabindex="-1">Step 4.1: Check the
+      status of an upload</h3>
+    <p>To check the status of an interrupted resumable upload, send an empty PUT request to the upload URL that you
+      retrieved in step 2 and also used in step 3. In your request, set the <code dir="ltr"
+        translate="no">Content-Range</code> header value to <code dir="ltr"
+        translate="no">bytes */<var translate="no">CONTENT_LENGTH</var></code>, where <var
+        translate="no">CONTENT_LENGTH</var> is the size of the file you are uploading.</p>
+    <div></div><devsite-code>
+      <pre dir="ltr" is-upgraded="" translate="no">
+PUT <var translate="no">UPLOAD_URL</var> HTTP/1.1
+Authorization: Bearer <var translate="no">AUTH_TOKEN</var>
+Content-Length: 0
+Content-Range: bytes */<var translate="no">CONTENT_LENGTH</var>
+</pre>
+    </devsite-code>
+    <h3 data-text="Step 4.2: Process the API response" id="Handle_Response_to_Status_Request" tabindex="-1">Step 4.2:
+      Process the API response</h3>
+    <p>If the upload already completed, regardless of whether it succeeded or failed, the API will return the same
+      response that it sent when the upload originally completed.</p>
+    <p>However, if the upload was interrupted or is still in progress, the API response will have an HTTP <code
+        dir="ltr" translate="no">308</code> (<code dir="ltr" translate="no">Resume Incomplete</code>) response code. In
+      the response, the <code dir="ltr" translate="no">Range</code> header specifies how many bytes of the file have
+      already been successfully uploaded.</p>
+    <p>
+    <ul>
+      <li>The header value is indexed from <code dir="ltr" translate="no">0</code>. As such, a header value of <code
+          dir="ltr" translate="no">0-999999</code> indicates that the first <code dir="ltr"
+          translate="no">1,000,000</code> bytes of the file have been uploaded.</li>
+      <li>If nothing has been uploaded yet, the API response will not include the <code dir="ltr"
+          translate="no">Range</code> header.</li>
+    </ul>
+    </p>
+    <p>The sample response below shows the format of an API response for a resumable upload:</p>
+    <div></div><devsite-code>
+      <pre dir="ltr" is-upgraded="" translate="no">
+308 Resume Incomplete
+Content-Length: 0
+<strong>Range: bytes=0-999999</strong>
+</pre>
+    </devsite-code>
+    <p>If the API response also includes the <code dir="ltr" translate="no">Retry-After</code> header, use that header's
+      value to determine when to attempt to resume the upload.</p>
+    <h3 data-text="Step 4.3: Resume the upload" id="Resume_Upload" tabindex="-1">Step 4.3: Resume the upload</h3>
+    <p>To resume the upload, send another <code dir="ltr" translate="no">PUT</code> request to the upload URL captured
+      in step 2. Set the request body to the binary code for the portion of the video file that has not yet been
+      uploaded.</p>
+    <div></div><devsite-code>
+      <pre dir="ltr" is-upgraded="" translate="no">
+PUT <var translate="no">UPLOAD_URL</var> HTTP/1.1
+Authorization: Bearer <var translate="no">AUTH_TOKEN</var>
+Content-Length: <var translate="no">REMAINING_CONTENT_LENGTH</var>
+Content-Range: bytes <var translate="no">FIRST_BYTE</var>-<var translate="no">LAST_BYTE</var>/<var translate="no">TOTAL_CONTENT_LENGTH</var>
+
+<var translate="no">PARTIAL_BINARY_FILE_DATA</var>
+</pre>
+    </devsite-code>
+    <p>You need to set the following HTTP request headers:</p>
+    <ul>
+      <li>
+        <p><code dir="ltr" translate="no">Authorization</code> – The authorization token for the request.</p>
+      </li>
+      <li>
+        <p><code dir="ltr" translate="no">Content-Length</code> – The size, in bytes, of the content that has not yet
+          been uploaded. If you are uploading the remainder of a file, you can calculate this value by subtracting the
+          <code dir="ltr" translate="no">FIRST_BYTE</code> value from the <code dir="ltr"
+            translate="no">TOTAL_CONTENT_LENGTH</code> value. Both values are used in the <code dir="ltr"
+            translate="no">Content-Range</code> header.</p>
+      </li>
+      <li id="Content_Range_Header">
+        <p><code dir="ltr" translate="no">Content-Range</code> – The portion of the file that you are uploading. The
+          header value comprises three values:</p>
+        <ul>
+          <li>
+            <p><code dir="ltr" translate="no">FIRST_BYTE</code> – The 0-based numeric index of the byte number from
+              which you are resuming the upload. This value is one number higher than the second number in the <code
+                dir="ltr" translate="no">Range</code> header retrieved in the previous step. In the previous example,
+              the <code dir="ltr" translate="no">Range</code> header value was <code dir="ltr"
+                translate="no">0-999999</code>, so the first byte in a subsequent resumed upload would be <code
+                dir="ltr" translate="no">1000000</code>.</p>
+          </li>
+          <li>
+            <p><code dir="ltr" translate="no">LAST_BYTE</code> – The 0-based numeric index of the last byte of the
+              binary file that you are uploading. Typically, this is the last byte in the file. So, for example, if the
+              file size was <code dir="ltr" translate="no">3000000</code> bytes, the last byte in the file would be
+              number <code dir="ltr" translate="no">2999999</code>.</p>
+          </li>
+          <li>
+            <p><code dir="ltr" translate="no">TOTAL_CONTENT_LENGTH</code> – The total size of the video file in bytes.
+              This value is the same as the <code dir="ltr" translate="no">Content-Length</code> header specified in the
+              <a href="#Start_Resumable_Session">original upload request</a>.</p>
+          </li>
+        </ul>
+        <div class="note">
+          <strong>Note:</strong> You cannot upload a noncontinuous block of the binary file. If you try to upload a
+          noncontinuous block, none of the remaining binary content will be uploaded.<br /><br />
+
+          As such, the first byte uploaded in a resumed upload must be the next byte after the last byte that had
+          already been successfully uploaded to YouTube. (See the discussion of the <code dir="ltr"
+            translate="no">Range</code> header in <a href="#Handle_Response_to_Status_Request">step 4.2</a>.<br /><br />
+
+          Thus, if the last byte in the <code dir="ltr" translate="no">Range</code> header is <code dir="ltr"
+            translate="no">999999</code>, the first byte in the request to resume the upload must be byte 1000000. (Both
+          numbers use a 0-based index.) If you try to resume the upload from byte 999999 or lower (overlapping bytes) or
+          byte 1000001 or higher (skipping bytes), none of the binary content will be uploaded.
+        </div>
+      </li>
+    </ul>
+    <h2 data-text="Upload a file in chunks" id="Uploading_Chunks" tabindex="-1">Upload a file in chunks</h2>
+    <p>Instead of trying to upload an entire file and resuming the upload in event of a network interruption, your
+      application can break the file into chunks and send a series of requests to upload the chunks in sequence. This
+      approach is rarely necessary and is actually discouraged because it requires additional requests, which have
+      performance implications. However, it might be useful if you are trying to display a progress indicator on a very
+      unstable network.</p>
+    <p>The instructions for uploading a file in chunks are virtually identical to the four-step process explained
+      earlier in this guide. However, the requests to start uploading a file (step 3 above) and to resume an upload
+      (step 4.3 above) both set the <code dir="ltr" translate="no">Content-Length</code> and <code dir="ltr"
+        translate="no">Content-Range</code> header values differently when a file is being uploaded in chunks.</p>
+    <ul>
+      <li>
+        <p>The <code dir="ltr" translate="no">Content-Length</code> header value specifies the size of the chunk that
+          the request is sending. Note the following restrictions on chunk sizes:</p>
+        <ul>
+          <li>
+            <p>The chunk size must be a multiple of 256 KB. (This restriction does not apply to the last chunk since the
+              size of the entire file may not be a multiple of 256 KB.) Remember that larger chunks are more efficient.
+            </p>
+          </li>
+          <li>
+            <p>The chunk size must be the same for each request in the upload sequence with the exception of the last
+              request, which specifies the size of the final chunk.</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>The <code dir="ltr" translate="no">Content-Range</code> header specifies the bytes in the file that the
+          request is uploading. The instructions for setting the <code dir="ltr"
+            translate="no"><a href="#Content_Range_Header">Content-Range</a></code> header in step 4.3 are applicable
+          when setting this value.</p>
+        <p>For example, a value of <code dir="ltr" translate="no">bytes 0-524287/2000000</code> shows that the request
+          is sending the first 524,288 bytes (256 x 2048) in a 2,000,000 byte file.</p>
+      </li>
+    </ul>
+    <p>The example below shows the format of the first of a series of requests that will upload a 2,000,000 byte file in
+      chunks:</p>
+    <div></div><devsite-code>
+      <pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="HTTP" translate="no"><span class="devsite-syntax-nf">PUT</span> <var translate="no"><span class="devsite-syntax-nn">UPLOAD_URL</span></var> <span class="devsite-syntax-kr">HTTP</span><span class="devsite-syntax-o">/</span><span class="devsite-syntax-m">1.1</span>
+<span class="devsite-syntax-na">Authorization</span><span class="devsite-syntax-o">:</span> <span class="devsite-syntax-l">Bearer <var translate="no">AUTH_TOKEN</var></span>
+<span class="devsite-syntax-na">Content-Length</span><span class="devsite-syntax-o">:</span> <var translate="no"><span class="devsite-syntax-l">524888</span></var>
+<span class="devsite-syntax-na">Content-Type</span><span class="devsite-syntax-o">:</span> <var translate="no"><span class="devsite-syntax-l">video/*</span></var>
+<span class="devsite-syntax-na">Content-Range</span><span class="devsite-syntax-o">:</span> <span class="devsite-syntax-l">bytes <var translate="no">0</var>-<var translate="no">524287</var>/<var translate="no">2000000</var></span>
+
+<var translate="no">{bytes 0-524287}</var></pre>
+    </devsite-code>
+    <p>If a request other than the final request succeeds, the API server responds with a <code dir="ltr"
+        translate="no">308</code> (<code dir="ltr" translate="no">Resume Incomplete</code>) response. The response
+      format will be the same as that described in <a href="#Handle_Response_to_Status_Request">Step 4.2: Process the
+        API response</a> above.</p>
+    <p>Use the upper value returned in the API response's <code dir="ltr" translate="no">Range</code> header to
+      determine where to start the next chunk. Continue to send <code dir="ltr" translate="no">PUT</code> requests, as
+      described in <a href="#Resume_Upload">Step 4.3: Resume the upload</a>, to upload subsequent file chunks until the
+      entire file has been uploaded.</p>
+    <p>When the entire file has been uploaded, the server responds with a <code dir="ltr" translate="no">201</code> HTTP
+      response code (<code dir="ltr" translate="no">Created</code>) and returns the requested parts of the newly created
+      video resource.</p>
+    <p>If any request is interrupted or your application receives any <code dir="ltr" translate="no">5xx</code> response
+      code, follow the procedure explained in <a href="#Complete_Upload">step 4</a> to complete the upload. However,
+      instead of attempting to upload the rest of the file, just continue uploading chunks from the point where you are
+      resuming the upload. Be sure to use the check the upload's status to determine where to resume the file upload. Do
+      not assume that the server received all (or none) of the bytes sent in the previous request.</p>
+    <p class="note"><strong>Note:</strong> You can also request the status of an active upload between uploaded chunks.
+      (The upload does not need to have been interrupted before you can retrieve its status.)</p>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

@@ -1,0 +1,241 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="get_started">Get Started</h1>
+        <p style="text-align:left">This guide will show you how to get an authorization code and an access token in
+            order to utilize the Display APIs. We will use the Display APIs to display a TikTok user's profile and
+            videos on your platform.</p>
+        <h2 id="before_you_start">Before You Start</h2>
+        <p style="text-align:left">You will need access to:</p>
+        <ul class="list-1" type="disc">
+            <li>A TikTok developer account on TikTok Developer Portal</li>
+            <li>Approval for both a Login Kit and TikTok API products</li>
+            <li>Granted <code>user.info</code><code>.basic</code> and <code>video.list</code> scopes for your app</li>
+            <li>A TikTok account with a few posted videos</li>
+        </ul>
+        <h2 id="authorization">Authorization</h2>
+        <h3 id="get_an_authorization_code">Get an Authorization Code</h3>
+        <p style="text-align:left">Follow these documents to integrate with our login kit, and use your TikTok account
+            to authorize and get an access token. You will need to set scope=user.info.basic,video.list.</p>
+        <ul class="list-1" type="disc">
+            <li><a href="/doc/login-kit-ios-quickstart">iOS</a></li>
+            <li><a href="/doc/login-kit-android-quickstart-v2">Android</a></li>
+            <li>
+                <style data-emotion="css ap4ivw">
+                    .css-ap4ivw {
+                        font-size: inherit;
+                        color: var(--ui-text-primary-display);
+                    }
+
+                    .css-ap4ivw *:hover {
+                        -webkit-text-decoration: none !important;
+                        text-decoration: none !important;
+                    }
+
+                    .css-ap4ivw:hover {
+                        -webkit-text-decoration: underline;
+                        text-decoration: underline;
+                    }
+
+                    .css-ap4ivw:hover {
+                        -webkit-text-decoration: underline;
+                        text-decoration: underline;
+                    }
+                </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://developers.tiktok.com/doc/login-kit-web/"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Web</span></a>
+            </li>
+        </ul>
+        <p style="text-align:left">After following one of the tutorials to get user authorization, you will be able to
+            get an authorization code that looks like the following: </p>
+        <p style="text-align:left">
+            <code>wFPH5DePZMb07BPJvpWi-WotFlq1ISzFYQBDb9S9CBUQkGZRGW3zOAbYzhGXkoYkFx-aDeph0hTFk3l6ngGYuoixRvvZBWV1e3Q_BFoBELY*0!6410</code>
+        </p>
+        <h3 id="get_an_access_token">Get an Access Token</h3>
+        <p style="text-align:left">Follow this <a class="css-ap4ivw" color="var(--ui-text-primary-display)"
+                data-e2e="StyledLink"
+                href="https://developers.tiktok.com/doc/login-kit-manage-user-access-tokens/"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">tutorial</span></a> to use the authorization code to
+            retrieve the user's access token and open id. </p>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>    </span><span>"data"</span><span>: {
+</span></span><span><span>        </span><span>"access_token"</span><span>: </span><span style="color:#d14">"act.example12345Example12345Example"</span><span>,
+</span></span><span><span>        </span><span>"captcha"</span><span>: </span><span style="color:#d14">""</span><span>,
+</span></span><span><span>        </span><span>"desc_url"</span><span>: </span><span style="color:#d14">""</span><span>,
+</span></span><span><span>        </span><span>"description"</span><span>: </span><span style="color:#d14">""</span><span>,
+</span></span><span><span>        </span><span>"error_code"</span><span>: </span><span style="color:#008080">0</span><span>,
+</span></span><span><span>        </span><span>"expires_in"</span><span>: </span><span style="color:#008080">86400</span><span>,
+</span></span><span><span>        </span><span>"log_id"</span><span>: </span><span style="color:#d14">"20220714041044010002007735002037040BAF34"</span><span>,
+</span></span><span><span>        </span><span>"open_id"</span><span>: </span><span style="color:#d14">"abcdefgh-1a2b-123c4-ab12-abc123abc1234"</span><span>,
+</span></span><span><span>        </span><span>"refresh_expires_in"</span><span>: </span><span style="color:#008080">31536000</span><span>,
+</span></span><span><span>        </span><span>"refresh_token"</span><span>: </span><span style="color:#d14">"rft.example12345Example12345Example"</span><span>,
+</span></span><span><span>        </span><span>"scope"</span><span>: </span><span style="color:#d14">"user.info.basic"</span><span>
+</span></span><span>    },
+</span><span><span>    </span><span>"message"</span><span>: </span><span style="color:#d14">"success"</span><span>
+</span></span><span>}</span></code></pre><br />
+        <h2 id="display_user's_tiktok_profile">Display User's TikTok Profile</h2>
+        <ol class="list-1" start="1" type="1">
+            <li>Design and build a UI to host the TikTok account profile.</li>
+            <li>Call <b><a href="/doc/tiktok-api-v2-get-user-info">GET /v2/user/info/</a></b> API using access_token to
+                get user profile information.</li>
+        </ol>
+        <p style="text-align:left">Example request:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span><span>curl -L -X GET </span><span style="color:#d14">'https://open.tiktokapis.com/v2/user/info/?fields=open_id,union_id,avatar_url,display_name'</span><span> \
+</span></span><span><span>-H </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span></span></code></pre>
+        <p style="text-align:left">Example response:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>   </span><span>"data"</span><span>:{
+</span></span><span><span>      </span><span>"user"</span><span>:{
+</span></span><span><span>         </span><span>"avatar_url"</span><span>:</span><span style="color:#d14">"https://p19-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/b17f0e4b3a4f4a50993cf72cda8b88b8~c5_168x168.jpeg"</span><span>,
+</span></span><span><span>         </span><span>"open_id"</span><span>:</span><span style="color:#d14">"723f24d7-e717-40f8-a2b6-cb8464cd23b4"</span><span>,
+</span></span><span><span>         </span><span>"union_id"</span><span>:</span><span style="color:#d14">"c9c60f44-a68e-4f5d-84dd-ce22faeb0ba1"</span><span>,
+</span></span><span><span>         </span><span>"display_name"</span><span>: </span><span style="color:#d14">"Tik Toker"</span><span>
+</span></span><span>      }
+</span><span>   },
+</span><span><span>   </span><span>"error"</span><span>:{
+</span></span><span><span>      </span><span>"code"</span><span>:</span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>      </span><span>"message"</span><span>:</span><span style="color:#d14">""</span><span>,
+</span></span><span><span>      </span><span>"log_id"</span><span>:</span><span style="color:#d14">"20220829194722CBE87ED59D524E727021"</span><span>
+</span></span><span>   }
+</span><span>}</span></code></pre>
+        <ol class="list-1" start="3" type="1">
+            <li>Parse the returned profile information and display it in your UI.</li>
+        </ol><br />
+        <h2 id="display_user's_recent_tiktok_videos">Display User's Recent TikTok Videos</h2>
+        <ol class="list-1" start="1" type="1">
+            <li>Design and build your interface to encourage users to authorize displaying their most recent TikTok
+                videos on your platform. </li>
+            <li>Call <b><a href="/doc/tiktok-api-v2-video-list">POST /v2/video/list/</a></b> using the access token to
+                get a list of a specified user's most recent videos. The returned videos are sorted by their creation
+                time in descending order. </li>
+        </ol>
+        <p style="text-align:left">Example request:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl -L -X POST </span><span style="color:#d14">'https://open.tiktokapis.com/v2/video/list/?fields=id,title,video_description,duration,cover_image_url,embed_link'</span><span> \
+</span></span><span style="color:#d14"><span>-H </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>-H </span><span style="color:#d14">'Content-Type: application/json'</span><span> \
+</span></span><span style="color:#d14"><span>--data-raw </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "max_count": 20
+</span><span style="color:#d14">}'</span></code></pre>
+        <p style="text-align:left">Example response:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>    </span><span style="color:#d14">"data"</span><span>: {
+</span></span><span><span>        </span><span style="color:#d14">"videos"</span><span>: [
+</span></span><span>            {
+</span><span><span>                </span><span style="color:#d14">"id"</span><span>: </span><span style="color:#d14">"7080213458555737986"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"title"</span><span>: </span><span style="color:#d14">"video 1"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"video_description"</span><span>: </span><span style="color:#d14">"Test video 1"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"duration"</span><span>: 2,
+</span></span><span><span>                </span><span style="color:#d14">"cover_image_url"</span><span>: </span><span style="color:#d14">"https://p16-sign-sg.tiktokcdn.com/tos-alisg-p-0037/49b5eb2713004dfa429eab84566e~tplv-noop.image?x-expires=1657851434&amp;x-signature=FjrSxXTCWpQUM57Ao2SNsoLtf%2B0%3D"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"share_url"</span><span>: </span><span style="color:#d14">"https://www.tiktok.com/@user_id/video/7080213458555737986?utm_campaign=tt4d_open_api&amp;utm_source=awbx37vxswqcvsf6"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"embed_link"</span><span>: </span><span style="color:#d14">"https://www.tiktok.com/static/profile-video?id=7080213458555737986&amp;hide_author=1&amp;utm_campaign=tt4d_open_api&amp;utm_source=awbx37vxswqcvsf6"</span><span>,
+</span></span><span>            },
+</span><span>            {
+</span><span><span>                </span><span style="color:#d14">"id"</span><span>: </span><span style="color:#d14">"7080217258545735586"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"title"</span><span>: </span><span style="color:#d14">"video 2"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"video_description"</span><span>: </span><span style="color:#d14">"Test video 2"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"duration"</span><span>: 3,
+</span></span><span><span>                </span><span style="color:#d14">"cover_image_url"</span><span>: </span><span style="color:#d14">"https://p16-sign-sg.tiktokcdn.com/tos-alisg-p-0037/49b5eb2713004dfa422dab84566e~tplv-noop.image?x-expires=1657851434&amp;x-signature=FjrSxXTCWpQUM57Ao2SNsoLtf%2B0%3D"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"share_url"</span><span>: </span><span style="color:#d14">"https://www.tiktok.com/@user_id/video/7080217258545735586?utm_campaign=tt4d_open_api&amp;utm_source=awbx37vxswqcvsf6"</span><span>,
+</span></span><span><span>                </span><span style="color:#d14">"embed_link"</span><span>: </span><span style="color:#d14">"https://www.tiktok.com/static/profile-video?id=7080217258545735586&amp;hide_author=1&amp;utm_campaign=tt4d_open_api&amp;utm_source=awbx37vxswqcvsf6"</span><span>,
+</span></span><span>            },
+</span><span>            ...
+</span><span>        ],
+</span><span><span>        </span><span style="color:#d14">"cursor"</span><span>: 1646883959000,
+</span></span><span><span>        </span><span style="color:#d14">"has_more"</span><span>: </span><span style="color:#008080">true</span><span>
+</span></span><span>    },
+</span><span><span>    </span><span style="color:#d14">"error"</span><span>: {
+</span></span><span><span>        </span><span style="color:#d14">"code"</span><span>:</span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>        </span><span style="color:#d14">"message"</span><span>:</span><span style="color:#d14">""</span><span>,
+</span></span><span><span>        </span><span style="color:#d14">"log_id"</span><span>:</span><span style="color:#d14">"20220829194722CBE87ED59D524E727021"</span><span>
+</span></span><span>    }
+</span><span>}</span></code></pre>
+        <ol class="list-1" start="3" type="1">
+            <li>Use the URLs in <code>embed_link</code> to open webviews and display videos as needed.</li>
+            <li>Schedule background jobs to keep the access token up-to-date using Refresh Token. This will fetch and
+                update the user's recent TikTok videos every 12 hours.</li>
+        </ol>
+        <h2 id="display_user's_self-selected_tiktok_videos">Display User's Self-Selected TikTok Videos</h2>
+        <p style="text-align:left">Design and build a UI to encourage users to bring their TikTok videos to your
+            platform.</p>
+        <ol class="list-1" start="1" type="1">
+            <li>Call <b><a href="/doc/tiktok-api-v2-video-list">POST /v2/video/list/</a></b> using an access token to
+                get a list of user's videos. This part is the same as displaying a user's recent TikTok videos.</li>
+            <li>Design the UI to display the videos with <code>cover_image_url</code> and <code>duration</code>. </li>
+            <li>Allow the user to select videos to add to your app. After they complete their selection, save the
+                metadata of the user's selected videos. Design the UI to present user's TikTok videos.</li>
+            <li>The <code>cover_image_url</code> will expire after some time, so we need to call <b><a
+                        href="/doc/tiktok-api-v2-video-query">POST /v2/video/query/</a></b><b> </b>to query the video
+                metadata filtered by video_id.</li>
+        </ol>
+        <p style="text-align:left">Example request:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl -L -X POST </span><span style="color:#d14">'https://open.tiktokapis.com/v2/video/query/?fields=id,cover_image_url,embed_link'</span><span> \
+</span></span><span style="color:#d14"><span>-H </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>-H </span><span style="color:#d14">'Content-Type: application/json'</span><span> \
+</span></span><span style="color:#d14"><span>--data-raw </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "filters": {
+</span><span style="color:#d14">        "video_ids": [
+</span><span style="color:#d14">            "7077642457847994444",
+</span><span style="color:#d14">            "7080217258529732386"
+</span><span style="color:#d14">        ]
+</span><span style="color:#d14">    }
+</span><span style="color:#d14">}'</span></code></pre>
+        <p style="text-align:left">Example response:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>    </span><span>"data"</span><span>: {
+</span></span><span><span>        </span><span>"videos"</span><span>: [
+</span></span><span>            {
+</span><span><span>                </span><span>"cover_image_url"</span><span>: </span><span style="color:#d14">"https://p16-sign-sg.tiktokcdn.com/tos-alisg-p-0037/c5e4394893164bbf90605100e8bdd45c~tplv-noop.image?x-expires=1657852284&amp;x-signature=e%2FMfIsqpUUUoXBe0mXuz5wVdfhc%3D"</span><span>,
+</span></span><span><span>                </span><span>"id"</span><span>: </span><span style="color:#d14">"7077642457847994444"</span><span>,
+</span></span><span><span>                </span><span>"embed_link"</span><span>: </span><span style="color:#d14">"https://www.tiktok.com/static/profile-video?id=7077642457847994444&amp;hide_author=1&amp;utm_campaign=tt4d_open_api&amp;utm_source=awbx37vxswqcvsf6"</span><span>,
+</span></span><span>            },
+</span><span>            {
+</span><span><span>                </span><span>"cover_image_url"</span><span>: </span><span style="color:#d14">"https://p16-sign-sg.tiktokcdn.com/tos-alisg-p-0037/49b5eb2713004cc2be8a429eab84566e~tplv-noop.image?x-expires=1657852284&amp;x-signature=kNFfMCgOsal78%2BpX8alQooUpNbo%3D"</span><span>,
+</span></span><span><span>                </span><span>"id"</span><span>: </span><span style="color:#d14">"7080217258529732386"</span><span>,
+</span></span><span><span>                </span><span>"embed_link"</span><span>: </span><span style="color:#d14">"https://www.tiktok.com/static/profile-video?id=7080217258529732386&amp;hide_author=1&amp;utm_campaign=tt4d_open_api&amp;utm_source=awbx37vxswqcvsf6"</span><span>,
+</span></span><span>            }
+</span><span>        ],
+</span><span><span>        </span><span>"cursor"</span><span>: </span><span style="color:#008080">0</span><span>,
+</span></span><span><span>        </span><span>"has_more"</span><span>: </span><span style="color:#008080">false</span><span>
+</span></span><span>    },
+</span><span><span>    </span><span>"error"</span><span>: {
+</span></span><span><span>        </span><span>"code"</span><span>:</span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>        </span><span>"message"</span><span>:</span><span style="color:#d14">""</span><span>,
+</span></span><span><span>        </span><span>"log_id"</span><span>:</span><span style="color:#d14">"20220829194722CBE87ED59D524E727021"</span><span>
+</span></span><span>    }
+</span><span>}</span></code></pre>
+        <ol class="list-1" start="5" type="1">
+            <li>Open a web view with the url <code>embed_link</code> to consume the video on user clicks. Users can now
+                view TikTok videos on your platform to know more about the author.</li>
+        </ol><br />
+    </div>
+</div>

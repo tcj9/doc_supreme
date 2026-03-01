@@ -1,0 +1,332 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Implementation: Comments<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>The <code>comments.markAsSpam</code> method is no longer supported in the YouTube Data API (v3).</p>
+          </li>
+          <li>
+            <p>You can retrieve comments for a specific video using the <code>commentThreads.list</code> method by
+              setting the <code>videoId</code> parameter, and you can choose to include replies to comments by setting
+              the <code>part</code> parameter.</p>
+          </li>
+          <li>
+            <p>You can retrieve comments about or associated with a specific channel by using the
+              <code>commentThreads.list</code> method and setting either the <code>channelId</code> or
+              <code>allThreadsRelatedToChannelId</code> parameters, respectively, instead of the <code>videoId</code>.
+            </p>
+          </li>
+          <li>
+            <p>New comments can be added to either a video or a channel using the <code>commentThreads.insert</code>
+              method, while replies to comments are added via the <code>comments.insert</code> method.</p>
+          </li>
+          <li>
+            <p>To update the text or moderate a comment, you can use the <code>comments.update</code> method to modify
+              the text, and <code>comments.setModerationStatus</code> to change a comment's moderation status.</p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <div class="warning">
+      The <code dir="ltr" translate="no"><a href="/youtube/v3/docs/comments/markAsSpam">comments.markAsSpam</a></code>
+      method is
+      no longer supported.
+    </div>
+    <p>The following examples show how to use the YouTube Data API (v3) to perform functions related to comments.</p>
+    <h2 data-text="Retrieve comments for a video" id="comments-list-video" tabindex="-1">Retrieve comments for a video
+    </h2>
+    <div style="padding-left: 25px">
+      <p>To retrieve a list of comment threads for a video, call the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/commentThreads/list">commentThreads.list</a></code> method. Set the
+        following parameter values in your request:</p>
+      <ul>
+        <li>
+          <p><code dir="ltr" translate="no"><a href="/youtube/v3/docs/commentThreads/list#part">part</a></code>: Set the
+            parameter value to <code dir="ltr" translate="no">snippet</code> if you only want to retrieve top-level
+            comments or to <code dir="ltr" translate="no">snippet,replies</code> if you also want to retrieve replies to
+            top-level comments. (Note that a <code dir="ltr" translate="no">commentThread</code> resource does not
+            necessarily contain all replies to a comment, and you need to use the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/comments/list">comments.list</a></code> method if you want to
+            retrieve all replies for a particular comment.)</p>
+        </li>
+        <li>
+          <p><code dir="ltr" translate="no"><a href="/youtube/v3/docs/commentThreads/list#videoId">videoId</a></code>:
+            Specify the YouTube video ID of the video for which you are retrieving comments.</p>
+        </li>
+      </ul>
+      <p>The request below retrieves comments and comment replies related to the video of the keynote speech at the 2014
+        Google I/O conference, which has the video ID <code dir="ltr" translate="no">wtLJPvx7-ys</code>.</p>
+      <div></div><devsite-code>
+        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.commentThreads.list?part=snippet%2Creplies&amp;videoId=wtLJPvx7-ys">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.commentThreads.list?
+part=snippet,replies
+&amp;videoId=wtLJPvx7-ys</a></pre>
+      </devsite-code>
+
+
+    </div>
+    <h2 data-text="Retrieve comments about or associated with a channel" id="comments-list-channel" tabindex="-1">
+      Retrieve comments about or associated with a channel</h2>
+    <div style="padding-left: 25px">
+      <p>The API supports the ability to either retrieve comments threads about a channel or to retrieve all comment
+        threads associated with a channel. In the latter case, the API could contain comments about the channel or about
+        any of the channel's videos.</p>
+      <p>
+      <ul>
+        <li>To retrieve comments about a channel, follow the instructions for <a href="#comments">retrieving comments
+            for a video</a>. However, instead of setting the <code dir="ltr" translate="no">videoId</code> parameter,
+          set the <code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/commentThreads/list#channelId">channelId</a></code> parameter to
+          identify the channel.</li>
+      </ul>
+      </p>
+      <li>To retrieve comments associated with a channel, follow the instructions for <a href="#comments">retrieving
+          comments for a video</a>. However, instead of setting the <code dir="ltr" translate="no">videoId</code>
+        parameter, set the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/commentThreads/list#allThreadsRelatedToChannelId">allThreadsRelatedToChannelId</a></code>
+        parameter to identify the channel.
+
+        <p>The request below retrieves all comment threads associated with the <b>GoogleDevelopers</b> YouTube channel:
+        </p>
+        <div></div><devsite-code>
+          <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.commentThreads.list?part=snippet%2Creplies&amp;allThreadsRelatedToChannelId=UC_x5XG1OV2P6uZZ5FSM9Ttw">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.commentThreads.list?
+part=snippet,replies
+&amp;allThreadsRelatedToChannelId=UC_x5XG1OV2P6uZZ5FSM9Ttw</a></pre>
+        </devsite-code>
+      </li>
+    </div>
+    <h2 data-text="Adding a comment" id="comments-add" tabindex="-1">Adding a comment</h2>
+    <div style="padding-left: 25px">
+      <p>Call the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/commentThreads/insert">commentThreads.insert</a></code> method to add
+        a new, top-level comment to a channel or a video. Set the request's <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/commentThreads/insert#part">part</a></code> parameter value to <code
+          dir="ltr" translate="no">snippet</code>. The body of the request is a <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/commentThreads#resource">commentThread resource</a></code> in which
+        the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/commentThreads#snippet.topLevelComment">snippet.topLevelComment[].snippet[].textOriginal</a></code>
+        property contains the comment text. This request must be authorized using OAuth 2.0.</p>
+      <ul>
+        <li>To add a comment to a channel, use the <code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/commentThreads#snippet.channelId">snippet.channelId</a></code>
+          property to identify the channel.</li>
+        <li>To add a comment to a video, use the <code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/commentThreads#snippet.channelId">snippet.channelId</a></code>
+          property to identify the channel that uploaded the video. Also use the <code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/commentThreads#snippet.videoId">snippet.videoId</a></code> property
+          to identify the video.</li>
+      </ul>
+      <p>The following sample request adds a comment to a video.</p>
+      <div></div><devsite-code>
+        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.commentThreads.insert?part=snippet&amp;_h=2&amp;resource=%257B%250A++%2522snippet%2522%253A+%250A++%257B%250A++++%2522channelId%2522%253A+%2522UC_x5XG1OV2P6uZZ5FSM9Ttw%2522%252C%250A++++%2522topLevelComment%2522%253A+%250A++++%257B%250A++++++%2522snippet%2522%253A+%250A++++++%257B%250A++++++++%2522textOriginal%2522%253A+%2522This+video+is+awesome!%2522%250A++++++%257D%250A++++%257D%252C%250A++++%2522videoId%2522%253A+%2522MILSirUni5E%2522%250A++%257D%250A%257D">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.commentThreads.insert?
+part=snippet
+</a></pre>
+      </devsite-code>
+      <p>The request inserts the resource shown below.</p>
+      <div></div><devsite-code>
+        <pre dir="ltr" is-upgraded="" translate="no">{
+ "snippet": {
+  "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+  "topLevelComment": {
+   "snippet": {
+    "textOriginal": "This video is awesome!"
+   }
+  },
+  "videoId": "MILSirUni5E"
+ }
+}</pre>
+      </devsite-code>
+    </div>
+    <h2 data-text="Reply to a comment" id="comments-add-reply" tabindex="-1">Reply to a comment</h2>
+    <div style="padding-left: 25px">
+      <p>Call the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/comments/insert">comments.insert</a></code>
+        method to reply to a comment. Set the request's <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/comments/insert#part">part</a></code> parameter value to <code
+          dir="ltr" translate="no">snippet</code>. The body of the request is a <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/comments#resource">comment resource</a></code> in which the <code
+          dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/comments#snippet.textOriginal">snippet.textOriginal</a></code>
+        property contains the comment text. The <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/comments#snippet.parentId">snippet.parentId</a></code> property
+        identifies the comment associated with the reply, and it's value is a <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/commentThreads#id">commentThread resource's ID</a></code>. This
+        request must be authorized using OAuth 2.0.</p>
+      <p>The following sample request adds a reply to an existing comment.</p>
+      <div></div><devsite-code>
+        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.comments.insert?part=snippet&amp;_h=5&amp;resource=%257B%250A++%2522snippet%2522%253A+%250A++%257B%250A++++%2522parentId%2522%253A+%2522COMMENT_THREAD_ID%2522%252C%250A++++%2522textOriginal%2522%253A+%2522That+is+true.%2522%250A++%257D%250A%257D&amp;">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.comments.insert?
+part=snippet
+</a></pre>
+      </devsite-code>
+      <p>The request inserts the resource shown below. To execute the request in the APIs Explorer, use the <code
+          dir="ltr" translate="no">snippet.parentId</code> property's value to identify the top-level comment associated
+        with the reply. In a <code dir="ltr" translate="no">commentThread</code> resource, the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/commentThreads#snippet.topLevelComment">snippet.topLevelComment[].id</a></code>
+        property specifies the resource's unique ID.</p>
+      <div></div><devsite-code>
+        <pre dir="ltr" is-upgraded="" translate="no">{
+  "snippet": {
+    "parentId": "COMMENT_THREAD_ID",
+    "textOriginal": "That is true."
+  }
+}</pre>
+      </devsite-code>
+    </div>
+    <h2 data-text="Update a top-level comment or comment reply" id="comments-update" tabindex="-1">Update a top-level
+      comment or comment reply</h2>
+    <div style="padding-left: 25px">
+      <p>To update the text of a top-level comment or a reply to a top-level comment, call the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/comments/update">comments.update</a></code> method. Set the <code
+          dir="ltr" translate="no">part</code> parameter's value to <code dir="ltr" translate="no">snippet</code>. In
+        the request body, the <code dir="ltr" translate="no">id</code> property identifies the comment that you are
+        modifying and the new comment text.</p>
+      <p>
+      <ul>
+        <li>In a <code dir="ltr" translate="no">commentThread</code> resource, which identifies a top-level comment, the
+          <code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/commentThreads#snippet.topLevelComment">snippet.topLevelComment[].id</a></code>
+          property specifies the comment's unique ID.</li>
+        <li>In a <code dir="ltr" translate="no">comment</code> resource, which can identify either a top-level comment
+          or a reply to a comment, the <code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/comments#id">id</a></code> property specifies the comment's unique
+          ID.</li>
+      </ul>
+      </p>
+      <p>The sample request below updates the text of an existing comment.</p>
+      <div></div><devsite-code>
+        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.comments.update?part=snippet&amp;_h=3&amp;resource=%257B%250A++%2522snippet%2522%253A+%250A++%257B%250A++++%2522textOriginal%2522%253A+%2522Or+maybe+it+is+not+true.%2522%250A++%257D%252C%250A++%2522id%2522%253A+%2522COMMENT_ID%2522%250A%257D&amp;">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.comments.update?
+part=snippet
+</a></pre>
+      </devsite-code>
+      <p>The request body contains the JSON snippet shown below. To execute the request in the APIs Explorer, set the
+        <code dir="ltr" translate="no">id</code> property's value to identify the comment that you are updating. The
+        request must be authorized by the comment's author.</p>
+      <div></div><devsite-code>
+        <pre dir="ltr" is-upgraded="" translate="no">{
+  "id": "COMMENT_ID",
+  "snippet": {
+    "textOriginal": "That is true."
+  }
+}</pre>
+      </devsite-code>
+    </div>
+    <h2 data-text="Set a comment's moderation status" id="comments-set-moderation-status" tabindex="-1">Set a comment's
+      moderation status</h2>
+    <div style="padding-left: 25px">
+      <p>To set a comment's moderation status, call the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/comments/setModerationStatus">comments.setModerationStatus</a></code>
+        method. This action is used when a channel owner moderates comments on the channel or the channel's videos.</p>
+      <p>When calling this method, set the <code dir="ltr" translate="no">id</code> parameter's value to identify the
+        comment. Also set the <code dir="ltr" translate="no">moderationStatus</code> parameter to the desired status. A
+        comment's status can only be adjusted by the owner of the channel where the comment appears.</p>
+      <ul>
+        <li>
+          <p><b>Step 1: Retrieve comments that are being held for review</b></p>
+          <p>Call the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/commentThreads/list">commentThreads.list</a></code> method to
+            retrieve comments for the channel or video. Set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/commentThreads/list#moderationStatus">moderationStatus</a></code>
+            parameter's value to <code dir="ltr" translate="no">heldForReview</code>. The API response could be used to
+            display a list of comments with an option for the channel owner to publish or reject each one.</p>
+        </li>
+        <li>
+          <p><b>Step 2: Update the moderation status of a comment</b></p>
+          <p>Call the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/comments/setModerationStatus">comments.setModerationStatus</a></code>
+            method to update the comment's status. Use the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/comments/setModerationStatus#id">id</a></code> parameter's value
+            to specify the comment's unique ID. Set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/comments/setModerationStatus#moderationStatus">moderationStatus</a></code>
+            parameter to either <code dir="ltr" translate="no">published</code> or <code dir="ltr"
+              translate="no">rejected</code>. If you are rejecting a comment, you can also set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/comments/setModerationStatus#banAuthor">banAuthor</a></code>
+            parameter to <code dir="ltr" translate="no">true</code> to prevent the author from making additional
+            comments on the channel or video.</p>
+        </li>
+      </ul>
+      <p class="note"><b>Note:</b> The API does not provide a way to list or otherwise discover rejected comments.
+        However, you can still change the moderation status of a rejected comment to <code dir="ltr"
+          translate="no">published</code> if the comment's unique ID is known. In addition, once a comment's moderation
+        status is updated to either <code dir="ltr" translate="no">published</code> or <code dir="ltr"
+          translate="no">rejected</code>, the moderation status cannot be changed back to <code dir="ltr"
+          translate="no">heldForReview</code>.</p>
+    </div>
+    <h2 data-text="Remove a comment" id="comments-delete" tabindex="-1">Remove a comment</h2>
+    <div style="padding-left: 25px">
+      <p>This example shows how to delete a comment. The example has the following steps:</p>
+      <ul>
+        <li>
+          <p><b>Step 1: Retrieve the comment ID</b></p>
+          <p>Follow the steps above to <a href="#comments">retrieve a list of comments</a> for a video or channel.
+            Remember that a comment can only be deleted by its author, so you will need to compare the value of a <code
+              dir="ltr" translate="no">comment</code> resource's <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/comments#snippet.authorChannelId.value">snippet.authorChannelId.value</a></code>
+            property to the authenticated user's channel ID to determine whether the user can delete that particular
+            comment.</p>
+        </li>
+        <li>
+          <p><b>Step 2: Delete the comment or comment thread</b></p>
+          <p>Once you have identified the ID of the comment thread or comment that you are deleting, call the <code
+              dir="ltr" translate="no"><a href="/youtube/v3/docs/comments/delete">comments.delete</a></code> method to
+            delete that comment. Use the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/comments/delete#id">id</a></code> parameter value to identify the
+            comment ID or comment thread ID that you are deleting. The request must be authorized using OAuth 2.0. If
+            you are testing this query in the APIs Explorer, you will need to substitute a valid comment ID or comment
+            thread ID for the <code dir="ltr" translate="no">id</code> parameter value in the request below.</p>
+          <div></div><devsite-code>
+            <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.comments.delete?id=COMMENT_ID">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.comments.delete?
+id=COMMENT_ID</a></pre>
+          </devsite-code>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

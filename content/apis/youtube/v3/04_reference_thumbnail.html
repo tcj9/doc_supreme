@@ -1,0 +1,313 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Thumbnails<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+                  <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title"
+                        class="devsite-key-takeaways-panel-header" role="button" tabindex="0">
+                        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+                        <div class="devsite-key-takeaways-panel-title">
+                              <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI"
+                                    id="key-takeaways-panel-title">Page Summary</h2>
+                        </div>
+                        <span aria-hidden="true"
+                              class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+                        </img>
+                  </div>
+                  <div class="devsite-key-takeaways-panel-content">
+                        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+                              <button aria-label="Report Key Takeaways!"
+                                    class="button-flat button-primary devsite-key-takeaways-report-button"
+                                    data-title="Report Key Takeaways!">
+                                    <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+                              </button>
+                        </devsite-feedback>
+                        <ul class="devsite-key-takeaways-panel-list">
+                              <li>
+                                    <p>A resource's <code>snippet.thumbnails</code> property contains an object, and
+                                          each of these objects has properties such as <code>default</code>,
+                                          <code>medium</code>, and <code>high</code>, which identify the different
+                                          available thumbnail image sizes for that specific resource.</p>
+                              </li>
+                              <li>
+                                    <p>Thumbnail image sizes can vary significantly between different resource types
+                                          (e.g., videos vs. channels), and even among resources of the same type, based
+                                          on the resolution of the original uploaded content.</p>
+                              </li>
+                              <li>
+                                    <p>Each thumbnail image size object contains a <code>url</code>, <code>width</code>,
+                                          and <code>height</code> property, but the width and height may not always be
+                                          returned.</p>
+                              </li>
+                              <li>
+                                    <p>When a custom thumbnail image is uploaded, it's resized to match the required
+                                          dimensions without changing its aspect ratio, which may result in black bars
+                                          being added.</p>
+                              </li>
+                              <li>
+                                    <p>The <code>thumbnails</code> resource offers various image size options, such as
+                                          <code>default</code>, <code>medium</code>, <code>high</code>,
+                                          <code>standard</code>, and <code>maxres</code>, each with distinct resolutions
+                                          to accommodate different display needs.</p>
+                              </li>
+                        </ul>
+                  </div>
+            </devsite-key-takeaways-panel>
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="thumbnails" itemprop="name">
+                  <section id="overview">
+                        <p>A <code dir="ltr" translate="no"><strong>thumbnail</strong></code> resource identifies
+                              different thumbnail image sizes associated with a resource. Please note the following
+                              characteristics of thumbnail images:
+                        <ul>
+                              <li>A resource's <code dir="ltr" translate="no">snippet.thumbnails</code> property is an
+                                    object that identifies the thumbnail images available for that resource.</li>
+                              <li>A <code dir="ltr" translate="no">thumbnail</code> resource contains a series of
+                                    objects. The name of each object (<code dir="ltr" translate="no">default</code>,
+                                    <code dir="ltr" translate="no">medium</code>, <code dir="ltr"
+                                          translate="no">high</code>, etc.) refers to the thumbnail image size.</li>
+                              <li>Different types of resources may support different thumbnail image sizes.</li>
+                              <li>Different types of resources may define different sizes for thumbnail images with the
+                                    same name. For example, the <code dir="ltr" translate="no">default</code> thumbnail
+                                    image for a <code dir="ltr" translate="no">video</code> resource is typically 120px
+                                    by 90px, and the <code dir="ltr" translate="no">default</code> thumbnail image for a
+                                    <code dir="ltr" translate="no">channel</code> resource is typically 88px by 88px.
+                              </li>
+                              <li>Resources of the same type may still have different thumbnail image sizes for certain
+                                    images depending on the resolution of the original image or content uploaded to
+                                    YouTube. For example, an HD video may support higher resolution thumbnails than
+                                    non-HD videos.</li>
+                              <li>Each object that contains information about a thumbnail image size has a <code
+                                          dir="ltr" translate="no">width</code> property and a <code dir="ltr"
+                                          translate="no">height</code> property. However, the width and height
+                                    properties may not be returned for that image.</li>
+                              <li>If an uploaded thumbnail image does not match the required dimensions, the image is
+                                    resized to match the correct size without changing its aspect ratio. The image is
+                                    not cropped, but may include black bars so that the size is correct.</li>
+                        </ul>
+                        </p>
+                  </section>
+                  <section id="methods">
+                        <h2 data-text="Methods" id="methods" tabindex="-1">Methods</h2>
+                        <p>The API supports the following methods for <code dir="ltr" translate="no">thumbnails</code>
+                              resources:</p>
+                        <dl>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/thumbnails/set">set</a></dt>
+                              <dd>Uploads a custom video thumbnail to YouTube and sets it for a video.
+                              </dd>
+                        </dl>
+                  </section>
+                  <section id="resource">
+                        <h2 data-text="Resource representation" id="resource-representation" tabindex="-1">Resource
+                              representation</h2>
+                        <p>The following JSON structure shows the format of a <code dir="ltr"
+                                    translate="no">thumbnails</code> resource:</p>
+                        <div></div><devsite-code>
+                              <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json" is-upgraded=""
+                                    style="max-height: 500px; overflow: auto" syntax="Text only">{
+  "<a href="#default">default</a>": {
+    "<a href="#default.url">url</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#default.width">width</a>": <var class="apiparam" translate="no">unsigned integer</var>,
+    "<a href="#default.height">height</a>": <var class="apiparam" translate="no">unsigned integer</var>
+  },
+  "<a href="#medium">medium</a>": {
+    "<a href="#medium.url">url</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#medium.width">width</a>": <var class="apiparam" translate="no">unsigned integer</var>,
+    "<a href="#medium.height">height</a>": <var class="apiparam" translate="no">unsigned integer</var>
+  },
+  "<a href="#high">high</a>": {
+    "<a href="#high.url">url</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#high.width">width</a>": <var class="apiparam" translate="no">unsigned integer</var>,
+    "<a href="#high.height">height</a>": <var class="apiparam" translate="no">unsigned integer</var>
+  },
+  "<a href="#standard">standard</a>": {
+    "<a href="#standard.url">url</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#standard.width">width</a>": <var class="apiparam" translate="no">unsigned integer</var>,
+    "<a href="#standard.height">height</a>": <var class="apiparam" translate="no">unsigned integer</var>
+  },
+  "<a href="#maxres">maxres</a>": {
+    "<a href="#maxres.url">url</a>": <var class="apiparam" translate="no">string</var>,
+    "<a href="#maxres.width">width</a>": <var class="apiparam" translate="no">unsigned integer</var>,
+    "<a href="#maxres.height">height</a>": <var class="apiparam" translate="no">unsigned integer</var>
+  }
+}</pre>
+                        </devsite-code>
+                  </section>
+                  <section id="properties">
+                        <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                        <p>The following table defines the properties that appear in this resource:</p>
+                        <table class="responsive properties" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th colspan="2">Properties</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="default">
+                                          <td><code dir="ltr" itemprop="property" translate="no">default</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The default thumbnail image. The default thumbnail for a video – or a
+                                                resource that refers to a video, such as a playlist item or search
+                                                result – is 120px wide and 90px tall. The default thumbnail for a
+                                                channel is 88px wide and 88px tall.</td>
+                                    </tr>
+                                    <tr id="default.url">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">default.</span>url</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The image's URL.</td>
+                                    </tr>
+                                    <tr id="default.width">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">default.</span>width</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's width.</td>
+                                    </tr>
+                                    <tr id="default.height">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">default.</span>height</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's height.</td>
+                                    </tr>
+                                    <tr id="medium">
+                                          <td><code dir="ltr" itemprop="property" translate="no">medium</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                A higher resolution version of the thumbnail image. For a video (or a
+                                                resource that refers to a video), this image is 320px wide and 180px
+                                                tall. For a channel, this image is 240px wide and 240px tall.</td>
+                                    </tr>
+                                    <tr id="medium.url">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">medium.</span>url</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The image's URL.</td>
+                                    </tr>
+                                    <tr id="medium.width">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">medium.</span>width</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's width.</td>
+                                    </tr>
+                                    <tr id="medium.height">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">medium.</span>height</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's height.</td>
+                                    </tr>
+                                    <tr id="high">
+                                          <td><code dir="ltr" itemprop="property" translate="no">high</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                A high resolution version of the thumbnail image. For a video (or a
+                                                resource that refers to a video), this image is 480px wide and 360px
+                                                tall. For a channel, this image is 800px wide and 800px tall.</td>
+                                    </tr>
+                                    <tr id="high.url">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">high.</span>url</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The image's URL.</td>
+                                    </tr>
+                                    <tr id="high.width">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">high.</span>width</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's width.</td>
+                                    </tr>
+                                    <tr id="high.height">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">high.</span>height</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's height.</td>
+                                    </tr>
+                                    <tr id="standard">
+                                          <td><code dir="ltr" itemprop="property" translate="no">standard</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                An even higher resolution version of the thumbnail image than the <code
+                                                      dir="ltr" translate="no">high</code> resolution image. This image
+                                                is available for some videos and other resources that refer to videos,
+                                                like playlist items or search results. This image is 640px wide and
+                                                480px tall.</td>
+                                    </tr>
+                                    <tr id="standard.url">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">standard.</span>url</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The image's URL.</td>
+                                    </tr>
+                                    <tr id="standard.width">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">standard.</span>width</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's width.</td>
+                                    </tr>
+                                    <tr id="standard.height">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">standard.</span>height</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's height.</td>
+                                    </tr>
+                                    <tr id="maxres">
+                                          <td><code dir="ltr" itemprop="property" translate="no">maxres</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The highest resolution version of the thumbnail image. This image size
+                                                is available for some videos and other resources that refer to videos,
+                                                like playlist items or search results. This image is 1280px wide and
+                                                720px tall.</td>
+                                    </tr>
+                                    <tr id="maxres.url">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">maxres.</span>url</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The image's URL.</td>
+                                    </tr>
+                                    <tr id="maxres.width">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">maxres.</span>width</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's width.</td>
+                                    </tr>
+                                    <tr id="maxres.height">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">maxres.</span>height</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's height.</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

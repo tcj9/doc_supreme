@@ -1,0 +1,200 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_DU">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Webhooks for Pages</h1>
+              <p>Webhooks for <a href="/docs/pages">Pages</a> can send you real-time notifications of changes to your
+                Pages. For example, you can receive real-time updates whenever users post to your feed, comment on a
+                post, or like your posts.</p>
+              <p>To set up a Page Webhook:</p>
+              <ol>
+                <li><a href="#set-up-endpoint-and-product">Set up your endpoint and configure the Webhooks product</a>.
+                </li>
+                <li><a href="#install-app">Install your app</a> using your Facebook page.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="set-up-endpoint-and-product">Setting Up Your Endpoint and Webhook Product</h2>
+              <p>Follow our <a href="/docs/graph-api/webhooks/getting-started">Getting Started guide</a> to create your
+                endpoint and configure the Webhooks product. During configuration, make sure to choose the
+                <strong>Page</strong> object and subscribe to one or more of the Pages fields below.
+              </p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:30%">Field</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_+F">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>feed</code></p>
+                      </td>
+                      <td>
+                        <p>Notifies you when an Page's feed has changed; posts, reactions, shares, etc.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>messages</code></p>
+                      </td>
+                      <td>
+                        <p>Notifies you when your page has received a message via Messenger. See the <a
+                            href="https://developers.facebook.com/docs/messenger-platform/webhook#events"
+                            target="_blank">Webhooks for Messenger guide</a> for a list of all available messages
+                          webhooks fields</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="install-app">Install Your App</h2>
+              <p>Webhook notifications will only be sent if your Page has installed your Webhooks configured-app, and if
+                the Page has not disabled the <strong>App</strong> platform in its <a
+                  href="https://www.facebook.com/settings?tab=applications">App Settings</a>. To get your Page to
+                install the app, have your app send a <code>POST</code> request to the Page's <a
+                  href="/docs/graph-api/reference/page/subscribed_apps">subscribed_apps</a> edge using the Page's
+                acccess token.</p>
+              <h3>Requirements</h3>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">
+                    A Page access token requested from a person who can perform the
+                    <a href="/docs/pages/overview#tasks" target="_blank"><code>CREATE_CONTENT</code>,
+                      <code>MANAGE</code>, or
+                      <code>MODERATE</code>
+                      task
+                    </a> on the Page being queried
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">
+                    The
+                    <a href="https://developers.facebook.com/docs/pages/overview/permissions-features#permission-dependencies"
+                      target="_blank"><code>pages_manage_metadata</code>
+                      and
+                      <code>pages_show_list</code>
+                      permissions</a>
+                    are required for the <code>feed</code> webhooks
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">The <a
+                      href="https://developers.facebook.com/docs/pages/overview/permissions-features#permission-dependencies"><code>pages_messaging</code></a>
+                    is also required for the <code>messages</code></div>
+                </li>
+              </ul>
+              <p>For the messages related fields only</p>
+              <ul>
+                <li>A Page access token requested from a person who can perform the <a
+                    href="/docs/pages/overview#tasks"><code>MESSAGING</code> task</a> on the Page being queried</li>
+                <li><a
+                    href="https://developers.facebook.com/docs/permissions/reference/pages_messaging"><code>pages_messaging</code></a>
+                </li>
+              </ul>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+curl -i -X POST "https://graph.facebook.com/{page-id}/subscribed_apps
+  ?subscribed_fields=feed
+  &amp;access_token={page-access-token}"
+  </pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-js" style="">{
+  "success": "true"
+}</pre>
+              <p>To see which app's your Page has installed, send a <code>GET</code> request instead:</p>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="">curl -i -X GET "https://graph.facebook.com/{page-id}/subscribed_apps
+  &amp;access_token={page-access-token}</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-js" style="">{
+  "data": [
+    {
+      "category": "Business",
+      "link": "https://my-clever-domain-name.com/app",
+      "name": "My Sample App",
+      "id": "{page-id}"
+    }
+  ]
+}</pre>
+              <p>If your Page has not installed any apps, the API will return an empty data set.</p>
+              <h4>Graph API Explorer</h4>
+              <div style="margin-bottom:15px"></div>
+              <p>If you don't want to install your app programmatically, you can easily do it with the <a
+                  href="/tools/explorer">Graph API Explorer</a> instead:</p>
+              <ol>
+                <li>Select your app in the <strong>Application</strong> dropdown menu. This will return your app's
+                  access token.</li>
+                <li>Click the <strong>Get Token</strong> dropdown and select <strong>Get User Access Token</strong>,
+                  then choose the <code>pages_manage_metadata</code> permission. This will exchange your app token for a
+                  User access token with the <code>pages_manage_metadata</code> permission granted.</li>
+                <li>Click <strong>Get Token</strong> again and select your Page. This will exchange your User access
+                  token for a Page access token.</li>
+                <li>Change the operation method by clicking the <code>GET</code> dropdown menu and selecting
+                  <code>POST</code>.
+                </li>
+                <li>Replace the default <code>me?fields=id,name</code> query with the Page's <strong>id</strong>
+                  followed by <code>/subscribed_apps</code>, then submit the query. </li>
+              </ol>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="common-uses">Common Uses</h2>
+              <h3>Getting Page Feed Details</h3>
+              <p>Your app can subscribe to a Page's Feed and get notified anytime any Feed-related change occurs. For
+                example, here's a notification sent when a User posted to a Page.</p>
+              <h4>Sample Webhook Response</h4>
+              <pre class="_5s-8 prettyprint lang-js" style="">[
+  {
+    "entry": [
+      {
+        "changes": [
+          {
+            "field": "feed",
+            "value": {
+              "from": {
+                "id": "{user-id}",
+                "name": "Cinderella Hoover"
+              },
+              "item": "post",
+              "post_id": "{page-post-id}",
+              "verb": "add",
+              "created_time": 1520544814,
+              "is_hidden": false,
+              "message": "It's Thursday and I want to eat cake."
+            }
+          }
+        ],
+        "id": "{page-id}",
+        "time": 1520544816
+      }
+    ],
+    "object": "page"
+  }
+]</pre>
+              <p>Use the <code>post_id</code> from the notification to <a
+                  href="/docs/pages/publishing#comment_on_post">comment on that Page post</a>.</p>
+              <h4>Sample API Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">curl -i -X POST   "https://graph.facebook.com/{page-post-id}/comments
+  ?message=I%20want%20chocolate%20cake%20!
+  &amp;access_token=page-access-token" </pre>
+              <h4>Sample API Response</h4>
+              <pre class="_5s-8 prettyprint lang-js" style="">{
+  "id": "{comment-id}"
+}</pre>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

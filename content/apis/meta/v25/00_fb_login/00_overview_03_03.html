@@ -1,0 +1,32 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_sn">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1>Access Token Security</h1>
+                            <h2 id="security">Security</h2>
+                            <p>Access tokens are opaque strings that are used in token-based authentication to identify
+                                a user, app, or page and can allow an application to access an API. These are considered
+                                sensitive and should be kept confidential at all times, as stated in our <a
+                                    href="https://developers.facebook.com/terms/">Platform Terms</a>. In many cases,
+                                code can be directly viewed, either by reading the HTML source or by decompiling an app
+                                binary. Therefore, your app should <strong>never</strong> have an access token
+                                hard-coded into it. Instead, calls should be made directly with the response from the
+                                access token generation request.</p>
+                            <p>To increase security, Meta will work with GitHub to mitigate risks associated with
+                                exposed user access tokens and page access tokens. Exposed tokens risk being used for
+                                unauthorized access to the application or being used by a malicious user to act on
+                                behalf of the token owner and potentially compromise the application.</p>
+                            <p>As part of this program, GitHub will scan every commit to a public repository for exposed
+                                Meta access tokens and forward any access tokens to Meta. Access tokens having a valid
+                                session will be automatically invalidated. App owners will be notified via App Dashboard
+                                whenever a token belonging to app admin or developers has been invalidated. The
+                                end-to-end process takes just a few seconds.</p>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

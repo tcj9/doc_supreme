@@ -1,0 +1,219 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_Nj">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>IG User Media Publish</h1>
+              <p>Publish an <a href="/docs/instagram-api/reference/ig-container">IG Container</a> on an Instagram
+                Business <a href="/docs/instagram-api/reference/ig-user">IG User</a>. Refer to the <a
+                  href="/docs/instagram-api/guides/content-publishing">Content Publishing</a> guide for complete
+                publishing steps.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Creating</h2>
+              <p><strong><code>POST /{ig-user-id}/media_publish</code></strong></p>
+              <p>Publish an <a href="/docs/instagram-api/reference/ig-container">IG Container</a> object on an Instagram
+                Business <a href="/docs/instagram-api/reference/ig-user">IG User</a>.</p>
+              <h3>Limitations</h3>
+              <ul>
+                <li>An Instagram professional account can only publish 50 posts within a 24 hour moving period</li>
+                <li>If the <a href="/docs/instagram-api/overview#pages">Page</a> connected to the targeted Instagram
+                  Business account requires <a
+                    href="https://www.facebook.com/business/m/one-sheeters/page-publishing-authorization">Page
+                    Publishing Authorization</a> (PPA), PPA must be completed or the request will fail.</li>
+                <li>If the Page connected to the targeted Instagram Business account requires two-factor authentication,
+                  the Facebook User must also have performed two-factor authentication or the request will fail.</li>
+              </ul>
+              <h3>Requirements</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:20%">Type</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_7X">
+                    <tr class="row_0">
+                      <td>
+                        <p><a href="/docs/facebook-login/access-tokens#usertokens">Access Tokens</a></p>
+                      </td>
+                      <td>
+                        <p><a href="/docs/facebook-login/access-tokens#usertokens">User</a></p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><a href="https://www.facebook.com/business/help/442345745885606">Business Roles</a></p>
+                      </td>
+                      <td>
+                        <p>If publishing containers for <a href="/docs/instagram-api/guides/product-tagging">product
+                            tagging</a>, the app user must have an admin role on the <a
+                            href="https://business.facebook.com/">Business Manager</a> that owns the IG User's <a
+                            data-lynx-mode="hover"
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1187859655048322&amp;h=AT30tyXC3ZYGh3AZxd8_u83mdj77GWX1Do5jhx4JDlD4zysBzzRBeZBN6Hw5p_EIZdtQiuyPIrOTLBqexDpmHLtcq9g9KytnjQhkTk53oByUOf8ptCeSDzBSzaBWcfv-Xc9NXsB6hdEVhAUFnbYLBg"
+                            rel="nofollow" target="_blank">Instagram Shop</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><a data-lynx-mode="hover"
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1187859655048322%2F&amp;h=AT2hSAAOvdiz-yrIpL0SPfKvlXuDDeAQZ_d4p3GM1qBGRgaVdKNKP8wZieF5Ive1gZxCpRliOhWOOdn5rDMQxr1wNylHiILINcdTPlJwCtJePw7mAMKd7AC7LuYszpQdWHffV4i2iyi7RfmrDJEsIG2Y6t1pkyAq8B4"
+                            rel="nofollow" target="_blank">Instagram Shop</a></p>
+                      </td>
+                      <td>
+                        <p>If publishing containers for <a href="/docs/instagram-api/guides/product-tagging">product
+                            tagging</a>, the IG User must have an approved <a data-lynx-mode="hover"
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1187859655048322%2F&amp;h=AT06_FK6md3dkppnVjUJaG3gpYc59XbX1_wlnWVZTKUA2XCSNWeTxIjayp6pePYlzqm7oAwxrPRs93yaWHhIJBy_hYo2aOREmUpdf7EaH5t5sb5A9AV2tgYaE-xdBwtmrQcd-vV7cwlMRs6cG86YSQ"
+                            rel="nofollow" target="_blank">Instagram Shop</a> with a product catalog containing
+                          products.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><a href="/docs/apps/review/login-permissions">Permissions</a></p>
+                      </td>
+                      <td>
+                        <p><a
+                            href="/docs/facebook-login/permissions#reference-instagram_basic"><code>instagram_basic</code></a><br />
+                          <a
+                            href="/docs/permissions/reference/instagram_content_publish"><code>instagram_content_publish</code></a>
+                        </p>
+                        <p>If the app user was granted a role on the Page via the Business Manager, you will also need
+                          one of:</p>
+                        <p><a href="/docs/permissions/reference/ads_management"><code>ads_management</code></a><br />
+                          <code>ads_read</code>
+                        </p>
+                        <p>If publishing containers for <a href="/docs/instagram-api/guides/product-tagging">product
+                            tagging</a>, you will also need:</p>
+                        <p><a
+                            href="/docs/permissions/reference/catalog_management"><code>catalog_management</code></a><br />
+                          <a
+                            href="/docs/permissions/reference/instagram_shopping_tag_products"><code>instagram_shopping_tag_products</code></a>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><a href="/docs/instagram-api/overview#tasks">Tasks</a></p>
+                      </td>
+                      <td>
+                        <p>The app user whose token is used in the request must be able to perform <code>MANAGE</code>
+                          or <code>CREATE_CONTENT</code> tasks on the <a
+                            href="/docs/instagram-api/overview#pages">Page</a> connected to the targeted Instagram
+                          account.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Request Syntax</h3>
+              <pre class="_5s-8 prettyprint lang-http" style="">POST https://graph.facebook.com/{api-version}/{ig-user-id}/media_publish
+  ?creation_id={creation-id}
+  &amp;access_token={access-token}</pre>
+              <h3>Path Parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:20%">Placeholder</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_dV">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>{api-version}</code><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>API <a href="/docs/graph-api/guides/versioning">version</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>{ig-user-id}</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>App user's app-scoped user ID.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Query String Parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:20%">Key</th>
+                    <th style="width:22%">Placeholder</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_uz">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>access_token</code></p>
+                        <p>Required</p>
+                      </td>
+                      <td>
+                        <p><code>{access-token}</code></p>
+                      </td>
+                      <td>
+                        <p>The app user's <a href="/docs/facebook-login/access-tokens#usertokens">User</a> access token.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>creation_id</code></p>
+                        <p>Required</p>
+                      </td>
+                      <td>
+                        <p><code>{creation-id}</code></p>
+                      </td>
+                      <td>
+                        <p>The ID of the <a href="/docs/instagram-api/reference/ig-container">IG Container</a> to be
+                          published.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Sample Request</h3>
+              <pre class="_5s-8 prettyprint lang-code" style="">POST graph.facebook.com
+  /17841405822304914/media_publish
+    ?creation_id=17889455560051444</pre>
+              <h3>Sample Response</h3>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id": "17920238422030506"
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Reading</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

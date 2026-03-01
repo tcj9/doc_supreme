@@ -1,0 +1,13 @@
+# Class: FilterExpression\<T>
+
+[server](/api/modules/server.md).FilterExpression
+
+Expressions are evaluated to produce a [Value](/api/modules/values.md#value) in the course of executing a query.
+
+To construct an expression, use the [VectorFilterBuilder](/api/interfaces/server.VectorFilterBuilder.md) provided within [VectorSearchQuery](/api/interfaces/server.VectorSearchQuery.md).
+
+## Type parameters[​](#type-parameters "Direct link to Type parameters")
+
+| Name | Type                                                           | Description                                 |
+| ---- | -------------------------------------------------------------- | ------------------------------------------- |
+| `T`  | extends [`Value`](/api/modules/values.md#value) \| `undefined` | The type that this expression evaluates to. |

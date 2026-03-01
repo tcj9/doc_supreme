@@ -1,0 +1,378 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_x/">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Login Security</h1>
+              <p>The features of Facebook Login such as <a href="/docs/facebook-login/access-tokens/">access tokens</a>
+                and <a href="/docs/facebook-login/permissions/">permissions</a> make it safe and secure for people and
+                apps to use, but there are some security steps that apps need to implement themselves.</p>
+              <ul>
+                <li><a href="#checklist">Security Checklist</a></li>
+                <li><a href="#appsecret">The App Secret</a></li>
+                <li><a href="#proof">Secure Server-side Calls with <code>appsecret_proof</code></a></li>
+                <li><a href="#codeflow">Secure Client-side Calls with Short-term Tokens and Code Flow</a></li>
+                <li><a href="#tokenhijacking">Token Hijacking</a></li>
+                <li><a href="#checktokenvalidity">Check Access Token Validity Regularly</a></li>
+                <li><a href="#stateparam">State Parameter</a></li>
+                <li><a href="#strict_mode">Enable Strict Mode</a></li>
+                <li><a href="#https">Use Https</a></li>
+                <li><a href="#enablejssdk">Enable JavaScript SDK for Facebook Login</a></li>
+                <li><a href="#howredirectworks">How Redirect URI Checking Works</a></li>
+                <li><a href="#surfacearea">Lock Down Your Facebook App Settings</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="checklist">Security Checklist</h2>
+              <p>This list below should be considered the absolute minimum that all apps using Facebook Login should
+                implement. Other features will be unique to your app and you will need to always think about how to make
+                your app as secure as possible. Apps that are not secure will lose the trust of their audience and
+                people will stop using them.</p>
+              <div class="clearfix _rhc _3-9d"><i class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                <div class="_42ef">
+                  <p><a href="#appsecret">Never include your App Secret in client-side or decompilable code</a>.</p>
+                </div>
+              </div>
+              <div class="clearfix _rhc _3-9d"><i class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                <div class="_42ef">
+                  <p><a href="#proof">Sign all server-to-server Graph API calls with your App Secret</a>.</p>
+                </div>
+              </div>
+              <div class="clearfix _rhc _3-9d"><i class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                <div class="_42ef">
+                  <p><a href="#codeflow">Use unique short-term tokens on clients</a>.</p>
+                </div>
+              </div>
+              <div class="clearfix _rhc _3-9d"><i class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                <div class="_42ef">
+                  <p><a href="#tokenhijacking">Don't trust that access tokens in use by your app were actually generated
+                      by your app</a>.</p>
+                </div>
+              </div>
+              <div class="clearfix _rhc _3-9d"><i class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                <div class="_42ef">
+                  <p><a href="#stateparam">Use the state parameter when using the login dialog</a>.</p>
+                </div>
+              </div>
+              <div class="clearfix _rhc _3-9d"><i class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                <div class="_42ef">
+                  <p><a href="/docs/facebook-login/#loginflow">Use our official SDKs where possible</a>.</p>
+                </div>
+              </div>
+              <div class="clearfix _rhc _3-9d"><i class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                <div class="_42ef">
+                  <p><a href="#surfacearea">Reduce your app's attack surface area by locking down your Facebook app
+                      settings</a>.</p>
+                </div>
+              </div>
+              <div class="clearfix _rhc _3-9d"><i class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                <div class="_42ef">
+                  <p><a href="#https">Use HTTPS</a>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="appsecret">The App Secret</h2>
+              <p>The App Secret is used in some of the Login flows to generate access tokens and the Secret itself is
+                intended to secure usage of your App to only those that are trusted. The secret can be used to easily
+                create an App Access Token which can make API requests on behalf of any user of the app, which makes it
+                extremely important that an App Secret is not compromised.</p>
+              <p>Therefore the App Secret or an App Access token should never be included in any code.</p>
+              <p>We recommend that App Access Tokens should only be used directly from your app's servers in order to
+                provide the best security. For native apps, we suggest that the app communicates with your own server
+                and the server then makes the API requests to Facebook using the App Access Token. For this reason, if
+                your 'App Type' under <a href="/apps/">Advanced Settings in the App Dashboard</a> is set to
+                <code>Native/Desktop</code> we assume that your native app contains the App Secret or an App Access
+                Token in the binary, and we do not allow calls signed with an App Access Token to proceed. The API will
+                behave as though no access token was provided.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="proof">Secure Server-side Calls with <code>appsecret_proof</code></h2>
+              <p>You can reduce your exposure to malware and spammers by requiring server-to-server calls to Facebook's
+                API be signed with the <code>appsecret_proof</code> parameter. The app secret proof is a sha256 hash of
+                your access token, using your app secret as the key. The app secret can be found in your app dashboard
+                in <strong>Settings &gt; Basic</strong>.</p>
+              <h3>Generate the Proof</h3>
+              <p>The following code example is what the call looks like in PHP:</p>
+              <pre class="_5s-8 prettyprint lang-code"
+                style="">$appsecret_proof= hash_hmac('sha256', $access_token.'|'.time(), $app_secret); </pre>
+              <div class="_57yz _57z0 _3-8p">
+                <div class="_57y-">
+                  <p>Some Operating Systems and programming languages will return a timestamp that is a float. Be sure
+                    to convert to an integer value before calculating the app-secret proof. Some programming languages
+                    create the hash as a digest object. Be sure to express the hash as a hexadecimal object.</p>
+                </div>
+              </div>
+              <h3>Add the Proof</h3>
+              <p>You add the result as an <code>appsecret_proof</code> parameter with the <code>appsecret_time</code>
+                set to the timestamp you used when hashing the app secret to each call you make:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl \
+  -F 'access_token=ACCESS-TOKEN' \
+  -F 'appsecret_proof=APP-SECRET-PROOF' \
+  -F 'appsecret_time=APP-SECRET-TIME' \
+  -F 'batch=[{"method":"GET", "relative_url":"me"},{"method":"GET", "relative_url":"me/accounts"}]' \
+  https://graph.facebook.com</pre>
+              <p>Time-stamped app secret proofs will be considered expired after 5 minutes, so it's recommended that you
+                generate a new proof in-line when making each Graph API call.</p>
+              <h3>Require the Proof</h3>
+              <p>To enable <strong>Require App Secret</strong> for all your API calls, go to the Meta App Dashboard and
+                click <strong>App Settings &gt; Advanced</strong> in the left side menu. Scroll to the
+                <strong>Security</strong> section, and click the <strong>Require App Secret</strong> toggle.
+              </p>
+              <div class="_57yz _7_72 _3-8p">
+                <div class="_57y-">
+                  <p>If this setting is enabled, all client-initiated calls must be proxied through your backend where
+                    the <code>appsecret_proof</code> parameter can be added to the request before sending it to the
+                    Graph API, or the call will fail.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="codeflow">Secure Client-side Calls with Short-term Tokens and Code Flow</h2>
+              <p>In some configurations, apps will reuse a long-term token across multiple clients. Don't do this.
+                Instead use short-term tokens that are generated with the code flow, as described <a
+                  href="/docs/facebook-login/access-tokens/#short-from-long">in our access token documentation</a>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="tokenhijacking">Token Hijacking</h2>
+              <p>To understand how this happens, imagine a native iOS app that wants to make API calls, but instead of
+                doing it directly, communicates with a server owned by the same app and passes that server a token
+                generated using the iOS SDK. The server would then use the token to make API calls.</p>
+              <p>The endpoint that the server uses to receive the token could be compromised and others could pass
+                access tokens for completely different apps to it. This would be obviously insecure, but there is a way
+                to protect against this - access tokens should never be assumed to be from the app that is using them,
+                instead they should be <a href="/docs/facebook-login/access-tokens/#debug">checked using debugging
+                  endpoints</a>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="checktokenvalidity">Check Access Token Validity Regularly</h2>
+              <p>If you don't use the Facebook SDKs, regularly check whether the access token is valid. Although access
+                tokens have a scheduled expiration, tokens can be caused to expire early for security reasons. If you
+                don't use the Facebook SDKs in your app, it is extremely important that you manually implement frequent
+                checks of the token validity — at least daily — to ensure that your app is not relying on a token that
+                has expired early for security reasons.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="stateparam">State Parameter</h2>
+              <p>If you're using the Facebook <a
+                  href="/docs/facebook-login/manually-build-a-login-flow/#logindialog">login dialog</a> on your website,
+                the <code>state</code> parameter is a unique string that guards your application against <a
+                  data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCross-site_request_forgery&amp;h=AT3fgXYEpGjhTa1B0AlYCD2vDpwLaEF31ltIb0sKEgHCM6DuKEghmo_Y7n-QNwGBaIP8qKQMAUIgcMqw4DQKqAymseQ2kJsGiaJnKhxRVORMd8BfbI2M5yUbYjt-XdNV72gxD6BqOEqpGlTMmLmCuQ"
+                  rel="nofollow" target="_blank">Cross-site Request Forgery</a> attacks.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="strict_mode">Enable Strict Mode</h2>
+              <p>Strict Mode keeps apps safe by preventing bad actors from hijacking your redirect. Enabling Strict Mode
+                is required for all apps.</p>
+              <p>Before turning on Strict Mode in the App Dashboard, ensure your current redirect traffic still works by
+                taking the following actions in Facebook Login settings:</p>
+              <ul>
+                <li>
+                  <p>For apps with <strong>dynamic redirect URIs</strong>, use the <a
+                      href="/docs/facebook-login/manually-build-a-login-flow/#logindialog">state parameter</a>
+                    to pass back the dynamic information to a limited number of redirect URIs. Then add each of the
+                    limited redirect URIs to the <strong>Valid OAuth redirect URIs</strong> list.</p>
+                </li>
+                <li>
+                  <p>For apps with a <strong>limited number of redirect URIs</strong>, add each one to the <strong>Valid
+                      OAuth redirect URIs</strong> list.</p>
+                </li>
+              </ul>
+              <img alt="" class="_5aqp _5aqr img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/11404896_503008703196713_1252134979_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=tc2Gohqhax4Q7kNvwFk9waJ&amp;_nc_oc=AdkD1HRuZRD71HfJ2ZfLPFQ__3SDeiLIPV7Sad4hiogaJHiBHWJEwGp1p7cdkwTXXQs&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=ToxDeN4Lu1Lj6kVP9lFtIQ&amp;oh=00_Afv7N-xgZpAfxSVD0A6fDMfxDSdLxf_80yKF08TSxA1lNA&amp;oe=698CA3C6" />
+              <ul>
+                <li>For apps <strong>using only the Facebook JavaScript SDK</strong>, redirect traffic is already
+                  protected. No further action is needed.</li>
+              </ul>
+              <p>After taking these actions, make sure to enable strict mode.</p>
+              <img alt="" class="img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/20915038_1907309902856521_593202955730026496_n.png?_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=KTORm6z2tNoQ7kNvwHuIM6f&amp;_nc_oc=AdmaDEkDz8KN3BsEIfFDOlCyx7JEu69GcY2ylSdUt9v5jn2vSiDDNRVWV9AMisvsxxY&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=ToxDeN4Lu1Lj6kVP9lFtIQ&amp;oh=00_Afts87G7fZFkJSVpNTeW2LHxtbgNSt6BQomxUWUNGTAJsw&amp;oe=69A1081B"
+                style="margin-left:41.5px;" />
+              <h3>How Strict Mode Works</h3>
+              <p>Strict Mode prevents hijacking of your redirect URIs by requiring an exact match from your
+                <strong>Valid OAuth redirect URIs</strong> list. For example, if your list contains
+                <em>www.example.com</em>, then Strict Mode won't allow <em>www.example.com/token</em> as a valid
+                redirect. It also won't allow any extra query parameters not present in your <strong>Valid OAuth
+                  redirect URIs</strong> list.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="https">Use HTTPS</h2>
+              <p>Use HTTPS, instead of HTTP, as an internet protocol, because it uses encryption. HTTPS keeps
+                transmitted data private and guards against eavesdropping attacks. It also prevents data from being
+                tampered with during transmission by, for example, introducing advertisements or malicious code.</p>
+              <p>On October 6, 2018, all apps will be required to use HTTPS.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="enablejssdk">Enable JavaScript SDK for Facebook Login</h2>
+              <p>When you indicate that you are using the JavaScript SDK for login by setting the <strong>Login with the
+                  JavaScript SDK</strong> toggle to “yes”, the domain of your page that hosts the SDK must match one of
+                the entries in <strong>Allowed Domains for the JavaScript SDK</strong> list. This ensures that access
+                tokens are only returned to callbacks in authorized domains. Only https pages are supported for
+                authentication actions with the Facebook JavaScript SDK.</p>
+              <p>For existing JSSDK integrations created until August 10th, 2021, this list is backfilled with values
+                based on current usage. No further action is required.</p>
+              <p>For new integrations created after August 10th, 2021, you must add values to this list.</p>
+              <p>If you see your App's JSSDK domain field contains urls that starts with <code>*.</code> , please change
+                it such that it's replaced with absolute domain urls for extra security.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="howredirectworks">How Redirect URI Checking Works</h2>
+              <p>Open redirect attacks occur when a bad actor provides an unauthorized redirect_uri parameter in the
+                login request, leading to the potential for sensitive information like an access token to leak through
+                the query string or fragment in the redirect URI.</p>
+              <p>For custom web integrations, you should provide authorized redirect URIs in your app settings to
+                prevent such attacks. While fulfilling a login request, the redirect_uri parameter will be checked
+                against entries in this list. The full URI must be an exact match, including all parameters, with the
+                exception of the optional state parameter, the value of which is ignored.</p>
+              <h3>In-App Browsers and the JavaScript SDK</h3>
+              <p>The JavaScript SDK normally relies on popups and callbacks to complete a Login. For some in-app
+                browsers that suppress popups, this can fail. When this happens, the SDK will automatically attempt to
+                redirect, with an access token, to the page that invoked it. It can only do this redirect safely if the
+                full URI of the page is listed in the Valid OAuth Redirect URIs.</p>
+              <p>If in-app browser scenarios are important for your web app, you should add the domain of your login
+                page to the Allowed Domains and also its full URI (including the path and query parameters) to the Valid
+                OAuth Redirect URIs. If you have a lot of variation in the URIs where Login happens for your app, you
+                can manually specify a fallback_redirect_uri as an option in the FB.login() call so you only need to add
+                that one entry to your Valid OAuth Redirect URIs list.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="surfacearea">Lock Down Your Facebook App Settings</h2>
+              <p>Enable and/or disable any authentication flows that the app does not use to minimize attack surface
+                area.</p>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><span>
+                      <p><strong>Use code-generated short-term access tokens in clients instead of client-generated
+                          tokens or server-provided long-term tokens.</strong> The code-generated short-term access
+                        tokens flow requires the app server to exchange the code for a token, which is more secure than
+                        obtaining a token in the browser. Apps should prefer using this flow whenever possible to be
+                        more secure – if an app only enables this flow, malware running on a user’s computer cannot
+                        obtain an access token to abuse. Learn more in our <a
+                          href="/docs/facebook-login/access-tokens/#short-from-long">access tokens documentation</a>.
+                      </p>
+                    </span></div>
+                </li>
+              </ul>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb"><span>
+                      <p><strong>Disable Client OAuth Login if your app does not use it.</strong> Client OAuth Login is
+                        the global on-off switch for using OAuth client token flows. If your app does not use any client
+                        OAuth flows, which include Facebook login SDKs, you should disable this flow. Note, though, that
+                        you can't request permissions for an access token if you have Client OAuth Login disabled. This
+                        setting is found in the <strong>Products</strong> &gt; <strong>Facebook Login</strong> &gt;
+                        <strong>Settings</strong> section of the App Dashboard.
+                      </p>
+                      <img alt="" class="_5aqp _5aqr img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/11409182_1097191930310378_1858692434_n.png?_nc_cat=101&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=xiRjv58AW6gQ7kNvwHEh9AC&amp;_nc_oc=Adm5ZSSFhnLbaK4V_eRESBZ2BgTReZi4ZjDLTmKC5fwfeZr4nGyaj9ESq6qEpwhT_a4&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=ToxDeN4Lu1Lj6kVP9lFtIQ&amp;oh=00_AftTN8zJd5fZ8j-U4sPMribgU0eyybav5QhG3C0rilJqTw&amp;oe=698C9C1D" />
+                    </span></div>
+                </li>
+                <li>
+                  <div class="fcb"><span>
+                      <p><strong>Disable Web OAuth Flow or Specify a Redirect Allow List.</strong> Web OAuth Login
+                        settings enables any OAuth client token flows that use the Facebook web login dialog to return
+                        tokens to your own website. This setting is in the <strong>Products</strong> &gt;
+                        <strong>Facebook Login</strong> &gt; <strong>Settings</strong> section of the App Dashboard.
+                        Disable this setting if you are not building a custom web login flow or using the Facebook Login
+                        SDK on the web.
+                      </p>
+                      <img alt="" class="_5aqp _5aqr img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/11405237_807455136028597_475956896_n.png?_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=QlXWAFVua84Q7kNvwFeXNLB&amp;_nc_oc=AdlK0VeXJoBr3HcNuAE8fANvXT6xOBJL2I8aCQL5kxm0bAvNhluGdQoaSGwhubyR2_Y&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=ToxDeN4Lu1Lj6kVP9lFtIQ&amp;oh=00_Aft40KAABMs9Fti7brP2Gopw6FLuObdPxSQsxdDvxrSFdw&amp;oe=698C7BAE"
+                        width="350" />
+                    </span></div>
+                </li>
+                <li>
+                  <div class="fcb"><span>
+                      <p><strong>Enforce HTTPS</strong>. This setting requires HTTPS for OAuth Redirects, and it
+                        requires and Facebook JavaScript SDK calls that return or require an access token are only from
+                        HTTPS pages. All new apps created as of March 2018 have this setting on by default, and you
+                        should plan to migrate any existing apps to use only HTTPS URLs by October 6, 2018. Most major
+                        cloud application hosts provide free and automatic configuration of TLS certificates for your
+                        applications. If you self-host your app or your hosting service doesn't offer HTTPS by default,
+                        you can obtain a free certificate for your domain(s) from <a data-lynx-mode="hover"
+                          href="https://l.facebook.com/l.php?u=https%3A%2F%2Fletsencrypt.org%2F&amp;h=AT2oOoD59Rwnsywh3iXG85sk7PyRgQ4WRKoBhP_AenwykUHxEWJjUjgUG0jYiU6od2yWsqyXiIEiiIBKMQtbth6F8uYgipK_OW18gFKTL3XmbJvYzVblBTli1OQcgqtbuHeX6EhOpUCLPVs26t3mog"
+                          rel="nofollow" target="_blank">Let's Encrypt</a>.</p>
+                      <img alt="" class="_5aqp _5aqr img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/28418612_1185684154899637_8036368996091559936_n.png?_nc_cat=100&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=wc9a2klrhUkQ7kNvwFMMGxw&amp;_nc_oc=Adlss9Yu7xwft9UwIwib7hPq5KcMR_iCSnqr7FuBWM__x51Lvpz1BX8D46C_4nWUS-8&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=ToxDeN4Lu1Lj6kVP9lFtIQ&amp;oh=00_AfujxMxcipixWsPTg92P_5C-nWhxAXCkUn_bRXFisE-P2w&amp;oe=69A0DE88"
+                        width="375" />
+                    </span></div>
+                </li>
+                <li>
+                  <div class="fcb"><span>
+                      <p><strong>Disable embedded browser OAuth flow if your app does not use it.</strong> Some desktop
+                        and mobile native apps authenticate users by doing the OAuth client flow inside an embedded
+                        webview. If your app does not do this, then disable the setting in <strong>Products</strong>
+                        &gt; <strong>Facebook Login</strong> &gt; <strong>Settings</strong> section of the App
+                        Dashboard.</p>
+                      <img alt="" class="_5aqp _5aqr img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2178-6/11414380_110648682609140_955054838_n.png?_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=34156e&amp;_nc_ohc=9wlxOdLAwLwQ7kNvwGiilQm&amp;_nc_oc=AdlV_GMV8qY3oylGTQ5uQyKD_Z3OK7yrp39_QDWiSj6zI_VrzB0Iy1zOLptXHehfkds&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=ToxDeN4Lu1Lj6kVP9lFtIQ&amp;oh=00_Aft74ziRstKHmSE_1Ei7VUSTRwHogOG6a0F1Gl3y1bTK8w&amp;oe=698C9134"
+                        width="360" />
+                    </span></div>
+                </li>
+                <li>
+                  <div class="fcb"><span>
+                      <p><strong>Disable mobile single sign on flows if your app does not use them.</strong> If your app
+                        does not use iOS or Android Login, disable the ‘Single Sign On’ setting in the iOS and Android
+                        sections of <strong>Settings</strong> &gt; <strong>Basic</strong> .</p>
+                    </span></div>
+                </li>
+              </ul>
+              <p>The <a href="/apps">App Dashboard</a> contains a number of additional settings which allow developers
+                to shut down areas of attack that might otherwise lead to security issues:</p>
+              <ul>
+                <li><strong>Basic &gt; App Secret</strong> if your app secret is ever compromised, you can reset it
+                  here.</li>
+                <li><strong>Basic &gt; App Domains</strong> use this to lock down the domains and subdomains which can
+                  be used to perform Facebook Login on behalf of your app.</li>
+                <li><strong>Advanced &gt; App Type</strong> when you create a native app for mobile or desktop and
+                  include the app secret within, set this to <code>Native/Desktop</code> to protect against your app
+                  being decompiled and your app secret stolen.</li>
+                <li><strong>Advanced &gt; Server IP Allow List</strong> specifies a list of IP addresses from which
+                  Graph API calls can be made with your app secret. Graph API calls made with your app secret from
+                  outside of this range will fail. Calls made with user access tokens are not affected by this setting.
+                </li>
+                <li><strong>Advanced &gt; Update Settings IP Allow List</strong> locks down the IP addresses from which
+                  someone can modify these app settings to a specific range. Take care setting an IP allow list on
+                  residential broadband. If your IP address changes you will lose the ability to edit your app's
+                  settings.</li>
+                <li><strong>Advanced &gt; Update Notification Email</strong> notifies an email address whenever any app
+                  setting is changed in the App Dashboard.</li>
+                <li><strong>Advanced &gt; Stream post URL security</strong> this will stop your app from publishing any
+                  URLs that don't point back to a domain it owns. This will not always be useful, specifically if you
+                  know your app will publish links to other sites.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

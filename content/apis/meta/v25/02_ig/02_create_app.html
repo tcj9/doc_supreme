@@ -1,0 +1,509 @@
+<div id="documentation_body_pagelet" data-referrer="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_OJ">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div>
+                        <div class="_57yz _57z1 _3-8p">
+                            <div class="_57y-">
+                                <p>
+                                    The following content is from the Meta App Development documentation. Please refer
+                                    to the Development documentation to learn more about the
+                                    <a href="https://developers.facebook.com/docs/development" target="_blank">
+                                        Meta App Development process.
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                            <div class="_4-u3 _588p">
+                                <h1 id="create-a-meta-app-for-instagram-platform">Create a Meta App for Instagram
+                                    Platform</h1>
+
+                                <p>This guide shows you how to create and customize a Meta app for your Instagram app in
+                                    the App Dashboard.</p>
+
+                                <h3>Before you Start</h3>
+
+                                <p>This guide assumes that you have read and implemented the requirements for <a
+                                        href="https://developers.facebook.com/docs/development/create-an-app">creating
+                                        an app with Meta</a>.</p>
+
+                                <h3>Add to an existing app</h3>
+
+                                <p>If you are adding Instagram to an existing app, please start with <a
+                                        href="#add-ig">Step 6</a>.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                                <div class="_4-u3 _588p">
+                                    <h2 id="1--start-the-app-creation-process">1. Start the app creation process</h2>
+
+                                    <p>There are a number of ways to start the app creation flow.</p>
+
+                                    <ul>
+                                        <li>If you just came from the registration flow, click the <strong>Create First
+                                                App</strong> button</li>
+                                        <li>If you are on the App Dashboard, click <strong>Create App</strong> in the
+                                            upper-right</li>
+                                        <li>If you are on the dashboard for an existing app and want to create a new
+                                            app, select the dropdown menu in the upper-left, and click the
+                                            <strong>Create New App</strong> button
+                                        </li>
+                                    </ul>
+                                    <a role="button" class="_42ft _3g_o _3g_r _3g_v" href="/apps" target="_blank"
+                                        style="color:blue;">Launch the Meta App Dashboard</a>
+                                    <div class="_57yz _57z0 _3-8p">
+                                        <div class="_57y-">
+                                            <p>If you are unable to create an app, you might have reach the app limit.
+                                                You are permitted to have a <strong>developer or administrator role on a
+                                                    maximum of 15 apps</strong> that are not already connected to a Meta
+                                                Verified Business Account. If you have reached the app limit and are
+                                                unable to create an application or accept a new pending role, take the
+                                                following steps in the apps dashboard:</p>
+
+                                            <ul>
+                                                <li>Connect a <a
+                                                        href="/docs/development/release/business-verification">verified
+                                                        business portfolio</a> to any apps that are not already
+                                                    connected to one.</li>
+                                                <li>Remove any old or unused apps – Archived apps count towards the app
+                                                    limit; if you no longer require these apps, we suggest removing them
+                                                </li>
+                                                <li>Remove yourself as an administrator or developer from an app</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                                data-visualcompletion="css-img"
+                                                class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="step-2--connect-a-business">Step 2: Connect a business</h2>
+
+                                <p>You're required to connect your app to a business that has completed Business
+                                    Verification before you can publish your app. However, you can connect a business
+                                    now or at any time during the development process by clicking <strong>App settings
+                                        &gt; Basic</strong> in the left-side menu.</p>
+
+                                <ol>
+                                    <li>Select an option and click <strong>Next</strong>.</li>
+                                </ol>
+                                <p>
+                                    Learn more about
+                                    <a href="https://developers.facebook.com/docs/development/release/business-verification/"
+                                        target="_blank">
+                                        Business Verification.
+                                        <img class="img"
+                                            src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=5befapUHI7IObAdVr1Zsyw&amp;oh=00_AfvlI4R6ONKjMEWH_91EWtLkel1kNN9qIrqTn1ikFMm7xw&amp;oe=69A06B62"
+                                            width="10px" alt=""></a>
+                                </p>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="step-3--select-your-use-case">Step 3: Select your use case</h2>
+
+                                <p>To create an app that can access the Instagram product follow these steps:</p>
+
+                                <ol>
+                                    <li>Select the <strong>Other</strong> use case. </li>
+                                    <li>Click the <strong>Next</strong>. </li>
+                                </ol>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="step-4--select-your-app-type">Step 4: Select your app type</h2>
+
+                                <p>Your app must be a business type app to be able to add the Instagram product.</p>
+
+                                <ol>
+                                    <li>Select <strong>Business</strong>. </li>
+                                    <li>Click <strong>Next</strong>. </li>
+                                </ol>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="step-5--add-app-details">Step 5: Add app details</h2>
+
+                                <p>Add some details about your app.</p>
+
+                                <ol>
+                                    <li><strong>Add an app name</strong> that will appear in the app dashboard.</li>
+                                    <li><strong>Add contact email</strong> that Meta will use to contact you about your
+                                        app.</li>
+                                    <li>Click <strong>Next</strong>.</li>
+                                </ol>
+
+                                <p>You will be redirected to the app dashboard for your new app with products you can
+                                    add to your app.</p>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="add-ig">Step 6. Add the Instagram product to your app</h2>
+
+                                <p>Add the Instagram product to your app by following these steps:</p>
+
+                                <ol>
+                                    <li>
+                                        <p>Scroll until you see the <strong>Instagram</strong> product. This allows
+                                            Allow creators and businesses to manage messages and comments, publish
+                                            content, track insights, hashtags and mentions.</p>
+                                    </li>
+                                    <li>
+                                        <p>Click <strong>Set up</strong>.</p>
+                                    </li>
+                                </ol>
+
+                                <p><strong>API setup with Instagram login</strong> is automatically added to your app.
+                                    This allows your app users to log in to your app using their Instagram credentials.
+                                    This setup allows you to build an app that can publish to Instagram, manage comments
+                                    on Instagram media, and send and receive messages from people interested in your app
+                                    user's Instagram social media using the Instagram API.</p>
+
+                                <p>If you are building an app for a business that uses an Instagram Professional account
+                                    that is linked to a Facebook Page select the <strong>API setup with Facebook
+                                        login</strong>. This setup allows you to build an app that can publish content
+                                    to Instagram and manage comments on Instagram media, for product tagging,
+                                    Partnership Ads, and get metrics. Continue to the <a
+                                        href="https://developers.facebook.com/docs/instagram-platform">API Setup with
+                                        Facebook Login Developer Documentation</a> to complete the set up.</p>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="step-7--generate-access-tokens">Step 7. Generate access tokens</h2>
+
+                                <p>Assign an Instagram account to get access tokens for testing Instagram API calls and
+                                    webhooks subscriptions.</p>
+
+                                <ol>
+                                    <li>Add an Instagram account. This account must be public. Multiple accounts can be
+                                        added for multiple testers.</li>
+                                    <li>You will be prompted to login to your Instagram account.</li>
+                                </ol>
+
+                                <p>You can add or remove accounts at any time by clicking <strong>App Roles &gt;
+                                        Roles</strong> or <strong>Instagram &gt; API Setup with Instagram login</strong>
+                                    in the left-side menu.</p>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h3>Step 8. Configure webhooks</h3>
+
+                                <p>Meta Webhooks allow you to receive real-time HTTP notifications of changes to
+                                    specific objects in the Meta social graph. To use webhooks, please provide a
+                                    callback URL for your app.</p>
+
+                                <ol>
+                                    <li>Click <strong>Configure</strong>.</li>
+                                    <li>Add your <strong>Callback URL</strong>.</li>
+                                    <li>Add your <strong>Verify token</strong>.</li>
+                                    <li>Click <strong>Save</strong>.</li>
+                                    <li>Click <strong>Manage</strong> to unsubscribe or change testing and subscription
+                                        versions.</li>
+                                </ol>
+
+                                <p>By default you are subscribed to all available webhooks for the Instagram product:
+                                </p>
+                                <table class="uiGrid _51mz _57v1" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                        <tr class="_51mx">
+                                            <td class="_51m- vTop hLeft _57v2">
+                                                <ul>
+                                                    <li><code>comments</code></li>
+                                                    <li><code>live_comments</code></li>
+                                                    <li><code>message_reactions</code></li>
+                                                    <li><code>messages</code></li>
+                                                </ul>
+                                            </td>
+                                            <td class="_51m- vTop hLeft _57v2 _51mw">
+                                                <ul>
+                                                    <li><code>messaging_optins</code></li>
+                                                    <li><code>messaging_postbacks</code></li>
+                                                    <li><code>messaging_referral</code></li>
+                                                    <li><code>messaging_seen</code></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>
+                                    Learn more about
+                                    <a href="https://developers.facebook.com/docs/instagram/platform/instagram-api/webhooks"
+                                        target="_blank">
+                                        webhooks.
+                                        <img class="img"
+                                            src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=5befapUHI7IObAdVr1Zsyw&amp;oh=00_AfvlI4R6ONKjMEWH_91EWtLkel1kNN9qIrqTn1ikFMm7xw&amp;oe=69A06B62"
+                                            width="10px" alt=""></a>
+                                </p>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="step-9--set-up-instagram-business-login">Step 9. Set up Instagram business login
+                                </h2>
+
+                                <p>Provide a secure way for your app users to give your app permissions to access data
+                                    with business login.</p>
+                                <ol>
+                                    <li>Click <strong>Set up</strong> in the <strong>3. Set up Instagram business
+                                            login</strong> section</li>
+                                    <li>Add your <strong>Redirect URL</strong> in the popup and click
+                                        <strong>Save</strong>
+                                    </li>
+                                    <li>Copy and paste the <strong>Embed URL</strong> in an anchor tag or button on your
+                                        app or website to launch business login.</li>
+                                    <li>Click <strong>Business login settings</strong></li>
+                                    <li>Add additional <strong>OAuth Redirect URIs</strong>, if applicable</li>
+                                    <li>Add your <strong>Deauthorize callback URL</strong> </li>
+                                    <li>Add your <strong>Data deletion request URL</strong> </li>
+                                    <li>Click <strong>Save</strong></li>
+                                </ol>
+                                <p>
+                                    Learn more about
+                                    <a href="https://developers.facebook.com/docs/instagram/platform/instagram-api/business-login"
+                                        target="_blank">
+                                        business login.
+                                        <img class="img"
+                                            src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=5befapUHI7IObAdVr1Zsyw&amp;oh=00_AfvlI4R6ONKjMEWH_91EWtLkel1kNN9qIrqTn1ikFMm7xw&amp;oe=69A06B62"
+                                            width="10px" alt=""></a>
+                                </p>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="step-10--complete-app-review">Step 10. Complete App Review</h2>
+
+                                <p>Instagram requires successful completion of the App Review process before your app
+                                    can access live data. Submit your App Review request when you're ready.</p>
+
+                                <p>If you are ready now complete the following steps:</p>
+                                <ol>
+                                    <li>
+                                        Click the chevron to right of
+                                        <b>
+                                            Complete App Review.
+                                        </b>
+                                    </li>
+                                    <li>
+                                        Click
+                                        <b>
+                                            Go to App Review.
+                                        </b>
+                                        <p>
+                                            A pop-up appears with a list of the
+                                            <b>
+                                                Requirements
+                                            </b>
+                                            for App Review:
+                                        </p>
+                                        <ul class="uiList _4of _4kg">
+                                            <li>
+                                                <div class="fcb">
+                                                    Confirm that your app can be loaded and tested externally.
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="fcb">
+                                                    Provide clear use case details and describe step-by-step how a
+                                                    person uses your app.
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="fcb">
+                                                    Tell us how your case of Instagram permissions follows established
+                                                    usage guidelines. You will need to upload screen recordings that
+                                                    demonstrate how your app will use each permission.
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Click
+                                        <b>
+                                            Continue.
+                                        </b>
+                                        <p>A pop-up appears that shows the required and recommended permissions that
+                                            have been added by default for the Instagram product. If your app will not
+                                            need a recommended permission, uncheck it.</p>
+                                        <h4>Permissions</h4>
+                                        <ul class="uiList _4of _4kg">
+                                            <li>
+                                                <div class="fcb"><code>instagram_business_basic</code></div>
+                                            </li>
+                                            <li>
+                                                <div class="fcb"><code>instagram_business_content_publish</code></div>
+                                            </li>
+                                            <li>
+                                                <div class="fcb"><code>instagram_business_manage_comments</code></div>
+                                            </li>
+                                            <li>
+                                                <div class="fcb"><code>instagram_business_manage_insights</code></div>
+                                            </li>
+                                            <li>
+                                                <div class="fcb"><code>instagram_business_manage_messages</code></div>
+                                            </li>
+                                        </ul>
+                                        <h4>Features</h4>
+                                        <ul class="uiList _4of _4kg">
+                                            <li>
+                                                <div class="fcb"><a
+                                                        href="https://developers.facebook.com/docs/features-reference/human-agent"
+                                                        target="_blank">
+                                                        Human Agent
+                                                        <img class="img"
+                                                            src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwF6kz68&amp;_nc_oc=Adm07LmgO4Gfu44wiPMLsONSG9Axm4zS6BxM7akKc7p_45jRnOfoq3rRqK3ebsXvk6nkudbzLowReVT95Av6Gfui&amp;_nc_zt=14&amp;_nc_ht=scontent-lga3-2.xx&amp;_nc_gid=5befapUHI7IObAdVr1Zsyw&amp;oh=00_AfvlI4R6ONKjMEWH_91EWtLkel1kNN9qIrqTn1ikFMm7xw&amp;oe=69A06B62"
+                                                            width="10px" alt=""></a></div>
+                                            </li>
+                                        </ul>
+
+                                        If you have requested the <code>instagram_business_manage_messages</code>
+                                        permission, the Human Agent feature is added automatically.
+                                        <div style="padding:10px"></div><span>
+                                            <p><strong>Note:</strong> If you are adding Instagram to an existing app
+                                                that has been approved for Advanced Access you may be <a
+                                                    href="#request-for-app-review"
+                                                    data-auto-logging-id="fc6a39f42">automatically granted Advanced
+                                                    Access to Instagram business permissions</a>.</p>
+                                        </span>
+                                        <p>
+                                            You can add and remove permissions and features at any time during the
+                                            development process.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        Click <b>Continue</b> and you will be redirected to the <b>App Review &gt;
+                                            Requests</b> menu item in the left-side menu.
+                                    </li>
+                                </ol>
+                                <p>If you want to add more products or are not yet ready to submit for App Review, you
+                                    can <a href="#request-for-app-review">return to the app dashboard</a> to submit at a
+                                    later date.</p>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="next-steps">Next Steps</h2>
+
+                                <ul>
+                                    <li>
+                                        <p><strong>API Integration Helper</strong> – Use the API Integration Helper in
+                                            the App Dashboard to send a test message using the API.</p>
+                                    </li>
+                                    <li>
+                                        <p>When you need to request Advanced Access, visit the <a
+                                                href="https://developers.facebook.com/docs/instagram-platform/app-review">Instagram
+                                                Platform App Review guide</a> to learn how to submit your app for Meta
+                                            App Review.</p>
+                                    </li>
+                                </ul>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8 _3la3">
+                            <div class="_4-u3 _588p">
+                                <h2 id="see-also">See Also</h2>
+
+                                <p>Learn more about Meta app development, review, permissions, and more with the
+                                    following developer documents:</p>
+                                <ul class="uiList _4of _4kg">
+                                    <li>
+                                        <div class="fcb"><a
+                                                href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/business-login"
+                                                target="_blank" data-auto-logging-id="ff37b6e52">
+                                                Business login for Instagram
+                                            </a></div>
+                                    </li>
+                                    <li>
+                                        <div class="fcb"><a
+                                                href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/content-publishing"
+                                                target="_blank">
+                                                Content Publishing API
+                                            </a></div>
+                                    </li>
+                                    <li>
+                                        <div class="fcb"><a
+                                                href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/comment-moderation"
+                                                target="_blank">
+                                                Comment Moderation API
+                                            </a></div>
+                                    </li>
+                                    <li>
+                                        <div class="fcb"><a
+                                                href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/messaging-api"
+                                                target="_blank">
+                                                Instagram Messaging API
+                                            </a></div>
+                                    </li>
+                                    <li>
+                                        <div class="fcb"><a
+                                                href="https://developers.facebook.com/docs/app-review/resources/logos"
+                                                target="_blank">
+                                                Logos and Trademarks
+                                            </a></div>
+                                    </li>
+                                    <li>
+                                        <div class="fcb"><a href="https://developers.facebook.com/docs/permissions#i"
+                                                target="_blank">
+                                                Permissions Reference
+                                            </a></div>
+                                    </li>
+                                    <li>
+                                        <div class="fcb"><a
+                                                href="https://developers.facebook.com/docs/graph-api/webhooks"
+                                                target="_blank" data-auto-logging-id="f1bba5bd2"
+                                                data-interactable="|click|">
+                                                Webhooks from Meta
+                                            </a></div>
+                                    </li>
+                                </ul>
+                                <div data-click-area="to_top_nav"><a class="_2k32" href="#"><i alt=""
+                                            data-visualcompletion="css-img"
+                                            class="img sp_FsXE2S8xhbg sx_95432d"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

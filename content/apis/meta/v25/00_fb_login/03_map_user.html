@@ -1,0 +1,170 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_Sw">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Mapping Users Across Apps and Pages</h1>
+              <div class="_57yz _57z1 _3-8p">
+                <div class="_57y-">
+                  <p>If you want to share the same Scoped User ID between the test, development, staging or QA versions
+                    of your app, please use <a href="/docs/apps/test-apps">Test Apps</a>.</p>
+                </div>
+              </div>
+              <p>Facebook issues app-scoped user IDs for people who first log into an instance of an app and for people
+                who log in with <a href="/docs/facebook-login/limited-login">Limited Login</a>. for people who first use
+                a Messenger bot, Facebook issues page-scoped user IDs . By definition, this means the ID for the same
+                person may be different between these apps and bots.</p>
+              <p>A business may operate several Facebook Apps or bots - common in games studios, for example, to support
+                use cases such as cross-promotion or fraud detection, or in bots used to communicate with users. In
+                these cases, you may need to map the same person's ID between those apps and bots.</p>
+              <p>There are three methods by which you can map the same user across multiple apps:</p>
+              <ul>
+                <li><a href="#field">The <code>token_for_business</code> field on the User node</a></li>
+                <li><a href="#canvas">The <code>token_for_business</code> property in the signed_request object passed
+                    to apps rendered inside a Facebook Canvas frame</a></li>
+                <li><a href="#api">The <code>ids_for_business</code> edge on the User node</a></li>
+              </ul>
+              <p>Before you can use any of these mechanisms, you first must let Facebook know that your apps are owned
+                and operated by the same business entity. To do this you will need to use Facebook Business Manager to:
+              </p>
+              <ul>
+                <li><a href="https://developers.facebook.com/docs/apps/business-manager#create-business">create a new
+                    business</a>, or </li>
+                <li><a href="https://developers.facebook.com/docs/apps/business-manager#update-business">associate your
+                    apps to an existing business</a>. </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="field">The <code>token_for_business</code> field on the User node</h2>
+              <p>Once an app has been associated with a Business Manager, you may request the
+                <code>token_for_business</code> field on the <a
+                  href="/docs/graph-api/reference/user/"><code>User</code></a> node, using the app-scoped ID obtained
+                from Limited Login or the first login to an instance of an app. This call returns a string which is the
+                same for this person across all the apps managed by the same Business Manager.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">GET /me?fields=token_for_business</pre>
+              <p>would yield:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "id": "1234567890"
+  "token_for_business": "weg23ro87gfewblwjef"
+}</pre>
+              <p>Usage notes:</p>
+              <ul>
+                <li>The person being queried must have logged into this app.</li>
+                <li>This field can be called with an app access token, or a user access token. If using a user token,
+                  the person being queried must be the same person for whom the token was generated.</li>
+                <li>If you use an app-soped ID obtained from <a href="/docs/facebook-login/limited-login">Limited
+                    Login</a>, you must use your app's app ID to make the call because you don't have a User token valid
+                  for Graph API calls. Be aware that Limited Login safeguards are not supported in this context. </li>
+                <li>If the owning business changes, the value of <code>token_for_business</code> will also change.</li>
+                <li>If you request the <code>token_for_business</code> field and the app is not associated with a
+                  Business Manager, the call returns an error.</li>
+                <li>The value returned by <code>token_for_business</code> is a token, not an ID - it cannot be used
+                  directly against the Graph API to access a person's information. You should still store the ID in your
+                  database, and use this to call the Graph API to get that person's information.</li>
+              </ul>
+              <p>For convenience, the <code>token_for_business</code> field is available in all API versions</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="canvas">The <code>token_for_business</code> property in the Canvas <code>signed_request</code>
+                object</h2>
+              <p>To make it simple for apps with a Canvas presence to map a user across multiple apps, if the app is
+                associated with a Business Manager, and the user had logged into the app, a
+                <code>token_for_business</code> field will be added and passed to the app via the <a
+                  href="/docs/reference/login/signed-request"><code>signed_request</code> passed to Canvas apps upon
+                  load</a>. For example:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "algorithm": "HMAC-SHA256",
+  "expires": 1414263600,
+  "issued_at": 1414257389,
+  "oauth_token": "CAAGEkq9GMZAkBAFnvvQ3M6msZBKITLa1gVZBVdnLTdJue2QeV6fMKRXn4G6fcEZB5ZAJyg3z6HdaKOJCCMJ1l9YFWmN4hq6nNnx77f9O7SYhsnPcJ6iH79xjFwqhrALgieDp7GiziMy5Y3Mol6RzHvCM5ceqQe9ZAijvrWZB5hEIwphbMQKEwZA4ZBozXP3NJgEZA3nZCMTTtvleWpxfmqIqO5XwxneCZBsZC4",
+  "token_for_business": "AbwoGqummPbF3zp_",
+  "user_id": "10154418713995634"
+}</pre>
+              <p>The value of the <code>token_for_business</code> field will be the same as if queried on the <a
+                  href="/docs/graph-api/reference/user/"><code>User</code></a> node directly, e.g. via
+                <code>/me?fields=token_for_business</code>. It also follows the same rules, i.e. if the owning business
+                changes, the value of <code>token_for_business</code> will also change.</p>
+              <p>If the app is not associated with a Business Manager, or the user has not logged into the app, the
+                <code>token_for_business</code> property will not be present in the <code>signed_request</code> object.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="api">The <code>ids_for_business</code> edge on the User node</h2>
+              <p>Get mapped business IDs by calling the <code>ids_for_business</code> edge on the <a
+                  href="/docs/graph-api/reference/user/"><code>User</code></a> node. The response is an array of
+                objects, each of which represents an app which is associated with the same business as the calling app,
+                which the person has also logged into.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">GET /me/ids_for_business</pre>
+              <p>Example Response:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data": [
+    {
+      "id": "10153949089790582", 
+      "app": {
+        "name": "Business's App 1", 
+        "namespace": "business_app_1", 
+        "id": "647733625268125"
+      }
+    }, 
+    {
+      "id": "605665581", 
+      "app": {
+        "name": "Business's App 2", 
+        "namespace": "business_app_2", 
+        "id": "370612223054807"
+      }
+    }, 
+    {
+      "id": "10154053730190582", 
+      "app": {
+        "name": "Business's App 3", 
+        "namespace": "business_app_3", 
+        "id": "194890427204075"
+      }
+    }
+  ]
+}</pre>
+              <p>For data to be returned by the API, the user must have logged into one or more apps which are
+                associated with the same business as the app from which you're making the API call. Example: if a person
+                has logged into 3 of 5 apps associated with the same business, the API will return 3 objects.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="faq">FAQs</h2>
+              <h4>Do I need to use the Business Mapping API?</h4>
+              <p>No. The Business Mapping API is only useful for businesses who operate multiple Facebook Apps, and who
+                need to map the same user's ID between them. If you have one primary app you are unlikely to need to use
+                the Business Mapping API and thus do not need to set up a business or associate your apps with the
+                business.</p>
+              <h4>What is Business Manager?</h4>
+              <p>Business Manager is a way to help businesses and agencies manage their Facebook Pages, ad accounts,
+                apps and payment methods in one place. <a href="https://www.facebook.com/help/113163272211510/">Read
+                  more about Business Manager</a>.</p>
+              <h4>I don't think I need to use the Business Mapping API but should I associate my apps with a business
+                anyway?</h4>
+              <p>If you don't need to use the Business Mapping API, we do not recommend setting up a business at this
+                time. As a business needs to be linked with the primary Facebook Page for your business, the person who
+                is best-placed to set up the business on Facebook is the person who usually manages facebook ad accounts
+                and Page permissions for your company. If they have already setup your business within Business Manager,
+                you are free to associate apps with that business.</p>
+              <h4>Can I associate my app with multiple businesses?</h4>
+              <p>No. An app can only be associated with one business at a time.</p>
+              <h4>Can I transfer an app to another business?</h4>
+              <p>Yes. First, you must remove the app from the business it's currently associated with. You can do this
+                within Business Manager. Just go to the Applications tab within your business settings, select the app,
+                and click "Remove". You can then associate the app with a new business.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

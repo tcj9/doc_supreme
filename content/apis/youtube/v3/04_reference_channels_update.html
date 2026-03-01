@@ -1,0 +1,441 @@
+<article class="devsite-article">
+  <style>
+    .deprecated {
+      color: red
+    }
+  </style>
+  <h1 class="devsite-page-title" tabindex="-1">
+    Channels: update<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <div class="note">
+        The API now supports the ability to mark your <a href="/youtube/v3/docs/channels">channel</a> or
+        <a href="/youtube/v3/docs/videos">videos</a> as "made for kids." In addition, <code dir="ltr"
+          translate="no">channel</code>
+        and <code dir="ltr" translate="no">video</code> resources also now contain a property that identifies the "made
+        for kids"
+        status of that channel or video. The YouTube API Services Terms of Service and Developer Policies
+        were also updated on 10 January 2020. For more information, see the revision histories for
+        the <a href="/youtube/v3/revision_history">YouTube Data API Service</a> and the
+        <a href="/youtube/terms/revision-history">YouTube API Services Terms of Service</a>.
+      </div>
+      <section id="overview">
+        <p>Updates a channel's metadata. Note that this method only supports updates to the <code dir="ltr"
+            translate="no">channel</code> resource's <code dir="ltr" translate="no">brandingSettings</code>, <code
+            dir="ltr" translate="no">invideoPromotion</code>, and <code dir="ltr" translate="no">localizations</code>
+          objects and their child properties.</p>
+        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+            href="/youtube/v3/getting-started#quota">quota cost</a> of 50 units.</p>
+      </section>
+      <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common use cases
+      </h2>
+      <style>
+        iframe+section>h2 {
+          margin-top: 12px;
+        }
+      </style>
+      <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+          allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+          src="https://developers.google.com/frame/youtube/v3/docs/channels/update_9afcd5238ca1ee6fcc5f53b052b0ab72385e5b4f60501690907a7888a266db7e.frame"></iframe></devsite-iframe>
+      <section id="request">
+        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+        <section id="request_url">
+          <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+          <div></div><devsite-code>
+            <pre dir="ltr" is-upgraded="" translate="no">PUT https://www.googleapis.com/youtube/v3/channels</pre>
+          </devsite-code>
+        </section>
+        <section id="auth_required">
+          <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+          <p>This request requires authorization with at least one of the following scopes. To read more about
+            authentication and authorization, see <a href="/youtube/v3/guides/authentication">Implementing OAuth 2.0
+              authorization</a>.</p>
+          <table class="matchpre">
+            <thead>
+              <tr>
+                <th>Scope</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtubepartner</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="params">
+          <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+          <p>The following table lists the parameters that this query supports. All of the parameters listed are query
+            parameters.</p>
+          <table class="responsive details">
+            <thead>
+              <tr>
+                <th colspan="2">Parameters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="alt" id="required-parameters">
+                <td colspan="3"><b>Required parameters</b></td>
+              </tr>
+              <tr id="part">
+                <td><code dir="ltr" itemprop="property" translate="no">part</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  The <code dir="ltr" translate="no"><strong>part</strong></code> parameter serves two purposes in this
+                  operation. It identifies the properties that the write operation will set as well as the properties
+                  that the API response will include.<br><br />The API only allows the parameter value to be set to
+                  either <code dir="ltr" translate="no">brandingSettings</code>, <code dir="ltr"
+                    translate="no">invideoPromotion</code>, or <code dir="ltr" translate="no">localizations</code>. (You
+                  can only update any one of those parts with a single request.)<br /><br />Note that this method
+                  overrides the existing values for all of the mutable properties that are contained in the part that
+                  the parameter value specifies.</br></td>
+              </tr>
+              <tr class="alt" id="optional-parameters">
+                <td colspan="3"><b>Optional parameters</b></td>
+              </tr>
+              <tr id="onBehalfOfContentOwner">
+                <td><code dir="ltr" itemprop="property" translate="no">onBehalfOfContentOwner</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  This parameter can only be used in a properly <a href="/youtube/v3/guides/authentication">authorized
+                    request</a>.<br /><br />The <code dir="ltr"
+                    translate="no"><strong>onBehalfOfContentOwner</strong></code> parameter indicates that the
+                  authenticated user is acting on behalf of the content owner specified in the parameter value. This
+                  parameter is intended for YouTube content partners that own and manage many different YouTube
+                  channels. It allows content owners to authenticate once and get access to all their video and channel
+                  data, without having to provide authentication credentials for each individual channel. The actual CMS
+                  account that the user authenticates with needs to be linked to the specified YouTube content owner.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="request_body">
+          <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+          <p>Provide a <code dir="ltr" translate="no"><a href="/youtube/v3/docs/channels#resource">channel</a></code>
+            resource in the request body.
+            For that resource:</p>
+          <ul>
+            <li>
+              <p>You must specify a value for these properties:</p>
+              <ul>
+                <li><code dir="ltr" translate="no">id</code></li>
+              </ul>
+            </li>
+            <li>
+              <p>You can set values for these properties:</p>
+              <ul>
+                <li><code dir="ltr" translate="no">brandingSettings.channel.country</code></li>
+                <li><code dir="ltr" translate="no">brandingSettings.channel.description</code></li>
+                <li><code dir="ltr" translate="no">brandingSettings.channel.defaultLanguage</code></li>
+                <li><code dir="ltr" translate="no">brandingSettings.channel.keywords</code></li>
+                <li><code dir="ltr" translate="no">brandingSettings.channel.trackingAnalyticsAccountId</code></li>
+                <li><code dir="ltr" translate="no">brandingSettings.channel.unsubscribedTrailer</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key)</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key).title</code></li>
+                <li><code dir="ltr" translate="no">localizations.(key).description</code></li>
+                <li><code dir="ltr" translate="no">status.selfDeclaredMadeForKids</code></li>
+              </ul>
+              <p>If you are submitting an update request, and your request does not specify a value for a property that
+                already has a value, the property's existing value will be deleted.</p>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section id="response">
+        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+        <p>If successful, this method returns a <code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/channels#resource">channel</a></code> resource in the response
+          body.</p>
+      </section>
+      <section id="errors">
+        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+        <p>The following table identifies error messages that the API could return in response to a call to this method.
+          Fore more details, see <a href="/youtube/v3/docs/errors">YouTube Data API - Errors</a>.</p>
+        <table class="matchpre" id="property-table">
+          <thead>
+            <tr>
+              <th>Error type</th>
+              <th>Error detail</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="youtube.channels.update-badRequest-brandingValidationError">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">brandingValidationError</code>
+              </td>
+              <td class="error-cause">One of the values in the <code dir="ltr" translate="no">brandingSettings</code>
+                object failed validation. Use the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels/list">channels.list</a></code> method to retrieve
+                the existing settings for the channel, and update the property values following the guidelines in the
+                <code dir="ltr" translate="no"><a href="/youtube/v3/docs/channels#resource">channels</a></code> resource
+                documentation.</td>
+            </tr>
+            <tr id="youtube.channels.update-badRequest-channelTitleUpdateForbidden">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">channelTitleUpdateForbidden</code></td>
+              <td class="error-cause">When updating a channel's <code dir="ltr"
+                  translate="no">brandingSettings part</code>, you must set the <code dir="ltr"
+                  translate="no">brandingSettings.channel.title</code> property's value to the channel's current title
+                or omit the property. The API returns an error if you change the property's value.</td>
+            </tr>
+            <tr id="youtube.channels.update-badRequest-defaultLanguageNotSetError">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">defaultLanguageNotSetError</code></td>
+              <td class="error-cause">The <code dir="ltr" translate="no">defaultLanguage</code> must be set to update
+                <code dir="ltr" translate="no">localizations</code>.</td>
+            </tr>
+            <tr id="youtube.channels.update-badRequest-invalidBrandingOption">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidBrandingOption</code>
+              </td>
+              <td class="error-cause">One of the branding settings that you specified does not exist. Use the <code
+                  dir="ltr" translate="no"><a href="/youtube/v3/docs/channels/list">channels.list</a></code> method to
+                retrieve valid values and make sure to update them following the guidelines in the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#resource">channels</a></code> resource
+                documentation.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-badRequest-invalidCustomMessage-resource.invideo_promotion.item.custom_message">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidCustomMessage</code>
+              </td>
+              <td class="error-cause">The request metadata specifies an invalid custom message. Check the value of the
+                <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.items[].customMessage">invideoPromotion.items[].customMessage</a></code>
+                property in the resource that the request sent.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-badRequest-invalidDuration-resource.invideo_promotion.item.timing.duration_ms">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidDuration</code></td>
+              <td class="error-cause">The request metadata specifies an invalid duration in the invideoPromotion part.
+              </td>
+            </tr>
+            <tr
+              id="youtube.channels.update-badRequest-invalidDuration-resource.invideo_promotion.item.timing.duration_ms">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidDuration</code></td>
+              <td class="error-cause">The request metadata specifies an invalid position type for determining how the
+                promoted item is positioned in the video player. Check the value of the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.position.type">invideoPromotion.position.type</a></code>
+                property in the resource that the request sent.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-badRequest-invalidRecentlyUploadedBy-resource.invideo_promotion.item.recently_uploaded_by.value">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">invalidRecentlyUploadedBy</code></td>
+              <td class="error-cause">The request metadata specifies an invalid channel ID. Check the value of the <code
+                  dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.items[].id.recentlyUploadedBy">invideoPromotion.items[].id.recentlyUploadedBy</a></code>
+                property in the resource that the request sent.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-badRequest-invalidTimingOffset-resource.invideo_promotion.item.timing.offset_ms">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidTimingOffset</code>
+              </td>
+              <td class="error-cause">The request metadata specifies an invalid timing offset in the invideoPromotion
+                part.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-badRequest-invalidTimingOffset-resource.invideo_promotion.item.timing.offset_ms">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidTimingOffset</code>
+              </td>
+              <td class="error-cause">The request metadata specifies an invalid timing offset for determining when the
+                promoted item should be displayed in the video player. Check the value of the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.timing.offsetMs">invideoPromotion.timing.offsetMs</a></code>
+                property in the resource that the request sent.</td>
+            </tr>
+            <tr id="youtube.channels.update-badRequest-invalidTimingType-resource.invideo_promotion.item.timing.type">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">invalidTimingType</code></td>
+              <td class="error-cause">The request metadata specifies an invalid timing method for determining when the
+                promoted item should be displayed in the video player. Check the value of the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.timing.type">invideoPromotion.timing.type</a></code>
+                property in the resource that the request sent.</td>
+            </tr>
+            <tr id="youtube.channels.update-badRequest-localizationValidationError">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">localizationValidationError</code></td>
+              <td class="error-cause">One of the values in the localizations object failed validation. Use the <code
+                  dir="ltr" translate="no"><a href="/youtube/v3/docs/channels/list">channels.list</a></code> method to
+                retrieve valid values and make sure to update them following the guidelines in <a
+                  href="/youtube/v3/docs/channels#resource">the channels resource documentation.</a></td>
+            </tr>
+            <tr id="youtube.channels.update-badRequest-tooManyPromotedItems-resource.invideo_promotion.item">
+              <td class="error-name"><code dir="ltr" translate="no">badRequest (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">tooManyPromotedItems</code>
+              </td>
+              <td class="error-cause">Number of allowed promoted items exceeded in the invideoPromotion part.</td>
+            </tr>
+            <tr id="youtube.channels.update-forbidden-channelForbidden">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">channelForbidden</code></td>
+              <td class="error-cause">The channel specified in the <code dir="ltr" translate="no">id</code> parameter
+                does not support the request or the request is not properly authorized.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-forbidden-promotedVideoNotAllowed-resource.invideo_promotion.item_id.video_id">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">promotedVideoNotAllowed</code>
+              </td>
+              <td class="error-cause">The channel that the API request is attempting to update cannot be found. Check
+                the value of the <code dir="ltr" translate="no">id</code> property in the <code dir="ltr"
+                  translate="no">channel</code> resource that the request sent to ensure that the channel ID is correct.
+              </td>
+            </tr>
+            <tr
+              id="youtube.channels.update-forbidden-websiteLinkNotAllowed-resource.invideo_promotion.item.id.website_url">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">websiteLinkNotAllowed</code>
+              </td>
+              <td class="error-cause">The specified website URL is not allowed.</td>
+            </tr>
+            <tr id="youtube.channels.update-notFound-channelNotFound">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">channelNotFound</code></td>
+              <td class="error-cause">The channel specified in the <code dir="ltr" translate="no">id</code> parameter
+                cannot be found.</td>
+            </tr>
+            <tr id="youtube.channels.update-notFound-channelNotFound">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">channelNotFound</code></td>
+              <td class="error-cause">The channel specified by the <code dir="ltr" translate="no">id</code> parameter
+                cannot be found or does not have branding options.</td>
+            </tr>
+            <tr id="youtube.channels.update-notFound-unknownChannelId-resource.invideo_promotion.channel_id.value">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">unknownChannelId</code></td>
+              <td class="error-cause">The specified channel ID was not found.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-notFound-unknownChannelId-resource.invideo_promotion.item.recently_uploaded_by.value">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">unknownChannelId</code></td>
+              <td class="error-cause">The specified recentlyUploadedBy channel ID was not found.</td>
+            </tr>
+            <tr id="youtube.channels.update-notFound-unknownVideoId-resource.invideo_promotion.item.id.video_id.value">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">unknownVideoId</code></td>
+              <td class="error-cause">The <a href="/youtube/v3/docs/channels#invideoPromotion.items[].videoId">video
+                  ID</a> specified as a promoted item cannot be found.</td>
+            </tr>
+            <tr id="youtube.channels.update-required-requiredItemIdType-resource.invideo_promotion.item.id.type">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredItemIdType</code></td>
+              <td class="error-cause">The request metadata must specify an item type in the invideoPromotion part.</td>
+            </tr>
+            <tr id="youtube.channels.update-required-requiredItemId-resource.invideo_promotion.item.id">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredItemId</code></td>
+              <td class="error-cause">The request metadata must specify an item id the invideoPromotion part.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-required-requiredTimingOffset-resource.invideo_promotion.defaultTiming.offset_ms">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredTimingOffset</code>
+              </td>
+              <td class="error-cause">The request metadata must specify a default timing offset so that YouTube can
+                determine when to display the promoted item. Set the value of the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.defaultTiming.offsetMs">invideoPromotion.defaultTiming.offsetMs</a></code>
+                property in the resource that the request sends.</td>
+            </tr>
+            <tr
+              id="youtube.channels.update-required-requiredTimingOffset-resource.invideo_promotion.item.timing.offset_ms">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredTimingOffset</code>
+              </td>
+              <td class="error-cause">The request metadata must specify a timing offset so that YouTube can determine
+                when to display the promoted item. Set the value of the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.timing.offsetMs">invideoPromotion.timing.offsetMs</a></code>
+                property in the resource that the request sends.</td>
+            </tr>
+            <tr id="youtube.channels.update-required-requiredTimingType-resource.invideo_promotion.default_timing.type">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredTimingType</code></td>
+              <td class="error-cause">The request metadata must specify a timing method so that YouTube can determine
+                when to display the promoted item. Set the value of the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.defaultTiming.type">invideoPromotion.defaultTiming.type</a></code>
+                property in the resource that the request sends.</td>
+            </tr>
+            <tr id="youtube.channels.update-required-requiredTimingType-resource.invideo_promotion.item.timing.type">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredTimingType</code></td>
+              <td class="error-cause">The request metadata must specify a timing method so that YouTube can determine
+                when to display the promoted item. Set the value of the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.timing.type">invideoPromotion.timing.type</a></code>
+                property in the resource that the request sends.</td>
+            </tr>
+            <tr id="youtube.channels.update-required-requiredTiming-resource.invideo_promotion.item.timing">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredTiming</code></td>
+              <td class="error-cause">The request metadata must specify a timing for each item in the <code dir="ltr"
+                  translate="no">invideoPromotion</code> part.</td>
+            </tr>
+            <tr id="youtube.channels.update-required-requiredVideoId-resource.invideo_promotion.item.id.video_id.value">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredVideoId</code></td>
+              <td class="error-cause">The request metadata must specify a <a
+                  href="/youtube/v3/docs/channels#invideoPromotion.items[].videoId">video ID</a> to identify the
+                promoted item.</td>
+            </tr>
+            <tr id="youtube.channels.update-required-requiredWebsiteUrl-resource.invideo_promotion.item.id.website_url">
+              <td class="error-name"><code dir="ltr" translate="no">required (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">requiredWebsiteUrl</code></td>
+              <td class="error-cause">The request metadata must specify a website URL in the invideoPromotion part. Set
+                the value of the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels#invideoPromotion.items[].id.websiteUrl">invideoPromotion.items[].id.websiteUrl</a></code>
+                property in the resource that the request sends.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="try-it">
+        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API request and response.
+        </p>
+        <div class="devsite-apix">
+          <div class="apis-explorer" data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+            data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+            data-method-id="youtube.channels.update" data-show-code-button="true"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

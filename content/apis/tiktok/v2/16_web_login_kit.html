@@ -1,0 +1,367 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="login_kit_for_web">Login Kit for Web</h1>
+        <p style="text-align:left">This guide details how to enable authentication from your web app to TikTok. After
+            successfully completing authentication with TikTok, developers can obtain an <code>access_token</code> for
+            the TikTok user.</p>
+        <h2 id="prerequisites">Prerequisites</h2>
+        <h3 id="register_your_app">Register your app</h3>
+        <p style="text-align:left">Register your app following <a href="/doc/getting-started-create-an-app">these
+                steps</a>. Then obtain a client key and secret from the developer portal on <style
+                data-emotion="css ap4ivw">
+                .css-ap4ivw {
+                    font-size: inherit;
+                    color: var(--ui-text-primary-display);
+                }
+
+                .css-ap4ivw *:hover {
+                    -webkit-text-decoration: none !important;
+                    text-decoration: none !important;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+            </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/"><span class="TUXText TUXText--tiktok-sans TUXText--weight-normal"
+                    data-e2e="TUXText" style="color:inherit;font-size:inherit">https://developers.tiktok.com</span></a>
+            under <b>Manage apps</b>.</p>
+        <h3 id="configure_redirect_uri">Configure redirect URI</h3>
+        <p style="text-align:left">Redirect URI is required for web apps. After the user completes authorization with
+            Login Kit on the web, they will be redirected to a URI provided by you. This redirect URI must be registered
+            in the Login Kit product configuration for your app.</p>
+        <p style="text-align:left">The following are restrictions for registering redirect URIs.</p>
+        <ul class="list-1" type="disc">
+            <li>A maximum of 10 URIs is supported.</li>
+            <li>The length of each URI must be less than 512 characters.</li>
+            <li>URIs must be absolute and begin with <code>https</code>. For example:</li>
+            <ul class="list-2" type="circle">
+                <li>Correct: <code>https://dev.example.com/auth/callback/</code></li>
+                <li>Incorrect: <code>dev.example.com/auth/callback/</code></li>
+            </ul>
+            <li>URIs must be static. Parameters will be denied. For example:</li>
+            <ul class="list-2" type="circle">
+                <li>Correct: <code>https://dev.example.com/auth/callback/</code></li>
+                <li>Incorrect: <code>https://dev.example.com/auth/callback/?id=1</code></li>
+            </ul>
+            <li>URIs cannot include a fragment, or hash character (#):</li>
+            <ul class="list-2" type="circle">
+                <li>Correct: <code>https://dev.example.com/auth/callback/</code></li>
+                <li>Incorrect: <code>https://dev.example.com/auth/callback/#100</code></li>
+            </ul>
+        </ul>
+        <h2 id="integration_guide">Integration Guide</h2>
+        <h3 id="implement_the_front-end_code">Implement the front-end code</h3>
+        <p style="text-align:left">Get started by connecting your front-end login button to the server endpoint. The
+            following is an example in HTML:</p>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-html css-63unw6" style="white-space:pre-wrap"><span><span class="xml" style="color:#000080;font-weight:normal">&lt;</span><span class="xml" style="color:#000080;font-weight:normal">a</span><span class="xml" style="color:#000080;font-weight:normal"> </span><span class="xml" style="color:#000080;font-weight:normal">href</span><span class="xml" style="color:#000080;font-weight:normal">=</span><span class="xml" style="color:#d14;font-weight:normal">'{SERVER_ENDPOINT_OAUTH}'</span><span class="xml" style="color:#000080;font-weight:normal">&gt;</span><span class="xml">Continue with TikTok</span><span class="xml" style="color:#000080;font-weight:normal">&lt;/</span><span class="xml" style="color:#000080;font-weight:normal">a</span><span class="xml" style="color:#000080;font-weight:normal">&gt;</span></span></code></pre>
+        <h3 id="implement_the_server_code_to_handle_authorization_grant_flow">Implement the server code to handle
+            authorization grant flow</h3>
+        <p style="text-align:left">The server code must be responsible for the following:</p>
+        <ul class="list-1" type="disc">
+            <li>Ensuring that the client secret and refresh token are stored securely.</li>
+            <li>Ensuring that the security for each user is protected by preventing request forgery attacks.</li>
+            <li>Handling the refresh flow before access token expiry.</li>
+            <li>Managing the access token request flow for each user.</li>
+        </ul>
+        <h4 id="redirect_request_to_tiktok's_authorization_server">Redirect request to TikTok's authorization server
+        </h4>
+        <h5 id="create_an_anti-forgery_state_token">Create an anti-forgery state token</h5>
+        <p style="text-align:left">You must prevent request forgery attacks to protect the security of your users. The
+            first step before making the redirect request to TikTok's authorization server is to create a unique session
+            token to maintain the state between the request and callback.</p>
+        <p style="text-align:left">You will later match this unique session token with the authentication response to
+            verify that the user is making the request and not a malicious attacker.</p>
+        <p style="text-align:left">One of the simple approaches to a state token is a randomly generated alphanumeric
+            string constructed using a random-number generator. For example:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-javascript css-63unw6" style="white-space:pre-wrap"><span><span style="color:#333;font-weight:bold">let</span><span> array = </span><span style="color:#333;font-weight:bold">new</span><span> </span><span style="color:#0086b3">Uint8Array</span><span>(</span><span style="color:#008080">30</span><span>); 
+</span></span><span><span></span><span style="color:#333;font-weight:bold">const</span><span> csrfState = </span><span style="color:#0086b3">window</span><span>.crypto.getRandomValues(array);</span></span></code></pre>
+        <h5 id="initial_redirect_to_tiktok's_authorization_page">Initial redirect to TikTok's authorization page</h5>
+        <p style="text-align:left">To make the initial redirect request to TikTok's authorization server, the following
+            query parameters below must be added to the Authorization Page URL using the
+            <code>application/x-www-form-urlencoded</code> format.
+        </p>
+        <p style="text-align:left">For example, you can use an <a class="css-ap4ivw"
+                color="var(--ui-text-primary-display)" data-e2e="StyledLink" href="https://www.urlencoder.org/"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">online URL encoder</span></a> to encode parameters. Select
+            <b>UTF-8</b> as the destination character set.
+        </p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Parameter</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>client_key</code></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The unique identification key provisioned to the partner.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>scope</code></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">A comma (,) separated string of authorization scope(s). These scope(s)
+                        are assigned to your application on the TikTok for Developers website. They handle what content
+                        your application can and cannot access. If a scope is toggleable, the user can deny access to
+                        one scope while granting access to others.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>redirect_uri</code></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The redirect URI that you requested for your application. It must match
+                        one of the redirect URIs you registered for the app.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>state</code></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The state is used to maintain the state of your request and callback.
+                        This value will be included when redirecting the user back to the client. Check if the state
+                        returned in the callback matches what you sent earlier to prevent cross-site request forgery.
+                    </p>
+                    <p style="text-align:left">The state can also include customized parameters that you want TikTok
+                        service to return.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>response_type</code></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">This value should always be set to <code>code</code>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left"><code>disable_auto_auth</code></p>
+                </td>
+                <td>
+                    <p style="text-align:left">int</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Controls whether the authorization page is automatically presented to
+                        users. When set to 0, skips the authorization page for valid sessions. When set to 1, always
+                        displays the authorization page.</p>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:left">Redirect your users to the authorization page URL and supply the necessary query
+            parameters. Note that the page can only be accessed through HTTPS.</p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">URL</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>https://www.tiktok.com/v2/auth/authorize/</code></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Query parameters</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">
+                        <code>client_key=&lt;client_key&gt;&amp;response_type=code&amp;scope=&lt;scope&gt;&amp;redirect_uri=&lt;redirect_uri&gt;&amp;state=&lt;state&gt;</code>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:left">Note: If you are an existing client and use
+            <code>https://www.tiktok.com/auth/authorize/</code> as the authorization page URL, please <a
+                class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/apps/"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">register a redirect URI</span></a> for your app and migrate
+            to the new URL mentioned above.
+        </p>
+        <p style="text-align:left">The following is an example using Node, Express, and JavaScript:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-javascript css-63unw6" style="white-space:pre-wrap"><span><span style="color:#333;font-weight:bold">const</span><span> express = </span><span style="color:#0086b3">require</span><span>(</span><span style="color:#d14">'express'</span><span>);
+</span></span><span><span></span><span style="color:#333;font-weight:bold">const</span><span> app = express();
+</span></span><span><span></span><span style="color:#333;font-weight:bold">const</span><span> fetch = </span><span style="color:#0086b3">require</span><span>(</span><span style="color:#d14">'node-fetch'</span><span>);
+</span></span><span><span></span><span style="color:#333;font-weight:bold">const</span><span> cookieParser = </span><span style="color:#0086b3">require</span><span>(</span><span style="color:#d14">'cookie-parser'</span><span>);
+</span></span><span><span></span><span style="color:#333;font-weight:bold">const</span><span> cors = </span><span style="color:#0086b3">require</span><span>(</span><span style="color:#d14">'cors'</span><span>);
+</span></span><span>
+</span><span>app.use(cookieParser());
+</span><span>app.use(cors());
+</span><span><span>app.listen(process.env.PORT || </span><span style="color:#008080">5000</span><span>).
+</span></span><span>
+</span><span><span></span><span style="color:#333;font-weight:bold">const</span><span> CLIENT_KEY = </span><span style="color:#d14">'your_client_key'</span><span> </span><span style="color:#998;font-style:italic">// this value can be found in app's developer portal</span><span>
+</span></span><span>
+</span><span><span>app.get(</span><span style="color:#d14">'/oauth'</span><span>, </span><span class="hljs-function">(</span><span class="hljs-function hljs-params">req, res</span><span class="hljs-function">) =&gt;</span><span> {
+</span></span><span><span>    </span><span style="color:#333;font-weight:bold">const</span><span> csrfState = </span><span style="color:#0086b3">Math</span><span>.random().toString(</span><span style="color:#008080">36</span><span>).substring(</span><span style="color:#008080">2</span><span>);
+</span></span><span><span>    res.cookie(</span><span style="color:#d14">'csrfState'</span><span>, csrfState, { </span><span>maxAge</span><span>: </span><span style="color:#008080">60000</span><span> });
+</span></span><span>
+</span><span><span>    </span><span style="color:#333;font-weight:bold">let</span><span> url = </span><span style="color:#d14">'https://www.tiktok.com/v2/auth/authorize/'</span><span>;
+</span></span><span>
+</span><span><span>    </span><span style="color:#998;font-style:italic">// the following params need to be in `application/x-www-form-urlencoded` format.</span><span>
+</span></span><span><span>    url += </span><span style="color:#d14">'?client_key={CLIENT_KEY}'</span><span>;
+</span></span><span><span>    url += </span><span style="color:#d14">'&amp;scope=user.info.basic'</span><span>;
+</span></span><span><span>    url += </span><span style="color:#d14">'&amp;response_type=code'</span><span>;
+</span></span><span><span>    url += </span><span style="color:#d14">'&amp;redirect_uri={SERVER_ENDPOINT_REDIRECT}'</span><span>;
+</span></span><span><span>    url += </span><span style="color:#d14">'&amp;state='</span><span> + csrfState;
+</span></span><span>
+</span><span>    res.redirect(url);
+</span><span>})</span></code></pre>
+        <h4 id="tiktok_prompts_a_users_to_log_in_or_sign_up">TikTok prompts a users to log in or sign up</h4>
+        <p style="text-align:left">The authorization page takes the user to the TikTok website if the user is not logged
+            in. They are then prompted to log in or sign up for TikTok.</p>
+        <h4 id="tiktok_prompts_a_user_for_consent">TikTok prompts a user for consent</h4>
+        <p style="text-align:left">After logging in or signing up, an authorization page asks the user for consent to
+            allow your application to access your requested permissions.</p>
+        <h4 id="manage_authorization_response">Manage authorization response</h4>
+        <p style="text-align:left">If the user authorizes access, they will be redirected to <code>redirect_uri</code>
+            with the following query parameters appended using <code>application/x-www-form-urlencoded</code> format:
+        </p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Parameter</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>code</code></p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Authorization code that is used in getting an access token.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>scopes</code></p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">A comma-separated (,) string of authorization scope(s), which the user
+                        has granted.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>state</code></p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">A unique, non-guessable string when making the initial authorization
+                        request. This value allows you to prevent CSRF attacks by confirming that the value coming from
+                        the response matches the one you sent.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>error</code></p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">If this field is set, it means that the current user is not eligible for
+                        using third-party login or authorization. The partner is responsible for handling the error
+                        gracefully.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><code>error_description</code></p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">If this field is set, it will be a human-readable description about the
+                        error.</p>
+                </td>
+            </tr>
+        </table>
+        <h4 id="manage_access_token">Manage access token</h4>
+        <p style="text-align:left">Using the <code>code</code> appended to your <code>redirect_uri</code>, you can
+            obtain <code>access_token</code> for the user, which completes the flow for logging in with TikTok.</p>
+        <p style="text-align:left">See <a href="/doc/login-kit-manage-user-access-tokens">Manage User Access Tokens</a>
+            for related endpoints.</p><br />
+    </div>
+</div>

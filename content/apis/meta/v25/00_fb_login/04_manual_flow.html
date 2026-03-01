@@ -1,0 +1,397 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_es">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Manually Build a Login Flow</h1>
+              <p>For browser-based login for a web or desktop app without using our SDKs, such as in a webview for a
+                native desktop app (for example Windows 8), or a login flow using entirely server-side code, you can
+                build a Login flow for yourself by using browser redirects. This guide will take you through each step
+                of the login flow and show you how to implement each one without using our SDKs:</p>
+              <ul>
+                <li><a href="#checklogin">Checking login status</a></li>
+                <li><a href="#login">Logging people in</a></li>
+                <li><a href="#confirm">Confirming identity</a></li>
+                <li><a href="#token">Storing access tokens and login status</a></li>
+                <li><a href="#logout">Logging people out</a></li>
+                <li><a href="#deauth-callback">Detecting When People Uninstall Apps</a></li>
+                <li><a href="#data-deletion">Responding to Requests to Delete User Data</a></li>
+              </ul>
+              <div class="_57yz _57z1 _3-8p">
+                <div class="_57y-">
+                  <p>To use Facebook Login in a desktop app, you'll need to be able to embed a web browser (sometimes
+                    called a webview) within the app to perform the login process.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="checklogin">Checking Login Status</h2>
+              <p>Apps using our SDKs can check whether someone has already logged in using built-in functions. All other
+                apps must <a href="#token">create their own way of storing when a person has logged in</a>, and when
+                that indicator is not there, proceed on the assumption that they are logged out. If someone is logged
+                out, then your app should redirect them to the Login dialog at an appropriate time — for example if they
+                click a login button.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="login">Logging People In</h2>
+              <p>Whether someone is not logged into your app or not logged into Facebook, you can use <a
+                  href="/docs/facebook-login/overview/#logindialog">the Login dialog</a> to prompt them to do both. If
+                they aren't logged into Facebook, they'll be prompted to login and then move onto logging into your app.
+                This is automatically detected, so you don't need to do anything extra to enable this behavior.</p>
+              <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1 _5f0n">
+                <tbody>
+                  <tr class="_51mx">
+                    <td class="_51m- vTop hLeft _57v2 _2cs2"><img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/16327997_444594122597117_4349793051749646336_n.png?_nc_cat=100&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=Ii1mSOblJuUQ7kNvwH8NsMN&amp;_nc_oc=AdnNr1rGIpyqcshe1n1ngRe1e1YPcR4_IicFaRuNMytBpTaM4tNm55XjvHTuuXjRAMI&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=m1vsvWECQ8wRUaoDnYtXOg&amp;oh=00_AftYrJAlK5GdFDaoy9aRnVEYdM0imuyD3lHWKnwaZ1MfGw&amp;oe=69A0F095"
+                        width="325" /></td>
+                    <td class="_51m- vTop hLeft _57v2 _2cs2 _51mw"><img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/16327433_1870075749894022_1432932236771983360_n.png?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=qacBYZ9MMxMQ7kNvwGIiSmD&amp;_nc_oc=AdkcrMx2_xRLaL5rYBQ293riszlHeSpWLmkuHloZjIojqWKu4IWoWi-BsnyHroIYyBo&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=m1vsvWECQ8wRUaoDnYtXOg&amp;oh=00_AfsHqEtYu_LW1lBxCH8j053xddHL_wVnqFV0qDn0BLXjAw&amp;oe=69A10497"
+                        width="325" /></td>
+                  </tr>
+                </tbody>
+              </table><br />
+              <h4 id="logindialog">Invoking the Login Dialog and Setting the Redirect URL</h4>
+              <p>Your app must initiate a redirect to an endpoint which will display the login dialog:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+https://www.facebook.com/<code>v24.0</code>/dialog/oauth?
+  client_id={app-id}
+  &amp;redirect_uri={redirect-uri}
+  &amp;state={state-param}
+</pre>
+              <p>This endpoint has the following required parameters:</p>
+              <ul>
+                <li><code>client_id</code>. The ID of your app, found in your app's dashboard.</li>
+                <li><code>redirect_uri</code>. The URL that you want to redirect the person logging in back to. This URL
+                  will capture the response from the Login Dialog. If you are using this in a webview within a desktop
+                  app, this must be set to <code>https://www.facebook.com/connect/login_success.html</code>.
+                  You can confirm that this URL is set for your app in the App Dashboard. Under
+                  <strong>Products</strong> in the App Dashboard's left side navigation menu, click <strong>Facebook
+                    Login</strong>, then click <strong>Settings</strong>. Verify the <strong>Valid OAuth redirect
+                    URIs</strong> in the <strong>Client OAuth Settings</strong> section.
+                </li>
+                <li><code>state</code>. A string value created by your app to maintain
+                  state between the request and callback. This parameter should be used for preventing <a
+                    data-lynx-mode="hover"
+                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCross-site_request_forgery&amp;h=AT0-lviC8Z3i50fYEL2pT8D_GxqN7qo6MBFuw2y516xqzjwmrTi1GVOgivpKf_iLezbroF6krISTX6B7AYWV2GIjXNiuzRSRb7L8Se45zuWmkzHdjv3GiNiqZmfg0RHouYrWJ3jFE93iGSOr7aQ_9g"
+                    rel="nofollow" target="_blank">Cross-site Request Forgery</a> and will be passed back to you,
+                  unchanged, in your redirect URI.</li>
+              </ul>
+              <p>For example, if your login request looks like:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+https://www.facebook.com/<code>v24.0</code>/dialog/oauth?
+  client_id={app-id}
+  &amp;redirect_uri={"https://www.domain.com/login"}
+  &amp;state={"{st=state123abc,ds=123456789}"}
+</pre>
+              <p>then your redirect URI would be called with this:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">https://www.domain.com/login?state="{st=state123abc,ds=123456789}"
+    </pre>
+              <p>It also has the following optional parameters:</p>
+              <ul>
+                <li><code>response_type</code>. Determines whether the response data included when the redirect back to
+                  the app occurs is in URL parameters or fragments. See the <a href="#confirm">Confirming Identity</a>
+                  section to choose which type your app should use. This can be one of:
+
+                  <ul>
+                    <li><code>code</code>. Response data is included as URL parameters and contains <code>code</code>
+                      parameter (an encrypted string unique to each login request). This is the default behavior if this
+                      parameter is not specified. It's most useful when your server will be handling the token.</li>
+                    <li><code>token</code>. Response data is included as a URL fragment and contains an access token.
+                      Desktop apps must use this setting for <code>response_type</code>. This is most useful when the
+                      client will be handling the token.</li>
+                    <li><code>code%20token</code>. Response data is included as a URL fragment and contains both an
+                      access token and the <code>code</code> parameter.</li>
+                    <li><code>granted_scopes</code>. Returns a comma-separated list of all <a
+                        href="/docs/facebook-login/permissions/">Permissions</a> granted to the app by the user at the
+                      time of login. Can be combined with other <code>response_type</code> values. When combined with
+                      <code>token</code>, response data is included as a URL fragment, otherwise included as a URL
+                      parameter.
+                    </li>
+                  </ul>
+                </li>
+                <li><code>scope</code>. A comma or space separated list of <a
+                    href="/docs/facebook-login/permissions/">Permissions</a> to request from the person using your app.
+                </li>
+              </ul>
+              <h5 id="windows8">For Windows 8 Apps</h5>
+              <p>If you are building Login for a Windows app you can use the <a data-lynx-mode="hover"
+                  href="http://l.facebook.com/l.php?u=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Flibrary%2Fwindows%2Fapps%2Fhh465407.aspx&amp;h=AT1RkZW4f0tALnqfs-VccXNmUJEmvHHn_EXfr0jqP25X-Mlb07SMbeehEPN3LpbgR8fAssWHq7r-qxy5CvVbc2dUI8xarNkaGl7PLwkduU_a-I6X5o3GBwsjAW_jJl37kC7MIDUKGiy9aRbghOWcVDAIoc3uMiFMTKs"
+                  rel="nofollow" target="_blank">Package Security Identifier</a> as your <code>redirect_uri</code>.
+                Trigger the Login Dialog by calling <a data-lynx-mode="hover"
+                  href="http://l.facebook.com/l.php?u=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Flibrary%2Fwindows%2Fapps%2Fbr212068.aspx&amp;h=AT2dot1QJC9Hu6W2vbopW8aTz7Ae8rxF5BPNCX8vVVMxJyPzoqS1EIIu2_V6-JExW-JSLIEUJ5ZXz9S3Y_rUvzzlKXbOBLrvgvYrPRt5njCmOqZNOBk3ZxSKyqTONjlvKzOOwip8momSHaYeSp3TZQ"
+                  rel="nofollow" target="_blank"><code>WebAuthenticationBroker.AuthenticateAsync</code></a> and use the
+                Login Dialog endpoint as the requestUri. Here is an example in JavaScript:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+var requestUri = new Windows.Foundation.Uri(
+  "https://www.facebook.com/<code>v24.0</code>/dialog/oauth?
+    client_id={app-id}
+    &amp;display=popup
+    &amp;response_type=token
+    &amp;redirect_uri=ms-app://{package-security-identifier}");
+
+Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAsync(
+  options,
+  requestUri)
+  .done(function (result) {
+    // Handle the response from the Login Dialog
+  }
+);</pre>
+              <p>This will return control flow back to your app with an access token on success, or error on failure.
+              </p>
+              <h4 id="dialogresponse">Handling Login Dialog Response</h4>
+              <p>At this point in the login flow, the person will see the Login dialog and will have a choice of whether
+                to cancel or to let the app access their data.</p>
+              <p>If the person using the app chooses OK on the Login dialog, they grant access to their public profile,
+                friend list and any additional <a href="/docs/facebook-login/permissions/">Permissions</a> your app
+                requested.</p>
+              <p>In all cases, the browser returns to the app, and response data indicating whether someone connected or
+                cancelled is included. When your app uses the redirect method as above, the <code>redirect_uri</code>
+                your app returns to will be appended with URL parameters or fragments (as per the chosen
+                <code>response_type</code>), which must be captured.
+              </p>
+              <p>Because of the various combinations of code languages that could be used in web apps, our guide doesn't
+                show specific examples. However most modern languages will be capable of URL parsing, as follows:</p>
+              <p>Client-side JavaScript can capture URL fragments (for example <a data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Fcowboy%2Fjquery-bbq%2F&amp;h=AT0qb44ByhQtiAmS4-WTz1VqECpWiUAhIbzZiQ1VRvktNBel5sXoC0xE5Ol34is7r9pRs0x633f6lgSK3Or7zvBLT-br4wS-8FD3vWk5-S2PaCpYqye0KGolt6rA2FuTP-bD84E2QZYbZl6HZz41Yw"
+                  rel="nofollow" target="_blank">jQuery BBQ</a>), whereas URL parameters can be captured by both
+                client-side and server-side code (for example <a data-lynx-mode="hover"
+                  href="http://l.facebook.com/l.php?u=http%3A%2F%2Fphp.net%2Fmanual%2Fen%2Freserved.variables.get.php&amp;h=AT3UI83tLxcTHfxq9OvZcnF7Qk8pXiAp7NrlTLqlzErZcI8LOp_ixYjcOsux-6dPwLom-ZdHHY1zAFRkaaXHO7sptx-w9vYHhKLSm3_JmZsReYA3l0dzS_shdjl99yEJdBJLlPTddoaF3xt7GRuw4Q"
+                  rel="nofollow" target="_blank"><code>$_GET</code> in PHP</a>, <a data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Fcowboy%2Fjquery-bbq%2F&amp;h=AT3xBtdofWzCFEd8h1sJbeQVGDANMqADytF00Fw34_vfx2HnW9x2i-B8McEIJ0OdkblMNHqDQkDzZCyJdvpoHwx8XEV9oLXjqeXWRtrMDVIFYdwrJ3eSEFXebxTKPbOQbrioJp_F2lxnNpN0KX0tYA"
+                  rel="nofollow" target="_blank"><code>jQuery.deparam</code> in jQuery BBQ</a>, <a
+                  data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fnodejs.org%2Fapi%2Fquerystring.html&amp;h=AT3yx1GUqTGT9Ids2aFYBMSPrJVyyGsZOKM8E7_EnlWsWoW34D8hXMgXUfdPByyN6VUikTTmlievjlsbUkoPmEShRDnDWeUEOBdosuWIkURz4WTcMBGe89Sj_BOUasPnCaxdmZ5Qbu1A-bM2m03o1w"
+                  rel="nofollow" target="_blank"><code>querystring.parse</code> in Node.js</a> or <a
+                  data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.python.org%2F2%2Flibrary%2Furlparse.html&amp;h=AT1R1-VvRUwG1DUiMkztZH0DU0egG2GAVuBfSuD4px1kdRWnzWYjjGF_Vr4G1SC0cfXexoJs_mceHayUf1QQwKphZs-g3AXEQZPFV3-6RSppkONtmqm080xM_BosgfLidHjfxEatZie4nC0aZnswcw"
+                  rel="nofollow" target="_blank"><code>urlparse</code> in Python</a>). Microsoft provides <a
+                  data-lynx-mode="hover"
+                  href="http://l.facebook.com/l.php?u=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Flibrary%2Fwindows%2Fapps%2Fjj856915.aspx&amp;h=AT2_DsQgbNeu2iyElJR6mxvEhx30fKUvwjiqY0-nTudntEWz-0Y16haJ1MRl-JLijMHXBxTt-UxhEA7FYes4J6uzi8knbk4EKIlIqZCmRddCazxdz4aL7mfzv7kkNPEGVm9CyRFhm_cJ158CHB1ytA"
+                  rel="nofollow" target="_blank">a guide and sample code for Windows 8 apps</a> connecting to an "online
+                provider" - in this case, Facebook.</p>
+              <div class="_57yz _57z1 _3-8p">
+                <div class="_57y-">
+                  <p>When using a desktop app and logging in, Facebook redirects people to the <code>redirect_uri</code>
+                    mentioned above and places an access token along with some other metadata (such as token expiry
+                    time) in the URI fragment:</p>
+                  <pre class="_5s-8 prettyprint lang-code" style="">https://www.facebook.com/connect/login_success.html#
+    access_token=ACCESS_TOKEN...</pre>
+                  <p>Your app needs to detect this redirect and then read the access token out of the URI using the
+                    mechanisms provided by the OS and development framework you are using. You can then skip straight to
+                    the <a href="#checktoken">Inspecting access tokens</a> step.</p>
+                </div>
+              </div><br />
+              <h4 id="nonjscancel">Canceled Login</h4>
+              <p>If people using your app don't accept the Login dialog and clicks Cancel, they'll be redirected to the
+                following:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">YOUR_REDIRECT_URI?
+ error_reason=user_denied
+ &amp;error=access_denied
+ &amp;error_description=Permissions+error.</pre>
+              <p>See <a href="/docs/facebook-login/permissions/#missingperms">Handling Missing Permissions</a> for more
+                about what apps should do when people refuse to login.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="confirm">Confirming Identity</h2>
+              <p>Because this redirect flow involves browsers being redirected to URLs in your app from the Login
+                dialog, traffic could directly access this URL with made-up fragments or parameters. If your app assumed
+                these were valid parameters, the made-up data would be used by your app for potentially malicious
+                purposes. As a result, your app should confirm that the person using the app is the same person that you
+                have response data for before generating an access token for them. Confirming identity is accomplished
+                in different ways depending on the <code>response_type</code> received above:</p>
+              <ul>
+                <li>When <code>code</code> is received, it has to be <a href="#exchangecode">exchanged for an access
+                    token using an endpoint</a>. The call will need to be server-to-server, since it involves your app
+                  secret. (Your app secret should never end up in client code.)</li>
+                <li>When <code>token</code> is received, it needs to be verified. You should <a href="#checktoken">make
+                    an API call to an inspection endpoint</a> that will indicate who the token was generated for and by
+                  which app. As this API call requires using an app access token, never make this call from a client.
+                  Instead make this call from a server where you can securely store your app secret.</li>
+                <li>When <code>code</code> and <code>token</code> are both received, both steps should be performed.
+                </li>
+              </ul>
+              <p>Note that you can also generate your own <a href="#logindialog"><code>state</code> parameter</a> and
+                use it with your login request to provide CSRF protection.</p>
+              <h4 id="exchangecode">Exchanging Code for an Access Token</h4>
+              <p>To get an access token, make an HTTP GET request to the following OAuth endpoint:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+GET https://graph.facebook.com/<code>v24.0</code>/oauth/access_token?
+   client_id={app-id}
+   &amp;redirect_uri={redirect-uri}
+   &amp;client_secret={app-secret}
+   &amp;code={code-parameter}</pre>
+              <p>This endpoint has some required parameters:</p>
+              <ul>
+                <li><code>client_id</code>. Your app's IDs</li>
+                <li><code>redirect_uri</code>. This argument is required and must be the same as the original
+                  <code>request_uri</code> that you used when starting the OAuth login process.
+                </li>
+                <li><code>client_secret</code>. Your unique app secret, shown on the <a href="/apps">App Dashboard</a>.
+                  Never include this app secret in client-side code or in binaries that could be decompiled. It is
+                  extremely important that it remains completely secret as it is the core of the security of your app
+                  and all the people using it.</li>
+                <li><code>code</code>. The parameter received from the Login Dialog redirect above.</li>
+              </ul>
+              <p><strong>Response</strong></p>
+              <p>The response you will receive from this endpoint will be returned in JSON format and, if successful,
+                is:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "access_token": {access-token}, 
+  "token_type": {type},
+  "expires_in":  {seconds-til-expiration}
+}</pre>
+              <p>If it is not successful, you will receive an explanatory error message.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="checktoken">Inspecting Access Tokens</h2>
+              <p>Whether or not your app uses <code>code</code> or <code>token</code> as your <code>response_type</code>
+                from the Login dialog, it will have received an access token. You can perform automated checks on these
+                tokens using a Graph API endpoint:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">GET graph.facebook.com/debug_token?
+     input_token={token-to-inspect}
+     &amp;access_token={app-token-or-admin-token}</pre>
+              <p>This endpoint takes the following parameters:</p>
+              <ul>
+                <li><code>input_token</code>. The token you need to inspect.</li>
+                <li><code>access_token</code> An <a href="/docs/facebook-login/access-tokens/">app access token</a> or
+                  an access token for a developer of the app.</li>
+              </ul>
+              <p>The response of the API call is a JSON array containing data about the inspected token. For example:
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+    "data": {
+        "app_id": 138483919580948, 
+        "type": "USER",
+        "application": "Social Cafe", 
+        "expires_at": 1352419328, 
+        "is_valid": true, 
+        "issued_at": 1347235328, 
+        "metadata": {
+            "sso": "iphone-safari"
+        }, 
+        "scopes": [
+            "email", 
+            "publish_actions"
+        ], 
+        "user_id": "1207059"
+    }
+}</pre>
+              <p>The <code>app_id</code> and <code>user_id</code> fields help your app verify that the access token is
+                valid for the person and for your app. For a full description of the other fields, see the <a
+                  href="/docs/facebook-login/access-tokens">Getting Info about Access Tokens guide</a>.</p>
+              <h3 id="permscheck">Checking Permissions</h3>
+              <p>The <a href="/docs/graph-api/reference/user/permissions"><code>/me/permissions</code> edge</a> can be
+                called in order to retrieve a list of permissions that have been granted or declined by a particular
+                user. Your app can use this to check which of the requested permissions it cannot use for any particular
+                user.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="reaskperms">Re-asking for Declined Permissions</h2>
+              <p>Facebook Login lets people decline sharing some permissions with your app. The Login Dialog contains a
+                screen that looks like this:</p>
+              <img alt="" class="_5aqq _5aqp _5aqr img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/16179985_1206438769441612_8903745733237145600_n.png?_nc_cat=100&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=hKcuLMAP7iYQ7kNvwEoB9nA&amp;_nc_oc=AdnXMYHBITV8rZ6Cx6hJgqf1Qck6v73-O-2oSNrn8TvovxLxo4FAmFbm1_aLsYbON0A&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=m1vsvWECQ8wRUaoDnYtXOg&amp;oh=00_AfsvoDgPfECYYN_sQVBssc5ptKb9pWOSAvSRlyLVJOW-yA&amp;oe=69A10DDD"
+                width="500" />
+              <p>The <code>public_profile</code> permission is always required and greyed out because it can't be
+                disabled.</p>
+              <p>However, if someone were to uncheck <code>user_likes</code> (Likes) in this example, checking <a
+                  href="/docs/graph-api/reference/user/permissions"><code>/me/permissions</code></a> for which
+                permissions have been granted results in:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data":
+    [
+      {
+        "permission":"public_profile",
+        "status":"granted"
+      },
+      {
+        "permission":"user_likes",
+        "status":"declined"
+      }
+    ]
+}</pre>
+              <p>Note that <code>user_likes</code> has been declined instead of granted.</p>
+              <p>It's OK to ask a person again to grant your app permissions that they've declined. You should have a
+                screen of education on why you think they should grant the permission to you and then re-ask. But if you
+                invoke the Login Dialog <a href="#logindialog">as before</a>, it won't ask for that permission.</p>
+              <p><strong>This is because once someone has declined a permission, the Login Dialog will not re-ask them
+                  for it unless you explicitly tell the dialog you're re-asking for a declined permission.</strong></p>
+              <p>You do this by adding the <code>auth_type=rerequest</code> parameter to your Login Dialog URL:</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+https://www.facebook.com/<code>v24.0</code>/dialog/oauth?
+    client_id={app-id}
+    &amp;redirect_uri={redirect-uri}
+    &amp;auth_type=rerequest
+    scope=email
+   </pre>
+              <p>Using this, the Login Dialog will re-ask for the declined permission.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="token">Storing Access Tokens and Login Status</h2>
+              <p>At this point in the flow, you have someone authenticated and logged in. Your app is ready to make API
+                calls on their behalf. Before doing so, it should store the access token and the login status of the
+                person using the app.</p>
+              <h4>Storing Access Tokens</h4>
+              <p>After your app receives the access token from the previous step, the token should be stored so it's
+                available to all parts of the app when it makes API calls. There is no specific process here, however in
+                general if you're building a web app, it is best to add the token as a session variable to identify that
+                browser session with a particular person, if you're building a native desktop or mobile app, then you
+                should use the datastore available to your app. Also, the app should store the token in a database along
+                with the <code>user_id</code> to identify it.</p>
+              <p>Please see our note about the <a
+                  href="/docs/facebook-login/access-tokens/debugging-and-error-handling/#sizes">size of access tokens in
+                  the access token document</a>.</p>
+              <h4>Tracking login status</h4>
+              <p>Again, your app should store a person's login status, which helps avoid having to make additional calls
+                to the Login dialog. Whatever procedure you chose, modify your <a href="#checklogin">login status
+                  checking</a> to account for it.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="logout">Logging People Out</h2>
+              <p>You can log people out of your app by undoing <a href="#token">whatever login status indicator you
+                  added</a>, for example deleting the session that indicates a person is logged in. You should also
+                remove the stored access token.</p>
+              <p>Logging someone out is not the same as revoking login permission (removing previously granted
+                authentication), <a href="/docs/facebook-login/permissions/requesting-and-revoking#revokelogin">which
+                  can be performed separately</a>. Because of this, build your app so it doesn't automatically force
+                people who have logged out back to the Login dialog.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="deauth-callback">Detecting When People Uninstall Apps</h2>
+              <p>People are able to uninstall apps via Facebook.com without interacting with the app itself. To help
+                apps detect when this has happened, we allow them to provide a de-authorize callback URL which will be
+                pinged whenever this occurs.</p>
+              <p>You can enable a deauthorize callback through the <a
+                  href="https://developers.facebook.com/docs/development/create-an-app/app-dashboard/data-deletion-callback">App
+                  Dashboard</a>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="data-deletion">Responding to Requests to Delete User Data</h2>
+              <p>People can request an app to delete all information about them received from Facebook. For responding
+                to these requests, see <a href="/docs/apps/delete-data/">Data Deletion Request Callback</a>.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

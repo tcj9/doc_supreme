@@ -1,0 +1,207 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Implementation: Captions<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>This document provides instructions on how to use the YouTube Data API (v3) to manage video captions.</p>
+          </li>
+          <li>
+            <p>You can retrieve a list of caption tracks for a specific video using the <code>captions.list</code>
+              method, requiring OAuth 2.0 authorization.</p>
+          </li>
+          <li>
+            <p>Uploading a new caption track to a video is achieved using the <code>captions.insert</code> method,
+              requiring the <code>snippet.videoId</code>, <code>snippet.language</code>, and <code>snippet.name</code>
+              properties to be set.</p>
+          </li>
+          <li>
+            <p>Downloading a specific caption track is possible via the <code>captions.download</code> method, including
+              options to specify the desired format and retrieve a translated version.</p>
+          </li>
+          <li>
+            <p>The API allows for updating a caption track's draft status and even deleting it completely using the
+              <code>captions.update</code> and <code>captions.delete</code> methods respectively.</p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <p>The following examples show how to use the YouTube Data API (v3) to perform functions related to captions.</p>
+    <h2 data-text="Retrieve a list of caption tracks for a video" id="captions-list" tabindex="-1">Retrieve a list of
+      caption tracks for a video</h2>
+    <div style="padding-left: 25px">
+      <p>To retrieve a list of caption tracks that are available for a specific video, call the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/captions/list">captions.list</a></code> method. Set the <code
+          dir="ltr" translate="no"><a href="/youtube/v3/docs/captions/list#videoId">videoId</a></code> parameter value
+        to the YouTube video ID that uniquely identifies the video for which you are retrieving captions. Your request
+        must be authorized using OAuth 2.0.</p>
+      <p>The request below retrieves a list of captions for a video on the Google Stories YouTube channel:</p>
+      <div></div><devsite-code>
+        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.captions.list?part=snippet&amp;videoId=PRU2ShMzQRg">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.captions.list?
+part=snippet
+&amp;videoId=PRU2ShMzQRg</a></pre>
+      </devsite-code>
+      <p>See the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/captions/list#usage">captions.list</a></code>
+        method's documentation for code samples.</p>
+    </div>
+    <h2 data-text="Create a caption track" id="captions-insert" tabindex="-1">Create a caption track</h2>
+    <div style="padding-left: 25px">
+      <p class="note">This query cannot be tested using the APIs Explorer because the APIs Explorer does not support the
+        ability to upload files, which is a requirement for this method.</p>
+      <p>You can use the API's <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/captions/insert">captions.insert</a></code> method to upload a new
+        caption track for a video. When uploading a track, you must specify a value for the following <code dir="ltr"
+          translate="no">caption</code> resource properties:</p>
+      <p>
+      <ul>
+        <li><code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/captions#snippet.videoId">snippet.videoId</a></code> - This
+          identifies the video to which the caption track is being added.</li>
+        <li><code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/captions#snippet.language">snippet.language</a></code> - The
+          language of the caption track.</li>
+        <li><code dir="ltr" translate="no"><a href="/youtube/v3/docs/captions#snippet.name">snippet.name</a></code> -
+          The name of the caption track.</li>
+      </ul>
+      </p>
+      <p>The following additional options are available when uploading a caption track:</p>
+      <ul>
+        <li>
+          <p>If you set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/captions/insert#sync">sync</a></code> parameter to <code
+              dir="ltr" translate="no">true</code>, YouTube will disregard any time codes that are in the uploaded
+            caption file and generate new time codes for the captions.</p>
+          <p>You should set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/captions/insert#sync">sync</a></code> parameter to <code
+              dir="ltr" translate="no">true</code> if you are uploading a transcript, which has no time codes, or if you
+            suspect the time codes in your file are incorrect and want YouTube to try to fix them.</p>
+        </li>
+        <li>
+          <p>If you set the <code dir="ltr" translate="no">caption</code> resource's <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/captions#snippet.isDraft">snippet.isDraft</a></code> property to
+            <code dir="ltr" translate="no">true</code>, the track will not be publicly visible.</p>
+        </li>
+      </ul>
+      <p>See the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/captions/insert#examples">captions.insert</a></code> method's
+        documentation for code samples.</p>
+    </div>
+    <h2 data-text="Download a caption track" id="captions-download" tabindex="-1">Download a caption track</h2>
+    <div style="padding-left: 25px">
+      <p class="note">This query cannot be tested using the APIs Explorer because the APIs Explorer does not support the
+        ability to download files.</p>
+      <p>To download a specific caption track, call the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/captions/download">captions.download</a></code> method. Set the <code
+          dir="ltr" translate="no"><a href="/youtube/v3/docs/captions/download#id">id</a></code> parameter value to the
+        YouTube caption track ID that uniquely identifies the caption track that you are downloading. Your request must
+        be authorized using OAuth 2.0.</p>
+      <p>The v3 API supports the following options:</p>
+      <ul>
+        <li>
+          <p>To specify that a caption track should be returned in a specific format, set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/captions/download#tfmt">tfmt</a></code> parameter value to
+            identify the desired format. The parameter definition lists supported values.</p>
+        </li>
+        <li>
+          <p>To retrieve a translation of a caption track, set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/captions/download#tlang">tlang</a></code> parameter value to an
+            <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-1 two-letter language code</a>
+            that identifies the desired caption language. The translation is generated by using machine translation,
+            such as Google Translate.</p>
+        </li>
+      </ul>
+      <p>See the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/captions/download#examples">captions.download</a></code> method's
+        documentation for code samples.</p>
+    </div>
+    <h2 data-text="Update a caption track" id="captions-update" tabindex="-1">Update a caption track</h2>
+    <div style="padding-left: 25px">
+      <p>The API supports the ability to change a caption track's <a
+          href="/youtube/v3/docs/captions#snippet.isDraft">draft status</a>, upload a new caption track for a file, or
+        both.</p>
+      <p>You can use the APIs Explorer to test the ability to change a track's draft status. However, you cannot use the
+        APIs Explorer to update the actual caption track because tool does not support the ability to upload files.</p>
+      <p>The request below retrieves a list of captions for a video on the Google Stories YouTube channel:</p>
+      <p>The request updates the draft status of a caption track to <code dir="ltr" translate="no">true</code>, which
+        means the track will not be publicly visible. To complete the request in the APIs Explorer, you need to set the
+        <code dir="ltr" translate="no">id</code> property's value to identify a caption track.</p>
+      <div></div><devsite-code>
+        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.captions.update?part=snippet&amp;resource=%257B%250A++%2522id%2522%253A+%2522CAPTION_TRACK_ID%2522%250A%257D">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.captions.update?
+part=snippet</a></pre>
+      </devsite-code>
+      <p>See the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/captions/update#usage">captions.update</a></code> method's
+        documentation for code samples.</p>
+    </div>
+    <h2 data-text="Delete a caption track" id="captions-delete" tabindex="-1">Delete a caption track</h2>
+    <div style="padding-left: 25px">
+      <p>This example shows how to delete a caption track. The example has the following steps:</p>
+      <ul>
+        <li>
+          <p><b>Step 1: Retrieve the caption track ID</b></p>
+          <p>Follow the steps above to <a href="#captions-list">retrieve a list of caption tracks</a> for a video. The
+            list could be used to display a list of caption tracks, using each track's ID as a key.</p>
+        </li>
+        <li>
+          <p><b>Step 2: Delete the track</b></p>
+          <p>Call the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/captions/delete">captions.delete</a></code> method to delete a
+            specific video. In the request, the <code dir="ltr" translate="no">id</code> parameter specifies the caption
+            track ID of the track that you are deleting. The request must be authorized using OAuth 2.0. If you are
+            testing this query in the APIs Explorer, you will need to substitute a valid caption track ID for the <code
+              dir="ltr" translate="no">id</code> parameter value.</p>
+          <div></div><devsite-code>
+            <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.captions.delete?id=CAPTION_TRACK_ID">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.captions.delete?
+id=CAPTION_TRACK_ID</a></pre>
+          </devsite-code>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

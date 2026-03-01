@@ -1,0 +1,438 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_NB">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Set Up Webhooks for Instagram</h1>
+              <p>Webhooks for <a href="/docs/instagram-api">Instagram</a> allow you to receive real-time notifications
+                whenever someone comments on the Media objects of your app users; <a
+                  href="https://developers.facebook.com/docs/pages/mentions">@mentions</a> your app users; or when
+                Stories of your app users expire.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Receive Live Webhook Notifications</h2>
+              <p>To receive live webhook notifications, the following conditions must be satisfied:</p>
+              <ul>
+                <li>Your app must have <strong>Instagram</strong> webhooks configured and appropriate
+                  <strong>fields</strong> subscribed to in the App Dashboard.
+                </li>
+                <li>For <a
+                    href="https://developers.facebook.com/docs/development/create-an-app/app-dashboard/app-types#consumer">Consumer
+                    apps</a>, they must be in <a href="/docs/development/build-and-test/app-modes#live-mode">Live
+                    Mode.</a></li>
+                <li>For <a
+                    href="https://developers.facebook.com/docs/development/create-an-app/app-dashboard/app-types#business">Business
+                    apps</a>, they must have permissions with an <a
+                    href="https://developers.facebook.com/docs/graph-api/overview/access-levels#advanced-access">Advanced
+                    Access</a> level. You can request Advanced Access for permissions as shown here:</li>
+              </ul>
+              <div style="text-align:center; margin-right: 200px"><img alt="" class="img"
+                  src="https://lookaside.fbsbx.com/elementpath/media/?media_id=482444916912676&amp;version=1736178359" />
+              </div>
+              <div class="_57yz _57y_ _3-8p">
+                <div class="_57y-">
+                  <p>If the app permissions don't have an access level of <strong>Advanced Access</strong>, the app
+                    doesn't receive webhook notifications.</p>
+                </div>
+              </div>
+              <ul>
+                <li>The app user must have granted your app appropriate permissions (<a
+                    href="/docs/permissions/reference/instagram_manage_insights">instagram_manage_insights</a> for
+                  Stories, <a href="/docs/permissions/reference/instagram_manage_comments">instagram_manage_comments</a>
+                  for Comments and @Mentions).</li>
+                <li>The Page connected to the app user's account must have <a
+                    href="/docs/instagram-api/guides/webhooks/#step-2--enable-page-subscriptions">Page subscriptions
+                    enabled</a>.</li>
+                <li>The Business connected to the app user's Page must be <strong>verified</strong>.</li>
+                <li>The owner of the Media object upon which the comment or @mention appears must not have set their
+                  account to <a href="https://www.facebook.com/help/instagram/448523408565555">private</a>.</li>
+              </ul>
+              <h3>Limitations</h3>
+              <ul>
+                <li>Webhook notifications for Comments on albums don't include the album ID. Get the album ID by
+                  querying the Comment ID in the webhook and request its <code>media</code> field.</li>
+                <li>Apps don't receive a webhook notifications if the Media where the comment or @mention appears was
+                  created by a <a href="https://www.facebook.com/help/instagram/448523408565555">private account</a>.
+                </li>
+                <li>Story insights metrics with counts of less than 5 are returned as <code>-1</code>.</li>
+                <li>Apps only receive webhook notifications for comments on live <a
+                    href="https://developers.facebook.com/docs/instagram-api/reference/ig-media/">IG Media</a> if the
+                  media is on broadcast.</li>
+                <li>Reels are not supported.</li>
+                <li>Your app must have successfully completed App Review (advanced access) to receive webhooks
+                  notifications for <code>comments</code> and <code>live_comments</code> webhooks fields. </li>
+                <li>If the media is used for dynamic ads, the ad ID will not be returned.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 1: Create an Endpoint</h2>
+              <p><a href="/docs/graph-api/webhooks/getting-started">Create an endpoint</a> that accepts and processes
+                webhooks. During the <a
+                  href="https://developers.facebook.com/docs/graph-api/webhooks/getting-started#configure-webhooks-product">configuration</a>,
+                select the <strong>Instagram Graph API</strong> object, click <strong>Set up</strong>, and subscribe to
+                one or more <a href="/docs/graph-api/webhooks/reference/instagram/">Instagram fields</a>.</p>
+              <h3>Instagram Fields</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:15%">Field</th>
+                    <th style="width:45%">Description</th>
+                    <th>Permissions Required</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_46">
+                    <tr class="row_0">
+                      <td>
+                        <p><a href="/docs/graph-api/webhooks/reference/instagram/#comments"><code>comments</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Comments on an <a href="/docs/instagram-api/reference/ig-media/">IG Media</a> owned by your
+                          app's Instagram user.</p>
+                        <div class="_57yz _5s-k _3-8p">
+                          <div class="_57y-">
+                            <p>The <code>ad_id</code>, <code>ad_title</code> and <code>original_media_id</code> will be
+                              returned in the media object when a person comments on a boosted Instagram post or
+                              Instagram ads post.</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <ul>
+                          <li><a
+                              href="/docs/permissions/reference/instagram_manage_comments">instagram_manage_comments</a>
+                          </li>
+                          <li><a href="/docs/permissions/reference/pages_manage_metadata">pages_manage_metadata</a>
+                          </li>
+                          <li><a href="/docs/permissions/reference/pages_read_engagement">pages_read_engagement</a>
+                            <strong>or</strong><br />
+                            <a href="/docs/permissions/reference/pages_show_list">pages_show_list</a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><a
+                            href="/docs/graph-api/webhooks/reference/instagram/#live_comments"><code>live_comments</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Comments on a live <a href="/docs/instagram-api/reference/ig-media/">IG Media</a> owned by
+                          your app's Instagram user.</p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li><a
+                              href="/docs/permissions/reference/instagram_manage_comments">instagram_manage_comments</a>
+                          </li>
+                          <li>
+                            <p><a href="/docs/permissions/reference/pages_manage_metadata">pages_manage_metadata</a></p>
+                          </li>
+                          <li>
+                            <p><a href="/docs/permissions/reference/pages_read_engagement">pages_read_engagement</a>
+                              <strong>or</strong><br />
+                              <a href="/docs/permissions/reference/pages_show_list">pages_show_list</a>
+                            </p>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><a href="/docs/graph-api/webhooks/reference/instagram/#mentions"><code>mentions</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>@mentions for your app's Instagram user in a comment.</p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li><a
+                              href="/docs/permissions/reference/instagram_manage_comments">instagram_manage_comments</a>
+                          </li>
+                          <li>
+                            <p><a href="/docs/permissions/reference/pages_manage_metadata">pages_manage_metadata</a></p>
+                          </li>
+                          <li>
+                            <p><a href="/docs/permissions/reference/pages_read_engagement">pages_read_engagement</a>
+                              <strong>or</strong><br />
+                              <a href="/docs/permissions/reference/pages_show_list">pages_show_list</a>
+                            </p>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><a
+                            href="/docs/graph-api/webhooks/reference/instagram/#story_insights"><code>story_insights</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Metrics describing interactions on a story. Sent 1 hour after the story expires.</p>
+                      </td>
+                      <td>
+                        <ul>
+                          <li><a
+                              href="/docs/permissions/reference/instagram_manage_insights">instagram_manage_insights</a>
+                          </li>
+                          <li>
+                            <p><a href="/docs/permissions/reference/pages_manage_metadata">pages_manage_metadata</a></p>
+                          </li>
+                          <li>
+                            <p><a href="/docs/permissions/reference/pages_read_engagement">pages_read_engagement</a>
+                              <strong>or</strong><br />
+                              <a href="/docs/permissions/reference/pages_show_list">pages_show_list</a>
+                            </p>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="step-2--enable-page-subscriptions">Step 2: Enable Page Subscriptions</h2>
+              <p>Your app must enable Page subscriptions on the Page connected to the app user's account by sending a
+                <code>POST</code> request to the <a href="/docs/graph-api/reference/page/subscribed_apps#Creating">Page
+                  Subscribed Apps</a> edge and subscribing to any Page field.
+              </p>
+              <h3>Endpoint Requirements</h3>
+              <ul>
+                <li>the app user's Page Access Token</li>
+                <li><a href="docs/permissions/reference/pages_manage_metadata">pages_manage_metadata</a></li>
+              </ul>
+              <h4>Request Syntax</h4>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+POST /{page-id}/subscribed_apps
+  ?access_token={access-token}
+  &amp;subscribed_fields={fields}</pre>
+              <h4>Request Parameters</h4>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">
+                      Value Placeholder
+                    </th>
+                    <th>
+                      Value Description
+                    </th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_p3">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>{page_id}</code></p>
+                      </td>
+                      <td>
+                        <p>ID of the Page connected to the app user's account.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>{access_token}</code></p>
+                      </td>
+                      <td>
+                        <p>App user's Page access tToken.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>{fields}</code></p>
+                      </td>
+                      <td>
+                        <p>A Page field (example: <code>feed</code>).</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>Your app does not receive notifications for changes to a field unless you configure Page subscriptions
+                in the App Dashboard and subscribe to that field.</p>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -i -X POST \
+  "https://graph.facebook.com/<code>v24.0</code>/1755847768034402/subscribed_apps?subscribed_fields=feed&amp;access_token=EAAFB..."
+</pre>
+              <h5>Sample Response</h5>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "success": true
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Common Uses</h2>
+              <h3 id="capturing-story-insights">Capture Story Insights</h3>
+              <p>If you subscribe to the <code>story_insights</code> field, we send your endpoint a webhook notification
+                containing user interaction metrics on a story, after the story has expired.</p>
+              <h4>Sample Story Insights Payload</h4>
+              <div>
+                <pre class="_5s-8 prettyprint lang-code" style="">[
+  {
+    "entry": [
+      {
+        "changes": [
+          {
+            "field": "story_insights",
+            "value": {
+              "media_id": "18023345989012587",
+              "exits": 1,
+              "replies": 0,
+              "reach": 17,
+              "taps_forward": 12,
+              "taps_back": 0,
+              "impressions": 28
+            }
+          }
+        ],
+        "id": "17841405309211844",  // Instagram Business or Creator Account ID
+        "time": 1547687043
+      }
+    ],
+    "object": "instagram"
+  }
+]</pre>
+              </div>
+              <h3 id="reply-comment-mention">Reply to Comment @Mentions</h3>
+              <p>If you subscribe to the <code>mentions</code> field, we send your endpoint a webhook notification
+                whenever an Instagram user @mentions an Instagram Business or Creator Account in a comment or caption.
+              </p>
+              <p>For example, here's a sample comment webhook notification payload sent for an Instagram Business
+                Account (<code>17841405726653026</code>):</p>
+              <h4>Sample Comment @Mention Payload</h4>
+              <div>
+                <pre class="_5s-8 prettyprint lang-json" style="">
+[
+  {
+    "entry": [
+      {
+        "changes": [
+          {
+            "field": "mentions",
+            "value": {
+              "comment_id": "17894227972186120",  // ID of the comment in which your app user's Instagram professional account was mentioned
+              "media_id": "17918195224117851"     // ID of the media the Instagram user commented on
+            }
+          }
+        ],
+        "id": "17841405726653026",   // ID of your app user's Instagram professional account
+        "time": 1520622968           // Time the notification was sent
+      }
+    ],
+    "object": "instagram"
+  }
+]
+</pre>
+              </div>
+              <h3>Get the Comment's Contents</h3>
+              <p>To get the comment's contents, use the <code>comment_id</code> property to query the <a
+                  href="/docs/instagram-api/reference/ig-user/mentioned_comment"><code>GET /{ig-user-id}/mentioned_comment</code></a>
+                edge:</p>
+              <h4>Sample Query</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="">GET https://graph.facebook.com/17841405726653026
+  ?fields=mentioned_comment.comment_id(17894227972186120)</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "mentioned_comment": {
+    "timestamp": "2018-03-20T00:05:29+0000",
+    "text": "@bluebottle challenge?",
+    "id": "17894227972186120"
+  },
+  "id": "17841405726653026"
+}</pre>
+              <h3>Parse the Payload and Respond</h3>
+              <p>When you get the response, parse the payload for the <code>text</code> property to determine if you
+                want to respond to the comment. To respond, use the webhook notification payload's
+                <code>caption_id</code> and <code>media_id</code> property values to query the <a
+                  href="/docs/instagram-api/reference/ig-user/mentions"><code>POST /{ig-user-id}/mentions</code></a>
+                endpoint:
+              </p>
+              <h4>Sample Query</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X POST \
+  -d "comment_id=17894227972186120" \
+  -d "media_id=17918195224117851" \
+  -d "message=Challenge%20accepted!" \
+  -d "access_token={access-token}" \
+  "https://graph.facebook.com/17841405726653026/mentions"</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "id": "17911496353086895"
+}</pre>
+              <h3 id="reply-caption-mention">Reply to Caption @Mentions</h3>
+              <p>If you subscribe to the <code>mentions</code> field, we send your endpoint a webhook notification
+                whenever a user @mentions an Instagram Business or Creator Account in a comment or caption on a media
+                object not owned by the Business or Creator.</p>
+              <p>For example, here's a sample caption @mention webhook notification sent for an Instagram Business
+                Account (<code>17841405726653026</code>):</p>
+              <h4>Sample Caption @Mention Webhook Notification</h4>
+              <div>
+                <pre class="_5s-8 prettyprint lang-json" style="">
+[
+  {
+    "entry": [
+      {
+        "changes": [
+          {
+            "field": "mentions",
+            "value": {
+              "media_id": "17918195224117851"   // ID of the media where your app user's Instagram professional account was mentioned
+            }
+          }
+        ],
+        "id": "17841405726653026",   // ID of your app user's Instagram professional account
+        "time": 1520622968           // The time Meta sent the notification
+      }
+    ],
+    "object": "instagram"
+  }
+]
+</pre>
+              </div>
+              <h3>Get the Caption's Contents</h3>
+              <p>To get the caption's contents, use the <code>media_id</code> property to query the <a
+                  href="/docs/instagram-api/reference/ig-user/mentioned_media"><code>GET /{ig-user-id}/mentioned_media</code></a>
+                edge:</p>
+              <h4>Sample Query</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="">GET https://graph.facebook.com/17841405726653026
+  ?fields=mentioned_media.media_id(17918195224117851){caption,media_type}</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-js" style="">{
+  "mentioned_media": {
+    "caption": "@bluebottle There can be only one!",
+    "media_type": "IMAGE",
+    "id": "17918195224117851"
+  },
+  "id": "17841405726653026"
+}</pre>
+              <h3>Parse the Payload and Respond</h3>
+              <p>When you get the response, parse the payload for the <code>caption</code> property to determine if you
+                want to respond to the comment. To respond, use the webhook <code>media_id</code> property to query the
+                <a href="/docs/instagram-api/reference/ig-user/mentions"><code>POST /{ig-user-id}/mentions</code></a>
+                edge:
+              </p>
+              <h4>Sample Query</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">curl -i -X POST \
+  -d "media_id=17918195224117851" \
+  -d "message=MacLeod%20agrees!" \
+  -d "access_token={access-token}" \
+  "https://graph.facebook.com/17841405726653026/mentions"</pre>
+              <h4>Sample Response</h4>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "id": "17911496353086895"
+}</pre>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

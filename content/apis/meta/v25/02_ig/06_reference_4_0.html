@@ -1,0 +1,583 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_LL">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>IG User</h1>
+              <p>Represents an <a data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F502981923235522&amp;h=AT2WiDqwfHZthGJHGEq6-kckWglwJ2akPWYy9XUcNrTLP4oK_6w1kCU7fdGXEd8X2VW7Up_JoJOkPntB00o4Mfsn8Fa8w0AYfdycHQ1sf86CGFkWh_DN0ylvnK0vEGJoiSAFLopNgEDlYz5mur--Zg"
+                  rel="nofollow" target="_blank">Instagram Business Account</a> or an <a data-lynx-mode="hover"
+                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1158274571010880&amp;h=AT0lV6JKT-Ug-BfIskmI6XBJjiHIC9fKxaU5aZsDf2FlMbndEE4GxS895CKDQ-BUAi1oWh-qnGtIRZ1CyJMWHwBoZBcwuVxrOUoBS9OSVMnhRrU9UIj61oZP79NUwrRgmUB3J0a8_wBf0uz1PQ6aXg"
+                  rel="nofollow" target="_blank">Instagram Creator Account</a>.</p>
+              <p>Throughout our documentation we use "Instagram User" and "Instagram Account" interchangeably. Both
+                represent your app user's Instagram professional account.</p>
+              <div><span>
+                  <h3>Requirements</h3>
+                  <div class="_57-c">
+                    <table class="_4-ss _5k9x">
+                      <thead>
+                        <th style="width:12%"></th>
+                        <th style="width:40%">Instagram API with Instagram Login</th>
+                        <th>Instagram API with Facebook Login</th>
+                      </thead>
+                      <tbody class="_5m37" id="u_0_2_Tl">
+                        <tr class="row_0">
+                          <td>
+                            <p><strong>Access Tokens</strong></p>
+                          </td>
+                          <td>
+                            <ul>
+                              <li>Instagram User user access token</li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li><a href="/docs/facebook-login/access-tokens/#usertokens">Facebook User access
+                                  token</a></li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr class="row_1 _5m29">
+                          <td>
+                            <p><strong>Host URL</strong></p>
+                          </td>
+                          <td>
+                            <p><code>graph.instagram.com</code></p>
+                          </td>
+                          <td>
+                            <p><code>graph.facebook.com</code></p>
+                          </td>
+                        </tr>
+                        <tr class="row_2">
+                          <td>
+                            <p><strong>Login Type</strong></p>
+                          </td>
+                          <td>
+                            <p>Business Login for Instagram</p>
+                          </td>
+                          <td>
+                            <p>Facebook Login for Business</p>
+                          </td>
+                        </tr>
+                        <tr class="row_3 _5m29">
+                          <td><a href="/docs/permissions/reference#i" target="_blank"><b>Permissions</b></a></td>
+                          <td>
+                            <ul>
+                              <li><code>instagram_business_basic</code></li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li><code>instagram_basic</code></li>
+                              <li><code>pages_read_engagement</code></li>
+                            </ul>
+                            <p>If the app user was granted a role via the Business Manager on the <a
+                                href="/docs/instagram-api/overview#pages">Page</a> connected to the targeted IG User,
+                              you will also need one of:</p>
+                            <ul>
+                              <li><code>ads_management</code></li>
+                              <li><code>ads_read</code></li>
+                            </ul>
+                            <p>If you are requesting the <code>shopping_product_tag_eligibility</code> field for <a
+                                href="/docs/instagram-api/guides/product-tagging">product tagging</a>, you will also
+                              need:</p>
+                            <ul>
+                              <li><code>catalog_management</code></li>
+                              <li><code>instagram_shopping_tag_products</code></li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr class="row_4">
+                          <td>
+                            <p><strong><a href="https://www.facebook.com/business/help/442345745885606">Business
+                                  Roles</a></strong></p>
+                          </td>
+                          <td>
+                            <p>Not applicable.</p>
+                          </td>
+                          <td>
+                            <p>If you are requesting the <code>shopping_product_tag_eligibility</code> field for <a
+                                href="/docs/instagram-api/guides/product-tagging">product tagging</a>, the app user must
+                              have an admin role on the <a href="https://business.facebook.com/">Business Manager</a>
+                              that owns the IG User's <a data-lynx-mode="hover"
+                                href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1187859655048322&amp;h=AT2oVn9CPigxKs3JdQbvKdCLAyyqV_Ss77VZclfwtGFomMCzMe1hO3oK6rMapwWb1Ewg_MzOU0PLGMCIsw_AKu0PE_tKT7XoTe9Ei9rttW0-bNFG6lyDx44E9G8AhiS78pWVp-pEXEHDiXY6HfWFNRjcXL9bEyjAmWU"
+                                rel="nofollow" target="_blank">Instagram Shop</a>.</p>
+                          </td>
+                        </tr>
+                        <tr class="row_5 _5m29">
+                          <td>
+                            <p><strong><a data-lynx-mode="hover"
+                                  href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1187859655048322%2F&amp;h=AT0FxqLfCr5H-BsVB0SY_zEWdfs0j6_We3wZHRO_QVbmsR0T2lgtMViPoY4khRxMVS1XNFV_5au0vRMfELALQRhHEPe3fiXd82wa0_pvrJixzHGlqSWkVj3b8dbuah4vR2aMMdXk8RqzMY6tibNVPQ"
+                                  rel="nofollow" target="_blank">Instagram Shop</a></strong></p>
+                          </td>
+                          <td>
+                            <p>Not applicable.</p>
+                          </td>
+                          <td>
+                            <p>If you are requesting the <code>shopping_product_tag_eligibility</code> field for <a
+                                href="/docs/instagram-api/guides/product-tagging">product tagging</a>, the IG User must
+                              have an approved <a data-lynx-mode="hover"
+                                href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1187859655048322%2F&amp;h=AT2QKl-1psVA-7H1yrtEGFL7PMg2SeTwKnIhUjEH_sv9bsQCic-fiZHhDhuck7mUiYIaVH6VZ1OgQeqoGjzMu-tjJ83caZCCRqJ7N1fHASNMA4nyR4UvATwamsEfB1zEpinPtprYtdEwSltdkDh2OA"
+                                rel="nofollow" target="_blank">Instagram Shop</a> with a product catalog containing
+                              products.</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </span></div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="create">Creating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="read">Reading</h2>
+              <p><strong><code>GET /&lt;IG_USER_ID&gt;</code></strong></p>
+              <p>Get fields and edges on an Instagram Business or Creator Account.</p>
+              <div>
+                <div class="_57yz _7_72 _3-8p">
+                  <div class="_57y-">
+                    <p>If you are migrating from Marketing API Instagram Ads endpoints to Instagram Platform endpoints,
+                      be aware that some field names are different.</p>
+                  </div>
+                </div>
+              </div>
+              <h3>Request Syntax</h3>
+              <pre class="_5s-8 prettyprint lang-https" style="">
+GET https://graph.facebook.com/&lt;API_VERSION&gt;/&lt;IG_USER_ID&gt;
+  ?fields=&lt;LIST_OF_FIELDS&gt;
+  &amp;access_token=&lt;ACCESS_TOKEN&gt;
+</pre>
+              <h3>Path Parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:15%">Placeholder</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_Q8">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>&lt;API_VERSION&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>API <a href="/docs/graph-api/guides/versioning">version</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>&lt;IG_USER_ID&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>Required.</strong> IG User ID.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Query String Parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:15%">Key</th>
+                    <th style="width:15%">Placeholder</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_3M">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>access_token</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;ACCESS_TOKEN&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>Required.</strong> App user's <a
+                            href="/docs/facebook-login/access-tokens/#usertokens">User</a> access token.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>fields</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;LIST_OF_FIELDS&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>Comma-separated list of IG User <a href="#fields">fields</a> you want returned for each IG
+                          User in the result set.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Fields</h3>
+              <p>Public fields can be returned by an edge using field expansion. Only a few fields will be available for
+                accessing <a href="/docs/instagram/ads-api/guides/pages-ig-account#pbia">Page-backed Instagram
+                  accounts</a>.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Field Name</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_5_eg">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>alt_text</code><br />
+                          Public</p>
+                      </td>
+                      <td>
+                        <p>Descriptive text for images, for accessibility.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>biography</code><br />
+                          Public</p>
+                      </td>
+                      <td>
+                        <p>Profile bio text.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>followers_count</code><br />
+                          Public</p>
+                      </td>
+                      <td>
+                        <p>Total number of Instagram users following the user.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>follows_count</code></p>
+                      </td>
+                      <td>
+                        <p>Total number of Instagram users the user follows.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>has_profile_pic</code></p>
+                      </td>
+                      <td>
+                        <p>Indicates whether your app user's Instagram professional account has a profile picture.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>id</code><br />
+                          Public</p>
+                      </td>
+                      <td>
+                        <p>App-scoped User ID. Available for Page-backed Instagram accounts.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>is_published</code></p>
+                      </td>
+                      <td>
+                        <p>Indicates whether your app user's Instagram account is published. Available for Page-backed
+                          Instagram accounts.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_7 _5m29">
+                      <td>
+                        <p><code>legacy_instagram_user_id</code></p>
+                      </td>
+                      <td>
+                        <p>Your app user's Instagram ID that was created for Marketing API endpoints for v21.0 and
+                          older. Available for Page-backed Instagram accounts.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_8">
+                      <td>
+                        <p><code>media_count</code><br />
+                          Public</p>
+                      </td>
+                      <td>
+                        <p>Total number of IG Media published on your app user's account.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_9 _5m29">
+                      <td>
+                        <p><code>name</code></p>
+                      </td>
+                      <td>
+                        <p>Your app user's Instagram profile name.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_10">
+                      <td>
+                        <p><code>profile_picture_url</code></p>
+                      </td>
+                      <td>
+                        <p>Your app user's Instagram profile picture URL.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_11 _5m29">
+                      <td>
+                        <p><code>shopping_product_tag_eligibility</code></p>
+                      </td>
+                      <td>
+                        <p>Returns <code>true</code> if your app user has set up an <a data-lynx-mode="hover"
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1187859655048322%2F&amp;h=AT0sCed79EAJXXcDGL7s5kZCoUHTxZi1kgP27tW3Uhbrd4GeRzX-b2Ka-LnNBaxc6My206Efbg6VsY_gqLAdN0gkgq4CJ3xiHCRUH-7gdYDTaQcEMkG2ZuxRo-BtJ-7cT2aGnCSwg4GuaSNl0tVM3w"
+                            rel="nofollow" target="_blank">Instagram Shop</a> and is therefore eligible for product
+                          tagging, otherwise returns <code>false</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_12">
+                      <td>
+                        <p><code>username</code><br />
+                          Public</p>
+                      </td>
+                      <td>
+                        <p>Your app user's Instagram profile username.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_13 _5m29">
+                      <td>
+                        <p><code>website</code><br />
+                          Public</p>
+                      </td>
+                      <td>
+                        <p>Your app user's website URL.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Edges</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:35%">Edge</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_6_cD">
+                    <tr class="row_0">
+                      <td>
+                        <p><a href="/docs/instagram-api/reference/ig-user/agencies"><code>agencies</code></a></p>
+                      </td>
+                      <td>
+                        <p>A list of businesses that can advertise for this Instagram professional account.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-api/reference/ig-user/authorized-adaccounts"><code>authorized_adaccounts</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Ad accounts that can advertise for this Instagram professional account.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-api/reference/ig-user/business_discovery"><code>business_discovery</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Get data about other Instagram Business or Instagram Creator <a
+                            href="/docs/instagram-api/reference/ig-user">IG Users</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-platform/instagram-graph-api/reference/ig-user/connected_threads_user"><code>connected_threads_user</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Represents a Threads account connected to an Instagram account.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-api/reference/ig-user/content_publishing_limit"><code>content_publishing_limit</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Represents an <a href="/docs/instagram-api/reference/ig-user">IG User's</a> current <a
+                            href="/docs/instagram-api/guides/content-publishing">content publishing</a> usage.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><a href="/docs/instagram-api/reference/ig-user/insights"><code>insights</code></a></p>
+                      </td>
+                      <td>
+                        <p>Represents social interaction metrics on an <a
+                            href="/docs/instagram-api/reference/ig-user">IG User</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-platform/instagram-graph-api/reference/ig-user/instagram_backed_threads_user"><code>instagram_backed_threads_user</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Represents a Threads account backed by an Instagram account.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_7 _5m29">
+                      <td>
+                        <p><a href="/docs/instagram-api/reference/ig-user/live_media"><code>live_media</code></a></p>
+                      </td>
+                      <td>
+                        <p>Represents a collection of live video <a href="/docs/instagram-api/reference/ig-media">IG
+                            Media</a> on an <a href="/docs/instagram-api/reference/ig-user">IG User</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_8">
+                      <td>
+                        <p><a href="/docs/instagram-api/reference/ig-user/media"><code>media</code></a></p>
+                      </td>
+                      <td>
+                        <p>Represents a collection of <a href="/docs/instagram-api/reference/ig-media">IG Media</a> on
+                          an <a href="/docs/instagram-api/reference/ig-user">IG User</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_9 _5m29">
+                      <td>
+                        <p><a href="/docs/instagram-api/reference/ig-user/media_publish"><code>media_publish</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Publish an <a href="/docs/instagram-api/reference/ig-container">IG Container</a> on an
+                          Instagram Business <a href="/docs/instagram-api/reference/ig-user">IG User</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_10">
+                      <td>
+                        <p><a href="/docs/instagram-api/reference/ig-user/mentions"><code>mentions</code></a></p>
+                      </td>
+                      <td>
+                        <p>Create an <a href="/docs/instagram-api/reference/ig-comment">IG Comment</a> on an IG Comment
+                          or captioned <a href="/docs/instagram-api/reference/ig-media">IG Media</a> that an <a
+                            href="/docs/instagram-api/reference/ig-user">IG User</a> has been @mentioned in by another
+                          Instagram user.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_11 _5m29">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-api/reference/ig-user/mentioned_comment"><code>mentioned_comment</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Get data on an <a href="/docs/instagram-api/reference/ig-comment">IG Comment</a> in which an
+                          <a href="/docs/instagram-api/reference/ig-user">IG User</a> has been @mentioned by another
+                          Instagram user.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_12">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-api/reference/ig-user/mentioned_media"><code>mentioned_media</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Get data on an <a href="/docs/instagram-api/reference/ig-media">IG Media</a> in which an <a
+                            href="/docs/instagram-api/reference/ig-user">IG User</a> has been @mentioned in a caption by
+                          another Instagram user.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_13 _5m29">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-api/reference/ig-user/recently_searched_hashtags"><code>recently_searched_hashtags</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Get <a href="/docs/instagram-api/reference/ig-hashtag">IG Hashtags</a> that an <a
+                            href="/docs/instagram-api/reference/ig-user">IG User</a> has searched for within the last 7
+                          days.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_14">
+                      <td>
+                        <p><a href="/docs/instagram-api/reference/ig-user/stories"><code>stories</code></a></p>
+                      </td>
+                      <td>
+                        <p>Represents a collection of story <a href="/docs/instagram-api/reference/ig-media">IG
+                            Media</a> objects on an <a href="/docs/instagram-api/reference/ig-user">IG User</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_15 _5m29">
+                      <td>
+                        <p><a href="/docs/instagram-api/reference/ig-user/tags"><code>tags</code></a></p>
+                      </td>
+                      <td>
+                        <p>Represents a collection of <a href="/docs/instagram-api/reference/ig-media">IG Media</a> in
+                          which an <a href="/docs/instagram-api/reference/ig-user">IG User</a> has been tagged by
+                          another Instagram user.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_16">
+                      <td>
+                        <p><a
+                            href="/docs/instagram-api/reference/ig-user/upcoming-events"><code>upcoming_events</code></a>
+                        </p>
+                      </td>
+                      <td>
+                        <p>A list of events this Instagram professional account is hosting.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Response</h3>
+              <p>A JSON-formatted object containing default and requested <a href="#fields">fields</a> and <a
+                  href="#edges">edges</a>.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "&lt;FIELD&gt;":"&lt;VALUE&gt;",
+  ...
+}</pre>
+              <h3>cURL Example</h3>
+              <h4>Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X GET \
+  'https://graph.facebook.com/<code>v24.0</code>/17841405822304914?fields=biography%2Cid%2Cusername%2Cwebsite&amp;access_token=EAACwX...'
+</pre>
+              <h4>Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "biography": "Dino data crunching app",
+  "id": "17841405822304914",
+  "username": "metricsaurus",
+  "website": "http://www.metricsaurus.com/"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

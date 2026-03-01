@@ -1,0 +1,288 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_rs">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Migrate your App</h1>
+              <p>This guide will help you determine whether you should migrate your existing app to the new Instagram
+                product and how to implement it.</p>
+              <h2>Why migrate your app</h2>
+              <p>The Instagram API with Instagram Login offers a streamlined and efficient way for your app users to
+                manage their Instagram professional accounts without the need for a Facebook Page or Facebook presence.
+                With only two permissions required for each functionality – <code>instagram_business_basic</code> and
+                the permission specific to messaging, comment moderation, or content publishing – the onboarding process
+                has been significantly simplified, going from an average of 12 steps to just two. As a result, we've
+                seen a significant improvement in onboarding success rates.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Should you migrate your app</h2>
+              <p>Use the following table to determine if you should implement the Instagram product into your app:</p>
+              <div>
+                <div class="_57-c">
+                  <table class="_4-ss _5k9x">
+                    <thead>
+                      <th style="width:25%">
+                        <div style="padding-top:5%;">Component</div>
+                      </th>
+                      <th><a href="https://developers.facebook.com/docs/instagram/platform/instagram-api">
+                          Instagram API setup with Instagram Login
+                        </a></th>
+                      <th><a href="https://developers.facebook.com/docs/instagram-platform/instagram-graph-api">
+                          Instagram API setup with Facebook Login
+                        </a></th>
+                    </thead>
+                    <tbody class="_5m37" id="u_0_2_0h">
+                      <tr class="row_0">
+                        <td><b>Access token type</b></td>
+                        <td>
+                          <p>Instagram User</p>
+                        </td>
+                        <td>
+                          <p>Facebook User or Page</p>
+                        </td>
+                      </tr>
+                      <tr class="row_1 _5m29">
+                        <td><b>
+                            Authorization type
+                          </b></td>
+                        <td><a
+                            href="https://developers.facebook.com/docs/instagram/platform/instagram-api/business-login"
+                            target="_blank">
+                            Business Login for Instagram
+                          </a></td>
+                        <td><a href="https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/"
+                            target="_blank">
+                            Facebook Login for Business
+                          </a></td>
+                      </tr>
+                      <tr class="row_2">
+                        <td><b>
+                            Comment moderation
+                          </b></td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="row_3 _5m29">
+                        <td><b>
+                            Content publishing
+                          </b></td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="row_4">
+                        <td><b>
+                            Facebook Page
+                          </b></td>
+                        <td>
+                          <div style="padding-left:45%;">x</div>
+                        </td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            Required
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="row_5 _5m29">
+                        <td><b>Hashtag search</b></td>
+                        <td>
+                          <div style="padding-left:45%;padding-top:3%;">x</div>
+                        </td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="row_6">
+                        <td><a
+                            href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/insights"
+                            target="_blank"><b>
+                              Insights
+                            </b></a></td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="row_7 _5m29">
+                        <td><b>
+                            Mentions
+                          </b></td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="row_8">
+                        <td><b>Messaging </b></td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div style="padding-left:15%;"><a
+                              href="https://developers.facebook.com/docs/messenger-platform/instagram">
+                              via Messenger Platform</a></div>
+                        </td>
+                      </tr>
+                      <tr class="row_9 _5m29">
+                        <td><a
+                            href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/product-tagging"
+                            target="_blank"><b>
+                              Product tagging
+                            </b></a></td>
+                        <td>
+                          <div style="padding-left:45%;padding-top:3%;">x</div>
+                        </td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="row_10">
+                        <td><a
+                            href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/partnership-ads"
+                            target="_blank"><b>
+                              Partnership Ads
+                            </b></a></td>
+                        <td>
+                          <div style="padding-left:45%;padding-top:3%;">x</div>
+                        </td>
+                        <td>
+                          <div style="padding-left:35%;">
+                            <div class="clearfix _rhc _3-9d"><i
+                                class="_3-90 _3-8w lfloat _ohe img sp_r-vobMvcaoQ sx_07c288"></i>
+                              <div class="_42ef"></div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Migration Steps</h2>
+              <p>You will need to take the following steps to migrate your app.</p>
+              <h3>Step 1. Add Instagram</h3>
+              <p>Follow the <a
+                  href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/create-a-meta-app-with-instagram/"
+                  target="_blank">
+                  Create a Meta app with Instagram guide
+                  <img alt="" class="img"
+                    src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=Ww-wpIIKrD628cPDmyy7rg&amp;oh=00_Afv-LAV7OS7nni6sNdMOZoBJzWOQJHZmoLXGRtCzNgiPQA&amp;oe=69A0A3A2"
+                    width="10px" /></a> to add the Instagram product to your existing business type app. </p>
+              <div class="_57yz _7_72 _3-8p">
+                <div class="_57y-">
+                  <p>
+                    If your current Meta app type is <b>not</b> a Business type app you will need to create a new app
+                    and <a
+                      href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/create-a-meta-app-with-instagram#step-4--select-your-app-type"
+                      target="_blank">select <b>Business</b> during the creation process.<img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=Ww-wpIIKrD628cPDmyy7rg&amp;oh=00_Afv-LAV7OS7nni6sNdMOZoBJzWOQJHZmoLXGRtCzNgiPQA&amp;oe=69A0A3A2"
+                        width="10px" /></a></p>
+                  <p>
+                    If this new app needs Advanced Access, <a
+                      href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/create-a-meta-app-with-instagram#step-10--complete-app-review"
+                      target="_blank">App Review <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=Ww-wpIIKrD628cPDmyy7rg&amp;oh=00_Afv-LAV7OS7nni6sNdMOZoBJzWOQJHZmoLXGRtCzNgiPQA&amp;oe=69A0A3A2"
+                        width="10px" /></a> is required and will be handled within the Instagram product flow instead of
+                    the App Review item in the left side dashboard menu.
+
+                  </p>
+                </div>
+              </div>
+              <p>You will configure:</p>
+              <ul>
+                <li>Instagram Login for Business</li>
+                <li>Permissions and features</li>
+                <li>Webhooks</li>
+              </ul>
+              <h3>Step 2. Update your code</h3>
+              <ol>
+                <li>Copy and paste the <strong>Embed URL</strong> in an anchor tag or button on your app or website to
+                  launch the Business Login for Instagram flow. This flow will give your app an Instagram User access
+                  token.</li>
+                <li>Update the host URL in your code so that your API calls use <code>graph.instagram.com</code>.</li>
+                <li>Update your API calls to use an Instagram User access token. This will update the <code>/me</code>
+                  endpoint calls to use an Instagram Professional account ID instead of a Facebook Page ID</li>
+                <li>Replace your Meta app ID and app secret with the Instagram app ID and secret found in the app
+                  dashboard; <strong>Instagram &gt; API setup with Instagram login &gt; 3. Set up Instagram business
+                    login &gt; Business login settings</strong>.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

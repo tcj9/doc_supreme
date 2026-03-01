@@ -1,0 +1,186 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    PlaylistItems: delete<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta content="delete" itemprop="name">
+      <meta content="playlistItems" itemprop="path">
+      <section id="overview">
+        <p>Deletes a playlist item.</p>
+        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+            href="/youtube/v3/getting-started#quota">quota cost</a> of 50 units.</p>
+      </section>
+      <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common use cases
+      </h2>
+      <style>
+        iframe+section>h2 {
+          margin-top: 12px;
+        }
+      </style>
+      <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+          allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+          src="https://developers.google.com/frame/youtube/v3/docs/playlistItems/delete_8c3899ba7c066fce64236673a4db97dabe50d6b4e618138ee304e19b11f59443.frame"></iframe></devsite-iframe>
+      <section id="request">
+        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+        <section id="request_url">
+          <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+          <div></div><devsite-code>
+            <pre dir="ltr" is-upgraded=""
+              translate="no">DELETE https://www.googleapis.com/youtube/v3/playlistItems</pre>
+          </devsite-code>
+        </section>
+        <section id="auth_required">
+          <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+          <p>This request requires authorization with at least one of the following scopes. To read more about
+            authentication and authorization, see <a href="/youtube/v3/guides/authentication">Implementing OAuth 2.0
+              authorization</a>.</p>
+          <table class="matchpre">
+            <thead>
+              <tr>
+                <th>Scope</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtubepartner</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube</code></td>
+              </tr>
+              <tr>
+                <td><code dir="ltr" translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="params">
+          <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+          <p>The following table lists the parameters that this query supports. All of the parameters listed are query
+            parameters.</p>
+          <table class="responsive details">
+            <thead>
+              <tr>
+                <th colspan="2">Parameters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="alt" id="required-parameters">
+                <td colspan="3"><b>Required parameters</b></td>
+              </tr>
+              <tr id="id">
+                <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  The <code dir="ltr" translate="no"><strong>id</strong></code> parameter specifies the YouTube playlist
+                  item ID for the playlist item that is being deleted. In a <code dir="ltr"
+                    translate="no">playlistItem</code> resource, the <code dir="ltr" translate="no">id</code> property
+                  specifies the playlist item's ID.</td>
+              </tr>
+              <tr class="alt" id="optional-parameters">
+                <td colspan="3"><b>Optional parameters</b></td>
+              </tr>
+              <tr id="onBehalfOfContentOwner">
+                <td><code dir="ltr" itemprop="property" translate="no">onBehalfOfContentOwner</code></td>
+                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                  <strong>Note:</strong> The <code dir="ltr"
+                    translate="no"><strong>onBehalfOfContentOwner</strong></code> parameter is intended exclusively for
+                  YouTube content partners and can only be used in a properly <a
+                    href="/youtube/v3/guides/authentication">authorized request</a>.<br /><br />This parameter is
+                  designed for YouTube content partners that own and manage many different YouTube channels. It enables
+                  users affiliated with the content owner to authenticate once and then be able to access and manage all
+                  of the content owner's video and channel data, without having to provide authentication credentials
+                  for each individual channel.<br /><br />When the parameter is present, its value identifies a content
+                  owner, and the request's authorization credentials identify a YouTube user who is authorized to act on
+                  behalf of that content owner. The account that the user authenticates with must be <a
+                    href="https://support.google.com/youtube/answer/4524878">linked to the specified content owner</a>
+                  in the YouTube Creator Studio settings.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="request_body">
+          <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+          <p>Do not provide a request body when calling this method.</p>
+        </section>
+      </section>
+      <section id="response">
+        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+        <p>If successful, this method returns an HTTP <code dir="ltr" translate="no">204 No Content</code> status code.
+        </p>
+      </section>
+      <section id="errors">
+        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+        <p>The following table identifies error messages that the API could return in response to a call to this method.
+          For more details, see <a href="/youtube/v3/docs/errors">YouTube Data API - Errors</a>.</p>
+        <table class="matchpre" id="property-table">
+          <thead>
+            <tr>
+              <th>Error type</th>
+              <th>Error detail</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="youtube.playlistItems.delete-forbidden-playlistItemsNotAccessible">
+              <td class="error-name"><code dir="ltr" translate="no">forbidden (403)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">playlistItemsNotAccessible</code></td>
+              <td class="error-cause">The request is not properly authorized to delete the specified playlist item.</td>
+            </tr>
+            <tr id="youtube.playlistItems.delete-notFound-playlistItemNotFound">
+              <td class="error-name"><code dir="ltr" translate="no">notFound (404)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property" translate="no">playlistItemNotFound</code>
+              </td>
+              <td class="error-cause">The playlist item identified with the request's <code dir="ltr"
+                  translate="no">id</code> parameter cannot be found.</td>
+            </tr>
+            <tr id="youtube.playlistItems.delete-invalidValue-playlistOperationUnsupported">
+              <td class="error-name"><code dir="ltr" translate="no">invalidValue (400)</code></td>
+              <td class="error-reason"><code dir="ltr" itemprop="property"
+                  translate="no">playlistOperationUnsupported</code></td>
+              <td class="error-cause">The API does not support the ability to delete videos from the specified playlist.
+                For example, you can't delete a video from your uploaded videos playlist.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="try-it">
+        <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+        <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API request and response.
+        </p>
+        <div class="devsite-apix">
+          <div class="apis-explorer" data-default-scopes="https://www.googleapis.com/auth/youtube.force-ssl"
+            data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+            data-method-id="youtube.playlistItems.delete" data-show-code-button="true"></div>
+        </div>
+      </section>
+      </meta>
+      </meta>
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

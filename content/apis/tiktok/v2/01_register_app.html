@@ -1,0 +1,278 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="register_your_app">Register Your App</h1>
+        <p style="text-align:left">To integrate with our products, you must connect your app to TikTok for Developers
+            and submit your app registration for review. This guide demonstrates how to connect an app, configure app
+            settings, and complete the submission process. </p>
+        <h2 id="prerequisites">Prerequisites</h2>
+        <p style="text-align:left">Before registering your app, do the following:</p>
+        <ol class="list-1" start="1" type="1">
+            <li>Create a TikTok developer account from <style data-emotion="css ap4ivw">
+                    .css-ap4ivw {
+                        font-size: inherit;
+                        color: var(--ui-text-primary-display);
+                    }
+
+                    .css-ap4ivw *:hover {
+                        -webkit-text-decoration: none !important;
+                        text-decoration: none !important;
+                    }
+
+                    .css-ap4ivw:hover {
+                        -webkit-text-decoration: underline;
+                        text-decoration: underline;
+                    }
+
+                    .css-ap4ivw:hover {
+                        -webkit-text-decoration: underline;
+                        text-decoration: underline;
+                    }
+                </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://developers.tiktok.com/signup"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">our signup page</span></a> using your email.</li>
+            <li>Create or join an <a href="/doc/working-with-organizations">organization</a> representing the owning
+                group of the app. This step is highly recommended but not required.</li>
+        </ol>
+        <h2 id="connect_your_app_">Connect your app </h2>
+        <p style="text-align:left">Follow these steps to add your app to TikTok for Developers.</p>
+        <ol class="list-1" start="3" type="1">
+            <li><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://developers.tiktok.com/login/"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Log in</span></a> using your TikTok developer account.
+            </li>
+            <li>Click the profile icon in the main navigation bar, then click <b><a class="css-ap4ivw"
+                        color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                        href="https://developers.tiktok.com/apps"><span
+                            class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                            style="color:inherit;font-size:inherit">Manage apps</span></a></b> to access a list of your
+                apps. </li>
+        </ol>
+        <div style="display:flex;justify-content:center"><img height="342.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/97aeb730722c715f40e7f10201fee74b"
+                width="402.000000px" /></div>
+        <div class="callout-warning">
+            <p style="text-align:left">Note: You won't have any apps if you just created a developer account.</p>
+        </div>
+        <ol class="list-1" start="5" type="1">
+            <li>Click the <b>Connect an app</b> button to register your app. </li>
+            <li>When prompted to <b>Select the app owner</b>, choose one of your organizations and click <b>Confirm</b>.
+                If you don't see any <a href="/doc/working-with-organizations">organizations</a>, consider creating one.
+                You may also register the app directly under your individual developer account, but this is not
+                recommended for real app integrations.</li>
+            <li><a href="#configure_settings_for_your_app">Fill in the information</a> on the app page and add the
+                desired products. </li>
+            <li>Once your app configuration is complete, <a href="#submit_your_app_for_review">submit your app for
+                    review</a>.</li>
+        </ol>
+        <p style="text-align:left">You can access this app page any time by going to the <b><a class="css-ap4ivw"
+                    color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://developers.tiktok.com/apps/"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Manage apps</span></a></b> page and clicking on the app.
+        </p>
+        <h3 id="app_page_navigation">App page navigation</h3>
+        <p style="text-align:left">The app page contains administrative controls and essential information about your
+            app and product configuration.</p>
+        <div style="display:flex;justify-content:center"><img height="495.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/30e4ec1a0f0bf5fd3dab0c3c589a85aa"
+                width="732.000000px" /></div>
+        <p style="text-align:left">At the top of the app page, you can perform the following operations: </p>
+        <ul class="list-1" type="disc">
+            <li>Click the info icon next to the app's name to display the <b>App ID</b> and <b>Ownership</b>.</li>
+        </ul>
+        <div style="display:flex;justify-content:center"><img height="45.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/a7eacc2ad813616be3c09fd45641994c"
+                width="316.000000px" /></div>
+        <ul class="list-1" type="disc">
+            <li>Toggle between <b>Production</b> mode and <b>Sandbox </b>mode: </li>
+            <ul class="list-2" type="circle">
+                <li><b>Production</b> mode contains the version of the app that must be submitted for review to be
+                    released to the public. This guide covers the configuration and review process for <b>Production</b>
+                    mode.</li>
+                <li><b>Sandbox</b> mode is a restricted environment that allows you to try out integrations without
+                    having to submit your app for review. Learn more about <a href="/doc/add-a-sandbox">Sandbox
+                        mode</a>.</li>
+            </ul>
+            <li>Click the <b>URL properties</b> button to verify URL properties for Content Posting API.</li>
+            <li>Click the history icon button to access a <b>Changelog</b> and any <b>Review comments</b> if your app
+                was not approved after submission.</li>
+            <li>Click the <b>More Options</b> [<b>...</b>] button to transfer app ownership or delete the app.</li>
+        </ul>
+        <p style="text-align:left">Use the left navigation panel to view your app's review status, app details, and
+            products. </p>
+        <ul class="list-1" type="disc">
+            <li>View your app's review status under <b>Production</b>. If you just created an app, it will be in
+                <b>Draft</b> status.
+            </li>
+            <li>Click <b>App details</b>, <b>Products</b>, or <b>Scopes</b> to scroll the page to the corresponding
+                section. </li>
+            <ul class="list-2" type="circle">
+                <li>In the <b>Products</b> section, click the <b>Add products</b> button to choose from a list of
+                    integrations. Learn more about <a href="#products">adding products</a><b>.</b></li>
+                <li>In the <b>Scopes</b> section, you can add scopes to configure access to specific data or perform
+                    specific actions. Learn more about <a href="/doc/">scopes</a>. </li>
+            </ul>
+        </ul>
+        <h2 id="configure_settings_for_your_app">Configure settings for your app</h2>
+        <p style="text-align:left">Fill out the requested details and add your desired products to your app. </p>
+        <h3 id="app_details">App details</h3>
+        <p style="text-align:left">The <b>App details</b> section contains essential details about your app's
+            credentials, display information, and intended platforms. </p>
+        <h4 id="credentials">Credentials</h4>
+        <p style="text-align:left">The <b>Credentials</b> section contains <b>Client key</b> and <b>Client secret,
+            </b>which are necessary for your application to invoke TikTok APIs. </p>
+        <h4 id="basic_information_">Basic information </h4>
+        <p style="text-align:left">The<b> Basic information</b> section contains details that will be displayed to users
+            and help us understand your app. </p>
+        <ul class="list-1" type="disc">
+            <li><b>App icon </b>and <b>App name</b> are displayed whenever your app is present in the TikTok ecosystem.
+                Your app icon must meet the following specifications: </li>
+            <ul class="list-2" type="circle">
+                <li>1024 x 1024 px</li>
+                <li>JPEG, JPG, or PNG</li>
+                <li>Up to 5 MB </li>
+            </ul>
+        </ul>
+        <div style="display:flex;justify-content:center"><img height="284.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/23830cda73f72d2f5eaee249228c709e"
+                width="266.000000px" /></div>
+        <ul class="list-1" type="disc">
+            <li><b>Category</b> helps us better understand your app.</li>
+            <li><b>Description</b> helps the user understand your app. TikTok displays the description when a user views
+                the app authorization page.</li>
+        </ul>
+        <div style="display:flex;justify-content:center"><img height="584.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/a6f52b5243fe4150c241041cba503c4a"
+                width="272.000000px" /></div>
+        <h4 id="platforms">Platforms</h4>
+        <p style="text-align:left">You can run your app on different platforms including Web, Android, iOS and Desktop.
+            Select your intended platforms and then provide the requested details.</p>
+        <ul class="list-1" type="disc">
+            <li><b>Web</b> and<b> Desktop</b> require the URL of your official website.</li>
+            <li><b>Android</b> requires your app's package name, Play Store URL, app signature, and signing certificate.
+                These are used to verify your app's identity when you invoke TikTok APIs. Provide your Play Store URL to
+                help us better understand your app.</li>
+            <li><b>iOS</b> requires the App Store URL and Bundle ID. These are used to verify your app's identity when
+                you invoke TikTok APIs. Provide your App Store URL to help us better understand your app.</li>
+        </ul>
+        <h3 id="products">Products</h3>
+        <p style="text-align:left">Click the <b>Add products</b> button in the <b>Products </b>section. Choose from a
+            list of products to add to your app. Items appear under the <b>Products</b> section after you add them. </p>
+        <h4 id="login_kit_settings_example">Login Kit settings example</h4>
+        <p style="text-align:left">Each product has its own specific settings. For example, examine the product-specific
+            settings for <a href="/doc/login-kit-overview">Login Kit</a>.</p>
+        <ul class="list-1" type="disc">
+            <li>Web, iOS, Android and Desktop require a <b>Redirect URI</b> to return an authorization code back to your
+                app.</li>
+            <ul class="list-2" type="circle">
+                <li>Android's redirect URI must be an <a class="css-ap4ivw" color="var(--ui-text-primary-display)"
+                        data-e2e="StyledLink" href="https://developer.android.com/training/app-links"><span
+                            class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                            style="color:inherit;font-size:inherit">App Link</span></a> or <a class="css-ap4ivw"
+                        color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                        href="https://developer.android.com/training/app-links#deep-links"><span
+                            class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                            style="color:inherit;font-size:inherit">Deep Link</span></a>.</li>
+                <li>iOS's redirect URI must be a <a class="css-ap4ivw" color="var(--ui-text-primary-display)"
+                        data-e2e="StyledLink" href="https://developer.apple.com/ios/universal-links/"><span
+                            class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                            style="color:inherit;font-size:inherit">Universal Link</span></a> and your app must have the
+                    <a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                        href="https://developer.apple.com/documentation/xcode/supporting-associated-domains?language=objc"><span
+                            class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                            style="color:inherit;font-size:inherit">Associated Domain</span></a> capability.
+                </li>
+            </ul>
+        </ul>
+        <h2 id="verify_url_ownership">Verify URL ownership</h2>
+        <div class="callout-warning">
+            <p style="text-align:left">Note: For Sandbox environments, URL verification is only required for Content
+                Posting API. </p>
+        </div>
+        <p style="text-align:left">Before submitting your app for review, you must verify URL properties for all URLs in
+            your app configuration. Some features require URL verification before they can be used, like Link Sharing
+            (beta). There are two cases for URL verification, depending on when the app was created. </p>
+        <ul class="list-1" type="disc">
+            <li>For apps created after September 9, 2024, the following URLs require verification:</li>
+            <ul class="list-2" type="circle">
+                <li>Terms of Service URL</li>
+                <li>Privacy Policy URL</li>
+                <li>Web or Desktop URL</li>
+            </ul>
+            <li>All apps that use the Content Posting API upload URL or the Link Sharing URL must verify these URLs,
+                regardless of when the app was created.</li>
+        </ul>
+        <p style="text-align:left">To verify URL properties, complete the following steps:</p>
+        <ol class="list-1" start="1" type="1">
+            <li>Click the <b>URL properties</b> button at the top of your app page. </li>
+        </ol>
+        <div style="display:flex;justify-content:center"><img height="131.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/3fce2de336142aa54a1a2f17fb562922"
+                width="296.000000px" /></div>
+        <ol class="list-1" start="2" type="1">
+            <li>Ensure you are verifying properties for your app in <b>Production</b> mode, then click <b>Verify
+                    properties</b>.</li>
+            <li>Choose whether to verify your URL by <b>Domain</b> or <b>URL prefix</b>:</li>
+            <ol class="list-2" start="1" type="a">
+                <li>For verification by Domain, enter your domain and subdomain name, then click <b>Verify</b>. </li>
+                <li>For verification by URL prefix, enter your complete URL, then click <b>Verify</b>. Download the
+                    provided signature file, then upload it to your URL. </li>
+            </ol>
+        </ol>
+        <h2 id="submit_your_app_for_review">Submit your app for review</h2>
+        <p style="text-align:left">Before you integrate with our developer products, you must submit your app for
+            review. Familiarize yourself with our <a href="/doc/our-guidelines-developer-guidelines">developer
+                guidelines</a> and <a href="/doc/app-review-guidelines">app review guidelines</a> to understand our
+            integration processes and requirements before submitting your changes for review.</p>
+        <p style="text-align:left">Follow these steps to submit your app for review. </p>
+        <ol class="list-1" start="1" type="1">
+            <li>Go to the <b>App review</b> section on your app page and complete the required information for app
+                submission. </li>
+            <ol class="list-2" start="1" type="a">
+                <li>In detail, explain how each product and scope works within your app or website. For revisions, you
+                    must explain changes regarding the new configuration in this section. </li>
+                <li>Upload at least one demo video that shows the complete end-to-end flow of the integrations. You may
+                    upload a maximum of 5 videos, up to 50 MB each. </li>
+            </ol>
+            <li>Click the <b>Save </b>button to save your changes. </li>
+            <li>Once you are satisfied with your app configuration, click the <b>Submit for review</b> button.</li>
+        </ol>
+        <p style="text-align:left">TikTok for Developers will start reviewing your app once it is submitted. </p>
+        <h2 id="app_review_status">App review status</h2>
+        <p style="text-align:left">The status of your app review is visible under <b>Production</b> in the left
+            navigation panel. </p>
+        <ul class="list-1" type="disc">
+            <li><b>Draft</b>: Your app has not been submitted for review yet.</li>
+            <li><b>In review:</b> Your app has been submitted for review and approval is pending. No further changes can
+                be made at this stage.</li>
+            <ul class="list-2" type="circle">
+                <li>If you want to make changes, click the <b>Recall</b> button to withdraw the app from review and
+                    return it to draft status. </li>
+            </ul>
+            <li><b>Live:</b> Your current revision of the app was approved and integrations are live.</li>
+            <ul class="list-2" type="circle">
+                <li>If you want to make changes, click the <b>Create revision</b> button to create a <b>Draft</b> cloned
+                    from the <b>Live</b> version. You may modify this draft version without compromising your live
+                    configuration. </li>
+            </ul>
+            <li><b>Not approved:</b> After reviewing your app, we determined it did not meet our criteria. <b>Review
+                    comments</b> will be displayed on your app page and <b>History</b> with suggested actions. Complete
+                the suggested actions and resubmit your app for review.</li>
+        </ul>
+        <p style="text-align:left">Once your app is approved and live, any subsequent changes must be submitted for
+            review and approved to appear in the live release.</p><br />
+    </div>
+</div>

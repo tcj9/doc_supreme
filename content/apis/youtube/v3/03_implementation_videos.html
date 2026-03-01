@@ -1,0 +1,428 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Implementation: Videos<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>This content explains how to use the YouTube Data API (v3) to perform video-related functions, such as
+              retrieving, uploading, updating, deleting, and reporting videos.</p>
+          </li>
+          <li>
+            <p>You can retrieve a channel's uploaded videos by first getting the playlist ID from the
+              <code>channels.list</code> method and then using the <code>playlistItems.list</code> method.</p>
+          </li>
+          <li>
+            <p>The API allows for the retrieval of YouTube's most popular videos, filtered by region and/or category,
+              using the <code>videos.list</code> method with the <code>chart</code> parameter set to
+              <code>mostPopular</code>.</p>
+          </li>
+          <li>
+            <p>To check the processing status of an uploaded video, you can use the <code>videos.list</code> method and
+              examine the <code>processingDetails.processingStatus</code> property, after uploading it with
+              <code>videos.insert</code>.</p>
+          </li>
+          <li>
+            <p>The <code>videos.reportAbuse</code> method allows users to report videos for abusive content by providing
+              a reason and optional secondary reason IDs obtained from the <code>videoAbuseReportReasons.list</code>
+              method.</p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <p>The following examples show how to use the YouTube Data API (v3) to perform functions related to videos.</p>
+    <h2 data-text="Retrieve a channel's uploaded videos" id="videos-retrieve-uploads" tabindex="-1">Retrieve a channel's
+      uploaded videos</h2>
+    <div style="padding-left: 25px">
+      <p>This example retrieves the videos uploaded to a particular channel. The example has two steps:</p>
+      <ul>
+        <li>
+          <p><b>Step 1: Retrieve the playlist ID for the channel's uploaded videos</b></p>
+          <p>Call the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/channels/list">channels.list</a></code>
+            method to retrieve the ID of the playlist that contains the channel's uploaded videos. The request's <code
+              dir="ltr" translate="no">part</code> parameter value must include <code dir="ltr"
+              translate="no">contentDetails</code> as one of the <code dir="ltr" translate="no">channel</code> resource
+            parts being retrieved. In the API response, the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/channels#contentDetails.relatedPlaylists.uploads">contentDetails.relatedPlaylists.uploads</a></code>
+            property contains the playlist ID.</p>
+          <p> There are several ways to identify the channel:</p>
+          <ul>
+            <li>
+              <p>Set the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/channels/list#mine">mine</a></code>
+                parameter value to <code dir="ltr" translate="no">true</code> to retrieve information for the currently
+                authenticated user's YouTube channel. Your request must be authorized using OAuth 2.0.</p>
+              <div></div><devsite-code>
+                <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?part=contentDetails&amp;mine=true">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?
+        part=contentDetails
+        &amp;mine=true</a></pre>
+              </devsite-code>
+            </li>
+            <li>
+              <p>Set the <code dir="ltr"
+                  translate="no"><a href="/youtube/v3/docs/channels/list#forUsername">forUsername</a></code> parameter
+                to a YouTube username to retrieve information for the channel associated with that username. This
+                example sets the <code dir="ltr" translate="no">forUsername</code> parameter value to <code dir="ltr"
+                  translate="no">Google</code> to retrieve information for Google's official YouTube channel.</p>
+              <div></div><devsite-code>
+                <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?part=contentDetails&amp;forUsername=Google">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?
+        part=contentDetails
+        &amp;forUsername=Google</a></pre>
+              </devsite-code>
+            </li>
+            <li>
+              <p>Set the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/channels/list#id">id</a></code>
+                parameter to the YouTube channel ID that uniquely identifies the channel for which you are retrieving
+                information. This example sets the <code dir="ltr" translate="no">id</code> parameter to <code dir="ltr"
+                  translate="no">UCK8sQmJBp8GCxrOtXWBpyEA</code>, which also identifies Google's official YouTube
+                channel.</p>
+              <div></div><devsite-code>
+                <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?part=contentDetails&amp;id=UCK8sQmJBp8GCxrOtXWBpyEA">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?
+        part=contentDetails
+        &amp;id=UCK8sQmJBp8GCxrOtXWBpyEA</a></pre>
+              </devsite-code>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p><b>Step 2: Retrieve the list of uploaded videos</b></p>
+          <p>Call the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/playlistItems/list">playlistItems.list</a></code> method to
+            retrieve the list of uploaded videos. Set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/playlistItems/list#playlistId">playlistId</a></code> parameter's
+            value to the value obtained in step 1. In this example, the parameter value is set to <code dir="ltr"
+              translate="no">UUK8sQmJBp8GCxrOtXWBpyEA</code>, which is the list of videos uploaded to Google's official
+            YouTube channel.</p>
+          <div></div><devsite-code>
+            <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.playlistItems.list?part=snippet%252CcontentDetails%252Cstatus&amp;playlistId=UUK8sQmJBp8GCxrOtXWBpyEA">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.playlistItems.list?
+        part=snippet,contentDetails,status
+        &amp;playlistId=UUK8sQmJBp8GCxrOtXWBpyEA</a></pre>
+          </devsite-code>
+        </li>
+      </ul>
+    </div>
+    <h2 data-text="Retrieve most popular videos" id="videos-retrieve-most-popular-videos" tabindex="-1">Retrieve most
+      popular videos</h2>
+    <div style="padding-left: 25px">
+      <p>This example shows how to retrieve a list of YouTube's most popular videos, which are selected using an
+        algorithm that combines many different signals to determine overall popularity.</p>
+      <p>To retrieve the most popular videos list, call the <code dir="ltr" translate="no">videos.list</code> method and
+        set the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos/list#chart">chart</a></code> parameter's
+        value to <code dir="ltr" translate="no">mostPopular</code>.
+        The <code dir="ltr" translate="no">mostPopular</code> chart includes trending music, movies, and gaming videos.
+      </p>
+      <p>Then, you can optionally set the following parameters:</p>
+      <ul>
+        <li><code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos/list#regionCode">regionCode</a></code>:
+          Instructs the API to return a list of videos for the specified region. The parameter value is an ISO 3166-1
+          alpha-2 country code. You can use the <a href="/youtube/v3/docs/i18nRegions/list"><code dir="ltr"
+              translate="no">i18nRegions.list</code></a> method to retrieve a list of region codes that YouTube
+          supports.</li>
+        <li><code dir="ltr"
+            translate="no"><a href="/youtube/v3/docs/videos/list#videoCategoryId">videoCategoryId</a></code>: Identifies
+          the video category for which the most popular videos should be retrieved. You can use the <a
+            href="/youtube/v3/docs/videoCategories/list"><code dir="ltr" translate="no">videoCategories.list</code></a>
+          method to retrieve a list of category IDs that YouTube supports.</li>
+      </ul>
+      <p>For example, the following request retrieves the most popular sports videos in Spain:</p>
+      <div></div><devsite-code>
+        <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.list?part=snippet&amp;chart=mostPopular®ionCode=es&amp;videoCategoryId=17">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.list?
+        part=snippet
+        &amp;chart=mostPopular
+        &amp;regionCode=es
+        &amp;videoCategoryId=17</a>
+  </pre>
+      </devsite-code>
+    </div>
+    <h2 data-text="Upload a video" id="videos-upload" tabindex="-1">Upload a video</h2>
+    <div style="padding-left: 25px">
+      <p>Since the APIs Explorer does not support the ability to upload files, this description does not link to an
+        executable example. The following resources will help you to modify your application so that it can upload
+        videos using the v3 API:</p>
+      <ul>
+        <li>
+          <p>The documentation for the API's <a href="/youtube/v3/docs/videos/insert">videos.insert</a> method contains
+            several code samples that explain how to upload a video using different programming languages.</p>
+        </li>
+        <li>
+          <p>The <a href="/youtube/v3/guides/using_resumable_upload_protocol">Resumable Uploads</a> guide explains the
+            sequence of HTTP requests that an application uses to upload videos using a resumable uploading process. The
+            guide is primarily intended for developers who cannot use the <a href="/youtube/v3/libraries">Google API
+              client libraries</a>, some of which provide native support for resumable uploads.</p>
+        </li>
+        <li>
+          <p>The JavaScript example for <a href="/youtube/v3/code_samples/javascript#upload_video">uploading a video</a>
+            uses CORS (cross-origin resource sharing) to demonstrate how to upload a video file via a web page. The CORS
+            upload library that the v3 API uses naturally supports resumable uploading. In addition, the example
+            demonstrates how to check the status of an uploaded video by retrieving the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/videos#processingDetails">processingDetails</a></code> part of
+            the <code dir="ltr" translate="no">video</code> resource as well as how to handle status changes for the
+            uploaded video.</p>
+        </li>
+      </ul>
+    </div>
+    <h2 data-text="Check the status of an uploaded video" id="videos-upload-check-status" tabindex="-1">Check the status
+      of an uploaded video</h2>
+    <div style="padding-left: 25px">
+      <p>This example shows how to check the status of an uploaded video. An uploaded video will immediately be visible
+        in the authenticated user's uploaded videos feed. However, the video will not be visible on YouTube until it has
+        been processed.</p>
+      <ul>
+        <li>
+          <p><b>Step 1: Upload the video</b></p>
+          <p>Call the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos/insert">videos.insert</a></code>
+            method to <a href="#videos-upload">upload the video</a>. If the request is successful, the API response will
+            contain a <code dir="ltr" translate="no">video</code> resource that identifies the unique video ID for the
+            uploaded video.</p>
+        </li>
+        <li>
+          <p><b>Step 2: Check the video's status</b></p>
+          <p>Call the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos/list">videos.list</a></code>
+            method to check the video's status. Set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/videos/list#id">id</a></code> parameter's value to the video ID
+            obtained in step 1. Set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/videos/update#part">part</a></code> parameter's value to <code
+              dir="ltr" translate="no">processingDetails</code>.</p>
+          <p>If the request is handled successfully, the API response will contain a <code dir="ltr"
+              translate="no">video</code> resource. Check the value of the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/videos#processingDetails.processingStatus">processingDetails.processingStatus</a></code>
+            property to determine whether YouTube is still processing the video. The property's value will change to
+            something other than <code dir="ltr" translate="no">processing</code>, such as <code dir="ltr"
+              translate="no">succeeded</code> or <code dir="ltr" translate="no">failed</code>, when YouTube has finished
+            processing the video.</p>
+          <p>The request body is a <code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos">video</a></code>
+            resource in which the <code dir="ltr" translate="no">id</code> property specifies the video ID of the video
+            that you are deleting. In this example, the resource also contains a <code dir="ltr"
+              translate="no">recordingDetails</code> object.</p>
+          <p>The request below checks the status of a video. To complete the request in the APIs Explorer, you need to
+            set the <code dir="ltr" translate="no">id</code> property's value.</p>
+          <div></div><devsite-code>
+            <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.list?part=snippet%252CprocessingDetails&amp;id=VIDEO_ID">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.list?
+        part=snippet,processingDetails
+        &amp;id=VIDEO_ID</a></pre>
+          </devsite-code>
+        </li>
+      </ul>
+      <p class="note"><b>Note:</b> Your application could poll the API to periodically check the status of a newly
+        uploaded video. Once the video is processed, your application could create a bulletin or proceed with another
+        action contingent on the video's status.</p>
+    </div>
+    <h2 data-text="Update a video" id="videos-update" tabindex="-1">Update a video</h2>
+    <div style="padding-left: 25px">
+      <p>This example shows how to update a video to add information about the time and place where the video was
+        recorded. The example has the following steps:</p>
+      <ul>
+        <li>
+          <p><b>Step 1: Retrieve the video ID</b></p>
+          <p>Follow the steps above to <a href="#videos-retrieve-uploads">retrieve uploaded videos</a> for the currently
+            authenticated user's channel. The list could be used to display a list of videos, using each video's ID as a
+            key.</p>
+          <p class="note"><b>Note:</b> There are numerous other ways to obtain video IDs, such as retrieving search
+            results or listing items in a playlist. However, since a video can only be updated by its owner, retrieving
+            a list of videos owned by the user authorizing the API request is a likely first step in this process.</p>
+        </li>
+        <li>
+          <p><b>Step 2: Update a video</b></p>
+          <p>Call the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos/update">videos.update</a></code>
+            method to update a specific video. Set the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/videos/update#part">part</a></code> parameter's value to <code
+              dir="ltr" translate="no">recordingDetails</code>. (The parameter value depends on which video's metadata
+            fields are being updated.)</p>
+          <p>The request body is a <code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos">video</a></code>
+            resource in which the <code dir="ltr" translate="no">id</code> property specifies the video ID of the video
+            that you are updating. In this example, the resource also contains a <code dir="ltr"
+              translate="no">recordingDetails</code> object.</p>
+          <p>The sample resource below indicates that the video was recorded on October 30, 2013, in Boston:</p>
+          <div></div><devsite-code>
+            <pre dir="ltr" is-upgraded="" translate="no">{
+  "id": "VIDEO_ID",
+  "recordingDetails": {
+    "location": {
+      "latitude": "42.3464",
+      "longitude": "-71.0975"
+    }
+    "recordingDate": "2013-10-30T23:15:00.000Z"
+  }
+}</pre>
+          </devsite-code>
+          <p>To complete the request in the APIs Explorer, you need to set the <code dir="ltr" translate="no">id</code>
+            property's value.</p>
+          <div></div><devsite-code>
+            <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.update?part=recordingDetails&amp;resource=%257B%250A++%2522id%2522%253A+%2522VIDEO_ID%2522%252C%250A%2522recordingDetails%2522%253A+%250A++%257B%250A++++%2522location%2522%253A%250A++++++%257B%250A++++++++%2522latitude%2522%253A+%252242.3464%2522%252C%250A++++++++%2522longitude%2522%253A+%2522-71.0975%2522%250A++++++%257D%252C%250A++++%2522recordingDate%2522%253A+%25222013-10-30T23%253A15%253A00.000Z%2522%250A++%257D%250A%257D">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.update?
+        part=snippet</a></pre>
+          </devsite-code>
+        </li>
+      </ul>
+    </div>
+    <h2 data-text="Upload a custom thumbnail image and set it for a video" id="videos-set-thumbnail" tabindex="-1">
+      Upload a custom thumbnail image and set it for a video</h2>
+    <div style="padding-left: 25px">
+      <p>You can use the v3 API's <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/thumbnails/set">thumbnails.set</a></code> method to upload a custom
+        thumbnail image and set it for a video. In your request, the <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/thumbnails/set#videoId">videoId</a></code> parameter's value
+        identifies the video for which the thumbnail will be used.</p>
+      <p>This query cannot be tested using the APIs Explorer because the APIs Explorer does not support the ability to
+        upload media files, which is a requirement for this method.</p>
+      <p>Related code samples: <a href="/youtube/v3/code_samples/php#uploading_a_custom_thumbnail_for_a_video">PHP</a>,
+        <a href="/youtube/v3/code_samples/python#upload_a_video_thumbnail_image">Python</a></p>
+    </div>
+    <h2 data-text="Delete a video" id="videos-delete" tabindex="-1">Delete a video</h2>
+    <div style="padding-left: 25px">
+      <p>This example shows how to delete a video. The example has the following steps:</p>
+      <ul>
+        <li>
+          <p><b>Step 1: Retrieve the video ID</b></p>
+          <p>Follow the steps above to <a href="#videos-retrieve-uploads">retrieve uploaded videos</a> for the currently
+            authenticated user's channel. The list could be used to display a list of videos, using each video's ID as a
+            key.</p>
+          <p class="note"><b>Note:</b> There are numerous other ways to obtain video IDs, such as retrieving search
+            results or listing items in a playlist. However, since a video can only be deleted by its owner, retrieving
+            a list of videos owned by the user authorizing the API request is a likely first step in this process.</p>
+        </li>
+        <li>
+          <p><b>Step 2: Delete a video</b></p>
+          <p>Call the <code dir="ltr" translate="no"><a href="/youtube/v3/docs/videos/delete">videos.delete</a></code>
+            method to delete a specific video. In the request, the <code dir="ltr" translate="no">id</code> parameter
+            specifies the video ID of the video that you are deleting. The request must be authorized using OAuth 2.0.
+            If you are testing this query in the APIs Explorer, you will need to substitute a valid video ID for the
+            <code dir="ltr" translate="no">id</code> parameter value.</p>
+          <div></div><devsite-code>
+            <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.delete?id=VIDEO_ID">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.delete?
+        id=VIDEO_ID
+</a></pre>
+          </devsite-code>
+        </li>
+      </ul>
+    </div>
+    <h2 data-text="Report an abusive video" id="videos-report-abuse" tabindex="-1">Report an abusive video</h2>
+    <div style="padding-left: 25px">
+      <p>This example shows how to report a video that contains abusive content. The example has the following steps:
+      </p>
+      <ul>
+        <li>
+          <p><b>Step 1: Retrieve IDs that explain why the video is being reported</b></p>
+          <p>Send an authorized request to the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/videoAbuseReportReasons/list">videoAbuseReportReasons.list</a></code>
+            method to retrieve a list of valid reasons for flagging a video. The sample <code dir="ltr"
+              translate="no">videoAbuseReportReason</code> resource below contains information for flagging a video that
+            contains spam or misleading content.</p>
+          <div></div><devsite-code>
+            <pre dir="ltr" is-upgraded="" translate="no">{
+  "kind": "youtube#videoAbuseReportReason",
+  "etag": "\"tbWC5XrSXxe1WOAx6MK9z4hHSU8/Or2VqBIilpHU7j__oPzUFCvGVBw\"",
+  "id": "S",
+  "snippet": {
+    "label": "Spam or misleading",
+    "secondaryReasons": [
+      {
+        "id": "27",
+        "label": "Spam or mass advertising"
+      },
+      {
+        "id": "28",
+        "label": "Misleading thumbnail"
+      },
+      {
+        "id": "29",
+        "label": "Malware or phishing"
+      },
+      {
+        "id": "30",
+        "label": "Pharmaceutical drugs for sale"
+      },
+      {
+        "id": "31",
+        "label": "Other misleading info"
+      }
+    ]
+  }
+}</pre>
+          </devsite-code>
+          <p>As shown in the resource, this reason is associated with a list of secondary reasons. When flagging a video
+            for containing spam, you need to provide the ID for the reason and are strongly encouraged to provide a
+            secondary reason as well.</p>
+        </li>
+        <li>
+          <p><b>Step 2: Flag the video for abusive content</b></p>
+          <p>Send an authorized request to the <code dir="ltr"
+              translate="no"><a href="/youtube/v3/docs/videos/reportAbuse">videos.reportAbuse</a></code> method to
+            actually report the video. The request body is a JSON object that identifies both the video being flagged
+            and the reason it is being flagged. As noted in step 1, for some types of reasons, a secondary reason is
+            supported and strongly encouraged.</p>
+          The JSON object's <code dir="ltr" translate="no">videoId</code> property identifies the video that is being
+          flagged.
+          <p>The sample JSON object below flags a video for containing spam or misleading content and, more
+            specifically, for using a misleading thumbnail image. As shown in the sample JSON object above, the ID for
+            <b>Spam or misleading</b> content is <b>S</b>. The ID for a <b>Misleading thumbnail</b> is <b>28</b>.</p>
+          <div></div><devsite-code>
+            <pre dir="ltr" is-upgraded="" translate="no">{
+  "videoId": "VIDEO_ID",
+  "reasonId": "S",
+  "secondaryReasonId": "28",
+  "comments": "Testing the video flagging feature.",
+  "language": "en"
+}</pre>
+          </devsite-code>
+          <p>The <code dir="ltr" translate="no">videos.reportAbuse</code> request must be authorized using OAuth 2.0.
+            The link below loads the JSON object above in the APIs Explorer. To test the query, you need to substitute a
+            valid video ID for the <code dir="ltr" translate="no">videoId</code> property value. Please remember that
+            submitting this request will actually flag the video.</p>
+          <div></div><devsite-code>
+            <pre class="query notranslate" dir="ltr" is-upgraded="">
+<a href="https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.reportAbuse?_h=1&amp;resource=%257B%250A++%2522reasonId%2522%253A+%2522S%2522%252C%250A++%2522videoId%2522%253A+%2522VIDEO_ID%2522%252C%250A++%2522secondaryReasonId%2522%253A+%252228%2522%252C%250A++%2522comments%2522%253A+%2522Testing+the+API%2522%252C%250A++%2522language%2522%253A+%2522%2522%250A%257D&amp;">https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.reportAbuse</a></pre>
+          </devsite-code>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

@@ -1,0 +1,453 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_8T">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1>Login Button</h1>
+                            <p>The Login button is a simple way to trigger the <a
+                                    href="/docs/facebook-login/login-flow-for-web/">Facebook Login process</a> on your
+                                website or web app.</p>
+                            <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/294967112_614766366879300_4791806768823542705_n.png?_nc_cat=105&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=rNiipUlhw68Q7kNvwFSIQG4&amp;_nc_oc=Adm-aYOFGxq0GNPRL0XcdRdpdK5wsgl1pX_rqR860temi85-hIg_pQ-CJELjGdf4IbI&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=tv-moRWb9zbp_yZFxkJBEw&amp;oh=00_AfurK-inaYY6vWgN8ncOt0f0nBvWBTKOYayicWhe8K7TqA&amp;oe=69A0FCA4"
+                                width="450" />
+                            <p>If someone hasn't logged into your app yet, they'll see this button, and clicking it will
+                                open a Login dialog, starting the <a
+                                    href="/docs/facebook-login/login-flow-for-web/">login flow</a>. People who have
+                                already logged in won't see any button, or you can also choose to show a logout button
+                                to them.</p>
+                            <p>If you show a logout button, when people use it to log out, they log out both from your
+                                app and from Facebook.</p>
+                            <p>The Login button is only designed to work in connection with the <a
+                                    href="/docs/facebook-login/login-flow-for-web/">JavaScript SDK</a> — if you're
+                                building a mobile app or can't use our JavaScript SDK, you should follow the <a
+                                    href="/docs/facebook-login/">login flow guide for that type of app</a> instead.</p>
+                            <p>The <strong>Continue with Facebook</strong> button replaces earlier versions of the Login
+                                button. For more information, see <a href="#migration">Migration</a>.</p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="continueas">Continue as {Name} Button</h2>
+                            <p>The <strong>Continue as {Name}</strong> button has the text "Continue as {persons' name}"
+                                and optionally includes the person's Facebook profile picture if they're logged in to
+                                Facebook in the same browser. To use the <strong>Continue as {Name}</strong> button, you
+                                must first load the JavaScript SDK. For instructions on setting up the JavaScript SDK,
+                                see the <a href="/docs/javascript/quickstart">JavaScript SDK Quickstart</a>. Enable
+                                <strong>Continue as {Name}</strong> by adding <code>data-use-continue-as="true"</code>
+                                to the settings for your button.
+                            </p>
+                            <img alt="" class="img"
+                                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/17629395_1326967620719254_3698419651668082688_n.png?_nc_cat=104&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=3l3GLWR1aO0Q7kNvwGmmyw6&amp;_nc_oc=AdkkUpxwofhL0emT1RiLRQowFJQzCbO4MtAiyN2HFjErvCI6UAUsL5iRp1cPAD_C_s4&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=tv-moRWb9zbp_yZFxkJBEw&amp;oh=00_Aftph-94vs22jsrLtnMKoy0go2p8Vsyk5GUbthZ9Hn-6Mg&amp;oe=69A0EE7A"
+                                width="400" />
+                            <p>The height of the <strong>Continue as {Name}</strong> button is not customizable.</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <th>Button Size</th>
+                                        <th>Height</th>
+                                        <th>Width</th>
+                                        <th>Custom Widths?</th>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_2_ly">
+                                        <tr class="row_0">
+                                            <td>
+                                                <p>Small</p>
+                                            </td>
+                                            <td>
+                                                <p>20 px</p>
+                                            </td>
+                                            <td>
+                                                <p>200 px</p>
+                                            </td>
+                                            <td>
+                                                <p>No</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_1 _5m29">
+                                            <td>
+                                                <p>Medium</p>
+                                            </td>
+                                            <td>
+                                                <p>28 px</p>
+                                            </td>
+                                            <td>
+                                                <p>200 - 320 px</p>
+                                            </td>
+                                            <td>
+                                                <p>Yes</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_2">
+                                            <td>
+                                                <p>Large</p>
+                                            </td>
+                                            <td>
+                                                <p>40px</p>
+                                            </td>
+                                            <td>
+                                                <p>240 - 400 px</p>
+                                            </td>
+                                            <td>
+                                                <p>Yes</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>If the you select a size beyond the maximum parameters, the button will default to the
+                                maximum width.</p>
+                            <h3 id="cabestpractices">Best Practices for the <strong>Continue as {Name}</strong> Button
+                            </h3>
+                            <p>The <strong>Continue As {Name}</strong> button can be a great way to increase clicks and
+                                engagement. It lets the user see their profile picture and name on our Login button and
+                                can help make your app feel more personalized.</p>
+                            <p>As a result, it can also be confusing if the user isn't expecting to see their name and
+                                profile photo in this context. Please consider the following to see if <strong>Continue
+                                    As</strong> is best for your app.</p>
+                            <p>Even if the <strong>Continue As {Name}</strong> is not right for your app, you can still
+                                try the new JavaScript SDK buttons that say "Continue With Facebook".</p>
+                            <h4>Suggested Use Cases</h4>
+                            <p>We serve a global user base and different regions have different user expectations. Be
+                                respectful of those expectations when using this button.</p>
+                            <h5>Best when</h5>
+                            <ul>
+                                <li>
+                                    <p><em>Your app is social:</em><br />
+                                        When people are using social apps, they expect to connect with others. We have
+                                        seen <strong>Continue As {Name}</strong> perform well in these cases.</p>
+                                </li>
+                                <li>
+                                    <p><em>People in the target market share phones:</em><br />
+                                        When multiple people are using the same phone, <strong>Continue As
+                                            {Name}</strong> can give them reassurance that they are using the right
+                                        account.</p>
+                                </li>
+                            </ul>
+                            <h5>Avoid when</h5>
+                            <ul>
+                                <li>
+                                    <p><em>Your app is new:</em><br />
+                                        If your app is new to market, your users may be more likely to be confused about
+                                        why their name and profile photo are showing automatically, versus an
+                                        established or familiar app users plan to use on a regular basis.</p>
+                                </li>
+                                <li>
+                                    <p><em>People in the target market are concerned about privacy:</em><br />
+                                        In many countries, profile images are considered very private. You may want to
+                                        avoid using <strong>Continue As {Name}</strong> in this case as it will show the
+                                        profile image of the person logging in.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2>Login Button Best Practices</h2>
+                            <p>Please follow the general <a href="/docs/facebook-login/best-practices">Best
+                                    Practices</a> for using Facebook Login. It is particularly important to follow these
+                                two best practices when using <strong>Continue As {Name}</strong>:</p>
+                            <ul>
+                                <li>Provide a way to log out (required by policy)</li>
+                                <li>Test and Measure — Identify what impact this is having on user perceptions and
+                                    conversion</li>
+                            </ul>
+                            <p>Some other possible best practices:</p>
+                            <ul>
+                                <li>Be clear about what Logging in Does</li>
+                                <li>Use a placeholder/spinner while the Login button is loading and remove it when
+                                    button is loaded. An example of such code:</li>
+                            </ul>
+                            <pre class="_5s-8 prettyprint lang-code" style="">&lt;script&gt;
+var finished_rendering = function() {
+  console.log("finished rendering plugins");
+  var spinner = document.getElementById("spinner");
+  spinner.removeAttribute("style");
+  spinner.removeChild(spinner.childNodes[0]);
+}
+FB.Event.subscribe('xfbml.render', finished_rendering);
+&lt;/script&gt;
+&lt;div id="spinner"
+    style="
+        background: #4267b2;
+        border-radius: 5px;
+        color: white;
+        height: 40px;
+        text-align: center;
+        width: 250px;"&gt;
+    Loading
+    &lt;div
+    class="fb-login-button"
+    data-max-rows="1"
+    data-size="large"
+    data-button-type="continue_with"
+    data-use-continue-as="true"
+    &gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="settings">Settings</h2>
+                            <p>In addition to the settings above, you can also change the following:</p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <th>
+                                            Setting
+                                        </th>
+                                        <th>
+                                            HTML5 Attribute
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th>
+                                            Options
+                                        </th>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_3_UW">
+                                        <tr class="row_0">
+                                            <td>
+                                                <p><code>auto_logout_link</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>data-auto-logout-link</code></p>
+                                            </td>
+                                            <td>
+                                                <p>If enabled, the button will change to a logout button when the user
+                                                    is logged in.</p>
+                                            </td>
+                                            <td>
+                                                <p><strong><code>false</code></strong>, <code>true</code></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_1 _5m29">
+                                            <td>
+                                                <p><code>onlogin</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>data-onlogin</code></p>
+                                            </td>
+                                            <td>
+                                                <p>A JavaScript function to trigger when the login process is complete.
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p><code>Function</code></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_2">
+                                            <td>
+                                                <p><code>scope</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>data-scope</code></p>
+                                            </td>
+                                            <td>
+                                                <p>The list of permissions to request during login.</p>
+                                            </td>
+                                            <td>
+                                                <p><strong><code>public_profile</code></strong> (default) or a <a
+                                                        href="/docs/facebook-login/permissions/">comma separated list of
+                                                        permissions</a></p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_3 _5m29">
+                                            <td>
+                                                <p><code>size</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>data-size</code></p>
+                                            </td>
+                                            <td>
+                                                <p>Picks one of the size options for the button.</p>
+                                            </td>
+                                            <td>
+                                                <p><strong><code>small</code></strong>, <code>medium</code>,
+                                                    <code>large</code>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_4">
+                                            <td>
+                                                <p><code>default_audience</code></p>
+                                            </td>
+                                            <td>
+                                                <p><code>data-default-audience</code></p>
+                                            </td>
+                                            <td>
+                                                <p>Determines what audience will be selected by default, when requesting
+                                                    write permissions.</p>
+                                            </td>
+                                            <td>
+                                                <p><code>everyone</code>, <strong><code>friends</code></strong>,
+                                                    <code>only_me</code>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h3 id="migration">Migration</h3>
+                            <p>Old buttons will be migrated to the new buttons. The following table shows the mapping.
+                            </p>
+                            <div class="_57-c">
+                                <table class="_4-ss _5k9x">
+                                    <thead>
+                                        <th>Old Button</th>
+                                        <th>Old Height</th>
+                                        <th>New Button</th>
+                                        <th>New Height</th>
+                                    </thead>
+                                    <tbody class="_5m37" id="u_0_4_BW">
+                                        <tr class="row_0">
+                                            <td>
+                                                <p>Icon</p>
+                                            </td>
+                                            <td>
+                                                <p>18 px</p>
+                                            </td>
+                                            <td>
+                                                <p>Deprecated</p>
+                                            </td>
+                                            <td>
+                                                <p>Deprecated</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_1 _5m29">
+                                            <td>
+                                                <p>Small</p>
+                                            </td>
+                                            <td>
+                                                <p>18 px</p>
+                                            </td>
+                                            <td>
+                                                <p>Small</p>
+                                            </td>
+                                            <td>
+                                                <p>20 px</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_2">
+                                            <td>
+                                                <p>Medium</p>
+                                            </td>
+                                            <td>
+                                                <p>22 px</p>
+                                            </td>
+                                            <td>
+                                                <p>Small</p>
+                                            </td>
+                                            <td>
+                                                <p>20 px</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_3 _5m29">
+                                            <td>
+                                                <p>Large</p>
+                                            </td>
+                                            <td>
+                                                <p>25 px</p>
+                                            </td>
+                                            <td>
+                                                <p>Small</p>
+                                            </td>
+                                            <td>
+                                                <p>20 px</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="row_4">
+                                            <td>
+                                                <p>XLarge</p>
+                                            </td>
+                                            <td>
+                                                <p>39 px</p>
+                                            </td>
+                                            <td>
+                                                <p>Small</p>
+                                            </td>
+                                            <td>
+                                                <p>20 px</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>The new <strong>Continue as {Name}</strong> buttons have a parameter called
+                                <code>button_type</code>, which the old buttons do not require. This is how you specify
+                                either the <strong>Continue with Facebook</strong> or <strong>Log in with
+                                    Facebook</strong> buttons. If you don't specify a button type, the button is
+                                rendered as the new small button. This size is medium compared to the old buttons. For
+                                the <code>x-large</code> case, it will shrink down a bit slightly. If you do specify the
+                                <code>button_type</code> parameter, your buttons will appear as specified.
+                            </p>
+                            <p>You can cause the buttons to load more quickly by launching the JavaScript SDK as soon as
+                                possible. However, the system can't load the buttons until the webpage and JavaScript
+                                have finished loading, then it can create the iframe and load up the resources to render
+                                the button.</p>
+                            <pre class="_5s-8 prettyprint lang-code" style=""> &lt;div
+    class="fb-login-button"
+    data-max-rows="1"
+    data-size="&lt;medium, large&gt;"
+    data-button-type="continue_with"
+    data-width="&lt;100% or px&gt;"
+    data-scope="&lt;comma separated list of permissions, e.g. public_profile, email&gt;"
+&gt;&lt;/div&gt;
+}</pre>
+                            <h3>Localization:</h3>
+                            <p>Loading a button in a different locale requires the JavaScript SDK for that locale to be
+                                loaded. For more information on localizing the JavaScript SDK, see <a
+                                    href="/docs/internationalization#plugins">Localization with Social Plugins and
+                                    JavaScript SDK</a>.</p>
+                        </div>
+                    </div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h2 id="faq">FAQs</h2>
+                            <h4 id="loginfaq">How do I use this to log users in?</h4>
+                            <p>Once someone has clicked the Login button, and accepted the login dialog — completing the
+                                <a href="/docs/facebook-login/login-flow-for-web/">Login flow</a> — your app can now use
+                                the <a href="/docs/javascript">Facebook SDK for JavaScript</a> to make API calls on
+                                behalf of that person.
+                            </p>
+                            <p>There is no extra setup required here, however you can use the <code>onlogin</code>
+                                setting in the button to trigger your own JavaScript function that will run upon login.
+                            </p>
+                            <h4 id="loginserversidefaq">Can I use the Login button with server-side registration code?
+                            </h4>
+                            <p>You can, however you will still need to use the JavaScript SDK partially. Once the login
+                                process started by clicking on the button is done, the SDK will have access to an
+                                <code>authResponse</code> object using <a
+                                    href="/docs/reference/javascript/FB.getLoginStatus/"><code>FB.getLoginStatus()</code></a>.
+                                You can use this function to pass the response object to your server-side code to
+                                complete any registration that exists there.
+                            </p>
+                            <h4 id="login-button-rerequest">Can I use the Login button to re-request a permission that a
+                                person has declined?</h4>
+                            <p>The Login button doesn't support re-requests because asking for declined permissions
+                                doesn't fit the verbage on the button. If you need to re-request a permission, set up a
+                                custom button and <a
+                                    href="/docs/facebook-login/login-flow-for-web#re-asking-declined-permissions">use
+                                    <code>FB.login()</code> as described in the Facebook Login for the Web</a>
+                                documentation.</p>
+                            <h4>The button isn't rendering.</h4>
+                            <p>The <code>&lt;div&gt;</code> tags are transformed into rendered buttons using a
+                                technology we call XFBML, which relies on JavaScript in the SDK to parse the page and
+                                make replacements. If you are dynamically modifying page content to add these
+                                <code>div</code>s after the SDK <code>init</code> method has run, (e.g. in a dynamically
+                                constructed dialog) you need to call <a
+                                    href="/docs/reference/javascript/FB.XFBML.parse/">FB.XFBML.parse()</a> again in
+                                order for the transformation to be effected.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,725 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="photo">Photo</h1>
+        <h2 id="overview">Overview</h2>
+        <p style="text-align:left">The <code>/v2/post/publish/content/init/</code> endpoint allows you to post directly
+            or upload photos to TikTok.</p>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left">HTTP URL</p>
+                </td>
+                <td>
+                    <p style="text-align:left">/v2/post/publish/content/init/</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">HTTP Method</p>
+                </td>
+                <td>
+                    <p style="text-align:left">POST</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">Scope</p>
+                </td>
+                <td>
+                    <p style="text-align:left">video.publish or video.upload</p>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:left">To directly post photos to users' TikTok accounts, you must query creator information
+            to render the UI elements to be displayed on the export page of your app before you call this Content
+            Posting API.</p>
+        <ol>
+            <li>Learn more about the<a href="/doc/content-sharing-guidelines#"> UX guidelines.</a></li>
+            <li>Learn more about the <a href="/doc/content-posting-api-reference-query-creator-info">creator_info/query
+                    API</a>.</li>
+        </ol>
+        <h2 id="request">Request</h2>
+        <div class="callout-warning">
+            <p style="text-align:left"><b>Note</b>: Each user access_token is limited to six requests per minute.</p>
+        </div>
+        <h3 id="header">Header</h3>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left"><b>Field Name</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Value</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Required</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">Authorization</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The token that bears the authorization of the TikTok user, which is
+                        obtained through /oauth/access_token/</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Bearer {$UserAccessToken}</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">Content-Type</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The content format of the body of this HTTP request</p>
+                </td>
+                <td>
+                    <p style="text-align:left">application/json; charset=UTF-8</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="body">Body</h3>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left"><b>Field</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Required</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">media_type</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Currently only <code>PHOTO</code> is allowed</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">post_mode</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">Enum of:</p>
+                    <p style="text-align:left"><code>DIRECT POST</code>: Directly post the content to TikTok user's
+                        account.</p>
+                    <p style="text-align:left"><code>MEDIA_UPLOAD</code>: Upload content to TikTok for users to complete
+                        the post using TikTok's editing flow. Users will receive an inbox notification.</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">post_info</p>
+                </td>
+                <td>
+                    <p style="text-align:left"><a href="#eK35Sd">Post Info Object</a></p>
+                </td>
+                <td>
+                    <p style="text-align:left">The post information</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">source_info</p>
+                </td>
+                <td>
+                    <p style="text-align:left"><a href="#D9SdTz">Source Info Object</a></p>
+                </td>
+                <td>
+                    <p style="text-align:left">The media source information</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+        </table>
+        <h4 id="post_info_object">Post Info Object</h4>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left"><b>Field</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Required</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">title</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The post title. The maximum length for photo posts is 90 in UTF-16 runes.
+                    </p>
+                </td>
+                <td>
+                    <p style="text-align:left">false</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">description</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The post description. The maximum length for photo posts is 4000 in
+                        UTF-16 runes.</p>
+                </td>
+                <td>
+                    <p style="text-align:left">false</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">privacy_level</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Enum of:</p>
+                    <p style="text-align:left"><code>PUBLIC_TO_EVERYONE</code></p>
+                    <p style="text-align:left"><code>MUTUAL_FOLLOW_FRIENDS</code></p>
+                    <p style="text-align:left"><code>FOLLOWER_OF_CREATOR</code></p>
+                    <p style="text-align:left"><code>SELF_ONLY</code></p>
+                    <p style="text-align:left"><br /></p>
+                    <p style="text-align:left">The provided value must match one of the
+                        <code>privacy_level_options</code> returned in the <code>/creator_info/query/</code> API.
+                    </p>
+                </td>
+                <td>
+                    <p style="text-align:left">Required for <code>DIRECT POST</code></p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">disable_comment</p>
+                </td>
+                <td>
+                    <p style="text-align:left">bool</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Only works for post_mode = <code>DIRECT POST</code>.</p>
+                    <p style="text-align:left">If set to <code>true</code>, other TikTok users will not be allowed to
+                        make comments on this post.</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">false</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">auto_add_music</p>
+                </td>
+                <td>
+                    <p style="text-align:left">bool</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Only works for post_mode = <code>DIRECT POST</code>.</p>
+                    <p style="text-align:left">If set to <code>true</code>, recommended music will be automatically
+                        added to photos, and users can later choose to change the post's music in TikTok if they prefer
+                        other music.</p>
+                </td>
+                <td>
+                    <p style="text-align:left">false</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">brand_content_toggle</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">bool</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Only works for post_mode = <code>DIRECT POST</code>.</p>
+                    <p style="text-align:left">Set to <code>true</code> if the content is a paid partnership to promote
+                        a third-party business.</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">brand_organic_toggle</p>
+                </td>
+                <td>
+                    <p style="text-align:left">bool</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Only works for post_mode = <code>DIRECT POST</code>.</p>
+                    <p style="text-align:left">Set to <code>true</code> if this content is promoting the creator's own
+                        business.</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+        </table>
+        <h4 id="source_info_object">Source Info Object</h4>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left"><b>Field</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Required</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">source</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Only <code>PULL_FROM_URL</code> is allowed</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">photo_images</p>
+                </td>
+                <td>
+                    <p style="text-align:left">list&lt;string&gt;</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">An array containing up to 35 photo content URLs. The URLs must be
+                        publicly accessible and verified by your app. Learn more about <style data-emotion="css ap4ivw">
+                            .css-ap4ivw {
+                                font-size: inherit;
+                                color: var(--ui-text-primary-display);
+                            }
+
+                            .css-ap4ivw *:hover {
+                                -webkit-text-decoration: none !important;
+                                text-decoration: none !important;
+                            }
+
+                            .css-ap4ivw:hover {
+                                -webkit-text-decoration: underline;
+                                text-decoration: underline;
+                            }
+
+                            .css-ap4ivw:hover {
+                                -webkit-text-decoration: underline;
+                                text-decoration: underline;
+                            }
+                        </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                            href="https://developers.tiktok.com/doc/content-posting-api-media-transfer-guide#pull_from_url"><span
+                                class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                                style="color:inherit;font-size:inherit">pulling from URLs</span></a>.</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">photo_cover_index</p>
+                </td>
+                <td>
+                    <p style="text-align:left">int</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Indicates the index (starting from 0) of the photo to be used as the
+                        cover</p>
+                </td>
+                <td>
+                    <p style="text-align:left">true</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="example">Example</h3>
+        <h4 id="direct_post">Direct Post</h4>
+        <div class="callout-warning">
+            <p style="text-align:left"><b>Note</b>: To use Direct Post, the target TikTok user must have authorized your
+                app for the <code>video.publish</code> scope.</p>
+            <p style="text-align:left"><br /></p>
+            <p style="text-align:left">All content posted by unaudited clients will be restricted to private viewing
+                mode. Once you have successfully tested your integration, to lift the restrictions on content
+                visibility, your API client must <a class="css-ap4ivw" color="var(--ui-text-primary-display)"
+                    data-e2e="StyledLink" href="https://developers.tiktok.com/application/content-posting-api"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">undergo an audit</span></a> to verify compliance with
+                our <a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                    href="https://www.tiktok.com/legal/tik-tok-developer-terms-of-service?lang=en"><span
+                        class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                        style="color:inherit;font-size:inherit">Terms of Service</span></a>.</p>
+        </div>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl --location </span><span style="color:#d14">'https://open.tiktokapis.com/v2/post/publish/content/init/'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Content-Type: application/json'</span><span> \
+</span></span><span style="color:#d14"><span>--data-raw </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "post_info": {
+</span><span style="color:#d14">        "title": "funny cat",
+</span><span style="color:#d14">        "description": "this will be a #funny photomode on your @tiktok #fyp",
+</span><span style="color:#d14">        "disable_comment": true,
+</span><span style="color:#d14">        "privacy_level": "PUBLIC_TO_EVERYONE",
+</span><span style="color:#d14">        "auto_add_music": true
+</span><span style="color:#d14">    },
+</span><span style="color:#d14">    "source_info": {
+</span><span style="color:#d14">        "source": "PULL_FROM_URL",
+</span><span style="color:#d14">        "photo_cover_index": 1,
+</span><span style="color:#d14">        "photo_images": [
+</span><span style="color:#d14">            "https://tiktokcdn.com/obj/example-image-01.webp",
+</span><span style="color:#d14">            "https://tiktokcdn.com/obj/example-image-02.webp"
+</span><span style="color:#d14">        ]
+</span><span style="color:#d14">    },
+</span><span style="color:#d14">    "post_mode": "DIRECT_POST",
+</span><span style="color:#d14">    "media_type": "PHOTO"
+</span><span style="color:#d14">}'</span></code></pre>
+        <p style="text-align:left"><br /></p>
+        <h4 id="upload_">Upload </h4>
+        <div class="callout-warning">
+            <p style="text-align:left">After uploading from your app, you should inform users that they must click on
+                inbox notifications to continue the editing flow in TikTok and complete the post. Title and description
+                parameters are now supported with sending photos.</p>
+        </div>
+        <div class="callout-warning">
+            <p style="text-align:left"><b>Note</b>: To use upload method, the target TikTok user must have authorized
+                your app for the <code>video.upload</code> scope. </p>
+            <p style="text-align:left">We now support sending title and description in this method and it will be
+                reflected in the editing flow once user clicks on the inbox notification.</p>
+        </div>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-bash css-63unw6" style="white-space:pre-wrap"><span style="color:#d14"><span>curl --location </span><span style="color:#d14">'https://open.tiktokapis.com/v2/post/publish/content/init/'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Authorization: Bearer act.example12345Example12345Example'</span><span> \
+</span></span><span style="color:#d14"><span>--header </span><span style="color:#d14">'Content-Type: application/json'</span><span> \
+</span></span><span style="color:#d14"><span>--data-raw </span><span style="color:#d14">'{
+</span></span><span style="color:#d14">    "post_info": {
+</span><span style="color:#d14">        "title": "funny cat",
+</span><span style="color:#d14">        "description": "this will be a #funny photomode on your @tiktok #fyp"
+</span><span style="color:#d14">    },
+</span><span style="color:#d14">    "source_info": {
+</span><span style="color:#d14">        "source": "PULL_FROM_URL",
+</span><span style="color:#d14">        "photo_cover_index": 1,
+</span><span style="color:#d14">        "photo_images": [
+</span><span style="color:#d14">            "https://tiktokcdn.com/obj/example-image-01.webp",
+</span><span style="color:#d14">            "https://tiktokcdn.com/obj/example-image-02.webp"
+</span><span style="color:#d14">        ]
+</span><span style="color:#d14">    },
+</span><span style="color:#d14">    "post_mode": "MEDIA_UPLOAD",
+</span><span style="color:#d14">    "media_type": "PHOTO"
+</span><span style="color:#d14">}'</span></code></pre>
+        <h2 id="response">Response</h2>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left"><b>Field Name</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Nested Field</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">data</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">publish_id</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">An identifier to track the posting action, which you can use to check
+                        status. The maximum length of this field is 64.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="3">
+                    <p style="text-align:left">error</p>
+                </td>
+                <td>
+                    <p style="text-align:left">code</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">You can decide whether the request is successful based on the error code.
+                        Any code other than <code>ok</code> indicates the request did not succeed. Learn more about <a
+                            href="#DU14lm">error codes</a>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">message</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">A human-readable description of the error</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">logid</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">A unique identifier for the execution of this request</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="example_2">Example</h3>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span style="color:#008080">200</span><span> OK
+</span></span><span>{
+</span><span><span>    </span><span>"data"</span><span>: {
+</span></span><span><span>        </span><span>"publish_id"</span><span>: </span><span style="color:#d14">"p_pub_url~v2.123456789"</span><span>
+</span></span><span>    },
+</span><span><span>    </span><span>"error"</span><span>: {
+</span></span><span><span>         </span><span>"code"</span><span>: </span><span style="color:#d14">"ok"</span><span>,
+</span></span><span><span>         </span><span>"message"</span><span>: </span><span style="color:#d14">""</span><span>,
+</span></span><span><span>         </span><span>"log_id"</span><span>: </span><span style="color:#d14">"202210112248442CB9319E1FB30C1073F3"</span><span>
+</span></span><span>     }
+</span><span>}</span></code></pre>
+        <h3 id="error_codes">Error codes</h3>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left"><b>HTTP Status</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>error.code</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="2">
+                    <p style="text-align:left">400</p>
+                </td>
+                <td>
+                    <p style="text-align:left">invalid_param</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Check error message for details</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">app_version_check_failed</p>
+                </td>
+                <td>
+                    <p style="text-align:left">To use <code>MEDIA_UPLOAD</code> post_mode, users' TikTok APP version
+                        must not be less than 31.8</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="7">
+                    <p style="text-align:left">403</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">spam_risk_too_many_posts</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The daily post cap from API is reached for the current user</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">spam_risk_user_banned_from_posting</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The user is banned from making new posts</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">spam_risk_too_many_pending_share</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The daily upload cap from the API is reached for the current user.</p>
+                    <p style="text-align:left">To reduce spamming, TikTok limits the number of videos that can be
+                        uploaded via API that are not pending approval and posting by the creator. There may be at most
+                        5 pending shares within any 24-hour period.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">reached_active_user_cap</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The daily quota for active publishing users from your client is reached
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">unaudited_client_can_only_post_to_private_accounts</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Unaudited clients can only post to private account. The publish attempt
+                        will be blocked when calling <code>/publish/content/init/</code>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">url_ownership_unverified</p>
+                    <p style="text-align:left"><br /></p>
+                </td>
+                <td>
+                    <p style="text-align:left">To use <code>PULL_FROM_URL</code> as the content transfer method,
+                        developer must verify the ownership of the URL prefix or domain. Learn more about <a
+                            href="/doc/content-posting-api-media-transfer-guide#">content transfer</a>. </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">privacy_level_option_mismatch</p>
+                </td>
+                <td>
+                    <p style="text-align:left"><code>privacy_level</code> is either unspecified or not among the options
+                        from the <code>privacy_level_options</code> returned in /publish/creator_info/query/ API.</p>
+                    <p style="text-align:left"><br /></p>
+                    <p style="text-align:left">All clients are required to correctly display the creator account's
+                        privacy level options and honor the users' choice. Occurances of this error for product-use
+                        applications suggest violations to TikTok's product-use guidance.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="2">
+                    <p style="text-align:left">401</p>
+                </td>
+                <td>
+                    <p style="text-align:left">access_token_invalid</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The access_token is invalid or has expired</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">scope_not_authorized</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The access_token does not bear user's grant on <code>video.publish</code>
+                        or <code>video.upload</code> scope</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">429</p>
+                </td>
+                <td>
+                    <p style="text-align:left">rate_limit_exceeded</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Your request is blocked due to exceeding the API rate limit</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">5xx</p>
+                </td>
+                <td>
+                    <p style="text-align:left"> internal_error</p>
+                </td>
+                <td>
+                    <p style="text-align:left">TikTok server or network error. Try again later.</p>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:left"><br /></p>
+    </div>
+</div>

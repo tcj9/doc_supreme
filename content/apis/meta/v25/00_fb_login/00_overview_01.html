@@ -1,0 +1,113 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_2b">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Authentication Versus Data Access</h1>
+              <p>Facebook Login provides two major benefits: authentication and data access. These are not mutually
+                exclusive. You can use Facebook Login to authenticate people without planning to access their data. In
+                that case, you do not need to ask for <a
+                  href="/docs/facebook-login/permissions/overview">permissions</a> or put your app through <a
+                  href="/docs/facebook-login/review">app review</a>.</p>
+              <p>Authentication and data access each last for a finite period. However, the expiration periods for
+                authentication and data access are different and depend on different factors.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="authentication">Authentication</h2>
+              <p>Authentication enables people to log in to your mobile or web app and create an account by using their
+                Facebook credentials. They do not need to create or remember a separate password.</p>
+              <h3>Authentication Expiration</h3>
+              <p>When your app uses Facebook Login to authenticate someone, it receives a User <a
+                  href="/docs/facebook-login/access-tokens">access token</a>. If your app uses one of the Facebook SDKs,
+                this token lasts for about 60 days. However, the SDKs automatically refresh the token whenever the
+                person uses your app, so the tokens expire 60 days after last use. If your app doesn't use the Facebook
+                SDKs, you need to include code that refreshes the User token manually. If the User access token expires,
+                your app must put the user through the login flow again.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="data-access">Data Access</h2>
+              <p>Facebook Login also enables you to ask for <a
+                  href="/docs/facebook-login/permissions/overview">permissions</a> when people log in to your app. These
+                permissions, if granted by the user, give your app access to items of user data. For example, your app
+                can access a user's name and profile photo.</p>
+              <p>If an app asks for permissions, it is often necessary to put the app through <a
+                  href="/docs/facebook-login/review">app review</a> so that Facebook can make sure that data is not
+                misused. Your app can ask for people's name and photo (the <a
+                  href="/docs/facebook-login/permissions/#reference-default">default profile fields</a>) and for <a
+                  href="/docs/facebook-login/permissions/#reference-email">email</a> without going through app review,
+                but all other permissions require review. For lists of permissions and which ones require app review,
+                see <a href="/docs/facebook-login/permissions/">Permissions Reference</a>.</p>
+              <h3 id="data-access-expiration">Data Access Expiration</h3>
+              <p>The expiration period for data access is 90 days, based on when the user was last active. When this
+                90-day period expires, the user can still access your app — that is, they are still authenticated — but
+                your app can't access their data. To regain data access, your app must ask the user to re-authorize your
+                app's permissions.</p>
+              <img alt="" class="_5aqq _5aqp _5aqr img"
+                src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/44623790_1973617839604423_3733339934807818240_n.png?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=u57XejS1ljoQ7kNvwF1sL4t&amp;_nc_oc=AdmbW1e6RVBAMbY9OHEfv4xCLYttW6hzLHSfEpiuh-LekVWH6MgddV7bbaY5YUTsqHE&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=7RIqhG2ScqW4M_VCczZf2A&amp;oh=00_AftLgM7hOcez_gfrqn3JVfhjT5U5RVL5r7HdYLIOntUtag&amp;oe=69A10692"
+                width="350" />
+              <p>To ask for re-authorization with the Facebook SDK for Android or the Facebook SDK for iOS, call
+                <code>reauthorizeDataAccess()</code> on the <code>LoginManager</code>.</p>
+              <p>With the Facebook SDK for JavaScript, use <code>auth_type: 'reauthorize'</code>.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">FB.login(function(response) {
+  // Original FB.login code
+}, { auth_type: 'reauthorize' })</pre>
+              <p>For the web, make the call with <code>auth_type=reauthorize</code>.</p>
+              <p>The following permissions do not expire:</p>
+              <ul>
+                <li><code>ads_read</code> </li>
+                <li><code>ads_management</code></li>
+                <li><code>business_management</code></li>
+                <li><code>configure_page_transactions</code></li>
+                <li><code>pages_manage_ads</code></li>
+                <li><code>pages_manage_cta</code></li>
+                <li>
+                  <p><code>pages_manage_instant_articles</code></p>
+                </li>
+                <li>
+                  <p><code>pages_manage_engagement</code></p>
+                </li>
+                <li><code>pages_manage_metadata</code></li>
+                <li><code>pages_manage_posts</code></li>
+                <li><code>pages_messaging</code></li>
+                <li><code>pages_read_engagement</code></li>
+                <li><code>pages_read_user_content</code></li>
+                <li><code>pages_show_list</code></li>
+                <li><code>read_audience_network_insights</code></li>
+                <li><code>read_insights</code> </li>
+              </ul>
+              <h3>Testing When Access to User Data Expires</h3>
+              <p>With the Android and iOS SDKs, you can retrieve when your app's access to user data will expire by
+                calling <code>dataAccessExpirationTime</code> on the access token object. This method returns a date
+                specifying when data access will expire.</p>
+              <p>You can also test whether access to user data has expired by calling <code>isDataAccessExpired</code>,
+                which returns a Boolean.</p>
+              <p>Server side, you can retrieve this information from the <a
+                  href="/docs/graph-api/reference/debug_token/"><code>debug_token</code> endpoint</a>.</p>
+              <p>On the web, you can see the expiration time in the <code>payload: data_access_expiration_time</code>.
+              </p>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  status: 'connected',
+  authResponse: {
+    accessToken: '...',
+    expiresIn:'...',
+    reauthorize_required_in:'...',
+    data_access_expiration_time: '...',
+    signedRequest:'...',
+    userID:'...'
+  }
+}</pre>
+              <h3 id="permission-expiration">Permission Expiration</h3>
+              <p>Regardless of when the user was last active, if your app does not use a permission for 90 days, that
+                permission may expire. This is true even if the permission was approved through app review.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

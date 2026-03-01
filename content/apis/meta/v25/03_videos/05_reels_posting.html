@@ -1,0 +1,734 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_7_Bf">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Reels Publishing API</h1>
+              <p>This document explains how to publish a reel on a Facebook Page. To publish a reel on a Facebook Page,
+                you will:</p>
+              <ol>
+                <li>Initialize an upload session to upload your reel to the Meta servers</li>
+                <li>Upload your reel</li>
+                <li>Publish the reel to your Facebook Page</li>
+              </ol>
+              <ul>
+                <li>Optionally, you can invite a collaborator to publish the reel on their Facebook Page.</li>
+              </ul>
+              <h4>Sharing Disclosure</h4>
+              <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                <tbody>
+                  <tr class="_51mx">
+                    <td class="_51m- vTop hLeft _57v2">
+                      <p>When uploading a reel using your app, the app user should be presented with disclosure of and
+                        options for control over how their Reels are used on Facebook.</p>
+                      <h4>Privacy / Who can see this?</h4>
+                      <p>An app user should be able to select the audience for their reel. This selection corresponds to
+                        the privacy parameter in the publishing step. Publishing to a Page has implicit public scope,
+                        and only the 'Public' option should be available.</p>
+                      <h4>Limitations</h4>
+                      <ul>
+                        <li>You can only publish Reels to Facebook Pages</li>
+                        <li>You can only crosspost Reels to Facebook Pages</li>
+                      </ul>
+                      <h4>Rate Limit</h4>
+                      <p>Reels API is limited to 30 API-published posts within a 24-hour moving period. This limit is
+                        enforced on the <code>POST /{page_id}/video_reels</code> endpoint when attempting to publish a
+                        reel. Meta recommends that your app also enforces the publishing rate limit, especially if your
+                        app allows app users to schedule posts to be published in the future.</p>
+                    </td>
+                    <td class="_51m- vTop hLeft _57v2 _51mw">
+                      <p><em>Sharing Disclosure Mockup</em></p>
+                      <img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/299692207_789876818817443_2233519248934922026_n.png?_nc_cat=111&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=Q_YE0_1iUHQQ7kNvwGBndqN&amp;_nc_oc=AdmBeg_gCR5ud6kVNZWcQJe2rah2ycMBJrhrPrYfCJt8y5IU-GA9L9a3FUV1Lt5kxbg&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=wf4mgVQ_JkO72ItK_k3wTA&amp;oh=00_Afug4egMkphXlGtkFpBnOAEXOJ8wBYgKHZcLTt7yCeiygQ&amp;oe=69A0D6B8"
+                        width="200px" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <h2>Before You Start</h2>
+              <p>You will need:</p>
+              <ul>
+                <li>A Page access token requested from your app user who can perform the <code>CREATE_CONTENT</code>
+                  task on the Page</li>
+                <li>The your app user must grant your app the following permissions using Facebook Login:
+
+                  <ul>
+                    <li><code>pages_show_list</code> </li>
+                    <li><code>pages_read_engagement</code> </li>
+                    <li><code>pages_manage_posts</code></li>
+                  </ul>
+                </li>
+                <li>A video file that contains your reel</li>
+              </ul>
+              <h3 id="requirements">Video Specifications</h3>
+              <div>
+                <div class="_57-c">
+                  <table class="_4-ss _5k9x">
+                    <thead>
+                      <th style="width:14%">Property</th>
+                      <th style="width:54%">Specification</th>
+                    </thead>
+                    <tbody class="_5m37" id="u_0_8_Gc">
+                      <tr class="row_0">
+                        <td>
+                          <p>File Type</p>
+                        </td>
+                        <td>
+                          <p>.mp4 (recommended)</p>
+                        </td>
+                      </tr>
+                      <tr class="row_1 _5m29">
+                        <td>
+                          <p>Aspect Ratio</p>
+                        </td>
+                        <td>
+                          <p>9 x 16</p>
+                        </td>
+                      </tr>
+                      <tr class="row_2">
+                        <td>
+                          <p>Resolution</p>
+                        </td>
+                        <td>
+                          <p>1080 x 1920 pixels (recommended). Minimum is 540 x 960 pixels</p>
+                        </td>
+                      </tr>
+                      <tr class="row_3 _5m29">
+                        <td>
+                          <p>Frame Rate</p>
+                        </td>
+                        <td>
+                          <p>24 to 60 frames per second</p>
+                        </td>
+                      </tr>
+                      <tr class="row_4">
+                        <td>
+                          <p>Duration</p>
+                        </td>
+                        <td>
+                          <p>3 to 90 seconds.</p>
+                          <p>A reel published as a story on a Facebook Page can not exceed 60 seconds.</p>
+                        </td>
+                      </tr>
+                      <tr class="row_5 _5m29">
+                        <td>
+                          <p>Video Settings</p>
+                        </td>
+                        <td>
+                          <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                            <tbody>
+                              <tr class="_51mx">
+                                <td class="_51m- vTop hLeft _57v2">
+                                  <ul>
+                                    <li>Chroma subsampling 4:2:0</li>
+                                    <li>Closed GOP (2-5 seconds)</li>
+                                    <li>Compression – H.264, H.265 (VP9, AV1 are also supported)</li>
+                                  </ul>
+                                </td>
+                                <td class="_51m- vTop hLeft _57v2 _51mw">
+                                  <ul>
+                                    <li>Fixed frame rate</li>
+                                    <li>Progressive scan</li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr class="row_6">
+                        <td>
+                          <p>Audio Settings</p>
+                        </td>
+                        <td>
+                          <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                            <tbody>
+                              <tr class="_51mx">
+                                <td class="_51m- vTop hLeft _57v2">
+                                  <ul>
+                                    <li>Audio bitrate – 128kbs+</li>
+                                    <li>Channels – Stereo</li>
+                                  </ul>
+                                </td>
+                                <td class="_51m- vTop hLeft _57v2 _51mw">
+                                  <ul>
+                                    <li>Codec – AAC Low Complexity</li>
+                                    <li>Sample rate – 48kHz</li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 1: Initialize an Upload Session</h2>
+              <p>Before you can publish a video to a Facebook Page, you must first upload it to the Meta social graph.
+                You will need to initialize a video upload session to start the upload process. To start a session, send
+                a <code>POST</code> request to the <code>/page-id/video_reels</code> endpoint, where
+                <strong><em>page-id</em></strong> is the ID for your Facebook Page, with the <code>upload_phase</code>
+                parameter set to <code>start</code>.
+              </p>
+              <p>Be sure the host is <strong><em><code>graph.facebook.com</code></em></strong>.</p>
+              <h4>Example Request</h4>
+              <p><em>Formatted for readability. Replace <strong><em>bold</em></strong>, <strong><em>italics
+                      values</em></strong>, such as <strong><em>page_access_token</em></strong>, with your values.</em>
+              </p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<code>v24.0</code>/<b><i>Your_page_id</i></b>/video_reels" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "upload_phase":"start",
+           "access_token":"<b><i>Your_page_access_token</i></b>"
+         }'
+</pre>
+              <p>On success, your app will receive a video ID and a URL to the video. This video ID will be used in
+                subsequent steps.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "video_id": "<b><i>video-id</i></b>",
+  "upload_url": "https://rupload.facebook.com/video-upload/<b><i>video-id</i></b>",
+}   
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="upload">Step 2: Upload the Video</h2>
+              <p>Most Graph API calls use the graph.facebook.com host however, calls to upload videos for reels use
+                <strong><em><code>rupload.facebook.com</code></em></strong>.
+              </p>
+              <p>The following file sources are supported for uploaded video files:</p>
+              <ul>
+                <li>A file located on your computer </li>
+                <li>A file hosted on a public facing server, such as a CDN</li>
+              </ul>
+              <h3>Upload a Local File</h3>
+              <p>To initiate the upload of the video asset, send a <code>POST</code> request using
+                application/octet-stream as content type to the
+                <code>/video-upload/</code><strong><em><code>video-id</code></em></strong> endpoint where
+                <strong><em>video-id</em></strong> is the ID from Step 1, <code>offset</code> is set to the first byte
+                being upload, generally <code>0</code>, and <code>file_size</code> set to the size of your file, in
+                bytes.
+              </p>
+              <p>Be sure the host is <strong><em><code>rupload.facebook.com</code></em></strong>.</p>
+              <p id="u_0_2_JU"><a href="#" role="button"><b>Video Reel Upload Quick Reference</b></a></p>
+              <h4>Example Request</h4>
+              <p><em>Formatted for readability. Replace <strong><em>bold</em></strong>, <strong><em>italics
+                      values</em></strong>, such as <strong><em>page_access_token</em></strong>, with your values.</em>
+              </p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://rupload.facebook.com/video-upload/<code>v24.0</code>/<b><i>video-id</i></b>" \
+     -H "Authorization: OAuth <b><i>Your_page_access_token</i></b>" \
+     -H "offset: 0" \
+     -H "file_size: <b><i>Your_file_size_in_bytes</i></b>" \
+     --data-binary "@<b><i>my_video_file.mp4</i></b>"
+</pre>
+              <h3>Upload a Hosted File</h3>
+              <p>To upload a hosted file, send a <code>POST</code> request to the
+                <code>/video-upload/</code><strong><em><code>video-id</code></em></strong> endpoint where
+                <strong><em>video-id</em></strong> is the ID returned in Step 1 and <code>file_url</code> is set to the
+                URL for your hosted file.
+              </p>
+              <p>Be sure the host is <strong><em><code>rupload.facebook.com</code></em></strong>.</p>
+              <p>The API will now reject files hosted on sites that restrict access via robots.txt. Developers need to
+                ensure that the hosting site allows the “facebookexternalhit/1.1
+                (+http://www.facebook.com/externalhit_uatext.php)” user agent to fetch the hosted file.</p>
+              <p>Files hosted on Meta CDN (e.g.. fbcdn URLs) will get rejected. Instead, developers can use the
+                crossposting feature to publish a video on multiple pages without uploading the video to each page.
+                Refer to our <a href="https://developers.facebook.com/docs/video-api/guides/crossposting/">detailed
+                  guidance</a> on crossposting.</p>
+              <h4>Example Request</h4>
+              <p><em>Formatted for readability. Replace <strong><em>bold</em></strong>, <strong><em>italics
+                      values</em></strong>, such as <strong><em>page_access_token</em></strong>, with your values.</em>
+              </p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://rupload.facebook.com/video-upload/<code>v24.0</code>/<b><i>video_id</i></b>" \
+     -H "Authorization: OAuth <b><i>Your_page_access_token</i></b>" \
+     -H "file_url: <b><i>https://some.cdn.url/video.mp4</i></b>"
+</pre>
+              <h3>Example Upload Response</h3>
+              <p>If you upload was successful, your app will receive a JSON object with <code>success</code> set to
+                <code>true</code>.
+              </p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{"success": true}</pre>
+              <h3>Get the Upload Status</h3>
+              <p>To get the status of a video, send a <code>GET</code> request to the <code>/</code>
+                <code>video-id</code> endpoint where the <code>video-id</code> is the ID from initialization step, and
+                with <code>fields</code> set to <code>status</code>.
+              </p>
+              <p>Be sure the host is <code>graph.facebook.com</code>.</p>
+              <h4>Sample Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X GET "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>video-id</i></b>
+    ?fields=status
+    &amp;access_token=<b><i>Your_page_access_token</i></b>"
+</pre>
+              <p>On success your app will receive a JSON object with status information that includes the processing,
+                uploading, and publishing phases, and the video status.</p>
+              <p id="u_0_4_wO"><a href="#" role="button"><b>Video Status Quick Reference</b></a></p>
+              <p>If re-uploading doesn’t work, try again from Step 1.</p>
+              <h5>Example Response with a Processing Error</h5>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "status": {
+    "video_status": "processing",
+    "uploading_phase": {
+      "status": "complete",
+    },
+    "processing_phase": {
+      "status": "not_started",
+      "error": {
+        "message": "Resolution too low. Video must have a minimum resolution of 540p."
+      }
+    }
+    "publishing_phase": {
+      "status": "not_started",
+    }
+  }
+}</pre>
+              <h5>Example Response for an Interrupted Upload</h5>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "status": {
+    "video_status": "processing", 
+    "uploading_phase": {
+      "status": "in_progress",
+      "bytes_transfered": 50002  
+    }
+    "processing_phase": {
+      "status": "not_started"
+    }
+    "publishing_phase": {
+      "status": "not_started",
+    }
+  }
+}</pre>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th>Error Type</th>
+                    <th>Error Message</th>
+                    <th>Recommended Solution</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_9_4S">
+                    <tr class="row_0">
+                      <td>
+                        <p>OffsetInvalidError</p>
+                      </td>
+                      <td>
+                        <p>Request starting offset is invalid</p>
+                      </td>
+                      <td>
+                        <p>Set the ‘offset’ parameter to the <code>bytes_transfered</code> value returned in the Video
+                          endpoint <code>status</code> field</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p>PartialRequestError</p>
+                      </td>
+                      <td>
+                        <p>Partial request (did not match length of file)</p>
+                      </td>
+                      <td>
+                        <p>Check the file size and try the upload again.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p>ProcessingFailedError</p>
+                      </td>
+                      <td>
+                        <p>Request processing failed</p>
+                      </td>
+                      <td>
+                        <p>Please try uploading again. Make sure the video meets all of the requirements. If the upload
+                          does not work, initialize a new upload session.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Resume an Interrupted Upload</h3>
+              <p>If the video upload is interrupted, it can be resumed.</p>
+              <p>To resume an upload, send another POST request to the <code>/video-upload/video-id</code> endpoint and
+                use the value for <code>upload_phase.bytes_transfered</code> as the value for <code>offset</code>.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Step 3: Publish the Reel</h2>
+              <p>To end the upload session and publish your video, send a <code>POST</code>request to the
+                <code>/</code><strong><em><code>page-id</code></em></strong><code>/video_reels</code> endpoint. You can
+                also include any of the additional fields, like <code>description</code>, which can include hashtags,
+                and <code>title</code>.
+              </p>
+              <p>Be sure the host is <strong><em><code>graph.facebook.com</code></em></strong>.</p>
+              <p id="u_0_6_jr"><a href="#" role="button"><b>POST Page Video Reels Quick Reference</b></a></p>
+              <h4>Example Request</h4>
+              <p><em>Formatted for readability. Replace <strong><em>bold</em></strong>, <strong><em>italics
+                      values</em></strong>, such as <strong><em>page_access_token</em></strong>, with your values.</em>
+              </p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page-id</i></b>/video_reels
+    ?access_token=<b><i>Your_page_access_token</i></b>
+    &amp;video_id=<b><i>video-id</i></b>
+    &amp;upload_phase=finish
+    &amp;video_state=PUBLISHED
+    &amp;description=<b><i>What a beautiful day! #sunnyand72</i></b>"
+</pre>
+              <p>On success your app will receive a JSON object with <code>success</code> set to <code>true</code>.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{"success": true}</pre>
+              <h3>Get a List of Reels</h3>
+              <p>To get a list of all reels published on your Facebook Page, send a <code>GET</code> request to
+                <code>/</code><strong><em><code>page-id</code></em></strong><code>/video_reels</code> endpoint.
+              </p>
+              <p>Be sure the host is <strong><em><code>graph.facebook.com</code></em></strong> for this API call.</p>
+              <p><strong>Note:</strong> When using <code>since</code> and <code>until</code> in your <code>GET</code>
+                request, the date for <code>until</code> must be a date after the date for <code>since</code>. For
+                example, if <code>since</code> is <code>2023-01-31</code>, <code>until</code> must be after
+                <code>2023-01-31</code>. You can use both parameters, or one or the other. Date formats can be any of
+                the following:
+              </p>
+              <ul>
+                <li><code>today</code>, <code>yesterday</code></li>
+                <li>Epoch timestamps (1676057525)</li>
+                <li><code>yyyy-mm-dd</code> (2023-1-31)</li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X GET "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>page-id</i></b>/video_reels?access_token=<b><i>Your_page_access_token</i></b>"
+</pre>
+              <p>On success your app will receive a JSON object with information about your published reels such as
+                video ID and published time.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "data": [
+    {
+      "updated_time": "<b><i>unix_timestamp</i></b>",
+      "id": "<b><i>video-1-id</i></b>"
+    },
+    {
+      "description": "sample_description",
+      "updated_time": "<b><i>unix_timestamp</i></b>",
+      "id": "<b><i>video-2-id</i></b>"
+    },
+    ...
+  ]
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Invite a collaborator</h2>
+              <p>Invite a person, a <strong>collaborator</strong>, to publish your reel on their Facebook Page.</p>
+              <p>To publish a reel on a collaborator's Facebook Page you will invite the collaborator to publish your
+                reel on their Facebook Page. When they accept the invitation, the reel will immediately be published on
+                their Facebook Page if the reel has been published, or the reel will be published on their Page when you
+                publish the reel on your Page.</p>
+              <p>You will need:</p>
+              <ul>
+                <li>The ID for the collaborator's Facebook Page (for New Page Experience, use the delegate Page ID)</li>
+                <li>The ID for the Video you want to share with a collaborator</li>
+              </ul>
+              <h4>Limitations</h4>
+              <ul>
+                <li>You can only send 10 collaborator invitation per Page per 24 hours</li>
+                <li>You can only publish Reels to other Facebook Pages</li>
+              </ul>
+              <h3>Send an Invitation</h3>
+              <p>To invite a collaborator to publish your reel on their Facebook Page, send a <code>POST</code> request
+                to the <code>/</code><strong><em><code>video-id</code></em></strong><code>/collaborators</code> endpoint
+                with the <code>target_id</code> parameter set to the ID for the collaborator's Facebook Page.</p>
+              <i>Formatted for readability.</i>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>video-id</i></b>/collaborators
+  ?target_id=<b><i>collaborators-page-id</i></b> 
+  &amp;access_token=<b><i>your-page-access-token</i></b>"
+</pre>
+              <p>On success your app will receive a JSON response with the link to the invitation and your collaborator
+                will receive an invite notification.</p>
+              <h4>Example Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "success": true,
+  “collaborator_id”: “<b><i>collaborators-page-id</i></b>”
+  “invitation_link”: “<b><i>facebook-url-for-invitation</i></b>”
+}
+</pre>
+              <h3>Get Invitation Status</h3>
+              <p>To get the status for an invitation you sent, send a <code>GET</code> request to the
+                <code>/</code><strong><em><code>video-id</code></em></strong><code>/collaborators</code> endpoint.
+              </p>
+              <h4>Example Request</h4>
+              <i>Formatted for readability.</i>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://graph.facebook.com/<b><i><code>v24.0</code></i></b>/<b><i>video-id</i></b>/collaborators
+  ?access_token=<b><i>your-page-or-user--access-token</i></b>"
+</pre>
+              <p>On success your app will receive a JSON response with the invitation status of <code>Accepted</code>,
+                <code>Declined</code>, or <code>Pending</code>.
+              </p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  “id”: “<b><i>video-id</i></b>”
+  “name”: “<b><i>collaborators-page-name</i></b>”
+  “invite_status”: “<b><i>Accepted</i></b>”
+  “invitation_link”: “<b><i>facebook-url-for-invitation</i></b>”
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Tag a location</h2>
+              <p>To find a place to tag, you can use the <a
+                  href="https://developers.facebook.com/docs/pages-api/search-pages">Pages Search API</a>. When
+                searching for a place, only pages with valid locations can be used. When searching be sure to include
+                the <code>location</code> field to verify this.</p>
+              <p>To tag the location in your reel, include the parameter <code>place</code> and the <code>id</code>
+                returned from the Pages Search API in the publish call.</p>
+              <p><strong>Example Request</strong></p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">curl -X POST "https://graph.facebook.com/v18.0/page-id/video_reels
+    ?access_token=Your_page_access_token
+    &amp;video_id=video-id
+    &amp;upload_phase=finish
+    &amp;video_state=PUBLISHED
+    &amp;place=123456"</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Retrieve Copyright Information</h2>
+              <p>At upload, a copyright check is run to see if your upload contains licensed content and lets you act
+                appropriately before publishing. Videos in violation may have restricted access or be subject to
+                monetization impacts. To retrieve the copyright check information on the Reel, you must have
+                <code>pages_read_engagement</code> permission on the Page. You will need the ID of the Video and the
+                Page access token. Please note that it may take a couple of minutes for the copyright check to be
+                completed and return information.
+              </p>
+              <h3>Limitations</h3>
+              <ul>
+                <li>
+                  <p>Works for Reels API uploads</p>
+                </li>
+                <li>
+                  <p>Only the owner can view the matches information</p>
+                </li>
+              </ul>
+              <h3>Example</h3>
+              <p><strong>Example Request</strong></p>
+              <pre class="_5s-8 prettyprint lang-curl"
+                style="">curl -i -X GET "https://graph.facebook.com/v18.0/VIDEO_ID?fields=copyright_check_information&amp;access_token=ACCESS_TOKEN"</pre>
+              <p><strong>Example Responses</strong></p>
+              <p><em>In progress:</em></p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "copyright_check_information": {
+        "status": {
+            "status": "in_progress",
+        },
+    }
+}</pre>
+              <p><em>Without any matches:</em></p>
+              <pre class="_5s-8 prettyprint lang-json" style="">{
+  "copyright_check_information": {
+        "status": {
+            "status": "complete",
+            "matches_found": false
+        },
+    }
+}</pre>
+              <p><em>With matches:</em></p>
+              <pre class="_5s-8 prettyprint lang-json" style="">"copyright_check_information": {
+        "status": {
+            "status": "complete",
+            "matches_found": true
+        },
+        "copyright_matches": [
+            {
+                "content_title": "Title 1",
+                "owner_copyright_policy": {
+                    "name": "Owner name 1",
+                    "actions": [
+                        {
+                            "action": "TRACK",
+                            "territories": "3",
+                            "geos": [
+                                "United Arab Emirates",
+                                "Afghanistan",
+                                "Antigua and Barbuda",
+                            ]
+                        }
+                    ]
+                },
+                "matched_segments": [
+                    {
+                        "start_time_in_seconds": 90.5,
+                        "duration_in_seconds": 35,
+                        "segment_type": "AUDIO"
+                    }
+                ]
+            },
+            {
+                "content_title": "Title 2",
+                "owner_copyright_policy": {
+                    "name": "Owner name 2",
+                    "actions": [
+                        {
+                            "action": "BLOCK",
+                            "territories": "1",
+                            "geos": [
+                                "Italy"
+                            ]
+                        }
+                    ]
+                },
+                "matched_segments": [
+                    {
+                        "start_time_in_seconds": 90.5,
+                        "duration_in_seconds": 35,
+                        "segment_type": "AUDIO"
+                    }
+                ]
+            }
+        ]
+    },</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Error Codes</h2>
+              <p>Common error codes and possible mitigations.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:10%">Error Code</th>
+                    <th style="width:">Error Message</th>
+                    <th>Possible Mitigation</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_a_Ky">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>100</code></p>
+                      </td>
+                      <td>
+                        <p>"error": {
+                          "message": "(#100) Missing parameter: {a list of missing parameters}",
+                          "type": "OAuthException",
+                          "code": 100,
+                          "fbtrace_id": "----"
+                          }
+                          }</p>
+                      </td>
+                      <td>
+                        <p>A required parameter, such as <code>upload_phase</code>, is missing from your API call. Visit
+                          the endpoint reference to ensure all required parameters are included and be sure to check for
+                          typos.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>1363040</code></p>
+                      </td>
+                      <td>
+                        <p>The video you tried to upload has an aspect ratio that isn't supported on Facebook. Aspect
+                          ratios for videos need to be between 16x9 and 9x16. Please try uploading a video in a
+                          supported aspect ratio.</p>
+                      </td>
+                      <td>
+                        <p>Aspect ratios for videos need to be between 16x9 and 9x16.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>1363127</code></p>
+                      </td>
+                      <td>
+                        <p>The video you tried to upload has resolution that isn't supported on Facebook for this
+                          product. Please try uploading a video with a supported resolution</p>
+                      </td>
+                      <td>
+                        <p>Minimum resolution is 540 x 960 pixels. Recommended resolution is 1080 x 1920 pixels.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>1363128</code></p>
+                      </td>
+                      <td>
+                        <p>The video you tried to upload has a duration that isn't supported on Facebook for this
+                          product. Please try uploading a video with a supported duration.</p>
+                      </td>
+                      <td>
+                        <p>Reels duration must be between 3 and 90 seconds.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>1363129</code></p>
+                      </td>
+                      <td>
+                        <p>The video you tried to upload has an average frame rate that isn't supported on Facebook for
+                          this product. Please try uploading a video with a supported frame rate</p>
+                      </td>
+                      <td>
+                        <p>Reels frame rate must be between 24 and 60 frames per second.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Learn how to customize a reel</h2>
+              <p>Customize your reel to create a richer reels experience for your viewers.</p>
+              <ul>
+                <li><a href="https://developers.facebook.com/docs/graph-api/reference/video/thumbnails/#Creating">Add a
+                    custom cover photo for your reel</a> </li>
+                <li><a
+                    href="https://developers.facebook.com/docs/video-api/guides/music-recommendations#music-for-you">Add
+                    your favorite music to your reel</a> </li>
+                <li><a
+                    href="https://developers.facebook.com/docs/video-api/guides/music-recommendations#new-music-on-facebook">Get
+                    music recommendations from Meta for new music</a> </li>
+                <li><a
+                    href="https://developers.facebook.com/docs/video-api/guides/music-recommendations#music-popular-on-facebook">Get
+                    music recommendations from Meta for popular music on Facebook</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See also</h2>
+              <ul>
+                <li><a
+                    href="https://developers.facebook.com/docs/graph-api/reference/video/video_insights#reels-metrics">Get
+                    insights for your reels</a> to track engagement</li>
+                <li><a href="/docs/android/sharing-to-reels-facebook">Facebook Sharing to Reels From Android</a></li>
+                <li><a href="/docs/ios/sharing-to-reels-facebook">Facebook Sharing to Reels From iOS</a> </li>
+                <li>Check out the <a data-lynx-mode="hover"
+                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Ffbsamples%2Freels_publishing_apis%2Ftree%2Fmain%2Ffb_reels_publishing_api_sample&amp;h=AT1eA8hi-W5XYE7KpBzW3cgGCJ7_y6MRJdCWgxsQHA1JvvUiQ_ai6gIjj35Ld3_dXAj47-jgA22JYnn1viFc6_tooAhgkWB6pk9sdt928mc8Hr46NVQYsa7mMSc28D_n2ygg3Uk_bkAfcryPF4roRw"
+                    rel="nofollow" target="_blank">Facebook Reels Publishing API Sample</a> available on Github.</li>
+                <li>Check out the <a data-lynx-mode="hover"
+                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.postman.com%2Fmeta%2Fworkspace%2Ffacebook%2Ffolder%2F23987686-8318a757-f788-40fa-a27b-e3dcfdc2f8d4%3Fctx%3Ddocumentation%26fbclid%3DIwAR23KQZpXD4mdQ-fFdEYU5KkigRM67AtsFPwJMJ-EdZZyuxAmuC-Zd22jV0&amp;h=AT0w01GGTVY7qQhhYdSuSjVIq8xVbW7r2hVL1Ys38WSAeNjpdFLeemV6J2XvVlsCQ-UvR9SrX91wdFP9YrpRB7poZ9WbB120vFvk2sO4RAbunacXleT58ppzCgaE7BB5DuuwwN6ujmgKAmsMQCUwxnQi7T1HRbOM29A"
+                    rel="nofollow" target="_blank">Facebook Reels collection on the Postman API Platform</a></li>
+                <li>Check out the <a data-lynx-mode="hover"
+                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.postman.com%2Fmeta%2Fworkspace%2Finstagram%2Ffolder%2F23987686-91b95cb4-a10c-4aad-b15d-b54f2e6900e7%3Fctx%3Ddocumentation%26fbclid%3DIwAR31DFQLv9Uew9bxy-Cx6WqINMpg3sqdV-ipqVc2fBeFMdxVE4lOzDHGp80&amp;h=AT19iyGW5yUWZG-jWFG1aI427CyhtlZIJNjFmylSnH8fjboEKSmFGlim7y5a_8TxhFMwkqvtwo9N6ZIw7-malDJh3N7B0LByO2SvSBGJBnXidmBd7qeppQLaHLNMIzJZJjf_SIJVTmVU08a8OqyB8g"
+                    rel="nofollow" target="_blank">Instagram Reels collection on the Postman API Platform</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

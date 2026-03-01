@@ -1,0 +1,400 @@
+<article class="devsite-article">
+  <h1 class="devsite-page-title" tabindex="-1">
+    Upload a Video<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+      <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title" class="devsite-key-takeaways-panel-header"
+        role="button" tabindex="0">
+        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+        <div class="devsite-key-takeaways-panel-title">
+          <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI" id="key-takeaways-panel-title">Page Summary
+          </h2>
+        </div>
+        <span aria-hidden="true" class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+        </img>
+      </div>
+      <div class="devsite-key-takeaways-panel-content">
+        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+          <button aria-label="Report Key Takeaways!"
+            class="button-flat button-primary devsite-key-takeaways-report-button" data-title="Report Key Takeaways!">
+            <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+          </button>
+        </devsite-feedback>
+        <ul class="devsite-key-takeaways-panel-list">
+          <li>
+            <p>This guide demonstrates a Python script for uploading videos to YouTube using the YouTube Data API, which
+              utilizes the Google APIs Client Library for Python.</p>
+          </li>
+          <li>
+            <p>The script requires Python 2.5 or higher, the Google APIs Client Library for Python, and registration of
+              your application with Google to use OAuth 2.0 for authorized access.</p>
+          </li>
+          <li>
+            <p>A <code>client_secrets.json</code> file is necessary, containing OAuth 2.0 credentials obtained from the
+              Google API Console, to enable the script's authentication.</p>
+          </li>
+          <li>
+            <p>The script allows setting video metadata like title, description, keywords, category, and privacy status
+              via command-line arguments.</p>
+          </li>
+          <li>
+            <p>The provided Python script includes an exponential backoff strategy for retrying uploads in case of
+              network interruptions or errors.</p>
+          </li>
+        </ul>
+      </div>
+    </devsite-key-takeaways-panel>
+    <section>
+      <p>This guide provides and explains a Python script that uploads a YouTube video using the YouTube Data API. The
+        code uses the Google APIs Client Library for Python. (Client libraries for other popular programming languages
+        are also available.)</p>
+      <p class="note"><strong>Note:</strong> The sample script does not do error handling.</p>
+    </section>
+    <section>
+      <h2 data-text="Requirements" id="Requirements" tabindex="-1">Requirements</h2>
+      <ul>
+        <li>
+          <p>Python 2.5 or higher</p>
+        </li>
+        <li>
+          <p>Install the <a href="/api-client-library/python/start/installation">Google APIs Client Library for
+              Python</a> (<code dir="ltr" translate="no">google-api-python-client</code>)</p>
+        </li>
+        <li>
+          <p><a href="/youtube/registering_an_application">Register your application with Google</a> so that it can use
+            the <a class="notranslate" href="http://oauth.net/2/">OAuth 2.0</a> protocol to authorize access to user
+            data.</p>
+        </li>
+        <li>
+          <p>To use <span class="notranslate">OAuth 2.0</span> steps with this script, you'll need to create a <code
+              dir="ltr" translate="no">client_secrets.json</code> file that contains information from the <a
+              class="notranslate" href="https://console.cloud.google.com/" target="_blank">API Console</a>. The file
+            should be in the same directory as the script.</p>
+          <div></div><devsite-code>
+            <pre class="code devsite-click-to-copy notranslate" dir="ltr" is-upgraded="" syntax="JavaScript"><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s2">"web"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"client_id"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"<var class="apiparam" translate="no">[[INSERT CLIENT ID HERE]]</var>"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"client_secret"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"<var class="apiparam" translate="no">[[INSERT CLIENT SECRET HERE]]</var>"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"redirect_uris"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[],</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"auth_uri"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"https://accounts.google.com/o/oauth2/auth"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"token_uri"</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"https://accounts.google.com/o/oauth2/token"</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span></pre>
+          </devsite-code>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2 data-text="Sample request" id="Sample_Requests" tabindex="-1">Sample request</h2>
+      <p>This request uploads a video and sets various metadata fields for the video, including its title, description,
+        keywords, and category. The command-line arguments are all defined in detail in the following section.</p>
+      <div></div><devsite-code>
+        <pre class="notranslate" dir="ltr" is-upgraded="">
+python upload_video.py --file="/tmp/test_video_file.flv"
+                       --title="Summer vacation in California"
+                       --description="Had fun surfing in Santa Cruz"
+                       --keywords="surfing,Santa Cruz"
+                       --category="22"
+                       --privacyStatus="private"</pre>
+      </devsite-code>
+      <p>In this example, the script would build and insert the following <code dir="ltr"
+          translate="no"><a href="/youtube/v3/docs/videos">video</a></code> resource for the video:</p>
+      <div></div><devsite-code>
+        <pre class="notranslate" dir="ltr" is-upgraded="">
+{
+  "snippet": {
+    "title": "Summer vacation in California",
+    "description": "Had fun surfing in Santa Cruz",
+    "tags": ["surfing", "Santa Cruz"],
+    "categoryId": "22"
+  },
+  "status": {
+    "privacyStatus": "private"
+  }
+}</pre>
+      </devsite-code>
+    </section>
+    <section>
+      <h2 data-text="Call the script" id="Calling" tabindex="-1">Call the script</h2>
+      <p>The list below defines the script's command-line arguments:</p>
+      <ul>
+        <li>
+          <p><strong><code dir="ltr" translate="no">file</code></strong>: This argument identifies the location of the
+            video file that you are uploading.</p>
+          <div></div><devsite-code>
+            <pre class="notranslate" dir="ltr" is-upgraded="">Example: --file="/home/path/to/file.mov"</pre>
+          </devsite-code>
+        </li>
+        <li>
+          <p><strong><code dir="ltr" translate="no">title</code></strong>: The title of the video that you are
+            uploading. The default value is <code dir="ltr" translate="no">Test title</code>.</p>
+          <div></div><devsite-code>
+            <pre class="notranslate" dir="ltr" is-upgraded="">Example: --title="Summer vacation in California"</pre>
+          </devsite-code>
+        </li>
+        <li>
+          <p><strong><code dir="ltr" translate="no">description</code></strong>: The description of the video that
+            you're uploading. The default value is <code dir="ltr" translate="no">Test description</code>.</p>
+          <div></div><devsite-code>
+            <pre class="notranslate" dir="ltr"
+              is-upgraded="">Example: --description="Had fun surfing in Santa Cruz"</pre>
+          </devsite-code>
+        </li>
+        <li>
+          <p><strong><code dir="ltr" translate="no">category</code></strong>: The category ID for the <a
+              href="/youtube/v3/docs/videoCategories/list">YouTube video category</a> associated with the video. The
+            default value is <code dir="ltr" translate="no">22</code>, which refers to the <code dir="ltr"
+              translate="no">People &amp; Blogs</code> category.</p>
+          <div></div><devsite-code>
+            <pre class="notranslate" dir="ltr" is-upgraded="">Example: --category="22"</pre>
+          </devsite-code>
+        </li>
+        <li>
+          <p><strong><code dir="ltr" translate="no">keywords</code></strong>: A comma-separated list of keywords
+            associated with the video. The default value is an empty string.</p>
+          <div></div><devsite-code>
+            <pre class="notranslate" dir="ltr" is-upgraded="">Example: --keywords="surfing"</pre>
+          </devsite-code>
+        </li>
+        <li>
+          <p><strong><code dir="ltr" translate="no">privacyStatus</code></strong>: The privacy status of the video. The
+            default behavior is for an uploaded video to be publicly visible (<code dir="ltr"
+              translate="no">public</code>). When uploading test videos, you may want to specify a <code dir="ltr"
+              translate="no">--privacyStatus</code> argument value to ensure that those videos are private or unlisted.
+            Valid values are <code dir="ltr" translate="no">public</code>, <code dir="ltr"
+              translate="no">private</code>, and <code dir="ltr" translate="no">unlisted</code>.</p>
+          <div></div><devsite-code>
+            <pre class="notranslate" dir="ltr" is-upgraded="">Example: --privacyStatus="private"</pre>
+          </devsite-code>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2 data-text="Sample code" id="Sample_Code" tabindex="-1">Sample code</h2>
+      <p>The complete working sample for the <code dir="ltr" translate="no">upload_video.py</code> script is listed
+        below:</p>
+      <div></div><devsite-code>
+        <pre class="devsite-click-to-copy notranslate" dir="ltr" is-upgraded=""
+          syntax="Python"><span class="devsite-syntax-ch">#!/usr/bin/python</span>
+
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">httplib</span>
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">httplib2</span>
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">os</span>
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">random</span>
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">sys</span>
+<span class="devsite-syntax-kn">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">time</span>
+
+<span class="devsite-syntax-kn">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">apiclient.discovery</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kn">import</span> <span class="devsite-syntax-n">build</span>
+<span class="devsite-syntax-kn">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">apiclient.errors</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kn">import</span> <span class="devsite-syntax-n">HttpError</span>
+<span class="devsite-syntax-kn">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">apiclient.http</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kn">import</span> <span class="devsite-syntax-n">MediaFileUpload</span>
+<span class="devsite-syntax-kn">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">oauth2client.client</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kn">import</span> <span class="devsite-syntax-n">flow_from_clientsecrets</span>
+<span class="devsite-syntax-kn">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">oauth2client.file</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kn">import</span> <span class="devsite-syntax-n">Storage</span>
+<span class="devsite-syntax-kn">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nn">oauth2client.tools</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kn">import</span> <span class="devsite-syntax-n">argparser</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">run_flow</span>
+
+
+<span class="devsite-syntax-c1"># Explicitly tell the underlying HTTP transport library not to retry, since</span>
+<span class="devsite-syntax-c1"># we are handling retry logic ourselves.</span>
+<span class="devsite-syntax-n">httplib2</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">RETRIES</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-mi">1</span>
+
+<span class="devsite-syntax-c1"># Maximum number of times to retry before giving up.</span>
+<span class="devsite-syntax-n">MAX_RETRIES</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-mi">10</span>
+
+<span class="devsite-syntax-c1"># Always retry when these exceptions are raised.</span>
+<span class="devsite-syntax-n">RETRIABLE_EXCEPTIONS</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">httplib2</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">HttpLib2Error</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-ne">IOError</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">httplib</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">NotConnected</span><span class="devsite-syntax-p">,</span>
+  <span class="devsite-syntax-n">httplib</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">IncompleteRead</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">httplib</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ImproperConnectionState</span><span class="devsite-syntax-p">,</span>
+  <span class="devsite-syntax-n">httplib</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">CannotSendRequest</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">httplib</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">CannotSendHeader</span><span class="devsite-syntax-p">,</span>
+  <span class="devsite-syntax-n">httplib</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">ResponseNotReady</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">httplib</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">BadStatusLine</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-c1"># Always retry when an apiclient.errors.HttpError with one of these status</span>
+<span class="devsite-syntax-c1"># codes is raised.</span>
+<span class="devsite-syntax-n">RETRIABLE_STATUS_CODES</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-p">[</span><span class="devsite-syntax-mi">500</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-mi">502</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-mi">503</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-mi">504</span><span class="devsite-syntax-p">]</span>
+
+<span class="devsite-syntax-c1"># The CLIENT_SECRETS_FILE variable specifies the name of a file that contains</span>
+<span class="devsite-syntax-c1"># the OAuth 2.0 information for this application, including its client_id and</span>
+<span class="devsite-syntax-c1"># client_secret. You can acquire an OAuth 2.0 client ID and client secret from</span>
+<span class="devsite-syntax-c1"># the Google API Console at</span>
+<span class="devsite-syntax-c1"># https://console.cloud.google.com/.</span>
+<span class="devsite-syntax-c1"># Please ensure that you have enabled the YouTube Data API for your project.</span>
+<span class="devsite-syntax-c1"># For more information about using OAuth2 to access the YouTube Data API, see:</span>
+<span class="devsite-syntax-c1">#   https://developers.google.com/youtube/v3/guides/authentication</span>
+<span class="devsite-syntax-c1"># For more information about the client_secrets.json file format, see:</span>
+<span class="devsite-syntax-c1">#   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets</span>
+<span class="devsite-syntax-n">CLIENT_SECRETS_FILE</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-s2">"client_secrets.json"</span>
+
+<span class="devsite-syntax-c1"># This OAuth 2.0 access scope allows an application to upload files to the</span>
+<span class="devsite-syntax-c1"># authenticated user's YouTube channel, but doesn't allow other types of access.</span>
+<span class="devsite-syntax-n">YOUTUBE_UPLOAD_SCOPE</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-s2">"https://www.googleapis.com/auth/youtube.upload"</span>
+<span class="devsite-syntax-n">YOUTUBE_API_SERVICE_NAME</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-s2">"youtube"</span>
+<span class="devsite-syntax-n">YOUTUBE_API_VERSION</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-s2">"v3"</span>
+
+<span class="devsite-syntax-c1"># This variable defines a message to display if the CLIENT_SECRETS_FILE is</span>
+<span class="devsite-syntax-c1"># missing.</span>
+<span class="devsite-syntax-n">MISSING_CLIENT_SECRETS_MESSAGE</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-s2">"""</span>
+<span class="devsite-syntax-s2">WARNING: Please configure OAuth 2.0</span>
+
+<span class="devsite-syntax-s2">To make this sample run you will need to populate the client_secrets.json file</span>
+<span class="devsite-syntax-s2">found at:</span>
+
+<span class="devsite-syntax-s2">   </span><span class="devsite-syntax-si">%s</span>
+
+<span class="devsite-syntax-s2">with information from the API Console</span>
+<span class="devsite-syntax-s2">https://console.cloud.google.com/</span>
+
+<span class="devsite-syntax-s2">For more information about the client_secrets.json file format, please visit:</span>
+<span class="devsite-syntax-s2">https://developers.google.com/api-client-library/python/guide/aaa_client_secrets</span>
+<span class="devsite-syntax-s2">"""</span> <span class="devsite-syntax-o">%</span> <span class="devsite-syntax-n">os</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">path</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">abspath</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">os</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">path</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">join</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">os</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">path</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">dirname</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-vm">__file__</span><span class="devsite-syntax-p">),</span>
+                                   <span class="devsite-syntax-n">CLIENT_SECRETS_FILE</span><span class="devsite-syntax-p">))</span>
+
+<span class="devsite-syntax-n">VALID_PRIVACY_STATUSES</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"public"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-s2">"private"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-s2">"unlisted"</span><span class="devsite-syntax-p">)</span>
+
+
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">get_authenticated_service</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">args</span><span class="devsite-syntax-p">):</span>
+  <span class="devsite-syntax-n">flow</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">flow_from_clientsecrets</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">CLIENT_SECRETS_FILE</span><span class="devsite-syntax-p">,</span>
+    <span class="devsite-syntax-n">scope</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">YOUTUBE_UPLOAD_SCOPE</span><span class="devsite-syntax-p">,</span>
+    <span class="devsite-syntax-n">message</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">MISSING_CLIENT_SECRETS_MESSAGE</span><span class="devsite-syntax-p">)</span>
+
+  <span class="devsite-syntax-n">storage</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">Storage</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"</span><span class="devsite-syntax-si">%s</span><span class="devsite-syntax-s2">-oauth2.json"</span> <span class="devsite-syntax-o">%</span> <span class="devsite-syntax-n">sys</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">argv</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-mi">0</span><span class="devsite-syntax-p">])</span>
+  <span class="devsite-syntax-n">credentials</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">storage</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">get</span><span class="devsite-syntax-p">()</span>
+
+  <span class="devsite-syntax-k">if</span> <span class="devsite-syntax-n">credentials</span> <span class="devsite-syntax-ow">is</span> <span class="devsite-syntax-kc">None</span> <span class="devsite-syntax-ow">or</span> <span class="devsite-syntax-n">credentials</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">invalid</span><span class="devsite-syntax-p">:</span>
+    <span class="devsite-syntax-n">credentials</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">run_flow</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">flow</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">storage</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">args</span><span class="devsite-syntax-p">)</span>
+
+  <span class="devsite-syntax-k">return</span> <span class="devsite-syntax-n">build</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">YOUTUBE_API_SERVICE_NAME</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">YOUTUBE_API_VERSION</span><span class="devsite-syntax-p">,</span>
+    <span class="devsite-syntax-n">http</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">credentials</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">authorize</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">httplib2</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">Http</span><span class="devsite-syntax-p">()))</span>
+
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">initialize_upload</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">options</span><span class="devsite-syntax-p">):</span>
+  <span class="devsite-syntax-n">tags</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-kc">None</span>
+  <span class="devsite-syntax-k">if</span> <span class="devsite-syntax-n">options</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">keywords</span><span class="devsite-syntax-p">:</span>
+    <span class="devsite-syntax-n">tags</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">options</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">keywords</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">split</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">","</span><span class="devsite-syntax-p">)</span>
+
+  <span class="devsite-syntax-n">body</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-nb">dict</span><span class="devsite-syntax-p">(</span>
+    <span class="devsite-syntax-n">snippet</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-nb">dict</span><span class="devsite-syntax-p">(</span>
+      <span class="devsite-syntax-n">title</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">options</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">title</span><span class="devsite-syntax-p">,</span>
+      <span class="devsite-syntax-n">description</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">options</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">description</span><span class="devsite-syntax-p">,</span>
+      <span class="devsite-syntax-n">tags</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">tags</span><span class="devsite-syntax-p">,</span>
+      <span class="devsite-syntax-n">categoryId</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">options</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">category</span>
+    <span class="devsite-syntax-p">),</span>
+    <span class="devsite-syntax-n">status</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-nb">dict</span><span class="devsite-syntax-p">(</span>
+      <span class="devsite-syntax-n">privacyStatus</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">options</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">privacyStatus</span>
+    <span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-p">)</span>
+
+  <span class="devsite-syntax-c1"># Call the API's videos.insert method to create and upload the video.</span>
+  <span class="devsite-syntax-n">insert_request</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">videos</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">insert</span><span class="devsite-syntax-p">(</span>
+    <span class="devsite-syntax-n">part</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">","</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">join</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">body</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">keys</span><span class="devsite-syntax-p">()),</span>
+    <span class="devsite-syntax-n">body</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">body</span><span class="devsite-syntax-p">,</span>
+    <span class="devsite-syntax-c1"># The chunksize parameter specifies the size of each chunk of data, in</span>
+    <span class="devsite-syntax-c1"># bytes, that will be uploaded at a time. Set a higher value for</span>
+    <span class="devsite-syntax-c1"># reliable connections as fewer chunks lead to faster uploads. Set a lower</span>
+    <span class="devsite-syntax-c1"># value for better recovery on less reliable connections.</span>
+    <span class="devsite-syntax-c1">#</span>
+    <span class="devsite-syntax-c1"># Setting "chunksize" equal to -1 in the code below means that the entire</span>
+    <span class="devsite-syntax-c1"># file will be uploaded in a single HTTP request. (If the upload fails,</span>
+    <span class="devsite-syntax-c1"># it will still be retried where it left off.) This is usually a best</span>
+    <span class="devsite-syntax-c1"># practice, but if you're using Python older than 2.6 or if you're</span>
+    <span class="devsite-syntax-c1"># running on App Engine, you should set the chunksize to something like</span>
+    <span class="devsite-syntax-c1"># 1024 * 1024 (1 megabyte).</span>
+    <span class="devsite-syntax-n">media_body</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">MediaFileUpload</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">options</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">file</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">chunksize</span><span class="devsite-syntax-o">=-</span><span class="devsite-syntax-mi">1</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">resumable</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-kc">True</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-p">)</span>
+
+  <span class="devsite-syntax-n">resumable_upload</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">insert_request</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-c1"># This method implements an exponential backoff strategy to resume a</span>
+<span class="devsite-syntax-c1"># failed upload.</span>
+<span class="devsite-syntax-k">def</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nf">resumable_upload</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">insert_request</span><span class="devsite-syntax-p">):</span>
+  <span class="devsite-syntax-n">response</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-kc">None</span>
+  <span class="devsite-syntax-n">error</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-kc">None</span>
+  <span class="devsite-syntax-n">retry</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-mi">0</span>
+  <span class="devsite-syntax-k">while</span> <span class="devsite-syntax-n">response</span> <span class="devsite-syntax-ow">is</span> <span class="devsite-syntax-kc">None</span><span class="devsite-syntax-p">:</span>
+    <span class="devsite-syntax-k">try</span><span class="devsite-syntax-p">:</span>
+      <span class="devsite-syntax-nb">print</span> <span class="devsite-syntax-s2">"Uploading file..."</span>
+      <span class="devsite-syntax-n">status</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">response</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">insert_request</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">next_chunk</span><span class="devsite-syntax-p">()</span>
+      <span class="devsite-syntax-k">if</span> <span class="devsite-syntax-n">response</span> <span class="devsite-syntax-ow">is</span> <span class="devsite-syntax-ow">not</span> <span class="devsite-syntax-kc">None</span><span class="devsite-syntax-p">:</span>
+        <span class="devsite-syntax-k">if</span> <span class="devsite-syntax-s1">'id'</span> <span class="devsite-syntax-ow">in</span> <span class="devsite-syntax-n">response</span><span class="devsite-syntax-p">:</span>
+          <span class="devsite-syntax-nb">print</span> <span class="devsite-syntax-s2">"Video id '</span><span class="devsite-syntax-si">%s</span><span class="devsite-syntax-s2">' was successfully uploaded."</span> <span class="devsite-syntax-o">%</span> <span class="devsite-syntax-n">response</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-s1">'id'</span><span class="devsite-syntax-p">]</span>
+        <span class="devsite-syntax-k">else</span><span class="devsite-syntax-p">:</span>
+          <span class="devsite-syntax-n">exit</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"The upload failed with an unexpected response: </span><span class="devsite-syntax-si">%s</span><span class="devsite-syntax-s2">"</span> <span class="devsite-syntax-o">%</span> <span class="devsite-syntax-n">response</span><span class="devsite-syntax-p">)</span>
+    <span class="devsite-syntax-k">except</span> <span class="devsite-syntax-n">HttpError</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">e</span><span class="devsite-syntax-p">:</span>
+      <span class="devsite-syntax-k">if</span> <span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">resp</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">status</span> <span class="devsite-syntax-ow">in</span> <span class="devsite-syntax-n">RETRIABLE_STATUS_CODES</span><span class="devsite-syntax-p">:</span>
+        <span class="devsite-syntax-n">error</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-s2">"A retriable HTTP error </span><span class="devsite-syntax-si">%d</span><span class="devsite-syntax-s2"> occurred:</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-si">%s</span><span class="devsite-syntax-s2">"</span> <span class="devsite-syntax-o">%</span> <span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">resp</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">status</span><span class="devsite-syntax-p">,</span>
+                                                             <span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">content</span><span class="devsite-syntax-p">)</span>
+      <span class="devsite-syntax-k">else</span><span class="devsite-syntax-p">:</span>
+        <span class="devsite-syntax-k">raise</span>
+    <span class="devsite-syntax-k">except</span> <span class="devsite-syntax-n">RETRIABLE_EXCEPTIONS</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">e</span><span class="devsite-syntax-p">:</span>
+      <span class="devsite-syntax-n">error</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-s2">"A retriable error occurred: </span><span class="devsite-syntax-si">%s</span><span class="devsite-syntax-s2">"</span> <span class="devsite-syntax-o">%</span> <span class="devsite-syntax-n">e</span>
+
+    <span class="devsite-syntax-k">if</span> <span class="devsite-syntax-n">error</span> <span class="devsite-syntax-ow">is</span> <span class="devsite-syntax-ow">not</span> <span class="devsite-syntax-kc">None</span><span class="devsite-syntax-p">:</span>
+      <span class="devsite-syntax-nb">print</span> <span class="devsite-syntax-n">error</span>
+      <span class="devsite-syntax-n">retry</span> <span class="devsite-syntax-o">+=</span> <span class="devsite-syntax-mi">1</span>
+      <span class="devsite-syntax-k">if</span> <span class="devsite-syntax-n">retry</span> &gt; <span class="devsite-syntax-n">MAX_RETRIES</span><span class="devsite-syntax-p">:</span>
+        <span class="devsite-syntax-n">exit</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"No longer attempting to retry."</span><span class="devsite-syntax-p">)</span>
+
+      <span class="devsite-syntax-n">max_sleep</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-mi">2</span> <span class="devsite-syntax-o">**</span> <span class="devsite-syntax-n">retry</span>
+      <span class="devsite-syntax-n">sleep_seconds</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">random</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">random</span><span class="devsite-syntax-p">()</span> <span class="devsite-syntax-o">*</span> <span class="devsite-syntax-n">max_sleep</span>
+      <span class="devsite-syntax-nb">print</span> <span class="devsite-syntax-s2">"Sleeping </span><span class="devsite-syntax-si">%f</span><span class="devsite-syntax-s2"> seconds and then retrying..."</span> <span class="devsite-syntax-o">%</span> <span class="devsite-syntax-n">sleep_seconds</span>
+      <span class="devsite-syntax-n">time</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">sleep</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">sleep_seconds</span><span class="devsite-syntax-p">)</span>
+
+<span class="devsite-syntax-k">if</span> <span class="devsite-syntax-vm">__name__</span> <span class="devsite-syntax-o">==</span> <span class="devsite-syntax-s1">'__main__'</span><span class="devsite-syntax-p">:</span>
+  <span class="devsite-syntax-n">argparser</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">add_argument</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"--file"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">required</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-kc">True</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">help</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"Video file to upload"</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-n">argparser</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">add_argument</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"--title"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">help</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"Video title"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">default</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"Test Title"</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-n">argparser</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">add_argument</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"--description"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">help</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"Video description"</span><span class="devsite-syntax-p">,</span>
+    <span class="devsite-syntax-n">default</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"Test Description"</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-n">argparser</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">add_argument</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"--category"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">default</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"22"</span><span class="devsite-syntax-p">,</span>
+    <span class="devsite-syntax-n">help</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"Numeric video category. "</span> <span class="devsite-syntax-o">+</span>
+      <span class="devsite-syntax-s2">"See https://developers.google.com/youtube/v3/docs/videoCategories/list"</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-n">argparser</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">add_argument</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"--keywords"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">help</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"Video keywords, comma separated"</span><span class="devsite-syntax-p">,</span>
+    <span class="devsite-syntax-n">default</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">""</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-n">argparser</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">add_argument</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"--privacyStatus"</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">choices</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">VALID_PRIVACY_STATUSES</span><span class="devsite-syntax-p">,</span>
+    <span class="devsite-syntax-n">default</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-n">VALID_PRIVACY_STATUSES</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-mi">0</span><span class="devsite-syntax-p">],</span> <span class="devsite-syntax-n">help</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-s2">"Video privacy status."</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-n">args</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">argparser</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">parse_args</span><span class="devsite-syntax-p">()</span>
+
+  <span class="devsite-syntax-k">if</span> <span class="devsite-syntax-ow">not</span> <span class="devsite-syntax-n">os</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">path</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">exists</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">args</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">file</span><span class="devsite-syntax-p">):</span>
+    <span class="devsite-syntax-n">exit</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s2">"Please specify a valid file using the --file= parameter."</span><span class="devsite-syntax-p">)</span>
+
+  <span class="devsite-syntax-n">youtube</span> <span class="devsite-syntax-o">=</span> <span class="devsite-syntax-n">get_authenticated_service</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">args</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-k">try</span><span class="devsite-syntax-p">:</span>
+    <span class="devsite-syntax-n">initialize_upload</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">youtube</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">args</span><span class="devsite-syntax-p">)</span>
+  <span class="devsite-syntax-k">except</span> <span class="devsite-syntax-n">HttpError</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">e</span><span class="devsite-syntax-p">:</span>
+    <span class="devsite-syntax-nb">print</span> <span class="devsite-syntax-s2">"An HTTP error </span><span class="devsite-syntax-si">%d</span><span class="devsite-syntax-s2"> occurred:</span><span class="devsite-syntax-se">\n</span><span class="devsite-syntax-si">%s</span><span class="devsite-syntax-s2">"</span> <span class="devsite-syntax-o">%</span> <span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">resp</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">status</span><span class="devsite-syntax-p">,</span> <span class="devsite-syntax-n">e</span><span class="devsite-syntax-o">.</span><span class="devsite-syntax-n">content</span><span class="devsite-syntax-p">)</span></pre>
+      </devsite-code>
+    </section>
+    <section>
+      <h2 data-text="Additional resources" id="Additional_Resources" tabindex="-1">Additional resources</h2>
+      <ul>
+        <li>
+          <p>The <a href="/youtube/v3/guides/authentication">Authentication</a> guide provides complete details for
+            implementing <span class="notranslate">OAuth 2.0</span>.</p>
+        </li>
+        <li>
+          <p>The reference documentation explains the fields in a <a class="notranslate"
+              href="/youtube/v3/docs/videos">video</a> resource.</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

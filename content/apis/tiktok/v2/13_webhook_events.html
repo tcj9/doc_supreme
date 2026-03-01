@@ -1,0 +1,243 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="webhook_events">Webhook Events</h1>
+        <p style="text-align:left">Webhooks let you subscribe to events and receive notice when an event occurs. For
+            more information about how to set up a webhook subscription, see <a href="/doc/webhooks-overview">Webhooks
+                Overview</a>.</p>
+        <p style="text-align:left">By default, you are subscribed to all events when a callback URL is configured in the
+            TikTok Developer Portal.</p>
+        <h2 id="webhook_structure">Webhook Structure</h2>
+        <h3 id="request_body">Request Body</h3>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">client_key</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The unique identification key provisioned to the partner.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">event</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">Event name.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">create_time</p>
+                </td>
+                <td>
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The time in which the event occurred. UTC epoch time is in seconds.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">user_openid</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">The TikTok user's unique identifier; obtained through
+                        <code>/oauth/access_token/</code>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">content</p>
+                </td>
+                <td>
+                    <p style="text-align:left">string</p>
+                </td>
+                <td>
+                    <p style="text-align:left">A serialized JSON string of event information.</p>
+                </td>
+            </tr>
+        </table><br />
+        <h2 id="event_types">Event types</h2>
+        <h3 id="authorization.removed">authorization.removed</h3>
+        <p style="text-align:left">Fired when the user's account deauthorized from your application.</p>
+        <p style="text-align:left">The <code>access_token</code> for the user will have been already revoked when you
+            receive the disconnect callback message. Developers can persist this information for clean-up purposes.</p>
+        <table>
+            <tr>
+                <td>
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td>
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="text-align:left">reason</p>
+                </td>
+                <td>
+                    <p style="text-align:left">int</p>
+                </td>
+                <td>
+                    <p style="text-align:left"> 0 = Unknown </p>
+                    <p style="text-align:left"> 1 = User disconnects from TikTok app </p>
+                    <p style="text-align:left"> 2 = User's account got deleted </p>
+                    <p style="text-align:left"> 3 = User's age changed </p>
+                    <p style="text-align:left"> 4 = User's account got banned</p>
+                    <p style="text-align:left"> 5 = Developer revoke authorization</p>
+                </td>
+            </tr>
+        </table><br />
+        <h4 id="example_payload">Example payload</h4>
+        <style data-emotion="css 5tsrm2">
+            .css-5tsrm2 {
+                max-height: 420px;
+                background: rgb(22 24 35 / 3%);
+                border: 0.5px solid var(--tux-colorLineSecondary);
+                box-sizing: border-box;
+                border-radius: 4px;
+                overflow-y: auto;
+                padding: 15px !important;
+            }
+        </style>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><style data-emotion="css 63unw6">.css-63unw6{font-family:Courier,monospace;}</style><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>    </span><span>"client_key"</span><span>: </span><span style="color:#d14">"bwo2m45353a6k85"</span><span>,
+</span></span><span><span>    </span><span>"event"</span><span>: </span><span style="color:#d14">"authorization.removed"</span><span>,
+</span></span><span><span>    </span><span>"create_time"</span><span>: </span><span style="color:#008080">1615338610</span><span>,
+</span></span><span><span>    </span><span>"user_openid"</span><span>: </span><span style="color:#d14">"act.example12345Example12345Example"</span><span>,
+</span></span><span><span>    </span><span>"content"</span><span>: </span><span style="color:#d14">"{\"reason\": 1 }"</span><span>
+</span></span><span>}</span></code></pre>
+        <h3 id="video.upload.failed">video.upload.failed</h3>
+        <p style="text-align:left">Fired when the video uploaded from <a href="/doc/web-video-kit-with-web">Video
+                Kit</a> fails to upload in TikTok.</p>
+        <h4 id="example_payload_2">Example payload</h4>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>    </span><span>"client_key"</span><span>: </span><span style="color:#d14">"bwo2m45353a6k85"</span><span>,
+</span></span><span><span>    </span><span>"event"</span><span>: </span><span style="color:#d14">"video.upload.failed"</span><span>,
+</span></span><span><span>    </span><span>"create_time"</span><span>: </span><span style="color:#008080">1615338610</span><span>,
+</span></span><span><span>    </span><span>"user_openid"</span><span>: </span><span style="color:#d14">"act.example12345Example12345Example"</span><span>,
+</span></span><span><span>    </span><span>"content"</span><span>:</span><span style="color:#d14">"{\"share_id\":\"video.6974245311675353080.VDCxrcMJ\"}"</span><span>
+</span></span><span>}</span></code></pre>
+        <h3 id="video.publish.completed">video.publish.completed</h3>
+        <p style="text-align:left">Fired when the video uploaded from <a href="/doc/web-video-kit-with-web">Video
+                Kit</a> has been published by the user in TikTok.</p>
+        <h4 id="example_payload_3">Example payload</h4>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>    </span><span>"client_key"</span><span>: </span><span style="color:#d14">"bwo2m45353a6k85"</span><span>,
+</span></span><span><span>    </span><span>"event"</span><span>: </span><span style="color:#d14">"video.publish.completed"</span><span>,
+</span></span><span><span>    </span><span>"create_time"</span><span>: </span><span style="color:#008080">1615338610</span><span>,
+</span></span><span><span>    </span><span>"user_openid"</span><span>: </span><span style="color:#d14">"act.example12345Example12345Example"</span><span>,
+</span></span><span><span>    </span><span>"content"</span><span>:</span><span style="color:#d14">"{\"share_id\":\"video.6974245311675353080.VDCxrcMJ\"}"</span><span>
+</span></span><span>}</span></code></pre>
+        <h2 id="portability.download.ready">portability.download.ready</h2>
+        <p style="text-align:left">Fired when data requested via from the <style data-emotion="css ap4ivw">
+                .css-ap4ivw {
+                    font-size: inherit;
+                    color: var(--ui-text-primary-display);
+                }
+
+                .css-ap4ivw *:hover {
+                    -webkit-text-decoration: none !important;
+                    text-decoration: none !important;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+            </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/products/data-portability-api/"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">Data Portability API</span></a> is in the
+            <code>downloading</code> state.
+        </p>
+        <p style="text-align:left">Example payload:</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>    </span><span>"client_key"</span><span>: </span><span style="color:#d14">"developer_client_key"</span><span>,
+</span></span><span><span>    </span><span>"event"</span><span>: </span><span style="color:#d14">"portability.download.ready"</span><span>,
+</span></span><span><span>    </span><span>"create_time"</span><span>: </span><span style="color:#008080">1615338610</span><span>,
+</span></span><span><span>    </span><span>"content"</span><span>:</span><span style="color:#d14">"{\"request_id\":123123123123123}"</span><span>
+</span></span><span>}</span></code></pre>
+        <p style="text-align:left">Note: <code>content</code> is a JSON object marshalled as a string</p>
+        <pre class="css-5tsrm2" data-e2e="SyntaxHighlighter"
+            style="display:block;overflow-x:auto;padding:0.5em;color:#333;background:#f8f8f8"><code class="language-json css-63unw6" style="white-space:pre-wrap"><span><span>{
+</span></span><span><span>    </span><span>"request_id"</span><span>: </span><span style="color:#008080">123123123123123</span><span>
+</span></span><span>}</span></code></pre>
+        <h3 id="payload_content">Payload content</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:center"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:center"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:center"><b>Description</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:center"><b>Example</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">request_id</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">int64</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The unique ID generated to track the download data request. This value
+                        can be obtained from the Add Data Request API</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">123123123123</p>
+                </td>
+            </tr>
+        </table><br />
+    </div>
+</div>

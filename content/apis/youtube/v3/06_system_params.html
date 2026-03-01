@@ -1,0 +1,226 @@
+<article class="devsite-article">
+  <style>
+    .api-table tr th[colspan] {
+      background-color: #edf0f2 !important;
+      color: #455a64 !important;
+    }
+
+    .api-table tr td {
+      background-color: white !important;
+    }
+  </style>
+  <devsite-feedback bucket="Documentation" class="nocontent" context="" data-label="Send Feedback Button"
+    position="header" product-id="5008998"
+    project-icon="https://docs.cloud.google.com/_static/clouddocs/images/icons/categories/developer-tools-color.svg"
+    project-name="Cloud APIs" track-metadata-position="header" track-name="sendFeedbackLink" track-type="feedback"
+    version="t-devsite-webserver-20260203-r00-rc00.475209219095455269">
+    <button>
+
+
+      Send feedback
+
+    </button>
+  </devsite-feedback>
+  <h1 class="devsite-page-title" tabindex="-1">
+    System parameters<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+        ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-action-close="Callout Profile dismissed"
+        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+        id="devsite-collections-dropdown">
+        <devsite-bookmark></devsite-bookmark>
+        <span slot="popout-heading">
+
+          Stay organized with collections
+        </span>
+        <span slot="popout-contents">
+
+          Save and categorize content based on your preferences.
+        </span>
+      </devsite-feature-tooltip></devsite-actions>
+  </h1>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <p>Google's API platform provides a set of common functionality to all Google APIs
+      built using the platform. In order to use and control such functionality,
+      the platform pre-defines a special set of request parameters called
+      <em>system parameters</em>. These parameters are available across all Google REST APIs
+      and gRPC APIs. A system parameter can be specified either using an HTTP query
+      parameter or an HTTP header. For Google gRPC APIs, only HTTP headers are
+      supported.
+    </p>
+    <p>Most users will not need to use these parameters directly. However, they are
+      often used by Google-provided
+      <a href="/apis/docs/client-libraries-explained">client libraries</a>. If you need to write
+      custom code to access Google APIs directly, the system parameters can be
+      useful in cases such as controlling JSON pretty-printing or specifying API Keys.
+    </p>
+    <h2 data-text="HTTP Mapping" id="http_mapping" tabindex="-1">HTTP Mapping</h2>
+    <p>For HTTP requests, system parameters are sent as URL query parameters or
+      HTTP request headers. For example, if you have a system parameter <code dir="ltr" translate="no">$foo</code>, it's
+      sent as <code dir="ltr" translate="no">?$foo=xxx</code> in the URL, or <code dir="ltr"
+        translate="no">?%24foo=xxx</code> if URL-encoded. See the
+      table below for details.</p>
+    <aside class="note"><strong>Note:</strong><span> The <code dir="ltr" translate="no">$</code> name prefix is added to
+        avoid conflicting with normal request
+        parameters.</span></aside>
+    <h2 data-text="gRPC Mapping" id="grpc_mapping" tabindex="-1">gRPC Mapping</h2>
+    <p>For <a href="https://grpc.io/">gRPC</a> requests, system parameters are sent as HTTP
+      request headers with keys in lowercase. See the table below for details.</p>
+    <h2 data-text="Definitions" id="definitions" tabindex="-1">Definitions</h2>
+    <p>The following table lists all system parameters and their definitions.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>URL Query Parameter</th>
+          <th>HTTP/gRPC Header</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td><code dir="ltr" translate="no">Authorization</code></td>
+          <td>Authentication credentials. See <a href="/docs/authentication">Authentication overview</a> for details.
+          </td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$alt</code>,<br /><code dir="ltr" translate="no">alt</code></td>
+          <td></td>
+          <td>Alternative response format. Supported values are <code dir="ltr" translate="no">json</code> (default),
+            <code dir="ltr" translate="no">media</code>, <code dir="ltr" translate="no">proto</code>, <code dir="ltr"
+              translate="no">sse</code> (JSON streams).
+          </td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$.xgafv</code></td>
+          <td></td>
+          <td>JSON error format. Supported values are <code dir="ltr" translate="no">1</code>, <code dir="ltr"
+              translate="no">2</code> (default). The error format <code dir="ltr" translate="no">1</code> should only be
+            used by <a href="https://developers.google.com/api-client-library">Google API Client Libraries</a>.</td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$callback</code>,<br /><code dir="ltr" translate="no">callback</code></td>
+          <td></td>
+          <td>JSONP callback parameter.</td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$ct</code></td>
+          <td><code dir="ltr" translate="no">Content-Type</code></td>
+          <td>HTTP Content-Type request header override.</td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$fields</code>,<br /><code dir="ltr" translate="no">fields</code></td>
+          <td><code dir="ltr" translate="no">X-Goog-FieldMask</code></td>
+          <td><a
+              href="https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto"><code
+                dir="ltr" translate="no">FieldMask</code></a> used for response filtering. If empty, all fields should
+            be returned unless documented otherwise.</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><code dir="ltr" translate="no">X-HTTP-Method-Override</code></td>
+          <td>The intended HTTP method for the request. Some network proxies don't accept all HTTP methods.</td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$key</code>,<br /><code dir="ltr" translate="no">key</code></td>
+          <td><code dir="ltr" translate="no">X-Goog-Api-Key</code></td>
+          <td>Google API key. See https://cloud.google.com/docs/authentication/api-keys for details.</td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">passwd</code>,<br /><code dir="ltr" translate="no">password</code></td>
+          <td></td>
+          <td>Reserved to prevent putting passwords in URLs.</td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$prettyPrint</code>,<br /><code dir="ltr" translate="no">prettyPrint</code>
+          </td>
+          <td></td>
+          <td>Pretty-print JSON response. Supported values are <code dir="ltr" translate="no">true</code> (default),
+            <code dir="ltr" translate="no">false</code>.
+          </td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">quotaUser</code></td>
+          <td><code dir="ltr" translate="no">X-Goog-Quota-User</code></td>
+          <td>A pseudo user identifier for charging per-user quotas. If not specified, the authenticated principal is
+            used. If there is no authenticated principal, the client IP address will be used. When specified, a valid
+            API key with service restrictions must be used to identify the quota project. Otherwise, this parameter is
+            ignored.</td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$outputDefaults</code></td>
+          <td></td>
+          <td>Force to output proto default values for JSON responses.</td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$unique</code></td>
+          <td></td>
+          <td>Unique query parameter to disable request caching.</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><code dir="ltr" translate="no">X-Goog-Api-Client</code></td>
+          <td>API client identification. The value is a space-separated list of <code dir="ltr"
+              translate="no">NAME "/" SEMVER</code> strings, where the <code dir="ltr" translate="no">NAME</code> should
+            only contain lowercase letters, digits, and "-", and the <code dir="ltr" translate="no">SEMVER</code> should
+            be a semantic version string. For example: X-Goog-Api-Client: python/3.5.0 grpc-google-pubsub-v1/0.1.0-beta2
+            linux/2.7.0.</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><code dir="ltr" translate="no">X-Goog-Request-Reason</code></td>
+          <td>Contains a reason for making the request, which is intended to be recorded in audit logging. An example
+            reason would be a support-case ticket number. For audit logs, the characters in the reason determine whether
+            the reason is base64 encoded before being attached to the log entry. Reasons that include only letters,
+            digits, and spaces are retained in plain text. Reasons that include other characters are base64 encoded.
+          </td>
+        </tr>
+        <tr>
+          <td><code dir="ltr" translate="no">$userProject</code></td>
+          <td><code dir="ltr" translate="no">X-Goog-User-Project</code></td>
+          <td>A caller-specified project for quota and billing purposes. The caller must have <code dir="ltr"
+              translate="no">serviceusage.services.use</code> permission on the project.</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><code dir="ltr" translate="no">X-Server-Timeout</code></td>
+          <td>Timeout (in seconds, float value) for the server to finish processing the request. This system param only
+            applies to REST APIs for which client-side timeout is not applicable.</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><code dir="ltr" translate="no">x-goog-request-params</code></td>
+          <td>Passing additional parameters for gRPC requests in URL query format. For example: x-goog-request-params:
+            service=pubsub.googleapis.com&amp;release=2021-11-01r0.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 data-text="Changelog" id="changelog" tabindex="-1">Changelog</h2>
+    <ul>
+      <li>2021-11 Published documentation for <code dir="ltr" translate="no">x-goog-request-params</code>.</li>
+      <li>2021-02 Published documentation for <code dir="ltr" translate="no">quotaUser</code>.</li>
+      <li>2020-07 Deprecated OAuth 2.0 query parameters.</li>
+      <li>2019-10 Introduced <code dir="ltr" translate="no">X-Server-Timeout</code> system parameter.</li>
+      <li>2017-10 Introduced <code dir="ltr" translate="no">X-Goog-User-Project</code> system parameter.</li>
+    </ul>
+    <devsite-hats-survey class="nocontent" hats-id="mwETRvWii0eU5NUYprb0Y9z5GVbc"
+      listnr-id="83405"></devsite-hats-survey>
+  </div>
+  <devsite-thumb-rating position="footer">
+  </devsite-thumb-rating>
+  <devsite-feedback bucket="Documentation" class="nocontent" context="" data-label="Send Feedback Button"
+    position="footer" product-id="5008998"
+    project-icon="https://docs.cloud.google.com/_static/clouddocs/images/icons/categories/developer-tools-color.svg"
+    project-name="Cloud APIs" track-metadata-position="footer" track-name="sendFeedbackLink" track-type="feedback"
+    version="t-devsite-webserver-20260203-r00-rc00.475209219095455269">
+    <button>
+
+
+      Send feedback
+
+    </button>
+  </devsite-feedback>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

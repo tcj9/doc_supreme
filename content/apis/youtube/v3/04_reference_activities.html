@@ -1,0 +1,843 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Activities<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <devsite-key-takeaways-panel aria-labelledby="key-takeaways-panel-title" role="region">
+                  <div aria-expanded="false" aria-labelledby="key-takeaways-panel-title"
+                        class="devsite-key-takeaways-panel-header" role="button" tabindex="0">
+                        <img alt="Spark icon" src="/_static/images/icons/spark.svg">
+                        <div class="devsite-key-takeaways-panel-title">
+                              <h2 class="no-link hide-from-toc" data-tooltip="Generated with AI"
+                                    id="key-takeaways-panel-title">Page Summary</h2>
+                        </div>
+                        <span aria-hidden="true"
+                              class="material-icons devsite-key-takeaways-panel-toggle-button"></span>
+                        </img>
+                  </div>
+                  <div class="devsite-key-takeaways-panel-content">
+                        <devsite-feedback bucket="8963846920012181156" disable-product-feedback="" product-id="5123748">
+                              <button aria-label="Report Key Takeaways!"
+                                    class="button-flat button-primary devsite-key-takeaways-report-button"
+                                    data-title="Report Key Takeaways!">
+                                    <span aria-label="Report Key Takeaways!" class="material-icons">outlined_flag</span>
+                              </button>
+                        </devsite-feedback>
+                        <ul class="devsite-key-takeaways-panel-list">
+                              <li>
+                                    <p>YouTube's channel bulletin feature has been removed, making the
+                                          <code>activities.list</code> method unable to retrieve bulletins and rendering
+                                          the <code>activities.insert</code> method obsolete.</p>
+                              </li>
+                              <li>
+                                    <p>An activity resource represents a channel or user action on YouTube, including
+                                          actions like video uploads, likes, favorites, comments, and subscriptions.</p>
+                              </li>
+                              <li>
+                                    <p>The <code>activities.list</code> method can be used to retrieve activity events
+                                          that meet specific criteria, while the <code>activities.insert</code> method
+                                          is no longer functional.</p>
+                              </li>
+                              <li>
+                                    <p>The <code>activity</code> resource contains details in the <code>snippet</code>
+                                          and <code>contentDetails</code> properties, offering information such as
+                                          timestamps, channel IDs, activity type, and associated resource details like
+                                          videos, playlists, or social posts.</p>
+                              </li>
+                              <li>
+                                    <p>The social post <code>contentDetails</code> section, which is present when the
+                                          activity <code>type</code> is social, provides the social network name, the
+                                          resource ID related to the post, the author, the reference URL and the author
+                                          image URL.</p>
+                              </li>
+                        </ul>
+                  </div>
+            </devsite-key-takeaways-panel>
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="activities" itemprop="name">
+                  <style>
+                        deprecated {
+                              color: red;
+                        }
+                  </style>
+                  <section id="overview">
+                        <p>An <code dir="ltr" translate="no"><strong>activity</strong></code> resource contains
+                              information about an action that a particular channel, or user, has taken on YouTube. The
+                              actions reported in activity feeds include rating a video, sharing a video, marking a
+                              video as a favorite, uploading a video, and so forth. Each <code dir="ltr"
+                                    translate="no">activity</code> resource identifies the type of action, the channel
+                              associated with the action, and the resource(s) associated with the action, such as the
+                              video that was rated or uploaded.</p>
+                  </section>
+                  <section id="methods">
+                        <h2 data-text="Methods" id="methods" tabindex="-1">Methods</h2>
+                        <p>The API supports the following methods for <code dir="ltr" translate="no">activities</code>
+                              resources:</p>
+                        <dl>
+                              <dt class="notranslate"><a href="/youtube/v3/docs/activities/list">list</a></dt>
+                              <dd>Returns a list of channel activity events that match the request criteria. For
+                                    example, you can retrieve events associated with a particular channel or with the
+                                    user's own channel.
+                                    <a href="/youtube/v3/docs/activities/list#usage">Try it now</a>.
+                              </dd>
+                        </dl>
+                  </section>
+                  <section id="resource">
+                        <h2 data-text="Resource representation" id="resource-representation" tabindex="-1">Resource
+                              representation</h2>
+                        <p>The following JSON structure shows the format of an <code dir="ltr"
+                                    translate="no">activities</code> resource:</p>
+                        <div></div><devsite-code>
+                              <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json" is-upgraded=""
+                                    style="max-height: 500px; overflow: auto" syntax="GDScript">{
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s2">"<a href="#kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"youtube#activity"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s2">"<a href="#etag">etag</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">etag</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s2">"<a href="#id">id</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s2">"<a href="#snippet">snippet</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#snippet.publishedAt">publishedAt</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">datetime</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#snippet.channelId">channelId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#snippet.title">title</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#snippet.description">description</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#snippet.thumbnails">thumbnails</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><var class="apiparam" translate="no"><span class="devsite-syntax-p">(</span><span class="devsite-syntax-n">key</span><span class="devsite-syntax-p">)</span></var>:<span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#snippet.thumbnails.(key).url">url</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#snippet.thumbnails.(key).width">width</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">unsigned</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">integer</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#snippet.thumbnails.(key).height">height</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">unsigned</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">integer</span></var>
+<span class="devsite-syntax-w">      </span>}
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#snippet.channelTitle">channelTitle</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#snippet.type">type</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#snippet.groupId">groupId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var>
+<span class="devsite-syntax-w">  </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s2">"<a href="#contentDetails">contentDetails</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.upload">upload</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.upload.videoId">videoId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var>
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.like">like</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.like.resourceId">resourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.like.resourceId.kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.like.resourceId.videoId">videoId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span>}
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.favorite">favorite</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.favorite.resourceId">resourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.favorite.resourceId.kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.favorite.resourceId.videoId">videoId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span>}
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.comment">comment</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.comment.resourceId">resourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.comment.resourceId.kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.comment.resourceId.videoId">videoId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.comment.resourceId.channelId">channelId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span>}
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.subscription">subscription</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.subscription.resourceId">resourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.subscription.resourceId.kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.subscription.resourceId.channelId">channelId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span>}
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.playlistItem">playlistItem</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.playlistItem.resourceId">resourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.playlistItem.resourceId.kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.playlistItem.resourceId.videoId">videoId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.playlistItem.playlistId">playlistId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.playlistItem.playlistItemId">playlistItemId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var>
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation">recommendation</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.resourceId">resourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.resourceId.kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.resourceId.videoId">videoId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.resourceId.channelId">channelId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.reason">reason</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.seedResourceId">seedResourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.seedResourceId.kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.seedResourceId.videoId">videoId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.seedResourceId.channelId">channelId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.recommendation.seedResourceId.playlistId">playlistId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var>
+<span class="devsite-syntax-w">      </span>}
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social">social</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.type">type</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.resourceId">resourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.resourceId.kind">kind</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.resourceId.videoId">videoId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.resourceId.channelId">channelId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.resourceId.playlistId">playlistId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var>
+<span class="devsite-syntax-w">      </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.author">author</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.referenceUrl">referenceUrl</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.social.imageUrl">imageUrl</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><var class="apiparam" translate="no"><span class="devsite-syntax-n">string</span></var>
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s2">"<a href="#contentDetails.channelItem">channelItem</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span><span class="devsite-syntax-s2">"<a href="#contentDetails.channelItem.resourceId">resourceId</a>"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span>{
+<span class="devsite-syntax-w">      </span>}
+<span class="devsite-syntax-w">    </span>}<span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span>}
+}</pre>
+                        </devsite-code>
+                  </section>
+                  <section id="properties">
+                        <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                        <p>The following table defines the properties that appear in this resource:</p>
+                        <table class="responsive properties" id="property-table">
+                              <thead>
+                                    <tr>
+                                          <th colspan="2">Properties</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="kind">
+                                          <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                Identifies the API resource's type. The value will be <code dir="ltr"
+                                                      translate="no">youtube#activity</code>.</td>
+                                    </tr>
+                                    <tr id="etag">
+                                          <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                The Etag of this resource.</td>
+                                    </tr>
+                                    <tr id="id">
+                                          <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the activity.</td>
+                                    </tr>
+                                    <tr id="snippet">
+                                          <td><code dir="ltr" itemprop="property" translate="no">snippet</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">snippet</code> object contains basic
+                                                details about the activity, including the activity's type and group ID.
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.publishedAt">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>publishedAt</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">datetime</code><br />
+                                                The date and time that the activity occurred. The value is specified in
+                                                <a href="//www.w3.org/TR/NOTE-datetime">ISO 8601</a> format.</td>
+                                    </tr>
+                                    <tr id="snippet.channelId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>channelId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the channel associated
+                                                with the activity.</td>
+                                    </tr>
+                                    <tr id="snippet.title">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>title</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The title of the resource primarily associated with the activity.</td>
+                                    </tr>
+                                    <tr id="snippet.description">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>description</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The description of the resource primarily associated with the activity.
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>thumbnails</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                A map of thumbnail images associated with the resource that is primarily
+                                                associated with the activity. For each object in the map, the key is the
+                                                name of the thumbnail image, and the value is an object that contains
+                                                other information about the thumbnail.</td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails.(key)">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.thumbnails.</span>(key)</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                Valid key values are:<ul>
+                                                      <li><code dir="ltr" translate="no">default</code> – The default
+                                                            thumbnail image. The default thumbnail for a video – or a
+                                                            resource that refers to a video, such as a playlist item or
+                                                            search result – is 120px wide and 90px tall. The default
+                                                            thumbnail for a channel is 88px wide and 88px tall.</li>
+                                                      <li><code dir="ltr" translate="no">medium</code> – A higher
+                                                            resolution version of the thumbnail image. For a video (or a
+                                                            resource that refers to a video), this image is 320px wide
+                                                            and 180px tall. For a channel, this image is 240px wide and
+                                                            240px tall.</li>
+                                                      <li><code dir="ltr" translate="no">high</code> – A high resolution
+                                                            version of the thumbnail image. For a video (or a resource
+                                                            that refers to a video), this image is 480px wide and 360px
+                                                            tall. For a channel, this image is 800px wide and 800px
+                                                            tall.</li>
+                                                      <li><code dir="ltr" translate="no">standard</code> – An even
+                                                            higher resolution version of the thumbnail image than the
+                                                            <code dir="ltr" translate="no">high</code> resolution image.
+                                                            This image is available for some videos and other resources
+                                                            that refer to videos, like playlist items or search results.
+                                                            This image is 640px wide and 480px tall.</li>
+                                                      <li><code dir="ltr" translate="no">maxres</code> – The highest
+                                                            resolution version of the thumbnail image. This image size
+                                                            is available for some videos and other resources that refer
+                                                            to videos, like playlist items or search results. This image
+                                                            is 1280px wide and 720px tall.</li>
+                                                </ul>
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails.(key).url">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.thumbnails.(key).</span>url</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The image's URL.</td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails.(key).width">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.thumbnails.(key).</span>width</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's width.</td>
+                                    </tr>
+                                    <tr id="snippet.thumbnails.(key).height">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.thumbnails.(key).</span>height</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">unsigned integer</code><br />
+                                                The image's height.</td>
+                                    </tr>
+                                    <tr id="snippet.channelTitle">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>channelTitle</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                Channel title for the channel responsible for this activity</td>
+                                    </tr>
+                                    <tr id="snippet.type">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>type</code></td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of activity that the resource describes.<br><br>Valid values
+                                                for this property are:
+                                                <ul>
+                                                      <li><code dir="ltr" translate="no">channelItem</code></li>
+                                                      <li><code dir="ltr" translate="no">comment</code> – (not currently
+                                                            returned)</li>
+                                                      <li><code dir="ltr" translate="no">favorite</code></li>
+                                                      <li><code dir="ltr" translate="no">like</code></li>
+                                                      <li><code dir="ltr" translate="no">playlistItem</code></li>
+                                                      <li><code dir="ltr" translate="no">promotedItem</code></li>
+                                                      <li><code dir="ltr" translate="no">recommendation</code></li>
+                                                      <li><code dir="ltr" translate="no">social</code></li>
+                                                      <li><code dir="ltr" translate="no">subscription</code></li>
+                                                      <li><code dir="ltr" translate="no">upload</code></li>
+                                                </ul>
+                                                </br></br>
+                                          </td>
+                                    </tr>
+                                    <tr id="snippet.groupId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">snippet.</span>groupId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The group ID associated with the activity. A group ID identifies user
+                                                events that are associated with the same user and resource. For example,
+                                                if a user rates a video and marks the same video as a favorite, the
+                                                entries for those events would have the same group ID in the user's
+                                                activity feed. In your user interface, you can avoid repetition by
+                                                grouping events with the same <code dir="ltr"
+                                                      translate="no">groupId</code> value.</td>
+                                    </tr>
+                                    <tr id="contentDetails">
+                                          <td><code dir="ltr" itemprop="property" translate="no">contentDetails</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">contentDetails</code> object contains
+                                                information about the content associated with the activity. For example,
+                                                if the <code dir="ltr" translate="no">snippet.type</code> value is <code
+                                                      dir="ltr" translate="no">videoRated</code>, then the <code
+                                                      dir="ltr" translate="no">contentDetails</code> object's content
+                                                identifies the rated video.</td>
+                                    </tr>
+                                    <tr id="contentDetails.upload">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>upload</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">upload</code> object contains
+                                                information about the uploaded video. This property is only present if
+                                                the <code dir="ltr" translate="no">snippet.type</code> is <code
+                                                      dir="ltr" translate="no">upload</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.upload.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.upload.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the uploaded video.</td>
+                                    </tr>
+                                    <tr id="contentDetails.like">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>like</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">like</code> object contains
+                                                information about a resource that received a positive (like) rating.
+                                                This property is only present if the <code dir="ltr"
+                                                      translate="no">snippet.type</code> is <code dir="ltr"
+                                                      translate="no">like</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.like.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.like.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">resourceId</code> object contains
+                                                information that identifies the rated resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.like.resourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.like.resourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of the API resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.like.resourceId.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.like.resourceId.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the video, if the rated
+                                                resource is a video. This property is only present if the <code
+                                                      dir="ltr" translate="no">resourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#video</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.favorite">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>favorite</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">favorite</code> object contains
+                                                information about a video that was marked as a favorite video. This
+                                                property is only present if the <code dir="ltr"
+                                                      translate="no">snippet.type</code> is <code dir="ltr"
+                                                      translate="no">favorite</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.favorite.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.favorite.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">resourceId</code> object contains
+                                                information that identifies the resource that was marked as a favorite.
+                                          </td>
+                                    </tr>
+                                    <tr id="contentDetails.favorite.resourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.favorite.resourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of the API resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.favorite.resourceId.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.favorite.resourceId.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the favorite video. This
+                                                property is only present if the <code dir="ltr"
+                                                      translate="no">resourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#video</code>.<br /><br /><b>Note:</b> The
+                                                <code dir="ltr" translate="no">activities.list</code> method does not
+                                                currently return resources for new comments.</td>
+                                    </tr>
+                                    <tr id="contentDetails.comment">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>comment</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">comment</code> object contains
+                                                information about a resource that received a comment. This property is
+                                                only present if the <code dir="ltr" translate="no">snippet.type</code>
+                                                is <code dir="ltr" translate="no">comment</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.comment.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.comment.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">resourceId</code> object contains
+                                                information that identifies the resource associated with the comment.
+                                          </td>
+                                    </tr>
+                                    <tr id="contentDetails.comment.resourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.comment.resourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of the API resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.comment.resourceId.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.comment.resourceId.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the video associated with
+                                                a comment. This property is only present if the <code dir="ltr"
+                                                      translate="no">resourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#video</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.comment.resourceId.channelId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.comment.resourceId.</span>channelId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the channel associated
+                                                with a comment. This property is only present if the <code dir="ltr"
+                                                      translate="no">resourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#channel</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.subscription">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>subscription</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">subscription</code> object contains
+                                                information about a channel that a user subscribed to. This property is
+                                                only present if the <code dir="ltr" translate="no">snippet.type</code>
+                                                is <code dir="ltr" translate="no">subscription</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.subscription.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.subscription.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">resourceId</code> object contains
+                                                information that identifies the resource that the user subscribed to.
+                                          </td>
+                                    </tr>
+                                    <tr id="contentDetails.subscription.resourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.subscription.resourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of the API resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.subscription.resourceId.channelId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.subscription.resourceId.</span>channelId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the channel that the user
+                                                subscribed to. This property is only present if the <code dir="ltr"
+                                                      translate="no">resourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#channel</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.playlistItem">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>playlistItem</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">playlistItem</code> object contains
+                                                information about a new playlist item. This property is only present if
+                                                the <code dir="ltr" translate="no">snippet.type</code> is <code
+                                                      dir="ltr" translate="no">playlistItem</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.playlistItem.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.playlistItem.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">resourceId</code> object contains
+                                                information that identifies the resource that was added to the playlist.
+                                          </td>
+                                    </tr>
+                                    <tr id="contentDetails.playlistItem.resourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.playlistItem.resourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of the API resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.playlistItem.resourceId.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.playlistItem.resourceId.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the video that was added
+                                                to the playlist. This property is only present if the <code dir="ltr"
+                                                      translate="no">resourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#video</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.playlistItem.playlistId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.playlistItem.</span>playlistId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The value that YouTube uses to uniquely identify the playlist.</td>
+                                    </tr>
+                                    <tr id="contentDetails.playlistItem.playlistItemId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.playlistItem.</span>playlistItemId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The value that YouTube uses to uniquely identify the item in the
+                                                playlist.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>recommendation</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">recommendation</code> object contains
+                                                information about a recommended resource. This property is only present
+                                                if the <code dir="ltr" translate="no">snippet.type</code> is <code
+                                                      dir="ltr" translate="no">recommendation</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">resourceId</code> object contains
+                                                information that identifies the recommended resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.resourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.resourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of the API resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.resourceId.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.resourceId.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the video, if the
+                                                recommended resource is a video. This property is only present if the
+                                                <code dir="ltr" translate="no">resourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#video</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.resourceId.channelId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.resourceId.</span>channelId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the channel, if the
+                                                recommended resource is a channel. This property is only present if the
+                                                <code dir="ltr" translate="no">resourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#channel</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.reason">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.</span>reason</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The reason that the resource is recommended to the user.<br><br>Valid
+                                                values for this property are:
+                                                <ul>
+                                                      <li><code dir="ltr" translate="no">videoFavorited</code></li>
+                                                      <li><code dir="ltr" translate="no">videoLiked</code></li>
+                                                      <li><code dir="ltr" translate="no">videoWatched</code></li>
+                                                </ul>
+                                                </br></br>
+                                          </td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.seedResourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.</span>seedResourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">seedResourceId</code> object contains
+                                                information about the resource that caused the recommendation.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.seedResourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.seedResourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of the API resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.seedResourceId.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.seedResourceId.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the video, if the
+                                                recommendation was caused by a particular video. This property is only
+                                                present if the <code dir="ltr" translate="no">seedResourceId.kind</code>
+                                                is <code dir="ltr" translate="no">youtube#video</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.seedResourceId.channelId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.seedResourceId.</span>channelId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the channel, if the
+                                                recommendation was caused by a particular channel. This property is only
+                                                present if the <code dir="ltr" translate="no">seedResourceId.kind</code>
+                                                is <code dir="ltr" translate="no">youtube#channel</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.recommendation.seedResourceId.playlistId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.recommendation.seedResourceId.</span>playlistId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the playlist, if the
+                                                recommendation was caused by a particular playlist. This property is
+                                                only present if the <code dir="ltr"
+                                                      translate="no">seedResourceId.kind</code> is <code dir="ltr"
+                                                      translate="no">youtube#playlist</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>social</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">social</code> object contains details
+                                                about a social network post. This property is only present if the <code
+                                                      dir="ltr" translate="no">snippet.type</code> is <code dir="ltr"
+                                                      translate="no">social</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social.type">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.</span>type</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The name of the social network.<br><br>Valid values for this property
+                                                are:
+                                                <ul>
+                                                      <li><code dir="ltr" translate="no">facebook</code></li>
+                                                      <li><code dir="ltr" translate="no">googlePlus</code></li>
+                                                      <li><code dir="ltr" translate="no">twitter</code></li>
+                                                      <li><code dir="ltr" translate="no">unspecified</code></li>
+                                                </ul>
+                                                </br></br>
+                                          </td>
+                                    </tr>
+                                    <tr id="contentDetails.social.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">resourceId</code> object encapsulates
+                                                information that identifies the resource associated with a social
+                                                network post.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social.resourceId.kind">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.resourceId.</span>kind</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The type of the API resource.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social.resourceId.videoId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.resourceId.</span>videoId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the video featured in a
+                                                social network post, if the post refers to a video. This property will
+                                                only be present if the value of the <code dir="ltr"
+                                                      translate="no">social.resourceId.kind</code> property is <code
+                                                      dir="ltr" translate="no">youtube#video</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social.resourceId.channelId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.resourceId.</span>channelId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the channel featured in a
+                                                social network post, if the post refers to a channel. This property will
+                                                only be present if the value of the <code dir="ltr"
+                                                      translate="no">social.resourceId.kind</code> property is <code
+                                                      dir="ltr" translate="no">youtube#channel</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social.resourceId.playlistId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.resourceId.</span>playlistId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The ID that YouTube uses to uniquely identify the playlist featured in a
+                                                social network post, if the post refers to a playlist. This property
+                                                will only be present if the value of the <code dir="ltr"
+                                                      translate="no">social.resourceId.kind</code> property is <code
+                                                      dir="ltr" translate="no">youtube#playlist</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social.author">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.</span>author</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The author of the social network post.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social.referenceUrl">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.</span>referenceUrl</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                The URL of the social network post.</td>
+                                    </tr>
+                                    <tr id="contentDetails.social.imageUrl">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.social.</span>imageUrl</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                An image of the post's author.</td>
+                                    </tr>
+                                    <tr id="contentDetails.channelItem">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.</span>channelItem</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">channelItem</code> object contains
+                                                details about a resource that was added to a channel. This property is
+                                                only present if the <code dir="ltr" translate="no">snippet.type</code>
+                                                is <code dir="ltr" translate="no">channelItem</code>.</td>
+                                    </tr>
+                                    <tr id="contentDetails.channelItem.resourceId">
+                                          <td><code dir="ltr" itemprop="property"
+                                                      translate="no"><span class="quiet">contentDetails.channelItem.</span>resourceId</code>
+                                          </td>
+                                          <td><code class="apitype notranslate" dir="ltr">object</code><br />
+                                                The <code dir="ltr" translate="no">resourceId</code> object contains
+                                                information that identifies the resource that was added to the channel.
+                                          </td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </section>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

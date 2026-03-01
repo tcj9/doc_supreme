@@ -1,0 +1,164 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="error_handling">Error Handling</h1>
+        <p style="text-align:left">In the new generation of the TikTok Login Kit, OAuth error responses include an error
+            code represented as readable strings with a detailed error message and log ID. When contacting the TikTok
+            support team, these details must be provided.</p>
+        <h3 id="error_struct">Error struct</h3>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Key</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Type</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">error</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The error category in string.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">error_description</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The detailed error description.</p><br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">log_id</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">String</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The unique ID associated with every request for debugging purposes.</p>
+                </td>
+            </tr>
+        </table>
+        <h3 id="error_categories">Error categories</h3>
+        <p style="text-align:left">The <code>error</code> property can be one of the following values:</p>
+        <table>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Error</b></p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left"><b>Description </b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">access_denied</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The resource owner or authorization server denied the request.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">invalid_client</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Client authentication failed (for example, unknown client, no client
+                        authentication included, or unsupported authentication method).</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">invalid_grant</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The provided authorization grant (for example, authorization code or
+                        resource owner credentials) or refresh token is invalid, expired, revoked, does not match the
+                        redirection URI used in the authorization request, or was issued to another client.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">invalid_request</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The request misses a required parameter or is otherwise malformed.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">invalid_scope</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The requested scope is invalid, unknown, or malformed.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">unauthorized_client</p><br />
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The client is not authorized to request an authorization code using this
+                        method.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">unsupported_grant_type</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The authorization grant type is not supported by the authorization
+                        server.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">unsupported_response_type</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">The authorization server does not support obtaining an authorization code
+                        using this method.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">server_error</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Other internal server errors.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">temporarily_unavailable</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p style="text-align:left">Service is temporarily unavailable. </p>
+                </td>
+            </tr>
+        </table><br /><br />
+    </div>
+</div>

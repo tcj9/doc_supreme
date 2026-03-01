@@ -1,0 +1,251 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_GZ">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Get Started</h1>
+              <p>This document explains how to make your first call using the Instagram API with Instagram Login to
+                obtain information about your Instagram professional account, including your User ID, username, and
+                media objects.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Before You Start</h2>
+              <div><span>
+                  <p>This guide assumes you have read the <a
+                      href="https://developers.facebook.com/docs/instagram-platform/overview">Instagram Platform
+                      Overview</a> and implemented the needed components for using this API, such as a Meta login flow
+                    and a webhooks server to receive notifications.</p>
+                </span></div>
+              <div class="_57yz _7_72 _3-8p">
+                <div class="_57y-">
+                  <p>
+                    If your current Meta app type is <b>not</b> a Business type app you will need to create a new app
+                    and <a
+                      href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/create-a-meta-app-with-instagram#step-4--select-your-app-type"
+                      target="_blank">select <b>Business</b> during the creation process.<img alt="" class="img"
+                        src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=crq0DXdTD4X5vtu-YSgpiQ&amp;oh=00_AfvbTO9V0vd-UJyUiy7UJeV33hgvrhRPyBUeMAvGCX383w&amp;oe=69A0DBE2"
+                        width="10px" /></a> If this new app needs Advanced Access, App Review is required.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get an access token</h2>
+              <p>An access token contains information about the app making the request, the token's expiration date, the
+                app user's Instagram User ID and the permissions the user has granted the app. You can get an Instagram
+                user access token using one of the following methods:</p>
+              <b><a href="/docs/instagram/platform/instagram-api/business-login" target="_blank">
+                  Business Login for Instagram
+                  <img alt="" class="img"
+                    src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=crq0DXdTD4X5vtu-YSgpiQ&amp;oh=00_AfvbTO9V0vd-UJyUiy7UJeV33hgvrhRPyBUeMAvGCX383w&amp;oe=69A0DBE2"
+                    width="10px" /></a></b>
+              <p>If you have implemented Business Login for Instagram into your app, log in to your app.</p>
+              <b><a href="/apps" target="_blank">
+                  App Dashboard
+                  <img alt="" class="img"
+                    src="https://scontent-bos5-1.xx.fbcdn.net/v/t39.2365-6/310307727_3347317042262105_1088877051262827250_n.png?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=e280be&amp;_nc_ohc=tEhIqoNdY3cQ7kNvwH5ocS1&amp;_nc_oc=AdlfyIysN3tEBuLF28oBmcTGfio1v1A_X1B5QIi-Dm2KFiWxyJpB4arozaAzkoGMJVA&amp;_nc_zt=14&amp;_nc_ht=scontent-bos5-1.xx&amp;_nc_gid=crq0DXdTD4X5vtu-YSgpiQ&amp;oh=00_AfvbTO9V0vd-UJyUiy7UJeV33hgvrhRPyBUeMAvGCX383w&amp;oe=69A0DBE2"
+                    width="10px" /></a></b>
+              <p>If you have not implemented Business Login for Instagram, Get an access token via the App Dashboard.
+              </p>
+              <ol>
+                <li>In your app dashboard, click <strong>Instagram &gt; API setup with Instagram business login</strong>
+                  in the left side menu.</li>
+                <li>Click <strong>Generate token</strong> next to the Instagram account you want to access. </li>
+                <li>Log into Instagram.</li>
+                <li>Copy the access token.</li>
+              </ol>
+              <p>
+                Access tokens from the business login flow are short-lived and valid for 1 hour. Access tokens from the
+                App Dashboard are long-lived and are valid for 60 days. <a
+                  href="/docs/instagram/platform/instagram-api/business-login#get-a-long-lived-access-token"
+                  target="_blank">Learn how to extend the expiry of any access token.</a></p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get the app user ID &amp; username</h2>
+              <p>To obtain your app user's Instagram professional account user ID and username, send a <code>GET</code>
+                request to the <code>/me</code> endpoint with the following parameters:</p>
+              <ul>
+                <li><code>fields</code> set to a comma-separated list with <code>user_id</code> and
+                  <code>username</code>
+                </li>
+                <li><code>access_token</code> set to the access token from the app dashboard</li>
+              </ul>
+              <p><strong>Note:</strong> The <code>/me</code> endpoint represents the app user's ID received from the
+                access token, in this example, your user ID.</p>
+              <h3>Example request</h3>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+curl -i -X GET \
+ "https://graph.instagram.com/<code>v24.0</code>/me
+      ?fields=user_id,username
+      &amp;access_token=Ealkdfj..."
+</pre>
+              <p>On success, your app receives a JSON object with the app user's Instagram user ID and the username of
+                the Instagram professional account.</p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+{
+  "data": [
+    {
+      "user_id": "&lt;IG_ID&gt;"
+      "username": "&lt;IG_USERNAME&gt;"
+    }
+  ]
+}         
+</pre>
+              <h3 id="fields">Fields</h3>
+              <p>You can use the <code>fields</code> query string parameter to request the following fields on a User.
+              </p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Field Name</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_gS">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>id</code></p>
+                      </td>
+                      <td>
+                        <p>The app user's app-scoped ID</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>user_id</code></p>
+                      </td>
+                      <td>
+                        <p>The Instagram professional acount ID, <code>&lt;IG_ID&gt;</code>, for your app user. This ID
+                          is value of the <code>id</code> field received in webhook notifications for this account.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>username</code></p>
+                      </td>
+                      <td>
+                        <p>The app user's Instagram username.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>name</code></p>
+                      </td>
+                      <td>
+                        <p>The app user's name</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>account_type</code></p>
+                      </td>
+                      <td>
+                        <p>The app user's account type. Can be <code>Business</code> or <code>Media_Creator</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>profile_picture_url</code></p>
+                      </td>
+                      <td>
+                        <p>The URL for the app user's profile picture.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>followers_count</code></p>
+                      </td>
+                      <td>
+                        <p>The number of followers of the app user's Instagram professional account</p>
+                      </td>
+                    </tr>
+                    <tr class="row_7 _5m29">
+                      <td>
+                        <p><code>follows_count</code></p>
+                      </td>
+                      <td>
+                        <p>The number of Instagram accounts the app user's Instagram professional account follows</p>
+                      </td>
+                    </tr>
+                    <tr class="row_8">
+                      <td>
+                        <p><code>media_count</code></p>
+                      </td>
+                      <td>
+                        <p>The number of Media object on the User</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="posts">Get an app user's media objects</h2>
+              <p>To get media objects, send a <code>GET</code> request to the <code>/&lt;IG_ID&gt;/media</code>
+                endpoint.</p>
+              <h3>Example request</h3>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+curl -i -X GET \
+ "https://graph.instagram.com/<code>v24.0</code>/&lt;IG_ID&gt;/media?access_token=&lt;INSTAGRAM_USER_ACCESS_TOKEN&gt;"
+</pre>
+              <p>On success your app receives a JSON object with the IDs of all the <a
+                  href="/docs/instagram-api/reference/ig-media">IG Media</a> objects on the <a
+                  href="/docs/instagram-api/reference/ig-user">IG User</a>:</p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+{
+  "data": [
+    {
+      "id": "17918195224117851"
+    },
+    {
+      "id": "17895695668004550"
+    },
+    {
+      "id": "17899305451014820"
+    },
+    {
+      "id": "17896450804038745"
+    },
+    {
+      "id": "17881042411086627"
+    },
+    {
+      "id": "17869102915168123"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIUkdGRXA2eHNNTUs4T1ZAXNGFxQTAtd3U4QjBLd1B2NXRMM1NkcnhqRFdBcEUzSDVJZATFoLWtXMWZAGU2VrRTk2RHVtTVlDckI2NjN0UERFa2JrUk4yMW13",
+      "after": "QVFIUmlwbnFsM3N2cV9lZAFdCa0hDeV9qMVliT0VuMmJyNENxZA180c0t6VjFQVEJaTE9XV085aU92OUFLNFB6Szd2amo5aV9rTlVBcnNlWmEtMzYxcE1HSFR3"
+    }
+  }
+}
+</pre>
+              <p>If you are able to perform this final query successfully, you should be able to perform queries using
+                any of the Instagram API with Instagram Login endpoints — just see our various guides and references to
+                learn what each endpoint can do and what permissions they require.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Next Steps</h2>
+              <p>Now that you know how to get access tokens and Instagram User IDs for your app users, learn how to <a
+                  href="https://developers.facebook.com/docs/instagram/platform/instagram-api/webhooks">subscribe your
+                  app users to Instagram webhooks notifications.</a></p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

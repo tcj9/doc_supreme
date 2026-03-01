@@ -1,0 +1,1239 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_5_KC">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Facebook Login for Business</h1>
+              <p>Facebook Login for Business is the preferred authentication and authorization solution for tech
+                providers building integrations with Meta’s business tools to create marketing, messaging, and selling
+                solutions.</p>
+              <p>Facebook Login for Business allows you to create a login experience in the Meta App Dashboard based on
+                the needs of your app. You can specify the access token type, assets, and permissions your app needs,
+                and save it as a <strong>configuration</strong>. During login your app users are presented with this
+                configuration that allows them to grant your app access to their business assets.</p>
+              <h2>Requirements</h2>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">
+                    Your Meta app must be a <a
+                      href="https://developers.facebook.com/docs/development/create-an-app/other-app-types#step-3--select-an-app-type"
+                      target="_blank"><b>business type app</b></a></div>
+                </li>
+                <li>
+                  <div class="fcb">All permissions that your app asks for during login must be granted by your app user
+                    or your app won't be granted any permissions.</div>
+                </li>
+                <li>
+                  <div class="fcb">The <code>email</code> and <code>public_profile</code> permissions are automatically
+                    granted to all apps but at least one other supported permission must be included for each app
+                    installation.</div>
+                </li>
+                <li>
+                  <div class="fcb">
+                    To serve businesses that you do not own or manage, your app must be approved for <a href="#"
+                      role="button"><b>Advanced Access</b></a> via <a href="/docs/app-review" target="_blank"><b>Meta's
+                        App Review</b></a></div>
+                </li>
+                <li>
+                  <div class="fcb">
+                    Apps with Advanced Access are required to undergo <a
+                      href="https://developers.facebook.com/docs/resp-plat-initiatives/ongoing-reviews" target="_blank">
+                      Ongoing Review
+                    </a> to retain access. However, apps using Facebook Login for Business have reduced requirements for
+                    certain ongoing compliance reviews because they are limited to accessing business permissions and
+                    features.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Supported permissions</h2>
+              <p>The following table shows the available permissions for Facebook Login for Business.</p>
+              <div>
+                <div class="_57-c">
+                  <table class="_4-ss _5k9x">
+                    <thead>
+                      <th style="width:40%">Available Permissions</th>
+                      <th style="width:30%">User access tokens</th>
+                      <th style="width:30%">Business Integration System User access tokens</th>
+                    </thead>
+                    <tbody class="_5m37" id="u_0_6_yl">
+                      <tr class="row_0">
+                        <td><a href="/docs/permissions/#ads_management" target="_blank"><code>ads_management</code></a>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_1 _5m29">
+                        <td><a href="/docs/permissions/#ads_read" target="_blank"><code>ads_read</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_2">
+                        <td><a href="/docs/permissions/#business_management"
+                            target="_blank"><code>business_management</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_3 _5m29">
+                        <td><a href="/docs/permissions/#catalog_management"
+                            target="_blank"><code>catalog_management</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_4">
+                        <td><code>commerce_account_manage_orders</code></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_5 _5m29">
+                        <td><code> commerce_account_read_orders</code></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_6">
+                        <td><code>commerce_account_read_reports</code></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_7 _5m29">
+                        <td><code> commerce_account_read_settings</code></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_8">
+                        <td><code>commerce_manage_accounts</code></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_9 _5m29">
+                        <td><a href="/docs/permissions/#email" target="_blank"><code>email</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>N/A</p>
+                        </td>
+                      </tr>
+                      <tr class="row_10">
+                        <td><a href="/docs/permissions/#instagram_basic"
+                            target="_blank"><code>instagram_basic</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_11 _5m29">
+                        <td><a href="/docs/permissions/#instagram_content_publish"
+                            target="_blank"><code>instagram_content_publish</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_12">
+                        <td><a href="/docs/permissions/#instagram_manage_comments"
+                            target="_blank"><code>instagram_manage_comments</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_13 _5m29">
+                        <td><a href="/docs/permissions/#instagram_manage_insights"
+                            target="_blank"><code>instagram_manage_insights</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_14">
+                        <td><a href="/docs/permissions/#instagram_manage_messages"
+                            target="_blank"><code>instagram_manage_messages</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_15 _5m29">
+                        <td><a href="/docs/permissions/#instagram_shopping_tag_products"
+                            target="_blank"><code>instagram_shopping_tag_products</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_16">
+                        <td><a href="/docs/permissions/#leads_retrieval"
+                            target="_blank"><code>leads_retrieval</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_17 _5m29">
+                        <td><a href="/docs/permissions/#manage_app_solution"
+                            target="_blank"><code>manage_app_solutions</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_18">
+                        <td><a href="/docs/permissions/#manage_fundraisers"
+                            target="_blank"><code>manage_fundraisers</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_19 _5m29">
+                        <td><a href="/docs/permissions/#pages_manage_cta"
+                            target="_blank"><code>pages_manage_cta</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_20">
+                        <td><a href="/docs/permissions/#page_events" target="_blank"><code>page_events</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_21 _5m29">
+                        <td><a href="/docs/permissions/#pages_manage_ads"
+                            target="_blank"><code>pages_manage_ads</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_22">
+                        <td><a href="/docs/permissions/#pages_manage_engagement"
+                            target="_blank"><code>pages_manage_engagement</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_23 _5m29">
+                        <td><a href="/docs/permissions/#pages_manage_instant_articles"
+                            target="_blank"><code>pages_manage_instant_articles</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_24">
+                        <td><a href="/docs/permissions/#pages_manage_metadata"
+                            target="_blank"><code>pages_manage_metadata</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_25 _5m29">
+                        <td><a href="/docs/permissions/#pages_manage_posts"
+                            target="_blank"><code>pages_manage_posts</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_26">
+                        <td><a href="/docs/permissions/#pages_messaging"
+                            target="_blank"><code>pages_messaging</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_27 _5m29">
+                        <td><a href="/docs/permissions/#pages_read_engagement"
+                            target="_blank"><code>pages_read_engagement</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_28">
+                        <td><a href="/docs/permissions/#pages_read_user_content"
+                            target="_blank"><code>pages_read_user_content</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_29 _5m29">
+                        <td><a href="/docs/permissions/#pages_show_list"
+                            target="_blank"><code>pages_show_list</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_30">
+                        <td><a href="/docs/permissions/#private_computation_access"
+                            target="_blank"><code>private_computation_access</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_31 _5m29">
+                        <td><a href="/docs/permissions/#public_profile" target="_blank"><code>public_profile</code></a>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>N/A</p>
+                        </td>
+                      </tr>
+                      <tr class="row_32">
+                        <td><a href="/docs/permissions/#publish_video" target="_blank"><code>publish_video</code></a>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_33 _5m29">
+                        <td><a href="/docs/permissions/#read_insights" target="_blank"><code>read_insights</code></a>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_34">
+                        <td><a href="/docs/permissions/#read_audience_network_insights"
+                            target="_blank"><code>read_audience_network_insights</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_35 _5m29">
+                        <td><a href="/docs/permissions/#whatsapp_business_management"
+                            target="_blank"><code>whatsapp_business_management</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                      <tr class="row_36">
+                        <td><a href="/docs/permissions/#whatsapp_business_messaging"
+                            target="_blank"><code>whatsapp_business_messaging</code></a></td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                        <td style="text-align:center;">
+                          <p>✓</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2><a href="https://developers.facebook.com/docs/features-reference" target="_blank">Supported
+                  features</a></h2>
+              <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                <tbody>
+                  <tr class="_51mx">
+                    <td class="_51m- vTop hLeft _57v2">
+                      <ul>
+                        <li>Ads Management Standard Access</li>
+                        <li>Business Asset User Profile Access</li>
+                        <li>Human Agent</li>
+                        <li>Instagram Public Content Access</li>
+                      </ul>
+                    </td>
+                    <td class="_51m- vTop hLeft _57v2 _51mw">
+                      <ul>
+                        <li>Live Video API</li>
+                        <li>Page Mentions</li>
+                        <li>Page Public Content Access</li>
+                        <li>Page Public Metadata Access</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Supported products</h2>
+              <div>
+                <table cellpadding="0" cellspacing="0" class="uiGrid _51mz _57v1">
+                  <tbody>
+                    <tr class="_51mx">
+                      <td class="_51m- vTop hLeft _57v2">
+                        <ul class="uiList _4of _4kg">
+                          <li>
+                            <div class="fcb"><a href="/docs/app-ads" target="_blank">
+                                App Ads
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/app-events" target="_blank">
+                                App Events
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/applinks" target="_blank">
+                                App Links
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/audience-network" target="_blank">
+                                Audience Network
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/commerce-platform" target="_blank">
+                                Commerce Platform
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/fundraiser-api" target="_blank">
+                                Fundraiser API
+
+                              </a></div>
+                          </li>
+                        </ul>
+                      </td>
+                      <td class="_51m- vTop hLeft _57v2">
+                        <ul class="uiList _4of _4kg">
+                          <li>
+                            <div class="fcb"><a href="/docs/instagram-platform" target="_blank">
+                                Instagram Platform
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/pages/jobs-xml" target="_blank">
+                                Jobs
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/marketing-apis" target="_blank">
+                                Marketing API
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/messenger-platform" target="_blank">
+                                Messenger Platform
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/meta-business-extension" target="_blank">
+                                Meta Business Extension
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/meta-pixel" target="_blank">
+                                Meta Pixel
+
+                              </a></div>
+                          </li>
+                        </ul>
+                      </td>
+                      <td class="_51m- vTop hLeft _57v2 _51mw">
+                        <ul class="uiList _4of _4kg">
+                          <li>
+                            <div class="fcb"><a href="/docs/pages-api" target="_blank">
+                                Pages API
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/sharing" target="_blank">
+                                Sharing
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="https://developers.facebook.com/docs/threat-exchange"
+                                target="_blank">
+                                ThreatExchange
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/games_payments" target="_blank">
+                                Web Payments
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/graph-api/webhooks" target="_blank">
+                                Webhooks
+
+                              </a></div>
+                          </li>
+                          <li>
+                            <div class="fcb"><a href="/docs/whatsapp" target="_blank">
+                                WhatsApp Business Platform
+
+                              </a></div>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Supported access tokens</h2>
+              <p>You can use Facebook Login for Business to get either Business Integration System User access tokens or
+                User access tokens.</p>
+              <h3>User access tokens</h3>
+              <p>User access tokens should be used if your app takes actions in real time, based on input from the user.
+                For example, use a user access token if your app requires a user to input text and click a button in
+                order to post content to their Page. User access tokens should also be used if you require an API that
+                requires admin permissions on a business portfolio.</p>
+              <h3>Business integration system user access tokens</h3>
+              <p>Business integration system user access tokens should be used if your app performs programmatic,
+                automated actions on your business clients' assets without having to rely on input from an app user, or
+                require re-authentication at a future date. For example:</p>
+              <ul>
+                <li>Hourly, automated server-to-server conversion API calls</li>
+                <li>Sending automated responses as a Facebook Page or WhatsApp business portfolio</li>
+                <li>Continuous, automated updates to product catalog inventories</li>
+                <li>Automated retrieval of ads insights</li>
+              </ul>
+              <h4>Requirements</h4>
+              <p>To get business integration system user access tokens from your business clients:</p>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">
+                    Your app can only request logins from web surfaces
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">
+                    Businesses onboarding to your app must have, or be willing to create, a
+                    <a href="https://www.facebook.com/business/help/2199735813629697" target="_blank">
+                      business portfolio
+
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">
+                    Your app must be associated with a
+                    <a href="https://www.facebook.com/business/help/2199735813629697" target="_blank">
+                      business portfolio,
+
+                    </a> which you have full control. This needs to be separate from the business portfolio owned by
+                    your business client.
+
+                  </div>
+                </li>
+              </ul>
+              <p>To test the business integration system user access token flow, the tester must have a role on the app
+                and full control of the client business.</p>
+              <h4>Granular business integration system user access tokens</h4>
+              <div style="padding:5px"></div>
+              <p>If you need different access setups for different purposes or departments, you can use multiple
+                granular business integration system user access tokens per client business to improve the scalability
+                and security of your integrations.</p>
+              <p>Granular access tokens are still specific to a client business portfolio. They are not shareable and
+                accessible across different client businesses. Their scope and asset list are a subset of the original
+                business integration system user access token.</p>
+              <p>To isolate potential security incidents in the event of a compromised token, only that specific client
+                business will be impacted, instead of impacting all business portfolios across all client businesses.
+              </p>
+              <img alt="" class="img"
+                src="https://lookaside.fbsbx.com/elementpath/media/?media_id=3497241840528666&amp;version=1759804881&amp;transcode_extension=webp"
+                width="100%" />
+              <h3>Comparison</h3>
+              <div>
+                <div class="_57-c">
+                  <table class="_4-ss _5k9x">
+                    <thead>
+                      <th style="width:20%"></th>
+                      <th>Business Integration System User access tokens</th>
+                      <th>User access tokens</th>
+                    </thead>
+                    <tbody class="_5m37" id="u_0_7_JW">
+                      <tr class="row_0">
+                        <td>
+                          <p>Access Designations</p>
+                        </td>
+                        <td>
+                          <p>Access is <strong>explicitly delegated</strong> at the time of authorization. Your app can
+                            only access the assets that were designated by your business client when they completed the
+                            Facebook Login for Business flow. Tech Providers only.</p>
+                        </td>
+                        <td>
+                          <p>Access is <strong>inherited</strong> from your app user's current account access; your app
+                            can access the same business assets that the app user currently has access to.</p>
+                        </td>
+                      </tr>
+                      <tr class="row_1 _5m29">
+                        <td>
+                          <p>Account association</p>
+                        </td>
+                        <td>
+                          <p>Associated with your business client's business portfolio rather than a specific user. Any
+                            admin in your business client's admin group can grant your app a system user access token.
+                          </p>
+                        </td>
+                        <td>
+                          <p>Associated with your app user's personal Facebook account.</p>
+                        </td>
+                      </tr>
+                      <tr class="row_2">
+                        <td>
+                          <p>Expiration and refresh</p>
+                        </td>
+                        <td>
+                          <p>Defaults to <strong>never expire</strong> for the common offline server-to-server
+                            communication.</p>
+                        </td>
+                        <td>
+                          <p>A <strong>short-lived</strong> token for online activities such as web browsers.</p>
+                        </td>
+                      </tr>
+                      <tr class="row_3 _5m29">
+                        <td>
+                          <p>OAuth grant type</p>
+                        </td>
+                        <td>
+                          <p><strong>Authorization Code</strong> grant only.</p>
+                        </td>
+                        <td>
+                          <p><strong>Implicit</strong> grant by default, and can support authorization code grant for
+                            improved security. Mainly used for user-agent based clients such as web browsers and mobile
+                            apps.</p>
+                        </td>
+                      </tr>
+                      <tr class="row_4">
+                        <td>
+                          <p>Representation</p>
+                        </td>
+                        <td>
+                          <p>Part of the Tech Provider integration's infrastructure, initialized by a client business
+                            through Tech Provider’s app installation.</p>
+                        </td>
+                        <td>
+                          <p>Represents servers or software making API calls to assets owned or managed by a
+                            <a href="https://developers.facebook.com/docs/business-manager-api" target="_blank">
+                              Business Manager.
+
+                            </a>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr class="row_5 _5m29">
+                        <td>
+                          <p>Token Invalidation</p>
+                        </td>
+                        <td>
+                          <p>Your business clients can invalidate business integration system User access tokens by
+                            going to <b><a href="https://business.facebook.com/" target="_blank">Business Manager</a>
+                              &gt; Settings &gt; Business Settings &gt; Integrations &gt; Connected apps</b> and
+                            removing your app.</p>
+                        </td>
+                        <td>
+                          <p>Your business clients can invalidate User access tokens by going to Facebook and navigating
+                            to <strong>Settings &amp; privacy</strong> &gt; <strong>Settings</strong> &gt;
+                            <strong>Security and login</strong> &gt; <strong>Business Integrations</strong> and removing
+                            your app.
+                          </p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2 id="bisu-token-api">Business Integration System User Access Token Management API</h2>
+              <p>When a client business installs an app through Facebook Login for Business and generates a business
+                integration system user access token, the token includes a client business ID. This ID represents the
+                client business and is used by your app to make API calls.</p>
+              <h3>Get a client business ID</h3>
+              <p>To get a client business ID from the business integration system user access token, send a
+                <code>GET</code> request to the <code>/me</code> endpoint with the <code>fields</code> parameter set to
+                <code>client_business_id</code> and the <code>access_token</code> parameter to your app user's business
+                integration system user access token.
+              </p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+curl -i -X GET \
+"https://graph.facebook.com/&lt;API_VERSION&gt;/me \
+  ?fields=client_business_id
+  &amp;access_token=&lt;BUSINESS_INTEGRATION_SYSTEM_USER_ACCESS_TOKEN&gt;”
+</pre>
+              <p>On success your app receives a JSON response with your app user's client business ID.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "client_business_id": "&lt;CLIENT_BUSINESS_ID&gt;",
+  "id": "&lt;APP_SCOPED_ID&gt;"
+}
+
+</pre>
+              <h3>Get tokens</h3>
+              <p>The <code>/&lt;CLIENT_BUSINESS_ID&gt;/system_user_access_tokens</code> endpoint allows you to manage
+                your existing business integration system user access tokens. Actions include:</p>
+              <ul>
+                <li>Generate granular business integration system user access tokens from the existing business
+                  integration system user access tokens</li>
+                <li>Fetch any existing business integration system user access tokens</li>
+              </ul>
+              <h5>Parameters</h5>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:40%">Object</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_8_Cd">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>access_token</code> <em>string</em></p>
+                      </td>
+                      <td>
+                        <p><strong>Required.</strong> This access token requires the <code>business_management</code>
+                          permission</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>appsecret_proof</code> <em>string</em></p>
+                      </td>
+                      <td>
+                        <p><b>Required.</b>
+                          The <a
+                            href="https://developers.facebook.com/docs/graph-api/guides/secure-requests/#generate-the-proof"
+                            target="_blank"><code>appsecret_proof</code></a> is a <code>sha256</code> hash of your
+                          access token ensuring API calls are from a server are more secure.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>asset</code> <em>int</em></p>
+                      </td>
+                      <td>
+                        <p>Optional.
+                          When you want to generate a more granular token, you can set a list of <code>asset</code> IDs,
+                          separated by commas. The list of assets will have to be a subset of assets from the original
+                          access token.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>fetch_only</code> <em>bool</em></p>
+                      </td>
+                      <td>
+                        <p>Optional.
+                          The flag you want to use to fetch the existing token and indicate this operation is read only
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>scope</code> <em>bool</em></p>
+                      </td>
+                      <td>
+                        <p>Optional.
+                          When you want to generate a more granular token, you can set a list of <code>scope</code> ids,
+                          separated by a comma. The list of assets will have to be a subset of scopes from the original
+                          access token.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>set_token_expires_in_60_days</code> <em>bool</em></p>
+                      </td>
+                      <td>
+                        <p>Optional.
+                          When you generate a new token, set to <code>true</code> so that the token expires in 60 days.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>system_user_id</code> <em>int</em></p>
+                      </td>
+                      <td>
+                        <p>Optional. The ID for the system user included in the access token.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h5>Sample request</h5>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+curl -i -X POST "https://graph.facebook.com/<code>v24.0</code>/&lt;CLIENT_BUSINESS_ID&gt;/system_user_access_tokens
+    ?appsecret_proof=&lt;APPSECRET_PROOF_HASH&gt;
+    &amp;access_token=&lt;ACCESS_TOKEN&gt;
+    &amp;system_user_id=&lt;SYSTEM_USER_ID&gt;
+    &amp;fetch_only=true"
+</pre>
+              <p>On success your app receives a JSON response with a new access token to be used in subsequent API
+                calls.</p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+{
+  "access_token": "&lt;NEW_ACCESS_TOKEN&gt;" 
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Login flow experience</h2>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th>User access token login flow</th>
+                    <th>Business integration system user access token login flow </th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_9_rq">
+                    <tr class="row_0">
+                      <td>
+                        <div style="border:1px solid grey; width:250px;">
+                          <div class="_1c_u" id="u_0_a_ED">
+                            <div class="_53j5" id="u_0_b_2h" style="height:323px;width:250px;" tabindex="0"><video
+                                class="_ox1 _21y0" data-video-height="323" data-video-width="250" height="323"
+                                id="u_0_c_9f" preload="metadata" style="" width="250"></video>
+                              <div class="_4ubd _170l _27db _3htz" id="u_0_d_Kv"></div>
+                              <div class="_m54 _1jto _3htz" id="u_0_e_qO"><img alt="" class="_1445 _4ndd img"
+                                  id="u_0_f_h+" src="https://static.xx.fbcdn.net/rsrc.php/v4/y4/r/-PAXP-deijE.gif"
+                                  style="background-image: url('https\3a //scontent-bos5-1.xx.fbcdn.net/v/t15.5256-10/348280015_586506133549065_1248618649964712243_n.jpg?stp\3d dst-jpg_p261x260_tt6\26 _nc_cat\3d 110\26 ccb\3d 1-7\26 _nc_sid\3d f01e75\26 _nc_ohc\3d fwtyUKTS4LYQ7kNvwHrolac\26 _nc_oc\3d AdkwUcT6OMhcd9Qod0G2I4KrxCB_8qQ-EVkkP9s5Noyy-fBebJWTJkCXzTdeMwcK2CQ\26 _nc_zt\3d 23\26 _nc_ht\3d scontent-bos5-1.xx\26 _nc_gid\3d NxRvSrMsfNEqpnaOPICBGQ\26 oh\3d 00_Aft6NHRXfYtjHMAkqNtiIT3d5nX1GYaup7VPI49tx4voSA\26 oe\3d 698C7F7C');" />
+                              </div>
+                              <div class="_18xu _9omd _3htz">
+                                <div class="_5l7x _360f _167h hidden_elem" id="u_0_4_8K"></div><input
+                                  aria-label="Play video" class="_530-" id="u_0_3_5W" type="button" />
+                              </div>
+                              <div class="_4ctp _1jto _3htz">
+                                <div class="_4ctq">
+                                  <div class="_4ctr" id="u_0_g_be">Something Went Wrong</div>
+                                  <div id="u_0_h_J5">We're having trouble playing this video.</div>
+                                  <div class="_5hdy"><a class="_4cts"
+                                      href="https://www.facebook.com/help/396404120401278/list" id="u_0_i_yv">Learn
+                                      more</a></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="_2i84">
+                              <div id="u_0_j_0Y"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div style="border:1px solid grey; width:250px;">
+                          <div class="_1c_u" id="u_0_k_KY">
+                            <div class="_53j5" id="u_0_l_rf" style="height:323px;width:250px;" tabindex="0"><video
+                                class="_ox1 _21y0" data-video-height="323" data-video-width="250" height="323"
+                                id="u_0_m_/k" preload="metadata" style="" width="250"></video>
+                              <div class="_4ubd _170l _27db _3htz" id="u_0_n_KL"></div>
+                              <div class="_m54 _1jto _3htz" id="u_0_o_3A"><img alt="" class="_1445 _4ndd img"
+                                  id="u_0_p_P3" src="https://static.xx.fbcdn.net/rsrc.php/v4/y4/r/-PAXP-deijE.gif"
+                                  style="background-image: url('https\3a //scontent-bos5-1.xx.fbcdn.net/v/t15.5256-10/344303707_1061948651445158_8496308741180122348_n.jpg?stp\3d dst-jpg_p261x260_tt6\26 _nc_cat\3d 105\26 ccb\3d 1-7\26 _nc_sid\3d f01e75\26 _nc_ohc\3d fsCDxVqP3vYQ7kNvwGpBYJh\26 _nc_oc\3d Adkp-a68qzLISjDZ11KBek5T2_bL3OnQoDNahnBpvDSHOjVrEL2CVEwnUFC_-uBNoyg\26 _nc_zt\3d 23\26 _nc_ht\3d scontent-bos5-1.xx\26 _nc_gid\3d NxRvSrMsfNEqpnaOPICBGQ\26 oh\3d 00_Afv6_2khV7JSAE0zBlMEv0X9v_erooT29QfcwIXy0Hf-Fg\26 oe\3d 698CA252');" />
+                              </div>
+                              <div class="_18xu _9omd _3htz">
+                                <div class="_5l7x _360f _167h hidden_elem" id="u_0_2_JX"></div><input
+                                  aria-label="Play video" class="_530-" id="u_0_1_iz" type="button" />
+                              </div>
+                              <div class="_4ctp _1jto _3htz">
+                                <div class="_4ctq">
+                                  <div class="_4ctr" id="u_0_q_Uf">Something Went Wrong</div>
+                                  <div id="u_0_r_7W">We're having trouble playing this video.</div>
+                                  <div class="_5hdy"><a class="_4cts"
+                                      href="https://www.facebook.com/help/396404120401278/list" id="u_0_s_9a">Learn
+                                      more</a></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="_2i84">
+                              <div id="u_0_t_jf"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Get started</h2>
+              <p>The following are the steps required to set up Facebook Login for Business if you don't already have an
+                app.</p>
+              <h3 id="create-a-configuration">Create an app</h3>
+              <ol>
+                <li>In Meta's App Dashboard, create a <a
+                    href="https://developers.facebook.com/docs/development/create-an-app/app-dashboard/app-types#business"
+                    target="_blank"><b>Business type app</b>.</a></li>
+                <li>Add the <b>Facebook Login for Business</b> product.</li>
+                <li>In the left side menu select <b>Configurations</b>.</li>
+                <li>You can either <b>+ Create configuration</b> to create a configuration or <b>Create from
+                    template</b> to select one of Meta's preset configurations.
+
+
+                  You can create multiple configurations and present them to different sets of users. </li>
+                <li>Name your configuration</li>
+                <li> Choose the type of access token you want to request from your business clients, a User access token
+                  or System-user access token and token expiration.
+
+                  If you select User access token then your app users will log in using their personal Facebook account.
+                  If you select System-user access token your app users will be required to log in using a business
+                  portfolio. This is only required if this configuration needs continuous access to business assets,
+                  such as Facebook Pages, ad accounts or Instagram accounts.</li>
+                <li>Select all the assets your app needs access to.</li>
+                <li>Select the permissions your app needs and click <b>Create</b>.</li>
+              </ol>
+              <p>You will receive a <strong>Configuration ID</strong> that you will use in your code to invoke the login
+                dialog.</p>
+              <h4>Create a WhatsApp Business Platform Embedded Signup configuration</h4>
+              <p>To create a WhatApp Embedded Signup configuration, visit our <a
+                  href="https://developers.facebook.com/docs/whatsapp/embedded-signup/" target="_blank">WhatsApp
+                  Embedded Signup guide.</a></p>
+              <h4>Create a Conversions API for Business Messaging configuration</h4>
+              <p> To create a Conversions API for Business Messaging configuration, visit our <a
+                  href="https://developers.facebook.com/docs/marketing-api/conversions-api/business-messaging"
+                  target="_blank">Marketing API – Conversions API for Business Messaging guide</a>.</p>
+              <h4>Create an Instagram Graph API configuration</h4>
+              <p> To create an Instagram Graph API configuration, visit our <a
+                  href="https://developers.facebook.com/docs/instagram-api" target="_blank">Instagram Graph API
+                  documentation</a>.</p>
+              <h3>Invoke a login dialog</h3>
+              <p>Invoke a login dialog using one of our SDKs (recommended) or manually build your login flow.</p>
+              <h4>Invoking with our SDKS</h4>
+              <p>You can use any of our SDKs to invoke the login dialog by replacing the list of scopes (permissions)
+                your app needs with your configuration ID and the access token's required OAuth grant type.</p>
+              <p>If you are unfamiliar with our SDKs, we recommend that you first install the JavaScript SDK and get it
+                working with the consumer Facebook Login product before proceeding, as the following examples reference
+                the SDK.</p>
+              <h5>Business integration system user access token configurations</h5>
+              <p>Here's an example of the JavaScript SDK's <code>FB.login()</code> method modified to use a
+                configuration for a System User access token. Note that <code>config_id</code> has replaced
+                <code>scope</code> (which should not be used), the <code>response_type</code> has been set to
+                <code>code</code>, since SUAT's require the authorization code grant type, and
+                <code>override_default_response_type</code> must be set to <code>true</code>. When true, any response
+                types passed in the <code>response_type</code> will take precedence over the default types.
+              </p>
+              <pre class="_5s-8 prettyprint lang-js" style="">
+FB.login(
+  function(response) [
+    console.log(response);
+  ],
+  [
+    config_id: '&lt;CONFIG_ID&gt;',
+    response_type: 'code',
+    override_default_response_type: true
+  ]
+);
+</pre>
+              <p>When the user completes the login dialog flow we will redirect the user to your redirect URL and
+                include a code. You must then exchange this code for an access token by performing a server-to-server
+                call to our servers.</p>
+              <pre class="_5s-8 prettyprint lang-http" style="">
+GET https://graph.facebook.com/<code>v24.0</code>/oauth/access_token?
+  client_id=&lt;APP_ID&gt;
+  &amp;client_secret=&lt;APP_SECRET&gt;
+  &amp;code=&lt;CODE&gt;
+</pre>
+              <p>See <a href="/docs/facebook-login/guides/advanced/manual-flow#exchangecode" target="_blank">Exchanging
+                  Code for an Access Token</a> for more information about this step.</p>
+              <h5>User access token configurations</h5>
+              <p>Here's an example of the JavaScript SDK's <code>FB.login()</code> method modified to use a
+                configuration for a User access token. Note that <code>config_id</code> has replaced <code>scope</code>
+                (although <code>scope</code> can still be included, we recommend that you do not use it).</p>
+              <pre class="_5s-8 prettyprint lang-js" style="">
+FB.login(
+  function(response) {
+    console.log(response);
+  },
+  {
+    config_id: '&lt;CONFIG_ID&gt;' // configuration ID goes here
+  }
+);
+</pre>
+              <p>Here's an example of the JavaScript SDK's <strong>login</strong> button modified to use a User access
+                token configuration:</p>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+&lt;fb:login-button config_id="&lt;CONFIG_ID&gt;" onlogin="checkLoginState();"&gt;
+&lt;/fb:login-button&gt;
+</pre>
+              <h4>Build a manual login flow</h4>
+              <p>See <a href="/docs/facebook-login/guides/advanced/manual-flow" target="_blank">Manually Building the
+                  Login Flow</a> to learn how to invoke the login dialog manually. When <a
+                  href="/docs/facebook-login/guides/advanced/manual-flow#logindialog" target="_blank">invoking the login
+                  dialog and setting the redirect URL</a>, include your configuration ID as an optional parameter
+                (although scope can still be included, we recommend that you do not use it).</p>
+              <pre class="_5s-8 prettyprint lang-js" style="">
+config_id=&lt;CONFIG_ID&gt;
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Switch to Facebook Login for Business</h2>
+              <div class="_57yz _57z1 _3-8p">
+                <div class="_57y-">
+                  <p>It is recommended you conduct <a
+                      href="https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/#getting-started"
+                      target="_blank">testing</a> and learn about potentially encountered problems<a
+                      href="https://developers.facebook.com/docs/facebook-login/facebook-login-for-business/#troubleshooting"
+                      target="_blank"></a> before switching to Facebook Login for Business.</p>
+                </div>
+              </div>
+              <p>Facebook Login for Business is available to <a
+                  href="https://developers.facebook.com/docs/development/create-an-app/app-dashboard/app-types#business"
+                  target="_blank"><b>Business type apps</b></a>.</p>
+              <p>If your app is eligible to switch to Facebook Login for Business, you should be able to see an opt in
+                banner by the following steps:</p>
+              <ol>
+                <li>Select your app in the App Dashboard</li>
+                <li>Go to or add the Facebook Login product</li>
+                <li>Click either <b>Settings</b> or <b>Quickstart</b> in the left side menu </li>
+                <li>Click the “Get started with Facebook Login for Business” button at the top of the page.</li>
+              </ol>
+              <p>Note that your current access tokens will not be impacted upon switching to Facebook Login for
+                Business. Additionally, any test app(s) associated with this app will also switch to Facebook Login for
+                Business.</p>
+              <p>After switching, your app type will be under <strong>Business type</strong>. If your app is not
+                functioning as intended, each app is allowed to roll back to Facebook Login within <strong>30
+                  days</strong> after the switch.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Troubleshooting</h2>
+              <p>Business clients might encounter error messages for the following reasons:</p>
+              <ul>
+                <li>Config ID is invalid</li>
+                <li>Business System User Access Token is not currently supported on Mobile devices</li>
+                <li>Business System User Access Token is set up with incorrect response_type</li>
+              </ul>
+              <p>Potential breaking changes:</p>
+              <ul>
+                <li>If your app type is currently <strong>None</strong>, switching to Facebook Login for Business will
+                  change your app’s type to <strong>Business</strong> and will only retain access to the <a
+                    href="#supported-permissions">permissions</a>, <a href="#available-features">features</a> and <a
+                    href="#available-products">products</a> listed above. </li>
+                <li>If you request permissions or features from business clients that Facebook Login for Business
+                  doesn’t support, those permissions and features will be <strong>revoked immediately</strong> once you
+                  switch your app to Facebook Login for Business. </li>
+                <li>If you only request <code>email</code> and/or <code>public_profile</code> from your business
+                  clients, switching the app to Facebook Login for Business will lead to the invalidation of all
+                  previously installed tokens for these clients. </li>
+                <li>If your app has both Facebook Login for Business and Meta Business Extension, the Meta Business
+                  Extension experience will be limited to permissions supported by Facebook Login for Business. </li>
+                <li>Business Asset User Profile Access may affect how user profile data is accessed and managed through
+                  our APIs.</li>
+                <li>Note that if the login dialog for Facebook Login for Business is invoked via configuration id, and
+                  if you decide to rollback to Facebook Login, the login dialog might fail to load as Facebook Login
+                  does not support the <code>config_id</code> parameter and you need to replace the
+                  <code>config_id</code> parameter with the <code>scope</code> parameter instead.
+                </li>
+              </ul>
+              <p>Learn more about <a
+                  href="https://developers.facebook.com/docs/facebook-business-extension/fbe/get-started/business-login"
+                  target="_blank">Meta Business Extension.</a></p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Switch back to Facebook Login</h2>
+              <div class="_57yz _57z1 _3-8p">
+                <div class="_57y-">
+                  <p>Only available when an existing app has switched to Facebook Login for Business; Newly created
+                    Business Type apps cannot switch back to Facebook Login.</p>
+                </div>
+              </div>
+              <p>After switching to Facebook Login for Business, if your app is not functioning as intended after
+                switching to Facebook Login for Business, you can roll back to Facebook Login by going to the
+                <strong>App Dashboard</strong> &gt; <strong>Facebook Login for Business</strong> &gt;
+                <strong>Settings</strong> and clicking the <strong>Switch to Facebook Login</strong> link. You will be
+                presented with a survey which helps us improve the Facebook Login for Business configuration experience.
+                Each app is allowed to roll back to Facebook Login within <strong>30 days</strong> after the switch.
+              </p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>FAQs</h2>
+              <div class="_1d--" id="faq_534350346227548">
+                <div class="clearfix" role="presentation"><a aria-controls="534350346227548" aria-expanded="false"
+                    class="_1d_0" href="#faq_534350346227548" role="button">Facebook Login for Business isn’t available
+                    for my app - what should I do?<span class="_1d_5"></span></a></div>
+                <div class="_1d-_ _1d_4">
+                  <div class="_3-8x">
+                    <p>The easiest way to add Facebook Login for Business is to create a new Business Type app, where
+                      Facebook Login for Business is automatically available, and request supported business permissions
+                      through Meta App Review. If you want to use it for an existing None type app, your app must have
+                      advanced access to at least one supported business permission.</p>
+                  </div><a class="_50f3 _39g5" href="#faq_534350346227548"><span
+                      class="_50f8 _50f3">Permalink</span></a>
+                </div>
+              </div>
+              <div class="_1d--" id="faq_2775168179349932">
+                <div class="clearfix" role="presentation"><a aria-controls="2775168179349932" aria-expanded="false"
+                    class="_1d_0" href="#faq_2775168179349932" role="button">What should I use for authentication if my
+                    app is not intended for businesses or if I am not a Tech Provider building an app for other
+                    businesses to use?<span class="_1d_5"></span></a></div>
+                <div class="_1d-_ _1d_4">
+                  <div class="_3-8x">
+                    <p>If you are not a Tech Provider building solutions using Meta’s business APIs, Facebook Login is
+                      recommended for consumer authentication.</p>
+                  </div><a class="_50f3 _39g5" href="#faq_2775168179349932"><span
+                      class="_50f8 _50f3">Permalink</span></a>
+                </div>
+              </div>
+              <div class="_1d--" id="faq_1135648528298372">
+                <div class="clearfix" role="presentation"><a aria-controls="1135648528298372" aria-expanded="false"
+                    class="_1d_0" href="#faq_1135648528298372" role="button">What permissions do I need to request when
+                    implementing Facebook Login for Business?<span class="_1d_5"></span></a></div>
+                <div class="_1d-_ _1d_4">
+                  <div class="_3-8x">
+                    <p>Only request the minimum permissions necessary for your app's functionality. Be transparent with
+                      users about why you need each permissions and features. Note that the <code>email</code> and
+                      <code>public_profile</code> permissions must be requested with at least one other supported <a
+                        href="#supported-permissions">business permission</a>.
+                    </p>
+                  </div><a class="_50f3 _39g5" href="#faq_1135648528298372"><span
+                      class="_50f8 _50f3">Permalink</span></a>
+                </div>
+              </div>
+              <div class="_1d--" id="faq_1952139018625416">
+                <div class="clearfix" role="presentation"><a aria-controls="1952139018625416" aria-expanded="false"
+                    class="_1d_0" href="#faq_1952139018625416" role="button">Is advanced access to the public_profile
+                    permission required before a Facebook Login for Business app goes live?<span
+                      class="_1d_5"></span></a></div>
+                <div class="_1d-_ _1d_4">
+                  <div class="_3-8x">
+                    <p>Yes, advanced access to the <code>public_profile</code> permission is required for Facebook Login
+                      for Business apps before they go live. This requirement is crucial to ensure that the app can
+                      support authorization from users who do not have an app role, commonly referred to as external
+                      users.</p>
+                  </div><a class="_50f3 _39g5" href="#faq_1952139018625416"><span
+                      class="_50f8 _50f3">Permalink</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

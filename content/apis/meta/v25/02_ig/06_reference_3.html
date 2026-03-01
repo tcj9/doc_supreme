@@ -1,0 +1,248 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_pb">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Instagram (IG) Container</h1>
+              <p>Represents a media container for publishing an Instagram media object.</p>
+              <div><span>
+                  <h3>Requirements</h3>
+                  <div class="_57-c">
+                    <table class="_4-ss _5k9x">
+                      <thead>
+                        <th style="width:12%"></th>
+                        <th style="width:40%">Instagram API with Instagram Login</th>
+                        <th>Instagram API with Facebook Login</th>
+                      </thead>
+                      <tbody class="_5m37" id="u_0_2_hm">
+                        <tr class="row_0">
+                          <td>
+                            <p><strong>Access Tokens</strong></p>
+                          </td>
+                          <td>
+                            <ul>
+                              <li>Instagram User user access token</li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li><a href="/docs/facebook-login/access-tokens/#usertokens">Facebook User access
+                                  token</a></li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr class="row_1 _5m29">
+                          <td>
+                            <p><strong>Host URL</strong></p>
+                          </td>
+                          <td>
+                            <p><code>graph.instagram.com</code></p>
+                          </td>
+                          <td>
+                            <p><code>graph.facebook.com</code></p>
+                          </td>
+                        </tr>
+                        <tr class="row_2">
+                          <td>
+                            <p><strong>Login Type</strong></p>
+                          </td>
+                          <td>
+                            <p>Business Login for Instagram</p>
+                          </td>
+                          <td>
+                            <p>Facebook Login for Business</p>
+                          </td>
+                        </tr>
+                        <tr class="row_3 _5m29">
+                          <td><a href="/docs/permissions/reference#i" target="_blank"><b>Permissions</b></a></td>
+                          <td>
+                            <ul>
+                              <li><code>instagram_business_basic</code></li>
+                              <li><code>instagram_business_content_publish</code></li>
+                            </ul>
+                          </td>
+                          <td>
+                            <ul>
+                              <li><code>instagram_basic</code></li>
+                              <li><code>instagram_content_publish</code></li>
+                              <li><code>pages_read_engagement</code></li>
+                            </ul>
+                            <p>If the app user was granted a role via the Business Manager on the <a
+                                href="/docs/instagram-api/overview#pages">Page</a> connected to the targeted IG User,
+                              you will also need one of:</p>
+                            <ul>
+                              <li><code>ads_management</code></li>
+                              <li><code>ads_read</code></li>
+                            </ul>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </span></div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Creating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Reading</h2>
+              <p><strong><code>GET &lt;HOST_URL&gt;/&lt;IG_CONTAINER_ID&gt;</code></strong></p>
+              <p>Get <a href="#fields">fields</a> and <a href="#edges">edges</a> on an IG Container.</p>
+              <h3>Request Syntax</h3>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+GET &lt;HOST_URL&gt;/&lt;API_VERSION&gt;/&lt;IG_CONTAINER_ID&gt;
+  ?fields=&lt;LIST_OF_FIELDS&gt;
+  &amp;access_token=&lt;ACCESS_TOKEN&gt;</pre>
+              <h3>Query String Parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Parameter</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_R+">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>access_token</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The app user's <a href="/docs/facebook-login/access-tokens/#usertokens">User</a> access
+                          token.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>fields</code><br />
+                          <em>Comma-separated list</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>A comma-separated list of <a href="#fields">fields</a> and <a href="#edges">edges</a> you
+                          want returned. If omitted, default fields will be returned.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Fields</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Field Name</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_ov">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>copyright_check_status</code></p>
+                      </td>
+                      <td>
+                        <p>Used to determine if an uploaded video is violating copyright. Key-values pairs return
+                          include:</p>
+                        <ul>
+                          <li><code>matches_found</code> set to one of the following:
+
+                            <ul>
+                              <li><code>true</code> – the video is violating copyright</li>
+                              <li><code>false</code> – the video is not violating copyright</li>
+                            </ul>
+                          </li>
+                          <li><code>status</code> set to one of the following:
+
+                            <ul>
+                              <li><code>completed</code> – the detection process has finished</li>
+                              <li><code>error</code> – an error occurred during the detection process</li>
+                              <li><code>in_progress</code> – the detection process is ongoing</li>
+                              <li><code>not_started</code> – the detection process has not started</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>id</code></p>
+                      </td>
+                      <td>
+                        <p>Instagram Container ID, represented in code examples as <code>&lt;IG_CONTAINER_ID&gt;</code>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>status</code></p>
+                      </td>
+                      <td>
+                        <p>Publishing status. If <code>status_code</code> is <code>ERROR</code>, this value will be an
+                          <a href="/docs/instagram-api/reference/error-codes">error subcode</a>.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>status_code</code></p>
+                      </td>
+                      <td>
+                        <p>The container's publishing status. Possible values:</p>
+                        <br />
+                        <ul>
+                          <li><code>EXPIRED</code> — The container was not published within 24 hours and has expired.
+                          </li>
+                          <li><code>ERROR</code> — The container failed to complete the publishing process.</li>
+                          <li><code>FINISHED</code> — The container and its media object are ready to be published.</li>
+                          <li><code>IN_PROGRESS</code> — The container is still in the publishing process.</li>
+                          <li><code>PUBLISHED</code> — The container's media object has been published.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Edges</h3>
+              <p>There are no edges on this node.</p>
+              <h3>Response</h3>
+              <p>A JSON-formatted object containing default and requested <a href="#fields">fields</a>.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "&lt;FIELD&gt;":"&lt;VALUE&gt;",
+  ...
+}</pre>
+              <h3>Example Request</h3>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X GET \
+  'https://graph.instagram.com/17889615691921648?fields=status_code&amp;access_token=IGQVJ...'
+</pre>
+              <h3>Sample Response</h3>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "status_code": "FINISHED",
+  "id": "17889615691921648"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

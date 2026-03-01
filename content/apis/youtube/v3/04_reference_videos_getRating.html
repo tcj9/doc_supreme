@@ -1,0 +1,237 @@
+<article class="devsite-article">
+      <h1 class="devsite-page-title" tabindex="-1">
+            Videos: getRating<devsite-actions data-nosnippet="" hidden=""><devsite-feature-tooltip
+                        ack-key="AckCollectionsBookmarkTooltipDismiss"
+                        analytics-action-close="Callout Profile dismissed"
+                        analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events"
+                        analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent"
+                        close-button-text="Got it" dismiss-button="true" dismiss-button-text="Dismiss"
+                        id="devsite-collections-dropdown">
+                        <devsite-bookmark></devsite-bookmark>
+                        <span slot="popout-heading">
+
+                              Stay organized with collections
+                        </span>
+                        <span slot="popout-contents">
+
+                              Save and categorize content based on your preferences.
+                        </span>
+                  </devsite-feature-tooltip></devsite-actions>
+      </h1>
+      <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+      <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+      </devsite-toc>
+      <div class="devsite-article-body clearfix">
+            <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+                  <meta content="getRating" itemprop="name">
+                  <meta content="videos" itemprop="path">
+                  <section id="overview">
+                        <p>Retrieves the ratings that the authorized user gave to a list of specified videos.</p>
+                        <p class="special"><b>Quota impact:</b> A call to this method has a <a
+                                    href="/youtube/v3/getting-started#quota">quota cost</a> of 1 unit.</p>
+                  </section>
+                  <h2 data-text="Common use cases" id="common-use-cases" style="margin-bottom: 8px" tabindex="-1">Common
+                        use cases</h2>
+                  <style>
+                        iframe+section>h2 {
+                              margin-top: 12px;
+                        }
+                  </style>
+                  <devsite-iframe><iframe allow="clipboard-write https://developers-dot-devsite-v2-prod.appspot.com"
+                              allowfullscreen="" class="framebox inherit-locale" is-upgraded=""
+                              src="https://developers.google.com/frame/youtube/v3/docs/videos/getRating_a181fcec10439ac4620e5840967c0296258c9422beea88e9906f4033818e3e11.frame"></iframe></devsite-iframe>
+                  <section id="request">
+                        <h2 data-text="Request" id="request" tabindex="-1">Request</h2>
+                        <section id="request_url">
+                              <h3 data-text="HTTP request" id="http-request" tabindex="-1">HTTP request</h3>
+                              <div></div><devsite-code>
+                                    <pre dir="ltr" is-upgraded=""
+                                          translate="no">GET https://www.googleapis.com/youtube/v3/videos/getRating</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="auth_required">
+                              <h3 data-text="Authorization" id="auth" tabindex="-1">Authorization</h3>
+                              <p>This request requires authorization with at least one of the following scopes (<a
+                                          href="/youtube/v3/guides/authentication">read more about authentication and
+                                          authorization</a>).</p>
+                              <table class="matchpre">
+                                    <thead>
+                                          <tr>
+                                                <th>Scope</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtubepartner</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube</code>
+                                                </td>
+                                          </tr>
+                                          <tr>
+                                                <td><code dir="ltr"
+                                                            translate="no">https://www.googleapis.com/auth/youtube.force-ssl</code>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="params">
+                              <h3 data-text="Parameters" id="parameters" tabindex="-1">Parameters</h3>
+                              <p>The following table lists the parameters that this query supports. All of the
+                                    parameters listed are query parameters.</p>
+                              <table class="responsive details">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Parameters</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="alt" id="required-parameters">
+                                                <td colspan="3"><b>Required parameters</b></td>
+                                          </tr>
+                                          <tr id="id">
+                                                <td><code dir="ltr" itemprop="property" translate="no">id</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      The <code dir="ltr" translate="no"><strong>id</strong></code>
+                                                      parameter specifies a comma-separated list of the YouTube video
+                                                      ID(s) for the resource(s) for which you are retrieving rating
+                                                      data. In a <code dir="ltr" translate="no">video</code> resource,
+                                                      the <code dir="ltr" translate="no">id</code> property specifies
+                                                      the video's ID.</td>
+                                          </tr>
+                                          <tr class="alt" id="optional-parameters">
+                                                <td colspan="3"><b>Optional parameters</b></td>
+                                          </tr>
+                                          <tr id="onBehalfOfContentOwner">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no">onBehalfOfContentOwner</code></td>
+                                                <td><code class="apitype" dir="ltr" translate="no">string</code><br />
+                                                      This parameter can only be used in a properly <a
+                                                            href="/youtube/v3/guides/authentication">authorized
+                                                            request</a>. <strong>Note:</strong> This parameter is
+                                                      intended exclusively for YouTube content partners.<br /><br />The
+                                                      <code dir="ltr"
+                                                            translate="no"><strong>onBehalfOfContentOwner</strong></code>
+                                                      parameter indicates that the request's authorization credentials
+                                                      identify a YouTube CMS user who is acting on behalf of the content
+                                                      owner specified in the parameter value. This parameter is intended
+                                                      for YouTube content partners that own and manage many different
+                                                      YouTube channels. It allows content owners to authenticate once
+                                                      and get access to all their video and channel data, without having
+                                                      to provide authentication credentials for each individual channel.
+                                                      The CMS account that the user authenticates with must be linked to
+                                                      the specified YouTube content owner.</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                        <section id="request_body">
+                              <h3 data-text="Request body" id="request-body" tabindex="-1">Request body</h3>
+                              <p>Do not provide a request body when calling this method.</p>
+                        </section>
+                  </section>
+                  <section id="response">
+                        <h2 data-text="Response" id="response" tabindex="-1">Response</h2>
+                        <section id="resource">
+                              <p>If successful, this method returns a response body with the following structure:</p>
+                              <div></div><devsite-code>
+                                    <pre class="devsite-click-to-copy notranslate" dir="ltr" id="alt-json"
+                                          is-upgraded="" style="max-height: 500px; overflow: auto" syntax="Text only">{
+  "kind": "youtube#videoGetRatingResponse",
+  "etag": <var class="apiparam" translate="no">etag</var>,
+  "items": [
+    {
+      "videoId": <var class="apiparam" translate="no">string</var>,
+      "rating": <var class="apiparam" translate="no">string</var>
+    }
+  ]
+}</pre>
+                              </devsite-code>
+                        </section>
+                        <section id="properties">
+                              <h3 data-text="Properties" id="properties" tabindex="-1">Properties</h3>
+                              <p>The following table defines the properties that appear in this resource:</p>
+                              <table class="responsive properties" id="property-table">
+                                    <thead>
+                                          <tr>
+                                                <th colspan="2">Properties</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr id="kind">
+                                                <td><code dir="ltr" itemprop="property" translate="no">kind</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      Identifies the API resource's type. The value will be <code
+                                                            dir="ltr"
+                                                            translate="no">youtube#videoGetRatingResponse</code>.</td>
+                                          </tr>
+                                          <tr id="etag">
+                                                <td><code dir="ltr" itemprop="property" translate="no">etag</code></td>
+                                                <td><code class="apitype notranslate" dir="ltr">etag</code><br />
+                                                      The Etag of this resource.</td>
+                                          </tr>
+                                          <tr id="items[]">
+                                                <td><code dir="ltr" itemprop="property" translate="no">items[]</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">list</code><br />
+                                                      A list of ratings that match the request criteria.</td>
+                                          </tr>
+                                          <tr id="items[].videoId">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">items[].</span>videoId</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The ID that YouTube uses to uniquely identify the video.</td>
+                                          </tr>
+                                          <tr id="items[].rating">
+                                                <td><code dir="ltr" itemprop="property"
+                                                            translate="no"><span class="quiet">items[].</span>rating</code>
+                                                </td>
+                                                <td><code class="apitype notranslate" dir="ltr">string</code><br />
+                                                      The rating that the authorized user gave to the
+                                                      video.<br><br>Valid values for this property are:
+                                                      <ul>
+                                                            <li><code dir="ltr" translate="no">dislike</code></li>
+                                                            <li><code dir="ltr" translate="no">like</code></li>
+                                                            <li><code dir="ltr" translate="no">none</code></li>
+                                                            <li><code dir="ltr" translate="no">unspecified</code></li>
+                                                      </ul>
+                                                      </br></br>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </section>
+                  </section>
+                  <section id="errors">
+                        <h2 data-text="Errors" id="errors" tabindex="-1">Errors</h2>
+                        <p>The API does not define any error messages that are unique to this API method. However, this
+                              method could still return general API errors listed in the <a
+                                    href="/youtube/v3/docs/errors#general">error message</a> documentation.</p>
+                        <section id="try-it">
+                              <h2 data-text="Try it!" id="try-it" tabindex="-1">Try it!</h2>
+                              <p>Use the <span class="notranslate">APIs Explorer</span> to call this API and see the API
+                                    request and response.</p>
+                              <div class="devsite-apix">
+                                    <div class="apis-explorer"
+                                          data-default-scopes="https://www.googleapis.com/auth/youtube.readonly"
+                                          data-discovery-rest-url="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+                                          data-method-id="youtube.videos.getRating" data-show-code-button="true"></div>
+                              </div>
+                        </section>
+                  </section>
+                  </meta>
+                  </meta>
+            </div>
+      </div>
+      <devsite-recommendations display="in-page" hidden="" yield="">
+      </devsite-recommendations>
+      <devsite-thumb-rating position="footer">
+      </devsite-thumb-rating>
+      <devsite-recommendations id="recommendations-link" yield=""></devsite-recommendations>
+      <div class="devsite-floating-action-buttons"></div>
+</article>

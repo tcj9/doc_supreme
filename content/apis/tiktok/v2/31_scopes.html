@@ -1,0 +1,84 @@
+<div class="css-osrxbk" data-e2e="TechDoc">
+    <style data-emotion="css 1e98m8w">
+        .css-1e98m8w {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    </style>
+    <div class="css-1e98m8w" data-e2e="Column">
+        <h1 id="scopes_overview">Scopes Overview</h1>
+        <p style="text-align:left">Scopes represent end user granted permissions to access specific data resources or
+            perform specific actions. Every TikTok for Developer API requires a scope to be accessed, and sensitive
+            fields are protected by additional scopes. For example, the scope <code>user.info</code><code>.basic</code>
+            allows access to APIs and data related to the basic user of a TikTok user.</p>
+        <h2 id="managing_scopes">Managing scopes</h2>
+        <p style="text-align:left">Scopes are available on your app page. The scope
+            <code>user.info</code><code>.basic</code> will be added by default for all apps with Login Kit. Developers
+            can also request additional scopes and manage existing scopes on their app page after logging in.
+        </p>
+        <p style="text-align:left">To add scopes to your app, do the following: </p>
+        <ol class="list-1" start="1" type="1">
+            <li>Navigate to the section titled <b>Scopes</b> to view your scopes.</li>
+            <li>Click the <b>Add Scopes </b>button, then add your desired scopes. </li>
+        </ol>
+        <p style="text-align:left">To remove a scope, click the minus button next to it. </p>
+        <div class="callout-warning">
+            <p style="text-align:left">Note: Remember that applying and being approved for a scope alone does not give
+                you access to a user's data. Each user must also authorize your app for access to specific scopes.</p>
+        </div>
+        <h2 id="user_authorization">User authorization</h2>
+        <p style="text-align:left">After you are approved for certain scopes on TikTok for Developers, users will be
+            asked to authorize and confirm your access. This is explained further in the tutorials for Login Kit on
+            <style data-emotion="css ap4ivw">
+                .css-ap4ivw {
+                    font-size: inherit;
+                    color: var(--ui-text-primary-display);
+                }
+
+                .css-ap4ivw *:hover {
+                    -webkit-text-decoration: none !important;
+                    text-decoration: none !important;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+
+                .css-ap4ivw:hover {
+                    -webkit-text-decoration: underline;
+                    text-decoration: underline;
+                }
+            </style><a class="css-ap4ivw" color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/doc/login-kit-ios-login-kit-with-objective-c"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">iOS</span></a>, <a class="css-ap4ivw"
+                color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/doc/login-kit-android"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">Android</span></a>, <a
+                href="/doc/login-kit-desktop">Desktop</a>, and <a class="css-ap4ivw"
+                color="var(--ui-text-primary-display)" data-e2e="StyledLink"
+                href="https://developers.tiktok.com/doc/login-kit-web"><span
+                    class="TUXText TUXText--tiktok-sans TUXText--weight-normal" data-e2e="TUXText"
+                    style="color:inherit;font-size:inherit">Web</span></a>. Users can grant or deny the requested scopes
+            or any subset of them, and revoke the authorization at any time on their TikTok apps.
+        </p>
+        <p style="text-align:left">After a user grants the requested scopes, a code will be sent to your registered
+            callback URL. You can obtain an <code>access_token</code> and start invoking TikTok for Developers APIs to
+            get that user's information or perform actions on the user's behalf.</p>
+        <p style="text-align:left">See how to <a href="/doc/login-kit-manage-user-access-tokens">manage user access
+                tokens</a> for <code>access_token</code> related endpoints.</p>
+        <div style="display:flex;justify-content:center"><img height="645.000000px"
+                src="https://sf16-va.tiktokcdn.com/obj/tiktok-open-platform/ttop_doc_images/bc614e2c5de500ca36eaaf187ee3a8f3"
+                width="656.000000px" /></div>
+        <h2 id="scopes_reference">Scopes Reference</h2>
+        <p style="text-align:left">You can find the list of available scopes and their explanation on <a
+                href="/doc/tiktok-api-scopes">the scopes reference page</a>.</p><br />
+    </div>
+</div>

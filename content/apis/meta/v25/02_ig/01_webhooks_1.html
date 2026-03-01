@@ -1,0 +1,108 @@
+<div id="documentation_body_pagelet" data-referrer="documentation_body_pagelet">
+    <div class="_34yh" id="u_0_1_tc">
+        <div class="_4cel"><span data-click-area="main">
+                <div>
+                    <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+                        <div class="_4-u3 _588p">
+                            <h1 id="instagram-post-shares--new-attachment-type-and-transition-period">Instagram Post
+                                Shares: New Attachment Type and Transition Period</h1>
+
+                            <p>Starting November 3, 2025, the webhook payload for Instagram post shares will include two
+                                attachments: the existing <code>share</code> attachment and a new <code>ig_post</code>
+                                attachment. The payload now provides additional metadata, including media ID, URL, and
+                                title (caption).</p>
+
+                            <p>If this change is not compatible with your app and you need more time to make updates,
+                                please contact our BSE support team via the <a
+                                    href="https://developers.facebook.com/support/">Meta Developer Support Portal</a> to
+                                request exclusion of your app(s) from this change until you make the necessary updates
+                                to support the new attachment type.</p>
+
+                            <p>The old <code>share</code> attachment type will continue to be supported for Instagram
+                                posts until <strong>February 1, 2026</strong>, after which it will be removed. Partners
+                                and integrators are encouraged to migrate to the new <code>ig_post</code> attachment
+                                type as soon as possible.</p>
+
+                            <h3>Previous Payload</h3>
+                            <pre class="_5s-8 prettyprint lang-curl prettyprinted" style=""><span class="pun">{</span><span class="pln">
+  </span><span class="str">"object"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"instagram"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"entry"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+    </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"time"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1761287298065</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{PAGE_ID}"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"messaging"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+        </span><span class="pun">{</span><span class="pln">
+          </span><span class="str">"sender"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{SENDER_ID}"</span><span class="pln">
+          </span><span class="pun">},</span><span class="pln">
+          </span><span class="str">"recipient"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{PAGE_ID}"</span><span class="pln">
+          </span><span class="pun">},</span><span class="pln">
+          </span><span class="str">"timestamp"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1761287294014</span><span class="pun">,</span><span class="pln">
+          </span><span class="str">"message"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"mid"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{MESSAGE_ID}"</span><span class="pun">,</span><span class="pln">
+            </span><span class="str">"attachments"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+              </span><span class="pun">{</span><span class="pln">
+                </span><span class="str">"type"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"share"</span><span class="pun">,</span><span class="pln">
+                </span><span class="str">"payload"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                  </span><span class="str">"ig_post_media_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"18139494541428835"</span><span class="pun">,</span><span class="pln">
+                  </span><span class="str">"title"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Build a workspace that attracts talent and supports your team with solutions made for growing businesses."</span><span class="pun">,</span><span class="pln">
+                  </span><span class="str">"url"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"https://lookaside.fbsbx.com/ig_messaging_cdn/?asset_id=18139494541428835={SIGNATURE}"</span><span class="pln">
+                </span><span class="pun">}</span><span class="pln">
+              </span><span class="pun">}</span><span class="pln">
+            </span><span class="pun">]</span><span class="pln">
+          </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+      </span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">]</span><span class="pln">
+</span><span class="pun">}</span></pre>
+                            <h3>New Sample Webhook Payload</h3>
+                            <pre class="_5s-8 prettyprint lang-curl prettyprinted" style=""><span class="pun">{</span><span class="pln">
+  </span><span class="str">"object"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"instagram"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"entry"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+    </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"time"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1761287298065</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{PAGE_ID}"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"messaging"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+        </span><span class="pun">{</span><span class="pln">
+          </span><span class="str">"sender"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{SENDER_ID}"</span><span class="pln">
+          </span><span class="pun">},</span><span class="pln">
+          </span><span class="str">"recipient"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{PAGE_ID}"</span><span class="pln">
+          </span><span class="pun">},</span><span class="pln">
+          </span><span class="str">"timestamp"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1761287294014</span><span class="pun">,</span><span class="pln">
+          </span><span class="str">"message"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="str">"mid"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{MESSAGE_ID}"</span><span class="pun">,</span><span class="pln">
+            </span><span class="str">"attachments"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+              </span><span class="pun">{</span><span class="pln">
+                </span><span class="str">"type"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"share"</span><span class="pun">,</span><span class="pln">
+                </span><span class="str">"payload"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                  </span><span class="str">"ig_post_media_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"18139494541428835"</span><span class="pun">,</span><span class="pln">
+                  </span><span class="str">"title"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Build a workspace that attracts talent and supports your team with solutions made for growing businesses."</span><span class="pun">,</span><span class="pln">
+               </span><span class="str">"url"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"https://lookaside.fbsbx.com/ig_messaging_cdn/?asset_id=18139494541428835={SIGNATURE}"</span><span class="pln">
+                </span><span class="pun">}</span><span class="pln">
+              </span><span class="pun">},</span><span class="pln">
+              </span><span class="pun">{</span><span class="pln">
+                </span><span class="str">"type"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"ig_post"</span><span class="pun">,</span><span class="pln">
+                </span><span class="str">"payload"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                  </span><span class="str">"ig_post_media_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"18139494541428835"</span><span class="pun">,</span><span class="pln">
+                  </span><span class="str">"title"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Build a workspace that attracts talent and supports your team with solutions made for growing businesses."</span><span class="pun">,</span><span class="pln">
+                  </span><span class="str">"url"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"https://lookaside.fbsbx.com/ig_messaging_cdn/?asset_id=18139494541428835={SIGNATURE}"</span><span class="pln">
+                </span><span class="pun">}</span><span class="pln">
+              </span><span class="pun">}</span><span class="pln">
+            </span><span class="pun">]</span><span class="pln">
+          </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+      </span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">]</span><span class="pln">
+</span><span class="pun">}</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

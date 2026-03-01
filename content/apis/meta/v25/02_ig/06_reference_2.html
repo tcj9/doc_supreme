@@ -1,0 +1,143 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_NC">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>Access Token</h1>
+              <p>The <code>/access_token</code> endpoint allows you to exchange short-lived Instagram User Access
+                Tokens, those that expire in one hour, for long-lived Instagram User access Tokens that expire in 60
+                days.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Creating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Reading</h2>
+              <p><strong><code>GET /access_token</code></strong></p>
+              <p>Exchange a short-lived Instagram User access token, that expires in one hour, for long-lived Instagram
+                User access token that expires in 60 days.</p>
+              <h3>Limitations</h3>
+              <p>Requests for long-lived tokens include your app secret so should only be made in server-side code,
+                never in client-side code or in an app binary that could be decompiled. Do not share your app secret
+                with anyone, expose it in code, send it to a client, or store it in a device.</p>
+              <h3>Requirements</h3>
+              <h4>Access tokens</h4>
+              <ul>
+                <li>An Instagram User access token requested from a person who can send a message from the Instagram
+                  professional account</li>
+              </ul>
+              <h4>Base URL</h4>
+              <p>All endpoints can be accessed via the graph.instagram.com host.</p>
+              <h4>Endpoints</h4>
+              <ul>
+                <li><code>/access_token</code></li>
+              </ul>
+              <h4>Required Parameters</h4>
+              <p>The following table contains the required parameters for each API request.</p>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:25%">Key</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_nG">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>client_secret</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Your Instagram app's secret, displayed in the <strong>App Dashboard</strong> &gt;
+                          <strong>Products</strong> &gt; <strong>Instagram</strong> &gt; <strong>Basic Display</strong>
+                          &gt; <strong>Instagram App Secret</strong> field.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>grant_type</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>Set this to <code>ig_exchange_token</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>access_token</code><br />
+                          <strong>Required</strong><br />
+                          <em>String</em>
+                        </p>
+                      </td>
+                      <td>
+                        <p>The valid (unexpired) <a
+                            href="/docs/instagram-basic-display-api/overview#short-lived-access-tokens">short-lived</a>
+                          Instagram User Access Token that you want to exchange for a <a
+                            href="/docs/instagram-basic-display-api/overview#long-lived-access-tokens">long-lived</a>
+                          token.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Permissions</h4>
+              <ul>
+                <li><code>instagram_graph_user_profile</code> for Instagram Basic Display API</li>
+              </ul>
+              <h3>Request Syntax</h3>
+              <p><em>Formatted for readability.</em></p>
+              <pre class="_5s-8 prettyprint lang-code" style="">
+GET https://graph.instagram.com/access_token
+  ?grant_type=ig_exchange_token
+  &amp;client_secret=&lt;INSTAGRAM_APP_SECRET&gt;
+  &amp;access_token=&lt;VALID_SHORT_LIVED_ACCESS_TOKEN&gt;</pre>
+              <h3>Response</h3>
+              <p>Upon success, your app receives a JSON-formatted object containing the following:</p>
+              <ul>
+                <li><code>access_token</code> set to the new, long-lived Instagram User access token; <em>numeric
+                    string</em></li>
+                <li><code>token_type</code> set to <code>bearer</code>; <em>string</em> </li>
+                <li><code>expires_in</code> set to the number of seconds until the token expires; <em>integer</em></li>
+              </ul>
+              <h3>cURL Example</h3>
+              <h4>Request</h4>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X GET "https://graph.instagram.com/access_token?grant_type=ig_exchange_token&amp;&amp;client_secret=eb87G...&amp;access_token=IGQVJ..."
+</pre>
+              <h4>Response</h4>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "access_token": "lZAfb2dhVW...",
+  "token_type": "bearer",
+  "expires_in": 5184000
+}
+</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,899 @@
+<div data-referrer="documentation_body_pagelet" id="documentation_body_pagelet">
+  <div class="_34yh" id="u_0_1_/9">
+    <div class="_4cel"><span data-click-area="main">
+        <div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h1>IG User Media</h1>
+              <p>Represents a collection of <a href="/docs/instagram-api/reference/ig-media">IG Media</a> objects on an
+                <a href="/docs/instagram-api/reference/ig-user">IG User</a>.
+              </p>
+              <div>
+                <div class="_57yz _5s-k _3-8p">
+                  <div class="_57y-">
+                    <p>On July 9, 2025, we added support for the existing <code>user_tags</code> field for image and
+                      video stories on the <code>/&lt;IG_ID&gt;/media</code> endpoint. You can mention users in a story
+                      and optionally specify x, y coordinates to tag them at a particular coordinate in the media.</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="_57yz _5s-k _3-8p">
+                  <div class="_57y-">
+                    <p>On March 24, 2025, we introduced the new <code>alt_text</code> field for image posts on the
+                      <code>/&lt;INSTAGRAM_PROFESSIONAL_ACCOUNT_ID&gt;/media</code> endpoint. Reels and stories are not
+                      supported.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Creating</h2>
+              <p><strong><code>POST /&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media</code></strong></p>
+              <ul>
+                <li>Create an image, carousel, story or reel <a href="/docs/instagram-api/reference/ig-container">IG
+                    Container</a> for use in the post publishing process. See the <a
+                    href="/docs/instagram-api/guides/content-publishing">Content Publishing</a> guide for complete
+                  publishing steps.</li>
+              </ul>
+              <p>Steps to publish a media object include the following:</p>
+              <ol>
+                <li>Create a container</li>
+                <li>Upload the media to the container</li>
+                <li>Publish the container</li>
+              </ol>
+              <h3 id="limitations">Limitations</h3>
+              <h4 id="limitations-general">General Limitations</h4>
+              <ul>
+                <li>Containers expire after 24 hours</li>
+                <li>An Instagram account can only create 400 containers within a rolling 24 hour period</li>
+                <li>If the <a href="/docs/instagram-api/overview#pages">Page</a> connected to the targeted Instagram
+                  professional account requires <a href="https://www.facebook.com/help/www/1939753742723975">Page
+                    Publishing Authorization</a> (PPA), PPA must be completed or the request will fail</li>
+                <li>If the Page connected to the targeted Instagram professional account requires two-factor
+                  authentication, the Facebook User must also have performed two-factor authentication or the request
+                  will fail</li>
+                <li>We strongly recommended the HTTP IETF standard character set for URLs, URLs that contain only US
+                  ASCII characters, or the request will fail</li>
+              </ul>
+              <h4 id="limitations-reels">Reels Limitations</h4>
+              <ul>
+                <li>Reels cannot appear in carousels</li>
+                <li>Account privacy settings are respected upon publish. For example, if <strong>Allow remixing</strong>
+                  is enabled, published reels will have remixing enabled upon publish but remixing can be disabled on
+                  published reels manually through the Instagram app.</li>
+                <li>Music tagging is only available for original audio.</li>
+              </ul>
+              <h4>Story Limitations</h4>
+              <ul>
+                <li>Stories expire after 24 hours.</li>
+                <li>Support either video URL or Reels URL but not both.</li>
+                <li>Publishing stickers (i.e., link, poll, location) is not supported; however mentioning users without
+                  a sticker is supported. </li>
+              </ul>
+              <h3>Requirements</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:20%">Type</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_2_KS">
+                    <tr class="row_0">
+                      <td>
+                        <p><a href="/docs/facebook-login/access-tokens#usertokens">Access Tokens</a></p>
+                      </td>
+                      <td>
+                        <p><a href="/docs/facebook-login/access-tokens#usertokens">User</a></p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><a href="https://www.facebook.com/business/help/442345745885606">Business Roles</a></p>
+                      </td>
+                      <td>
+                        <p>If creating containers for <a href="/docs/instagram-api/guides/product-tagging">product
+                            tagging</a>, the app user must have an admin role on the <a
+                            href="https://business.facebook.com/">Business Manager</a> that owns the IG User's <a
+                            data-lynx-mode="hover"
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fhelp.instagram.com%2F1187859655048322&amp;h=AT0NLgNw565UOTUyeiA5PQbvXD9L5EoPNscuGltf2UTUc_ljMNuONN4AGCuuMo5hV1s2uqc50_tJODRCc8nQrI7eh4CTMa3VV3PFHUt9TpeymTQhadM0b-NERal1R2aX94TGV1ckziFxR31cRQwBPQ"
+                            rel="nofollow" target="_blank">Instagram Shop</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><a href="/docs/apps/review/login-permissions">Permissions</a></p>
+                      </td>
+                      <td>
+                        <p><a
+                            href="/docs/facebook-login/permissions#reference-instagram_basic"><code>instagram_basic</code></a><br />
+                          <a
+                            href="/docs/permissions/reference/instagram_content_publish"><code>instagram_content_publish</code></a><br />
+                          <a
+                            href="/docs/facebook-login/permissions#reference-pages_read_engagement"><code>pages_read_engagement</code></a>
+                          If the app user was granted a role on the Page via the Business Manager, you will also need
+                          one of:
+                        </p>
+                        <p><a href="/docs/permissions/reference/ads_management"><code>ads_management</code></a><br />
+                          <code>ads_read</code>
+                        </p>
+                        <p>If creating containers for <a href="/docs/instagram-api/guides/product-tagging">product
+                            tagging</a>, you will also need:</p>
+                        <p><a
+                            href="/docs/permissions/reference/catalog_management"><code>catalog_management</code></a><br />
+                          <a
+                            href="/docs/permissions/reference/instagram_shopping_tag_products"><code>instagram_shopping_tag_products</code></a>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><a href="/docs/instagram-api/overview#tasks">Tasks</a></p>
+                      </td>
+                      <td>
+                        <p>Your app user must be able to perform the <code>MANAGE</code> or <code>CREATE_CONTENT</code>
+                          tasks on the Page linked to their Instagram professional account.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Image Specifications</h3>
+              <ul>
+                <li>Format: JPEG</li>
+                <li>File size: 8 MB maximum.</li>
+                <li>Aspect ratio: Must be within a 4:5 to 1.91:1 range</li>
+                <li>Minimum width: 320 (will be scaled up to the minimum if necessary)</li>
+                <li>Maximum width: 1440 (will be scaled down to the maximum if necessary)</li>
+                <li>Height: Varies, depending on width and aspect ratio</li>
+                <li>Color Space: sRGB. Images using other color spaces will have their color spaces converted to sRGB.
+                </li>
+              </ul>
+              <h3 id="reels-specs">Reel Specifications</h3>
+              <p>The following are the specifications for Reels:</p>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">Container: MOV or MP4 (MPEG-4 Part 14), no edit lists, moov atom at the front of the
+                    file.</div>
+                </li>
+                <li>
+                  <div class="fcb">Audio codec: AAC, 48khz sample rate maximum, 1 or 2 channels (mono or stereo).</div>
+                </li>
+                <li>
+                  <div class="fcb">Video codec: HEVC or H264, progressive scan, closed GOP, 4:2:0 chroma subsampling.
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">Frame rate: 23-60 FPS.</div>
+                </li>
+                <li>
+                  <div class="fcb">Picture size:
+                    <ul class="uiList _4of _4kg">
+                      <li>
+                        <div class="fcb">Maximum columns (horizontal pixels): 1920</div>
+                      </li>
+                      <li>
+                        <div class="fcb">Required aspect ratio is between 0.01:1 and 10:1 but we recommend 9:16 to avoid
+                          cropping or blank space.</div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">Video bitrate: VBR, 25Mbps maximum</div>
+                </li>
+                <li>
+                  <div class="fcb">Audio bitrate: 128kbps</div>
+                </li>
+                <li>
+                  <div class="fcb">Duration: 15 mins maximum, 3 seconds minimum</div>
+                </li>
+                <li>
+                  <div class="fcb">File size: 300MB maximum</div>
+                </li>
+              </ul>
+              <p>The following are the specifications for a Reels cover photo:</p>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">Format: JPEG</div>
+                </li>
+                <li>
+                  <div class="fcb">File size: 8MB maximum</div>
+                </li>
+                <li>
+                  <div class="fcb">Color Space: sRGB. Images that use other color spaces will be converted to sRGB.
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">Aspect ratio: We recommend 9:16 to avoid cropping or blank space. If the aspect ratio
+                    of the original image is not 9:16, we crop the image and use the middle most 9:16 rectangle as the
+                    cover photo for the reel. If you share a reel to your feed, we crop the image and use the middle
+                    most 1:1 square as the cover photo for your feed post.
+                  </div>
+                </li>
+              </ul>
+              <h3>Story Image Specifications</h3>
+              <ul>
+                <li>Format: JPEG</li>
+                <li>File size: 8 MB maximum.</li>
+                <li>Aspect ratio: We recommended 9:16 to avoid cropping or blank space</li>
+                <li>Color Space: sRGB. Images using other color spaces will have their color spaces converted to sRGB
+                </li>
+              </ul>
+              <h3>Story Video Specifications</h3>
+              <ul class="uiList _4of _4kg">
+                <li>
+                  <div class="fcb">Container: MOV or MP4 (MPEG-4 Part 14), no edit lists, moov atom at the front of the
+                    file.</div>
+                </li>
+                <li>
+                  <div class="fcb">Audio codec: AAC, 48khz sample rate maximum, 1 or 2 channels (mono or stereo).</div>
+                </li>
+                <li>
+                  <div class="fcb">Video codec: HEVC or H264, progressive scan, closed GOP, 4:2:0 chroma subsampling.
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">Frame rate: 23-60 FPS.</div>
+                </li>
+                <li>
+                  <div class="fcb">Picture size:
+                    <ul class="uiList _4of _4kg">
+                      <li>
+                        <div class="fcb">Maximum columns (horizontal pixels): 1920</div>
+                      </li>
+                      <li>
+                        <div class="fcb">Required aspect ratio is between 0.1:1 and 10:1 but we recommend 9:16 to avoid
+                          cropping or blank space</div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="fcb">Video bitrate: VBR, 25Mbps maximum</div>
+                </li>
+                <li>
+                  <div class="fcb">Audio bitrate: 128kbps</div>
+                </li>
+                <li>
+                  <div class="fcb">Duration: 60 seconds maximum, 3 seconds minimum</div>
+                </li>
+                <li>
+                  <div class="fcb">File size: 100MB maximum</div>
+                </li>
+              </ul>
+              <h3>Request Syntax</h3>
+              <h4>Image Containers</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+POST https://graph.facebook.com/<code>v24.0</code>/&lt;YOUR_APP_USERS_IG_USER_ID&gt;/media
+?image_url=&lt;IMAGE_URL&gt;
+&amp;is_carousel_item=&lt;TRUE_OR_FALSE&gt;
+&amp;alt_text=&lt;IMAGE_ALTERNATIVE_TEXT&gt;      
+&amp;caption=&lt;IMAGE_CAPTION&gt;
+&amp;location_id=&lt;LOCATION_PAGE_ID&gt;
+&amp;user_tags=&lt;ARRAY_OF_USERS_FOR_TAGGING&gt;&gt;
+&amp;product_tags=&lt;ARRAY_OF_PRODUCTS_FOR_TAGGING&gt;
+&amp;access_token=&lt;USER_ACCESS_TOKEN&gt;
+</pre>
+              <h4>Reel Containers</h4>
+              <h5>Standard upload</h5>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+POST https://graph.facebook.com/<code>v24.0</code>/&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media
+?media_type=REELS
+&amp;video_url=&lt;REEL_URL&gt;
+&amp;caption=&lt;IMAGE_CAPTION&gt;
+&amp;share_to_feed=&lt;TRUE_OR_FALSE&gt;
+&amp;collaborators=&lt;COLLABORATOR_USERNAMES&gt;
+&amp;cover_url=&lt;COVER_URL&gt;
+&amp;audio_name=&lt;AUDIO_NAME&gt;
+&amp;user_tags=&lt;ARRAY_OF_USERS_FOR_TAGGING&gt;&gt;
+&amp;location_id=&lt;LOCATION_PAGE_ID&gt;
+&amp;thumb_offset=&lt;THUMB_OFFSET&gt;
+&amp;share_to_feed=&lt;TRUE_OR_FALSE&gt;
+&amp;trial_params=&lt;TRIAL_PARAM&gt;
+&amp;access_token=&lt;USER_ACCESS_TOKEN&gt;
+</pre>
+              <h5>Resumable upload session</h5>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+POST https://graph.facebook.com/<code>v24.0</code>/&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media
+?media_type=REELS
+&amp;upload_type=resumable
+&amp;caption=&lt;IMAGE_CAPTION&gt;
+&amp;collaborators=&lt;COLLABORATOR_USERNAMES&gt;
+&amp;cover_url=&lt;COVER_URL&gt;
+&amp;audio_name=&lt;AUDIO_NAME&gt;
+&amp;user_tags=&lt;ARRAY_OF_USERS_FOR_TAGGING&gt;&gt;
+&amp;location_id=&lt;LOCATION_PAGE_ID&gt;
+&amp;thumb_offset=&lt;THUMB_OFFSET&gt;
+&amp;access_token=&lt;USER_ACCESS_TOKEN&gt;
+</pre>
+              <p>On success, an <code>ig-container-id</code> and a <code>uri</code> is returned in the response, which
+                will be used in subsequent steps, such as:</p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+{
+  "id": "&lt;IG_CONTAINER_ID&gt;",
+  "uri": "https://rupload.facebook.com/ig-api-upload/<code>v24.0</code>/&lt;IG_CONTAINER_ID&gt;"
+}
+</pre>
+              <h4>Carousel Containers</h4>
+              <p>Carousel containers only. To create carousel item containers, create image or video containers instead
+                (reels are not supported). See <a
+                  href="/docs/instagram-api/guides/content-publishing#carousel-posts">Carousel Posts</a> for complete
+                publishing steps.</p>
+              <h5>Standard upload</h5>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+POST https://graph.facebook.com/<code>v24.0</code>/&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media
+?media_type=CAROUSEL
+&amp;caption=&lt;IMAGE_CAPTION&gt;
+&amp;share_to_feed=&lt;TRUE_OR_FALSE&gt;
+&amp;collaborators=&lt;COLLABORATOR_USERNAMES&gt;
+&amp;location_id=&lt;LOCATION_PAGE_ID&gt;
+&amp;product_tags=&lt;ARRAY_OF_PRODUCTS_FOR_TAGGING&gt;
+&amp;children=&lt;ARRAY_OF_CAROUSEL_CONTAINTER_IDS&gt;
+&amp;access_token=&lt;USER_ACCESS_TOKEN&gt;
+</pre>
+              <h5>Resumable upload session</h5>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+POST https://graph.facebook.com/<code>v24.0</code>/&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media
+?media_type=VIDEO
+&amp;is_carousel_item=true
+&amp;upload_type=resumable
+&amp;access_token=&lt;USER_ACCESS_TOKEN&gt;
+</pre>
+              <p>On success, an <code>ig-container-id</code> and a <code>uri</code> is returned in the response, which
+                will be used in subsequent steps.</p>
+              <h4>Image Story Containers</h4>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+POST https://graph.facebook.com/<code>v24.0</code>/&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media
+?image_url=&lt;IMAGE_URL&gt;
+&amp;media_type=STORIES
+&amp;user_tags=&lt;ARRAY_OF_USERS_FOR_TAGGING&gt;
+&amp;access_token=&lt;USER_ACCESS_TOKEN&gt;
+</pre>
+              <h4>Video Story Containers</h4>
+              <h5>Standard upload</h5>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+POST https://graph.facebook.com/<code>v24.0</code>/&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media
+?video_url=&lt;VIDEO_URL&gt;
+&amp;media_type=STORIES
+&amp;user_tags=&lt;ARRAY_OF_USERS_FOR_TAGGING&gt;
+&amp;access_token=&lt;USER_ACCESS_TOKEN&gt;
+</pre>
+              <h5>Resumable upload session</h5>
+              <pre class="_5s-8 prettyprint lang-html" style="">
+POST https://graph.facebook.com/<code>v24.0</code>/&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media
+?media_type=STORIES
+&amp;upload_type=resumable
+&amp;access_token=&lt;USER_ACCESS_TOKEN&gt;
+</pre>
+              <p>On success, an Instagram container ID and a URI is returned in the response, which will be used in
+                subsequent steps.</p>
+              <h4>Upload a video through resumable upload protocol</h4>
+              <span class="_7ab">
+                <p>Once the Instagram container ID returns from a resumable upload session call, send a
+                  <code>POST</code> request to the <code>https://rupload.facebook.com/ig-api-upload/</code>
+                </p>
+                <code>v24.0</code>
+                <p><code>/&lt;IG_CONTAINER_ID&gt;</code> endpoint.</p>
+              </span>
+              <ul>
+                <li>All media_type shares the same flow to upload the video.</li>
+                <li><code>ig-container-id</code> is the ID from the resumable reels, carousel and video container upload
+                  session examples above.</li>
+                <li><code>access-token</code> is the same one used in other steps.</li>
+                <li><code>offset</code> is set to the first byte being upload, generally <code>0</code>.</li>
+                <li><code>file_size</code> is set to the size of your file in bytes.</li>
+                <li><code>Your_file_local_path</code> sets to the file path of your local file, for example, if
+                  uploading a file from the <strong>Downloads</strong> folder on macOS, the path is
+                  <strong>@Downloads/example.mov</strong>.
+                </li>
+              </ul>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://rupload.facebook.com/ig-api-upload/<code>v24.0</code>/&lt;IG_CONTAINER_ID&gt;" \
+     -H "Authorization: OAuth &lt;USER_ACCESS_TOKEN&gt;" \
+     -H "offset: 0" \
+     -H "file_size: Your_file_size_in_bytes" \
+     --data-binary "@Your_local_file_path.extension"
+</pre>
+              <p>On success, you should see response like this example:</p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+{
+  "success":true,
+  "message":"Upload successful. ..."
+}  
+
+</pre>
+              <h4>Upload a video from a hosted URL</h4>
+              <p>This service can also support video upload from a hosted URL.</p>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+curl -X POST "https://rupload.facebook.com/ig-api-upload/<code>v24.0</code>/&lt;IG_CONTAINER_ID&gt;" \
+     -H "Authorization: OAuth &lt;USER_ACCESS_TOKEN&gt;" \
+     -H "file_url: &lt;VIDEO_URL&gt;"
+</pre>
+              <h3>Path Parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:50%">Placeholder</th>
+                    <th>Value</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_3_Vy">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>&lt;LATEST_API_VERSION&gt;</code></p>
+                        <span class="_7ab">
+                          <p>The lastest API version is:</p>
+                          <code>v24.0</code>
+                        </span>
+                      </td>
+                      <td>
+                        <p>API <a href="/docs/graph-api/guides/versioning">version</a>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;</code><br />
+                          Required</p>
+                      </td>
+                      <td>
+                        <p>App user's app-scoped user ID.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Query String Parameters</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:20%">Key</th>
+                    <th style="width:20%">Placeholder</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_4_ZD">
+                    <tr class="row_0">
+                      <td>
+                        <p><code>access_token</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;USER_ACCESS_TOKEN&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>Required. App user's <a href="/docs/facebook-login/access-tokens#usertokens">User</a> access
+                          token.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><code>alt_text</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;IMAGE_ALTERNATIVE_TEXT&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>For image posts only.</strong> Alternative text, up to 1000 character, for an image.
+                          Only supported on a single image or image media in a carousel.</p>
+                        <p><strong>Reels and stories are not supported.</strong></p>
+                      </td>
+                    </tr>
+                    <tr class="row_2">
+                      <td>
+                        <p><code>audio_name</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;AUDIO_NAME&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>For Reels only.</strong> Name of the audio of your Reels media. You can only rename
+                          once, either while creating a reel or after from the audio page.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_3 _5m29">
+                      <td>
+                        <p><code>caption</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;IMAGE_CAPTION&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>A caption for the image, video, or carousel. Can include hashtags (example:
+                          <code>#crazywildebeest</code>) and usernames of Instagram users (example:
+                          <code>@natgeo</code>). @Mentioned Instagram users receive a notification when the container is
+                          published. Maximum 2200 characters, 30 hashtags, and 20 @ tags.
+                        </p>
+                        <br />
+                        <p><strong>Not supported on images or videos in carousels</strong>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_4">
+                      <td>
+                        <p><code>collaborators</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;LIST_OF_COLLABORATORS&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>For Feed image, Reels and Carousels only. A list of up to 3 instagram usernames as
+                          collaborators on an ig media.</p>
+                        <br />
+                        <p><strong>Not supported for Stories.</strong></p>
+                      </td>
+                    </tr>
+                    <tr class="row_5 _5m29">
+                      <td>
+                        <p><code>children</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;ARRAY_OF_CAROUSEL_CONTAINTER_IDS</code></p>
+                      </td>
+                      <td>
+                        <p><strong>Required for carousels. Applies only to carousels</strong>. An array of up to 10
+                          container IDs of each image and video that should appear in the published carousel. Carousels
+                          can have up to 10 total images, vidoes, or a mix of the two.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_6">
+                      <td>
+                        <p><code>cover_url</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;COVER_URL&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>For Reels only. The path to an image to use as the cover image for the Reels tab. We will
+                          cURL the image using the URL that you specify so the image must be on a public server. If you
+                          specify both <code>cover_url</code> and <code>thumb_offset</code>, we use
+                          <code>cover_url</code> and ignore <code>thumb_offset</code>. The image must conform to the <a
+                            href="#reels-specs">specifications for a Reels cover photo</a>.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_7 _5m29">
+                      <td>
+                        <p><code>image_url</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;IMAGE_URL&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>For images only and required for images. The path to the image. We will cURL the image using
+                          the URL that you specify so the image must be on a public server.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_8">
+                      <td>
+                        <p><code>is_carousel_item</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;TRUE_OR_FALSE&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>Applies only to images and video</strong>. Set to <code>true</code>. Indicates image
+                          or video appears in a carousel.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_9 _5m29">
+                      <td>
+                        <p><code>location_id</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;LOCATION_PAGE_ID&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>The ID of a <a href="/docs/graph-api/reference/page">Page</a> associated with a location that
+                          you want to tag the image or video with.</p>
+                        <br />
+                        <p>Use the <a href="/docs/pages/searching">Pages Search API</a> to search for <a
+                            href="/docs/graph-api/reference/page">Pages</a> whose names match a search string, then
+                          parse the results to identify any Pages that have been created for a physical location.
+                          Include the <code>location</code> field in your query and verify that the Page you want to use
+                          has location data. Attempting to create a container using a Page that has no location data
+                          will fail with coded exception <code>INSTAGRAM_PLATFORM_API__INVALID_LOCATION_ID</code>.</p>
+                        <br />
+                        <p><strong>Not supported on images or videos in carousels</strong>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_10">
+                      <td>
+                        <p><code>media_type</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;MEDIA_TYPE&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>Required for carousels, stories, and reels.</strong> Indicates container is for a
+                          carousel, story or reel. Value can be:</p>
+                        <ul>
+                          <li><code>CAROUSEL</code></li>
+                          <li><code>REELS</code></li>
+                          <li><code>STORIES</code></li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_11 _5m29">
+                      <td>
+                        <p><code>product_tags</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;ARRAY_OF_PRODUCTS_FOR_TAGGING&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>Required for product tagging. Applies only to images and videos</strong>. An array of
+                          objects specifying which product tags to tag the image or video with (maximum of 5; tags and
+                          product IDs must be unique). Each object should have the following information:</p>
+                        <br />
+                        <ul>
+                          <li><code>product_id</code> — <strong>Required.</strong> Product ID.</li>
+                          <li><code>x</code> — <strong>Images only.</strong> An optional float that indicates percentage
+                            distance from left edge of the published media image. Value must be within
+                            <code>0.0</code>–<code>1.0</code> range.
+                          </li>
+                          <li><code>y</code> — <strong>Images only.</strong> An optional float that indicates percentage
+                            distance from top edge of the published media image. Value must be within
+                            <code>0.0</code>–<code>1.0</code> range.
+                          </li>
+                        </ul>
+                        <p>For example:</p>
+                        <br />
+                        <p><code>[{product_id:'3231775643511089',x: 0.5,y: 0.8}]</code></p>
+                      </td>
+                    </tr>
+                    <tr class="row_12">
+                      <td>
+                        <p><code>share_to_feed</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;TRUE_OR_FALSE&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>For Reels only. When <code>true</code>, indicates that the reel can appear in both the
+                          <strong>Feed</strong> and <strong>Reels</strong> tabs. When <code>false</code>, indicates the
+                          reel can only appear in the <strong>Reels</strong> tab.
+                        </p>
+                        <div class="_57yz _7_72 _3-8p">
+                          <div class="_57y-">
+                            <p>Neither value determines whether the reel actually appears in the <strong>Reels</strong>
+                              tab because the reel may not meet eligibilty requirements or may not be selected by our
+                              algorithm. See <a
+                                href="/docs/instagram-api/reference/ig-user/media#reel-specifications">reel
+                                specifications</a> for eligibility critera.</p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="row_13 _5m29">
+                      <td>
+                        <p><code>thumb_offset</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;THUMB_OFFSET&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>For videos and reels. Location, in milliseconds, of the video or reel frame to be used as the
+                          cover thumbnail image. The default value is <code>0</code>, which is the first frame of the
+                          video or reel. For reels, if you specify both <code>cover_url</code> and
+                          <code>thumb_offset</code>, we use <code>cover_url</code> and ignore <code>thumb_offset</code>.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr class="row_14">
+                      <td>
+                        <p><code>upload_type</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;UPLOAD_TYPE&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>An optional parameter for users want to upload video through the rupload protocol, values can
+                          be set to lowercase string value: <code>resumable</code>.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_15 _5m29">
+                      <td>
+                        <p><code>user_tags</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;ARRAY_OF_USERS_FOR_TAGGING&gt;&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>Required for user tagging in images, videos, and stories.</strong> Videos in
+                          carousels are not supported. An array of public usernames and <code>x</code>/<code>y</code>
+                          coordinates for any public Instagram users who you want to tag in the image. Each object in
+                          the array should have the following information:</p>
+                        <ul>
+                          <li><code>username</code> — <strong>Required.</strong> Username.</li>
+                          <li><code>x</code> — <strong>Required for images, optional for stories. Applies only to images
+                              and stories.</strong> A float that indicates percentage distance from left edge of the
+                            published media image. Value must be within <code>0.0</code>–<code>1.0</code> range. </li>
+                          <li><code>y</code> — <strong>Required for images, optional for stories. Applies only to images
+                              and stories.</strong> A float that indicates percentage distance from top edge of the
+                            published media image. Value must be within <code>0.0</code>–<code>1.0</code> range.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="row_16">
+                      <td>
+                        <p><code>video_url</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;VIDEO_URL&gt;</code></p>
+                      </td>
+                      <td>
+                        <p><strong>Required for videos and reels. Applies only to videos and reels.</strong> Path to the
+                          video. We cURL the video using the passed-in URL, so it must be on a public server.</p>
+                      </td>
+                    </tr>
+                    <tr class="row_17 _5m29">
+                      <td>
+                        <p><code>trial_params</code></p>
+                      </td>
+                      <td>
+                        <p><code>&lt;TRIAL_PARAM&gt;</code></p>
+                      </td>
+                      <td>
+                        <p>An optional parameter for publishing trial reels. The <code>media_type</code> must be
+                          <code>REELS</code> if this parameter is included in the request. Each object should have the
+                          following information:
+                        </p>
+                        <ul>
+                          <li><code>graduation_strategy</code> - <strong>Required</strong>. The graduation strategy
+                            specifies the conditions to graduate a reel (convert the trial reel to a reel, sharing it to
+                            followers). The value should be either <code>MANUAL</code> or <code>SS_PERFORMANCE</code>.
+                            When <code>MANUAL</code>, the trial reel can be manually graduated in the native app. When
+                            <code>SS_PERFORMANCE</code>, the trial reel will be automatically graduated if the trial
+                            reel performs well.
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Response</h3>
+              <p>A JSON-formatted object containing an <a href="/docs/instagram-api/reference/ig-container">IG
+                  Container</a> ID which you can use to <a
+                  href="/docs/instagram-api/reference/ig-user/media_publish">publish</a> the container.</p>
+              <p>Video uploads are asynchronous, so receiving a container ID does not guarantee that the upload was
+                successful. To verify that a video has been uploaded, request the <a
+                  href="/docs/instagram-api/reference/ig-container#fields"><code>status_code</code></a> field on the IG
+                Container. If its value is <code>FINISHED</code>, the video was uploaded successfully.</p>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id":"&lt;IG_CONTAINER_ID&gt;"
+}</pre>
+              <h3>Sample Request</h3>
+              <pre class="_5s-8 prettyprint lang-curl" style="">POST graph.facebook.com/17841400008460056/media
+  ?image_url=curls//www.example.com/images/bronzed-fonzes.jpg
+  &amp;caption=#BronzedFonzes!
+  &amp;collaborators= [‘username1’,’username2’]
+  &amp;user_tags=[
+    {
+      username:'kevinhart4real',
+      x: 0.5,
+      y: 0.8
+    },
+    {
+      username:'therock',
+      x: 0.3,
+      y: 0.2
+    }
+  ]</pre>
+              <h3>Sample Response</h3>
+              <pre class="_5s-8 prettyprint lang-json" style="">
+{
+  "id": "17889455560051444"
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Reading</h2>
+              <p><strong><code>GET /&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/media</code></strong></p>
+              <p>Get all <a href="/docs/instagram-api/reference/ig-media">IG Media</a> on an <a
+                  href="/docs/instagram-api/reference/ig-user">IG User</a>.</p>
+              <h3>Limitations</h3>
+              <ul>
+                <li>Returns a maximum of 10K of the most recently created media.</li>
+                <li>Story IG Media not supported, use the <a
+                    href="/docs/instagram-api/reference/ig-user/stories"><code>GET /&lt;YOUR_APP_USERS_INSTAGRAM_USER_ID&gt;/stories</code></a>
+                  endpoint instead.</li>
+              </ul>
+              <h3>Requirements</h3>
+              <div class="_57-c">
+                <table class="_4-ss _5k9x">
+                  <thead>
+                    <th style="width:20%">Type</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody class="_5m37" id="u_0_5_p9">
+                    <tr class="row_0">
+                      <td>
+                        <p><a href="/docs/facebook-login/access-tokens#usertokens">Access Tokens</a></p>
+                      </td>
+                      <td>
+                        <p><a href="/docs/facebook-login/access-tokens#usertokens">User</a></p>
+                      </td>
+                    </tr>
+                    <tr class="row_1 _5m29">
+                      <td>
+                        <p><a href="/docs/apps/review/login-permissions">Permissions</a></p>
+                      </td>
+                      <td>
+                        <p><a
+                            href="/docs/facebook-login/permissions#reference-instagram_basic"><code>instagram_basic</code></a><br />
+                          <a
+                            href="/docs/facebook-login/permissions#reference-pages_read_engagement"><code>pages_read_engagement</code></a>
+                          or <a
+                            href="/docs/facebook-login/permissions#reference-pages_show_list"><code>pages_show_list</code></a>
+                        </p>
+                        <p>If the app user was granted a role on the Page via the Business Manager, you will also need
+                          one of:</p>
+                        <p><a href="/docs/permissions/reference/ads_management"><code>ads_management</code></a><br />
+                          <a href="/docs/permissions/reference/business_management"><code>business_management</code></a>
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Time-based Pagination</h3>
+              <p>This endpoint supports <a href="/docs/graph-api/results#time">time-based pagination</a>. Include
+                <code>since</code> and <code>until</code> query-string parameters with Unix timestamp or
+                <code>strtotime</code> data values to define a time range.
+              </p>
+              <h3>Sample Request</h3>
+              <pre class="_5s-8 prettyprint lang-curl" style="">
+GET graph.facebook.com/<code>v24.0</code>/17841405822304914/media
+</pre>
+              <h3>Sample Response</h3>
+              <pre class="_5s-8 prettyprint lang-code" style="">{
+  "data": [
+    {
+      "id": "17895695668004550"
+    },
+    {
+      "id": "17899305451014820"
+    },
+    {
+      "id": "17896450804038745"
+    },
+    {
+      "id": "17881042411086627"
+    },
+    {
+      "id": "17869102915168123"
+    }
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Updating</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>Deleting</h2>
+              <p>This operation is not supported.</p>
+            </div>
+          </div>
+          <div class="_4-u2 _57mb _1u44 _3fw6 _4-u8">
+            <div class="_4-u3 _588p">
+              <h2>See Also</h2>
+              <ul>
+                <li><a
+                    href="https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/error-codes">Error
+                    Codes</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>
