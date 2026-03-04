@@ -1,0 +1,104 @@
+<article class="devsite-article">
+<div class="devsite-banner devsite-banner-announcement nocontent">
+<div class="devsite-banner-message">
+<div class="devsite-banner-message-text">
+<style>
+  .devsite-banner-announcement:not(.devsite-banner-tenant) {
+    background: #202124;
+    color: white;
+    font-weight: 500;
+  }
+  .devsite-banner-announcement a {
+    color: white;
+    font-weight: 700;
+  }
+  .devsite-banner-announcement a:link:not(.button),
+  .devsite-banner-announcement a:visited:not(.button) {
+    background: 0;
+  }
+  .devsite-banner-announcement a:hover,
+  .devsite-banner-announcement a:focus {
+    text-decoration: none;
+  }
+  .devsite-banner-announcement .devsite-banner-message-text {
+    margin: 0 auto;
+  }
+</style> <span class="nocontent">
+  Google is committed to advancing racial equity for Black communities.
+</span> <a class="gc-analytics-event nocontent" data-category="Announcement" data-label="Racial Equity" href="https://google.com/racialequity">See how.</a>
+</div>
+</div>
+</div>
+<div class="devsite-article-meta nocontent" role="navigation">
+<ul aria-label="Breadcrumb" class="devsite-breadcrumb-list">
+<li class="devsite-breadcrumb-item">
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" href="https://webrtc.org/" track-metadata-eventdetail="WebRTC" track-metadata-position="1" track-name="breadcrumb" track-type="globalNav">
+    
+          WebRTC
+        
+  </a>
+</li>
+<li class="devsite-breadcrumb-item">
+<div aria-hidden="true" class="devsite-breadcrumb-guillemet material-icons"></div>
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" href="https://webrtc.org/getting-started/overview" track-metadata-eventdetail="" track-metadata-position="2" track-name="breadcrumb" track-type="globalNav">
+    
+          Guides
+        
+  </a>
+</li>
+</ul>
+<devsite-thumb-rating position="header">
+</devsite-thumb-rating>
+</div>
+<h1 class="devsite-page-title" tabindex="-1">
+      Testing WebRTC applications<devsite-actions data-nosnippet="" hidden=""></devsite-actions>
+</h1>
+<div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+<devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+</devsite-toc>
+<div class="devsite-article-body clearfix">
+<p>When writing automated tests for your WebRTC applications, there are useful
+configurations that can be enabled for browsers that make development and
+testing easier.</p>
+<h2 data-text="Chrome" id="chrome" tabindex="-1">Chrome</h2>
+<p>When running automated tests on Chrome, the following arguments are useful when
+launching:</p>
+<ul>
+<li><code dir="ltr" translate="no">--allow-file-access-from-files</code> - Allows API access for file:// URLs</li>
+<li><code dir="ltr" translate="no">--disable-translate</code> - Disables the translation popup</li>
+<li><code dir="ltr" translate="no">--use-fake-ui-for-media-stream</code> - Provide fake media streams. Useful when
+running on CI servers.</li>
+<li><code dir="ltr" translate="no">--use-file-for-fake-audio-capture=&lt;filename&gt;</code> - Provide a file to use when
+capturing audio.</li>
+<li><code dir="ltr" translate="no">--use-file-for-fake-video-capture=&lt;filename&gt;</code> - Provide a file to use when
+capturing video.</li>
+<li><code dir="ltr" translate="no">--headless</code> - Run in headless mode. Useful when running on CI servers.</li>
+<li><code dir="ltr" translate="no">--mute-audio</code> - Mute audio output.</li>
+</ul>
+<h2 data-text="Firefox" id="firefox" tabindex="-1">Firefox</h2>
+<p>When running automated tests on Firefox, we need to provide a set of preference
+keys that will be used on the launched instance. Below is the configuration used
+for the WebRTC samples automated tests:</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JSON" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-nt">"prefs"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.cache.disk.enable"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.cache.disk.capacity"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">0</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.cache.disk.smart_size.enabled"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.cache.disk.smart_size.first_run"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.sessionstore.resume_from_crash"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.startup.page"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">0</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"media.navigator.streams.fake"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"media.navigator.permission.disabled"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"device.storage.enabled"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"media.gstreamer.enabled"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.startup.homepage"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"about:blank"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.startup.firstrunSkipsHomepage"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"extensions.update.enabled"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"app.update.enabled"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"network.http.use-cache"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"browser.shell.checkDefaultBrowser"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code>
+</div>
+<devsite-thumb-rating position="footer">
+</devsite-thumb-rating>
+<div class="devsite-floating-action-buttons"></div></article>

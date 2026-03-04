@@ -1,0 +1,298 @@
+<article class="devsite-article">
+<div class="devsite-banner devsite-banner-announcement nocontent">
+<div class="devsite-banner-message">
+<div class="devsite-banner-message-text">
+<style>
+  .devsite-banner-announcement:not(.devsite-banner-tenant) {
+    background: #202124;
+    color: white;
+    font-weight: 500;
+  }
+  .devsite-banner-announcement a {
+    color: white;
+    font-weight: 700;
+  }
+  .devsite-banner-announcement a:link:not(.button),
+  .devsite-banner-announcement a:visited:not(.button) {
+    background: 0;
+  }
+  .devsite-banner-announcement a:hover,
+  .devsite-banner-announcement a:focus {
+    text-decoration: none;
+  }
+  .devsite-banner-announcement .devsite-banner-message-text {
+    margin: 0 auto;
+  }
+</style> <span class="nocontent">
+  Google is committed to advancing racial equity for Black communities.
+</span> <a class="gc-analytics-event nocontent" data-category="Announcement" data-label="Racial Equity" href="https://google.com/racialequity">See how.</a>
+</div>
+</div>
+</div>
+<div class="devsite-article-meta nocontent" role="navigation">
+<ul aria-label="Breadcrumb" class="devsite-breadcrumb-list">
+<li class="devsite-breadcrumb-item">
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" href="https://webrtc.org/" track-metadata-eventdetail="WebRTC" track-metadata-position="1" track-name="breadcrumb" track-type="globalNav">
+    
+          WebRTC
+        
+  </a>
+</li>
+<li class="devsite-breadcrumb-item">
+<div aria-hidden="true" class="devsite-breadcrumb-guillemet material-icons"></div>
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" href="https://webrtc.org/getting-started/overview" track-metadata-eventdetail="" track-metadata-position="2" track-name="breadcrumb" track-type="globalNav">
+    
+          Guides
+        
+  </a>
+</li>
+</ul>
+<devsite-thumb-rating position="header">
+</devsite-thumb-rating>
+</div>
+<h1 class="devsite-page-title" tabindex="-1">
+      Firebase + WebRTC Codelab<devsite-actions data-nosnippet="" hidden=""></devsite-actions>
+</h1>
+<div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+<devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+</devsite-toc>
+<div class="devsite-article-body clearfix">
+<h2 data-text="1. Introduction" id="1_introduction" tabindex="-1">1. Introduction</h2>
+<p>In this codelab, you'll learn how to build a simple video chat application using
+the WebRTC API in your browser and Cloud Firestore for signaling. The
+application is called FirebaseRTC and works as a simple example that will teach
+you the basics of building WebRTC enabled applications.</p>
+<blockquote>
+<aside class="note"><strong>Note:</strong><span> Another option for signaling could be Firebase Cloud Messaging. However,
+that is currently only supported in Chrome and in this codelab we will focus
+on a solution that works across all browsers supporting WebRTC.</span></aside></blockquote>
+<h3 data-text="What you'll learn" id="what_youll_learn" tabindex="-1">What you'll learn</h3>
+<ul>
+<li>Initiating a video call in a web application using WebRTC</li>
+<li>Signaling to the remote party using Cloud Firestore</li>
+</ul>
+<h3 data-text="What you'll need" id="what_youll_need" tabindex="-1">What you'll need</h3>
+<p>Before starting this codelab, make sure that you've installed:</p>
+<ul>
+<li>npm which typically comes with Node.js - Node LTS is recommended</li>
+</ul>
+<h2 data-text="2. Create and set up a Firebase project" id="2_create_and_set_up_a_firebase_project" tabindex="-1">2. Create and set up a Firebase project</h2>
+<h3 data-text="Create a Firebase project" id="create_a_firebase_project" tabindex="-1">Create a Firebase project</h3>
+<ol>
+<li><a href="https://console.firebase.google.com">In the Firebase console</a>, click Add
+project, then name the Firebase project FirebaseRTC.</li>
+</ol>
+<p>Remember the Project ID for your Firebase project.</p>
+<blockquote>
+<aside class="note"><strong>Note:</strong><span> If you go to the home page of your project, you can see it in Settings &gt;
+Project Settings (or look at the URL!)</span></aside></blockquote>
+<ol>
+<li>Click Create project.</li>
+</ol>
+<p>The application that you're going to build uses two Firebase services available
+on the web:</p>
+<ul>
+<li>Cloud Firestore to save structured data on the Cloud and get instant
+notification when the data is updated</li>
+<li>Firebase Hosting to host and serve your static assets</li>
+</ul>
+<p>For this specific codelab, you've already configured Firebase Hosting in the
+project you'll be cloning. However, for Cloud Firestore, we'll walk you through
+the configuration and enabling of the services using the Firebase console.</p>
+<h3 data-text="Enable Cloud Firestore" id="enable_cloud_firestore" tabindex="-1">Enable Cloud Firestore</h3>
+<p>The app uses Cloud Firestore to save the chat messages and receive new chat
+messages.</p>
+<p>You'll need to enable Cloud Firestore:</p>
+<ol>
+<li>In the Firebase console menu's Develop section, click Database.</li>
+<li>Click <strong>Create database</strong> in the Cloud Firestore pane.</li>
+<li>Select the <strong>Start in test mode</strong> option, then click Enable after reading the
+disclaimer about the security rules.</li>
+</ol>
+<p>Test mode ensures that you can freely write to the database during development.
+We'll make our database more secure later on in this codelab.</p>
+<h2 data-text="3. Get the sample code" id="3_get_the_sample_code" tabindex="-1">3. Get the sample code</h2>
+<p>Clone the GitHub repository from the command line:</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Bash" translate="no"><code dir="ltr" translate="no">git<span class="devsite-syntax-w"> </span>clone<span class="devsite-syntax-w"> </span>https://github.com/webrtc/FirebaseRTC
+</code></pre></devsite-code>
+<p>The sample code should have been cloned into the <code dir="ltr" translate="no">FirebaseRTC</code> directory.
+Make sure your command line is run from this directory from now on:</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="Bash" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-nb">cd</span><span class="devsite-syntax-w"> </span>FirebaseRTC
+</code></pre></devsite-code>
+<h3 data-text="Import the starter app" id="import_the_starter_app" tabindex="-1">Import the starter app</h3>
+<p>Open the files in <code dir="ltr" translate="no">FirebaseRTC</code> in your editor and change them according to
+the instructions below. This directory contains the starting code for the
+codelab which consists of a not-yet functional WebRTC app. We'll make it
+functional throughout this codelab.</p>
+<h2 data-text="4. Install the Firebase Command Line Interface" id="4_install_the_firebase_command_line_interface" tabindex="-1">4. Install the Firebase Command Line Interface</h2>
+<p>The Firebase Command Line Interface (CLI) allows you to serve your web app
+locally and deploy your web app to Firebase Hosting.</p>
+<blockquote>
+<aside class="note"><strong>Note:</strong><span> To install the CLI, you need to install npm which typically comes with
+Node.js.</span></aside></blockquote>
+<ol>
+<li>Install the CLI by running the following npm command:
+<code dir="ltr" translate="no">sh
+npm -g install firebase-tools</code></li>
+</ol>
+<blockquote>
+<aside class="note"><strong>Note:</strong><span> Doesn't work? You may need to run the command using <code dir="ltr" translate="no">sudo</code> instead.</span></aside></blockquote>
+<ol>
+<li>Verify that the CLI has been installed correctly by running the following
+command:
+<code dir="ltr" translate="no">sh
+firebase --version</code></li>
+</ol>
+<p>Make sure the version of the Firebase CLI is v6.7.1 or later.</p>
+<ol>
+<li>Authorize the Firebase CLI by running the following command:
+<code dir="ltr" translate="no">sh
+firebase login</code></li>
+</ol>
+<p>You've set up the web app template to pull your app's configuration for Firebase
+Hosting from your app's local directory and files. But to do this, you need to
+associate your app with your Firebase project.</p>
+<ol>
+<li><p>Associate your app with your Firebase project by running the following
+command:
+<code dir="ltr" translate="no">sh
+firebase use --add</code></p></li>
+<li><p>When prompted, select your Project ID, then give your Firebase project an
+alias.</p></li>
+</ol>
+<p>An alias is useful if you have multiple environments (production, staging, etc).
+However, for this codelab, let's just use the alias of <code dir="ltr" translate="no">default</code>.</p>
+<ol>
+<li><p>Follow the remaining instructions in your command line.</p></li>
+</ol>
+<h2 data-text="5. Run the local server" id="5_run_the_local_server" tabindex="-1">5. Run the local server</h2>
+<p>You're ready to actually start work on our app! Let's run the app locally!</p>
+<ol>
+<li><p>Run the following Firebase CLI command:
+<code dir="ltr" translate="no">sh
+firebase serve --only hosting</code></p></li>
+<li><p>Your command line should display the following response:
+<code dir="ltr" translate="no">hosting: Local server: http://localhost:5000</code></p></li>
+</ol>
+<p>We're using the Firebase Hosting emulator to serve our app locally. The web app
+should now be available from http://localhost:5000.</p>
+<ol>
+<li>Open your app at http://localhost:5000.</li>
+</ol>
+<p>You should see your copy of FirebaseRTC which has been connected to your
+Firebase project.</p>
+<p>The app has automatically connected to your Firebase project.</p>
+<h2 data-text="6. Creating a new room" id="6_creating_a_new_room" tabindex="-1">6. Creating a new room</h2>
+<p>In this application, each video chat session is called a room. A user can create
+a new room by clicking a button in their application. This will generate an ID
+that the remote party can use to join the same room. The ID is used as the key
+in Cloud Firestore for each room.</p>
+<p>Each room will contain the <code dir="ltr" translate="no">RTCSessionDescriptions</code> for both the offer and the
+answer, as well as two separate collections with ICE candidates from each party.</p>
+<p>Your first task is to implement the missing code for creating a new room with
+the initial offer from the caller. Open <code dir="ltr" translate="no">public/app.js</code> and find the comment <code dir="ltr" translate="no">//
+Add code for creating a room here</code> and add the following code:</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">createOffer</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">setLocalDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">roomWithOffer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">sdp</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">sdp</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">roomRef</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">db</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">collection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'rooms'</span><span class="devsite-syntax-p">).</span><span class="devsite-syntax-nx">add</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">roomWithOffer</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">roomId</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">roomRef</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">id</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'#currentRoom'</span><span class="devsite-syntax-p">).</span><span class="devsite-syntax-nx">innerText</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-sb">`Current room is </span><span class="devsite-syntax-si">${</span><span class="devsite-syntax-nx">roomId</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-sb"> - You are the caller!`</span>
+</code></pre></devsite-code>
+<p>The first line creates an <code dir="ltr" translate="no">RTCSessionDescription</code> that will represent the offer
+from the caller. This is then set as the local description, and finally written
+to the new room object in Cloud Firestore.</p>
+<p>Next, we will listen for changes to the database and detect when an answer from
+the callee has been added.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-nx">roomRef</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">onSnapshot</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">snapshot</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">-</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Got updated room:'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">snapshot</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-p">());</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">snapshot</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-o">!</span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">currentRemoteDescription</span><span class="devsite-syntax-w"> &amp;&amp; </span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Set remote description: '</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCSessionDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">setRemoteDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre></devsite-code>
+<p>This will wait until the callee writes the <code dir="ltr" translate="no">RTCSessionDescription</code> for the
+answer, and set that as the remote description on the caller
+<code dir="ltr" translate="no">RTCPeerConnection</code>.</p>
+<h2 data-text="7. Joining a room" id="7_joining_a_room" tabindex="-1">7. Joining a room</h2>
+<p>The next step is to implement the logic for joining an existing room. The user
+does this by clicking the <strong>Join room</strong> button and entering the ID for the room
+to join. Your task here is to implement the creation of the
+<code dir="ltr" translate="no">RTCSessionDescription</code> for the answer and update the room in the database
+accordingly.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">roomSnapshot</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-p">().</span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">setRemoteDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">createAnswer</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">setLocalDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">roomWithAnswer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">sdp</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">sdp</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">roomRef</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">update</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">roomWithAnswer</span><span class="devsite-syntax-p">);</span>
+</code></pre></devsite-code>
+<p>In the code above, we start by extracting the offer from the caller and creating
+a <code dir="ltr" translate="no">RTCSessionDescription</code> that we set as the remote description. Next, we create
+the answer, set it as the local description, and update the database. The update
+of the database will trigger the <code dir="ltr" translate="no">onSnapshot</code> callback on the caller side, which
+in turn will set the remote description based on the answer from the callee.
+This completes the exchange of the <code dir="ltr" translate="no">RTCSessionDescription</code> objects between the
+caller and the callee.</p>
+<h2 data-text="8. Collect ICE candidates" id="8_collect_ice_candidates" tabindex="-1">8. Collect ICE candidates</h2>
+<p>Before the caller and callee can connect to each other, they also need to
+exchange ICE candidates that tell WebRTC how to connect to the remote peer.
+Your next task is to implement the code that listens for ICE candidates and adds
+them to a collection in the database. Find the function <code dir="ltr" translate="no">collectIceCandidates</code>
+and add the following code:</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">collectIceCandidates</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">roomRef</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">                                    </span><span class="devsite-syntax-nx">localName</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">remoteName</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">candidatesCollection</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">roomRef</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">collection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">localName</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'icecandidate'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">-</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">candidate</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">json</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">candidate</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">toJSON</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nx">candidatesCollection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">add</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">json</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">});</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">roomRef</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">collection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">remoteName</span><span class="devsite-syntax-p">).</span><span class="devsite-syntax-nx">onSnapshot</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">snapshot</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">-</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">snapshot</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">docChanges</span><span class="devsite-syntax-p">().</span><span class="devsite-syntax-nx">forEach</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">change</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">-</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">change</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">===</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"added"</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">                </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">candidate</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCIceCandidate</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">change</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">doc</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-p">());</span>
+<span class="devsite-syntax-w">                </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addIceCandidate</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">candidate</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">});</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">})</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code>
+<p>This function does two things. It collects ICE candidates from the WebRTC API and
+adds them to the database, and listens for added ICE candidates from the remote
+peer and adds them to its <code dir="ltr" translate="no">RTCPeerConnection</code> instance. It is important when
+listening to database changes to filter out anything that isn't a new addition,
+since we otherwise would have added the same set of ICE candidates over and over
+again.</p>
+<h2 data-text="9. Conclusion" id="9_conclusion" tabindex="-1">9. Conclusion</h2>
+<p>In this codelab you learned how to implement signaling for WebRTC using Cloud
+Firestore, as well as how to use that for creating a simple video chat
+application.</p>
+<p>To learn more, visit the following resources:</p>
+<ol>
+<li><a href="https://github.com/webrtc/FirebaseRTC">FirebaseRTC Source Code</a></li>
+<li><a href="https://webrtc.github.io/samples">WebRTC samples</a></li>
+<li><a href="https://firebase.google.com/docs/firestore/">Cloud Firestore</a></li>
+</ol>
+</div>
+<devsite-thumb-rating position="footer">
+</devsite-thumb-rating>
+<div class="devsite-floating-action-buttons"></div></article>

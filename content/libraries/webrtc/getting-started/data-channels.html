@@ -1,0 +1,229 @@
+<article class="devsite-article">
+  <div class="devsite-banner devsite-banner-announcement nocontent">
+    <div class="devsite-banner-message">
+      <div class="devsite-banner-message-text">
+        <style>
+          .devsite-banner-announcement:not(.devsite-banner-tenant) {
+            background: #202124;
+            color: white;
+            font-weight: 500;
+          }
+          .devsite-banner-announcement a {
+            color: white;
+            font-weight: 700;
+          }
+          .devsite-banner-announcement a:link:not(.button),
+          .devsite-banner-announcement a:visited:not(.button) {
+            background: 0;
+          }
+          .devsite-banner-announcement a:hover,
+          .devsite-banner-announcement a:focus {
+            text-decoration: none;
+          }
+          .devsite-banner-announcement .devsite-banner-message-text {
+            margin: 0 auto;
+          }
+        </style>
+        <span class="nocontent">
+          Google is committed to advancing racial equity for Black communities.
+        </span>
+        <a
+          class="gc-analytics-event nocontent"
+          data-category="Announcement"
+          data-label="Racial Equity"
+          href="https://google.com/racialequity"
+          >See how.</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="devsite-article-meta nocontent" role="navigation">
+    <ul aria-label="Breadcrumb" class="devsite-breadcrumb-list">
+      <li class="devsite-breadcrumb-item">
+        <a
+          class="devsite-breadcrumb-link gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Breadcrumbs"
+          data-value="1"
+          href="https://webrtc.org/"
+          track-metadata-eventdetail="WebRTC"
+          track-metadata-position="1"
+          track-name="breadcrumb"
+          track-type="globalNav"
+        >
+          WebRTC
+        </a>
+      </li>
+      <li class="devsite-breadcrumb-item">
+        <div
+          aria-hidden="true"
+          class="devsite-breadcrumb-guillemet material-icons"
+        ></div>
+        <a
+          class="devsite-breadcrumb-link gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Breadcrumbs"
+          data-value="2"
+          href="https://webrtc.org/getting-started/overview"
+          track-metadata-eventdetail=""
+          track-metadata-position="2"
+          track-name="breadcrumb"
+          track-type="globalNav"
+        >
+          Guides
+        </a>
+      </li>
+    </ul>
+    <devsite-thumb-rating position="header"> </devsite-thumb-rating>
+  </div>
+  <h1 class="devsite-page-title" tabindex="-1">
+    Data channels<devsite-actions data-nosnippet="" hidden=""></devsite-actions>
+  </h1>
+  <div class="devsite-page-title-meta">
+    <devsite-view-release-notes></devsite-view-release-notes>
+  </div>
+  <devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+  </devsite-toc>
+  <div class="devsite-article-body clearfix">
+    <p>
+      The WebRTC standard also covers an API for sending arbitrary data over a
+      <code dir="ltr" translate="no">RTCPeerConnection</code>. This is done by
+      calling <code dir="ltr" translate="no">createDataChannel()</code> on a
+      <code dir="ltr" translate="no">RTCPeerConnection</code> object, which
+      returns a <code dir="ltr" translate="no">RTCDataChannel</code> object.
+    </p>
+    <div></div>
+    <devsite-code>
+      <pre
+        class="devsite-click-to-copy"
+        dir="ltr"
+        is-upgraded=""
+        syntax="JavaScript"
+        translate="no"
+      ><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCPeerConnection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">configuration</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">dataChannel</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">createDataChannel</span><span class="devsite-syntax-p">();</span>
+</code></pre>
+    </devsite-code>
+    <p>
+      The remote peer can receive data channels by listening for the
+      <code dir="ltr" translate="no">datachannel</code> event on the
+      <code dir="ltr" translate="no">RTCPeerConnection</code> object. The
+      received event is of the type
+      <code dir="ltr" translate="no">RTCDataChannelEvent</code> and contains a
+      <code dir="ltr" translate="no">channel</code> property that represents the
+      <code dir="ltr" translate="no">RTCDataChannel</code> connected between the
+      peers.
+    </p>
+    <div></div>
+    <devsite-code>
+      <pre
+        class="devsite-click-to-copy"
+        dir="ltr"
+        is-upgraded=""
+        syntax="JavaScript"
+        translate="no"
+      ><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCPeerConnection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">configuration</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'datachannel'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">dataChannel</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">channel</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre>
+    </devsite-code>
+    <h2
+      data-text="Open and close events"
+      id="open_and_close_events"
+      tabindex="-1"
+    >
+      Open and close events
+    </h2>
+    <p>
+      Before a data channel can be used for sending data, the client needs to
+      wait until it has been opened. This is done by listening to the
+      <code dir="ltr" translate="no">open</code> event. Likewise, there is a
+      <code dir="ltr" translate="no">close</code> event for when either side
+      closes the channel.
+    </p>
+    <div></div>
+    <devsite-code>
+      <pre
+        class="devsite-click-to-copy"
+        dir="ltr"
+        is-upgraded=""
+        syntax="JavaScript"
+        translate="no"
+      ><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">messageBox</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'#messageBox'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">sendButton</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'#sendButton'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCPeerConnection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">configuration</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">dataChannel</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">createDataChannel</span><span class="devsite-syntax-p">();</span>
+
+<span class="devsite-syntax-c1">// Enable textarea and button when opened</span>
+<span class="devsite-syntax-nx">dataChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'open'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">messageBox</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">disabled</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">messageBox</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">focus</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">sendButton</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">disabled</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-p">});</span>
+
+<span class="devsite-syntax-c1">// Disable input when closed</span>
+<span class="devsite-syntax-nx">dataChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'close'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">messageBox</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">disabled</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">sendButton</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">disabled</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">false</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre>
+    </devsite-code>
+    <h2 data-text="Messages" id="messages" tabindex="-1">Messages</h2>
+    <p>
+      Sending a message on a
+      <code dir="ltr" translate="no">RTCDataChannel</code> is done by calling
+      the <code dir="ltr" translate="no">send()</code> function with the data we
+      want to send. The <code dir="ltr" translate="no">data</code> parameter for
+      this function can be either a string, a
+      <code dir="ltr" translate="no">Blob</code>, an
+      <code dir="ltr" translate="no">ArrayBuffer</code> or and
+      <code dir="ltr" translate="no">ArrayBufferView</code>.
+    </p>
+    <div></div>
+    <devsite-code>
+      <pre
+        class="devsite-click-to-copy"
+        dir="ltr"
+        is-upgraded=""
+        syntax="JavaScript"
+        translate="no"
+      ><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">messageBox</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'#messageBox'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">sendButton</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'#sendButton'</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-c1">// Send a simple text message when we click the button</span>
+<span class="devsite-syntax-nx">sendButton</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'click'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">messageBox</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">textContent</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">dataChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">send</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">})</span>
+</code></pre>
+    </devsite-code>
+    <p>
+      The remote peer will receive messages sent on a
+      <code dir="ltr" translate="no">RTCDataChannel</code> by listening on the
+      <code dir="ltr" translate="no">message</code> event.
+    </p>
+    <div></div>
+    <devsite-code>
+      <pre
+        class="devsite-click-to-copy"
+        dir="ltr"
+        is-upgraded=""
+        syntax="JavaScript"
+        translate="no"
+      ><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">incomingMessages</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'#incomingMessages'</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCPeerConnection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">configuration</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">dataChannel</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">createDataChannel</span><span class="devsite-syntax-p">();</span>
+
+<span class="devsite-syntax-c1">// Append new messages to the box of incoming messages</span>
+<span class="devsite-syntax-nx">dataChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'message'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">data</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">incomingMessages</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">textContent</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">+=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">+</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'\n'</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre>
+    </devsite-code>
+  </div>
+  <devsite-thumb-rating position="footer"> </devsite-thumb-rating>
+  <div class="devsite-floating-action-buttons"></div>
+</article>

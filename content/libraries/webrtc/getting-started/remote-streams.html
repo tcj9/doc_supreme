@@ -1,0 +1,93 @@
+<article class="devsite-article">
+<div class="devsite-banner devsite-banner-announcement nocontent">
+<div class="devsite-banner-message">
+<div class="devsite-banner-message-text">
+<style>
+  .devsite-banner-announcement:not(.devsite-banner-tenant) {
+    background: #202124;
+    color: white;
+    font-weight: 500;
+  }
+  .devsite-banner-announcement a {
+    color: white;
+    font-weight: 700;
+  }
+  .devsite-banner-announcement a:link:not(.button),
+  .devsite-banner-announcement a:visited:not(.button) {
+    background: 0;
+  }
+  .devsite-banner-announcement a:hover,
+  .devsite-banner-announcement a:focus {
+    text-decoration: none;
+  }
+  .devsite-banner-announcement .devsite-banner-message-text {
+    margin: 0 auto;
+  }
+</style> <span class="nocontent">
+  Google is committed to advancing racial equity for Black communities.
+</span> <a class="gc-analytics-event nocontent" data-category="Announcement" data-label="Racial Equity" href="https://google.com/racialequity">See how.</a>
+</div>
+</div>
+</div>
+<div class="devsite-article-meta nocontent" role="navigation">
+<ul aria-label="Breadcrumb" class="devsite-breadcrumb-list">
+<li class="devsite-breadcrumb-item">
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" href="https://webrtc.org/" track-metadata-eventdetail="WebRTC" track-metadata-position="1" track-name="breadcrumb" track-type="globalNav">
+    
+          WebRTC
+        
+  </a>
+</li>
+<li class="devsite-breadcrumb-item">
+<div aria-hidden="true" class="devsite-breadcrumb-guillemet material-icons"></div>
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" href="https://webrtc.org/getting-started/overview" track-metadata-eventdetail="" track-metadata-position="2" track-name="breadcrumb" track-type="globalNav">
+    
+          Guides
+        
+  </a>
+</li>
+</ul>
+<devsite-thumb-rating position="header">
+</devsite-thumb-rating>
+</div>
+<h1 class="devsite-page-title" tabindex="-1">
+      Getting started with remote streams<devsite-actions data-nosnippet="" hidden=""></devsite-actions>
+</h1>
+<div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+<devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+</devsite-toc>
+<div class="devsite-article-body clearfix">
+<p>Once a <code dir="ltr" translate="no">RTCPeerConnection</code> is connected to a remote peer, it is possible to
+stream audio and video between them. This is the point where we connect the
+stream we receive from <code dir="ltr" translate="no">getUserMedia()</code> to the <code dir="ltr" translate="no">RTCPeerConnection</code>. A media
+stream consists of at least one media track, and these are individually added
+to the <code dir="ltr" translate="no">RTCPeerConnection</code> when we want to transmit the media to the remote
+peer.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">localStream</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getUserMedia</span><span class="devsite-syntax-p">({</span><span class="devsite-syntax-nx">video</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">audio</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">});</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCPeerConnection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">iceConfig</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-nx">localStream</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">getTracks</span><span class="devsite-syntax-p">().</span><span class="devsite-syntax-nx">forEach</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">track</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addTrack</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">track</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">localStream</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre></devsite-code>
+<p>Tracks can be added to a <code dir="ltr" translate="no">RTCPeerConnection</code> before it has connected to a remote
+peer, so it makes sense to perform this setup as early as possible instead of
+waiting for the connection to be completed.</p>
+<h2 data-text="Adding remote tracks" id="adding_remote_tracks" tabindex="-1">Adding remote tracks</h2>
+<p>To receive the remote tracks that were added by the other peer, we register a
+listener on the local <code dir="ltr" translate="no">RTCPeerConnection</code> listening for the <code dir="ltr" translate="no">track</code> event. The
+<code dir="ltr" translate="no">RTCTrackEvent</code> contains an array of <code dir="ltr" translate="no">MediaStream</code> objects that have the same
+<code dir="ltr" translate="no">MediaStream.id</code> values as the peer's corresponding local streams. In our
+example, each track is only associated with a single stream.</p>
+<p>Note that while <code dir="ltr" translate="no">MediaStream</code> IDs match on both sides of the peer connection,
+the same is generally not true for <code dir="ltr" translate="no">MediaStreamTrack</code> IDs.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">remoteVideo</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'#remoteVideo'</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'track'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-nx">remoteStream</span><span class="devsite-syntax-p">]</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">streams</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">remoteVideo</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">srcObject</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">remoteStream</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre></devsite-code>
+</div>
+<devsite-thumb-rating position="footer">
+</devsite-thumb-rating>
+<div class="devsite-floating-action-buttons"></div></article>

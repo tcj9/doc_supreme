@@ -1,0 +1,139 @@
+<article class="devsite-article">
+<div class="devsite-banner devsite-banner-announcement nocontent">
+<div class="devsite-banner-message">
+<div class="devsite-banner-message-text">
+<style>
+  .devsite-banner-announcement:not(.devsite-banner-tenant) {
+    background: #202124;
+    color: white;
+    font-weight: 500;
+  }
+  .devsite-banner-announcement a {
+    color: white;
+    font-weight: 700;
+  }
+  .devsite-banner-announcement a:link:not(.button),
+  .devsite-banner-announcement a:visited:not(.button) {
+    background: 0;
+  }
+  .devsite-banner-announcement a:hover,
+  .devsite-banner-announcement a:focus {
+    text-decoration: none;
+  }
+  .devsite-banner-announcement .devsite-banner-message-text {
+    margin: 0 auto;
+  }
+</style> <span class="nocontent">
+  Google is committed to advancing racial equity for Black communities.
+</span> <a class="gc-analytics-event nocontent" data-category="Announcement" data-label="Racial Equity" href="https://google.com/racialequity">See how.</a>
+</div>
+</div>
+</div>
+<div class="devsite-article-meta nocontent" role="navigation">
+<ul aria-label="Breadcrumb" class="devsite-breadcrumb-list">
+<li class="devsite-breadcrumb-item">
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" href="https://webrtc.org/" track-metadata-eventdetail="WebRTC" track-metadata-position="1" track-name="breadcrumb" track-type="globalNav">
+    
+          WebRTC
+        
+  </a>
+</li>
+<li class="devsite-breadcrumb-item">
+<div aria-hidden="true" class="devsite-breadcrumb-guillemet material-icons"></div>
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" href="https://webrtc.org/getting-started/overview" track-metadata-eventdetail="" track-metadata-position="2" track-name="breadcrumb" track-type="globalNav">
+    
+          Guides
+        
+  </a>
+</li>
+</ul>
+<devsite-thumb-rating position="header">
+</devsite-thumb-rating>
+</div>
+<h1 class="devsite-page-title" tabindex="-1">
+      Unified Plan SDP format - transition plan<devsite-actions data-nosnippet="" hidden=""></devsite-actions>
+</h1>
+<div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+<devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+</devsite-toc>
+<div class="devsite-article-body clearfix">
+<p>Google is planning to transition Chrome’s WebRTC implementation from the
+current SDP format (called “Plan B”) to a standards conformant format
+(“Unified Plan”, draft-ietf-rtcweb-jsep) over the next couple of quarters.</p>
+<p>The plan involves 5 phases, and one transient API feature.</p>
+<h2 data-text="Who will be affected" id="who_will_be_affected" tabindex="-1">Who will be affected</h2>
+<p>People who use multiple audio tracks or multiple video tracks on a single
+PeerConnection will have to test their product under Unified Plan, and adapt
+accordingly. In the case where a call is initiated from a non-Chrome endpoint
+and replied to by Chrome, the form of the offer may have to change. People who
+do detailed SDP parsing and care about msid attributes will have to check that
+their parsing code picks up the new format (a=msid). The details on whether
+changes will be needed and how the apps need to change will be application
+dependent. We think that almost all applications that use only a single audio
+and a single video track per RTCPeerConnection will be unaffected by the change.</p>
+<h2 data-text="The API feature" id="the_api_feature" tabindex="-1">The API feature</h2>
+<p>We are adding one new feature to the RTCPeerConnection’s RTCConfiguration:</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kr">enum</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">SdpSemantics</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s2">"plan-b"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s2">"unified-plan"</span>
+<span class="devsite-syntax-p">};</span>
+
+
+<span class="devsite-syntax-nx">partial</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">dictionary</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCConfiguration</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">   </span><span class="devsite-syntax-nx">SdpSemantics</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">sdpSemantics</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code>
+<p>The RTCConfiguration can be passed to the constructor of an RTCPeerConnection,
+and all offers and answers constructed will be in the Unified Plan format.
+Calls to setLocalDescription and setRemoteDescription will also expect the SDP
+to be in the Unified Plan format; if it is in the legacy Chrome format, then
+all but the first audio track and the first video track will be ignored.</p>
+<p>There’s also a command line flag (–enable-features=RTCUnifiedPlanByDefault in
+Chrome M71 and above, –enable-blink-features=RTCUnifiedPlanByDefault in
+earlier versions) that allows the default value of this flag to be set to
+“unified-plan”.</p>
+<h2 data-text="The Phases" id="the_phases" tabindex="-1">The Phases</h2>
+<h3 data-text="Phase 1: Implement Unified Plan" id="phase_1_implement_unified_plan" tabindex="-1">Phase 1: Implement Unified Plan</h3>
+<p>In this phase, Unified Plan was being developed behind an experimentation flag
+available since M65. Until phase 2, it was wisest to test with Chrome Canary
+using “–enable-blink-features=RTCUnifiedPlan”.</p>
+<h3 data-text="Phase 2: Make the API feature generally available" id="phase_2_make_the_api_feature_generally_available" tabindex="-1">Phase 2: Make the API feature generally available</h3>
+<p>Released in M69 (beta August 2018, stable September 2018)</p>
+<p>In this phase, the default value of the sdpSemantics flag was “plan-b”. In
+Phase 2, people who had implementations that depended on the SDP format were
+expected to run tests to see if their applications work when Unified Plan is in
+use. For applications that support Firefox, we expect this to be a very simple
+exercise: just do as you would do for Firefox.</p>
+<p>The default value of the sdpSemantics flag can be changed in “chrome://flags”;
+look for the feature “WebRTC: Use Unified Plan SDP Semantics by default”.</p>
+<h3 data-text="Phase 3: Switch the default" id="phase_3_switch_the_default" tabindex="-1">Phase 3: Switch the default</h3>
+<p>The date for the switch was M72 (beta December 2018, stable January 2019).</p>
+<p>In this phase, we changed the default value of the sdpSemantics flag to
+“unified-plan”. Applications that discovered that they needed more time to
+convert set the sdpSemantics flag explicitly to “plan-b” in order to recover
+previous behaviour.</p>
+<h3 data-text="Phase 4: Make “Plan B” throw" id="phase_4_make_“plan_b”_throw" tabindex="-1">Phase 4: Make “Plan B” throw</h3>
+<p>In this phase, setting the sdpSemantics flag to "plan-b" results in an exception
+being thrown. It has been throwing in Canary from M93. As of M96, the exception
+was throwing in all channels, including Stable.</p>
+<p>During this phase, a <a href="https://developer.chrome.com/origintrials/#/view_trial/3892235977954951169">Deprecation Trial</a>
+was available that allowed using Plan B without the exception throwing but the
+trial stopped working on May 25, 2022.</p>
+<h3 data-text="Phase 5: Remove “Plan B” from Chromium" id="phase_5_remove_“plan_b”_from_chromium" tabindex="-1">Phase 5: Remove “Plan B” from Chromium</h3>
+<p>After the trial has ended, Plan B will be removed from Chrome. At this point,
+the sdpSemantics flag will be removed. Attempting to set it to "plan-b" will not
+throw an exception, but it will no longer have any effect.</p>
+<p>Plan B is still available behind special flags or special builds but the full
+code removal will happen in H2, 2022.</p>
+<h3 data-text="Phase 6: Deprecate and remove ”Plan B” from WebRTC" id="phase_6_deprecate_and_remove_”plan_b”_from_webrtc" tabindex="-1">Phase 6: Deprecate and remove ”Plan B” from WebRTC</h3>
+<p>Plan B is already marked as deprecated in WebRTC, but it is still available.
+Removal should happen in 2023.</p>
+<h2 data-text="Preparing Your Application For Unified Plan" id="preparing_your_application_for_unified_plan" tabindex="-1">Preparing Your Application For Unified Plan</h2>
+<p>For detailed information about Plan B and Unified Plan differences and how your 
+application may need to be updated in preparation for Unified plan, see the
+<a href="https://docs.google.com/document/d/1-ZfikoUtoJa9k-GZG1daN0BU3IjIanQ_JSscHxQesvU/edit?usp=sharing">“Unified Plan” Transition Guide (JavaScript)</a></p>
+<p>For native (C++) applications, see the document <a href="https://docs.google.com/document/d/1PPHWV6108znP1tk_rkCnyagH9FK205hHeE9k5mhUzOg/edit#heading=h.cp7krlgejmby">“Migrating your native/mobile application to Unified Plan”</a></p>
+</div>
+<devsite-thumb-rating position="footer">
+</devsite-thumb-rating>
+<div class="devsite-floating-action-buttons"></div></article>

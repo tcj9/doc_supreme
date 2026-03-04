@@ -1,0 +1,205 @@
+<article class="devsite-article">
+<div class="devsite-banner devsite-banner-announcement nocontent">
+<div class="devsite-banner-message">
+<div class="devsite-banner-message-text">
+<style>
+  .devsite-banner-announcement:not(.devsite-banner-tenant) {
+    background: #202124;
+    color: white;
+    font-weight: 500;
+  }
+  .devsite-banner-announcement a {
+    color: white;
+    font-weight: 700;
+  }
+  .devsite-banner-announcement a:link:not(.button),
+  .devsite-banner-announcement a:visited:not(.button) {
+    background: 0;
+  }
+  .devsite-banner-announcement a:hover,
+  .devsite-banner-announcement a:focus {
+    text-decoration: none;
+  }
+  .devsite-banner-announcement .devsite-banner-message-text {
+    margin: 0 auto;
+  }
+</style> <span class="nocontent">
+  Google is committed to advancing racial equity for Black communities.
+</span> <a class="gc-analytics-event nocontent" data-category="Announcement" data-label="Racial Equity" href="https://google.com/racialequity">See how.</a>
+</div>
+</div>
+</div>
+<div class="devsite-article-meta nocontent" role="navigation">
+<ul aria-label="Breadcrumb" class="devsite-breadcrumb-list">
+<li class="devsite-breadcrumb-item">
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" href="https://webrtc.org/" track-metadata-eventdetail="WebRTC" track-metadata-position="1" track-name="breadcrumb" track-type="globalNav">
+    
+          WebRTC
+        
+  </a>
+</li>
+<li class="devsite-breadcrumb-item">
+<div aria-hidden="true" class="devsite-breadcrumb-guillemet material-icons"></div>
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" href="https://webrtc.org/getting-started/overview" track-metadata-eventdetail="" track-metadata-position="2" track-name="breadcrumb" track-type="globalNav">
+    
+          Guides
+        
+  </a>
+</li>
+</ul>
+<devsite-thumb-rating position="header">
+</devsite-thumb-rating>
+</div>
+<h1 class="devsite-page-title" tabindex="-1">
+      Getting started with peer connections<devsite-actions data-nosnippet="" hidden=""></devsite-actions>
+</h1>
+<div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+<devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+</devsite-toc>
+<div class="devsite-article-body clearfix">
+<p>Peer connections is the part of the WebRTC specifications that deals with
+connecting two applications on different computers to communicate using a
+peer-to-peer protocol. The communication between peers can be video, audio or
+arbitrary binary data (for clients supporting the <code dir="ltr" translate="no">RTCDataChannel</code> API). In
+order to discover how two peers can connect, both clients need to provide an ICE
+Server configuration. This is either a STUN or a TURN-server, and their role is
+to provide ICE candidates to each client which is then transferred to the remote
+peer. This transferring of ICE candidates is commonly called signaling.</p>
+<h2 data-text="Signaling" id="signaling" tabindex="-1">Signaling</h2>
+<p>The WebRTC specification includes APIs for communicating with an ICE (Internet
+Connectivity Establishment) Server, but the signaling component is not part of
+it. Signaling is needed in order for two peers to share how they should connect.
+Usually this is solved through a regular HTTP-based Web API (i.e., a REST
+service or other RPC mechanism) where web applications can relay the necessary
+information before the peer connection is initiated.</p>
+<p>The follow code snippet shows how this fictitious signaling service can be used
+to send and receive messages asynchronously. This will be used in the remaining
+examples in this guide where necessary.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-c1">// Set up an asynchronous communication channel that will be</span>
+<span class="devsite-syntax-c1">// used during the peer connection setup</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">SignalingChannel</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">remoteClientId</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'message'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-c1">// New message from remote client received</span>
+<span class="devsite-syntax-p">});</span>
+
+<span class="devsite-syntax-c1">// Send an asynchronous message to the remote client</span>
+<span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">send</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Hello!'</span><span class="devsite-syntax-p">);</span>
+</code></pre></devsite-code>
+<p>Signaling can be implemented in many different ways, and the WebRTC
+specification doesn't prefer any specific solution.</p>
+<h2 data-text="Initiating peer connections" id="initiating_peer_connections" tabindex="-1">Initiating peer connections</h2>
+<p>Each peer connection is handled by a <code dir="ltr" translate="no">RTCPeerConnection</code> object. The constructor
+for this class takes a single <code dir="ltr" translate="no">RTCConfiguration</code> object as its parameter. This
+object defines how the peer connection is set up and should contain information
+about the ICE servers to use.</p>
+<p>Once the <code dir="ltr" translate="no">RTCPeerConnection</code> is created we need to create an SDP offer or
+answer, depending on if we are the calling peer or receiving peer. Once the SDP
+offer or answer is created, it must be sent to the remote peer through a
+different channel. Passing SDP objects to remote peers is called signaling and
+is not covered by the WebRTC specification.</p>
+<p>To initiate the peer connection setup from the calling side, we create a
+<code dir="ltr" translate="no">RTCPeerConnection</code> object and then call <code dir="ltr" translate="no">createOffer()</code> to create a
+<code dir="ltr" translate="no">RTCSessionDescription</code> object. This session description is set as the local
+description using <code dir="ltr" translate="no">setLocalDescription()</code> and is then sent over our signaling
+channel to the receiving side. We also set up a listener to our signaling
+channel for when an answer to our offered session description is received from
+the receiving side.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">makeCall</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">configuration</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-s1">'iceServers'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">[{</span><span class="devsite-syntax-s1">'urls'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'stun:stun.l.google.com:19302'</span><span class="devsite-syntax-p">}]}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCPeerConnection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">configuration</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'message'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">remoteDesc</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCSessionDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">setRemoteDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">remoteDesc</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">});</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">createOffer</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">setLocalDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">send</span><span class="devsite-syntax-p">({</span><span class="devsite-syntax-s1">'offer'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">});</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code>
+<p>On the receiving side, we wait for an incoming offer before we create our
+<code dir="ltr" translate="no">RTCPeerConnection</code> instance. Once that is done we set the received offer using
+<code dir="ltr" translate="no">setRemoteDescription()</code>. Next, we call <code dir="ltr" translate="no">createAnswer()</code> to create an answer to
+the received offer. This answer is set as the local description using
+<code dir="ltr" translate="no">setLocalDescription()</code> and then sent to the calling side over our signaling
+server.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCPeerConnection</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">configuration</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'message'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">setRemoteDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-ow">new</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">RTCSessionDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">offer</span><span class="devsite-syntax-p">));</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">createAnswer</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">setLocalDescription</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">send</span><span class="devsite-syntax-p">({</span><span class="devsite-syntax-s1">'answer'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">answer</span><span class="devsite-syntax-p">});</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre></devsite-code>
+<p>Once the two peers have set both the local and remote session descriptions they
+know the capabilities of the remote peer. This doesn't mean that the connection
+between the peers is ready. For this to work we need to collect the ICE
+candidates at each peer and transfer (over the signaling channel) to the other
+peer.</p>
+<h2 data-text="ICE candidates" id="ice_candidates" tabindex="-1">ICE candidates</h2>
+<p>Before two peers can communicate using WebRTC, they need to exchange
+connectivity information. Since the network conditions can vary depending on a
+number of factors, an external service is usually used for discovering the
+possible candidates for connecting to a peer. This service is called ICE and is
+using either a STUN or a TURN server. STUN stands for Session Traversal
+Utilities for NAT, and is usually used indirectly in most WebRTC applications.</p>
+<p>TURN (Traversal Using Relay NAT) is the more advanced solution that incorporates
+the STUN protocols and most commercial WebRTC based services use a TURN server
+for establishing connections between peers. The WebRTC API supports both STUN
+and TURN directly, and it is gathered under the more complete term Internet
+Connectivity Establishment. When creating a WebRTC connection, we usually
+provide one or several ICE servers in the configuration for the
+<code dir="ltr" translate="no">RTCPeerConnection</code> object.</p>
+<h3 data-text="Trickle ICE" id="trickle_ice" tabindex="-1">Trickle ICE</h3>
+<p>Once a <code dir="ltr" translate="no">RTCPeerConnection</code> object is created, the underlying framework uses the
+provided ICE servers to gather candidates for connectivity establishment (ICE
+candidates). The event <code dir="ltr" translate="no">icegatheringstatechange</code> on <code dir="ltr" translate="no">RTCPeerConnection</code> signals
+in what state the ICE gathering is (<code dir="ltr" translate="no">new</code>, <code dir="ltr" translate="no">gathering</code> or <code dir="ltr" translate="no">complete</code>).</p>
+<p>While it is possible for a peer to wait until the ICE gathering is complete, it
+is usually much more efficient to use a "trickle ice" technique and transmit
+each ICE candidate to the remote peer as it gets discovered. This will
+significantly reduce the setup time for the peer connectivity and allow a video
+call to get started with less delays.</p>
+<p>To gather ICE candidates, simply add a listener for the <code dir="ltr" translate="no">icecandidate</code> event.
+The <code dir="ltr" translate="no">RTCPeerConnectionIceEvent</code> emitted on that listener will contain
+<code dir="ltr" translate="no">candidate</code> property that represents a new candidate that should be sent to the
+remote peer (See Signaling).</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-c1">// Listen for local ICE candidates on the local RTCPeerConnection</span>
+<span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'icecandidate'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">candidate</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">send</span><span class="devsite-syntax-p">({</span><span class="devsite-syntax-s1">'new-ice-candidate'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">candidate</span><span class="devsite-syntax-p">});</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">});</span>
+
+<span class="devsite-syntax-c1">// Listen for remote ICE candidates and add them to the local RTCPeerConnection</span>
+<span class="devsite-syntax-nx">signalingChannel</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'message'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">iceCandidate</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-k">try</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addIceCandidate</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">message</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">iceCandidate</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">catch</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">e</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Error adding received ice candidate'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">e</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre></devsite-code>
+<h2 data-text="Connection established" id="connection_established" tabindex="-1">Connection established</h2>
+<p>Once ICE candidates are being received, we should expect the state for our peer
+connection will eventually change to a connected state. To detect this, we add a
+listener to our <code dir="ltr" translate="no">RTCPeerConnection</code> where we listen for <code dir="ltr" translate="no">connectionstatechange</code>
+events.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-c1">// Listen for connectionstatechange on the local RTCPeerConnection</span>
+<span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'connectionstatechange'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">peerConnection</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">connectionState</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">===</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'connected'</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-c1">// Peers connected!</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre></devsite-code>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection">RTCPeerConnection API
+documentation</a></p>
+</div>
+<devsite-thumb-rating position="footer">
+</devsite-thumb-rating>
+<div class="devsite-floating-action-buttons"></div></article>

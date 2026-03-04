@@ -1,0 +1,236 @@
+<article class="devsite-article">
+<div class="devsite-banner devsite-banner-announcement nocontent">
+<div class="devsite-banner-message">
+<div class="devsite-banner-message-text">
+<style>
+  .devsite-banner-announcement:not(.devsite-banner-tenant) {
+    background: #202124;
+    color: white;
+    font-weight: 500;
+  }
+  .devsite-banner-announcement a {
+    color: white;
+    font-weight: 700;
+  }
+  .devsite-banner-announcement a:link:not(.button),
+  .devsite-banner-announcement a:visited:not(.button) {
+    background: 0;
+  }
+  .devsite-banner-announcement a:hover,
+  .devsite-banner-announcement a:focus {
+    text-decoration: none;
+  }
+  .devsite-banner-announcement .devsite-banner-message-text {
+    margin: 0 auto;
+  }
+</style> <span class="nocontent">
+  Google is committed to advancing racial equity for Black communities.
+</span> <a class="gc-analytics-event nocontent" data-category="Announcement" data-label="Racial Equity" href="https://google.com/racialequity">See how.</a>
+</div>
+</div>
+</div>
+<div class="devsite-article-meta nocontent" role="navigation">
+<ul aria-label="Breadcrumb" class="devsite-breadcrumb-list">
+<li class="devsite-breadcrumb-item">
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" href="https://webrtc.org/" track-metadata-eventdetail="WebRTC" track-metadata-position="1" track-name="breadcrumb" track-type="globalNav">
+    
+          WebRTC
+        
+  </a>
+</li>
+<li class="devsite-breadcrumb-item">
+<div aria-hidden="true" class="devsite-breadcrumb-guillemet material-icons"></div>
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" href="https://webrtc.org/getting-started/overview" track-metadata-eventdetail="" track-metadata-position="2" track-name="breadcrumb" track-type="globalNav">
+    
+          Guides
+        
+  </a>
+</li>
+</ul>
+<devsite-thumb-rating position="header">
+</devsite-thumb-rating>
+</div>
+<h1 class="devsite-page-title" tabindex="-1">
+      Getting started with media devices<devsite-actions data-nosnippet="" hidden=""></devsite-actions>
+</h1>
+<div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+<devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+</devsite-toc>
+<div class="devsite-article-body clearfix">
+<p>When developing for the web, the WebRTC standard provides APIs for accessing
+cameras and microphones connected to the computer or smartphone. These devices
+are commonly referred to as Media Devices and can be accessed with JavaScript
+through the <code dir="ltr" translate="no">navigator.mediaDevices</code> object, which implements the <code dir="ltr" translate="no">MediaDevices</code>
+interface. From this object we can enumerate all connected devices, listen for
+device changes (when a device is connected or disconnected), and open a device
+to retrieve a Media Stream (see below).</p>
+<p>The most common way this is used is through the function <code dir="ltr" translate="no">getUserMedia()</code>, which
+returns a promise that will resolve to a <code dir="ltr" translate="no">MediaStream</code> for the matching media
+devices. This function takes a single <code dir="ltr" translate="no">MediaStreamConstraints</code> object that
+specifies the requirements that we have. For instance, to simply open the
+default microphone and camera, we would do the following.</p>
+<div class="ds-selector-tabs" data-ds-scope="code-sample">
+<section><h3 data-text="Using Promises" id="using-promises" tabindex="-1">Using Promises</h3><div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">constraints</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s1">'video'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-s1">'audio'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span>
+<span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">getUserMedia</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">constraints</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">then</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">stream</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Got MediaStream:'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">stream</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">})</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-k">catch</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Error accessing media devices.'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">});</span>
+</code></pre></devsite-code></section>
+<section><h3 data-text="Using async/await" id="using-asyncawait" tabindex="-1">Using async/await</h3><div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">openMediaDevices</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">constraints</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">getUserMedia</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">constraints</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-k">try</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">stream</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">openMediaDevices</span><span class="devsite-syntax-p">({</span><span class="devsite-syntax-s1">'video'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-s1">'audio'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">});</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Got MediaStream:'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">stream</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">}</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">catch</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Error accessing media devices.'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code></section>
+</div>
+<p>The call to <code dir="ltr" translate="no">getUserMedia()</code> will trigger a permissions request. If the user
+accepts the permission, the promise is resolved with a <code dir="ltr" translate="no">MediaStream</code> containing
+one video and one audio track. If the permission is denied, a
+<code dir="ltr" translate="no">PermissionDeniedError</code> is thrown. In case there are no matching devices
+connected, a <code dir="ltr" translate="no">NotFoundError</code> will be thrown.</p>
+<p>The full API reference for the <code dir="ltr" translate="no">MediaDevices</code> interface is available at <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices">MDN web
+docs</a>.</p>
+<h2 data-text="Querying media devices" id="querying_media_devices" tabindex="-1">Querying media devices</h2>
+<p>In a more complex application, we will most likely want to check all the
+connected cameras and microphones and provide the appropriate feedback to the
+user. This can be done by calling the function <code dir="ltr" translate="no">enumerateDevices()</code>. This will
+return a promise that resolves to an array of <code dir="ltr" translate="no">MediaDevicesInfo</code> that describe
+each known media device. We can use this to present a UI to the user which let's
+them pick the one they prefer. Each <code dir="ltr" translate="no">MediaDevicesInfo</code> contains a property named
+<code dir="ltr" translate="no">kind</code> with the value <code dir="ltr" translate="no">audioinput</code>, <code dir="ltr" translate="no">audiooutput</code> or <code dir="ltr" translate="no">videoinput</code>, indicating
+what type of media device it is.</p>
+<div class="ds-selector-tabs" data-ds-scope="code-sample">
+<section><h3 data-text="Using Promises" id="using-promises_1" tabindex="-1">Using Promises</h3><div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">callback</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">enumerateDevices</span><span class="devsite-syntax-p">()</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">then</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">devices</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">filtered</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">devices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">filter</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">device</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">device</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">kind</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">===</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nx">callback</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">filtered</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">});</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'videoinput'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">cameras</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Cameras found'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">cameras</span><span class="devsite-syntax-p">));</span>
+</code></pre></devsite-code></section>
+<section><h3 data-text="Using async/await" id="using-asyncawait_1" tabindex="-1">Using async/await</h3><div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">devices</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">enumerateDevices</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">devices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">filter</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">device</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">device</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">kind</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">===</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">videoCameras</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'videoinput'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Cameras found:'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">videoCameras</span><span class="devsite-syntax-p">);</span>
+</code></pre></devsite-code></section>
+</div>
+<h2 data-text="Listening for devices changes" id="listening_for_devices_changes" tabindex="-1">Listening for devices changes</h2>
+<p>Most computers support plugging in various devices during runtime. It could be a
+webcam connected by USB, a Bluetooth headset, or a set of external speakers. In
+order to properly support this, a web application should listen for the changes
+of media devices. This can be done by adding a listener to
+<code dir="ltr" translate="no">navigator.mediaDevices</code> for the <code dir="ltr" translate="no">devicechange</code> event.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-c1">// Updates the select element with the provided set of cameras</span>
+<span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">updateCameraList</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">cameras</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">listElement</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'select#availableCameras'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">listElement</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">innerHTML</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">''</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">cameras</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">map</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">camera</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">cameraOption</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">createElement</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'option'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">cameraOption</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">label</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">camera</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">label</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">cameraOption</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">value</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">camera</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">deviceId</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}).</span><span class="devsite-syntax-nx">forEach</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">cameraOption</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">listElement</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">add</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">cameraOption</span><span class="devsite-syntax-p">));</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-c1">// Fetch an array of devices of a certain type</span>
+<span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">devices</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">enumerateDevices</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">devices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">filter</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">device</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">device</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">kind</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">===</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-c1">// Get the initial set of cameras connected</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">videoCameras</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'videoinput'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-nx">updateCameraList</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">videoCameras</span><span class="devsite-syntax-p">);</span>
+
+<span class="devsite-syntax-c1">// Listen for changes to media devices and update the list accordingly</span>
+<span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">addEventListener</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'devicechange'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">event</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">newCameraList</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'video'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nx">updateCameraList</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">newCameraList</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">});</span>
+</code></pre></devsite-code>
+<h2 data-text="Media constraints" id="media_constraints" tabindex="-1">Media constraints</h2>
+<p>The constraints object, which must implement the <code dir="ltr" translate="no">MediaStreamConstraints</code>
+interface, that we pass as a parameter to <code dir="ltr" translate="no">getUserMedia()</code> allows us to open a
+media device that matches a certain requirement. This requirement can be very
+loosely defined (audio and/or video), or very specific (minimum camera
+resolution or an exact device ID). It is recommended that applications that use
+the <code dir="ltr" translate="no">getUserMedia()</code> API first check the existing devices and then specifies a
+constraint that matches the exact device using the <code dir="ltr" translate="no">deviceId</code> constraint.
+Devices will also, if possible, be configured according to the constraints. We
+can enable echo cancellation on microphones or set a specific or minimum width
+and height of the video from the camera.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">devices</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">enumerateDevices</span><span class="devsite-syntax-p">();</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">devices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">filter</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">device</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">device</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">kind</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">===</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">type</span><span class="devsite-syntax-p">)</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-c1">// Open camera with at least minWidth and minHeight capabilities</span>
+<span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">openCamera</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">cameraId</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">minWidth</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">minHeight</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">constraints</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s1">'audio'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-s1">'echoCancellation'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-s1">'video'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-s1">'deviceId'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">cameraId</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-s1">'width'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-s1">'min'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">minWidth</span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-s1">'height'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-s1">'min'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">minHeight</span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">return</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">getUserMedia</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">constraints</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">}</span>
+
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">cameras</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">getConnectedDevices</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'videoinput'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-k">if</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">cameras</span><span class="devsite-syntax-w"> &amp;&amp; </span><span class="devsite-syntax-nx">cameras</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">length</span><span class="devsite-syntax-w"> &gt; </span><span class="devsite-syntax-mf">0</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-c1">// Open first available video camera with a resolution of 1280x720 pixels</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">stream</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">openCamera</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">cameras</span><span class="devsite-syntax-p">[</span><span class="devsite-syntax-mf">0</span><span class="devsite-syntax-p">].</span><span class="devsite-syntax-nx">deviceId</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mf">1280</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mf">720</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code>
+<p>The full documentation for the <code dir="ltr" translate="no">MediaStreamConstraints</code> interface can be found
+on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamConstraints">MDN web
+docs</a>.</p>
+<h2 data-text="Local playback" id="local_playback" tabindex="-1">Local playback</h2>
+<p>Once a media device has been opened and we have a <code dir="ltr" translate="no">MediaStream</code> available, we
+can assign it to a video or audio element to play the stream locally.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JavaScript" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-k">async</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kd">function</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">playVideoFromCamera</span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-k">try</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">constraints</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span><span class="devsite-syntax-s1">'video'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'audio'</span><span class="devsite-syntax-o">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">};</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">stream</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">await</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">navigator</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">mediaDevices</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">getUserMedia</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">constraints</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">videoElement</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">document</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">querySelector</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'video#localVideo'</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">videoElement</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">srcObject</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">stream</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">catch</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'Error opening video camera.'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">error</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code>
+<p>The HTML needed for a typical video element used with <code dir="ltr" translate="no">getUserMedia()</code> will
+usually have the attributes <code dir="ltr" translate="no">autoplay</code> and <code dir="ltr" translate="no">playsinline</code>. The <code dir="ltr" translate="no">autoplay</code>
+attribute will cause new streams assigned to the element to play automatically.
+The <code dir="ltr" translate="no">playsinline</code> attribute allows video to play inline, instead of only in full
+screen, on certain mobile browsers. It is also recommended to use
+<code dir="ltr" translate="no">controls="false"</code> for live streams, unless the user should be able to pause
+them.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="HTML" translate="no"><code dir="ltr" translate="no">&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Local video playback&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;video id="localVideo" autoplay playsinline controls="false"/&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></devsite-code>
+</div>
+<devsite-thumb-rating position="footer">
+</devsite-thumb-rating>
+<div class="devsite-floating-action-buttons"></div></article>

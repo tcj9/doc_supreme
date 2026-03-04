@@ -1,0 +1,162 @@
+<article class="devsite-article">
+<div class="devsite-banner devsite-banner-announcement nocontent">
+<div class="devsite-banner-message">
+<div class="devsite-banner-message-text">
+<style>
+  .devsite-banner-announcement:not(.devsite-banner-tenant) {
+    background: #202124;
+    color: white;
+    font-weight: 500;
+  }
+  .devsite-banner-announcement a {
+    color: white;
+    font-weight: 700;
+  }
+  .devsite-banner-announcement a:link:not(.button),
+  .devsite-banner-announcement a:visited:not(.button) {
+    background: 0;
+  }
+  .devsite-banner-announcement a:hover,
+  .devsite-banner-announcement a:focus {
+    text-decoration: none;
+  }
+  .devsite-banner-announcement .devsite-banner-message-text {
+    margin: 0 auto;
+  }
+</style> <span class="nocontent">
+  Google is committed to advancing racial equity for Black communities.
+</span> <a class="gc-analytics-event nocontent" data-category="Announcement" data-label="Racial Equity" href="https://google.com/racialequity">See how.</a>
+</div>
+</div>
+</div>
+<div class="devsite-article-meta nocontent" role="navigation">
+<ul aria-label="Breadcrumb" class="devsite-breadcrumb-list">
+<li class="devsite-breadcrumb-item">
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" href="https://webrtc.org/" track-metadata-eventdetail="WebRTC" track-metadata-position="1" track-name="breadcrumb" track-type="globalNav">
+    
+          WebRTC
+        
+  </a>
+</li>
+<li class="devsite-breadcrumb-item">
+<div aria-hidden="true" class="devsite-breadcrumb-guillemet material-icons"></div>
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" href="https://webrtc.org/getting-started/overview" track-metadata-eventdetail="" track-metadata-position="2" track-name="breadcrumb" track-type="globalNav">
+    
+          Guides
+        
+  </a>
+</li>
+</ul>
+<devsite-thumb-rating position="header">
+</devsite-thumb-rating>
+</div>
+<h1 class="devsite-page-title" tabindex="-1">
+      Media capture and constraints<devsite-actions data-nosnippet="" hidden=""></devsite-actions>
+</h1>
+<div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+<devsite-toc class="devsite-nav" depth="2" devsite-toc-embedded="">
+</devsite-toc>
+<div class="devsite-article-body clearfix">
+<p>The media part of WebRTC covers how to access hardware capable of capturing
+video and audio, such as cameras and microphones, as well as how media streams
+work. It also covers display media, which is how an application can do screen
+capturing.</p>
+<h2 data-text="Media devices" id="media_devices" tabindex="-1">Media devices</h2>
+<p>All cameras and microphones that are supported by the browser are accessed and
+managed through the <code dir="ltr" translate="no">navigator.mediaDevices</code> object. Applications can retrieve
+the current list of connected devices and also listen for changes, since many
+cameras and microphones connect through USB and can be connected and
+disconnected during the lifecycle of the application. Since the state of a media
+device can change at any time, it is recommended that applications register for
+device changes in order to properly handle changes.</p>
+<h3 data-text="Constraints" id="constraints" tabindex="-1">Constraints</h3>
+<p>When accessing media devices, it is a good practice to provide as detailed
+constraints as possible. While it is possible to open the default camera and
+microphone with a simple constraint, it might deliver a media stream that is far
+from the most optimal for the application.</p>
+<p>The specific constraints are defined in a <code dir="ltr" translate="no">MediaTrackConstraint</code> object, one for
+audio and one for video. The attributes in this object are of type
+<code dir="ltr" translate="no">ConstraintLong</code>, <code dir="ltr" translate="no">ConstraintBoolean</code>, <code dir="ltr" translate="no">ConstraintDouble</code> or
+<code dir="ltr" translate="no">ConstraintDOMString</code>. These can either be a specific value (e.g., a number,
+boolean or string), a range (<code dir="ltr" translate="no">LongRange</code> or <code dir="ltr" translate="no">DoubleRange</code> with a minimum and
+maximum value) or an object with either an <code dir="ltr" translate="no">ideal</code> or <code dir="ltr" translate="no">exact</code> definition. For a
+specific value, the browser will attempt to pick something as close as possible.
+For a range, the best value in that range will be used. When <code dir="ltr" translate="no">exact</code> is
+specified, only media streams that exactly match that constraint will be
+returned.</p>
+<div class="ds-selector-tabs" data-ds-scope="code-sample">
+<section><h3 data-text="Near" id="near" tabindex="-1">Near</h3><div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JSON" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-c1">// Camera with a resolution as close to 640x480 as possible</span>
+<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"video"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nt">"width"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">640</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nt">"height"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">480</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code></section>
+<section><h3 data-text="Range" id="range" tabindex="-1">Range</h3><div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JSON" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-c1">// Camera with a resolution in the range 640x480 to 1024x768</span>
+<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"video"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nt">"width"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nt">"min"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">640</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nt">"max"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">1024</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nt">"height"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nt">"min"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">480</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nt">"max"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">768</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code></section>
+<section><h3 data-text="Exact" id="exact" tabindex="-1">Exact</h3><div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JSON" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-c1">// Camera with the exact resolution of 1024x768</span>
+<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"video"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nt">"width"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nt">"exact"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">1024</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-nt">"height"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">            </span><span class="devsite-syntax-nt">"exact"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mi">768</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code></section>
+</div>
+<p>To determine the actual configuration a certain track of a media stream has,
+we can call <code dir="ltr" translate="no">MediaStreamTrack.getSettings()</code> which returns the
+<code dir="ltr" translate="no">MediaTrackSettings</code> currently applied.</p>
+<p>It is also possible to update the constraints of a track from a media device we
+have opened, by calling <code dir="ltr" translate="no">applyConstraints()</code> on the track. This lets an
+application re-configure a media device without first having to close the
+existing stream.</p>
+<h3 data-text="Display media" id="display_media" tabindex="-1">Display media</h3>
+<p>An application that wants to be able to perform screen capturing and recording
+must use the Display Media API. The function <code dir="ltr" translate="no">getDisplayMedia()</code> (which is part
+of <code dir="ltr" translate="no">navigator.mediaDevices</code> is similar to <code dir="ltr" translate="no">getUserMedia()</code> and is used for the
+purpose of opening the content of the display (or a portion of it, such as a
+window). The returned <code dir="ltr" translate="no">MediaStream</code> works the same as when using
+<code dir="ltr" translate="no">getUserMedia()</code>.</p>
+<p>The constraints for <code dir="ltr" translate="no">getDisplayMedia()</code> differ from the ones used for regular
+video or audio input.</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" dir="ltr" is-upgraded="" syntax="JSON" translate="no"><code dir="ltr" translate="no"><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-err">video</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-err">cursor</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">'always'</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">|</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">'mo</span><span class="devsite-syntax-kc">t</span><span class="devsite-syntax-err">io</span><span class="devsite-syntax-kc">n</span><span class="devsite-syntax-err">'</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">|</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">'</span><span class="devsite-syntax-kc">ne</span><span class="devsite-syntax-err">ver'</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">        </span><span class="devsite-syntax-err">displaySur</span><span class="devsite-syntax-kc">fa</span><span class="devsite-syntax-err">ce</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">'applica</span><span class="devsite-syntax-kc">t</span><span class="devsite-syntax-err">io</span><span class="devsite-syntax-kc">n</span><span class="devsite-syntax-err">'</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">|</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">'browser'</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">|</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">'mo</span><span class="devsite-syntax-kc">n</span><span class="devsite-syntax-err">i</span><span class="devsite-syntax-kc">t</span><span class="devsite-syntax-err">or'</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">|</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-err">'wi</span><span class="devsite-syntax-kc">n</span><span class="devsite-syntax-err">dow'</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+</code></pre></devsite-code>
+<p>The code snippet above shows how the special constraints for screen recording
+works. Note that these might not be supported by all browsers that have display
+media support.</p>
+<h2 data-text="Streams and tracks" id="streams_and_tracks" tabindex="-1">Streams and tracks</h2>
+<p>A <code dir="ltr" translate="no">MediaStream</code> represents a stream of media content, which consists of tracks
+(<code dir="ltr" translate="no">MediaStreamTrack</code>) of audio and video. You can retrieve all the tracks from
+<code dir="ltr" translate="no">MediaStream</code> by calling <code dir="ltr" translate="no">MediaStream.getTracks()</code>, which returns an array of
+<code dir="ltr" translate="no">MediaStreamTrack</code> objects.</p>
+<h3 data-text="MediaStreamTrack" id="mediastreamtrack" tabindex="-1">MediaStreamTrack</h3>
+<p>A <code dir="ltr" translate="no">MediaStreamTrack</code> has a <code dir="ltr" translate="no">kind</code> property that is either <code dir="ltr" translate="no">audio</code> or <code dir="ltr" translate="no">video</code>,
+indicating the kind of media it represents. Each track can be muted by toggling
+its <code dir="ltr" translate="no">enabled</code> property. A track has a Boolean property <code dir="ltr" translate="no">remote</code> that indicates
+if it is sourced by a <code dir="ltr" translate="no">RTCPeerConnection</code> and coming from a remote peer.</p>
+</div>
+<devsite-thumb-rating position="footer">
+</devsite-thumb-rating>
+<div class="devsite-floating-action-buttons"></div></article>
